@@ -67,6 +67,46 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Permissao` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `mydb`.`LOG`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `mydb`.`LOG` (
+  `idLOG` INT NOT NULL AUTO_INCREMENT,
+  `id_ADM` INT NOT NULL,
+  `id_Atividade` INT NOT NULL,
+  `id_Alvo` INT NOT NULL,
+  `datahora` DATETIME(1) NOT NULL,
+  PRIMARY KEY (`idLOG`),
+  UNIQUE INDEX `idLOG_UNIQUE` (`idLOG` ASC) VISIBLE,
+  INDEX `id_ADM_idx` (`id_ADM` ASC) VISIBLE,
+  INDEX `id_Atividade_idx` (`id_Atividade` ASC) VISIBLE,
+  INDEX `id_Alvo_idx` (`id_Alvo` ASC) VISIBLE,
+  CONSTRAINT `id_ADM`
+    FOREIGN KEY (`id_ADM`)
+    REFERENCES `mydb`.`usuario` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `id_Atividade`
+    FOREIGN KEY (`id_Atividade`)
+    REFERENCES `mydb`.`Eventos` (`idEventos`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `id_Alvo`
+    FOREIGN KEY (`id_Alvo`)
+    REFERENCES `mydb`.`usuario` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Eventos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Eventos` (
+  `idEventos` INT NOT NULL AUTO_INCREMENT,
+  `atividade` TINYTEXT NOT NULL,
+  PRIMARY KEY (`idEventos`))
+ENGINE = InnoDB
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
