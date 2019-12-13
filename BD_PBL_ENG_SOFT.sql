@@ -260,6 +260,49 @@ CREATE TABLE IF NOT EXISTS `mydb`.`professor_instituicao` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `mydb`.`estagiario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`estagiario` (
+  `ID` INT NOT NULL,
+  `matricula` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`horario_estagiario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`horario_estagiario` (
+  `estagiario_ID` INT NOT NULL,
+  `dia_semana` VARCHAR(45) NOT NULL,
+  `turno` VARCHAR(45) NOT NULL,
+  INDEX `fk_horario_estagiario_estagiario1_idx` (`estagiario_ID` ASC) VISIBLE,
+  PRIMARY KEY (`estagiario_ID`, `dia_semana`, `turno`),
+  CONSTRAINT `fk_horario_estagiario_estagiario1`
+    FOREIGN KEY (`estagiario_ID`)
+    REFERENCES `mydb`.`estagiario` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`proposta_horario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`proposta_horario` (
+  `estagiario_ID` INT NOT NULL,
+  `dia_semana` VARCHAR(45) NOT NULL,
+  `turno` VARCHAR(45) NOT NULL,
+  INDEX `fk_proposta_horario_estagiario1_idx` (`estagiario_ID` ASC) VISIBLE,
+  PRIMARY KEY (`estagiario_ID`, `dia_semana`, `turno`),
+  CONSTRAINT `fk_proposta_horario_estagiario1`
+    FOREIGN KEY (`estagiario_ID`)
+    REFERENCES `mydb`.`estagiario` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
