@@ -5,6 +5,6 @@
     margin-left: 5%
 }
 .imagemLogoMenu{
-    width: 50%;
+    width: 50%; /*rever a questão da responsividade*/
     margin-top: -5%;
 }
