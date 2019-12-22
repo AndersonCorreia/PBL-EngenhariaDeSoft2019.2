@@ -6,7 +6,7 @@ require_once "./../Model/Users/Pessoa.php";//falta inserir as outras classes
 class PessoaDAO extends DataAccessObject {
 
     function INSERT($pessoa): bool{
-        //usa a variavel $dataBase para fazer a query no banco
+        //usa a variavel $dataBase para  fazer a query no banco
         $this->dataBase;
     }
     function UPDATE($pessoa): bool{
