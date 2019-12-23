@@ -25,6 +25,11 @@ Route::get('/cadastro', ['uses'=>'InicialController@telaCadastro']);
 Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\CadastroController@cadastroNormal']);
 
 /**
+ * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
+ */
+Route::get('/usuario/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao']);
+
+/**
  * Após confirmação dos dados da rota acima, retorna a tela de "Prosseguir" da verificação de email. Essa tela
  * só tem o intuito de informar que um email foi enviado para o inbox do visitante/responsável. Por isso usei o 
  * get, pois é só uma tela para mostrar informações.
@@ -32,3 +37,5 @@ Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\C
 Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController@prosseguirVerificacaoEmail']);
 
 // Fazer as rotas para cadastro com facebook e google...
+
+
