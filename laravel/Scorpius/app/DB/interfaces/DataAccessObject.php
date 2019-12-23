@@ -16,7 +16,7 @@ abstract class DataAccessObject {
      * @throws Exception em falha de conexão ao banco
      */
     function __Construct(){
-        $ini = parse_ini_file("./../../php.ini");// definir como variavel global posteriomente
+        $ini = parse_ini_file("./php.ini");// definir como variavel global posteriomente
         $this->dataBase = new mysqli(
             $ini["DB_HOST"],
             $ini["DB_USERNAME"],
