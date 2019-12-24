@@ -16,18 +16,15 @@ abstract class DataAccessObject {
      * @throws Exception em falha de conexão ao banco
      */
     function __Construct(){
-        $ini = parse_ini_file("./php.ini");// definir como variavel global posteriomente
-        $this->dataBase = new mysqli(
+        
+        mysqli_report(MYSQLI_REPORT_STRICT);//faz o mysqli lançar exception no erro de conexão
+        $ini = parse_ini_file(__DIR__."/../../../php.ini");// definir como variavel global posteriomente
+        $this->dataBase = new \mysqli(
             $ini["DB_HOST"],
             $ini["DB_USERNAME"],
             $ini["DB_PASSWORD"],
             $ini["DB_DATABASE"],
             $ini["DB_PORT"]         );
-
-        if ($this->dataBase->connect_error) {// em caso de erro na conexão com o SGBD aplicação é interrompida
-            $msg = 'Connect Error (' . $this->dataBase->connect_errno . ') '. $this->dataBase->connect_error ;
-            throw new exception($msg);
-        }
     }
     /**
      * Realiza uma query SELECT retornando todos os dados de uma tabela em especifca
