@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="1.360508">
+    <testsuite name="Unit" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.023202">
+      <testsuite name="Tests\Unit\ExampleTest" file="C:\Users\Carlo\OneDrive\Documents\anderson\git\PBL-EngenhariaDeSoft2019.2\laravel\Scorpius\tests\Unit\ExampleTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.023202">
+        <testcase name="testBasicTest" class="Tests\Unit\ExampleTest" classname="Tests.Unit.ExampleTest" file="C:\Users\Carlo\OneDrive\Documents\anderson\git\PBL-EngenhariaDeSoft2019.2\laravel\Scorpius\tests\Unit\ExampleTest.php" line="14" assertions="1" time="0.023202"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Feature" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="1.337306">
+      <testsuite name="Tests\Feature\ExampleTest" file="C:\Users\Carlo\OneDrive\Documents\anderson\git\PBL-EngenhariaDeSoft2019.2\laravel\Scorpius\tests\Feature\ExampleTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="1.337306">
+        <testcase name="testBasicTest" class="Tests\Feature\ExampleTest" classname="Tests.Feature.ExampleTest" file="C:\Users\Carlo\OneDrive\Documents\anderson\git\PBL-EngenhariaDeSoft2019.2\laravel\Scorpius\tests\Feature\ExampleTest.php" line="15" assertions="1" time="1.337306"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
