@@ -7,13 +7,27 @@ abstract class Pessoa{
     private $email;
     private $senha;
 
-    public static function login(): Pessoa{
+	/**
+	 * Metodo de login do usuario do sistema. 
+	 *
+	 * @return Pessoa
+	 */
+	public static function login(): Pessoa{
         
     }
 
-    public function validarAcesso($token) {}
+    /**
+	 * Validação de acesso do usuario ao sistema.
+	 */
+	public function validarAcesso($token) {}
 
-    public function alterarSenha($novaSenha){
+	/**
+	 * Alterar senha anterior da pessoa por uma nova.
+	 *
+	 * @param [type] $novaSenha nova senha da pessoa
+	 * @return void
+	 */
+	public function alterarSenha($novaSenha){
         $this->senha = $novaSenha;
     }
 
