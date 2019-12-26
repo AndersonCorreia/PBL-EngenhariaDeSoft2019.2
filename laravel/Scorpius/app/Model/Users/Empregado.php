@@ -9,7 +9,7 @@ class Empregado extends Pessoa{
     /**
      * Método realiza confirmação de pessoas marcadas para uma visita em um turno.
      *
-     * @param [type] $lista lista de pessoas inscritas
+     * @param [type] $lista lista de pessoas inscritas em uma visita
      * @return void
      */
     public function checkin($lista){ 
@@ -17,7 +17,8 @@ class Empregado extends Pessoa{
     }
 
     /**
-     * Gerencia e organiza visitas marcadas.
+     * Gerencia e organiza visitas marcadas. Podendo atualizar informações, cancelar uma visita, confirmar 
+     * ou efetuar o agendamento de uma escola na lista de espera.
      *
      * @return void
      */
@@ -26,7 +27,7 @@ class Empregado extends Pessoa{
     }
 
     /**
-     * Undocumented function
+     * Acessar relatorio completo de agendamentos com todas as visitas agendadas no sistema.
      *
      * @return void
      */
@@ -35,7 +36,7 @@ class Empregado extends Pessoa{
     }
 
     /**
-     * 
+     *  lista de visitantes para uma visita.
      *
      * @return void
      */
@@ -44,7 +45,7 @@ class Empregado extends Pessoa{
     }
 
     /**
-     * Undocumented function
+     * Estátisticas de visitas e agendamentos da semana para visualização. 
      *
      * @return void
      */
