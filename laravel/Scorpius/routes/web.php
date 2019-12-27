@@ -37,3 +37,5 @@ Route::get('/usuario/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituic
 Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController@prosseguirVerificacaoEmail']);
 
 // Fazer as rotas para cadastro com facebook e google...
+
+Route::get("layout", function () { return View("layout/templateGeralTelasUsuarios");} );
