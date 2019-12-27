@@ -1,5 +1,5 @@
 <!-- Aqui é a tela de Cadastre-se -->
-@extends('layout.templateLogin')
+@extends('layouts.templateLogin')
 
 @section('title', 'Cadastre-se - Scorpius')
 
@@ -11,7 +11,7 @@
     
     <button type="button" class="btn btn-gplus"><i class="fab fa-google-plus-g pr-1"></i> Cadastre-se com o Google</button>
 </div><br>
-<form action="">
+<form action="" method="POST">
     <input placeholder="Nome" id="nomeCadastro" name="nome" type="text">
     <input placeholder="Sobrenome" id="sobrenomeCadastro" name="sobrenome" type="text"><br>
     <input placeholder="E-mail" id="emailCadastro" name="e-mail" type="text"><br>

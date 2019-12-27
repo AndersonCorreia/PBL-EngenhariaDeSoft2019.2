@@ -1,6 +1,6 @@
 <!-- É a tela "Prosseguir" da prototipação, informa que um email foi enviado ao inbox do usuário -->
 
-@extends('layout.templateLogin')
+@extends('layouts.templateLogin')
 
 @section('title', 'Verifique seu e-mail - Scorpius')
 

@@ -3,7 +3,7 @@
     visto que acerca de layout, serão a mesma coisa. Então reaproveitamos o layout. 
 -->
 
-@include('layout._includes.top')
+@include('layouts._includes.top')
 <!-- Aqui ficara as coisas que ficam ao lado esquerdo das telas de login, que no caso, 
 é aquela imagem do background -->
 <div id="lado_esquerdo">
@@ -17,4 +17,4 @@ os botões, etc.. -->
 @yield('conteudo')
 </div>
 
-@include('layout._includes.footer')
+@include('layouts._includes.footer')
