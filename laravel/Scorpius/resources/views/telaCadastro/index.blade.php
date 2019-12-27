@@ -7,8 +7,8 @@
 <h1>Cadastre-se</h1>
 <h4>Já possui uma conta? <a href=""> Entre</a></h4><br>
 <div class="">
-    <button>Entre com o Facebook</button>
-    <button>Entre com o Google</button>
+    <button>Cadastre-se com o Facebook</button>
+    <button>Cadastre-se com o Google</button>
 </div><br>
 <form action="">
     <input placeholder="Nome" id="nomeCadastro" name="nome" type="text">
