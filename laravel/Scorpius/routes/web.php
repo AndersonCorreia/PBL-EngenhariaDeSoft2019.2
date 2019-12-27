@@ -39,3 +39,7 @@ Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController
 // Fazer as rotas para cadastro com facebook e google...
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
