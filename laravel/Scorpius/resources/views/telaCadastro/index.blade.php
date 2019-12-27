@@ -25,7 +25,8 @@
     </div>
 
     <input placeholder="Senha" id="senhaCadastro" name="senha" type="password"><br>
-    <button id="botaoCadastro">Cadastre-se</button><br>
+    
+    <button type="button" class="btn btn-dark-green">Cadastre-se</button><br>
 </form>
 <h5>
     Por cadastre-se, você aceita os <a target="_blank" href="">Termos</a> e a 
