@@ -2,7 +2,7 @@
 @include('layouts._includes.top')
 
 <div style="height: 100%; display:flex;">
-    <div id="menu" class=" bg-dark" style="min-Width : 90pt ; width : 15%; height: 100%;"> 
+    <div id="menu" class=" bg-dark" style="min-Width : 100pt ; width : 15%; height: 100%;"> 
         <nav class="nav flex-column"> <!-- min-width provisorio para o texto não sai da area do menu-->
             <a class="nav-link active" href="#">Inicio</a>
             <a class="nav-link" href="#">Link</a>
