@@ -39,7 +39,7 @@ Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController
 // Fazer as rotas para cadastro com facebook e google...
 
 // rota para visualizar o layout
-Route::get("layout", function () { return View("layout/templateGeralTelasUsuarios");} );
+Route::get("layout", function () { return View("layouts/templateGeralTelasUsuarios");} );
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
