@@ -16,7 +16,7 @@
 
     <!-- Aqui ficara as coisas que ficam ao lado direito das telas de login, como os campos
     os botões, etc.. -->
-    <div class="col-sm" id="lado_direito">
+    <div class="col-sm-5" id="lado_direito">
         <div class="w-auto p-3">
             <div class="text-center">
             <img width="250" class="img-fluid" id="nome-scorpius" src="{{ asset('img/nome-scorpius.png') }}">

@@ -14,28 +14,61 @@
     </div>
 </div>
 <br>
-<form action="" method="POST">
-    <input placeholder="Nome" id="nomeCadastro" name="nome" type="text">
-    <input placeholder="Sobrenome" id="sobrenomeCadastro" name="sobrenome" type="text"><br>
-    <input placeholder="E-mail" id="emailCadastro" name="e-mail" type="text"><br>
-    <input type="text" class="" placeholder="000.000.000-00">
-    <!-- Os radio buttons -->
-    <div class="radio">
-        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-        <label for="optionsRadios1">Visitante</label>
-        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-        <label for="optionsRadios2">Representante</label>
+<form class="form-group col-md-10" action="" method="POST">
+    <!-- Nome completo -->
+    <div class="form-group">
+        <div class="form-row">
+            <div class="col">
+                <label for="nome">Nome</label>
+                <input id="nome" type="text" class="form-control" placeholder="">
+            </div>
+            <div class="col">
+                <label for="sobrenome">Sobrenome</label>
+                <input id="sobrenome" type="text" class="form-control" placeholder="">
+            </div>
+        </div>
+    </div>
+    <!-- E-mail -->
+    <div class="form-group">
+        <label for="emailCadastro">E-mail</label>
+        <input class="form-control" placeholder="exemplo@exemplo.com" id="emailCadastro" name="e-mail" type="text" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">Insira um e-mail válido.</small>
+    </div>
+    
+    <div class="form-group">
+        <label for="cpfCadastro">CPF</label>
+        <input id="cpfCadastro" placeholder="000.000.000-00" type="text" minlength="14" maxlength="14" class="form-control">
+    </div>
+    <!-- Tipo de usuário -->
+    <div class="form-group">
+        <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Tipo de usuário</legend>
+            <div class="col-md-1"></div>
+            <div id="tipoUsuario" class="col-md-4">
+                <input class="form-check-input" type="radio" name="tipoUsuario" id="visitante" value="1" checked>
+                <label class="form-check-label" for="visitante">Visitante</label>
+            </div>
+            <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="tipoUsuario" id="representante" value="2">
+                <label class="form-check-label" for="representante">Representante de instituição</label>
+            </div>   
+        </div>
     </div>
 
-    <input placeholder="Senha" id="senhaCadastro" name="senha" type="password"><br>
-    
-    <button type="button" class="btn btn-dark-green">Cadastre-se</button><br>
+    <div class="form-group">
+        <label for="senha1">Senha</label>
+        <input minlength="4" maxlength="8" type="password" class="form-control" id="senha1">
+    </div>
+    <div class="form-group">
+        <label for="senha2">Repita a senha</label>
+        <input minlength="4" maxlength="8" type="password" class="form-control" id="senha2">
+    </div>
+
+    <button type="submit" class="btn btn-dark-green">Cadastre-se</button><br>
 </form>
-<h5>
+<h7 class="col-md-10">
     Por cadastre-se, você aceita os <a target="_blank" href="">Termos</a> e a 
     <a target="_blank" href="">Politica de Privacidade</a>.
-</h5>
-
-
+</h7>
 
 @endsection
