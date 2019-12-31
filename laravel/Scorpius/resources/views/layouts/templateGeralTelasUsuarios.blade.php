@@ -2,13 +2,13 @@
 @include('layouts._includes.top')
 
 <div class= "tela">
-    <div id="menu" class= "bg-dark"> 
+    <div class= "bg-dark"> 
         <nav class="nav flex-column"> 
             <a class="nav-link active" href="#">Inicio</a>
             <a class="nav-link" href="#">Link</a>
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Historico de atividades</a>
             <a class="nav-link disabled" href="#">Desativado</a>
-          </nav>
+        </nav>
     </div>
     <div class="content">
         @yield('conteudo')
@@ -31,25 +31,30 @@
     </div>
 </div>
 <style type="text/css">
+@media (orientation: landscape) {/* css quanto a tela esta em paisagem */
     html,body{
-        height:100%;
+        margin: 0%;
+        padding: 0%;
+        height:100vh;
     }
     .tela {
         height:100vh;
-        display:flex;
+    }
+    a{
+        color: ghostwhite;
     }
     .content {
-        margin-left: 17%;
+        margin: 5% ;
+        width: 70%;
+        float: right;
     }
     .bg-dark {
-        /* min-width provisorio para o texto não sai da area do menu*/
-        min-width: 100pt;
-        width:15%;
+        min-width: 6rem;
+        width:19%;
         height:100vh;
         position:fixed;
+        float: left;
     }
-
-
-
+}
 </style>
 @include('layouts._includes.footer')
