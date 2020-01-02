@@ -1,16 +1,17 @@
 
 @include('layouts._includes.top')
 
-<div class= "tela">
-    <div class= "bg-dark"> 
-        <nav class="nav flex-column"> 
-            <a class="nav-link active" href="#">Inicio</a>
+<div class= "tela ">
+    <div id="menuLateral" class= "bg-dark">
+        <img id="logo" class = "px-md-3 px-2 pt-3 mb-3" src="{{ asset("img/scorpius-whited.png")}}" height=auto  width=100%> 
+        <nav class="p-lg-2 p-1 navbar-left flex-column"> 
+            <a class="nav-link bg-secondary rounded active" href="#">Inicio</a>
             <a class="nav-link" href="#">Link</a>
-            <a class="nav-link" href="#">Historico de atividades</a>
+            <a class="nav-link" href="#">Gerenciamento de atividades</a>
             <a class="nav-link disabled" href="#">Desativado</a>
         </nav>
     </div>
-    <div class="content">
+    <div class="content p-4 bg-light">
         @yield('conteudo')
         <div>
             <H1> Página do [..]</H1>
@@ -31,29 +32,51 @@
     </div>
 </div>
 <style type="text/css">
-@media (orientation: landscape) {/* css quanto a tela esta em paisagem */
-    html,body{
-        margin: 0%;
-        padding: 0%;
-        height:100vh;
-    }
-    .tela {
-        height:100vh;
-    }
-    a{
-        color: ghostwhite;
-    }
+html,body, .tela{
+    margin: 0%;
+    padding: 0%;
+    height:100vh;
+}
+a{
+    color: ghostwhite;
+}
+@media (min-width: 651px) {
     .content {
-        margin: 5% ;
-        width: 70%;
+        width: 83%;
         float: right;
     }
-    .bg-dark {
-        min-width: 6rem;
-        width:19%;
+    #menuLateral{
+        width:17%;
         height:100vh;
         position:fixed;
-        float: left;
+    }
+}
+@media (max-width: 650px){
+    #logo {
+        height: 30%; 
+        width: 30%;
+        margin-left: 35%;
+        margin-right: 35%;
+    }
+    #menuLateral {
+        height: auto;
+    }
+}
+@media (min-width: 651px) and (max-width: 850px){
+    .content {
+        width: 81%;
+    }
+    #menuLateral{
+        min-width: 8rem;/*tamanho minimo para não oculta palavras*/
+        width:19%;
+    }
+}
+@media (min-width: 851px) and (max-width: 950px){/*para alteração mais suave do tamanho do menu*/
+    .content {
+        width: 82%;
+    }
+    #menuLateral{
+        width:18%;
     }
 }
 </style>
