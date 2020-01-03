@@ -4,12 +4,15 @@
 <div class= "tela ">
     <div id="menuLateral" class= "bg-dark">
         <img id="logo" class = "px-md-3 px-2 pt-3 mb-3" src="{{ asset("img/scorpius-whited.png")}}" height=auto  width=100%> 
-        <nav class="p-lg-2 p-1 navbar-left flex-column"> 
-            <a class="nav-link bg-secondary rounded active" href="#">Inicio</a>
-            <a class="nav-link" href="#">Link</a>
-            <a class="nav-link" href="#">Gerenciamento de atividades</a>
-            <a class="nav-link disabled" href="#">Desativado</a>
-        </nav>
+        <div class="h-75 overflow-auto"><nav class="p-lg-2 p-1 navbar-left flex-column">
+            @foreach ($itensMenu as $item){{--Para adicionar os itens do menu dinamicamente --}}
+                @if ($item['texto']==$paginaAtual){{--Para destacar a pagina atual no menu --}}
+                    <a class="nav-link bg-secondary rounded active" href="{{$item['link']}}">{{$item['texto']}}</a>
+                @else
+                    <a class="nav-link" href="{{$item['link']}}">{{$item['texto']}}</a>
+                @endif
+            @endforeach
+        </nav></div>
     </div>
     <div class="content p-4 bg-light">
         @yield('conteudo')
@@ -48,7 +51,8 @@ a{
     #menuLateral{
         width:17%;
         height:100vh;
-        position:fixed;
+        float: left;
+        position: fixed;
     }
 }
 @media (max-width: 650px){
@@ -79,5 +83,24 @@ a{
         width:18%;
     }
 }
+/* personalizar a barra em geral, aqui estou definindo 10px de largura para a barra vertical
+e 10px de altura para a barra horizontal */
+#menuLateral ::-webkit-scrollbar {
+    width: 3%;
+}
+ 
+/* aqui é para personalizar o fundo da barra*/
+#menuLateral ::-webkit-scrollbar-track {
+    background:rgba(250, 250, 250, 0.3);
+    border-radius: 20px;
+}
+ 
+/* aqui é a alça da barra, que demonstra a altura que você está na página
+estou colocando uma cor azul clara nela*/
+#menuLateral ::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background:royalblue;
+}
+
 </style>
 @include('layouts._includes.footer')
