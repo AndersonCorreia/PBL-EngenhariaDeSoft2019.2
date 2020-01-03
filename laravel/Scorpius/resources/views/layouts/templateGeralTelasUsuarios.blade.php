@@ -14,7 +14,7 @@
     <div class="content p-4 bg-light">
         @yield('conteudo')
         <div>
-            <H1> Página do [..]</H1>
+            <!--<H1> Página do [..]</H1>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices dignissim blandit. Ut sollicitudin mattis ligula vel vestibulum. Sed tortor ligula, bibendum nec mauris fringilla, pulvinar vehicula turpis. Donec consectetur mollis suscipit. Aenean eros odio, pharetra eu nulla at, scelerisque convallis turpis. Sed eget pulvinar neque, id gravida nulla. Suspendisse vitae odio nisl. Praesent eget semper turpis, vel iaculis lectus. Pellentesque sed varius ipsum, et egestas augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer condimentum congue mi eget condimentum. Praesent quis urna eget lorem ultrices ornare in ut sapien. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sed pulvinar mi.
 
             Morbi vel aliquet metus. Suspendisse ac lacinia nunc, id interdum felis. Fusce mattis ex vitae magna pulvinar tempus. Mauris euismod ex sit amet aliquet ornare. Aenean mollis nisi ut posuere porta. Proin nisi eros, accumsan nec malesuada id, rutrum in lectus. Integer tristique aliquam orci, nec vestibulum urna interdum sit amet. Nulla eu rhoncus felis. Quisque ac mauris nec urna ornare placerat.
@@ -28,6 +28,7 @@
             Cras vel viverra orci, vitae semper neque. Duis nunc ante, gravida eu enim ut, mollis scelerisque magna. Etiam id rutrum felis, ut maximus purus. Duis tempus odio quis nisi sollicitudin sollicitudin vel et enim. Maecenas consectetur, mi ac tincidunt auctor, leo tellus lacinia nibh, eget fringilla sem dui ut mauris. Proin odio magna, luctus eu tincidunt vitae, tincidunt eu felis. Morbi cursus nisi ut venenatis ullamcorper. Sed pharetra ex quis metus faucibus finibus. Nunc fringilla justo quam, vitae faucibus augue pellentesque a. Nam ornare sagittis justo sit amet vestibulum. Nam at mi porttitor magna sollicitudin bibendum. Aliquam cursus vel dui porta sagittis. Curabitur dapibus tristique ex ut sollicitudin. Nunc venenatis orci non risus viverra, ultricies euismod nibh euismod. Pellentesque fermentum eros et ultricies elementum. Suspendisse blandit, nisi dictum pellentesque condimentum, lorem nulla sagittis tortor, vitae porttitor urna nibh vitae nulla.
 
             Vivamus id nulla pellentesque, tempor diam at, pretium purus. Integer blandit gravida convallis. Quisque nec magna quis orci maximus laoreet sit amet eget elit. Quisque elementum volutpat lacinia. Donec et mollis sapien, a pellentesque enim. Sed venenatis lectus eget pharetra imperdiet. Donec vulputate sodales mauris, et tempus augue tempor nec. Sed quis lacus pulvinar, eleifend erat in, sollicitudin libero. Pellentesque pellentesque arcu ut sem interdum malesuada. Praesent tincidunt, lectus ac condimentum auctor, quam velit tincidunt nisi, hendrerit mattis nisi urna in nibh. Vivamus suscipit mi id egestas molestie. Aenean leo ante, bibendum eget augue sollicitudin, ultrices molestie dolor. Pellentesque eu quam in magna porta vestibulum in at arcu. Nulla laoreet urna vel lectus sodales consequat. Curabitur aliquet felis euismod nisi rutrum venenatis.
+        -->
         </div>
     </div>
 </div>
