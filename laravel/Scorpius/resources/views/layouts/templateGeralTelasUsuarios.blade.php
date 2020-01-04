@@ -1,12 +1,12 @@
 @include('layouts._includes.top')
 
 <div class= "tela ">
-    <div id="menuLateral" class= "bg-dark">
+    <div id="menuLateral" class= "bg-dark border-right border-dark">
         <img id="logo" class = "px-md-3 px-2 pt-3 mb-3" src="{{ asset("img/scorpius-whited.png")}}" height=auto  width=100%> 
         <div class="h-75 overflow-auto">
             <nav class="p-lg-2 p-1 navbar-left flex-column">
                 @foreach ($itensMenu as $item){{--Para adicionar os itens do menu dinamicamente --}}
-                    @if ($item['texto']==$paginaAtual){{--Para destacar a pagina atual no menu --}}
+                    @if ($item['texto']==($paginaAtual ?? 'Inicio')){{--Para destacar a pagina atual no menu --}}
                         <a class="nav-link bg-secondary rounded active" href="{{$item['link']}}">{{$item['texto']}}</a>
                     @else
                         <a class="nav-link" href="{{$item['link']}}">{{$item['texto']}}</a>
@@ -16,20 +16,23 @@
         </div>
     </div>
     <div class="content">
-
-        <div id="menuTopo">
-            <ul>
-                <li><a href="#"><h4>Página do [..]</h4></a></li>
-                <li>
-                    <img class="rounded-circle" height=2.5% width=2.5% src="{{ asset("img/user-default-img.png")}}"> 
-                    <a href="#">Fulano</a>    
-                </li>
-                <li><a href="#" title="Sair"><img href="#" alt="exit-icon" class="rounded-lg" height=5% width=5% src="{{ asset("img/exit-img.jpg")}}"></a></li>
-            <ul>
+        <div id="menuTopo" class="d-flex m-0 pt-2 w-100 border-bottom">
+                <ul class=" w-100">
+                    <li id="menuTopoTitle" class="ml-5 pt-1 pb-0 my-0 float-left w-50">
+                        <h2>@yield('title', $paginaAtual ?? 'Pagina do Visitante')</h2>
+                    </li>
+                    <li class="mr-3 float-right w-auto">
+                        <a href="#" class="mr-5">
+                            <img class="rounded-circle" height=40vh src="{{ asset("img/user-default-img.png")}}">
+                            <span class="ml-1">{{$nomeUsuario ?? 'Fulano'}}</span>
+                        </a> 
+                        <a href="#" title="Sair"><img href="#" alt="exit-icon" class="rounded-lg" width=40vw src="{{ asset("img/exit-img.jpg")}}"></a>   
+                    </li>
+                </ul>
         </div>
-
-        @yield('conteudo')
+        {{--<hr class="m-0 bg-primary">--}}
         <div class="p-4 bg-light">
+            @yield('conteudo')
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices dignissim blandit. Ut sollicitudin mattis ligula vel vestibulum. Sed tortor ligula, bibendum nec mauris fringilla, pulvinar vehicula turpis. Donec consectetur mollis suscipit. Aenean eros odio, pharetra eu nulla at, scelerisque convallis turpis. Sed eget pulvinar neque, id gravida nulla. Suspendisse vitae odio nisl. Praesent eget semper turpis, vel iaculis lectus. Pellentesque sed varius ipsum, et egestas augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer condimentum congue mi eget condimentum. Praesent quis urna eget lorem ultrices ornare in ut sapien. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sed pulvinar mi.
 
             Morbi vel aliquet metus. Suspendisse ac lacinia nunc, id interdum felis. Fusce mattis ex vitae magna pulvinar tempus. Mauris euismod ex sit amet aliquet ornare. Aenean mollis nisi ut posuere porta. Proin nisi eros, accumsan nec malesuada id, rutrum in lectus. Integer tristique aliquam orci, nec vestibulum urna interdum sit amet. Nulla eu rhoncus felis. Quisque ac mauris nec urna ornare placerat.
@@ -60,15 +63,17 @@
         color: ghostwhite;
     }
 
-    #menuTopo ul {
-        margin: 0;
-        background-color: white;
-        list-style: none;
+    hr {
+        height: 0.1vh;
     }
 
-    #menuTopo ul li {
-        display: inline;
-        padding: 10px 10px;
+    #menuTopo {
+        background-color: white;
+    }
+    #menuTopo ul {
+        margin: 0;
+        padding:0;
+        list-style: none;
     }
 
     #menuTopo ul li a {
