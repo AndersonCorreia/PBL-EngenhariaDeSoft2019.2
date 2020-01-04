@@ -5,6 +5,10 @@ namespace DB;
 require_once "./app/DB/interfaces/DataAccessObject.php";
 require_once "./app/Model/Users/Pessoa.php";//falta inserir as outras classes
 
+/**
+ * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe pessoa
+ * e todas as subclasses.
+ */
 class PessoaDAO extends \DataAccessObject {
 
     function INSERT($pessoa): bool{

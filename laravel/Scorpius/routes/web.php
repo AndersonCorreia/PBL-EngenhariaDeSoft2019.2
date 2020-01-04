@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +9,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+require "./../resources/views/util/layoutUtil.php";
 
 Route::get('/', function () {
     return view('paginaInicial');
@@ -39,7 +40,12 @@ Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController
 // Fazer as rotas para cadastro com facebook e google...
 
 // rota para visualizar o layout
-Route::get("layout", function () { return View("layouts/templateGeralTelasUsuarios");} );
+Route::get("layout", function () {
+    $variaveis= [ 'itensMenu'=> getMenuLinks(),
+                 'paginaAtual'=>'Inicio'
+                ];
+    return View("layouts/templateGeralTelasUsuarios", $variaveis);
+});
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
