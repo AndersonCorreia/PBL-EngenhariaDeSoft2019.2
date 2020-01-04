@@ -82,8 +82,6 @@
         color: #767474;
     }
 
-
-
     @media (min-width: 651px) {
         .content {
             width: 83%;
