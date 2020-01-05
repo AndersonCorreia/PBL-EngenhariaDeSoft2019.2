@@ -10,7 +10,7 @@
 |
 */
 
-require_once "./../resources/views/util/layoutUtil.php";
+require_once __DIR__."/../resources/views/util/layoutUtil.php";
 
 Route::get('/', function () {
     return view('paginaInicial');
@@ -41,7 +41,7 @@ Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController
 
 // rota para visualizar o layout
 Route::get("layout", function () {
-    $variaveis= [ 'itensMenu'=> getMenuLinksAll()
+    $variaveis= [ 'itensMenu'=> getMenuLinks()
                 ];
     return View("layouts/templateGeralTelasUsuarios", $variaveis);
 });
