@@ -10,7 +10,7 @@
 |
 */
 
-require_once "./../resources/views/util/layoutUtil.php";
+require_once __DIR__."./../resources/views/util/layoutUtil.php";
 
 Route::get('/', function () {
     return view('paginaInicial');
@@ -28,7 +28,7 @@ Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\C
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
-Route::get('/usuario/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao']);
+Route::get('/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao']);
 
 /**
  * Após confirmação dos dados da rota acima, retorna a tela de "Prosseguir" da verificação de email. Essa tela
