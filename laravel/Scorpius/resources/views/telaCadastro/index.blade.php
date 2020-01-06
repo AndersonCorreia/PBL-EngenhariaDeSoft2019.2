@@ -36,22 +36,24 @@
     </div>
     
     <div class="form-group">
-        <label for="cpfCadastro">CPF</label>
-        <input id="cpfCadastro" placeholder="000.000.000-00" type="text" minlength="14" maxlength="14" class="form-control">
-    </div>
-    <!-- Tipo de usuário -->
-    <div class="form-group">
-        <div class="row">
-            <legend class="col-form-label col-sm-2 pt-0">Tipo de usuário</legend>
-            <div class="col-md-1"></div>
-            <div id="tipoUsuario" class="col-md-4">
-                <input class="form-check-input" type="radio" name="tipoUsuario" id="visitante" value="1" checked>
-                <label class="form-check-label" for="visitante">Visitante</label>
+        <div class="form-row">
+            <div class="col">
+                <label for="cpfCadastro">CPF</label>
+                <input id="cpfCadastro" placeholder="000.000.000-00" type="text" minlength="14" maxlength="14" class="form-control">
             </div>
-            <div class="col-md-4">
+             <!-- Tipo de usuário -->
+            <div id="usuario" class="col">
+                <div class="row">
+                <legend class="col-form-label pt-0">Tipo de usuário</legend>
+            <div id="tipoUsuario" class="col">
+                    <input class="form-check-input" type="radio" name="tipoUsuario" id="visitante" value="1" checked>
+                    <label class="form-check-label" id="tamanho_label" for="visitante">Visitante</label>
+            </div>
+            <div class="col">
                 <input class="form-check-input" type="radio" name="tipoUsuario" id="representante" value="2">
-                <label class="form-check-label" for="representante">Representante de instituição</label>
-            </div>   
+                <label class="form-check-label" id="tamanho_label" for="representante">Representante de instituição</label>
+                </div>   
+            </div>
         </div>
     </div>
 
@@ -67,8 +69,24 @@
     <button type="submit" class="btn btn-dark-green">Cadastre-se</button><br>
 </form>
 <h7 class="col-md-10">
-    Por cadastre-se, você aceita os <a target="_blank" href="">Termos</a> e a 
+Por cadastre-se, você aceita os <a target="_blank" href="">Termos</a> e a 
     <a target="_blank" href="">Politica de Privacidade</a>.
 </h7>
+<style>
+    #cpfCadastro{
+        width:150px; 
+        height:25px;
+    }
 
+    #usuario {
+        width:100%;
+    }
+
+    #tamanho_label {
+        width:210px; 
+        height:25px;
+    }
+
+
+</style>
 @endsection
