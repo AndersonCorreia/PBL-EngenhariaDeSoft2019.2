@@ -5,7 +5,7 @@
 @section('conteudo')
 
 <h1>Instituições de ensino</h1> 
-<form method="GET" action="/usuario/instituicaoEnsino">
+<form method="get" action="#">
     {{csrf_field()}}
     <div class="instituicoes">
         <h2>Colegio x</h2> 
