@@ -2,8 +2,8 @@
 
 
 namespace DB;
-require_once "./app/DB/interfaces/DataAccessObject.php";
-require_once "./app/Model/Users/Pessoa.php";//falta inserir as outras classes
+require_once __DIR__."/interfaces/DataAccessObject.php";
+require_once __DIR__."/../Model/Users/Pessoa.php";//falta inserir as outras classes
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe pessoa
@@ -11,17 +11,17 @@ require_once "./app/Model/Users/Pessoa.php";//falta inserir as outras classes
  */
 class PessoaDAO extends \DataAccessObject {
 
-    function INSERT($pessoa): bool{
+    function INSERT(Pessoa $pessoa): bool{
         //usa a variavel $dataBase para  fazer a query no banco
         $this->dataBase;
     }
-    function UPDATE($pessoa): bool{
+    function UPDATE(Pessoa $pessoa): bool{
         
     }
-    function DELETE($pessoa): bool{
+    function DELETE(Pessoa $pessoa): bool{
 
     }
-    function SELECT_ALL($table="usuario"){
+    function SELECT_ALL(String $table="usuario"){
         return parent::SELECT_ALL($table);// inves de apenas retorna criar os objetos da classe
         //talvez nesse select all não seja util mas os selects de um usuario especifico devem criar o objeto
     }

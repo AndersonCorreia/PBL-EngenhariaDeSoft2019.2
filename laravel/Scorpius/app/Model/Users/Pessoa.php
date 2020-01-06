@@ -1,6 +1,6 @@
 <?php
 
-abstract class Pessoa{
+abstract class Pessoa extends DB\interfaces\DataObject {
     private $nome;
     private $cpf;
     private $telefone;
@@ -67,6 +67,9 @@ abstract class Pessoa{
 		return $this->senha;
 	}
 
+	protected function save(){
+		(new DB\PessoaDAO)->UPDATE($this);
+	}
 }
 
 ?>

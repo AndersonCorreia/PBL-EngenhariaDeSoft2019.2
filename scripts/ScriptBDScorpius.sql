@@ -138,7 +138,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
   `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(10) NOT NULL,
-  `Professor_Int` INT NOT NULL,
   `Ano_Escolar` VARCHAR(12) NOT NULL,
   `Ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
   `professor_instituicao_ID` INT UNSIGNED NOT NULL,
@@ -202,13 +201,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `scorpius`.`Permissao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scorpius`.`Permissao` (
+CREATE TABLE IF NOT EXISTS `scorpius`.`permissao` (
   `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
   `Permissao` VARCHAR(40) NOT NULL,
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_Permissao_tipo_usuario1_idx` (`tipo_usuario_ID` ASC),
-  UNIQUE INDEX `Permissao_UNIQUE` (`Permissao` ASC),
+  UNIQUE INDEX `Permissao_UNIQUE` (`Permissao`,'tipo_usuario_ID'),
   CONSTRAINT `fk_Permissao_tipo_usuario1`
     FOREIGN KEY (`tipo_usuario_ID`)
     REFERENCES `scorpius`.`tipo_usuario` (`ID`)

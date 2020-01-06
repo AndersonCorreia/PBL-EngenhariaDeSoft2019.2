@@ -3,18 +3,24 @@
 @section('title', 'Instituições')
 
 @section('conteudo')
-
-<h1>Instituições de ensino</h1> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<h1>Instituições de Ensino</h1> 
 <form method="get" action="#">
     {{csrf_field()}}
-    <div class="instituicoes">
-        <h2>Colegio x</h2> 
-        <div class="box-actions">
-			<button type="submit" class="btn-a">Atualizar dados</button>
-            <button type="submit" class="btn-d">Deletar</button>
-	    </div>
+
+    <div class= "instBotoes">
+        <div class="instituicoes">
+            <h2>Colegio X</h2> 
+            
+        </div>
+
+        <div class="botoes">
+                <button type="submit" class="btn btn-primary">Atualizar dados</button>
+                <button type="submit" class="btn btn-danger">Deletar</button>
+        </div>
     </div>
 </form>
+
 <style>
 
     .box-actions{
@@ -42,11 +48,36 @@
     }
 
     .instituicoes{
-        border: solid 3px black;
+        width: 400px;
+        height: 100px;
+        border: solid 2px black;
         padding: 20px;
         margin: 10px;
         display: flex;
         flex-direction: row;
+        align-items: center;
+        
+    }
+
+    .instBotoes{
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .botoes{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn{
+        padding: 10px; 
+        margin: 5px;
+    }
+
+    h2{
+        align-items: center;
     }
    
 

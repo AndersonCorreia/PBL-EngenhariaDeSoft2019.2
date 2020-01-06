@@ -14,7 +14,7 @@ function getMenuLinksAll(){
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
         'estagiario1'=>     ['link'=>'#' , 'texto'=>'Resumo da Semana' ],
         'estagiario2'=>     ['link'=>'#' , 'texto'=>'Demanda WEB' ],
-        'Realizar check-in'=>                   ['link'=>'#' , 'texto'=>'Check-in' ],
+        'realizar check-in'=>                   ['link'=>'#' , 'texto'=>'Check-in' ],
         'designar horários para estagiarios'=>  ['link'=>'#' , 'texto'=>'Horários dos Estagiários' ],
         'gerenciamento de visitas'=>            ['link'=>'#' , 'texto'=>'Gerenciamento de Visitas' ],
         'relatorio dos agendamentos'=>          ['link'=>'#' , 'texto'=>'Relatórios de Agendamentos' ],
@@ -34,10 +34,10 @@ function getMenuLinksAll(){
  * @param string $tipoUsuario tipo do usuario para paginas especificas de determinado tipo de usuario, por exemplo Demanda web para estagiario
  * @return array array com os campos link e texto para o menu do layout geral do sistema
  */
-function getMenuLinks($tipoUsuario="visitante"){
+function getMenuLinks(String $tipoUsuario="visitante"){
     $menuLinks= getMenuLinksAll();
-
-    $links= [$menuLinks['inicio']];//adcionando o inicio que vale para todos
+    $tipoUsuario = strtolower($tipoUsuario);
+    $links=[$menuLinks['inicio']];//adcionando o inicio que vale para todos
 
     if($tipoUsuario=="visitante" || $tipoUsuario=="institucional"){
         $links[]=$menuLinks['visitante0'];
@@ -50,12 +50,13 @@ function getMenuLinks($tipoUsuario="visitante"){
         $links[]=$menuLinks['visitante2'];
         $links[]=$menuLinks['visitante3'];
     }
-    else if($tipoUsuario=="estagiario"){
-        $links[]=$menuLinks["estagiario0"];
-        $links[]=$menuLinks["estagiario1"];
-        $links[]=$menuLinks["estagiario2"];
-    }
     else {
+        if($tipoUsuario=="estagiario"){
+            $links[]=$menuLinks["estagiario0"];
+            $links[]=$menuLinks["estagiario1"];
+            $links[]=$menuLinks["estagiario2"];
+        }
+
         $DAO = new PessoaDAO;
         $permissoes = $DAO->getPermissoes($tipoUsuario);
 
