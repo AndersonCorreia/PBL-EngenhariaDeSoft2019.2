@@ -6,7 +6,7 @@
 @section('conteudo')
 <div class="text-center">
     <h1>Cadastre-se</h1>
-    <h4>Já possui uma conta? <a href=""> Entre</a></h4><br>
+    <h4>Já possui uma conta? <a href="{{ route('entrar') }}"> Entre</a></h4><br>
     <div class="">
         <button type="button" class="btn btn-md btn-fb"><i class="fab fa-facebook-f pr-1"></i>Cadastre-se com o Facebook</button>
         
@@ -34,7 +34,7 @@
         <input class="form-control" placeholder="exemplo@exemplo.com" id="emailCadastro" name="e-mail" type="text" aria-describedby="emailHelp">
         <small id="emailHelp" class="form-text text-muted">Insira um e-mail válido.</small>
     </div>
-    
+    <!-- CPF -->
     <div class="form-group">
         <label for="cpfCadastro">CPF</label>
         <input id="cpfCadastro" placeholder="000.000.000-00" type="text" minlength="14" maxlength="14" class="form-control">
@@ -54,11 +54,12 @@
             </div>   
         </div>
     </div>
-
+    <!-- Senha -->
     <div class="form-group">
         <label for="senha1">Senha</label>
         <input minlength="4" maxlength="8" type="password" class="form-control" id="senha1">
     </div>
+    <!-- Repitir senha -->
     <div class="form-group">
         <label for="senha2">Repita a senha</label>
         <input minlength="4" maxlength="8" type="password" class="form-control" id="senha2">
