@@ -17,4 +17,11 @@ class ControlerUsuario extends Controller
         ];
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
+
+    public function telaDadosInstituicao(){
+        $variaveis = [
+            'itensMenu' => getMenuLinksAll()
+        ];
+        return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
+    }
 }
