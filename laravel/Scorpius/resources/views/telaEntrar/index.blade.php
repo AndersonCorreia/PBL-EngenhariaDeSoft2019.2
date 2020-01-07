@@ -8,9 +8,9 @@
     <h1>Cadastre-se</h1>
     <h4>Não possui uma conta? <a href="{{ route('cadastrar') }}"> Cadastre-se</a></h4><br>
     <div class="">
-        <button type="button" class="btn btn-md btn-fb"><i class="fab fa-facebook-f pr-1"></i>Cadastre-se com o Facebook</button>
+        <button type="button" class="btn btn-md btn-fb"><i class="fab fa-facebook-f pr-1"></i>Entrar com o Facebook</button>
         
-        <button type="button" class="btn btn-gplus"><i class="fab fa-google-plus-g pr-1"></i> Cadastre-se com o Google</button>
+        <button type="button" class="btn btn-gplus"><i class="fab fa-google-plus-g pr-1"></i> Entrar com o Google</button>
     </div>
 </div>
 <br>
