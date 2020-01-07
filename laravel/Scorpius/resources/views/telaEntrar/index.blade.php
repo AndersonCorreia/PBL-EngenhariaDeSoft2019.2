@@ -6,7 +6,7 @@
 @section('conteudo')
 <div class="text-center">
     <h1>Cadastre-se</h1>
-    <h4>Não possui uma conta? <a href="{{ route('cadastrar') }}"> Cadastre-se</a></h4><br>
+    <h5>Não possui uma conta? <a href="{{ route('cadastrar') }}"> Cadastre-se</a></h5><br>
     <div class="">
         <button type="button" class="btn btn-md btn-fb"><i class="fab fa-facebook-f pr-1"></i>Entrar com o Facebook</button>
         
