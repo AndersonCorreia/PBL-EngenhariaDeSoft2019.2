@@ -31,6 +31,11 @@ Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\C
 Route::get('/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao']);
 
 /**
+ * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
+ */
+Route::get('/instituicaoEnsino/dadosInstituicaoEnsino',['uses'=>'ControlerUsuario@telaDadosInstituicao']);
+
+/**
  * Após confirmação dos dados da rota acima, retorna a tela de "Prosseguir" da verificação de email. Essa tela
  * só tem o intuito de informar que um email foi enviado para o inbox do visitante/responsável. Por isso usei o 
  * get, pois é só uma tela para mostrar informações.
