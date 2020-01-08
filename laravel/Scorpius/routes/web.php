@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('paginaInicial');
-});
+})->name('paginaInicial');
 
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
 Route::get('/cadastro', ['uses'=>'InicialController@telaCadastro'])->name('cadastrar');

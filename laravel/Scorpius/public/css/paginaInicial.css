@@ -1,0 +1,28 @@
+#imgNomeSistema{
+    width: 20%;
+    padding: 10px;
+    margin-top: 0%;
+    margin-left: 5%
+}
+#imgLogoMenu{
+    width: 50%;
+    margin-top: -5%;
+}
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
