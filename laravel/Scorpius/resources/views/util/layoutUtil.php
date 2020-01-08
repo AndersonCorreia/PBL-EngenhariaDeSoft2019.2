@@ -1,7 +1,6 @@
 <?php
 
-use DB\PessoaDAO;
-
+require_once __DIR__."/../../../app/DB/PessoaDAO.php";
 function getMenuLinksAll(){
     return [//todos os possiveis links do menu, utilizado no layout da area administrativa
         'inicio'=>          ['link'=>'#' , 'texto'=>'Inicio' ],// texto é o nome que vai estar dentro da tag <a>
@@ -22,7 +21,7 @@ function getMenuLinksAll(){
         'criar usuarios'=>                      ['link'=>'#' , 'texto'=>'Cadastrar Usuário' ],
         'gerenciar usuarios'=>                  ['link'=>'#' , 'texto'=>'Gerenciar Usuários' ],
         'ver confiabilidade das Instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],
-        'ver log de atividades'=>               ['link'=>'#' , 'texto'=>'Histórico de Atividades' ],
+        'ver log de atividade'=>               ['link'=>'#' , 'texto'=>'Histórico de Atividades' ],
         'realizar backup'=>                     ['link'=>'#' , 'texto'=>'Realizar Backup' ],
         'gerenciar permissões'=>                ['link'=>'#' , 'texto'=>'Gerenciar Permissões' ]//creio que seria melhor ser permissão apenas para o adm
     ];
@@ -57,11 +56,11 @@ function getMenuLinks(String $tipoUsuario="visitante"){
             $links[]=$menuLinks["estagiario2"];
         }
 
-        $DAO = new PessoaDAO;
+        $DAO = new \PessoaDAO;
         $permissoes = $DAO->getPermissoes($tipoUsuario);
 
         foreach ($permissoes as $value) {
-            $links[]=$value;
+            $links[]=$menuLinks[$value["permissao"]];
         }
     }
 

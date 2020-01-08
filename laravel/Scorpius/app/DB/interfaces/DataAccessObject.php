@@ -62,5 +62,3 @@ abstract class DataAccessObject {
      */
     abstract function DELETE($object): bool;
 }
-
-//print_r((new DataAccessObject())->SELECTALL("usuario"));//para testes

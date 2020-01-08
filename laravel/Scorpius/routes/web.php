@@ -48,7 +48,7 @@ Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController
 
 // rota para visualizar o layout
 Route::get("layout", function () {
-    $variaveis= [ 'itensMenu'=> getMenuLinks()
+    $variaveis= [ 'itensMenu'=> getMenuLinks($_GET["tipo"])
                 ];
     return View("layouts/templateGeralTelasUsuarios", $variaveis);
 });

@@ -2,7 +2,7 @@
 /**
  * @version 1.0.0
  */
-
+namespace app\Model\Users;
 class Empregado extends Pessoa{
     private $permissoes = array();
 
