@@ -5,7 +5,7 @@
 
 @section('conteudo')
 <div class="text-center">
-    <h1>Cadastre-se</h1>
+    <h1>Entre</h1>
     <h5>Não possui uma conta? <a href="{{ route('cadastrar') }}"> Cadastre-se</a></h5><br>
     <div id="redes-sociais-login" class="btn-toolbar col-md-10" role="toolbar">
         <div class="btn-group mr-3 ml-3" role="group">
