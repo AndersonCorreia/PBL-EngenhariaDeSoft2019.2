@@ -14,10 +14,12 @@ require_once __DIR__."/../resources/views/util/layoutUtil.php";
 
 Route::get('/', function () {
     return view('paginaInicial');
-});
+})->name('paginaInicial');
 
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
-Route::get('/cadastro', ['uses'=>'InicialController@telaCadastro']);
+Route::get('/cadastro', ['uses'=>'InicialController@telaCadastro'])->name('cadastrar');
+// Chama o metódo do Inicialcontroller que retorna a página de entrar (login).
+Route::get('/entrar', ['uses'=>'InicialController@telaEntrar'])->name('entrar');
 
 /**
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que
