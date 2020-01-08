@@ -33,6 +33,21 @@
     <div>
         <img id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
     </div>
+
+    <div>
+        <img style="float:left;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
+        <div>
+            <h1 class="bordaTextoLateral" id="fonteTitulo" style="text-align:center;">SOBRE O OBSERVATÓRIO<br></h1>
+            <h2 class="bordaTextoLateral" id="fonteTexto" style="text-align:center;"><br>O planetário é utilizado para a projeção de filmes<br>
+                sobre o Universo e representa um importante recurso<br>
+                didático para as visitas de escolas e do público em<br>
+                geral no Observatório Astronômico Antares.<br>
+                As sessões acontecem de segunda a sexta<br>
+                às 10 horas e às 15 horas.<br>
+            </h2>
+            <h2 class="bordaTextoLateral" id="fonteNegrito" style="text-align:center;"><br>O atendimento é gratuito.</h2>
+        </div>
+    </div>
 </body>
 </html>
 
