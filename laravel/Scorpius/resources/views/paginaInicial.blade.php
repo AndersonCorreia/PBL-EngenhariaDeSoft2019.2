@@ -35,12 +35,10 @@
     <div id="MenuPrincipal">
         <figure class="fig-sobreposta" id="img-menu">
             <img id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
-            <div id="opcoes-menu" class="obj-sobreposta">
-                <a id="linkAntares" href="http://www.antares.uefs.br/">
-                    <i class='fas fa-external-link-alt' style='font-size:large'></i>ANTARES
-                </a>
-                <a id="linkInfo" href="#sobre-observatorio">INFORMAÇÕES</a>
-            </div>
+            <a class="obj-sobreposta" id="linkAntares" href="http://www.antares.uefs.br/">
+                <i class='fas fa-external-link-alt' style='font-size:large'></i>ANTARES
+            </a>
+            <a class="obj-sobreposta" id="linkInfo" href="#sobre-observatorio">INFORMAÇÕES</a>
         </figure>
     </div>
 
