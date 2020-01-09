@@ -31,10 +31,16 @@
     </div>
     
     <div id="sobre-observatorio">
-        <img style="float:left;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
+        <img style="float:left; border-radius: 0px 180px 180px 0px;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+        <!--<img style="float:left;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/degrade-lateral.png') }}">-->
         <div>
-            <h1 class="bordaTextoLateral" id="fonteTitulo" style="text-align:center;">SOBRE O OBSERVATÓRIO<br></h1>
-            <h2 class="bordaTextoLateral" id="fonteTexto" style="text-align:center;"><br>O planetário é utilizado para a projeção de filmes<br>
+            <h1 class="bordaTextoLateral" style="text-align:center; font-size: 350%; font-family: -apple-system,
+                BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                SOBRE O OBSERVATÓRIO<br>
+            </h1>
+            <h2 class="bordaTextoLateral" style="text-align:center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-style: normal; font-weight: 400;">
+                <br>O planetário é utilizado para a projeção de filmes<br>
                 sobre o Universo e representa um importante recurso<br>
                 didático para as visitas de escolas e do público em<br>
                 geral no Observatório Astronômico Antares.<br>
