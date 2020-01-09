@@ -74,9 +74,9 @@
 
     <button type="submit" class="btn btn-success btn-lg btn-block">Cadastre-se</button><br>
 </form>
-<h7 class="col-md-10 ml-4" style="font-size:13px">
+<h6 class="col-md-10 ml-4" style="font-size:13px">
     Por cadastre-se, você aceita os <a target="_blank" href="">Termos</a> e a 
     <a target="_blank" href="">Politica de Privacidade</a>.
-</h7>
+</h6>
 
 @endsection

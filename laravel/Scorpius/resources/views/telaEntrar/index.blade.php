@@ -35,8 +35,8 @@
 
     <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Entrar</button><br>
 </form>
-<h7 class="col-md-10">
+<h6 class="col-md-10">
     Esqueceu a sua senha? <a target="_blank" href="">Ajuda.</a>.
-</h7>
+</h6>
 
 @endsection
