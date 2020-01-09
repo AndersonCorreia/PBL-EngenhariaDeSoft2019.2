@@ -44,3 +44,15 @@
 .bordaTextoLateral{
     margin-left: 45%;
 }
+#img-menu{
+    display: inline-block;
+    position: relative;
+    font-size: large;
+    font-family: Orator Std;
+    src: url('fonts/oratorstd.otf');
+}
+#linkAntares{
+    position: absolute;
+    top: 190px;
+    left: 510px;
+}

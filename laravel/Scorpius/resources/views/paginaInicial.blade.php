@@ -9,6 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/paginaInicial.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <title>Scorpius</title>
 </head>
 <body>
@@ -29,12 +31,17 @@
             </div>
         </div>
     </div>
-    
-    <div>
-        <img id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
+    <!-- Menu principal -->
+    <div id="MenuPrincipal">
+        <figure id="img-menu">
+            <img id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
+            <a id="linkAntares" href="http://www.antares.uefs.br/">
+                Antares <i class='fas fa-external-link-alt' style='font-size:12px'></i>
+            </a>
+        </figure>
     </div>
 
-    <div>
+    <div id="sobre-observatorio">
         <img style="float:left;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
         <div>
             <h1 class="bordaTextoLateral" id="fonteTitulo" style="text-align:center;">SOBRE O OBSERVATÓRIO<br></h1>
