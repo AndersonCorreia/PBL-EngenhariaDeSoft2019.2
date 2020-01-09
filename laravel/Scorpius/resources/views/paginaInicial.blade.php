@@ -20,13 +20,14 @@
         </div>
         <div id="cadastrar-entrar" class="top-right" role="toolbar">
             <div class="btn-group mr-3 ml-3" role="group">
-                <a href="{{ route('entrar') }}">
-                    <button class="btn btn-outline-success">Entrar</button>
+                <a href="{{ route('entrar') }}" style="color: white;">
+                    <!--<button class="btn btn-outline-primary" style="border-radius: 30px;">Entrar</button>-->
+                    Entrar
                 </a>
             </div>
             <div  class="btn-group mr-3" role="group">
                 <a href="{{ route('cadastrar') }}">
-                    <button class="btn btn-success">Cadastre-se</button>
+                    <button class="btn btn-primary" style="border-radius: 30px;">Cadastre-se</button>
                 </a>
             </div>
         </div>
@@ -36,17 +37,23 @@
         <figure class="fig-sobreposta" id="img-menu">
             <img id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
             <a class="obj-sobreposta" id="linkAntares" href="http://www.antares.uefs.br/">
-                <i class='fas fa-external-link-alt' style='font-size:large'></i>ANTARES
+                <i class='fas fa-external-link-alt' style='font-size:large;'></i>ANTARES
             </a>
             <a class="obj-sobreposta" id="linkInfo" href="#sobre-observatorio">INFORMAÇÕES</a>
         </figure>
     </div>
 
     <div id="sobre-observatorio">
-        <img style="float:left;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
+        <img style="float:left; border-radius: 0px 180px 180px 0px;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+        <!--<img style="float:left;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/degrade-lateral.png') }}">-->
         <div>
-            <h1 class="bordaTextoLateral" id="fonteTitulo" style="text-align:center;">SOBRE O OBSERVATÓRIO<br></h1>
-            <h2 class="bordaTextoLateral" id="fonteTexto" style="text-align:center;"><br>O planetário é utilizado para a projeção de filmes<br>
+            <h1 class="bordaTextoLateral" style="text-align:center; font-size: 350%; font-family: -apple-system,
+                BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                SOBRE O OBSERVATÓRIO<br>
+            </h1>
+            <h2 class="bordaTextoLateral" style="text-align:center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-style: normal; font-weight: 400;">
+                <br>O planetário é utilizado para a projeção de filmes<br>
                 sobre o Universo e representa um importante recurso<br>
                 didático para as visitas de escolas e do público em<br>
                 geral no Observatório Astronômico Antares.<br>
