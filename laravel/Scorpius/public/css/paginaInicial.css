@@ -50,11 +50,13 @@
     font-weight: bold;
     font-family: Orator Std;
     src: url('fonts/oratorstd.otf');
+    width: 100%;
+    top: 10px;
 }
 #linkAntares{
     position: absolute;
-    top: 165px;
-    left: 330px;
+    top: 160px;
+    left: 340px;
     color: #696969;
 }
 #linkInfo{
@@ -69,3 +71,10 @@
 .obj-sobreposta{
     position: absolute;
 }
+#img-background{
+    position: absolute;
+    right: 0px;
+    width: 50%;
+    height: 99%;
+}
+
