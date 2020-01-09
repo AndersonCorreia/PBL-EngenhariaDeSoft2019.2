@@ -18,6 +18,24 @@
 <body>
 
     <div>
+    <img id="img-background" src="{{ asset('img/tela_inicial/img-background-v2.png') }}">
+        <div id="barra-topo" class="flex-center position-ref full-heigh">
+            <div>
+                <img id="imgNomeSistema" src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">
+            </div>
+            <div id="cadastrar-entrar" class="top-right" role="toolbar">
+                <div class="btn-group mr-3 ml-3" role="group">
+                    <a href="{{ route('entrar') }}">
+                        <button class="btn btn-outline-primary">Entrar</button>
+                    </a>
+                </div>
+                <div class="btn-group mr-3" role="group">
+                    <a href="{{ route('cadastrar') }}">
+                        <button class="btn btn-primary">Cadastre-se</button>
+                    </a>
+                </div>
+            </div>
+        </div>
         <!-- Menu principal -->
         <div id="MenuPrincipal">
             <figure class="fig-sobreposta" id="img-menu">
