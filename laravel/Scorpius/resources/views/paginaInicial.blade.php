@@ -18,7 +18,7 @@
 <body>
 
     <div>
-    <img id="img-background" src="{{ asset('img/tela_inicial/img-background-v2.png') }}">
+        <img id="img-background" src="{{ asset('img/tela_inicial/img-background-v2.png') }}">
         <div id="barra-topo" class="flex-center position-ref full-heigh">
             <div>
                 <img id="imgNomeSistema" src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">
@@ -47,7 +47,7 @@
             </figure>
         </div>
     </div>
-    
+
     <div id="sobre-observatorio">
         <img style="float:left; border-radius: 0px 180px 180px 0px;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
         <!--<img style="float:left;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/degrade-lateral.png') }}">-->
