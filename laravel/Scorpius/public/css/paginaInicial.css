@@ -36,12 +36,15 @@
 .bordaTextoLateral{
     margin-left: 45%;
 }
+@font-face{
+    font-family: orator;
+    src: url('fonts/oratorstd.otf');
+}
 #img-menu{
     font-size: x-large;
     color: #696969;
     font-weight: bold;
-    font-family: "Orator Std";
-    src: url('fonts/oratorstd.otf');
+    font-family: orator;
     width: 100%;
     top: 10px;
 }
