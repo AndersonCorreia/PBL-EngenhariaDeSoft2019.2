@@ -45,8 +45,6 @@
     margin-left: 45%;
 }
 #img-menu{
-    display: inline-block;
-    position: relative;
     font-size: x-large;
     color: #696969;
     font-weight: bold;
@@ -60,8 +58,14 @@
     color: #696969;
 }
 #linkInfo{
-    position: absolute;
     top: 320px;
     left: 450px;
     color: #696969;
+}
+.fig-sobreposta{
+    display: inline-block;
+    position: relative;
+}
+.obj-sobreposta{
+    position: absolute;
 }

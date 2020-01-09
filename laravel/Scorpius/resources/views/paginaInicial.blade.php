@@ -33,12 +33,14 @@
     </div>
     <!-- Menu principal -->
     <div id="MenuPrincipal">
-        <figure id="img-menu">
+        <figure class="img-sobreposta" id="img-menu">
             <img id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
-            <a id="linkAntares" href="http://www.antares.uefs.br/">
-                <i class='fas fa-external-link-alt' style='font-size:large'></i>ANTARES
-            </a>
-            <a id="linkInfo" href="#sobre-observatorio">INFORMAÇÕES</a>
+            <div id="opcoes-menu" class="obj-sobreposta">
+                <a id="linkAntares" href="http://www.antares.uefs.br/">
+                    <i class='fas fa-external-link-alt' style='font-size:large'></i>ANTARES
+                </a>
+                <a id="linkInfo" href="#sobre-observatorio">INFORMAÇÕES</a>
+            </div>
         </figure>
     </div>
 
