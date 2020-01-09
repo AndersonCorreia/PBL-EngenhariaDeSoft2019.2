@@ -16,5 +16,10 @@ class InicialController extends Controller
     public function prosseguirVerificacaoEmail(){
         return view('telaCadastro.prosseguirVerificacaoEmail');
     }
+    //retorna a tela de entrar
+    public function telaEntrar(){
+        return view('telaEntrar.index');
+    }
+
 
 }

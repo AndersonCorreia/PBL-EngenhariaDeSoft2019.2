@@ -1,7 +1,5 @@
 <?php
-
-require_once "./app/Model/Users/Pessoa.php";
-
+namespace app\Model\Users;
 class Usuario extends Pessoa{
     public function alterarDados($nome, $email, $telefone){}
     

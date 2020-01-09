@@ -1,6 +1,8 @@
 <?php
 
-abstract class Pessoa extends DB\interfaces\DataObject {
+namespace app\Model\users;
+require_once __DIR__."/../../DB/interfaces/DataObject.php";
+abstract class Pessoa extends \DataObject {
     private $nome;
     private $cpf;
     private $telefone;
@@ -68,7 +70,7 @@ abstract class Pessoa extends DB\interfaces\DataObject {
 	}
 
 	protected function save(){
-		(new DB\PessoaDAO)->UPDATE($this);
+		(new \app\DB\PessoaDAO)->UPDATE($this);
 	}
 }
 

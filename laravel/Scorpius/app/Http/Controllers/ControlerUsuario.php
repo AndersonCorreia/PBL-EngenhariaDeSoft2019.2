@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-require_once "./../resources/views/util/layoutUtil.php";
+require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class ControlerUsuario extends Controller
 {
     /**

@@ -1,7 +1,4 @@
 <?PHP 
-
-
-namespace DB;
 require_once __DIR__."/interfaces/DataAccessObject.php";
 require_once __DIR__."/../Model/Users/Pessoa.php";//falta inserir as outras classes
 
@@ -11,14 +8,14 @@ require_once __DIR__."/../Model/Users/Pessoa.php";//falta inserir as outras clas
  */
 class PessoaDAO extends \DataAccessObject {
 
-    function INSERT(Pessoa $pessoa): bool{
+    function INSERT($pessoa): bool{
         //usa a variavel $dataBase para  fazer a query no banco
         $this->dataBase;
     }
-    function UPDATE(Pessoa $pessoa): bool{
-        
+    function UPDATE($pessoa): bool{
+        return true;
     }
-    function DELETE(Pessoa $pessoa): bool{
+    function DELETE($pessoa): bool{
 
     }
     function SELECT_ALL(String $table="usuario"){
@@ -33,4 +30,17 @@ class PessoaDAO extends \DataAccessObject {
     function SELECTbyCPF(): Pessoa{
 
     }
+    /**
+     * Undocumented function
+     *
+     * @param string $tipoUsuario
+     * @return Array
+     */
+    function getPermissoes(string $tipoUsuario): Array{
+        $join = "permissao p LEFT JOIN tipo_usuario t ON p.tipo_usuario_ID = t.ID";
+        $result = $this->dataBase->query("SELECT (permissao) FROM $join WHERE t.nome = '$tipoUsuario'");
+        $array = $result->fetch_all(MYSQLI_ASSOC);
+        return $array;
+    }
+
 }

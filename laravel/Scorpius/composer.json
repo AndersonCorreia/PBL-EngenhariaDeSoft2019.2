@@ -58,7 +58,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "tests": "vendor\\bin\\phpunit"
+        "testes": "vendor\\bin\\phpunit"
         
     }
 }
