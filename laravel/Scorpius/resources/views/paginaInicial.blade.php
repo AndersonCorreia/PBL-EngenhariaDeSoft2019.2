@@ -36,8 +36,9 @@
         <figure id="img-menu">
             <img id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
             <a id="linkAntares" href="http://www.antares.uefs.br/">
-                Antares <i class='fas fa-external-link-alt' style='font-size:12px'></i>
+                <i class='fas fa-external-link-alt' style='font-size:large'></i>ANTARES
             </a>
+            <a id="linkInfo" href="#sobre-observatorio">INFORMAÇÕES</a>
         </figure>
     </div>
 

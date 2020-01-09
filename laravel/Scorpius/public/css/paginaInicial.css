@@ -47,12 +47,21 @@
 #img-menu{
     display: inline-block;
     position: relative;
-    font-size: large;
+    font-size: x-large;
+    color: #696969;
+    font-weight: bold;
     font-family: Orator Std;
     src: url('fonts/oratorstd.otf');
 }
 #linkAntares{
     position: absolute;
-    top: 190px;
-    left: 510px;
+    top: 165px;
+    left: 330px;
+    color: #696969;
+}
+#linkInfo{
+    position: absolute;
+    top: 320px;
+    left: 450px;
+    color: #696969;
 }
