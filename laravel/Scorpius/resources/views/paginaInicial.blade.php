@@ -14,26 +14,29 @@
     <title>Scorpius</title>
 </head>
 <body>
-    <div id="barra-topo" class="flex-center position-ref full-heigh">
-        <div>
-            <img id="imgNomeSistema" src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">
-        </div>
-        <div id="cadastrar-entrar" class="top-right" role="toolbar">
-            <div class="btn-group mr-3 ml-3" role="group">
-                <a href="{{ route('entrar') }}">
-                    <button class="btn btn-outline-success">Entrar</button>
-                </a>
+    <figure class="fig-sobreposta">
+        <div id="barra-topo" class="flex-center position-ref full-heigh">
+            <div>
+                <img id="imgNomeSistema" src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">
             </div>
-            <div  class="btn-group mr-3" role="group">
-                <a href="{{ route('cadastrar') }}">
-                    <button class="btn btn-success">Cadastre-se</button>
-                </a>
+            <div id="cadastrar-entrar" class="top-right obj-sobreposta" role="toolbar">
+                <div class="btn-group mr-3 ml-3" role="group">
+                    <a href="{{ route('entrar') }}">
+                        <button class="btn btn-outline-success">Entrar</button>
+                    </a>
+                </div>
+                <div  class="btn-group mr-3" role="group">
+                    <a href="{{ route('cadastrar') }}">
+                        <button class="btn btn-success">Cadastre-se</button>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+        <img src="{{ asset('img/tela_inicial/img-background-v2.png') }}">
+    </figure>
     <!-- Menu principal -->
     <div id="MenuPrincipal">
-        <figure class="img-sobreposta" id="img-menu">
+        <figure class="fig-sobreposta" id="img-menu">
             <img id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
             <div id="opcoes-menu" class="obj-sobreposta">
                 <a id="linkAntares" href="http://www.antares.uefs.br/">
