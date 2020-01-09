@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="{{ asset('css/paginaInicial.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,7 +17,7 @@
 </head>
 
 <body>
-
+    <!-- MENU INICIAL -->
     <div>
         <img id="img-background" src="{{ asset('img/tela_inicial/img-background-v2.png') }}">
         <div id="barra-topo" class="flex-center position-ref full-heigh">
@@ -25,30 +26,47 @@
             </div>
             <div id="cadastrar-entrar" class="top-right" role="toolbar">
                 <div class="btn-group mr-3 ml-3" role="group">
-                    <a href="{{ route('entrar') }}">
-                        <button class="btn btn-outline-primary">Entrar</button>
+                    <a class="btn btn-outline-primary text-white" href="{{ route('entrar') }}">
+                        ENTRAR
                     </a>
                 </div>
                 <div class="btn-group mr-3" role="group">
-                    <a href="{{ route('cadastrar') }}">
-                        <button class="btn btn-primary">Cadastre-se</button>
+                    <a class="btn btn-primary" href="{{ route('cadastrar') }}">
+                        CADASTRAR-SE
                     </a>
                 </div>
             </div>
         </div>
-        <!-- Menu principal -->
+        <!-- Menu Scorpius -->
         <div id="MenuPrincipal">
             <figure class="fig-sobreposta" id="img-menu">
                 <img id="imgLogoMenu" src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
-                <a class="obj-sobreposta" id="linkAntares" href="http://www.antares.uefs.br/">
-                    <i class='fas fa-external-link-alt' style='font-size:large'></i>ANTARES
-                </a>
-                <a class="obj-sobreposta" id="linkInfo" href="#sobre-observatorio">INFORMAÇÕES</a>
+                <div id="opc-menu">
+                    <a href="http://www.antares.uefs.br/" id="opc-menu-antares" class="obj-sobreposta">
+                        <i class='fas fa-external-link-alt' style='font-size:large'></i>
+                        ANTARES
+                    </a>
+                    <a href="#exposicoes" id="opc-menu-exposicoes" class="obj-sobreposta">
+                        EXPOSIÇÕES
+                    </a>
+                    <a href="#informacoes" id="opc-menu-informacoes" class="obj-sobreposta">
+                        INFORMAÇÕES
+                    </a>
+                    <a href="#agendamento" id="opc-menu-agendamento" class="obj-sobreposta">
+                        AGENDAMENTO
+                    </a>
+                    <a href="#endereco" id="opc-menu-endereco" class="obj-sobreposta">
+                        ENDEREÇO
+                    </a>
+                    <a href="#contato" id="opc-menu-contato" class="obj-sobreposta">
+                        CONTATO
+                    </a>
+                </div>
             </figure>
         </div>
     </div>
-
-    <div id="sobre-observatorio">
+    <!-- INFORMAÇÕES -->
+    <div id="informacoes">
         <img style="float:left; border-radius: 0px 180px 180px 0px;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
         <!--<img style="float:left;" id="imgLogoMenu" src="{{ asset('img/tela_inicial/degrade-lateral.png') }}">-->
         <div>

@@ -1,10 +1,18 @@
-#imgNomeSistema{
+@font-face {
+    font-family: orator;
+    src: url("fonts/oratorstd.otf");
+}
+@font-face {
+    font-family: stark;
+    src: url("fonts/Stark.OTF");
+}
+#imgNomeSistema {
     width: 20%;
     padding: 10px;
     margin-top: 0%;
     margin-left: 5%;
 }
-#imgLogoMenu{
+#imgLogoMenu {
     width: 50%;
     margin-top: -5%;
     margin-bottom: 7%;
@@ -28,19 +36,19 @@
     top: 30px;
 }
 
-#fonteNegrito{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#fonteNegrito {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
 }
 
-.bordaTextoLateral{
+.bordaTextoLateral {
     margin-left: 45%;
 }
-@font-face{
-    font-family: orator;
-    src: url('fonts/oratorstd.otf');
+#cadastrar-entrar {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
-#img-menu{
+#img-menu {
     font-size: x-large;
     color: #696969;
     font-weight: bold;
@@ -48,28 +56,50 @@
     width: 100%;
     top: 10px;
 }
-#linkAntares{
-    position: absolute;
-    top: 160px;
-    left: 340px;
+#opc-menu {
     color: #696969;
 }
-#linkInfo{
+#opc-menu-antares {
+    position: absolute;
+    top: 160px;
+    left: 330px;
+    color: #696969;
+}
+#opc-menu-exposicoes {
+    top: 220px;
+    left: 480px;
+    color: #696969;
+}
+#opc-menu-informacoes {
     top: 320px;
     left: 450px;
     color: #696969;
 }
-.fig-sobreposta{
+#opc-menu-agendamento {
+    top: 440px;
+    left: 440px;
+    color: #696969;
+}
+#opc-menu-endereco {
+    top: 510px;
+    left: 255px;
+    color: #696969;
+}
+#opc-menu-contato {
+    top: 485px;
+    left: 85px;
+    color: #696969;
+}
+.fig-sobreposta {
     display: inline-block;
     position: relative;
 }
-.obj-sobreposta{
+.obj-sobreposta {
     position: absolute;
 }
-#img-background{
+#img-background {
     position: absolute;
     right: 0px;
     width: 50%;
     height: 99%;
 }
-
