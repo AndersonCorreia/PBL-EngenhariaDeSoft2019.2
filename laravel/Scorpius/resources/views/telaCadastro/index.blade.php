@@ -4,6 +4,10 @@
 @section('title', 'Cadastre-se - Scorpius')
 
 @section('conteudo')
+@section('img')
+<img style="border-bottom-right-radius: 130px;border-top-right-radius: 130px;" class="img-fluid " src="{{ asset('img/background-login-4.png') }}">
+@endsection
+
 <div class="text-center mx-auto col-md-10">
     <h1>Cadastre-se</h1>
     <h4>Já possui uma conta? <a href="{{ route('entrar') }}"> Entre</a></h4>

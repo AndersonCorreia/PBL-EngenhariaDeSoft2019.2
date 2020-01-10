@@ -21,6 +21,8 @@ Route::get('/cadastro', ['uses'=>'InicialController@telaCadastro'])->name('cadas
 // Chama o metódo do Inicialcontroller que retorna a página de entrar (login).
 Route::get('/entrar', ['uses'=>'InicialController@telaEntrar'])->name('entrar');
 
+Route::get('/login-administrativo', ['uses' => 'InicialController@loginAdm'])->name('loginAdm');
+
 Route::get('/AlterarDadosCadastrais',['uses'=>'AlterarDadosController@index']);
 
 /**
