@@ -4,7 +4,13 @@
 -->
 
 @include('layouts._includes.top')
-
+<style>
+@media only screen and (max-width: 480px) {
+  #lado_esquerdo{ 
+    display: none !important; 
+  } 
+}
+</style>
 <div class="row">
     <!-- Aqui ficara as coisas que ficam ao lado esquerdo das telas de login, que no caso, 
     é aquela imagem do background -->
