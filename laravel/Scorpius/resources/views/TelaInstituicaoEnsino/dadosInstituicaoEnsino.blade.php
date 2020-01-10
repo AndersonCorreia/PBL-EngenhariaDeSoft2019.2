@@ -3,13 +3,12 @@
 @section('title', 'Atualizar dados')
 
 @section('conteudo')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <h1>Colégio X</h1>
 <div>
     <h2>Dados da instituição de ensino</h2>
 
-<form action="#" method="PATCH">
+<form action="#" method="POST">
     {{csrf_field()}}
         <fieldset>
             <div class="form-row">

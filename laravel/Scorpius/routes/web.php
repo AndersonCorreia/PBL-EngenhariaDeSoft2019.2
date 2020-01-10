@@ -34,8 +34,17 @@ Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\C
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
-Route::get('/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao']);
+Route::get('/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao'])->name("instituição.show");
 
+/**
+ * Rota para retornar a tela para cadastra uma instituição
+ */
+Route::get('/instituicao/cadastro', 'ControlerUsuario@telaCadastroInstituicao')->name("CadastroIntituição.show");
+
+/**
+ * Rota para casdastra uma instituição e vinculala a um usuario
+ */
+Route::post('/instituicao/cadastro', 'ControlerUsuario@cadastrarInstituicao')->name("CadastroInstituição.post");
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
@@ -51,7 +60,7 @@ Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController
 // Fazer as rotas para cadastro com facebook e google...
 
 // rota para visualizar o layout
-Route::get("layout/{tipo?}", function ($tipo = "visitante") {
+Route::get("layout/{tipo?}", function ($tipo ="visitante") {
     $variaveis= [ 'itensMenu'=> getMenuLinks($tipo)
                 ];
     return View("layouts/templateGeralTelasUsuarios", $variaveis);
