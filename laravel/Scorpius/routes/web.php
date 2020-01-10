@@ -21,6 +21,8 @@ Route::get('/cadastro', ['uses'=>'InicialController@telaCadastro'])->name('cadas
 // Chama o metódo do Inicialcontroller que retorna a página de entrar (login).
 Route::get('/entrar', ['uses'=>'InicialController@telaEntrar'])->name('entrar');
 
+Route::get('/AlterarDadosCadastrais',['uses'=>'AlterarDadosController@index']);
+
 /**
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que
  * gerencia o cadastro normal dos visitantes/responsáveis.
