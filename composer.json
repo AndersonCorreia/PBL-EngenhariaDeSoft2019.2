@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "serve": "php laravel/scorpius/artisan serve"
+    }
+}

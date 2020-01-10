@@ -3,7 +3,6 @@
 @section('title', 'Instituições')
 
 @section('conteudo')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <h1>Instituições de Ensino</h1> 
 <form method="get" action="#">
     {{csrf_field()}}
@@ -15,8 +14,8 @@
         </div>
 
         <div class="botoes">
-                <button type="submit" class="btn btn-primary">Atualizar dados</button>
-                <button type="submit" class="btn btn-danger">Deletar</button>
+                <button type="submit" class="btn col btn-primary">Atualizar dados</button>
+                <button type="submit" class="btn col btn-danger">Deletar</button>
         </div>
     </div>
 </form>

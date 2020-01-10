@@ -13,14 +13,14 @@ class ControlerUsuario extends Controller
     public function telaInstituicao()
     {
         $variaveis = [
-            'itensMenu' => getMenuLinksAll()
+            'itensMenu' => getMenuLinks("institucional")
         ];
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
 
     public function telaDadosInstituicao(){
         $variaveis = [
-            'itensMenu' => getMenuLinksAll()
+            'itensMenu' => getMenuLinks("institucional")
         ];
         return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
     }
