@@ -13,15 +13,39 @@ class ControlerUsuario extends Controller
     public function telaInstituicao()
     {
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional")
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Instituições"
         ];
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
 
     public function telaDadosInstituicao(){
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional")
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Instituições"
         ];
         return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
+    }
+    /**
+     * retornar a tela de cadastro de instituições para o usuario
+     *
+     * @return void
+     */
+    public function telaCadastroInstituicao(){
+        $variaveis = [
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Cadastro de Instituições"
+        ];
+        return view('TelaInstituicaoEnsino.cadastroInstituicao', $variaveis);
+    }
+    /**
+     * Função que deve cadastrar uma instituição e vincula-la ao usuario.
+     *
+     * @return page redirecionar o usuario para a pagina de instituições
+     */
+    public function CadastrarInstituicao(){
+        //codigo para cadastrar a instituição e vincular ao usuario
+
+        return redirect()->route('instituição.show');
     }
 }
