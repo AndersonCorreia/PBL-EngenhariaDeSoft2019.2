@@ -19,7 +19,7 @@
 <body>
     <!-- MENU INICIAL -->
     <div>
-        <img id="img-background" src="{{ asset('img/tela_inicial/img-background-v2.png') }}">
+        <img class="img-fluid" id="img-background" src="{{ asset('img/tela_inicial/img-background-v2.png') }}">
         <div id="barra-topo" class="flex-center position-ref full-heigh">
             <div>
                 <img id="imgNomeSistema" src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">

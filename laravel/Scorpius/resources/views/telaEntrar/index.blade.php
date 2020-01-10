@@ -4,24 +4,31 @@
 @section('title', 'Cadastre-se - Scorpius')
 
 @section('conteudo')
-<div class="text-center">
+<style>
+    @font-face {
+        font-family: orator;
+        src: url("fonts/oratorstd.otf");
+    }
+
+    @font-face {
+        font-family: stark;
+        src: url("fonts/Stark.OTF");
+    }
+</style>
+<div class="text-center mx-auto col-md-10">
     <h1>Entre</h1>
-    <h5>Não possui uma conta? <a href="{{ route('cadastrar') }}"> Cadastre-se</a></h5><br>
-    <div id="redes-sociais-login" class="btn-toolbar col-md-10" role="toolbar">
-        <div class="btn-group mr-3 ml-3" role="group">
-            <button type="button" class="btn btn-primary" style="font-size:13px">
-                <i class="fa fa-facebook-square" style="font-size:13px;color:white"></i>   Entrar com o Facebook
-            </button>
-        </div>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-danger" style="font-size:13px">
-                <i class="fa fa-google-plus" style="font-size:13px;color:white"></i>   Entrar com o Google
-            </button>
-        </div>
+    <h5>Não possui uma conta? <a href="{{ route('cadastrar') }}"> Cadastre-se</a>.</h5>
+    <div id="redes-socias">
+        <a style="font-size: 15px;" href="" class="btn btn-primary btn-lg btn-block" style="font-size:13px;color:white">
+            <i class="fa fa-facebook-square" style="font-size:13px;color:white"></i> Entrar com o Facebook
+        </a>
+        <a style="font-size: 15px;" href="" class="btn btn-danger btn-lg btn-block" style="font-size:13px;color:white">
+            <i class="fa fa-google-plus" style="font-size:13px;color:white"></i> Entrar com o Google
+        </a>
     </div>
 </div>
 <br>
-<form class="form-group col-md-10" action="" method="POST">
+<form class="form-group mx-auto col-md-10" action="" method="POST">
     <!-- E-mail -->
     <div class="form-group">
         <label for="emailCadastro">E-mail</label>
@@ -33,10 +40,11 @@
         <input minlength="4" maxlength="8" type="password" class="form-control" id="senha">
     </div>
 
-    <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Entrar</button><br>
+    <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Entrar</button>
+    <h1></h1>
+    <h6 class="float-right">
+        Esqueceu a sua senha? <a target="_blank" href="">Ajuda</a>.
+    </h6>
 </form>
-<h6 class="col-md-10">
-    Esqueceu a sua senha? <a target="_blank" href="">Ajuda.</a>.
-</h6>
 
 @endsection
