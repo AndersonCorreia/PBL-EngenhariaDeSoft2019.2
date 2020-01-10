@@ -51,8 +51,8 @@ Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController
 // Fazer as rotas para cadastro com facebook e google...
 
 // rota para visualizar o layout
-Route::get("layout", function () {
-    $variaveis= [ 'itensMenu'=> getMenuLinks($_GET["tipo"])
+Route::get("layout/{tipo?}", function ($tipo = "visitante") {
+    $variaveis= [ 'itensMenu'=> getMenuLinks($tipo)
                 ];
     return View("layouts/templateGeralTelasUsuarios", $variaveis);
 });
