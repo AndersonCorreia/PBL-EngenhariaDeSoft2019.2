@@ -36,6 +36,8 @@
         </div>
     </div>
 </div>
+
+@yield('css')
 <style type="text/css">
     html,
     body,
@@ -124,9 +126,6 @@
             width: 18%;
         }
     }
-
-    /* personalizar a barra em geral, aqui estou definindo 10px de largura para a barra vertical
-e 10px de altura para a barra horizontal */
     #menuLateral ::-webkit-scrollbar {
         width: 3%;
     }

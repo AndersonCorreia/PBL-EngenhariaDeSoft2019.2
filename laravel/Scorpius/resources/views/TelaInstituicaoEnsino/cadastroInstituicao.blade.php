@@ -11,31 +11,41 @@
             <div class="form-group col-sm-12 d-block">
                 <span>Instituição de Ensino</span>
                 <div class="col-sm-10 m-0 p-0 float-sm-left">
-                <input id="nomeInst" class="form-control" type="text" name="nameInstituicao" placeholder="Insira o Nome da instituicão" value="" required>
+                    <input id="nomeInst" class="form-control" type="text" name="nameInstituicao" placeholder="Insira o Nome da instituicão" value="" list="inst" required autofocus>
+                    <datalist id="inst">
+
+                        <option value="Female">
+                       
+                    </datalist>
                 </div>
                 <div class="col-sm-2 pt-1 p-0 pt-sm-0 float-sm-right d-block">
                     <button type="button" class= "btn btn-primary float-right " onclick="getDados()"> Buscar </button>
                 </div>
             </div>
+
             <div class="form-group col-sm-8">    
-                <span>Responsável pela Instituição<input class="form-control"  type="text" name="nameResponsavel" placeholder="Nome do Responsável"  value="" required></span>
+                <span>Responsável pela Instituição</span>
+                <input class="form-control"  type="text" maxlength="40" name="nameResponsavel" placeholder="Nome do Responsável"  value="" required>
             </div>
+
             <div class="form-group col-sm-4">
-                <span>Telefone do responsável</span>
-                <input class="form-control" type="tel" maxlength="14" name="nameTelefone" placeholder="(99)9999-9999" value="" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" required>
+                <span>Telefone da instituicão</span>
+                <input class="form-control" type="tel" maxlength="14" name="nameTelefone" placeholder="(99)99999-9999" value="" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
             </div> 
 
             <div class="form-group col-sm-8">
                 <span>Endereço da Instituição</span>
-                <input class="form-control"  type="text" name="nameEndereco" placeholder="Informe Rua e Bairro" value="" required>
+                <input class="form-control"  type="text" maxlength="50" name="nameEndereco" placeholder="Informe Rua e Bairro" value="" required>
             </div>
 
             <div class="form-group col-sm-2">    
-                <span>Numero<input class="form-control" type="text" name="nameNumero" maxlength="5" placeholder="xxx" value="" required></span>
+                <span>Numero</span>
+                <input class="form-control" type="text" name="nameNumero" maxlength="5" placeholder="xxx" value="" required>
             </div>
 
             <div class="form-group col-sm-2">
-                <span>CEP<input class="form-control" type="text" name="nameCEP" maxlength="8" placeholder="99999-999" value="" required></span>
+                <span>CEP</span>
+                <input class="form-control" type="text" name="nameCEP" maxlength="9" placeholder="99999-999" value="" required>
             </div>
 
             <div class="form-group col-sm-4">
@@ -60,7 +70,7 @@
             
             <div class="form-group col-sm-5">
                 <span>Tipo da Instituição</span>
-                <select name="select"  class="custom-select" placeholder="Tipo de instituição" required>
+                <select name="tipo"  class="custom-select" placeholder="Tipo de instituição" required>
                     <option  value="Privada">Privada</option> 
                     <option  value="Federal">Federal</option>
                     <option  value="Distrital">Distrital</option>
@@ -80,12 +90,14 @@
 </form>
 @endsection
 
-<style>
-.form-group{
-    padding:2%;
-}
-span{
-    color: black;
-    text-decoration: none;   
-}
+@section('css')
+<style type="text/css">
+    form .form-group{
+        padding:2%;
+    }
+    form span{
+        color: black;
+        text-decoration: none;   
+    }
 </style>
+@endsection
