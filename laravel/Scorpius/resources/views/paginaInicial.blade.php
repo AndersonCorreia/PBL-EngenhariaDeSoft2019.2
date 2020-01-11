@@ -67,6 +67,30 @@
         </div>
     </div>
     <br><br>
+    <!-- INFORMAÇÕES -->
+    <div id="informacoes">
+        <div class="row mr-0">
+            <div id="informacoes-esquerda" class="col-md-6">
+                <img id="informacoes-esquerda-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+            </div>
+            <div id="informacoes-direita" class="col-md-6">
+                <h1 id="informacoes-direita-titulo">
+                    SOBRE O OBSERVATÓRIO
+                </h1>
+                <h2 id="informacoes-direita-conteudo">
+                    O planetário é utilizado para a projeção de filmes
+                    sobre o Universo e representa um importante recurso
+                    didático para as visitas de escolas e do público em
+                    geral no Observatório Astronômico Antares.
+                    As sessões acontecem de segunda a sexta
+                    às 10 horas e às 15 horas.
+                </h2>
+                <h2 id="informacoes-direita-conteudo-footer">
+                    O atendimento é gratuito.
+                </h2>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
