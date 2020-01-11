@@ -6,100 +6,118 @@
     font-family: stark;
     src: url("fonts/Stark.OTF");
 }
-#imgNomeSistema {
-    width: 20%;
-    padding: 10px;
-    margin-top: 0%;
-    margin-left: 5%;
+@media only screen and (max-width: 800px) {
+    #img-background {
+        display: none !important;
+    }
+    #menu-botoes{
+        display: none;
+    }
 }
-#imgLogoMenu {
-    width: 50%;
-    margin-top: -5%;
-    margin-bottom: 7%;
+@media only screen and (max-width: 800px) {
+    #btn-login-max {
+        display: none !important;
+    }
+    body {
+        margin: 0px;
+    }
+    #btn-login-min {
+        display: block !important;
+    }
+    #img-nome-scorpius {
+        width: 50% !important;
+    }
+    #img-nome-min {
+        text-align: center !important;
+    }
+    #btn-login-min {
+        font-size: small;
+    }
+    #btn-entrar {
+        font-size: small;
+        color: rgb(39, 39, 255) !important;
+    }
+    #btn-cadastrar {
+        font-size: smaller;
+    }
+    #menu-img-logo {
+        width: 80% !important;
+    }
+    #informacoes-direita{
+        text-align: center;
+    }
 }
-.full-height {
-    height: 100vh;
+@media only screen and (min-width: 800px) {
+    #btn-login-min {
+        display: none !important;
+    }
 }
 
-.flex-center {
-    align-items: center;
-    display: flex;
-    justify-content: center;
+#container {
+    margin: 0px;
+}
+#img-background {
+    width: 95%;
+    float: right;
 }
 
-.position-ref {
+.lado-direito {
     position: relative;
 }
-.top-right {
+#btn-login-max {
     position: absolute;
-    right: 100px;
-    top: 30px;
+    margin-top: 5%;
+    margin-left: 40%;
 }
-
-#fonteNegrito {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 500;
+#img-nome-scorpius {
+    width: 50%;
+    margin-left: 5%;
 }
-
-.bordaTextoLateral {
-    margin-left: 45%;
-}
-#cadastrar-entrar {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-}
-#img-menu {
-    font-size: x-large;
-    color: #696969;
-    font-weight: bold;
-    font-family: orator;
-    width: 100%;
-    top: 10px;
-}
-#opc-menu {
-    color: #696969;
-}
-#opc-menu-antares {
-    position: absolute;
-    top: 160px;
-    left: 330px;
-    color: #696969;
-}
-#opc-menu-exposicoes {
-    top: 220px;
-    left: 480px;
-    color: #696969;
-}
-#opc-menu-informacoes {
-    top: 320px;
-    left: 450px;
-    color: #696969;
-}
-#opc-menu-agendamento {
-    top: 440px;
-    left: 440px;
-    color: #696969;
-}
-#opc-menu-endereco {
-    top: 510px;
-    left: 255px;
-    color: #696969;
-}
-#opc-menu-contato {
-    top: 485px;
-    left: 85px;
-    color: #696969;
-}
-.fig-sobreposta {
+#menu {
     display: inline-block;
     position: relative;
 }
-.obj-sobreposta {
-    position: absolute;
+#menu-img-logo {
+    width: 95%;
+    margin-left: 10%;
 }
-#img-background {
+#menu-botoes {
+    font-family: orator;
+    font-size: 24px;
+}
+#menu-botoes-antares {
     position: absolute;
-    right: 0px;
-    width: 50%;
-    height: 99%;
+    top: 27%;
+    left: 55%;
+    color: #696969
+}
+#menu-botoes-exposicoes {
+    position: absolute;
+    top: 40%;
+    left: 82%;
+    color: #696969
+}
+#menu-botoes-informacoes {
+    position: absolute;
+    top: 61%;
+    left: 77%;
+    color: #696969
+}
+#menu-botoes-agendamento {
+    position: absolute;
+    top: 83%;
+    left: 75%;
+    color: #696969
+}
+#menu-botoes-endereco {
+    position: absolute;
+    top: 100%;
+    left: 45%;
+    color: #696969
+}
+#menu-botoes-contato {
+    position: absolute;
+    top: 95%;
+    left: 17%;
+    color: #696969
 }
