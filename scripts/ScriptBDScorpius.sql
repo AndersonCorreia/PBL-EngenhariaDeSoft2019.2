@@ -53,6 +53,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`instituicao` (
   `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
+  `responsavel` VARCHAR(40) NOT NULL,
   `endereco` VARCHAR(50) NOT NULL,
   `numero` VARCHAR(6) NOT NULL,
   `cidade_UF` SMALLINT NOT NULL,
