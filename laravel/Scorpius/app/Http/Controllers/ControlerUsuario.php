@@ -45,7 +45,7 @@ class ControlerUsuario extends Controller
      */
     public function CadastrarInstituicao(){
         //codigo para cadastrar a instituição e vincular ao usuario
-
+        return $_POST;
         return redirect()->route('instituição.show');
     }
 }
