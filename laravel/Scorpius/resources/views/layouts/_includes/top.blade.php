@@ -20,6 +20,7 @@
         }
     </style>
     <title>@yield('title')</title>
+    @yield('css.head')
 </head>
 
 <body>
