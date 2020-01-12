@@ -69,9 +69,10 @@
     <br><br>
     <!-- INFORMAÇÕES -->
     <div id="informacoes">
-        <div class="row mr-0">
+        <div class="row mr-0 align-items-center">
             <div id="informacoes-esquerda" class="col-md-6">
                 <img id="informacoes-esquerda-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+                <span class="glyphicon glyphicon-chevron-right"></span>
             </div>
             <div id="informacoes-direita" class="col-md-6">
                 <h1 id="informacoes-direita-titulo">
