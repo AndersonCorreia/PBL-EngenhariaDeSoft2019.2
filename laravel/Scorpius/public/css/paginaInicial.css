@@ -45,23 +45,20 @@
     }
     #informacoes-direita{
         text-align: center;
-        /**font-size: medium !important;**/ /*tentei, para padronizar, mas nao vai...*/
     }
     #informacoes-direita-titulo{
-        /**font-size: medium !important; usando o vmin, vi q se adapta melhor aos tipos de tela do que medium e small*/
-        font-size: 6vmin !important;
-        margin-bottom: 2px !important;
+        font-size: 7vmin !important;
+        margin-bottom: 7px !important;
     }
     #informacoes-direita-conteudo{
-        font-size: 4vmin !important;
+        font-size: 4.5vmin !important;
     }
     #informacoes-direita-conteudo-footer{
-        font-size: 4vmin !important;
+        font-size: 4.5vmin !important;
     }
     #informacoes-esquerda-img{
         margin-top: 10px !important;
         margin-bottom: 10px !important;
-        /*align-content: flex-end !important;*/
     }
 }
 @media only screen and (min-width: 800px) {
