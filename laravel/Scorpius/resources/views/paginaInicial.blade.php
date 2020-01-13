@@ -23,10 +23,24 @@
             <div id="img-nome-min">
                 <img class="img-fluid" id="img-nome-scorpius" src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">
             </div>
-            <!-- Botões de Login (só aparecem para versão mobile) -->
-            <div id="btn-login-min">
-                <a id="btn-entrar" class="btn btn-outline-primary text-white btn-lg btn-block" href="{{ route('entrar') }}">ENTRAR</a>
-                <a id="btn-cadastrar" class="btn btn-primary btn-lg btn-block" href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
+            <!-- DIV que só aparecerá para versão mobile -->
+            <div id="mobile-top">
+                <div id="btn-login-min">
+                    <a id="btn-entrar" class="btn btn-outline-primary text-white btn-lg btn-block" href="{{ route('entrar') }}">ENTRAR</a>
+                    <a id="btn-cadastrar" class="btn btn-primary btn-lg btn-block" href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
+                </div>
+                <div id="mobile-top-menu">
+                    <div id="mobile-top-menu-botoes-1" class="btn-group" role="group" aria-label="...">
+                        <button id="mobile-top-menu-antares" type="button" class="btn btn-secondary border border-white"><a href="">Antares</a></button>
+                        <button id="mobile-top-menu-exposicoes"  type="button" class="btn btn-secondary border border-white"><a href="#exposicoes">Exposições</a></button>
+                        <button id="mobile-top-menu-informacoes"  type="button" class="btn btn-secondary border border-white"><a href="#informacoes">Informações</a></button>
+                        <button id="mobile-top-menu-agendamento"  type="button" class="btn btn-secondary border border-white"><a href="#agendamento">Agendamento</a></button>
+                    </div>
+                    <div id="mobile-top-menu-botoes-1" class="btn-group" role="group" aria-label="...">
+                        <button id="mobile-top-menu-endereco" type="button" class="btn btn-secondary border border-white"><a href="#endereco">Endereço</a></button>
+                        <button id="mobile-top-menu-contato"  type="button" class="btn btn-secondary border border-white"><a href="contato">Contato</a></button>
+                    </div>
+                </div>
             </div>
             <br>
 
@@ -66,14 +80,17 @@
             </div>
         </div>
     </div>
-    <br><br>
+    
     <!-- INFORMAÇÕES -->
     <div id="informacoes">
-        <div class="row mr-0 align-items-center">
+        <div class="row mr-0">
             <div id="informacoes-esquerda" class="col-md-6">
-                <img class="img-fluid" id="informacoes-esquerda-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
-                <span class="glyphicon glyphicon-chevron-right"></span>
+                <img id="informacoes-esquerda-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
             </div>
+
+            <!-- Separa a coluna da esquerda da direita quando abaixo de 1000px de resolução -->
+            <div id="informacoes-separador-coluna" class="w-100"></div>
+
             <div id="informacoes-direita" class="col-md-6">
                 <h1 id="informacoes-direita-titulo">
                     SOBRE O OBSERVATÓRIO

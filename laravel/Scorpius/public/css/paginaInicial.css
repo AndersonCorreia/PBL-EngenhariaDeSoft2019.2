@@ -6,32 +6,134 @@
     font-family: stark;
     src: url("fonts/Stark.OTF");
 }
-@media only screen and (max-width: 800px) {
-    #img-background {
-        display: none !important;
+@media only screen and (max-width: 1200px) {
+    #btn-login-max {
+        text-align: center;
     }
-    #menu-botoes{
-        display: none;
+    #btn-entrar {
+        margin-bottom: 10px;
     }
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 400px) {
+    #informacoes{
+        font-size: 12px;
+    }
+    #mobile-top-menu-antares {
+        font-size: small;
+        padding: 5px !important;
+    }
+    #mobile-top-menu-exposicoes {
+        font-size: small;
+        padding: 5px !important;
+    }
+    #mobile-top-menu-informacoes {
+        font-size: small;
+        padding: 5px !important;
+    }
+    #mobile-top-menu-agendamento {
+        font-size: small;
+        padding: 5px !important;
+    }
+    #mobile-top-menu-endereco {
+        font-size: small;
+        padding: 5px !important;
+    }
+    #mobile-top-menu-contato {
+        font-size: small;
+        padding: 5px !important;
+    }
+}
+@media only screen and (max-width: 340px) {
+    #mobile-top-menu-antares {
+        font-size: small;
+        padding: 2px !important;
+    }
+    #mobile-top-menu-exposicoes {
+        font-size: small;
+        padding: 2px !important;
+    }
+    #mobile-top-menu-informacoes {
+        font-size: small;
+        padding: 2px !important;
+    }
+    #mobile-top-menu-agendamento {
+        font-size: small;
+        padding: 2px !important;
+    }
+    #mobile-top-menu-endereco {
+        font-size: small;
+        padding: 2px !important;
+    }
+    #mobile-top-menu-contato {
+        font-size: small;
+        padding: 2px !important;
+    }
+}
+@media only screen and(max-width: 550px){
+    #mobile-top-menu-botoes-2{
+        margin-top: 1%;
+    }
+}
+@media only screen and(max-width: 1350px){
+    #menu-botoes-antares {
+        left: 0px !important;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .lado-direito {
+        display: none !important;
+    }
+    #informacoes-esquerda-img{
+        margin-top: 20% !important;
+        margin-bottom: 0px !important;
+        padding: 0px !important;
+    }
+    #menu-botoes {
+        display: none;
+    }
     #btn-login-max {
         display: none !important;
     }
     body {
         margin: 0px;
     }
-    #btn-login-min {
+    #mobile-top {
         display: block !important;
     }
+    #mobile-top-menu {
+        margin-top: 3%;
+        text-align: center;
+    }
+    #mobile-top-menu-antares a {
+        font-size: small;
+        color: white;
+    }
+    #mobile-top-menu-exposicoes a {
+        font-size: small;
+        color: white;
+    }
+    #mobile-top-menu-informacoes a {
+        font-size: small;
+        color: white;
+    }
+    #mobile-top-menu-agendamento a {
+        font-size: small;
+        color: white;
+    }
+    #mobile-top-menu-endereco a {
+        font-size: small;
+        color: white;
+    }
+    #mobile-top-menu-contato a {
+        font-size: small;
+        color: white;
+    }
+
     #img-nome-scorpius {
         width: 50% !important;
     }
     #img-nome-min {
         text-align: center !important;
-    }
-    #btn-login-min {
-        font-size: small;
     }
     #btn-entrar {
         font-size: small;
@@ -43,27 +145,16 @@
     #menu-img-logo {
         width: 80% !important;
     }
-    #informacoes-direita{
+    #informacoes-direita {
         text-align: center;
     }
-    #informacoes-direita-titulo{
-        font-size: 7vmin !important;
-        margin-bottom: 7px !important;
-    }
-    #informacoes-direita-conteudo{
-        font-size: 4.5vmin !important;
-    }
-    #informacoes-direita-conteudo-footer{
-        font-size: 4.5vmin !important;
-    }
-    #informacoes-esquerda-img{
-        margin-top: 10px !important;
-        margin-bottom: 10px !important;
-    }
 }
-@media only screen and (min-width: 800px) {
-    #btn-login-min {
+@media only screen and (min-width: 1000px) {
+    #mobile-top {
         display: none !important;
+    }
+    #informacoes-separador-coluna {
+        display: none;
     }
 }
 
@@ -102,40 +193,40 @@
 #menu-botoes-antares {
     position: absolute;
     top: 27%;
-    left: 55%;
-    color: #696969
+    left: 57%;
+    color: #696969;
 }
 #menu-botoes-exposicoes {
     position: absolute;
     top: 40%;
     left: 82%;
-    color: #696969
+    color: #696969;
 }
 #menu-botoes-informacoes {
     position: absolute;
     top: 61%;
     left: 77%;
-    color: #696969
+    color: #696969;
 }
 #menu-botoes-agendamento {
     position: absolute;
     top: 83%;
     left: 75%;
-    color: #696969
+    color: #696969;
 }
 #menu-botoes-endereco {
     position: absolute;
     top: 100%;
     left: 45%;
-    color: #696969
+    color: #696969;
 }
 #menu-botoes-contato {
     position: absolute;
     top: 95%;
-    left: 17%;
-    color: #696969
+    left: 15%;
+    color: #696969;
 }
-#informacoes-esquerda-img{
+#informacoes-esquerda-img {
     float: left;
     width: 100%;
     border-bottom-right-radius: 180px;
@@ -144,21 +235,22 @@
     margin-bottom: 125px;
     align-content: left;
 }
-#informacoes-direita{
+#informacoes-direita {
     text-align: center;
+    margin-top: 60px;
 }
-#informacoes-direita-titulo{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+#informacoes-direita-titulo {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-size: 350%;
     margin-bottom: 50px;
 }
-#informacoes-direita-conteudo{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#informacoes-direita-conteudo {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-style: normal;
     font-weight: 400;
-    text-align: center;
 }
-#informacoes-direita-conteudo-footer{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#informacoes-direita-conteudo-footer {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
 }
