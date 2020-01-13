@@ -1,30 +1,43 @@
-<!-- 
-    Esse será o template das telas de login (sign in e sign up), 
-    visto que acerca de layout, serão a mesma coisa. Então reaproveitamos o layout. 
--->
-
+<!-- Template das tela de Login (Cadastrar/Entrar/Login ADM) -->
 @include('layouts._includes.top')
 
-<div class="row">
-    <!-- Aqui ficara as coisas que ficam ao lado esquerdo das telas de login, que no caso, 
-    é aquela imagem do background -->
+<style>
+    @media only screen and (max-width: 1250px) {
+        #lado_esquerdo {
+            display: none !important;
+        }
+    }
+    #lado_esquerdo img {
+        float: left;
+        width: 630px;
+    }
+    #lado_direito{
+        margin-top: 80px;
+    }
     
-        <div class="col-sm" id="lado_esquerdo">
-            <img width="92%" class="img-fluid" src="{{ asset('img/background-login-2.png') }}">
-        </div>
-      
+    #nome-scorpius{
+        width: 45%;
+    }
+    #container{
+        margin-right: 0px;
+    }
+</style>
 
-    <!-- Aqui ficara as coisas que ficam ao lado direito das telas de login, como os campos
-    os botões, etc.. -->
-    <div class="col-sm-5" id="lado_direito">
-        <div class="w-auto p-3">
-            <div class="text-center">
-                <a href="{{ route('paginaInicial') }}">
-                    <img width="250" class="img-fluid" id="nome-scorpius" src="{{ asset('img/nome-scorpius.png') }}">
-                </a>
-            </div>
-            @yield('conteudo')
+<div id="container" class="row">
+    <!-- Lado esquerdo da tela de Login -->
+    <div id="lado_esquerdo" class="col-md-6">
+        @yield('img')
+    </div>
+    <!-- Lado direito da tela de Login -->
+    <div id="lado_direito" class="col-md-6 pr-0">
+        <!-- Parte do topo do lado direito -->
+        <div id="lado_direito-topo" class="text-center">
+            <a href="{{ route('paginaInicial') }}">
+                <img id="nome-scorpius" src="{{ asset('img/nome-scorpius.png') }}">
+            </a>
         </div>
+        <!-- Parte de baixo do lado direito -->
+        <div id="lado_direito-baixo"> @yield('conteudo')</div>
     </div>
 </div>
 

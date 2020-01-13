@@ -21,6 +21,10 @@ Route::get('/cadastro', ['uses'=>'InicialController@telaCadastro'])->name('cadas
 // Chama o metódo do Inicialcontroller que retorna a página de entrar (login).
 Route::get('/entrar', ['uses'=>'InicialController@telaEntrar'])->name('entrar');
 
+Route::get('/login-administrativo', ['uses' => 'InicialController@loginAdm'])->name('loginAdm');
+
+Route::get('/AlterarDadosCadastrais',['uses'=>'AlterarDadosController@index']);
+
 /**
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que
  * gerencia o cadastro normal dos visitantes/responsáveis.
@@ -30,7 +34,21 @@ Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\C
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
+<<<<<<< HEAD
 Route::get('/instituicaoEnsino',['uses'=>'ControlerInstitucional@telaInstituicao'])->name("instituição.show");
+=======
+Route::get('/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao'])->name("instituição.show");
+
+/**
+ * Rota para retornar a tela para cadastra uma instituição
+ */
+Route::get('/instituicao/cadastro', 'ControlerUsuario@telaCadastroInstituicao')->name("CadastroIntituição.show");
+
+/**
+ * Rota para casdastra uma instituição e vinculala a um usuario
+ */
+Route::post('/instituicao/cadastro', ['as' => 'user.instituicoes.cadastrar','uses'=>'ControlerUsuario@cadastrarInstituicao']);
+>>>>>>> 1d44b8c3c058e803e3c1dca2ed1c8e507dc24da2
 
 /**
  * Rota para retornar a tela para cadastra uma instituição

@@ -7,24 +7,16 @@
 @section('img')
 <img style="border-bottom-right-radius: 130px;border-top-right-radius: 130px;" class="img-fluid " src="{{ asset('img/background-login-3.png') }}">
 @endsection
+<br>
 <div class="text-center mx-auto col-md-10">
-    <h1>Entre</h1>
-    <h5>Não possui uma conta? <a href="{{ route('cadastrar') }}"> Cadastre-se</a>.</h5>
-    <div id="redes-socias">
-        <a style="font-size: 15px;" href="" class="btn btn-primary btn-lg btn-block" style="font-size:13px;color:white">
-            <i class="fa fa-facebook-square" style="font-size:13px;color:white"></i> Entrar com o Facebook
-        </a>
-        <a style="font-size: 15px;" href="" class="btn btn-danger btn-lg btn-block" style="font-size:13px;color:white">
-            <i class="fa fa-google-plus" style="font-size:13px;color:white"></i> Entrar com o Google
-        </a>
-    </div>
+    <h1>Login administrativo</h1>
 </div>
 <br>
 <form class="form-group mx-auto col-md-10" action="" method="POST">
-    <!-- E-mail -->
+    <!-- Usuário -->
     <div class="form-group">
-        <label for="emailCadastro">E-mail</label>
-        <input class="form-control" placeholder="exemplo@exemplo.com" id="emailCadastro" name="e-mail" type="text" aria-describedby="emailHelp">
+        <label for="usuario">Usuário</label>
+        <input class="form-control" id="usuario" name="usuario" type="text">
     </div>
     <!-- Senha -->
     <div class="form-group">
