@@ -46,8 +46,6 @@
     #informacoes-direita{
         text-align: center;
         /**font-size: medium !important;**/ /*tentei, para padronizar, mas nao vai...*/
-        height: 100vmin !important;
-        width: 100vmin !important;
     }
     #informacoes-direita-titulo{
         /**font-size: medium !important; usando o vmin, vi q se adapta melhor aos tipos de tela do que medium e small*/
