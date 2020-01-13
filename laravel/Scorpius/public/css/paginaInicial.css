@@ -45,6 +45,25 @@
     }
     #informacoes-direita{
         text-align: center;
+        /**font-size: medium !important;**/ /*tentei, para padronizar, mas nao vai...*/
+        height: 100vmin !important;
+        width: 100vmin !important;
+    }
+    #informacoes-direita-titulo{
+        /**font-size: medium !important; usando o vmin, vi q se adapta melhor aos tipos de tela do que medium e small*/
+        font-size: 6vmin !important;
+        margin-bottom: 2px !important;
+    }
+    #informacoes-direita-conteudo{
+        font-size: 4vmin !important;
+    }
+    #informacoes-direita-conteudo-footer{
+        font-size: 4vmin !important;
+    }
+    #informacoes-esquerda-img{
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        /*align-content: flex-end !important;*/
     }
 }
 @media only screen and (min-width: 800px) {
@@ -132,7 +151,6 @@
 }
 #informacoes-direita{
     text-align: center;
-    /**margin-top: 60px;**/
 }
 #informacoes-direita-titulo{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
