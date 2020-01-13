@@ -10,67 +10,20 @@
 
 <form action="#" method="POST">
     {{csrf_field()}}
-<<<<<<< HEAD
-        <fieldset>
-            <div class="form-row">
-            <div class="form-group col-md-9">
-                    <input class="form-control" type="text" name="nameInstituicao" placeholder="Nome da instituicão de ensino" value="" required>
-                </div>
-                <div class="form-group col-md-6">    
-                    <input class="form-control"  type="text" name="nameResponsavel" placeholder="Nome do responsável pela instituição"  value="" required>
-                </div>
-                <div class="form-group col-md-3">    
-                    <input class="form-control"  type="text" name="nameTelefone" placeholder="Telefone" value="" required>
-                </div>    
-                <div class="form-group col-md-9">
-                    <input class="form-control"  type="text" name="nameEndereco" placeholder="Endereço" value="" required>
-                </div>
-                <div class="form-group col-md-4">    
-                    <input class="form-control"  type="text" name="nameCidade" placeholder="Cidade" value="" required>
-                </div>
-                <div class="form-group col-md-2">    
-                    <input class="form-control"  type="text" name="nameEstado" placeholder="Estado" value="" required>
-                </div>
-                <div class="form-group col-md-1">    
-                    <input class="form-control"  type="text" name="nameNumero" placeholder="Numero" value="" required>
-                </div>
-                <div class="form-group col-md-2">
-                    <input class="form-control"  type="text" name="nameCEP" placeholder="CEP" value="" required>
-                    
-                    </div>
-                <div class="form-group col-md-9">
-                    
-                </div>
-                <div class="form-group col-md-9">
-                <select name="select"  class="custom-select" required>
-                    <option value="valor0">Selecione o tipo da instituição</option>
-                    <option  value="">Privada</option> 
-                    <option  value="">Federal</option>
-                    <option  value="">Distrital</option>
-                    <option  value="">Estadual</option>
-                    <option  value="">Municipal</option>
-                    <option  value="">Organização Não-Governamental</option>
-                    </select>
-                <div>
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Atualizar Dados</button>
-                    <button type="submit" class="btn btn-danger">Cancelar</button>
-=======
     <fieldset>
         <div class="form-row col-msm">
             <div class="form-group col-sm-12 d-block">
-                <span>Instituição de Ensino</span>
-                <div class="col-sm-10 m-0 p-0 float-sm-left">
-                    <input id="nomeInst" class="form-control" type="text" name="nameInstituicao" placeholder="Insira o Nome da instituicão" value="{{isset($instituicao->nameInstituicao) ? $instituicao->nameInstituicao : ''}}" list="inst" required autofocus>
-                    <datalist id="inst">
-
-                        <option value="Female">
-                       
+                <span class="col-12">Instituição de Ensino</span>
+                <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
+                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" value="{{isset($instituicao->nameInstituicao) ? $instituicao->nameInstituicao : ''}}" list="instList" required autofocus>
+                    <datalist id="instList">
+                    @foreach (($instuicoes ?? [["name" =>"UEFS", "endereco"=> "Segunda Casa"]]) as $inst)
+                        <option class="opList" value="{{$inst['name']}} ; Endereço: {{$inst['endereco']}}" >
+                    @endforeach
                     </datalist>
                 </div>
-                <div class="col-sm-2 pt-1 p-0 pt-sm-0 float-sm-right d-block">
+                <div class="col-sm-2 mt-1 m-0 mt-sm-0 float-sm-right d-block">
                     <button type="button" class= "btn btn-primary float-right " onclick="getDados()"> Buscar </button>
->>>>>>> 1d44b8c3c058e803e3c1dca2ed1c8e507dc24da2
                 </div>
             </div>
 
@@ -130,9 +83,6 @@
                     <option  value="Organização Não-Governamental">Organização Não-Governamental</option>
                 </select>
             </div>
-            
-            
-
         </div>
     </fieldset>
         <div class="input-group-append">
