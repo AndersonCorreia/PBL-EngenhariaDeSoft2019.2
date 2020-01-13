@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
-class ControlerUsuario extends Controller
+class ControlerInstitucional extends Controller
 {
     /**
      * Retorna tela de instiuição
@@ -35,6 +35,7 @@ class ControlerUsuario extends Controller
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Cadastro de Instituições"
+            //falta a variavel instituições, com nome e endereço das instiuições
         ];
         return view('TelaInstituicaoEnsino.cadastroInstituicao', $variaveis);
     }
@@ -45,7 +46,6 @@ class ControlerUsuario extends Controller
      */
     public function CadastrarInstituicao(){
         //codigo para cadastrar a instituição e vincular ao usuario
-        return $_POST;
         return redirect()->route('instituição.show');
     }
 }

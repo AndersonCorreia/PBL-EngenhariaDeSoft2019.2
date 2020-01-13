@@ -49613,8 +49613,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\vitor\OneDrive\Documentos\GitHub\2PBL-EngenhariaDeSoft2019.2\laravel\Scorpius\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\vitor\OneDrive\Documentos\GitHub\2PBL-EngenhariaDeSoft2019.2\laravel\Scorpius\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\USER\Documents\ecomp\PBL\2019.2\PBL-EngenhariaDeSoft2019.2\laravel\Scorpius\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\USER\Documents\ecomp\PBL\2019.2\PBL-EngenhariaDeSoft2019.2\laravel\Scorpius\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

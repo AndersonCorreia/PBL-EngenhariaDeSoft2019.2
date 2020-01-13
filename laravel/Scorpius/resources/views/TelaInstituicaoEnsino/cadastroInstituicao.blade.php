@@ -6,15 +6,16 @@
 
 <form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST">{{-- não precisar do action pois é a mesma url pra rota do POST --}}
     {{csrf_field()}}
+    <input id="onlyV" type="hidden" name="onlyVincular" value="false">{{-- valor para informar ao back-end se a instituição já existe --}}
     <fieldset>
         <div class="form-row col-msm">
             <div class="form-group col-sm-12 d-block">
-                <span class="col-12 p-0">Instituição de Ensino</span>
+                <span class="col-12">Instituição de Ensino</span>
                 <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
-                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" value="" list="inst" required autofocus>
-                    <datalist id="inst">
-                    @foreach (($instuicoes ?? [["name" =>"UEFS", "endereco"=> "segunda casa"]]) as $inst)
-                        <option value="{{$inst['name']}} ; Endereço: {{$inst['endereco']}}" >
+                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" value="" list="instList" required autofocus>
+                    <datalist id="instList">
+                    @foreach (($instuicoes ?? [["name" =>"UEFS", "endereco"=> "Segunda Casa"]]) as $inst)
+                        <option class="opList" value="{{$inst['name']}} ; Endereço: {{$inst['endereco']}}" >
                     @endforeach
                     </datalist>
                 </div>
@@ -55,7 +56,7 @@
 
             <div class="form-group col-sm-3">
                 <span>Estado</span>    
-                <select name="estado"  class="custom-select" required>
+                <select id="estado" name="estado"  class="custom-select" required>
                     <option  value="BA" selected>Bahia</option> 
                     <option  value="MA">Maranhão</option>
                     <option  value="PI">Piauí</option>
@@ -70,7 +71,7 @@
             
             <div class="form-group col-sm-5">
                 <span>Tipo da Instituição</span>
-                <select name="tipo"  class="custom-select" placeholder="Tipo de instituição" required>
+                <select id="tipo" name="tipo"  class="custom-select" placeholder="Tipo de instituição" required>
                     <option  value="Privada">Privada</option> 
                     <option  value="Federal">Federal</option>
                     <option  value="Distrital">Distrital</option>
@@ -81,8 +82,8 @@
             </div>
             
             <div class="input-group-append mt-2">
-                <button type="submit" class="btn mr-2 btn-primary">Cadastrar e vincular instituição</button>
-                <button type="reset" class="btn btn-danger">Cancelar</button>
+                <button id="submit" type="submit" class="btn mr-2 btn-primary">Cadastrar e Vincular instituição</button>
+                <a href="/instituicaoEnsino"><button type="button" class="btn btn-danger">Cancelar</button> </a>
             </div>
 
         </div>
@@ -100,4 +101,9 @@
         text-decoration: none;   
     }
 </style>
+@endsection
+
+@section('js')
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+<script src="{{ asset("/js/cadastroInstituicao.js")}}" ></script>
 @endsection
