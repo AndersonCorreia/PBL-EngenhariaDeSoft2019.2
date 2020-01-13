@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Users\Instituicao;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
+
 class ControlerUsuario extends Controller
 {
     /**
@@ -40,12 +42,15 @@ class ControlerUsuario extends Controller
     }
     /**
      * Função que deve cadastrar uma instituição e vincula-la ao usuario.
-     *
+     * @param 
      * @return page redirecionar o usuario para a pagina de instituições
      */
-    public function CadastrarInstituicao(){
+    public function cadastrarInstituicao(Request $req){
         //codigo para cadastrar a instituição e vincular ao usuario
-
+        $dados = $req->all();
+        $instituicao = new Instituicao($dados);
+        $instituicao->cadastraInstituicao();
+       
         return redirect()->route('instituição.show');
     }
 }

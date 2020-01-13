@@ -44,7 +44,8 @@ Route::get('/instituicao/cadastro', 'ControlerUsuario@telaCadastroInstituicao')-
 /**
  * Rota para casdastra uma instituição e vinculala a um usuario
  */
-Route::post('/instituicao/cadastro', 'ControlerUsuario@cadastrarInstituicao')->name("CadastroInstituição.post");
+Route::post('/instituicao/cadastro', ['as' => 'user.instituicoes.cadastrar','uses'=>'ControlerUsuario@cadastrarInstituicao']);
+
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */

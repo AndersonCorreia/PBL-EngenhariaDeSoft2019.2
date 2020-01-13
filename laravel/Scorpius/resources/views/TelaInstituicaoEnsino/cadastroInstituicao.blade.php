@@ -4,14 +4,14 @@
 
 @section('conteudo')
 
-<form class="col-md-9 col-sm-11 mx-sm-auto mt-sm-4" method="POST">{{-- não precisar do action pois é a mesma url pra rota do POST --}}
+<form class="col-md-9 col-sm-11 mx-sm-auto mt-sm-4" method="POST" enctype="multipart/form-data" action="{{route('user.instituicoes.cadastrar')}}">{{-- não precisar do action pois é a mesma url pra rota do POST --}}
     {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">
             <div class="form-group col-sm-12 d-block">
                 <span>Instituição de Ensino</span>
                 <div class="col-sm-10 m-0 p-0 float-sm-left">
-                    <input id="nomeInst" class="form-control" type="text" name="nameInstituicao" placeholder="Insira o Nome da instituicão" value="" list="inst" required autofocus>
+                    <input id="nomeInst" class="form-control" type="text" name="nameInstituicao" placeholder="Insira o Nome da instituicão" value="{{isset($instituicao->nameInstituicao) ? $instituicao->nameInstituicao : ''}}" list="inst" required autofocus>
                     <datalist id="inst">
 
                         <option value="Female">
@@ -25,32 +25,32 @@
 
             <div class="form-group col-sm-8">    
                 <span>Responsável pela Instituição</span>
-                <input class="form-control"  type="text" maxlength="40" name="nameResponsavel" placeholder="Nome do Responsável"  value="" required>
+                <input class="form-control"  type="text" maxlength="40" name="nameResponsavel" placeholder="Nome do Responsável"  value="{{isset($instituicao->nameResponsavel) ? $instituicao->nameResponsavel : ''}}" required>
             </div>
 
             <div class="form-group col-sm-4">
                 <span>Telefone da instituicão</span>
-                <input class="form-control" type="tel" maxlength="14" name="nameTelefone" placeholder="(99)99999-9999" value="" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
+                <input class="form-control" type="tel" maxlength="14" name="nameTelefone" placeholder="(99)99999-9999" value="{{isset($instituicao->nameTelefone) ? $instituicao->nameTelefone : ''}}" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
             </div> 
 
             <div class="form-group col-sm-8">
                 <span>Endereço da Instituição</span>
-                <input class="form-control"  type="text" maxlength="50" name="nameEndereco" placeholder="Informe Rua e Bairro" value="" required>
+                <input class="form-control"  type="text" maxlength="50" name="nameEndereco" placeholder="Informe Rua e Bairro" value="{{isset($instituicao->nameEndereco) ? $instituicao->nameEndereco : ''}}" required>
             </div>
 
             <div class="form-group col-sm-2">    
                 <span>Numero</span>
-                <input class="form-control" type="text" name="nameNumero" maxlength="5" placeholder="xxx" value="" required>
+                <input class="form-control" type="text" name="nameNumero" maxlength="5" placeholder="xxx" value="{{isset($instituicao->nameNumero) ? $instituicao->nameNumero : ''}}" required>
             </div>
 
             <div class="form-group col-sm-2">
                 <span>CEP</span>
-                <input class="form-control" type="text" name="nameCEP" maxlength="9" placeholder="99999-999" value="" required>
+                <input class="form-control" type="text" name="nameCEP" maxlength="9" placeholder="99999-999" value="{{isset($instituicao->nameCEP) ? $instituicao->nameCEP : ''}}" required>
             </div>
 
             <div class="form-group col-sm-4">
                 <span>Cidade</span>
-                <input class="form-control"  type="text" name="nameCidade" placeholder="Informe a Cidade" value="" required>
+                <input class="form-control"  type="text" name="nameCidade" placeholder="Informe a Cidade" value="{{isset($instituicao->nameCidade) ? $instituicao->nameCidade : ''}}" required>
             </div>
 
             <div class="form-group col-sm-3">
@@ -79,14 +79,12 @@
                     <option  value="Organização Não-Governamental">Organização Não-Governamental</option>
                 </select>
             </div>
-            
-            <div class="input-group-append mt-2">
-                <button type="submit" class="btn mr-2 btn-primary">Cadastrar e vincular instituição</button>
-                <button type="submit" class="btn btn-danger">Cancelar</button>
-            </div>
-
         </div>
     </fieldset>
+    <div class="input-group-append mt-2">
+        <button type="submit" class="btn mr-2 btn-primary">Cadastrar e vincular instituição</button>
+        <button type="submit" class="btn btn-danger">Cancelar</button>
+    </div>
 </form>
 @endsection
 
