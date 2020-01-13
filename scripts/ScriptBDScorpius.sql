@@ -39,7 +39,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`cidade_UF` (
   `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
-  `tipo_usuario` SMALLINT NULL DEFAULT NULL,
   `cidade` VARCHAR(30) NOT NULL,
   `UF` CHAR(2) NOT NULL,
   PRIMARY KEY (`ID`),

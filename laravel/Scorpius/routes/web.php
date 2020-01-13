@@ -34,6 +34,9 @@ Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\C
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
+<<<<<<< HEAD
+Route::get('/instituicaoEnsino',['uses'=>'ControlerInstitucional@telaInstituicao'])->name("instituição.show");
+=======
 Route::get('/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao'])->name("instituição.show");
 
 /**
@@ -45,11 +48,28 @@ Route::get('/instituicao/cadastro', 'ControlerUsuario@telaCadastroInstituicao')-
  * Rota para casdastra uma instituição e vinculala a um usuario
  */
 Route::post('/instituicao/cadastro', ['as' => 'user.instituicoes.cadastrar','uses'=>'ControlerUsuario@cadastrarInstituicao']);
+>>>>>>> 1d44b8c3c058e803e3c1dca2ed1c8e507dc24da2
 
+/**
+ * Rota para retornar a tela para cadastra uma instituição
+ */
+Route::get('/instituicao/cadastro', 'ControlerInstitucional@telaCadastroInstituicao')->name("CadastroIntituição.show");
+
+/**
+ * 
+ */
+Route::get("/instituicao/dados/{nome}/{endereco}/", function ($nome , $endereco){
+    return ["nome"=> $nome, "endereco"=> $endereco ];//para testes
+});
+
+/**
+ * Rota para casdastra uma instituição e vinculala a um usuario
+ */
+Route::post('/instituicao/cadastro', 'ControlerInstitucional@cadastrarInstituicao')->name("CadastroInstituição.post");
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
-Route::get('/instituicaoEnsino/dadosInstituicaoEnsino',['uses'=>'ControlerUsuario@telaDadosInstituicao']);
+Route::get('/instituicaoEnsino/dadosInstituicaoEnsino',['uses'=>'ControlerInstitucional@telaDadosInstituicao']);
 
 /**
  * Após confirmação dos dados da rota acima, retorna a tela de "Prosseguir" da verificação de email. Essa tela

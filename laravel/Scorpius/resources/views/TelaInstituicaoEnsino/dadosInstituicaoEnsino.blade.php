@@ -13,16 +13,16 @@
     <fieldset>
         <div class="form-row col-msm">
             <div class="form-group col-sm-12 d-block">
-                <span>Instituição de Ensino</span>
-                <div class="col-sm-10 m-0 p-0 float-sm-left">
-                    <input id="nomeInst" class="form-control" type="text" name="nameInstituicao" placeholder="Insira o Nome da instituicão" value="{{isset($instituicao->nameInstituicao) ? $instituicao->nameInstituicao : ''}}" list="inst" required autofocus>
-                    <datalist id="inst">
-
-                        <option value="Female">
-                       
+                <span class="col-12">Instituição de Ensino</span>
+                <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
+                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" value="{{isset($instituicao->nameInstituicao) ? $instituicao->nameInstituicao : ''}}" list="instList" required autofocus>
+                    <datalist id="instList">
+                    @foreach (($instuicoes ?? [["name" =>"UEFS", "endereco"=> "Segunda Casa"]]) as $inst)
+                        <option class="opList" value="{{$inst['name']}} ; Endereço: {{$inst['endereco']}}" >
+                    @endforeach
                     </datalist>
                 </div>
-                <div class="col-sm-2 pt-1 p-0 pt-sm-0 float-sm-right d-block">
+                <div class="col-sm-2 mt-1 m-0 mt-sm-0 float-sm-right d-block">
                     <button type="button" class= "btn btn-primary float-right " onclick="getDados()"> Buscar </button>
                 </div>
             </div>
@@ -83,9 +83,6 @@
                     <option  value="Organização Não-Governamental">Organização Não-Governamental</option>
                 </select>
             </div>
-            
-            
-
         </div>
     </fieldset>
         <div class="input-group-append">
