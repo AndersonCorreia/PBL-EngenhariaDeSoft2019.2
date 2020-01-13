@@ -62,25 +62,27 @@
                     </a>
                 </div>
             </div>
-            <div id="mobile-top-menu">
-                <br><br>
-                <div id="mobile-top-menu-botoes-1" class="btn-group" role="group" aria-label="...">
-                    <button id="mobile-top-menu-antares" type="button"
-                        class="btn btn-secondary border border-white"><a href="">Antares</a></button>
-                    <button id="mobile-top-menu-exposicoes" type="button"
-                        class="btn btn-secondary border border-white"><a href="#exposicoes">Exposições</a></button>
-                    <button id="mobile-top-menu-informacoes" type="button"
-                        class="btn btn-secondary border border-white"><a
-                            href="#informacoes">Informações</a></button>
-                </div>
-                <div id="mobile-top-menu-botoes-1" class="btn-group" role="group" aria-label="...">
-                    <button id="mobile-top-menu-agendamento" type="button"
-                    class="btn btn-secondary border border-white"><a
-                        href="#agendamento">Agendamento</a></button>
-                    <button id="mobile-top-menu-endereco" type="button"
-                        class="btn btn-secondary border border-white"><a href="#endereco">Endereço</a></button>
-                    <button id="mobile-top-menu-contato" type="button"
-                        class="btn btn-secondary border border-white"><a href="contato">Contato</a></button>
+            <div class="mobile-top">
+                <div id="mobile-top-menu">
+                    <br><br>
+                    <div id="mobile-top-menu-botoes-1" class="btn-group" role="group" aria-label="...">
+                        <button id="mobile-top-menu-antares" type="button"
+                            class="btn btn-secondary border border-white"><a href="">Antares</a></button>
+                        <button id="mobile-top-menu-exposicoes" type="button"
+                            class="btn btn-secondary border border-white"><a href="#exposicoes">Exposições</a></button>
+                        <button id="mobile-top-menu-informacoes" type="button"
+                            class="btn btn-secondary border border-white"><a
+                                href="#informacoes">Informações</a></button>
+                    </div>
+                    <div id="mobile-top-menu-botoes-1" class="btn-group" role="group" aria-label="...">
+                        <button id="mobile-top-menu-agendamento" type="button"
+                            class="btn btn-secondary border border-white"><a
+                                href="#agendamento">Agendamento</a></button>
+                        <button id="mobile-top-menu-endereco" type="button"
+                            class="btn btn-secondary border border-white"><a href="#endereco">Endereço</a></button>
+                        <button id="mobile-top-menu-contato" type="button"
+                            class="btn btn-secondary border border-white"><a href="contato">Contato</a></button>
+                    </div>
                 </div>
             </div>
         </div>
