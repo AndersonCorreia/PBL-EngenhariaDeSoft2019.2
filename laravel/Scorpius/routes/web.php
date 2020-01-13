@@ -29,7 +29,7 @@ Route::get('/AlterarDadosCadastrais',['uses'=>'AlterarDadosController@index']);
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que
  * gerencia o cadastro normal dos visitantes/responsáveis.
  */
-Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\CadastroController@cadastroNormal']);
+Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\CadastroController@cadastroNormal'])->name('cadastro.normal');
 
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
