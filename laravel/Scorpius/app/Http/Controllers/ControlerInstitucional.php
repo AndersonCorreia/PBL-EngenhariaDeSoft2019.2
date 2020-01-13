@@ -46,6 +46,12 @@ class ControlerInstitucional extends Controller
      */
     public function CadastrarInstituicao(){
         //codigo para cadastrar a instituição e vincular ao usuario
+        if($_POST("onlyVincular")==false){
+            //cadastra e vincular
+        }else {
+            //apenas vincular
+        }
+        
         return redirect()->route('instituição.show');
     }
 }
