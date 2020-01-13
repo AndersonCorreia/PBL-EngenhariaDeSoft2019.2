@@ -5,7 +5,37 @@
 
 @section('conteudo')
 @section('img')
-<img style="border-bottom-right-radius: 130px;border-top-right-radius: 130px;" class="img-fluid " src="{{ asset('img/background-login-3.png') }}">
+<div id="img" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#img" data-slide-to="0" class="active"></li>
+        <li data-target="#img" data-slide-to="1"></li>
+        <li data-target="#img" data-slide-to="2"></li>
+        <li data-target="#img" data-slide-to="3"></li>
+        <li data-target="#img" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div id="imgs" class="carousel-item active">
+            <img id="img-background-1" class="d-block w-100 img-fluid"
+                src="{{ asset('img\tela_login\background-login-1.jpg') }}" alt="Primeiro Slide">
+        </div>
+        <div class="carousel-item">
+            <img id="img-background-2" class="d-block w-100 img-fluid"
+                src="{{ asset('img\tela_login\background-login-2.jpg') }}" alt="Segundo Slide">
+        </div>
+        <div class="carousel-item">
+            <img id="img-background-3" class="d-block w-100 img-fluid"
+                src="{{ asset('img\tela_login\background-login-3.jpg') }}" alt="Terceiro Slide">
+        </div>
+        <div class="carousel-item">
+            <img id="img-background-4" class="d-block w-100 img-fluid"
+                src="{{ asset('img\tela_login\background-login-4.jpg') }}" alt="Quarto Slide">
+        </div>
+        <div class="carousel-item">
+            <img id="img-background-5" class="d-block w-100 img-fluid"
+                src="{{ asset('img\tela_login\background-login-5.jpg') }}" alt="Quinto Slide">
+        </div>
+    </div>
+</div>
 @endsection
 <br>
 <div class="text-center mx-auto col-md-10">
