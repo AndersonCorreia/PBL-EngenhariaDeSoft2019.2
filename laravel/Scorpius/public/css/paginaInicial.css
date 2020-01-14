@@ -46,6 +46,7 @@
     #mobile-img-nome-scorpius {
         text-align: center;
     }
+    /* Botões de ENTRAR/CADASTRAR - Mobile */
     #mobile-btn-login {
         text-align: center;
         margin-top: 2%;
@@ -53,6 +54,7 @@
     #mobile-btn-entrar {
         color: blue !important;
     }
+    /* Menu principal - Mobile */
     #mobile-menu-img {
         width: 100% !important;
         text-align: center;
@@ -68,6 +70,7 @@
         font-size: small;
         color: white;
     }
+    /* INFORMAÇÕES - Mobile */
     #mobile-informacoes-direita {
         text-align: center;
     }
@@ -108,6 +111,7 @@
     }
 }
 
+/* TELA INICIAL */
 #container {
     margin: 0px;
 }
@@ -118,15 +122,18 @@
     width: 95%;
     float: right;
 }
+/* Botões de ENTRAR/CADSTRAR */
 #btn-login {
     position: absolute;
     margin-top: 5%;
     margin-left: 60%;
 }
+/* Nome SCORPIUS */
 #img-nome-scorpius {
     width: 50%;
     margin-left: 5%;
 }
+/* Menu principal */
 #menu {
     display: inline-block;
     position: relative;
@@ -176,6 +183,7 @@
     color: #696969;
 }
 
+/* INFORMAÇÕES */
 #informacoes-esquerda-img {
     float: left;
     width: 100%;
@@ -204,3 +212,5 @@
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
 }
+
+/* AGENDAMENTO */
