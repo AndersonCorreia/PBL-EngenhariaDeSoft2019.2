@@ -112,9 +112,6 @@
 }
 
 /* TELA INICIAL */
-#container {
-    margin: 0px;
-}
 #lado-direito {
     position: relative;
 }
@@ -130,8 +127,8 @@
 }
 /* Nome SCORPIUS */
 #img-nome-scorpius {
-    width: 50%;
-    margin-left: 5%;
+    width: 60%;
+    margin-left: 10%;
 }
 /* Menu principal */
 #menu {

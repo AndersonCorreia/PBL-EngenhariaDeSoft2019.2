@@ -19,7 +19,7 @@
     <div id="tela-inicial">
         {{-- TELA INICIAL - DESKTOP --}}
         <div class="desktop">
-            <div id="container" class="row">
+            <div class="row mr-0">
                 <!-- Lado esquerdo da tela -->
                 <div class="col-md-6 lado-esquerdo">
                     <!-- Nome Scorpius -->
@@ -154,7 +154,7 @@
 
         {{-- DESKTOP --}}
         <div class="desktop">
-            <div class="row">
+            <div class="row mr-0">
 
                 {{-- Parte esquerda da sub-tela --}}
                 <div id="aec-esquerda" class="col-md-6">
