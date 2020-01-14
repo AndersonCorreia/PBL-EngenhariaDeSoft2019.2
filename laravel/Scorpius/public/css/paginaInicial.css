@@ -7,7 +7,7 @@
     src: url("fonts/Stark.OTF");
 }
 @media only screen and (max-width: 1200px) {
-    #btn-login-max {
+    #btn-login {
         text-align: center;
     }
     #btn-entrar {
@@ -15,128 +15,110 @@
     }
 }
 @media only screen and (max-width: 400px) {
-    #informacoes{
-        font-size: 12px;
-    }
-    #mobile-top-menu a {
+    #mobile-menu a {
         font-size: small;
         padding: 5px !important;
     }
 }
 @media only screen and (max-width: 340px) {
-    #mobile-top-menu a {
+    #mobile-menu a {
         font-size: small;
         padding: 2px !important;
     }
 }
-@media only screen and(max-width: 550px){
-    #mobile-top-menu-botoes-2{
+@media only screen and(max-width: 550px) {
+    #mobile-menu-botoes-2 {
         margin-top: 1%;
     }
 }
-@media only screen and(max-width: 1350px){
-    #menu-botoes-antares {
-        left: 0px !important;
+
+@media only screen and (max-width: 999px) {
+    body {
+        margin: 0px;
     }
-}
-@media only screen and (max-width: 1000px) {
-    .lado-direito {
+    .desktop {
         display: none !important;
     }
-    #informacoes-direita{
-        display: none !important;
+    .mobile {
+        display: block !important;
+        padding: 0% 5% 0% 5%;
     }
-    #mt-informacoes-direita{
+    #mobile-img-nome-scorpius {
         text-align: center;
-        padding: 5%;
     }
-    #mt-informacoes-direita-titulo {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-            Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    #mobile-btn-login {
+        text-align: center;
+        margin-top: 2%;
     }
-    #mt-informacoes-direita-conteudo {
+    #mobile-btn-entrar {
+        color: blue !important;
+    }
+    #mobile-menu-img {
+        width: 100% !important;
+        text-align: center;
+        margin-top: 5%;
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+    }
+    #mobile-menu {
+        margin-top: 2%;
+        text-align: center;
+    }
+    #mobile-menu a {
+        font-size: small;
+        color: white;
+    }
+    #mobile-informacoes-direita {
+        text-align: center;
+    }
+    #mobile-informacoes-direita-titulo {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    }
+    #mobile-informacoes-direita-conteudo {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-style: normal;
         font-weight: 400;
     }
-    #mt-informacoes-direita-footer {
+    #mobile-informacoes-direita-footer {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold !important;
     }
-    #informacoes-esquerda-img{
+    #mobile-informacoes-esquerda {
+        text-align: center;
+    }
+    #mobile-informacoes-esquerda-img {
         border-bottom-right-radius: 30px !important;
         border-top-right-radius: 30px !important;
         border-bottom-left-radius: 30px !important;
         border-top-left-radius: 30px !important;
-        margin-top: 20% !important;
-        margin-bottom: 0px !important;
-        padding: 0px !important;
-    }
-    #informacoes-esquerda{
-        padding: 0px !important;
-    }
-    #menu-botoes {
-        display: none;
-    }
-    #btn-login-max {
-        display: none !important;
-    }
-    body {
-        margin: 0px;
-    }
-    .mobile-top {
-        display: block !important;
-    }
-    #mobile-top-menu {
-        margin-top: 3%;
-        text-align: center;
-    }
-    #mobile-top-menu a {
-        font-size: small;
-        color: white;
-    }
-
-    #img-nome-scorpius {
-        width: 50% !important;
-    }
-    #img-nome-min {
-        text-align: center !important;
-    }
-    #btn-entrar {
-        font-size: small;
-        color: rgb(39, 39, 255) !important;
-    }
-    #btn-cadastrar {
-        font-size: smaller;
-    }
-    #menu-img-logo {
-        width: 80% !important;
-    }
-    #informacoes-direita {
-        text-align: center;
+        padding: 15px !important;
+        width: 100% !important;
+        margin-top: 5%;
     }
 }
 @media only screen and (min-width: 1000px) {
-    .mobile-top {
+    .mobile {
         display: none !important;
     }
-    #informacoes-separador-coluna {
-        display: none;
+}
+@media only screen and (max-width: 1250px) {
+    #menu-botoes-antares {
+        left: 55% !important;
     }
 }
 
 #container {
     margin: 0px;
 }
+#lado-direito {
+    position: relative;
+}
 #img-background {
     width: 95%;
     float: right;
 }
-
-.lado-direito {
-    position: relative;
-}
-#btn-login-max {
+#btn-login {
     position: absolute;
     margin-top: 5%;
     margin-left: 60%;
@@ -160,7 +142,7 @@
 #menu-botoes-antares {
     position: absolute;
     top: 27%;
-    left: 57%;
+    left: 60%;
     color: #696969;
 }
 #menu-botoes-exposicoes {
@@ -193,6 +175,7 @@
     left: 15%;
     color: #696969;
 }
+
 #informacoes-esquerda-img {
     float: left;
     width: 100%;
@@ -216,7 +199,6 @@
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-style: normal;
     font-weight: 400;
-   
 }
 #informacoes-direita-conteudo-footer {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;

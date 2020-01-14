@@ -16,95 +16,101 @@
 
 <body>
     <!-- TELA INICIAL -->
-    <div id="container" class="row">
-        <!-- Lado esquerdo da tela -->
-        <div class="col-md-6 lado-esquerdo">
-            <!-- Nome Scorpius -->
-            <div id="img-nome-min">
-                <img class="img-fluid" id="img-nome-scorpius"
-                    src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">
-            </div>
-            <!-- DIV que só aparecerá para versão mobile -->
-            <div class="mobile-top">
-                <div id="btn-login-min">
-                    <a id="btn-entrar" class="btn btn-outline-primary text-white btn-lg btn-block"
-                        href="{{ route('entrar') }}">ENTRAR</a>
-                    <a id="btn-cadastrar" class="btn btn-primary btn-lg btn-block"
-                        href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
-                </div>
-            </div>
-            <br>
-
-            <div id="menu">
-
-                <img id="menu-img-logo" class="img-fluid"
-                    src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
-
-                <div id="menu-botoes">
-                    <a id="menu-botoes-antares" href="http://www.antares.uefs.br/"><i class='fas fa-external-link-alt'
-                            style='font-size:large'></i>
-                        ANTARES
-                    </a>
-                    <a id="menu-botoes-exposicoes" href="#exposicoes">
-                        EXPOSIÇÕES
-                    </a>
-                    <a id="menu-botoes-informacoes" href="#informacoes">
-                        INFORMAÇÕES
-                    </a>
-                    <a id="menu-botoes-agendamento" href="#informacoes">
-                        AGENDAMENTO
-                    </a>
-                    <a id="menu-botoes-endereco" href="#informacoes">
-                        ENDEREÇO
-                    </a>
-                    <a id="menu-botoes-contato" href="#informacoes">
-                        CONTATO
-                    </a>
-                </div>
-            </div>
-            <div class="mobile-top">
-                <div id="mobile-top-menu">
-                    <br><br>
-                    <div id="mobile-top-menu-botoes-1" class="btn-group" role="group" aria-label="...">
-                        <button id="mobile-top-menu-antares" type="button"
-                            class="btn btn-secondary border border-white"><a href="">Antares</a></button>
-                        <button id="mobile-top-menu-exposicoes" type="button"
-                            class="btn btn-secondary border border-white"><a href="#exposicoes">Exposições</a></button>
-                        <button id="mobile-top-menu-informacoes" type="button"
-                            class="btn btn-secondary border border-white"><a
-                                href="#informacoes">Informações</a></button>
+    <div id="tela-inicial">
+        {{-- TELA INICIAL - DESKTOP --}}
+        <div class="desktop">
+            <div id="container" class="row">
+                <!-- Lado esquerdo da tela -->
+                <div class="col-md-6 lado-esquerdo">
+                    <!-- Nome Scorpius -->
+                    <div id="img-nome-scorpius">
+                        <img class="img-fluid" id="img-nome-scorpius"
+                            src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">
                     </div>
-                    <div id="mobile-top-menu-botoes-1" class="btn-group" role="group" aria-label="...">
-                        <button id="mobile-top-menu-agendamento" type="button"
-                            class="btn btn-secondary border border-white"><a
-                                href="#agendamento">Agendamento</a></button>
-                        <button id="mobile-top-menu-endereco" type="button"
-                            class="btn btn-secondary border border-white"><a href="#endereco">Endereço</a></button>
-                        <button id="mobile-top-menu-contato" type="button"
-                            class="btn btn-secondary border border-white"><a href="contato">Contato</a></button>
+                    <!-- DIV que só aparecerá para versão mobile -->
+                    <br>
+                    <div id="menu">
+
+                        <img id="menu-img-logo" class="img-fluid"
+                            src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
+
+                        <div id="menu-botoes">
+                            <a id="menu-botoes-antares" href="http://www.antares.uefs.br/">
+                                ANTARES
+                            </a>
+                            <a id="menu-botoes-exposicoes" href="#exposicoes">
+                                EXPOSIÇÕES
+                            </a>
+                            <a id="menu-botoes-informacoes" href="#informacoes">
+                                INFORMAÇÕES
+                            </a>
+                            <a id="menu-botoes-agendamento" href="#informacoes">
+                                AGENDAMENTO
+                            </a>
+                            <a id="menu-botoes-endereco" href="#informacoes">
+                                ENDEREÇO
+                            </a>
+                            <a id="menu-botoes-contato" href="#informacoes">
+                                CONTATO
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Lado direito -->
+                <div id="lado-direito" class="col-md-6 pr-0">
+                    <img class="img-fluid" id="img-background"
+                        src="{{ asset('img/tela_inicial/img-background-v3.png') }}">
+                    <div id="btn-login">
+                        <a id="btn-entrar" class="btn btn-outline-primary text-white"
+                            href="{{ route('entrar') }}">ENTRAR</a>
+                        <a id="btn-cadastrar" class="btn btn-primary" href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Lado direito -->
-        <div class="col-md-6 lado-direito pr-0">
-            <img class="img-fluid" id="img-background" src="{{ asset('img/tela_inicial/img-background-v3.png') }}">
-            <div id="btn-login-max">
-                <a id="btn-entrar" class="btn btn-outline-primary text-white" href="{{ route('entrar') }}">ENTRAR</a>
-                <a id="btn-cadastrar" class="btn btn-primary" href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
+        {{-- TELA INICIAL - MOBILE --}}
+        <div class="mobile">
+            <img class="img-fluid" id="mobile-img-nome-scorpius"
+                src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">
+            <div id="mobile-btn-login">
+                <a id="mobile-btn-entrar" class="btn btn-outline-primary text-white btn-lg btn-block"
+                    href="{{ route('entrar') }}">ENTRAR</a>
+                <a id="mobile-btn-cadastrar" class="btn btn-primary btn-lg btn-block"
+                    href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
+            </div>
+            <div id="mobile-menu-img">
+                <img id="mobile-menu-img-logo" class="img-fluid"
+                    src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
+            </div>
+            <br><br>
+            <div id="mobile-menu">
+                <div id="mobile-menu-botoes-1" class="btn-group" role="group" aria-label="...">
+                    <button id="mobile-menu-antares" type="button" class="btn btn-primary border border-white"><a
+                            href="">Antares</a></button>
+                    <button id="mobile-menu-exposicoes" type="button" class="btn btn-primary border border-white"><a
+                            href="#exposicoes">Exposições</a></button>
+                    <button id="mobile-menu-informacoes" type="button" class="btn btn-primary border border-white"><a
+                            href="#informacoes">Informações</a></button>
+                </div>
+                <div id="mobile-menu-botoes-1" class="btn-group" role="group" aria-label="...">
+                    <button id="mobile-menu-agendamento" type="button" class="btn btn-primary border border-white"><a
+                            href="#agendamento">Agendamento</a></button>
+                    <button id="mobile-menu-endereco" type="button" class="btn btn-primary border border-white"><a
+                            href="#endereco">Endereço</a></button>
+                    <button id="mobile-menu-contato" type="button" class="btn btn-primary border border-white"><a
+                            href="contato">Contato</a></button>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- INFORMAÇÕES -->
     <div id="informacoes">
-        <div class="row mr-0">
+        {{-- INFORMAÇÕES - DESKTOP --}}
+        <div class="desktop row mr-0">
             <div id="informacoes-esquerda" class="col-md-6">
                 <img id="informacoes-esquerda-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
             </div>
-
-            <!-- Separa a coluna da esquerda da direita quando abaixo de 1000px de resolução -->
-            <div id="informacoes-separador-coluna" class="w-100"></div>
             <div id="informacoes-direita" class="col-md-6">
                 <h1 id="informacoes-direita-titulo">
                     SOBRE O OBSERVATÓRIO
@@ -122,10 +128,15 @@
                 </h2>
             </div>
         </div>
-        <div class="mobile-top">
-            <div id="mt-informacoes-direita">
-                <h4 id="mt-informacoes-direita-titulo"> SOBRE O OBSERVATÓRIO</h4>
-                <h5 id="mt-informacoes-direita-conteudo">
+        {{-- INFORMAÇÕES - MOBILE --}}
+        <div class="mobile">
+            <div id="mobile-informacoes-esquerda">
+                <img id="mobile-informacoes-esquerda-img"
+                    src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+            </div>
+            <div id="mobile-informacoes-direita">
+                <h4 id="mobile-informacoes-direita-titulo"> SOBRE O OBSERVATÓRIO</h4>
+                <h5 id="mobile-informacoes-direita-conteudo">
                     O planetário é utilizado para a projeção de filmes
                     sobre o Universo e representa um importante recurso
                     didático para as visitas de escolas e do público em
@@ -133,7 +144,7 @@
                     As sessões acontecem de segunda a sexta
                     às 10 horas e às 15 horas.
                 </h5>
-                <h5 id="mt-informacoes-direita-footer">O atendimento é gratuito.</h5>
+                <h5 id="mobile-informacoes-direita-footer">O atendimento é gratuito.</h5>
             </div>
         </div>
     </div>
