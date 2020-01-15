@@ -4,7 +4,7 @@
 
 @section('conteudo')
 
-<form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" enctype="multipart/form-data" action="{{route('user.instituicoes.cadastrar')}}">>{{-- não precisar do action pois é a mesma url pra rota do POST --}}
+<form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('CadastroInstituição.post')}}">
     {{csrf_field()}}
     <input id="onlyV" type="hidden" name="onlyVincular" value="false">{{-- valor para informar ao back-end se a instituição já existe --}}
     <fieldset>
@@ -12,7 +12,7 @@
             <div class="form-group col-sm-12 d-block">
                 <span class="col-12">Instituição de Ensino</span>
                 <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
-                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" value="{{isset($instituicao->nameInstituicao) ? $instituicao->nameInstituicao : ''}}" list="instList" required autofocus>
+                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" list="instList" required autofocus>
                     <datalist id="instList">
                     @foreach (($instuicoes ?? [["name" =>"UEFS", "endereco"=> "Segunda Casa"]]) as $inst)
                         <option class="opList" value="{{$inst['name']}} ; Endereço: {{$inst['endereco']}}" >
@@ -26,32 +26,32 @@
 
             <div class="form-group col-sm-8">    
                 <span>Responsável pela Instituição</span>
-                <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" placeholder="Nome do Responsável"  value="{{isset($instituicao->nameResponsavel) ? $instituicao->nameResponsavel : ''}}" required>
+                <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" placeholder="Nome do Responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
             </div>
 
             <div class="form-group col-sm-4">
                 <span>Telefone da instituicão</span>
-                <input id="tel" class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" value="{{isset($instituicao->nameTelefone) ? $instituicao->nameTelefone : ''}}" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
+                <input id="tel" class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
             </div> 
 
             <div class="form-group col-sm-8">
                 <span>Endereço da Instituição</span>
-                <input id="endereco" class="form-control"  type="text" maxlength="50" name="Endereco" placeholder="Informe Rua e Bairro" value="" required>
+                <input id="endereco" class="form-control"  type="text" maxlength="50" name="Endereco" placeholder="Informe Rua e Bairro" required>
             </div>
 
             <div class="form-group col-sm-2 col-4">    
                 <span>Numero</span>
-                <input id="numero" class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx" value="{{isset($instituicao->nameNumero) ? $instituicao->nameNumero : ''}}" required>
+                <input id="numero" class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx" required>
             </div>
 
             <div class="form-group col-sm-2 col-8">
                 <span>CEP</span>
-                <input id="CEP" class="form-control" type="text" name="CEP" maxlength="9" placeholder="99999-999" pattern="[0-9]{5}-[0-9]{3}$"value="{{isset($instituicao->nameCEP) ? $instituicao->nameCEP : ''}}" required>
+                <input id="CEP" class="form-control" type="text" name="CEP" maxlength="9" placeholder="99999-999" pattern="[0-9]{5}-[0-9]{3}$" required>
             </div>
 
             <div class="form-group col-sm-4">
                 <span>Cidade</span>
-                <input id="cidade" class="form-control"  type="text" name="Cidade" placeholder="Informe a Cidade" value="{{isset($instituicao->nameCidade) ? $instituicao->nameCidade : ''}}"  required>
+                <input id="cidade" class="form-control"  type="text" name="Cidade" placeholder="Informe a Cidade" required>
             </div>
 
             <div class="form-group col-sm-3">

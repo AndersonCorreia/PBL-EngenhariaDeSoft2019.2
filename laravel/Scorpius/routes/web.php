@@ -34,34 +34,23 @@ Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\C
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
-Route::get('/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao'])->name("instituição.show");
-
-/**
- * Rota para retornar a tela para cadastra uma instituição
- */
-Route::get('/instituicao/cadastro', 'ControlerUsuario@telaCadastroInstituicao')->name("CadastroIntituição.show");
-
-/**
- * Rota para casdastra uma instituição e vinculala a um usuario
- */
-Route::post('/instituicao/cadastro', ['as' => 'user.instituicoes.cadastrar','uses'=>'ControlerUsuario@cadastrarInstituicao']);
+Route::get('/instituicaoEnsino',['uses'=>'ControlerInstitucional@telaInstituicao'])->name("instituição.show");
 
 /**
  * Rota para retornar a tela para cadastra uma instituição
  */
 Route::get('/instituicao/cadastro', 'ControlerInstitucional@telaCadastroInstituicao')->name("CadastroIntituição.show");
-
-/**
- * 
- */
-Route::get("/instituicao/dados/{nome}/{endereco}/", function ($nome , $endereco){
-    return ["nome"=> $nome, "endereco"=> $endereco ];//para testes
-});
-
 /**
  * Rota para casdastra uma instituição e vinculala a um usuario
  */
 Route::post('/instituicao/cadastro', 'ControlerInstitucional@cadastrarInstituicao')->name("CadastroInstituição.post");
+/**
+ * 
+ */
+Route::get("/instituicao/dados/{nome}/{endereco}/", function ($nome , $endereco){
+    return ["nome"=> $nome, "endereco"=> $endereco, "error"=> false ];//para testes
+});
+
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
