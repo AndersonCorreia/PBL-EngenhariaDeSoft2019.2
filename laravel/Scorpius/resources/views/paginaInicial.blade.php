@@ -44,13 +44,13 @@
                             <a id="menu-botoes-informacoes" href="#informacoes">
                                 INFORMAÇÕES
                             </a>
-                            <a id="menu-botoes-agendamento" href="#informacoes">
+                            <a id="menu-botoes-agendamento" href="#agendamento-endereco-informacoes">
                                 AGENDAMENTO
                             </a>
-                            <a id="menu-botoes-endereco" href="#informacoes">
+                            <a id="menu-botoes-endereco" href="#agendamento-endereco-informacoes">
                                 ENDEREÇO
                             </a>
-                            <a id="menu-botoes-contato" href="#informacoes">
+                            <a id="menu-botoes-contato" href="#agendamento-endereco-informacoes">
                                 CONTATO
                             </a>
                         </div>
@@ -94,18 +94,18 @@
                 </div>
                 <div id="mobile-menu-botoes-1" class="btn-group" role="group" aria-label="...">
                     <button id="mobile-menu-agendamento" type="button" class="btn btn-primary border border-white"><a
-                            href="#agendamento">Agendamento</a></button>
+                            href="#agendamento-endereco-informacoes">Agendamento</a></button>
                     <button id="mobile-menu-endereco" type="button" class="btn btn-primary border border-white"><a
-                            href="#endereco">Endereço</a></button>
+                            href="#agendamento-endereco-informacoes">Endereço</a></button>
                     <button id="mobile-menu-contato" type="button" class="btn btn-primary border border-white"><a
-                            href="contato">Contato</a></button>
+                            href="#agendamento-endereco-informacoes">Contato</a></button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- INFORMAÇÕES -->
-    <div id="informacoes">
+    <section id="informacoes">
         {{-- INFORMAÇÕES - DESKTOP --}}
         <div class="desktop row mr-0">
             <div id="informacoes-esquerda" class="col-md-6">
@@ -147,32 +147,150 @@
                 <h5 id="mobile-informacoes-direita-footer">O atendimento é gratuito.</h5>
             </div>
         </div>
-    </div>
+    </section>
 
     {{-- AGENDAMENTO / ENDEREÇO / CONTATO --}}
-    <div id="aec">
+    <section id="agendamento-endereco-informacoes">
 
         {{-- DESKTOP --}}
         <div class="desktop">
             <div class="row mr-0">
 
                 {{-- Parte esquerda da sub-tela --}}
-                <div id="aec-esquerda" class="col-md-6">
+                <div id="aec-esquerda" class="col-md-4">
+                    <div id="aec-esquerda-agendamento">
+                        <div id="aec-esquerda-agendamento-card" class="mx-auto">
+                            <p class="h1 text-center">Agendamento</p>
+                            <div class="card bg-transparent"
+                                style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
+                                <a href="{{ route('entrar') }}">
+                                    <img id="aec-esquerda-agendamento-card-img" class="card-img bg-transparente"
+                                        src="{{ asset('img/tela_inicial/background-agendamento.jpg') }}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cont_b358ec09b5af28aa548c2098f8263b2d">
+                        <script type="text/javascript" async
+                            src="https://www.tempo.com/wid_loader/b358ec09b5af28aa548c2098f8263b2d">
+                        </script>
+                    </div>
 
                 </div>
 
                 {{-- Parte direita da sub-tela --}}
-                <div id="aec-direita" class="col-md-6">
-
+                <div id="aec-direita" class="col-md-8">
+                    <div id="aec-direita-ec">
+                        <div class="card">
+                            <div id="aec-direita-ec-mapa" class="z-depth-1-half map-container-6" style="height: 400px">
+                                <iframe id="mapa"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.125422728828!2d-38.98123065087737!3d-12.239785991296475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71437f814104ed1%3A0xf454b0caf4308ec7!2sObservat%C3%B3rio%20Astron%C3%B4mico%20Antares!5e0!3m2!1spt-BR!2sbr!4v1579092162227!5m2!1spt-BR!2sbr"
+                                    width="600" height="450" frameborder="0" style="border:0;"
+                                    allowfullscreen=""></iframe>
+                            </div>
+                            <div id="aec-direita-ec-footer" class="card-body">
+                                <div class="row text-center">
+                                    <div class="col-md-4">
+                                        <a target="_blank" href="https://goo.gl/maps/obi3JURBXJco6Kab6">
+                                            <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 30px;"></i>
+                                            <p>Feira de Santana, BA 925</p>
+                                            <p>BRASIL</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="tel:+7536241921">
+                                            <i class='fas fa-phone' style='font-size:30px'></i>
+                                        </a>
+                                        <a href="tel:+7536241921">
+                                            <p>
+                                                (+55) 75 3624 1921
+                                            </p>
+                                        </a>
+                                        <a href="tel:+55754000">
+                                            <p>4000 (UEFS)</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="mailto:">
+                                            <i class="fa fa-envelope" aria-hidden="true" style="font-size: 30px;"></i>
+                                        </a>
+                                        <a href="mailto:observatoriouefs@gmail.com">
+                                            <p>observatoriouefs@gmail.com</p>
+                                        </a>
+                                        <a href="mailto:museuantares@gmail.com">
+                                            <p>museuantares@gmail.com</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
+        </div>
         </div>
 
         {{-- MOBILE --}}
         <div class="mobile">
-
-        </div>
-    </div>
+            <div id="mobile-agendamento">
+                <p class="h2 text-center">AGENDAMENTO</p>
+                <div class="card bg-transparent"
+                    style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
+                    <a href="{{ route('entrar') }}">
+                        <img id="aec-esquerda-agendamento-card-img" class="card-img bg-transparente"
+                            src="{{ asset('img/tela_inicial/background-agendamento.jpg') }}">
+                    </a>
+                </div>
+            </div>
+            <div id="mobile-ec">
+                <p class="h2 text-center">Endereço e Contato</p>
+                <div class="card"
+                    style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
+                    <div id="aec-direita-ec-mapa" class="z-depth-1-half map-container-6" style="height: 400px">
+                        <iframe id="mapa"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.125422728828!2d-38.98123065087737!3d-12.239785991296475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71437f814104ed1%3A0xf454b0caf4308ec7!2sObservat%C3%B3rio%20Astron%C3%B4mico%20Antares!5e0!3m2!1spt-BR!2sbr!4v1579092162227!5m2!1spt-BR!2sbr"
+                            width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                    </div>
+                    <div id="aec-direita-ec-footer" class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <a target="_blank" href="https://goo.gl/maps/obi3JURBXJco6Kab6">
+                                    <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 30px;"></i>
+                                    <p>Feira de Santana, BA 925</p>
+                                    <p>BRASIL</p>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="tel:+7536241921">
+                                    <i class='fas fa-phone' style='font-size:30px'></i>
+                                </a>
+                                <a href="tel:+7536241921">
+                                    <p>
+                                        (+55) 75 3624 1921
+                                    </p>
+                                </a>
+                                <a href="tel:+55754000">
+                                    <p>4000 (UEFS)</p>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="mailto:">
+                                    <i class="fa fa-envelope" aria-hidden="true" style="font-size: 30px;"></i>
+                                </a>
+                                <a href="mailto:observatoriouefs@gmail.com">
+                                    <p>observatoriouefs@gmail.com</p>
+                                </a>
+                                <a href="mailto:museuantares@gmail.com">
+                                    <p>museuantares@gmail.com</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
 </body>
 
 </html>
