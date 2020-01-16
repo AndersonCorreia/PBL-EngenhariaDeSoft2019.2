@@ -2,19 +2,23 @@
 // Controller das telas iniciais
 namespace App\Http\Controllers;
 
+use App\Model\Users\Instituicao;
 use Illuminate\Http\Request;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class ControlerInstitucional extends Controller
-{
+{   
     /**
      * Retorna tela de instiuição
      * @return telaInstituicao
      */
     public function telaInstituicao()
     {
+        $instituicao = new Instituicao(); 
+        
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições"
+            'paginaAtual' => "Instituições",
+            'registros' => $instituicao->listarInstituicoes()
         ];
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
@@ -53,5 +57,25 @@ class ControlerInstitucional extends Controller
         }
         
         return redirect()->route('instituição.show');
+    }
+
+    public function editarInstituicao($id){
+
+        $instituicao = new Instituicao(); 
+        $variaveis = [
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Instituições",
+            'registros' => $instituicao->buscar($id)
+        ];
+        return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
+       
+    }
+
+    public function atualizarInstituicao(Request $req, $id){
+       
+    }
+
+    public function deletarInstituicao(Request $req, $id){
+       
     }
 }

@@ -34,21 +34,17 @@ Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\C
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
-<<<<<<< HEAD
-Route::get('/instituicaoEnsino',['uses'=>'ControlerInstitucional@telaInstituicao'])->name("instituição.show");
-=======
-Route::get('/instituicaoEnsino',['uses'=>'ControlerUsuario@telaInstituicao'])->name("instituição.show");
+Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show");
 
 /**
  * Rota para retornar a tela para cadastra uma instituição
  */
-Route::get('/instituicao/cadastro', 'ControlerUsuario@telaCadastroInstituicao')->name("CadastroIntituição.show");
+Route::get('/instituicao/cadastro', 'ControlerInstitucional@telaCadastroInstituicao')->name("CadastroIntituição.show");
 
 /**
  * Rota para casdastra uma instituição e vinculala a um usuario
  */
-Route::post('/instituicao/cadastro', ['as' => 'user.instituicoes.cadastrar','uses'=>'ControlerUsuario@cadastrarInstituicao']);
->>>>>>> 1d44b8c3c058e803e3c1dca2ed1c8e507dc24da2
+Route::post('/instituicao/cadastro', ['as' => 'user.instituicoes.cadastrar','uses'=>'ControlerInstitucional@cadastrarInstituicao']);
 
 /**
  * Rota para retornar a tela para cadastra uma instituição
@@ -67,9 +63,17 @@ Route::get("/instituicao/dados/{nome}/{endereco}/", function ($nome , $endereco)
  */
 Route::post('/instituicao/cadastro', 'ControlerInstitucional@cadastrarInstituicao')->name("CadastroInstituição.post");
 /**
- * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
+ * Rota para editar instituicao.
  */
-Route::get('/instituicaoEnsino/dadosInstituicaoEnsino',['uses'=>'ControlerInstitucional@telaDadosInstituicao']);
+Route::get('/instituicao/editar/{id}',['as'=>'user.instituicoes.editar','uses'=>'ControlerInstitucional@editarInstituicao']);
+/**
+ * Rota para deletar instituicao.
+ */
+Route::get('/instituicao/deletar/{id}',['as'=>'user.instituicoes.deletar','uses'=>'ControlerInstitucional@deletarInstituicao']);
+/**
+ * Rota para atualizar instituicao.
+ */
+Route::put('/instituicao/atualizar/{id}',['as'=>'user.instituicoes.atualizar','uses'=>'ControlerInstitucional@atualizarInstituicao']);
 
 /**
  * Após confirmação dos dados da rota acima, retorna a tela de "Prosseguir" da verificação de email. Essa tela

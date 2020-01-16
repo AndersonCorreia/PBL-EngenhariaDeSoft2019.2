@@ -55,10 +55,39 @@ class InstituicaoDAO extends \DataAccessObject {
         $resultado = $this->dataBase->query($sql);
         return $resultado;
     }
-    function SELECT_ALL(String $table="instituicao"){
-        return parent::SELECT_ALL($table);// inves de apenas retorna criar os objetos da classe
+    function SELECT_ALL(String $table="instituicao"): Array{
+        //return parent::SELECT_ALL($table);// inves de apenas retorna criar os objetos da classe
         //talvez nesse select all não seja util mas os selects de um usuario especifico devem criar o objeto
+        $sql = "SELECT * FROM $table";
+        $resultado = $this->dataBase->query($sql);
+        $registros = [];
+
+        if($resultado->num_rows > 0) {
+            while($row = $resultado->fetch_assoc()) {
+                $registros[] = $row;
+            }
+        } 
+        return $registros;
+
     }
+
+    function SELECTbyID($id): Array{
+     
+        $sql = "SELECT * FROM instituicao WHERE id=$id";
+        //$sql = "SELECT * FROM instituicao";
+        $resultado = $this->dataBase->query($sql);
+
+        $registros = [];
+
+        if($resultado->num_rows > 0) {
+            while($row = $resultado->fetch_assoc()) {
+                $registros[] = $row;
+            }
+        } 
+
+        return $registros;
+    }
+
     /**
      * Undocumented function
      *
