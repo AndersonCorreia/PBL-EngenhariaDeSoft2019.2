@@ -2,6 +2,7 @@
 namespace App\Model\Users;
 
 use App\DB\InstituicaoDAO;
+use App\DB\Cidade_ufDAO;
 require_once __DIR__."/../../DB/interfaces/DataObject.php";
 class Instituicao extends \DataObject {
     private $nome;
@@ -15,8 +16,18 @@ class Instituicao extends \DataObject {
 	private $cidade_UF_ID;
 	private $instituicao;
 
-    function __Construct($dados){
-       	$this->instituicao = new InstituicaoDAO();
+	function __Construct(){
+		$this->instituicao = new InstituicaoDAO();
+	}
+
+    public function alterarDadosInstituicao($nome, $endereco,$numero, $cidade_UF, $cep,  $telefone, $tipo_Instituicao, $cidade_UF_ID): Instituicao{
+        
+    }
+
+    public function agendaInstituicao($instituicao): boolean{
+
+    }
+    public function cadastraInstituicao($dados): Instituicao{
         $this->nome = $dados['nameInstituicao'];
         $this->responsavel = $dados['nameResponsavel'];
         $this->endereco = $dados['nameEndereco'];
@@ -27,23 +38,21 @@ class Instituicao extends \DataObject {
         $this->tipo_Instituicao = $dados['tipo'];
 		$this->cidade_UF_ID = $dados['select'];
 		
-    
-    }
-
-    public function alterarDadosInstituicao($nome, $endereco,$numero, $cidade_UF, $cep,  $telefone, $tipo_Instituicao, $cidade_UF_ID): Instituicao{
-        
-    }
-
-    public function agendaInstituicao($instituicao): boolean{
-
-    }
-    public function cadastraInstituicao(): Instituicao{
         $this->instituicao->INSERT($this);
         return $this;
     }
     public function desvincularInstituicao($instituicao): boolean{
 
-    }
+	}
+	
+	public function buscar($id){
+		$result = $this->instituicao->SELECTbyID($id);
+		return $result;
+	}
+
+	public function listarInstituicoes(){
+		return $this->instituicao->SELECT_ALL();
+	}
 
 	public function getNome() {
 		return $this->nome;

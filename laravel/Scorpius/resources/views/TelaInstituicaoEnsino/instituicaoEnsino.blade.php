@@ -6,17 +6,36 @@
 <h1>Instituições de Ensino</h1> 
 <form method="get" action="#">
     {{csrf_field()}}
-
     <div class= "instBotoes">
+    
+    @foreach($registros as $registro)
+   
         <div class="instituicoes">
-            <h2>Colegio X</h2> 
-            
+        <table class="table-borderless">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Responsavel</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{$registro['nome']}}</td>
+                    <td>{{$registro['responsavel']}}</td>
+                    <td>{{$registro['endereco']}}</td>
+                    <td>{{$registro['telefone']}}</td>
+                </tr>
+            </tbody>
+        </table>
         </div>
 
         <div class="botoes">
-                <button type="submit" class="btn col btn-primary">Atualizar dados</button>
-                <button type="submit" class="btn col btn-danger">Deletar</button>
+                <a class="btn col btn-primary" href="{{route('user.instituicoes.editar', $registro['ID'])}}">Atualizar</a>
+                <a  href="{{route('user.instituicoes.deletar', $registro['ID'])}}" class="btn col btn-danger">Deletar</a>
         </div>
+        @endforeach
     </div>
 </form>
 

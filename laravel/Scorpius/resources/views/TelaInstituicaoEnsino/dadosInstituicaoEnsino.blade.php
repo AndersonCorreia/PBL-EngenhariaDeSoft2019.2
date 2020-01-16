@@ -4,26 +4,21 @@
 
 @section('conteudo')
 
-<h1>Colégio X</h1>
+<h1>Instituicao {{$registros[0]['nome']}}</h1>
 <div>
     <h2>Dados da instituição de ensino</h2>
-
-<form action="#" method="POST">
+<form action="{{route('user.instituicoes.atualizar',$instituicao->id)}}" method="POST" enctype="multipart/form-data">
     {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">
             <div class="form-group col-sm-12 d-block">
                 <span class="col-12">Instituição de Ensino</span>
+                <input type="hidden" name="_method" value="put">
                 <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
                     <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" value="{{isset($instituicao->nameInstituicao) ? $instituicao->nameInstituicao : ''}}" list="instList" required autofocus>
                     <datalist id="instList">
-                    @foreach (($instuicoes ?? [["name" =>"UEFS", "endereco"=> "Segunda Casa"]]) as $inst)
                         <option class="opList" value="{{$inst['name']}} ; Endereço: {{$inst['endereco']}}" >
-                    @endforeach
                     </datalist>
-                </div>
-                <div class="col-sm-2 mt-1 m-0 mt-sm-0 float-sm-right d-block">
-                    <button type="button" class= "btn btn-primary float-right " onclick="getDados()"> Buscar </button>
                 </div>
             </div>
 
