@@ -41,8 +41,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`cidade_UF` (
   `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
   `cidade` VARCHAR(30) NOT NULL,
   `UF` CHAR(2) NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE INDEX `tipo_usuario_UNIQUE` (`tipo_usuario` ASC))
+  PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
 
@@ -55,10 +54,9 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`instituicao` (
   `responsavel` VARCHAR(40) NOT NULL,
   `endereco` VARCHAR(50) NOT NULL,
   `numero` VARCHAR(6) NOT NULL,
-  `cidade_UF` SMALLINT NOT NULL,
   `cep` CHAR(9) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
-  `tipo_Instituicao` ENUM('Federal', 'Distrital', 'Estadual', 'Municipal', 'Privada', 'Filantrópica') NOT NULL,
+  `tipo_instituicao` ENUM('Federal', 'Distrital', 'Estadual', 'Municipal', 'Privada', 'Filantrópica') NOT NULL,
   `cidade_UF_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_instituicao_cidade_UF_idx` (`cidade_UF_ID` ASC),
@@ -199,16 +197,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `scorpius`.`Permissao`
+-- Table `scorpius`.`permissao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`permissao` (
   `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
-  `Permissao` VARCHAR(40) NOT NULL,
+  `permissao` VARCHAR(40) NOT NULL,
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `fk_Permissao_tipo_usuario1_idx` (`tipo_usuario_ID` ASC),
-  UNIQUE INDEX `Permissao_UNIQUE` (`Permissao`,'tipo_usuario_ID'),
-  CONSTRAINT `fk_Permissao_tipo_usuario1`
+  INDEX `fk_permissao_tipo_usuario1_idx` (`tipo_usuario_ID` ASC),
+  UNIQUE INDEX `permissao_UNIQUE` (`permissao`,`tipo_usuario_ID`),
+  CONSTRAINT `fk_permissao_tipo_usuario1`
     FOREIGN KEY (`tipo_usuario_ID`)
     REFERENCES `scorpius`.`tipo_usuario` (`ID`)
     ON DELETE NO ACTION

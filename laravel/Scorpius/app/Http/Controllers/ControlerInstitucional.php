@@ -1,9 +1,10 @@
 <?php
-// Controller das telas iniciais
+
 namespace App\Http\Controllers;
 
 use App\Model\Users\Instituicao;
 use Illuminate\Http\Request;
+require_once __DIR__."/../../DB/InstituicaoDAO.php";
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class ControlerInstitucional extends Controller
 {   
@@ -36,10 +37,11 @@ class ControlerInstitucional extends Controller
      * @return void
      */
     public function telaCadastroInstituicao(){
+        $DAO = new \InstituicaoDAO();
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Cadastro de Instituições"
-            //falta a variavel instituições, com nome e endereço das instiuições
+            'paginaAtual' => "Cadastro de Instituições",
+            'instituicoes' => $DAO->getNomeEnderecoALL()
         ];
         return view('TelaInstituicaoEnsino.cadastroInstituicao', $variaveis);
     }
@@ -50,7 +52,7 @@ class ControlerInstitucional extends Controller
      */
     public function CadastrarInstituicao(){
         //codigo para cadastrar a instituição e vincular ao usuario
-        if($_POST("onlyVincular")==false){
+        if($_POST["onlyVincular"]==false){
             //cadastra e vincular
         }else {
             //apenas vincular
@@ -76,6 +78,11 @@ class ControlerInstitucional extends Controller
     }
 
     public function deletarInstituicao(Request $req, $id){
-       
+    
+    }
+  
+    public function getInstituicao(string $nome, string $endereco){
+        $DAO = new \InstituicaoDAO();
+        return $DAO->SEECT($nome, $endereco);
     }
 }

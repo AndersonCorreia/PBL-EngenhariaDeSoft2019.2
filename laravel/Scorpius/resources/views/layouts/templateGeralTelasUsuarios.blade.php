@@ -15,8 +15,8 @@
             </nav>
         </div>
     </div>
-    <div class="content">
-        <div id="menuTopo" class="d-flex m-0 pt-2 w-100 border-bottom">
+    <div class="content h-100 bg-light">
+        <div id="menuTopo" class="d-flex m-0 pt-2 w-100 h-auto border-bottom">
                 <ul class=" w-100">
                     <li id="menuTopoTitle" class="ml-5 pt-1 pb-0 my-0 float-left w-50">
                         <h2>@yield('title', $paginaAtual ?? 'Pagina do Visitante')</h2>
@@ -31,7 +31,7 @@
                 </ul>
         </div>
         {{--<hr class="m-0 bg-primary">--}}
-        <div class="p-4 bg-light">
+        <div class="p-4">
             @yield('conteudo')
         </div>
     </div>
@@ -41,7 +41,7 @@
 <style type="text/css">
     html,
     body,
-    .tela {
+    .tela{
         margin: 0%;
         padding: 0%;
         height: 100vh;

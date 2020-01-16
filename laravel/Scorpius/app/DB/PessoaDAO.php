@@ -31,7 +31,7 @@ class PessoaDAO extends \DataAccessObject {
 
     }
     /**
-     * Undocumented function
+     * Retorna todas as permissões de determinado tipo de usuario;
      *
      * @param string $tipoUsuario
      * @return Array

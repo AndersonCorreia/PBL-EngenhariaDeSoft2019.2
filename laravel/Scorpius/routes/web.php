@@ -29,39 +29,27 @@ Route::get('/AlterarDadosCadastrais',['uses'=>'AlterarDadosController@index']);
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que
  * gerencia o cadastro normal dos visitantes/responsáveis.
  */
-Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\CadastroController@cadastroNormal']);
+Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\CadastroController@cadastroNormal'])->name('cadastro.normal');
 
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
 Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show");
 
-/**
- * Rota para retornar a tela para cadastra uma instituição
- */
-Route::get('/instituicao/cadastro', 'ControlerInstitucional@telaCadastroInstituicao')->name("CadastroIntituição.show");
-
-/**
- * Rota para casdastra uma instituição e vinculala a um usuario
- */
-Route::post('/instituicao/cadastro', ['as' => 'user.instituicoes.cadastrar','uses'=>'ControlerInstitucional@cadastrarInstituicao']);
 
 /**
  * Rota para retornar a tela para cadastra uma instituição
  */
 Route::get('/instituicao/cadastro', 'ControlerInstitucional@telaCadastroInstituicao')->name("CadastroIntituição.show");
-
-/**
- * 
- */
-Route::get("/instituicao/dados/{nome}/{endereco}/", function ($nome , $endereco){
-    return ["nome"=> $nome, "endereco"=> $endereco ];//para testes
-});
-
 /**
  * Rota para casdastra uma instituição e vinculala a um usuario
  */
 Route::post('/instituicao/cadastro', 'ControlerInstitucional@cadastrarInstituicao')->name("CadastroInstituição.post");
+/**
+ * rota para retornar o JSON com os dados de uma instituição.
+ */
+Route::get("/instituicao/dados/{nome}/{endereco}/", "ControlerInstitucional@getInstituicao");
+
 /**
  * Rota para editar instituicao.
  */
@@ -70,9 +58,7 @@ Route::get('/instituicao/editar/{id}',['as'=>'user.instituicoes.editar','uses'=>
  * Rota para deletar instituicao.
  */
 Route::get('/instituicao/deletar/{id}',['as'=>'user.instituicoes.deletar','uses'=>'ControlerInstitucional@deletarInstituicao']);
-/**
- * Rota para atualizar instituicao.
- */
+
 Route::put('/instituicao/atualizar/{id}',['as'=>'user.instituicoes.atualizar','uses'=>'ControlerInstitucional@atualizarInstituicao']);
 
 /**

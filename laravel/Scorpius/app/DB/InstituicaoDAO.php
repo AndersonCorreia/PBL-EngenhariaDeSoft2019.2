@@ -1,7 +1,7 @@
 <?PHP 
-namespace App\DB;
+
 require_once __DIR__."/interfaces/DataAccessObject.php";
-require_once __DIR__."/../Model/Users/Instituicao.php";//falta inserir as outras classes
+require_once __DIR__."/../Model/Users/Instituicao.php";
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao
@@ -55,21 +55,7 @@ class InstituicaoDAO extends \DataAccessObject {
         $resultado = $this->dataBase->query($sql);
         return $resultado;
     }
-    function SELECT_ALL(String $table="instituicao"): Array{
-        //return parent::SELECT_ALL($table);// inves de apenas retorna criar os objetos da classe
-        //talvez nesse select all não seja util mas os selects de um usuario especifico devem criar o objeto
-        $sql = "SELECT * FROM $table";
-        $resultado = $this->dataBase->query($sql);
-        $registros = [];
 
-        if($resultado->num_rows > 0) {
-            while($row = $resultado->fetch_assoc()) {
-                $registros[] = $row;
-            }
-        } 
-        return $registros;
-
-    }
 
     function SELECTbyID($id): Array{
      
@@ -87,24 +73,41 @@ class InstituicaoDAO extends \DataAccessObject {
 
         return $registros;
     }
+    function SELECT_ALL(String $table="instituicao"){
+        return parent::SELECT_ALL($table);
+    }
 
     /**
-     * Undocumented function
+     * Realizar a busca de uma instituição no banco com base no nome e endereço;
+     * Podendo retorna em forma de array ou um objeto do tipo Instituicao;
      *
-     * @return Pessoa
+     * @param string $nome
+     * @param string $endereco
+     * @param bool $array se true a informação é retornada na forma de array, do contrario como objeto
+     * @return array|Instituicao retornar um array ou objeto do tipo Instituicao com os dados;
      */
-    function SELECTbyCPF(): InstituicaoDAO{
-
+    function SELECT(string $nome, string $endereco, bool $array=true){
+        $join = "instituicao i LEFT JOIN cidade_UF c ON i.cidade_UF_ID = c.ID";
+        $sql = "SELECT * FROM $join WHERE i.nome = ? AND i.endereco = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ss", $nome, $endereco);
+        $stmt->execute();
+        
+        if($array){
+            return $stmt->get_result()->fetch_assoc();
+        }
+        else {
+            //construir o objeto e retornar
+        }
     }
     /**
-     * Undocumented function
-     *
-     * @param string $tipoUsuario
-     * @return Array
+     * Função para retorna o nome e endereço de todas as instituições;
+     * Retorna apenas nome e endereço.
+     * @return array array associativo com os dados;
      */
-    function getPermissoes(string $tipoUsuario): Array{
-        $join = "permissao p LEFT JOIN tipo_usuario t ON p.tipo_usuario_ID = t.ID";
-        $result = $this->dataBase->query("SELECT (permissao) FROM $join WHERE t.nome = '$tipoUsuario'");
+    function getNomeEnderecoALL(){
+        $sql = "SELECT nome,endereco FROM instituicao";
+        $result = $this->dataBase->query($sql);
         $array = $result->fetch_all(MYSQLI_ASSOC);
         return $array;
     }

@@ -1,17 +1,22 @@
+/**
+ * Função para preencher os valores dos campos e desativa o formulario,
+ * permitindo apenas que o usuario concluar a ação vinculando a instituição.
+ * @param {*} data 
+ * @param {*} status 
+ */
 const preencherForm = function(data, status) {
-        if (status != "success" || data.erro) {
+        if (status != "success" || data.error) {
             alert(" Erro ao recuperar as informações tente cadastrar manualmente");
         } else {
-            $("#nomeInst").val(data.nome).attr("readonly", "readonly");
-            $("#resp").val(data.responsavel).attr("readonly", "readonly");
-            $("#tel").val(data.telefone).attr("readonly", "readonly");
-            $("#endereco").val(data.endereco).attr("readonly", "readonly");
-            $("#numero").val(data.numero).attr("readonly", "readonly");
-            $("#CEP").val(data.cep).attr("readonly", "readonly");
-            $("#cidade").val(data.cidade).attr("readonly", "readonly");
-            $("#estado").val(data.UF).attr("readonly", "readonly");
-            $("#tipo").val(data.tipo_instituicao).attr("readonly", "readonly");
-
+            $("#nomeInst").val(data.nome).attr("readonly", "");
+            $("#resp").val(data.responsavel).attr("readonly", "");
+            $("#tel").val(data.telefone).attr("readonly", "");
+            $("#endereco").val(data.endereco).attr("readonly", "");
+            $("#numero").val(data.numero).attr("readonly", "");
+            $("#CEP").val(data.cep).attr("readonly", "");
+            $("#cidade").val(data.cidade).attr("readonly", "");
+            $("#estado").val(data.UF).attr("disabled", "");
+            $("#tipo").val(data.tipo_Instituicao).attr("disabled", "");
             $("#submit").html("Vincular instituição");
             $("#onlyV").val("true");
         }
@@ -31,7 +36,9 @@ function verificarInputName(nomeInst) {
     });
     return verificacao;
 }
-
+/**
+ * função que busca as informações da instituição no back-end e muda a tela.
+ */
 function getDados() {
     var nomeInst = $("#nomeInst").val();
 

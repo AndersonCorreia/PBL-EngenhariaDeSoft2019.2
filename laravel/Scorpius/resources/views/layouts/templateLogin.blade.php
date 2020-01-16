@@ -9,7 +9,7 @@
     }
     #lado_esquerdo img {
         float: left;
-        width: 630px;
+        width: 100% !important;
     }
     #lado_direito{
         margin-top: 80px;
