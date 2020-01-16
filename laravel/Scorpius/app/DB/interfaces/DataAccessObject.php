@@ -33,7 +33,8 @@ abstract class DataAccessObject {
      * @return mysqli_result|bool
      */
     function SELECT_ALL(string $table){
-        return $this->dataBase->query(" SELECT * FROM ".$table);
+        $result = $this->dataBase->query(" SELECT * FROM ".$table);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
     /**
      * Realiza uma ou mais querys de INSERT no banco de dados, para armazenar com o sucesso

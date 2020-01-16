@@ -45,11 +45,9 @@ Route::get('/instituicao/cadastro', 'ControlerInstitucional@telaCadastroInstitui
  */
 Route::post('/instituicao/cadastro', 'ControlerInstitucional@cadastrarInstituicao')->name("CadastroInstituição.post");
 /**
- * 
+ * rota para retornar o JSON com os dados de uma instituição.
  */
-Route::get("/instituicao/dados/{nome}/{endereco}/", function ($nome , $endereco){
-    return ["nome"=> $nome, "endereco"=> $endereco, "error"=> false ];//para testes
-});
+Route::get("/instituicao/dados/{nome}/{endereco}/", "ControlerInstitucional@getInstituicao");
 
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.

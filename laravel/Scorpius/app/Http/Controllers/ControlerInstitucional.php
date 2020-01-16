@@ -1,8 +1,9 @@
 <?php
-// Controller das telas iniciais
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+require_once __DIR__."/../../DB/InstituicaoDAO.php";
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class ControlerInstitucional extends Controller
 {
@@ -32,10 +33,11 @@ class ControlerInstitucional extends Controller
      * @return void
      */
     public function telaCadastroInstituicao(){
+        $DAO = new \InstituicaoDAO();
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Cadastro de Instituições"
-            //falta a variavel instituições, com nome e endereço das instiuições
+            'paginaAtual' => "Cadastro de Instituições",
+            'instituicoes' => $DAO->getNomeEnderecoALL()
         ];
         return view('TelaInstituicaoEnsino.cadastroInstituicao', $variaveis);
     }
@@ -53,5 +55,10 @@ class ControlerInstitucional extends Controller
         }
         
         return redirect()->route('instituição.show');
+    }
+
+    public function getInstituicao(string $nome, string $endereco){
+        $DAO = new \InstituicaoDAO();
+        return $DAO->SELECT($nome, $endereco);
     }
 }

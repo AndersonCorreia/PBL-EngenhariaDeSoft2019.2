@@ -16,7 +16,7 @@ const preencherForm = function(data, status) {
             $("#CEP").val(data.cep).attr("readonly", "");
             $("#cidade").val(data.cidade).attr("readonly", "");
             $("#estado").val(data.UF).attr("disabled", "");
-            $("#tipo").val(data.tipo_instituicao).attr("disabled", "");
+            $("#tipo").val(data.tipo_Instituicao).attr("disabled", "");
             $("#submit").html("Vincular instituição");
             $("#onlyV").val("true");
         }

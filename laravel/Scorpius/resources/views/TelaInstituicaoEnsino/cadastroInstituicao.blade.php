@@ -14,8 +14,8 @@
                 <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
                     <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" list="instList" required autofocus>
                     <datalist id="instList">
-                    @foreach (($instuicoes ?? [["name" =>"UEFS", "endereco"=> "Segunda Casa"]]) as $inst)
-                        <option class="opList" value="{{$inst['name']}} ; Endereço: {{$inst['endereco']}}" >
+                    @foreach (($instituicoes ?? [["nome" =>"UEFS", "endereco"=> "Segunda Casa"]]) as $inst)
+                        <option class="opList" value="{{$inst['nome']}} ; Endereço: {{$inst['endereco']}}" >
                     @endforeach
                     </datalist>
                 </div>
@@ -77,7 +77,7 @@
                     <option  value="Distrital">Distrital</option>
                     <option  value="Estadual">Estadual</option>
                     <option  value="Municipal">Municipal</option>
-                    <option  value="Organização Não-Governamental">Organização Não-Governamental</option>
+                    <option  value="Filantrópica">Filantrópica</option>
                 </select>
             </div>
             
