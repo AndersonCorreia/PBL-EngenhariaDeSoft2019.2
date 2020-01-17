@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://kit.fontawesome.com/8dc881c5b9.js" crossorigin="anonymous"></script>
     <title>Scorpius</title>
 </head>
 
 <body>
     <!-- TELA INICIAL -->
-    <div id="tela-inicial">
+    <div id="inicio">
         {{-- TELA INICIAL - DESKTOP --}}
         <div class="desktop">
             <div class="row mr-0">
@@ -86,7 +87,7 @@
             <div id="mobile-menu">
                 <div id="mobile-menu-botoes-1" class="btn-group" role="group" aria-label="...">
                     <button id="mobile-menu-antares" type="button" class="btn btn-primary border border-white"><a
-                            href="">Antares</a></button>
+                            href="http://www.antares.uefs.br/">Antares</a></button>
                     <button id="mobile-menu-exposicoes" type="button" class="btn btn-primary border border-white"><a
                             href="#exposicoes">Exposições</a></button>
                     <button id="mobile-menu-informacoes" type="button" class="btn btn-primary border border-white"><a
@@ -108,14 +109,14 @@
     <section id="informacoes">
         {{-- INFORMAÇÕES - DESKTOP --}}
         <div class="desktop row mr-0">
-            <div id="informacoes-esquerda" class="col-md-6">
-                <img id="informacoes-esquerda-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+            <div id="informacoes-left" class="col-md-6">
+                <img id="informacoes-left-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
             </div>
-            <div id="informacoes-direita" class="col-md-6">
-                <h1 id="informacoes-direita-titulo">
+            <div id="informacoes-right" class="col-md-6">
+                <h1 id="informacoes-right-titulo">
                     SOBRE O OBSERVATÓRIO
                 </h1>
-                <h2 id="informacoes-direita-conteudo">
+                <h2 id="informacoes-right-conteudo">
                     O planetário é utilizado para a projeção de filmes
                     sobre o Universo e representa um importante recurso
                     didático para as visitas de escolas e do público em
@@ -123,20 +124,19 @@
                     As sessões acontecem de segunda a sexta
                     às 10 horas e às 15 horas.
                 </h2>
-                <h2 id="informacoes-direita-conteudo-footer">
+                <h2 id="informacoes-right-conteudo-footer">
                     O atendimento é gratuito.
                 </h2>
             </div>
         </div>
         {{-- INFORMAÇÕES - MOBILE --}}
         <div class="mobile">
-            <div id="mobile-informacoes-esquerda">
-                <img id="mobile-informacoes-esquerda-img"
-                    src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+            <div id="mobile-informacoes-left">
+                <img id="mobile-informacoes-left-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
             </div>
-            <div id="mobile-informacoes-direita">
-                <h4 id="mobile-informacoes-direita-titulo"> SOBRE O OBSERVATÓRIO</h4>
-                <h5 id="mobile-informacoes-direita-conteudo">
+            <div id="mobile-informacoes-right">
+                <h4 id="mobile-informacoes-right-titulo"> SOBRE O OBSERVATÓRIO</h4>
+                <h5 id="mobile-informacoes-right-conteudo">
                     O planetário é utilizado para a projeção de filmes
                     sobre o Universo e representa um importante recurso
                     didático para as visitas de escolas e do público em
@@ -144,7 +144,7 @@
                     As sessões acontecem de segunda a sexta
                     às 10 horas e às 15 horas.
                 </h5>
-                <h5 id="mobile-informacoes-direita-footer">O atendimento é gratuito.</h5>
+                <h5 id="mobile-informacoes-right-footer">O atendimento é gratuito.</h5>
             </div>
         </div>
     </section>
@@ -156,15 +156,15 @@
         <div class="desktop">
             <div class="row mr-0">
 
-                {{-- Parte esquerda da sub-tela --}}
-                <div id="aec-esquerda" class="col-md-4">
-                    <div id="aec-esquerda-agendamento">
-                        <div id="aec-esquerda-agendamento-card" class="mx-auto">
+                {{-- Parte left da sub-tela --}}
+                <div id="aec-left" class="col-md-4">
+                    <div id="aec-left-agendamento">
+                        <div id="aec-left-agendamento-card" class="mx-auto">
                             <p class="h1 text-center">Agendamento</p>
                             <div class="card bg-transparent"
                                 style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
                                 <a href="{{ route('entrar') }}">
-                                    <img id="aec-esquerda-agendamento-card-img" class="card-img bg-transparente"
+                                    <img id="aec-left-agendamento-card-img" class="card-img bg-transparente"
                                         src="{{ asset('img/tela_inicial/background-agendamento.jpg') }}">
                                 </a>
                             </div>
@@ -179,17 +179,17 @@
 
                 </div>
 
-                {{-- Parte direita da sub-tela --}}
-                <div id="aec-direita" class="col-md-8">
-                    <div id="aec-direita-ec">
+                {{-- Parte right da sub-tela --}}
+                <div id="aec-right" class="col-md-8">
+                    <div id="aec-right-ec">
                         <div class="card">
-                            <div id="aec-direita-ec-mapa" class="z-depth-1-half map-container-6" style="height: 400px">
+                            <div id="aec-right-ec-mapa" class="z-depth-1-half map-container-6" style="height: 400px">
                                 <iframe id="mapa"
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.125422728828!2d-38.98123065087737!3d-12.239785991296475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71437f814104ed1%3A0xf454b0caf4308ec7!2sObservat%C3%B3rio%20Astron%C3%B4mico%20Antares!5e0!3m2!1spt-BR!2sbr!4v1579092162227!5m2!1spt-BR!2sbr"
                                     width="600" height="450" frameborder="0" style="border:0;"
                                     allowfullscreen=""></iframe>
                             </div>
-                            <div id="aec-direita-ec-footer" class="card-body">
+                            <div id="aec-right-ec-footer" class="card-body">
                                 <div class="row text-center">
                                     <div class="col-md-4">
                                         <a target="_blank" href="https://goo.gl/maps/obi3JURBXJco6Kab6">
@@ -239,7 +239,7 @@
                 <div class="card bg-transparent"
                     style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
                     <a href="{{ route('entrar') }}">
-                        <img id="aec-esquerda-agendamento-card-img" class="card-img bg-transparente"
+                        <img id="aec-left-agendamento-card-img" class="card-img bg-transparente"
                             src="{{ asset('img/tela_inicial/background-agendamento.jpg') }}">
                     </a>
                 </div>
@@ -248,12 +248,12 @@
                 <p class="h2 text-center">Endereço e Contato</p>
                 <div class="card"
                     style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
-                    <div id="aec-direita-ec-mapa" class="z-depth-1-half map-container-6" style="height: 400px">
+                    <div id="aec-right-ec-mapa" class="z-depth-1-half map-container-6" style="height: 400px">
                         <iframe id="mapa"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.125422728828!2d-38.98123065087737!3d-12.239785991296475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71437f814104ed1%3A0xf454b0caf4308ec7!2sObservat%C3%B3rio%20Astron%C3%B4mico%20Antares!5e0!3m2!1spt-BR!2sbr!4v1579092162227!5m2!1spt-BR!2sbr"
                             width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
                     </div>
-                    <div id="aec-direita-ec-footer" class="card-body">
+                    <div id="aec-right-ec-footer" class="card-body">
                         <div class="row text-center">
                             <div class="col-md-4">
                                 <a target="_blank" href="https://goo.gl/maps/obi3JURBXJco6Kab6">
@@ -291,6 +291,158 @@
                 </div>
             </div>
     </section>
+    {{-- FOOTER--}}
+    <footer id="footer">
+        <div class="desktop">
+            <div class="row mr-0">
+                {{-- Background --}}
+                <img id="footer-img-background" src="{{ asset('img/tela_inicial/background-footer.jpg') }}">
+                <div id="footer-conteudo" class="row">
+                    {{-- Logo Scorpius --}}
+                    <div class="container-footer col-md-2 text-center">
+                        <img id="footer-img-logo" src="{{ asset('img/scorpius-whited.png') }}" alt="">
+                    </div>
+                    {{-- Contato --}}
+                    <div id="footer-conteudo-contato" class="container-footer col-md-3 mr-0 ml-0">
+                        <p class="h5">Contato</p>
+                        <p class="h6">
+                            Rua da Barra, 925 - Jardim Cruzeiro <br>
+                            CEP: 44024-432 <br>
+                            Feira de Santana - BA<br>
+                            Telefone: 4000 (UEFS)/75 3624-1921 <br>
+                            E-mail: observatoriouefs@gmail.com <br>
+                            museuantares@gmail.com
+
+                        </p>
+                    </div>
+                    {{-- Menu --}}
+                    <div id="footer-conteudo-menu" class="container-footer col-md-2 m-0">
+                        <p class="h5">Menu</p>
+                        <p class="h6">
+                            <a href="#inicio">Início</a> <br>
+                            <a href="#informacoes">Sobre o Observatório</a> <br>
+                            <a href="#exposicoes">Exposições</a> <br>
+                            <a href="#atividades-diferenciadas"> Atividades Diferenciadas</a> <br>
+                            <a href="#agendamento-endereco-contato">Agendamento</a> <br>
+                            <a href="#agendamento-endereco-contato">Endereço e Contato</a> <br>
+                        </p>
+                    </div>
+                    {{-- Redes Sociais --}}
+                    <div id="footer-conteudo-rs" class="container-footer col-md-2">
+                        <p class="h5">Redes Sociais</p>
+                        <div class="row mx-auto">
+                            <div class="col-sm-2 pr-3">
+                                <a target="_blank"
+                                    href="https://www.facebook.com/pages/Observat%C3%B3rio-Astron%C3%B4mico-Antares/244289909257692">
+                                    <i class="fab fa-facebook" style="font-size:24px;"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a target="_blank" href="https://www.instagram.com/observatorioantares/">
+                                    <i class="fab fa-instagram" style="font-size:24px"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a target="_blank" href="http://www.antares.uefs.br/">
+                                    <i class="fas fa-globe" style="font-size: 24px;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Botao de voltar ao topo --}}
+                    <div class="col-md-1 text-center">
+                        <a href="#inicio">
+                            <i class="fas fa-arrow-circle-up" style="font-size:20px;"></i>
+                            <br>
+                            <p class="h6">TOPO</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{-- SUB FOOTER --}}
+            <footer id="sub-footer" class="row bg-dark mr-0 text-white">
+                {{-- Copyright --}}
+                <div class="col-md-6 mt-2 pl-5">
+                    <p class="h6">
+                        <span style="font-family: stark;">Scorpius</span>
+                        <i class="fas fa-copyright" style="font-size:12px;"></i>
+                        All Rights Reserved.
+                    </p>
+                </div>
+                {{-- Botao de login administrativo --}}
+                <div class="col-md-6 mt-2">
+                    <a class="text-white" href="{{ route('loginAdm') }}">
+                        <p class="h6 float-right">ADM</p>
+                    </a>
+                </div>
+            </footer>
+        </div>
+        {{-- MOBILE --}}
+        <div class="bg-dark">
+            <div class="mobile text-white text-center">
+                {{-- logo Scorpius - MOBILE --}}
+                <div>
+                    <img id="mobile-footer-img-logo" style="width: 50%;" src="{{ asset('img/scorpius-whited.png') }}">
+                </div>
+                {{-- Menu - MOBILE  --}}
+                <div id="mobile-footer-menu">
+                    <p class="h4">Menu</p>
+                    <p class="h6">
+                        <a href="#inicio">Início</a> <br>
+                        <a href="#informacoes">Sobre o Observatório</a> <br>
+                        <a href="#exposicoes">Exposições</a> <br>
+                        <a href="#atividades-diferenciadas"> Atividades Diferenciadas</a> <br>
+                        <a href="#agendamento-endereco-contato">Agendamento</a> <br>
+                        <a href="#agendamento-endereco-contato">Endereço e Contato</a> <br>
+                    </p>
+                </div>
+                <br>
+                {{-- Redes sociais - MOBILE  --}}
+                <div id="mobile-footer-rs" class="mx-auto">
+                    <p class="h4">Redes Sociais</p>
+                    <a class="pr-1" target="_blank"
+                        href="https://www.facebook.com/pages/Observat%C3%B3rio-Astron%C3%B4mico-Antares/244289909257692">
+                        <i class="fab fa-facebook" style="font-size:24px;"></i>
+                    </a>
+                    <a class="pr-1" target="_blank" href="https://www.instagram.com/observatorioantares/">
+                        <i class="fab fa-instagram" style="font-size:24px"></i>
+                    </a>
+                    <a target="_blank" href="http://www.antares.uefs.br/">
+                        <i class="fas fa-globe" style="font-size: 24px;"></i>
+                    </a>
+                </div>
+                <br>
+                {{-- Contato - MOBILE  --}}
+                <div id="mobile-footer-contato" class="mx-auto">
+                    <p class="h4">Contato</p>
+                    <p class="h6">
+                        Rua da Barra, 925 - Jardim Cruzeiro <br>
+                        CEP: 44024-432 <br>
+                        Feira de Santana - BA<br>
+                        TELEFONE: <br>
+                        4000 (UEFS) <br>
+                        +55 75 3624-1921<br>
+                        E-MAIL: <br>
+                        observatoriouefs@gmail.com <br>
+                        museuantares@gmail.com
+
+                    </p>
+                </div>
+                {{-- Botao de login administrativo - MOBILE  --}}
+                <a class="text-white" href="{{ route('loginAdm') }}">
+                    <p class="h6">ADM</p>
+                </a>
+                {{-- Copyright - MOBILE --}}
+                <p class="h6 mb-0 pb-0">
+                    <span style="font-family: stark;">Scorpius</span>
+                    <i class="fas fa-copyright" style="font-size:12px;"></i>
+                    All Rights Reserved.
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
 </body>
 
 </html>
