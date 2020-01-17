@@ -2,7 +2,6 @@
 namespace App\Model\Users;
 
 use App\DB\InstituicaoDAO;
-use App\DB\Cidade_ufDAO;
 require_once __DIR__."/../../DB/interfaces/DataObject.php";
 class Instituicao extends \DataObject {
     private $nome;

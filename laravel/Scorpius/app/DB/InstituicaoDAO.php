@@ -4,8 +4,7 @@ require_once __DIR__."/interfaces/DataAccessObject.php";
 require_once __DIR__."/../Model/Users/Instituicao.php";
 
 /**
- * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao
- * e todas as subclasses.
+ * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao.
  */
 class InstituicaoDAO extends \DataAccessObject {
 

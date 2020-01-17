@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Model\Users\Instituicao;
 use Illuminate\Http\Request;
-require_once __DIR__."/../../DB/InstituicaoDAO.php";
+//require_once __DIR__."/../../DB/InstituicaoDAO.php";
+use App\DB\InstituicaoDAO;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class ControlerInstitucional extends Controller
 {   
@@ -37,7 +38,7 @@ class ControlerInstitucional extends Controller
      * @return void
      */
     public function telaCadastroInstituicao(){
-        $DAO = new \InstituicaoDAO();
+        $DAO = new InstituicaoDAO();
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Cadastro de Instituições",
@@ -88,7 +89,7 @@ class ControlerInstitucional extends Controller
     }
   
     public function getInstituicao(string $nome, string $endereco){
-        $DAO = new \InstituicaoDAO();
+        $DAO = new InstituicaoDAO();
         return $DAO->SEECT($nome, $endereco);
     }
 }
