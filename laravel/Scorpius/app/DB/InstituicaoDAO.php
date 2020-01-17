@@ -9,33 +9,18 @@ require_once __DIR__."/interfaces/DataAccessObject.php";
 class InstituicaoDAO extends \DataAccessObject {
 
     function INSERT($instituicao): bool{
-       // dd($instituicao);
-       $nome = $instituicao->getNome(); 
-       $responsavel = $instituicao->getResponsavel();
-       $endereco = $instituicao->getEndereco();
-       $numero = $instituicao->getNumero();
-       $cidade_UF =$instituicao->getCidade_UF(); 
-       $cep = $instituicao->getCep(); 
-       $telefone = $instituicao->getTelefone();
-       $tipo_Instituicao = $instituicao->getTipo_Instituicao(); 
-       $cidade_UF_ID = $instituicao->getCidade_UF_ID();
-       //dd($nome,$responsavel, $endereco, $numero, $cidade_UF, $cep, $telefone, $tipo_Instituicao, $cidade_UF_ID);
-        $sql = "INSERT INTO instituicao
-        (nome, responsavel, endereco, numero, cidade_UF, cep, telefone, tipo_Instituicao, cidade_UF_ID)
-        VALUES (
-            '$nome', 
-            '$responsavel',
-            '$endereco',
-            '$numero' , 
-            1, 
-            '$cep', 
-            '$telefone', 
-            '$tipo_Instituicao', 
-            3
-    )";
-        //usa a variavel $dataBase para  fazer a query no banco
+
+        $nome = $instituicao->getNome(); 
+        $responsavel = $instituicao->getResponsavel();
+        $endereco = $instituicao->getEndereco();
+        $numero = $instituicao->getNumero();
+        $cidade =$instituicao->getCidade(); 
+        $cep = $instituicao->getCep(); 
+        $telefone = $instituicao->getTelefone();
+        $tipo_Instituicao = $instituicao->getTipo_Instituicao();
+        $sql;
+
         $resultado = $this->dataBase->query($sql);
-        dd($resultado);
         return $resultado;
     }
     function UPDATE($instituicao): bool{
@@ -49,16 +34,17 @@ class InstituicaoDAO extends \DataAccessObject {
         return $resultado;
     }
     function DELETE($instituicao): bool{
-        
+        return $this->DELETEbyID($instituicao->getID());
     }
-    function DELETEbyID($id){
+    
+    function DELETEbyID(int $id){
         $sql = "DELETE FROM instituicao WHERE id = $id ";
         $resultado = $this->dataBase->query($sql);
         return $resultado;
     }
 
     function SELECTbyID($id): Array{
-        
+
         $sql = "SELECT * FROM instituicao i LEFT JOIN cidade_UF c ON i.cidade_UF_ID = c.ID WHERE i.id=$id";
         //$sql = "SELECT * FROM instituicao";
         $resultado = $this->dataBase->query($sql);
@@ -92,9 +78,14 @@ class InstituicaoDAO extends \DataAccessObject {
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss", $nome, $endereco);
         $stmt->execute();
-        
+        $result = $stmt->get_result()->fetch_assoc();
+
+        if($result==[]){
+            throw new \Exception("Nenhuma instituição foi encontrada");
+        }
+
         if($array){
-            return $stmt->get_result()->fetch_assoc();
+            return $result;
         }
         else {
             //construir o objeto e retornar

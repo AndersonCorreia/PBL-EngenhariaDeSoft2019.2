@@ -1,6 +1,6 @@
 @include('layouts._includes.top')
 
-<div class= "tela ">
+<div class= "tela  bg-light">
     <div id="menuLateral" class= "bg-dark border-right border-dark">
         <img id="logo" class = "px-md-3 px-2 pt-3 mb-3" src="{{ asset("img/scorpius-whited.png")}}" height=auto  width=100%> 
         <div class="h-75 overflow-auto">

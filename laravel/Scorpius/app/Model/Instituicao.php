@@ -4,72 +4,70 @@ namespace App\Model;
 use App\DB\InstituicaoDAO;
 require_once __DIR__."/../DB/interfaces/DataObject.php";
 class Instituicao extends \DataObject {
+	private $ID;
     private $nome;
     private $responsavel;
     private $endereco;
     private $numero;
-    private $cidade_UF;
+	private $cidade;
+	private $UF;
     private $cep;
     private $telefone;
-    private $tipo_Instituicao;
-	private $cidade_UF_ID;
-	private $instituicao;
+	private $tipo_Instituicao;
 
-	function __Construct(){
-		$this->instituicao = new InstituicaoDAO();
+	function __Construct(int $id, string $nome, string $responsavel, string $endereco, string $numero, 
+						string $cidade, string $UF, string $cep, string $telefone, string $tipo_Instituicao){
+		$this->ID = $id;
+		$this->nome = $nome;
+		$this->responsavel = $responsavel;
+		$this->endereco = $endereco;
+		$this->numero = $numero;
+		$this->cidade = $cidade;
+		$this->UF = $UF;
+		$this->cep = $cep;
+		$this->telefone = $telefone;
+		$this->tipo_Instituicao = $tipo_Instituicao;
 	}
 
-    public function alterarDadosInstituicao($nome, $endereco,$numero, $cidade_UF, $cep,  $telefone, $tipo_Instituicao, $cidade_UF_ID): Instituicao{
-        
-    }
 
     public function agendaInstituicao($instituicao): boolean{
 
-    }
-    public function cadastraInstituicao($dados): Instituicao{
-        $this->nome = $dados['nameInstituicao'];
-        $this->responsavel = $dados['nameResponsavel'];
-        $this->endereco = $dados['nameEndereco'];
-        $this->numero = $dados['nameNumero'];
-        $this->cidade_UF = $dados['nameCidade'];
-        $this->cep = $dados['nameCEP'];
-        $this->telefone = $dados['nameTelefone'];
-        $this->tipo_Instituicao = $dados['tipo'];
-		$this->cidade_UF_ID = $dados['select'];
-		
-        $this->instituicao->INSERT($this);
-        return $this;
-    }
+	}
+	
     public function desvincularInstituicao($instituicao): boolean{
 
 	}
 	
-	public function buscar($id){
-		$result = $this->instituicao->SELECTbyID($id);
+	public static function buscar(int $id){
+		$result = (new InstituicaoDAO)->SELECTbyID($id);
 		return $result;
 	}
 
-	public function deletar($id){
-		$result = $this->instituicao->DELETEbyID($id);
+	public static function deletar(int $id){
+		$result = (new InstituicaoDAO)->DELETEbyID($id);
 		return $result;
 	}
 
-	public function listarInstituicoes(){
-		return $this->instituicao->SELECT_ALL();
+	public static function listarInstituicoes(){
+		return (new InstituicaoDAO)->SELECT_ALL();
 	}
-
+	public function getID(){
+		return $this->ID;
+	}
 	public function getNome() {
 		return $this->nome;
 	}
 
-	public function setNome($nome) {
+	public function setNome(string $nome) {
+		$this->alterado();
 		$this->nome = $nome;
 	}
 	public function getResponsavel() {
 		return $this->responsavel;
 	}
 
-	public function setResponsavel($responsalvel) {
+	public function setResponsavel(string $responsalvel) {
+		$this->alterado();
 		$this->responsavel = $responsavel;
 	}
 
@@ -77,7 +75,8 @@ class Instituicao extends \DataObject {
 		return $this->endereco;
 	}
 
-	public function setEndereco($endereco) {
+	public function setEndereco(string $endereco) {
+		$this->alterado();
 		$this->endereco = $endereco;
 	}
 
@@ -85,45 +84,44 @@ class Instituicao extends \DataObject {
 		return $this->numero;
 	}
 
-	public function setNumero($numero) {
+	public function setNumero(string $numero) {
+		$this->alterado();
 		$this->numero = $numero;
 	}
 
-	public function getCidade_UF() {
-		return $this->cidade_UF;
+	public function getCidade() {
+		return $this->cidade;
 	}
 
-	public function setCidade_UF($cidade_UF) {
-		$this->cidade_UF = $cidade_UF;
+	public function setCidade(string $cidade) {
+		$this->alterado();
+		$this->cidade = $cidade;
 	}
 
 	public function getCep() {
 		return $this->cep;
 	}
-	public function setCep($cep) {
+	public function setCep(string $cep) {
+		$this->alterado();
 		$this->cep = $cep;
 	}
 	public function getTelefone() {
 		return $this->telefone;
 	}
-	public function setTelefone($telefone) {
+	public function setTelefone(string $telefone) {
+		$this->alterado();
 		$this->telefone = $telefone;
 	}
 	public function getTipo_Instituicao() {
 		return $this->tipo_Instituicao;
 	}
-	public function setTipo_Instituicao($tipo_Instituicao) {
+	public function setTipo_Instituicao(string $tipo_Instituicao) {
+		$this->alterado();
 		$this->tipo_Instituicao = $tipo_Instituicao;
 	}
-	public function getCidade_UF_ID() {
-		return $this->cidade_UF_ID;
-	}
-	public function setCidade_UF_ID($cidade_UF_ID) {
-		$this->cidade_UF_ID= $cidade_UF_ID;
-	}
-
+	
 	protected function save(){
-		(new \app\DB\InstituicaoDAO)->INSERT($this);
+		(new InstituicaoDAO)->UPDATE($this);
 	}
 }
 ?>

@@ -14,12 +14,10 @@ class ControlerInstitucional extends Controller
      */
     public function telaInstituicao()
     {
-        $instituicao = new Instituicao(); 
-        
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Instituições",
-            'registros' => $instituicao->listarInstituicoes()
+            'registros' => instituicao::listarInstituicoes()
         ];
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
@@ -56,6 +54,7 @@ class ControlerInstitucional extends Controller
             //cadastra e vincular
         }else {
             //apenas vincular
+            //id da instituição disponivel no post
         }
         
         return redirect()->route('instituição.show');
@@ -63,37 +62,33 @@ class ControlerInstitucional extends Controller
 
     public function editarInstituicao($id){
 
-        $instituicao = new Instituicao(); 
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Instituições",
-            'registros' => $instituicao->buscar($id)
+            'registros' => instituicao::buscar($id)
         ];
         return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
        
     }
 
     public function atualizarInstituicao(Request $req, $id){
-        
+        //para atualizar os dados usar os sets do objeto e finalizar a função ( o deconstrutor salvar no banco)
     }
 
     public function deletarInstituicao($id){
-        $instituicao = new Instituicao(); 
-        $instituicao->deletar($id);
-        $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições"
-        ];
+        instituicao::deletar($id);
+
         return redirect()->route('instituição.show');
     }
   
     public function getInstituicao(string $nome, string $endereco){
-        $DAO = new InstituicaoDAO();
+        
         try {
+            $DAO = new InstituicaoDAO();
             return $DAO->SELECT($nome, $endereco);
         }
-        catch(Exception $e){
-            return ["error" => true];
+        catch(\Exception $e){
+            return ["error" => true, "Status"=> 500];
         }
     }
 }

@@ -6,8 +6,8 @@ function getMenuLinksAll(){
         'inicio'=>          ['link'=>'#' , 'texto'=>'Inicio' ],// texto é o nome que vai estar dentro da tag <a>
         'visitante0'=>      ['link'=>'#' , 'texto'=>'Agendar Visita' ],
         'visitante1'=>      ['link'=>'#' , 'texto'=>'Gerenciar Visitas' ],
-        'institucional0'=>  ['link'=>'#' , 'texto'=>'Cadastro de Instituições' ],
-        'institucional1'=>  ['link'=>'#' , 'texto'=>'Instituições' ],
+        'institucional0'=>  ['link'=>'/instituicao/cadastro' , 'texto'=>'Cadastro de Instituições' ],
+        'institucional1'=>  ['link'=>'/instituicao' , 'texto'=>'Instituições' ],
         'visitante2'=>      ['link'=>'#' , 'texto'=>'Histórico de Visitas' ],
         'visitante3'=>      ['link'=>'#' , 'texto'=>'Alterar Dados' ],
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
@@ -21,7 +21,7 @@ function getMenuLinksAll(){
         'criar usuarios'=>                      ['link'=>'#' , 'texto'=>'Cadastrar Usuário' ],
         'gerenciar usuarios'=>                  ['link'=>'#' , 'texto'=>'Gerenciar Usuários' ],
         'ver confiabilidade das Instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],
-        'ver log de atividade'=>               ['link'=>'#' , 'texto'=>'Histórico de Atividades' ],
+        'ver log de atividade'=>                ['link'=>'#' , 'texto'=>'Histórico de Atividades' ],
         'realizar backup'=>                     ['link'=>'#' , 'texto'=>'Realizar Backup' ],
         'gerenciar permissões'=>                ['link'=>'#' , 'texto'=>'Gerenciar Permissões' ]//creio que seria melhor ser permissão apenas para o adm
     ];

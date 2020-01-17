@@ -7,6 +7,7 @@
 <form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('CadastroInstituição.post')}}">
     {{csrf_field()}}
     <input id="onlyV" type="hidden" name="onlyVincular" value="false">{{-- valor para informar ao back-end se a instituição já existe --}}
+    <input id="id" type="hidden" name="ID">{{-- prenchido pelo js caso o usuario clique em "buscar" --}}
     <fieldset>
         <div class="form-row col-msm">
             <div class="form-group col-sm-12 d-block">
