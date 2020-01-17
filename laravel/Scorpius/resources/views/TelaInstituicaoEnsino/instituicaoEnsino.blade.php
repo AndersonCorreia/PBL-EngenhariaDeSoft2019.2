@@ -6,11 +6,11 @@
 <h1>Instituições de Ensino</h1> 
 <form method="get" action="#">
     {{csrf_field()}}
-    <div class= "instBotoes">
+    
     
     @foreach($registros as $registro)
-   
-        <div class="instituicoes">
+    <div class= "instBotoes">
+        <div class="instituicoes" >
         <table class="table-borderless">
             <thead>
                 <tr>
@@ -35,8 +35,9 @@
                 <a class="btn col btn-primary" href="{{route('user.instituicoes.editar', $registro['ID'])}}">Atualizar</a>
                 <a  href="{{route('user.instituicoes.deletar', $registro['ID'])}}" class="btn col btn-danger">Deletar</a>
         </div>
+        </div>
         @endforeach
-    </div>
+    
 </form>
 
 <style>
@@ -72,7 +73,7 @@
         padding: 20px;
         margin: 10px;
         display: flex;
-        flex-direction: row;
+        flex-direction:column;
         align-items: center;
         
     }

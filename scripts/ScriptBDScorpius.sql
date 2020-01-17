@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`usuario` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `email` VARCHAR(40) NOT NULL,
-  `password` VARCHAR(20) NOT NULL,
+  `senha` VARCHAR(20) NOT NULL,
   `CPF` CHAR(11) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`permissao` (
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_permissao_tipo_usuario1_idx` (`tipo_usuario_ID` ASC),
-  UNIQUE INDEX `permissao_UNIQUE` (`permissao`,`tipo_usuario_ID`),
+  UNIQUE INDEX `permissao_UNIQUE` (`permissao`, `tipo_usuario_ID`),
   CONSTRAINT `fk_permissao_tipo_usuario1`
     FOREIGN KEY (`tipo_usuario_ID`)
     REFERENCES `scorpius`.`tipo_usuario` (`ID`)
@@ -329,12 +329,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `scorpius`.`Eventos`
+-- Table `scorpius`.`Acoes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scorpius`.`Eventos` (
-  `idEventos` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `scorpius`.`Acoes` (
+  `idAcoes` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `atividade` TINYTEXT NOT NULL,
-  PRIMARY KEY (`idEventos`),
+  PRIMARY KEY (`idAcoes`),
   UNIQUE INDEX `atividade_UNIQUE` (`atividade` ASC))
 ENGINE = InnoDB;
 
@@ -345,16 +345,16 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`LOG` (
   `idLOG` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `datahora` DATETIME(1) NOT NULL,
-  `Eventos_idEventos` INT UNSIGNED NOT NULL,
+  `Acoes_idAcoes` INT UNSIGNED NOT NULL,
   `usuario_made_ID` INT UNSIGNED NOT NULL,
   `usuario_affected_ID1` INT UNSIGNED NULL,
   PRIMARY KEY (`idLOG`),
-  INDEX `fk_LOG_Eventos1_idx` (`Eventos_idEventos` ASC),
+  INDEX `fk_LOG_Acoes1_idx` (`Acoes_idAcoes` ASC),
   INDEX `fk_LOG_usuario1_idx` (`usuario_made_ID` ASC),
   INDEX `fk_LOG_usuario2_idx` (`usuario_affected_ID1` ASC),
-  CONSTRAINT `fk_LOG_Eventos1`
-    FOREIGN KEY (`Eventos_idEventos`)
-    REFERENCES `scorpius`.`Eventos` (`idEventos`)
+  CONSTRAINT `fk_LOG_Acoes1`
+    FOREIGN KEY (`Acoes_idAcoes`)
+    REFERENCES `scorpius`.`Acoes` (`idAcoes`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
   CONSTRAINT `fk_LOG_usuario1`

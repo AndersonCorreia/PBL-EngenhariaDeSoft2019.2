@@ -1,5 +1,5 @@
 <?PHP 
-
+namespace App\DB;
 require_once __DIR__."/interfaces/DataAccessObject.php";
 require_once __DIR__."/../Model/Users/Instituicao.php";
 
@@ -50,12 +50,13 @@ class InstituicaoDAO extends \DataAccessObject {
         return $resultado;
     }
     function DELETE($instituicao): bool{
-        $sql = "DELETE FROM instituicao WHERE id = $instituicao->id";
-  
+        
+    }
+    function DELETEbyID($id){
+        $sql = "DELETE FROM instituicao WHERE id = $id ";
         $resultado = $this->dataBase->query($sql);
         return $resultado;
     }
-
 
     function SELECTbyID($id): Array{
      
