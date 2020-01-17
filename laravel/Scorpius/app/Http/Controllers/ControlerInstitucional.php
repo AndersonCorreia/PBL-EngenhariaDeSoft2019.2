@@ -74,11 +74,17 @@ class ControlerInstitucional extends Controller
     }
 
     public function atualizarInstituicao(Request $req, $id){
-       
+        
     }
 
-    public function deletarInstituicao(Request $req, $id){
-    
+    public function deletarInstituicao($id){
+        $instituicao = new Instituicao(); 
+        $instituicao->deletar($id);
+        $variaveis = [
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Instituições"
+        ];
+        return redirect()->route('instituição.show');
     }
   
     public function getInstituicao(string $nome, string $endereco){

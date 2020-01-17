@@ -50,6 +50,11 @@ class Instituicao extends \DataObject {
 		return $result;
 	}
 
+	public function deletar($id){
+		$result = $this->instituicao->DELETEbyID($id);
+		return $result;
+	}
+
 	public function listarInstituicoes(){
 		return $this->instituicao->SELECT_ALL();
 	}
