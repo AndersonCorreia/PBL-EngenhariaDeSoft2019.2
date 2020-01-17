@@ -36,11 +36,12 @@ class Exposicao extends \DataObject
 
     protected function save()
     {
-        (new \app\DB\ExposicaoDAO)->INSERT($this);
+        (new \app\DB\ExposicaoDAO)->UPDATE($this);
     }
 
     public function setTitulo($titulo)
     {
+        $this->alterado();
         $this->titulo = $titulo;
     }
     public function getTitulo()
@@ -50,6 +51,7 @@ class Exposicao extends \DataObject
 
     public function setTipo_evento($tipo_evento)
     {
+        $this->alterado();
         $this->tipo_evento = $tipo_evento;
     }
     public function getTipo_evento()
@@ -59,6 +61,7 @@ class Exposicao extends \DataObject
 
     public function setDescricao($descricao)
     {
+        $this->alterado();
         $this->descricao = $descricao;
     }
     public function getDescricao()
@@ -68,6 +71,7 @@ class Exposicao extends \DataObject
 
     public function setQuantidade($quantidade_inscritos)
     {
+        $this->alterado();
         $this->quantidade_inscritos = $quantidade_inscritos;
     }
     public function getQuantidade()
@@ -77,6 +81,7 @@ class Exposicao extends \DataObject
 
     public function setData_Inicial($data_inicial)
     {
+        $this->alterado();
         $this->data_inicial = $data_inicial;
     }
     public function getData_Inicial()
@@ -86,6 +91,7 @@ class Exposicao extends \DataObject
 
     public function setData_Final($data_final)
     {
+        $this->alterado();
         $this->data_final = $data_final;
     }
     public function getData_Final()
@@ -95,6 +101,7 @@ class Exposicao extends \DataObject
 
     public function setImage($link_imagem)
     {
+        $this->alterado();
         $this->link_imagem = $link_imagem;
     }
     public function getImage()
