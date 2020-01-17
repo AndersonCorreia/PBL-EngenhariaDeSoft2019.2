@@ -107,8 +107,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`professor_instituicao` (
   `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
-  `usuario` INT NOT NULL,
-  `institucao` INT NOT NULL,
   `cont_Agendamento` SMALLINT NOT NULL,
   `cont_agendamento_cancelado` SMALLINT NOT NULL,
   `ativo` TINYINT NOT NULL,
@@ -299,7 +297,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`horario_estagiario` (
   `dia_semana` VARCHAR(45) NOT NULL,
   `turno` VARCHAR(45) NOT NULL,
-  `estagiario_ID` INT NOT NULL,
   `estagiario_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`dia_semana`, `turno`, `estagiario_usuario_ID`),
   INDEX `fk_horario_estagiario_estagiario1_idx` (`estagiario_usuario_ID` ASC),
