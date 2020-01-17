@@ -46,7 +46,7 @@
 
             <div class="form-group col-sm-4">
                 <span>Cidade</span>
-                <input class="form-control"  type="text" name="nameCidade" placeholder="Informe a Cidade" value="{{isset($registros[0]['cidade_UF']) ? $registros[0]['cidade_UF'] : ''}}" required>
+                <input class="form-control"  type="text" name="nameCidade" placeholder="Informe a Cidade" value="{{isset($registros[0]['cidade']) ? $registros[0]['cidade'] : ''}}" required>
             </div>
 
             <div class="form-group col-sm-3">

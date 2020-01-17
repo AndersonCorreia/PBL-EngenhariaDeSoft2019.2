@@ -34,16 +34,16 @@ INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('realizar backup',10)
 INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('gerenciar permissões',10);
 
 -- INSERT das cidades --
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (1, 'Salvador', 'Ba');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (2,'Feira de Santana', 'Ba');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (3,'Bonfim de Feira ', 'Ba');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (4,'Jaguara', 'Ba');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (5,'Governador João Durval Carneir', 'Ba');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (6,'Humildes', 'Ba');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (7,'Jaíba', 'Ba');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (8,'Maria Quitéria', 'Ba');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (9,'Matinha', 'Ba');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (10,'Tiquaruçu', 'Ba');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (1, 'Salvador', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (2,'Feira de Santana', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (3,'Bonfim de Feira ', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (4,'Jaguara', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (5,'Governador João Durval Carneir', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (6,'Humildes', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (7,'Jaíba', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (8,'Maria Quitéria', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (9,'Matinha', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (10,'Tiquaruçu', 'BA');
 
 -- INSERT das Instituições --
 INSERT INTO instituicao (ID, nome, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES

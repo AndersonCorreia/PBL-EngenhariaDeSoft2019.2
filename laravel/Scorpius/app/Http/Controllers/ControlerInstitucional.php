@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Users\Instituicao;
+use App\Model\Instituicao;
 use Illuminate\Http\Request;
-//require_once __DIR__."/../../DB/InstituicaoDAO.php";
 use App\DB\InstituicaoDAO;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class ControlerInstitucional extends Controller
@@ -90,6 +89,11 @@ class ControlerInstitucional extends Controller
   
     public function getInstituicao(string $nome, string $endereco){
         $DAO = new InstituicaoDAO();
-        return $DAO->SEECT($nome, $endereco);
+        try {
+            return $DAO->SELECT($nome, $endereco);
+        }
+        catch(Exception $e){
+            return ["error" => true];
+        }
     }
 }

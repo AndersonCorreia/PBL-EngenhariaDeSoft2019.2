@@ -1,7 +1,7 @@
 <?PHP 
 namespace App\DB;
+use App\Model\Instituicao;
 require_once __DIR__."/interfaces/DataAccessObject.php";
-require_once __DIR__."/../Model/Users/Instituicao.php";
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao.
@@ -58,8 +58,8 @@ class InstituicaoDAO extends \DataAccessObject {
     }
 
     function SELECTbyID($id): Array{
-     
-        $sql = "SELECT * FROM instituicao WHERE id=$id";
+        
+        $sql = "SELECT * FROM instituicao i LEFT JOIN cidade_UF c ON i.cidade_UF_ID = c.ID WHERE i.id=$id";
         //$sql = "SELECT * FROM instituicao";
         $resultado = $this->dataBase->query($sql);
 
