@@ -12,9 +12,7 @@
 
 require_once __DIR__."/../resources/views/util/layoutUtil.php";
 
-Route::get('/', function () {
-    return view('paginaInicial');
-})->name('paginaInicial');
+Route::get('/', ['uses'=>'InicialController@inicio'])->name('paginaInicial');
 
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
 Route::get('/cadastro', ['uses'=>'InicialController@telaCadastro'])->name('cadastrar');
@@ -66,7 +64,7 @@ Route::put('/instituicao/atualizar/{id}',['as'=>'user.instituicoes.atualizar','u
  * só tem o intuito de informar que um email foi enviado para o inbox do visitante/responsável. Por isso usei o 
  * get, pois é só uma tela para mostrar informações.
  */
-Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController@prosseguirVerificacaoEmail']);
+// Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController@prosseguirVerificacaoEmail']);
 
 // rotas para cadastro com facebook e google
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');

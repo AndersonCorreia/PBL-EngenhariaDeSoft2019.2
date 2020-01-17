@@ -1,20 +1,24 @@
 <?php
 // Controller das telas iniciais
 namespace App\Http\Controllers;
-
+use App\Model\Users\Exposicao;
 use Illuminate\Http\Request;
+use App\DB\ExposicaoDAO;
 
 class InicialController extends Controller
-{
+{   
+    public function inicio()
+    {
+
+        $DAO = new ExposicaoDAO();
+        $variaveis = [
+            'exposicoes' => $DAO->SELECT_ALL()
+        ];
+        return view('paginaInicial', $variaveis);
+    }
     // retorna a tela de cadastro
     public function telaCadastro(){
         return view('telaCadastro.index');
-    }
-
-    // retorna a tela de prosseguir da verificacao de email
-    // é apenas uma tela de exibição
-    public function prosseguirVerificacaoEmail(){
-        return view('telaCadastro.prosseguirVerificacaoEmail');
     }
     //retorna a tela de entrar
     public function telaEntrar(){
@@ -24,6 +28,5 @@ class InicialController extends Controller
     public function loginAdm(){
         return view('loginAdministrativo.index');
     }
-
 
 }

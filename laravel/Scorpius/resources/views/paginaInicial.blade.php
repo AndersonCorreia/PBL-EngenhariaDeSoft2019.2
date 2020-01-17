@@ -149,6 +149,19 @@
         </div>
     </section>
 
+    {{-- EXPOSICOES --}}
+    <section id="exposicoes">
+        <div class="desktop">
+            <div class="row mr-0">
+                <div class="col-md-6">
+                    @foreach ($exposicoes as $exposicao)
+                    <p class="h1">{{$exposicao['Titulo']}}</p>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{-- AGENDAMENTO / ENDEREÇO / CONTATO --}}
     <section id="agendamento-endereco-informacoes">
 
