@@ -41,10 +41,10 @@
     <h1>Cadastre-se</h1>
     <h4>Já possui uma conta? <a href="{{ route('entrar') }}"> Entre</a></h4>
     <div id="redes-socias">
-        <a style="font-size: 15px;" href="" class="btn btn-primary btn-lg btn-block" style="font-size:13px;color:white">
+        <a style="font-size: 15px;" href="{{ url('/login/facebook') }}" class="btn btn-primary btn-lg btn-block" style="font-size:13px;color:white">
             <i class="fa fa-facebook-square" style="font-size:13px;color:white"></i> Cadastrar-se com o Facebook
         </a>
-        <a style="font-size: 15px;" href="" class="btn btn-danger btn-lg btn-block" style="font-size:13px;color:white">
+        <a style="font-size: 15px;" href="{{ url('/login/google') }}" class="btn btn-danger btn-lg btn-block" style="font-size:13px;color:white">
             <i class="fa fa-google-plus" style="font-size:13px;color:white"></i> Cadastrar-se com o Google
         </a>
     </div>

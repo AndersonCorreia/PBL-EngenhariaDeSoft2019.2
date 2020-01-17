@@ -15,6 +15,14 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            // Serviços que serão utilizados para login
+            // Facebook
+            'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
+            // Google+
+            'SocialiteProviders\\Google\\GoogleExtendSocialite@handle',
+        ],
+
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
