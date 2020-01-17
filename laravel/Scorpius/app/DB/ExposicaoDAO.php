@@ -3,7 +3,7 @@
 namespace App\DB;
 
 require_once __DIR__ . "/interfaces/DataAccessObject.php";
-require_once __DIR__ . "/../Model/Users/Exposicao.php";
+require_once __DIR__ . "/../Model/Exposicao.php";
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao.

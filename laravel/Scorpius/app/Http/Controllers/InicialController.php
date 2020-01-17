@@ -1,7 +1,7 @@
 <?php
 // Controller das telas iniciais
 namespace App\Http\Controllers;
-use App\Model\Users\Exposicao;
+use App\Model\Exposicao;
 use Illuminate\Http\Request;
 use App\DB\ExposicaoDAO;
 
