@@ -86,3 +86,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // Testes. PAGINA TEMPORARIA
 Route::resource('enviar-eventos', 'enviarEventosController');
+
+//rota para visualizar corbetura dos testes
+Route::get('testes', function(){
+    redirect("public/build/coverage",307);
+});

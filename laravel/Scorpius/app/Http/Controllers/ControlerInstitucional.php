@@ -104,7 +104,8 @@ class ControlerInstitucional extends Controller {
             return $DAO->SELECT($nome, $endereco);
         }
         catch(\Exception $e) {
-            return ["error" => true, "Status"=> 500];
+            header("contend-type: aplication/json",true,500);
+            return ["error" => true];
         }
     }
 }

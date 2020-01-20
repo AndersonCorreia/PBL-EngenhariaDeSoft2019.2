@@ -1,4 +1,5 @@
 <?php
+namespace App\DB\interfaces;
 
 /**
  * Classe base para as demais classes que irão realizar a manipulação de dados no SGBD.
@@ -62,4 +63,14 @@ abstract class DataAccessObject {
      * @return boolean true se a query for realizada com sucesso, false se não for concluida com sucesso
      */
     abstract function DELETE($object): bool;
+
+    /**
+     * Retorna o ID da ultima operação feita no banco
+     * Util para saber o ID de um objeto que foi inserido recentemente no banco
+     * @return int id da ultima operação realizzada no banco
+     */
+    public function getLastID(): int{
+        return $this->dataBase->insert_id;
+    }
+    
 }

@@ -2,9 +2,7 @@
 namespace App\Model;
 
 use App\DB\InstituicaoDAO;
-require_once __DIR__."/../DB/interfaces/DataObject.php";
-class Instituicao extends \DataObject {
-	private $ID = 0;
+class Instituicao extends \App\DB\interfaces\DataObject {
     private $nome;
     private $responsavel;
     private $endereco;
@@ -15,18 +13,18 @@ class Instituicao extends \DataObject {
     private $telefone;
 	private $tipo_Instituicao;
 
-	public function __Construct(string $nome, string $responsavel, string $endereco, string $numero, 
-						string $cidade, string $UF, string $cep, string $telefone, string $tipo_Instituicao){
-		$this->ID = $ID+1;
+	public function __Construct(string $nome, string $resp, string $endereco, string $num, string $cidade,
+								string $UF, string $cep, string $tel, string $tipo, int $id=null){
+		$this->ID = $id;
 		$this->nome = $nome;
-		$this->responsavel = $responsavel;
+		$this->responsavel = $resp;
 		$this->endereco = $endereco;
-		$this->numero = $numero;
+		$this->numero = $num;
 		$this->cidade = $cidade;
 		$this->UF = $UF;
 		$this->cep = $cep;
-		$this->telefone = $telefone;
-		$this->tipo_Instituicao = $tipo_Instituicao;
+		$this->telefone = $tel;
+		$this->tipo_Instituicao = $tipo;
 	}
 
 
@@ -59,7 +57,7 @@ class Instituicao extends \DataObject {
 	}
 
 	public function setNome(string $nome) {
-		$this->alterado();
+		$this->setAlterado();
 		$this->nome = $nome;
 	}
 	public function getResponsavel() {
@@ -67,7 +65,7 @@ class Instituicao extends \DataObject {
 	}
 
 	public function setResponsavel(string $responsalvel) {
-		$this->alterado();
+		$this->setAlterado();
 		$this->responsavel = $responsavel;
 	}
 
@@ -76,7 +74,7 @@ class Instituicao extends \DataObject {
 	}
 
 	public function setEndereco(string $endereco) {
-		$this->alterado();
+		$this->setAlterado();
 		$this->endereco = $endereco;
 	}
 
@@ -85,7 +83,7 @@ class Instituicao extends \DataObject {
 	}
 
 	public function setNumero(string $numero) {
-		$this->alterado();
+		$this->setAlterado();
 		$this->numero = $numero;
 	}
 
@@ -94,7 +92,7 @@ class Instituicao extends \DataObject {
 	}
 
 	public function setCidade(string $cidade) {
-		$this->alterado();
+		$this->setAlterado();
 		$this->cidade = $cidade;
 	}
 
@@ -102,21 +100,21 @@ class Instituicao extends \DataObject {
 		return $this->cep;
 	}
 	public function setCep(string $cep) {
-		$this->alterado();
+		$this->setAlterado();
 		$this->cep = $cep;
 	}
 	public function getTelefone() {
 		return $this->telefone;
 	}
 	public function setTelefone(string $telefone) {
-		$this->alterado();
+		$this->setAlterado();
 		$this->telefone = $telefone;
 	}
 	public function getTipo_Instituicao() {
 		return $this->tipo_Instituicao;
 	}
 	public function setTipo_Instituicao(string $tipo_Instituicao) {
-		$this->alterado();
+		$this->setAlterado();
 		$this->tipo_Instituicao = $tipo_Instituicao;
 	}
 	

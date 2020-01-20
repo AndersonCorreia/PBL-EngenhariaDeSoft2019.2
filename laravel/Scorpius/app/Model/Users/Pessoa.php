@@ -1,13 +1,14 @@
 <?php
 
 namespace app\Model\users;
-require_once __DIR__."/../../DB/interfaces/DataObject.php";
-abstract class Pessoa extends \DataObject {
+
+abstract class Pessoa extends \App\DB\interfaces\DataObject {
     private $nome;
     private $cpf;
     private $telefone;
     private $email;
-    private $senha;
+	private $senha;
+	private $tipo;
 
 	/**
 	 * Metodo de login do usuario do sistema. 
@@ -68,6 +69,24 @@ abstract class Pessoa extends \DataObject {
 	public function getSenha() {
 		return $this->senha;
 	}
+
+	public function getID() {
+		return $this->ID;
+	}
+
+	public function getTipo() {
+		return $this->tipo;
+	}
+
+	/**
+	 * função abstrata, para que a implementação em usuario verifique se o tipo é correto.
+	 * os tipos corretos em usuario são visitante ou institucional
+	 *
+	 * @param string $tipo
+	 * @throws Exception caso seja setado o tipo incorreto;
+	 * @return void
+	 */
+	public abstract function setTipo(string $tipo);
 
 	protected function save(){
 		(new \app\DB\PessoaDAO)->UPDATE($this);

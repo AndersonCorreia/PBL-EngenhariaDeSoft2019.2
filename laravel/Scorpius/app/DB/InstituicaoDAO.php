@@ -1,12 +1,11 @@
 <?PHP 
 namespace App\DB;
 use App\Model\Instituicao;
-require_once __DIR__."/interfaces/DataAccessObject.php";
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao.
  */
-class InstituicaoDAO extends \DataAccessObject {
+class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
 
     function INSERT($instituicao): bool{
 
@@ -21,17 +20,18 @@ class InstituicaoDAO extends \DataAccessObject {
         $sql;
 
         $resultado = $this->dataBase->query($sql);
+        $instituicao->setID($this);
         return $resultado;
     }
     function UPDATE($instituicao): bool{
-        $sql = "UPDATE instituicao
-        SET nome = $instituicao->nome, endereco = $instituicao->endereco, numero = $instituicao->numero,
+        /**$sql = "UPDATE instituicao
+        SET nome = $instituicao->getNome, endereco = $instituicao->endereco, numero = $instituicao->numero,
         cidade_UF = $instituicao->cidade_UF, cep = $instituicao->cep, telefone = $instituicao->telefone,
-        tipo_Instituicao = $instituicao->tipo_Instituicao, cidade_UF_ID = $instituicao->cidade_UF_ID
+        tipo_Instituicao = $instituicao->tipo_Instituicao
         WHERE id = $instituicao->id";
         
-        $resultado = $this->dataBase->query($sql);
-        return $resultado;
+        $resultado = $this->dataBase->query($sql);**/
+        return true;
     }
     function DELETE($instituicao): bool{
         return $this->DELETEbyID($instituicao->getID());
@@ -43,21 +43,25 @@ class InstituicaoDAO extends \DataAccessObject {
         return $resultado;
     }
 
-    function SELECTbyID($id): Array{
+    function SELECTbyID(int $id, bool $asArray=true){
 
         $sql = "SELECT * FROM instituicao i LEFT JOIN cidade_UF c ON i.cidade_UF_ID = c.ID WHERE i.id=$id";
-        //$sql = "SELECT * FROM instituicao";
         $resultado = $this->dataBase->query($sql);
+        $row = $resultado->fetch_assoc();
 
-        $registros = [];
-
-        if($resultado->num_rows > 0) {
-            while($row = $resultado->fetch_assoc()) {
+        if($resultado->num_rows == 1){
+            if($asArray){
+                $registros = [];
                 $registros[] = $row;
-            }
-        } 
 
-        return $registros;
+                return $registros;
+            }
+        
+            $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
+                                $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["ID"]);
+            return $obj;
+        }
+        return [];
     }
     function SELECT_ALL(String $table="instituicao"){
         return parent::SELECT_ALL($table);
