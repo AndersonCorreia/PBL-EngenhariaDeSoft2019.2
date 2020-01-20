@@ -22,15 +22,16 @@ USE `scorpius` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `Titulo` VARCHAR(50) NOT NULL,
-  `Tipo_Evento` ENUM('atividade diferenciada', 'atividade permanente') NOT NULL,
-  `Descricao` VARCHAR(300) NOT NULL,
-  `Quantidade_Inscritos` INT NOT NULL,
-  `Data_Inicial` DATE NOT NULL,
-  `Data_Final` DATE NULL DEFAULT NULL,
-  `Link_Imagem` MEDIUMBLOB NULL DEFAULT NULL,
+  `titulo` VARCHAR(50) NOT NULL,
+  `tipo_evento` ENUM('atividade diferenciada', 'atividade permanente') NOT NULL,
+  `tema_evento` ENUM('astronomia', 'biodiversidade', 'origem do humano') NULL DEFAULT NULL,
+  `descricao` VARCHAR(300) NOT NULL,
+  `quantidade_inscritos` INT NULL DEFAULT NULL,
+  `data_inicial` DATE NOT NULL,
+  `data_final` DATE NULL DEFAULT NULL,
+  `imagem` MEDIUMBLOB NULL DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE INDEX `Titulo_UNIQUE` (`Titulo` ASC))
+  UNIQUE INDEX `titulo_UNIQUE` (`titulo` ASC))
 ENGINE = InnoDB;
 
 
