@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento` (
   `Visita` INT NOT NULL,
   `Data_Agendamento` DATETIME NOT NULL,
   `Exposicao` INT NOT NULL,
-  `Status` ENUM('pendente', 'cancelado', 'confirmado') NOT NULL,
+  `Status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado') NOT NULL,
   `turma_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_agendamento_turma1_idx` (`turma_ID` ASC),
@@ -218,8 +218,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento` (
   `ID` INT UNSIGNED NOT NULL,
-  `exposicao` INT NOT NULL,
-  `agendamento` INT NOT NULL,
   `exposicao_ID` INT NOT NULL,
   `agendamento_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
