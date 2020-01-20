@@ -154,9 +154,12 @@
         <div class="desktop">
             <div class="row mr-0">
                 <div class="col-md-6">
+                    {{-- Teste para ver se a conexão está funcionando --}}
                     @foreach ($exposicoes as $exposicao)
                     <p class="h1">{{$exposicao['Titulo']}}</p>
+                    <img width="30%" src="data:image/jpeg;base64,<?= base64_encode($exposicao['Link_Imagem']) ?>" />
                     @endforeach
+                    {{--  --}}
                 </div>
             </div>
         </div>

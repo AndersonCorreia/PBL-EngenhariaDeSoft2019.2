@@ -9,8 +9,7 @@ use App\DB\ExposicaoDAO;
 class InicialController extends Controller
 {
     public function inicio()
-    {
-        
+    {   
         $DAO = new ExposicaoDAO();
         $eventos = $DAO->SELECT_ALL();
         $exposicoes = array();
@@ -28,6 +27,7 @@ class InicialController extends Controller
         ];
         return view('paginaInicial', $variaveis);
     }
+
     // retorna a tela de cadastro
     public function telaCadastro()
     {
