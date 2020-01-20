@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 require_once __DIR__."/../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
 use App\DB\InstituicaoDAO;
 use App\model\users\Instituicao;
-class InstituiDAOTest extends TestCase
+class InstituicaoDAOTest extends TestCase
 {
     protected static $DAO;
 

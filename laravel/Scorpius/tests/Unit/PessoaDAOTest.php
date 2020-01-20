@@ -25,19 +25,6 @@ class PessoaDAOTest extends TestCase
         self::$DAO = null;
     }
     /**
-     * teste basico a conexão com o banco, em caso de erro informa o provavel motivo
-     */
-    public function testConexãoSGBD(){
-        try {
-            new PessoaDAO();
-            \assertTrue(true);
-        }
-        catch(\mysqli_sql_exception $e){
-            print("\n erro na conexão com o SGBD, O banco de dados foi iniciado ?? \n");
-            \assertTrue(false);
-        }
-    }
-    /**
      * Teste de inserção de um objeto da classe visitante no banco de dados
      *
      * @return void

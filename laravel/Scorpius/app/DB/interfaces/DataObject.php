@@ -4,6 +4,7 @@ namespace App\DB\interfaces;
 abstract class DataObject{
 
     protected $alterado = false;
+    protected $ID;
     
     function __destruct(){
         if($this->alterado){
@@ -29,6 +30,15 @@ abstract class DataObject{
      */
     protected function setAlterado(bool $alterado=true){
         $this->alterado= $alterado;
+    }
+    /**
+     * setar o ID deste objeto, tal ação só pode ser feita pelo objeto DAO que fez o INSERT no banco.
+     *
+     * @param DataAccessObject $dao
+     * @return void
+     */
+    public function setID(DataAccessObject $dao ){ 
+        $this->ID= $dao->getLastID();
     }
 }
 ?>

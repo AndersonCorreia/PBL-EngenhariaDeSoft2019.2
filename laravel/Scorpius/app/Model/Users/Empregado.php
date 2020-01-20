@@ -2,7 +2,7 @@
 /**
  * @version 1.0.0
  */
-namespace app\Model\Users;
+namespace App\Model\Users;
 class Empregado extends Pessoa{
     private $permissoes = array();
 
@@ -52,6 +52,9 @@ class Empregado extends Pessoa{
     public function resumoSemanal(){
 
     }
+
+    public function setTipo(string $tipo){
+        $this->tipo = $tipo;
+    }
 }
-new Empregado();
 ?>

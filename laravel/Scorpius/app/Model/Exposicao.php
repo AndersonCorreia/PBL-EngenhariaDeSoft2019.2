@@ -40,7 +40,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
 
     public function setTitulo($titulo)
     {
-        $this->alterado();
+        $this->setAlterado();
         $this->titulo = $titulo;
     }
     public function getTitulo()
@@ -50,7 +50,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
 
     public function setTipo_evento($tipo_evento)
     {
-        $this->alterado();
+        $this->setAlterado();
         $this->tipo_evento = $tipo_evento;
     }
     public function getTipo_evento()
@@ -60,7 +60,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
 
     public function setDescricao($descricao)
     {
-        $this->alterado();
+        $this->setAlterado();
         $this->descricao = $descricao;
     }
     public function getDescricao()
@@ -70,7 +70,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
 
     public function setQuantidade($quantidade_inscritos)
     {
-        $this->alterado();
+        $this->setAlterado();
         $this->quantidade_inscritos = $quantidade_inscritos;
     }
     public function getQuantidade()
@@ -80,7 +80,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
 
     public function setData_Inicial($data_inicial)
     {
-        $this->alterado();
+        $this->setAlterado();
         $this->data_inicial = $data_inicial;
     }
     public function getData_Inicial()
@@ -90,7 +90,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
 
     public function setData_Final($data_final)
     {
-        $this->alterado();
+        $this->setAlterado();
         $this->data_final = $data_final;
     }
     public function getData_Final()
@@ -100,7 +100,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
 
     public function setImage($link_imagem)
     {
-        $this->alterado();
+        $this->setAlterado();
         $this->link_imagem = $link_imagem;
     }
     public function getImage()
