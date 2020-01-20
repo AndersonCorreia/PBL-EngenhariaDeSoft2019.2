@@ -31,7 +31,16 @@
         margin-top: 1%;
     }
 }
-
+@media only screen and (max-width: 767px){
+    #exposicoes-galeria{
+        width: 108%;
+        text-align: center !important;
+    }
+    #exposicoes-galeria button{
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
 @media only screen and (max-width: 999px) {
     body {
         margin: 0px;
@@ -309,6 +318,12 @@
 /* Exposições */
 #exposicoes{
     margin-top: 8%;
+}
+#exposicoes h5{
+    font-family: stark !important;
+}
+#exposicoes p{
+    font-family: orator !important;
 }
 .zoom {
 	overflow: hidden;
