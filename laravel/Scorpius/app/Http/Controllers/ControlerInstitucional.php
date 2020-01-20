@@ -6,14 +6,12 @@ use App\Model\Instituicao;
 use Illuminate\Http\Request;
 use App\DB\InstituicaoDAO;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
-class ControlerInstitucional extends Controller
-{   
+class ControlerInstitucional extends Controller {   
     /**
      * Retorna tela de instiuição
      * @return telaInstituicao
      */
-    public function telaInstituicao()
-    {
+    public function telaInstituicao() {
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Instituições",
@@ -22,7 +20,7 @@ class ControlerInstitucional extends Controller
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
 
-    public function telaDadosInstituicao(){
+    public function telaDadosInstituicao() {
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Instituições"
@@ -34,7 +32,7 @@ class ControlerInstitucional extends Controller
      *
      * @return void
      */
-    public function telaCadastroInstituicao(){
+    public function telaCadastroInstituicao() {
         $DAO = new InstituicaoDAO();
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
@@ -48,19 +46,37 @@ class ControlerInstitucional extends Controller
      *
      * @return page redirecionar o usuario para a pagina de instituições
      */
-    public function CadastrarInstituicao(){
+    public function CadastrarInstituicao() {
         //codigo para cadastrar a instituição e vincular ao usuario
-        if($_POST["onlyVincular"]==false){
+        
+        if($_POST["onlyLink"]==false){
             //cadastra e vincular
+            $instituicao = new Instituicao();
+            $nome = $_POST['Instituicao'];
+            $responsavel = $_POST['Responsavel'];
+            $telefone = $_POST['Telefone'];
+            $endereco = $_POST['Endereco'];
+            $numero = $_POST['Numero'];
+            $cep = $_POST['CEP'];
+            $cidade = $_POST['Cidade'];
+            $estado = $_POST['Estado'];
+            $tipo = $_POST['Tipo'];
+
+            $instituicao->__Construct($nome, $responsavel, $telefone, $endereco, $numero,
+                        $cep, $cidade, $estado, $tipo);
+            
+            // POST['ID'];
+
         }else {
             //apenas vincular
             //id da instituição disponivel no post
+
         }
         
         return redirect()->route('instituição.show');
     }
 
-    public function editarInstituicao($id){
+    public function editarInstituicao($id) {
 
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
@@ -71,23 +87,23 @@ class ControlerInstitucional extends Controller
        
     }
 
-    public function atualizarInstituicao(Request $req, $id){
+    public function atualizarInstituicao(Request $req, $id) {
         //para atualizar os dados usar os sets do objeto e finalizar a função ( o deconstrutor salvar no banco)
     }
 
-    public function deletarInstituicao($id){
+    public function deletarInstituicao($id) {
         instituicao::deletar($id);
 
         return redirect()->route('instituição.show');
     }
   
-    public function getInstituicao(string $nome, string $endereco){
+    public function getInstituicao(string $nome, string $endereco) {
         
         try {
             $DAO = new InstituicaoDAO();
             return $DAO->SELECT($nome, $endereco);
         }
-        catch(\Exception $e){
+        catch(\Exception $e) {
             return ["error" => true, "Status"=> 500];
         }
     }

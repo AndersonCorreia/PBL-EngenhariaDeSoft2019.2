@@ -6,7 +6,7 @@
 
 <form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('CadastroInstituição.post')}}">
     {{csrf_field()}}
-    <input id="onlyV" type="hidden" name="onlyVincular" value="false">{{-- valor para informar ao back-end se a instituição já existe --}}
+    <input id="onlyLink" type="hidden" name="onlyLink" value="false">{{-- valor para informar ao back-end se a instituição já existe --}}
     <input id="id" type="hidden" name="ID">{{-- prenchido pelo js caso o usuario clique em "buscar" --}}
     <fieldset>
         <div class="form-row col-msm">
@@ -57,7 +57,7 @@
 
             <div class="form-group col-sm-3">
                 <span>Estado</span>    
-                <select id="estado" name="estado"  class="custom-select" required>
+                <select id="estado" name="Estado"  class="custom-select" required>
                     <option  value="BA" selected>Bahia</option> 
                     <option  value="MA">Maranhão</option>
                     <option  value="PI">Piauí</option>
@@ -72,7 +72,7 @@
             
             <div class="form-group col-sm-5">
                 <span>Tipo da Instituição</span>
-                <select id="tipo" name="tipo"  class="custom-select" placeholder="Tipo de instituição" required>
+                <select id="tipo" name="Tipo"  class="custom-select" placeholder="Tipo de instituição" required>
                     <option  value="Privada">Privada</option> 
                     <option  value="Federal">Federal</option>
                     <option  value="Distrital">Distrital</option>

@@ -4,7 +4,7 @@ namespace App\Model;
 use App\DB\InstituicaoDAO;
 require_once __DIR__."/../DB/interfaces/DataObject.php";
 class Instituicao extends \DataObject {
-	private $ID;
+	private $ID = 0;
     private $nome;
     private $responsavel;
     private $endereco;
@@ -15,9 +15,9 @@ class Instituicao extends \DataObject {
     private $telefone;
 	private $tipo_Instituicao;
 
-	function __Construct(int $id, string $nome, string $responsavel, string $endereco, string $numero, 
+	public function __Construct(string $nome, string $responsavel, string $endereco, string $numero, 
 						string $cidade, string $UF, string $cep, string $telefone, string $tipo_Instituicao){
-		$this->ID = $id;
+		$this->ID = $ID+1;
 		$this->nome = $nome;
 		$this->responsavel = $responsavel;
 		$this->endereco = $endereco;
