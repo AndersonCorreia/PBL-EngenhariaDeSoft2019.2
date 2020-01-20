@@ -10,8 +10,6 @@
 |
 */
 
-require_once __DIR__."/../resources/views/util/layoutUtil.php";
-
 Route::get('/', ['uses'=>'InicialController@inicio'])->name('paginaInicial');
 
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
@@ -69,13 +67,6 @@ Route::put('/instituicao/atualizar/{id}',['as'=>'user.instituicoes.atualizar','u
 // rotas para cadastro com facebook e google
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
-
-// rota para visualizar o layout
-Route::get("layout/{tipo?}", function ($tipo ="visitante") {
-    $variaveis= [ 'itensMenu'=> getMenuLinks($tipo)
-                ];
-    return View("layouts/templateGeralTelasUsuarios", $variaveis);
-});
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

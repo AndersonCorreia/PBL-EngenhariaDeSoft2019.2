@@ -4,9 +4,9 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-require_once "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
-use app\DB\InstituicaoDAO;
-use app\model\users\Instituicao;
+require_once __DIR__."/../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
+use App\DB\InstituicaoDAO;
+use App\model\users\Instituicao;
 class InstituiDAOTest extends TestCase
 {
     protected static $DAO;
@@ -19,7 +19,7 @@ class InstituiDAOTest extends TestCase
             print("\n erro na conexão com o SGBD, O banco de dados foi iniciado ?? \n");
         }
         
-        self::$DAO->INSERT();//inserir umas duas instituições
+        //self::$DAO->INSERT();//inserir umas duas instituições
     }
     /**
      * Teste da função SELECT
