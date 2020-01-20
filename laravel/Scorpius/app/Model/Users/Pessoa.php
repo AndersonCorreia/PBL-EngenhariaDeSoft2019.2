@@ -1,8 +1,8 @@
 <?php
 
 namespace app\Model\users;
-require_once __DIR__."/../../DB/interfaces/DataObject.php";
-abstract class Pessoa extends \DataObject {
+
+abstract class Pessoa extends \App\DB\interfaces\DataObject {
     private $nome;
     private $cpf;
     private $telefone;

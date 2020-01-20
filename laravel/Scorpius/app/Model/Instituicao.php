@@ -2,8 +2,7 @@
 namespace App\Model;
 
 use App\DB\InstituicaoDAO;
-require_once __DIR__."/../DB/interfaces/DataObject.php";
-class Instituicao extends \DataObject {
+class Instituicao extends \App\DB\interfaces\DataObject {
 	private $ID = 0;
     private $nome;
     private $responsavel;

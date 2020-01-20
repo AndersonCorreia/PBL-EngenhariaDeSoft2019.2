@@ -1,4 +1,5 @@
 <?php
+namespace App\DB\interfaces;
 
 /**
  * Classe base para as demais classes que irão realizar a manipulação de dados no SGBD.

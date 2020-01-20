@@ -4,8 +4,7 @@ namespace App\Model;
 
 use App\DB\ExposicaoDAO;
 
-require_once __DIR__ . "/../DB/interfaces/DataObject.php";
-class Exposicao extends \DataObject
+class Exposicao extends \App\DB\interfaces\DataObject
 {
     private $titulo;
     private $tipo_evento;

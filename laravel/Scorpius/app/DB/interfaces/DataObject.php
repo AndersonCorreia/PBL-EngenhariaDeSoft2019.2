@@ -1,4 +1,6 @@
 <?PHP 
+namespace App\DB\interfaces;
+
 abstract class DataObject{
 
     protected $alterado = false;

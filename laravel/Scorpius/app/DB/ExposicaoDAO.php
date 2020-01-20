@@ -1,14 +1,12 @@
 <?PHP
 
 namespace App\DB;
-
-require_once __DIR__ . "/interfaces/DataAccessObject.php";
-require_once __DIR__ . "/../Model/Exposicao.php";
+use App\Model\Exposicao;
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao.
  */
-class ExposicaoDAO extends \DataAccessObject
+class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
 {
 
     function INSERT($exposicao): bool

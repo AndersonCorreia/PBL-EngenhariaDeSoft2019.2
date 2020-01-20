@@ -1,14 +1,13 @@
 <?PHP 
 
 namespace App\DB;
-require_once __DIR__."/interfaces/DataAccessObject.php";
-require_once __DIR__."/../Model/Users/Pessoa.php";//falta inserir as outras classes
+use App\Model\Users\Pessoa;//falta inserir as outras classes
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe pessoa
  * e todas as subclasses.
  */
-class PessoaDAO extends \DataAccessObject {
+class PessoaDAO extends \App\DB\interfaces\DataAccessObject {
 
     function INSERT($pessoa): bool{
         //usa a variavel $dataBase para  fazer a query no banco
