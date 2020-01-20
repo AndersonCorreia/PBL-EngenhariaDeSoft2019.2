@@ -9,11 +9,12 @@ class Exposicao extends \DataObject
 {
     private $titulo;
     private $tipo_evento;
+    private $tema;
     private $descricao;
     private $quantidade_inscritos;
     private $data_inicial;
     private $data_final;
-    private $link_imagem;
+    private $imagem;
     private $exposicao;
 
     public function __Construct()
@@ -24,11 +25,12 @@ class Exposicao extends \DataObject
     {
         $this->titulo = $dados['titulo'];
         $this->tipo_evento = $dados['tipo'];
+        $this->tema = $dados['tema'];
         $this->descricao = $dados['descricao'];
         $this->quantidade_inscritos = $dados['quantidade'];
         $this->data_inicial = $dados['data_inicial'];
         $this->data_final = $dados['data_final'];
-        $this->link_imagem = $dados['imagem'];
+        $this->imagem = $dados['imagem'];
 
         $this->exposicao->INSERT($this);
         return $this;
@@ -57,6 +59,15 @@ class Exposicao extends \DataObject
     public function getTipo_evento()
     {
         return $this->tipo_evento;
+    }
+    public function setTema($tema)
+    {
+        $this->alterado();
+        $this->tema = $tema;
+    }
+    public function getTema()
+    {
+        return $this->tema;
     }
 
     public function setDescricao($descricao)
@@ -99,13 +110,13 @@ class Exposicao extends \DataObject
         return $this->data_final;
     }
 
-    public function setImage($link_imagem)
+    public function setImage($imagem)
     {
         $this->alterado();
-        $this->link_imagem = $link_imagem;
+        $this->imagem = $imagem;
     }
     public function getImage()
     {
-        return $this->link_imagem;
+        return $this->imagem;
     }
 }

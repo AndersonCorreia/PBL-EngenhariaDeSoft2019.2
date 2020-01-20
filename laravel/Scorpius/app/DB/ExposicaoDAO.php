@@ -15,22 +15,24 @@ class ExposicaoDAO extends \DataAccessObject
     {
         $titulo = $exposicao->getTitulo();
         $tipo_evento = $exposicao->getTipo_evento();
+        $tema = $exposicao->getTema();
         $descricao = $exposicao->getDescricao();
         $quantidade = $exposicao->getQuantidade();
         $data_inicial = $exposicao->getData_Inicial();
         $data_final = $exposicao->getData_Final();
-        $link_imagem = $exposicao->getImage();
+        $imagem = $exposicao->getImage();
 
         $sql = "INSERT INTO exposicao
-        (Titulo, Tipo_Evento, Descricao, Quantidade_Inscritos, Data_Inicial, Data_Final, Link_Imagem)
+        (titulo, tipo_evento, tema_evento, descricao, quantidade_inscritos, data_inicial, data_final, imagem)
         VALUES (
             '$titulo', 
             '$tipo_evento',
+            '$tema',
             '$descricao',
             '$quantidade' ,
             '$data_inicial', 
             '$data_final', 
-            '$link_imagem'
+            '$imagem'
         )";
         //usa a variavel $dataBase para  fazer a query no banco
         $resultado = $this->dataBase->query($sql);
@@ -40,8 +42,8 @@ class ExposicaoDAO extends \DataAccessObject
     function UPDATE($exposicao): bool
     {
         $sql = "UPDATE exposicao
-        SET titulo = $exposicao->titulo, Tipo_Evento = $exposicao->tipo_evento, Descricao = $exposicao->descricao,
-        Quantidade_Inscritos = $exposicao->quantidade, Data_Inicial = $exposicao->data_inicial, Data_Final = $exposicao->data_final
+        SET titulo = $exposicao->titulo, tipo_evento = $exposicao->tipo_evento, tema = $exposicao->tema, descricao = $exposicao->descricao,
+        quantidade_inscritos = $exposicao->quantidade, data_inicial = $exposicao->data_inicial, data_final = $exposicao->data_final
         WHERE id = $exposicao->id";
 
         $resultado = $this->dataBase->query($sql);

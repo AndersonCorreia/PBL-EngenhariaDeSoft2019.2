@@ -9,20 +9,30 @@ use App\DB\ExposicaoDAO;
 class InicialController extends Controller
 {
     public function inicio()
-    {   
+    {
         $DAO = new ExposicaoDAO();
         $eventos = $DAO->SELECT_ALL();
-        $exposicoes = array();
+        $astronomia = array();
+        $biodiversidade = array();
+        $origem_do_humano = array();
         $atividades = array();
         foreach ($eventos as $evento) {
-            if ($evento['Tipo_Evento'] == 'atividade permanente') {
-                $exposicoes[] = $evento;
+            if ($evento['tipo_evento'] == 'atividade permanente') {
+                if ($evento['tema_evento'] == 'astronomia') {
+                    $astronomia[] = $evento;
+                } elseif ($evento['tipo_evento'] == 'biodiversidade') {
+                    $biodiversidade[] = $evento;
+                } else {
+                    $origem_do_humano[] = $evento;
+                }
             } else {
                 $atividades[] = $evento;
             }
         }
         $variaveis = [
-            'exposicoes' => $exposicoes,
+            'biodiversidade' => $biodiversidade,
+            'astronomia' => $astronomia,
+            'origem_do_humano' => $origem_do_humano,
             'atividades' => $atividades
         ];
         return view('paginaInicial', $variaveis);

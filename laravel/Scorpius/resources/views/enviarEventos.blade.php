@@ -11,6 +11,14 @@
                 <option value="atividade diferenciada">Atividade Diferenciada</option>
             </select>
         </div>
+        <div class="form-group">
+            <select class="form-control" name="tema">
+                <option value="NULL"></option>
+                <option value="astronomia">Astronomia</option>
+                <option value="biodiversidade">Biodiversidade</option>
+                <option value="origem do humano">Origem do Humano</option>
+            </select>
+        </div>
         <input class="form-control" type="text" name="descricao" placeholder="Descricao"><br>
         <input class="form-control" type="text" name="quantidade" placeholder="Quantidade (ex: 40)"><br>
         <input class="form-control" type="text" name="data_inicial"

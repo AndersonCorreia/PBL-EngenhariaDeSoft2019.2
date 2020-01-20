@@ -10,8 +10,13 @@
     <link rel="stylesheet" href="{{ asset('css/paginaInicial.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="https://kit.fontawesome.com/8dc881c5b9.js" crossorigin="anonymous"></script>
+    <link REL="SHORTCUT ICON" HREF="{{asset('img/logo-galaxy-shotcut.png')}}">
     <title>Scorpius</title>
 </head>
 
@@ -148,21 +153,149 @@
             </div>
         </div>
     </section>
-
+    <br>
     {{-- EXPOSICOES --}}
     <section id="exposicoes">
-        <div class="desktop">
-            <div class="row mr-0">
-                <div class="col-md-6">
-                    {{-- Teste para ver se a conexão está funcionando --}}
-                    @foreach ($exposicoes as $exposicao)
-                    <p class="h1">{{$exposicao['Titulo']}}</p>
-                    <img width="30%" src="data:image/jpeg;base64,<?= base64_encode($exposicao['Link_Imagem']) ?>" />
-                    @endforeach
-                    {{--  --}}
+
+        <div id="exposicoes-galeria" class="row mr-0">
+            <div class="col-md-4 p-0">
+                <div id="exposicoes-img-astronomia" class="zoom text-center">
+                    <img src="{{ asset('img/tela_inicial/background-astronomia.jpg') }}" alt="Astronomia">
+                    <button type="button" class="exposicoes-btn-text text-center btn bg-transparent" data-toggle="modal"
+                        data-target="#Astronomia">
+                        Astronomia
+                    </button>
+                </div>
+
+
+                <div class="modal fade bg-transparent" id="Astronomia" tabindex="-1" role="dialog"
+                    aria-labelledby="AstronomiaTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl bg-transparent" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Astronomia</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        @foreach ($astronomia as $evento)
+                                        <div class="col-sm-3">
+                                            <div class="card exposicoes-card" style="width: 16rem;">
+                                                <img class="card-img-top"
+                                                    src="data:image/jpeg;base64,<?= base64_encode($evento['imagem']) ?>"
+                                                    alt="Imagem de capa do card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{$evento['titulo']}}</h5>
+                                                    <p class="card-text">{{$evento['descricao']}}</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <a href="{{ route('entrar')}}" class="card-link">Agendar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 p-0">
+                <div class="zoom text-center">
+                    <img src="{{ asset('img/tela_inicial/background-biodiversidade.jpg') }}" alt="Astronomia">
+                    <button type="button" class="exposicoes-btn-text text-center btn bg-transparent" data-toggle="modal"
+                        data-target="#biodiversidade">
+                        Biodiversidade
+                    </button>
+                </div>
+
+                <div class="modal fade bg-transparent" id="biodiversidade" tabindex="-1" role="dialog"
+                    aria-labelledby="biodiversidadeTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl bg-transparent" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Biodiversidade</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        @foreach ($biodiversidade as $evento)
+                                        <div class="col-sm-3">
+                                            <div class="card exposicoes-card" style="width: 16rem;">
+                                                <img class="card-img-top"
+                                                    src="data:image/jpeg;base64,<?= base64_encode($evento['imagem']) ?>"
+                                                    alt="Imagem de capa do card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{$evento['titulo']}}</h5>
+                                                    <p class="card-text">{{$evento['descricao']}}</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <a href="{{ route('entrar')}}" class="card-link">Agendar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 p-0">
+                <div class="zoom text-center">
+                    <img src="{{ asset('img/tela_inicial/background-origem-1.jpg') }}" alt="Astronomia">
+                    <button type="button" class="exposicoes-btn-text text-center btn bg-transparent" data-toggle="modal"
+                        data-target="#origem-do-humano">
+                        Origem do Homem
+                    </button>
+                </div>
+
+                <div class="modal fade bg-transparent" id="origem-do-humano" tabindex="-1" role="dialog"
+                    aria-labelledby="origem-do-humanoTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl bg-transparent" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Origem do homem</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        @foreach ($origem_do_humano as $evento)
+                                        <div class="col-sm-3">
+                                            <div class="card exposicoes-card" style="width: 16rem;">
+                                                <img class="card-img-top"
+                                                    src="data:image/jpeg;base64,<?= base64_encode($evento['imagem']) ?>"
+                                                    alt="Imagem de capa do card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{$evento['titulo']}}</h5>
+                                                    <p class="card-text">{{$evento['descricao']}}</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <a href="{{ route('entrar')}}" class="card-link">Agendar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </section>
 
     {{-- AGENDAMENTO / ENDEREÇO / CONTATO --}}
@@ -376,7 +509,7 @@
                 </div>
             </div>
             {{-- SUB FOOTER --}}
-            <footer id="sub-footer" class="row bg-dark mr-0 text-white">
+            <footer id="sub-footer" style="background-color:#0B0B3B" class="row mr-0 text-white">
                 {{-- Copyright --}}
                 <div class="col-md-6 mt-2 pl-5">
                     <p class="h6">
@@ -394,7 +527,7 @@
             </footer>
         </div>
         {{-- MOBILE --}}
-        <div class="bg-dark">
+        <div style="background-color:#0B0B3B">
             <div class="mobile text-white text-center">
                 {{-- logo Scorpius - MOBILE --}}
                 <div>

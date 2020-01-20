@@ -25,6 +25,7 @@ class enviarEventosController extends Controller
     {
         $titulo = $request->titulo;
         $tipoEvento = $request->evento;
+        $tema = $request->tema;
         $descricao = $request->descricao;
         $quantidade = $request->quantidade;
         $data_inicial = $request->data_inicial;
@@ -48,6 +49,7 @@ class enviarEventosController extends Controller
             $dadosEvent = [
                 'titulo' => $titulo,
                 'tipo' => $tipoEvento,
+                'tema' => $tema,
                 'descricao' => $descricao,
                 'quantidade' => $quantidade,
                 'data_inicial' => $data_inicial,
