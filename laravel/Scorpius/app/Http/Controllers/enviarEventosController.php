@@ -13,7 +13,7 @@ class enviarEventosController extends Controller
 
     public function index()
     {
-        return view('enviarEventos',$dados = ['try' => 'ND', 'log' => 'ND']);
+        return view('enviarEventos', $dados = ['try' => 'ND', 'log' => 'ND']);
     }
 
     public function create()
@@ -29,26 +29,40 @@ class enviarEventosController extends Controller
         $quantidade = $request->quantidade;
         $data_inicial = $request->data_inicial;
         $data_final = $request->data_final;
-        $rawImagem = $request->imagem;
         $token = $request->_token;
-       
-        
-        try{
-            /*
+
+
+        try {
+
+            $imagem = $_FILES['imagem']['tmp_name'];
+            $tamanho = $_FILES['imagem']['size'];
+
+            if ($imagem != "none") {
+                $fp = fopen($imagem, "rb");
+                $conteudo = fread($fp, $tamanho);
+                $conteudo = addslashes($conteudo);
+                fclose($fp);
+            }
+
             $newEvent = new Exposicao();
-            $newEvent->novaExposicao([
+            $dadosEvent = [
                 'titulo' => $titulo,
                 'tipo' => $tipoEvento,
                 'descricao' => $descricao,
                 'quantidade' => $quantidade,
                 'data_inicial' => $data_inicial,
                 'data_final' => $data_final,
-                'imagem' => $rawImagem
-            ]);
-            */
-            $try = 'TRUE';
-            $log = '';
-        }catch(Exception $e){
+                'imagem' => $conteudo
+            ];
+            if(($newEvent->novaExposicao($dadosEvent))){
+                $try = 'TRUE';
+                $log = 'SUCCESS';
+            }else{
+                $try = 'TRUE';
+                $log = 'FALID';
+            }
+
+        } catch (Exception $e) {
             $log = $e->getMessage();
             $try = 'FALSE';
         }
