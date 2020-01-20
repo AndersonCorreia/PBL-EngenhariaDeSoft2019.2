@@ -1,5 +1,6 @@
 {
     "scripts": {
-        "serve": "php laravel/scorpius/artisan serve"
+        "serve": "php laravel/scorpius/artisan serve",
+        "testes": "laravel\\scorpius\\vendor\\bin\\phpunit -c laravel\\scorpius\\phpunit.xml"
     }
 }

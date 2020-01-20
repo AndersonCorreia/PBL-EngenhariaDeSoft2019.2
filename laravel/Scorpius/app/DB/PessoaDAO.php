@@ -1,4 +1,6 @@
 <?PHP 
+
+namespace App\DB;
 require_once __DIR__."/interfaces/DataAccessObject.php";
 require_once __DIR__."/../Model/Users/Pessoa.php";//falta inserir as outras classes
 
