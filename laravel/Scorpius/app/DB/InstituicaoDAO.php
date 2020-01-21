@@ -24,13 +24,13 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $resultado;
     }
     function UPDATE($instituicao): bool{
-        /**$sql = "UPDATE instituicao
+        $sql = "UPDATE instituicao
         SET nome = $instituicao->getNome, endereco = $instituicao->endereco, numero = $instituicao->numero,
         cidade_UF = $instituicao->cidade_UF, cep = $instituicao->cep, telefone = $instituicao->telefone,
         tipo_Instituicao = $instituicao->tipo_Instituicao
         WHERE id = $instituicao->id";
         
-        $resultado = $this->dataBase->query($sql);**/
+        $resultado = $this->dataBase->query($sql);
         return true;
     }
     function DELETE($instituicao): bool{
@@ -49,14 +49,11 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         $resultado = $this->dataBase->query($sql);
         $row = $resultado->fetch_assoc();
 
-        if($resultado->num_rows == 1){
+        if($resultado->num_rows == 1){//um select pelo ID, só vai encontrar no maximo um resultado
             if($asArray){
-                $registros = [];
-                $registros[] = $row;
-
-                return $registros;
+                return [$row];
             }
-        
+
             $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
                                 $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["ID"]);
             return $obj;
@@ -82,17 +79,19 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss", $nome, $endereco);
         $stmt->execute();
-        $result = $stmt->get_result()->fetch_assoc();
+        $row = $stmt->get_result()->fetch_assoc();
 
-        if($result==[]){
+        if($row==[]){
             throw new \Exception("Nenhuma instituição foi encontrada");
         }
 
         if($array){
-            return $result;
+            return $row;
         }
         else {
-            //construir o objeto e retornar
+            $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
+                                $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["ID"]);
+            return $obj;
         }
     }
     /**

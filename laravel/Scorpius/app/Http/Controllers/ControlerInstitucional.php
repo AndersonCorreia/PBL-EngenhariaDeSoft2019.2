@@ -33,13 +33,17 @@ class ControlerInstitucional extends Controller {
      * @return void
      */
     public function telaCadastroInstituicao() {
-        $DAO = new InstituicaoDAO();
+        
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Cadastro de Instituições",
-            'instituicoes' => $DAO->getNomeEnderecoALL()
+            'paginaAtual' => "Cadastro de Instituições"   
         ];
-        return view('TelaInstituicaoEnsino.cadastroInstituicao', $variaveis);
+        try{
+            $DAO = new InstituicaoDAO();
+            $variaveis['instituicoes'] =$DAO->getNomeEnderecoALL();
+        }finally{
+            return view('TelaInstituicaoEnsino.cadastroInstituicao', $variaveis);
+        }
     }
     /**
      * Função que deve cadastrar uma instituição e vincula-la ao usuario.
@@ -104,7 +108,6 @@ class ControlerInstitucional extends Controller {
             return $DAO->SELECT($nome, $endereco);
         }
         catch(\Exception $e) {
-            header("contend-type: aplication/json",true,500);
             return ["error" => true];
         }
     }

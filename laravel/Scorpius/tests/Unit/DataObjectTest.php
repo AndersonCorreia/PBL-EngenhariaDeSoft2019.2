@@ -20,15 +20,19 @@ class DataObjectTest extends TestCase
         self::$dao = new DAO();
         self::$dao->INSERT(self::$object);
     }
-
+    /**
+     * Testando se apos uma alteração no objeto os dados são salvos no banco automaticamente
+     *  no destrutor do objeto.
+     */
     public function testSave_no_destrutor(){
         try {
             self::$object->setNome("colegio Z");
             self::$object->setNumero("66B");
             $id = self::$object->getID();
-            self::$object=null;
+            //apagando o objeto
+            self::$object = null;
 
-            $objAtualizado = self::$dao->SELECTbyID($id, false);
+            self::$object = self::$dao->SELECTbyID($id, false);
             //testando al alterações
             \assertEquals("colegio Z",$objAtualizado->getNome());
             \assertEquals("66B",$objAtualizado->getNumero());
@@ -37,4 +41,8 @@ class DataObjectTest extends TestCase
         }
     }
     
+    public static function tearDownAfterClass(): void{
+        //apagando objeto do banco de dados
+        self::$dao->DELETE(self::$object);
+    }
 }

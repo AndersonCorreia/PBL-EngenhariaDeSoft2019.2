@@ -15,9 +15,11 @@
                 <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
                     <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" list="instList" required autofocus>
                     <datalist id="instList">
-                    @foreach (($instituicoes ?? [["nome" =>"UEFS", "endereco"=> "Segunda Casa"]]) as $inst)
-                        <option class="opList" value="{{$inst['nome']}} ; Endereço: {{$inst['endereco']}}" >
-                    @endforeach
+                    @if (($instituicoes ?? false))
+                        @foreach ($instituicoes as $inst)
+                            <option class="opList" value="{{$inst['nome']}} ; Endereço: {{$inst['endereco']}}" >
+                        @endforeach
+                    @endif
                     </datalist>
                 </div>
                 <div class="col-sm-2 mt-1 m-0 mt-sm-0 float-sm-right d-block">
@@ -84,7 +86,7 @@
             
             <div class="input-group-append mt-2">
                 <button id="submit" type="submit" class="btn mr-2 btn-primary">Cadastrar e Vincular instituição</button>
-                <a href="/instituicaoEnsino"><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                <a href={{route("instituição.show")}}><button type="button" class="btn btn-danger">Cancelar</button> </a>
             </div>
 
         </div>
