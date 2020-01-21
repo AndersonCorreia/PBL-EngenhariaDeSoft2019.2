@@ -88,8 +88,10 @@
                     href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
             </div>
             <div id="mobile-menu-img">
-                <img id="mobile-menu-img-logo" class="img-fluid"
-                    src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
+                <a href="http://www.antares.uefs.br/">
+                    <img id="mobile-menu-img-logo" class="img-fluid"
+                    src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}" alt="Scorpius - Antares">
+                </a>
             </div>
             <br><br>
             <div id="mobile-menu">
@@ -155,8 +157,8 @@
                 <h5 id="mobile-informacoes-right-footer">O atendimento é gratuito.</h5>
             </div>
         </div>
-    </section>
-    <br>
+    </section> <br>
+    
     {{-- ATIVIDADES DIFERENCIADAS --}}
     <div class="desktop text-center mt-3 mb-3">
         <p class="h2">Atividades diferenciadas</p>
