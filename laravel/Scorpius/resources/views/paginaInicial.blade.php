@@ -156,7 +156,7 @@
             </div>
         </div>
     </section>
-
+    <br>
     {{-- ATIVIDADES DIFERENCIADAS --}}
     <div class="desktop text-center mt-3 mb-3">
         <p class="h2">Atividades diferenciadas</p>
@@ -281,9 +281,10 @@
             </div>
         </div>
     </section>
-
+    
     {{-- EXPOSICOES --}}
     <div class="text-center mt-3 mb-3">
+        
         <p class="h2">Exposições</p>
     </div>
     <section id="exposicoes">
