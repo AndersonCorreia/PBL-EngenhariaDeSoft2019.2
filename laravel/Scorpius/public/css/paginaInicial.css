@@ -61,7 +61,7 @@
         margin-top: 2%;
     }
     #mobile-btn-entrar {
-        color: blue !important;
+        color:#007bff !important;
     }
     /* Menu principal - Mobile */
     #mobile-menu-img {
@@ -173,31 +173,37 @@
     left: 60%;
     color: #696969;
 }
-#menu-botoes-exposicoes {
+#menu-botoes-contato {
+    position: absolute;
+    top: 40%;
+    left: 39%;
+    color: #696969;
+}
+#menu-botoes-informacoes {
     position: absolute;
     top: 40%;
     left: 82%;
     color: #696969;
 }
-#menu-botoes-informacoes {
+#menu-botoes-atividades {
     position: absolute;
     top: 61%;
     left: 77%;
     color: #696969;
 }
-#menu-botoes-agendamento {
+#menu-botoes-exposicoes {
     position: absolute;
     top: 83%;
     left: 75%;
     color: #696969;
 }
-#menu-botoes-endereco {
+#menu-botoes-agendamento {
     position: absolute;
     top: 100%;
     left: 45%;
     color: #696969;
 }
-#menu-botoes-contato {
+#menu-botoes-endereco {
     position: absolute;
     top: 95%;
     left: 15%;
@@ -361,6 +367,6 @@
     object-fit: cover;
 
     /* width: 300px; */
-    height: 680px!important;
+    height: 680px !important;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 1) !important;
 }

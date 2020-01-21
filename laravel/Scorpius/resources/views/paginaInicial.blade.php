@@ -44,6 +44,9 @@
                             <a id="menu-botoes-antares" href="http://www.antares.uefs.br/">
                                 ANTARES
                             </a>
+                            <a id="menu-botoes-atividades" href="#atividades-diferenciadas">
+                                ATIVIDADES
+                            </a>
                             <a id="menu-botoes-exposicoes" href="#exposicoes">
                                 EXPOSIÇÕES
                             </a>
@@ -91,14 +94,14 @@
             <br><br>
             <div id="mobile-menu">
                 <div id="mobile-menu-botoes-1" class="btn-group" role="group" aria-label="...">
-                    <button id="mobile-menu-antares" type="button" class="btn btn-primary border border-white"><a
-                            href="http://www.antares.uefs.br/">Antares</a></button>
-                    <button id="mobile-menu-exposicoes" type="button" class="btn btn-primary border border-white"><a
-                            href="#exposicoes">Exposições</a></button>
                     <button id="mobile-menu-informacoes" type="button" class="btn btn-primary border border-white"><a
                             href="#informacoes">Informações</a></button>
+                    <button id="mobile-menu-atividades" type="button" class="btn btn-primary border border-white"><a
+                            href="atividades-diferenciadas">Atividades</a></button>
+                    <button id="mobile-menu-exposicoes" type="button" class="btn btn-primary border border-white"><a
+                            href="#exposicoes">Exposições</a></button>
                 </div>
-                <div id="mobile-menu-botoes-1" class="btn-group" role="group" aria-label="...">
+                <div id="mobile-menu-botoes-2" class="btn-group" role="group" aria-label="...">
                     <button id="mobile-menu-agendamento" type="button" class="btn btn-primary border border-white"><a
                             href="#agendamento-endereco-informacoes">Agendamento</a></button>
                     <button id="mobile-menu-endereco" type="button" class="btn btn-primary border border-white"><a
@@ -155,84 +158,136 @@
     </section>
 
     {{-- ATIVIDADES DIFERENCIADAS --}}
+    <div class="desktop text-center mt-3 mb-3">
+        <p class="h2">Atividades diferenciadas</p>
+    </div>
     <section id="atividades-diferenciadas">
-        <div class="mobile text-center mt-3">
-            <p class="h2">Atividades Diferenciadas</p>
-        </div>
-        <div id="slideShowAtividades" class="carousel slide text-center" data-ride="carousel">
-            <ol class="carousel-indicators">
-                
+        <div class="desktop">
+            <div id="slideShowAtividades" class="carousel slide text-center" data-ride="carousel">
+                <ol class="carousel-indicators">
 
+
+                    @if (empty($atividades))
+                    <li data-target="#slideShowAtividades" data-slide-to="0" class="active"></li>
+                    @else
+                    <div hidden="true">{{$counter = 0}}</div>
+                    @foreach ($atividades as $atividade)
+                    @if($counter == 0)
+                    <li data-target="#slideShowAtividades" data-slide-to="0" class="active"></li>
+                    @else
+                    <li data-target="#slideShowAtividades" data-slide-to="{{$counter}}"></li>
+                    @endif
+                    <div hidden="false">{{$counter = $counter + 1}}</div>
+                    @endforeach
+                    @endif
+                </ol>
+                <div class="carousel-inner">
+                    @if (empty($atividades))
+                    <div class="carousel-item active">
+                        <img class="d-block w-100 atv-img mx-auto"
+                            src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <p class="h4">Não há atividades diferenciadas no momento</p>
+                        </div>
+                    </div>
+                    @else
+                    <div hidden="false">{{$counter = 0}}</div>
+                    @foreach ($atividades as $atividade)
+                    @if($counter == 0)
+                    <div class="carousel-item active">
+                        <img class="d-block w-100 atv-img mx-auto"
+                            src="data:image/jpeg;base64,<?= base64_encode($atividade['imagem']) ?>">
+                        <div class="carousel-caption d-none d-md-block">
+                            <p class="h2">{{$atividade['titulo']}}</p>
+                            <p class="h4">{{$atividade['descricao']}}</p>
+                            <p class="h4">Vagas por turno: {{$atividade['quantidade_inscritos']}}</p>
+                            <p class="h4">{{$atividade['data_inicial']}} - {{$atividade['data_final']}}</p>
+                        </div>
+                    </div>
+                    @else
+                    <div class="carousel-item">
+                        <img class="d-block w-100 atv-img mx-auto"
+                            src="data:image/jpeg;base64,<?= base64_encode($atividade['imagem']) ?>">
+                        <div class="carousel-caption d-none d-md-block">
+                            <p class="h2">{{$atividade['titulo']}}</p>
+                            <p class="h4">{{$atividade['descricao']}}</p>
+                            <p class="h4">Vagas por turno: {{$atividade['quantidade_inscritos']}}</p>
+                            <p class="h4">{{$atividade['data_inicial']}} - {{$atividade['data_final']}}</p>
+                        </div>
+                    </div>
+                    @endif
+                    <div hidden="false">{{$counter = $counter + 1}}</div>
+                    @endforeach
+                    @endif
+                </div>
+                <a class="carousel-control-prev" href="#slideShowAtividades" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#slideShowAtividades" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+            </div>
+        </div>
+        <div class="mobile text-center mt-3">
+
+            <p class="h2">Atividades Diferenciadas</p>
+
+            <div class="btn-group-vertical btn-lg btn-block">
                 @if (empty($atividades))
-                <li data-target="#slideShowAtividades" data-slide-to="0" class="active"></li>
+                <p class="h3">Não há atividaes diferenciadas no momento.</p>
                 @else
-                <div hidden="true">{{$counter = 0}}</div>
                 @foreach ($atividades as $atividade)
-                @if($counter == 0)
-                <li data-target="#slideShowAtividades" data-slide-to="0" class="active"></li>
-                @else
-                <li data-target="#slideShowAtividades" data-slide-to="{{$counter}}"></li>
-                @endif
-                <div hidden="false">{{$counter = $counter + 1}}</div>
-                @endforeach
-                @endif
-            </ol>
-            <div class="carousel-inner">
-                @if (empty($atividades))
-                <div class="carousel-item active atv-img mx-auto">
-                    <img class="d-block w-100" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
-                    <div class="carousel-caption d-none d-md-block">
-                        <p class="h4">Não há atividades diferenciadas no momento</p>
+                <button type="button" class="btn btn-light mb-1" data-toggle="modal"
+                    data-target="#atv{{$atividade['ID']}}">
+                    {{$atividade['titulo']}}
+                </button>
+
+                <div class="modal fade" id="atv{{$atividade['ID']}}" tabindex="-1" role="dialog"
+                    aria-labelledby="#atv{{$atividade['ID']}}Title" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="atv{{$atividade['ID']}}Title">{{$atividade['titulo']}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card  text-center mx-auto" style="width: 100%;">
+                                    <img class="card-img-top"
+                                        src="data:image/jpeg;base64,<?= base64_encode($atividade['imagem']) ?>"
+                                        alt="{{$atividade['titulo']}}">
+                                    <div class="card-body">
+                                        <p class="card-text">{{$atividade['descricao']}}</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Vagas por turno: {{$atividade['quantidade_inscritos']}}</li>
+                                        <li class="list-group-item">Início: {{$atividade['data_inicial']}}</li>
+                                        <li class="list-group-item">Fim: {{$atividade['data_final']}}</li>
+                                    </ul>
+                                    <div class="card-body">
+                                        <a href="{{ route('entrar')}}" class="card-link">Agendar</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-                @else
-                <div hidden="false">{{$counter = 0}}</div>
-                @foreach ($atividades as $atividade)
-                @if($counter == 0)
-                <div class="carousel-item active">
-                    <img class="d-block w-100 atv-img mx-auto"
-                        src="data:image/jpeg;base64,<?= base64_encode($atividade['imagem']) ?>">
-                    <div class="carousel-caption d-none d-md-block">
-                        <p class="h2">{{$atividade['titulo']}}</p>
-                        <p class="h4">{{$atividade['descricao']}}</p>
-                        <p class="h4">Vagas: {{$atividade['quantidade_inscritos']}}</p>
-                        <p class="h4">{{$atividade['data_inicial']}} - {{$atividade['data_final']}}</p>
-                    </div>
-                </div>
-                @else
-                <div class="carousel-item">
-                    <img class="d-block w-100 atv-img mx-auto"
-                        src="data:image/jpeg;base64,<?= base64_encode($atividade['imagem']) ?>">
-                    <div class="carousel-caption d-none d-md-block">
-                        <p class="h2">{{$atividade['titulo']}}</p>
-                        <p class="h4">{{$atividade['descricao']}}</p>
-                        <p class="h4">Vagas: {{$atividade['quantidade_inscritos']}}</p>
-                        <p class="h4">{{$atividade['data_inicial']}} - {{$atividade['data_final']}}</p>
-                    </div>
-                </div>
-                @endif
-                <div hidden="false">{{$counter = $counter + 1}}</div>
                 @endforeach
                 @endif
             </div>
-            <a class="carousel-control-prev" href="#slideShowAtividades" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#slideShowAtividades" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Próximo</span>
-            </a>
         </div>
-
     </section>
 
     {{-- EXPOSICOES --}}
-    <div class="mobile text-center mt-3">
-            <p class="h2">Exposições</p>
-        </div>
+    <div class="text-center mt-3 mb-3">
+        <p class="h2">Exposições</p>
+    </div>
     <section id="exposicoes">
-        
+
         <div id="exposicoes-galeria" class="row mr-0 desktop">
             <div class="col-md-4 p-0">
                 <div id="exposicoes-img-astronomia" class="zoom text-center">
