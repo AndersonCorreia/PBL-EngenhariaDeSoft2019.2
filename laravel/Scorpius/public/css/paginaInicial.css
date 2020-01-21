@@ -31,12 +31,12 @@
         margin-top: 1%;
     }
 }
-@media only screen and (max-width: 767px){
-    #exposicoes-galeria{
+@media only screen and (max-width: 767px) {
+    #exposicoes-galeria {
         width: 108%;
         text-align: center !important;
     }
-    #exposicoes-galeria button{
+    #exposicoes-galeria button {
         margin-right: auto;
         margin-left: auto;
     }
@@ -117,7 +117,6 @@
     #mobile-ec {
         padding: 3%;
     }
-    
 }
 @media only screen and (min-width: 1000px) {
     .mobile {
@@ -206,7 +205,7 @@
 }
 
 /* INFORMAÇÕES */
-#informacoes{
+#informacoes {
     margin-top: 5% !important;
     margin-bottom: 5% !important;
     padding-top: 5%;
@@ -312,48 +311,56 @@
     color: whitesmoke;
     margin-top: 5% !important;
 }
-#footer a{
+#footer a {
     color: whitesmoke;
 }
 /* Exposições */
-#exposicoes{
-    margin-top: 8%;
+#exposicoes {
+    /* margin-top: 8%; */
 }
-#exposicoes h5{
+#exposicoes h5 {
     font-family: stark !important;
 }
-#exposicoes p{
+#exposicoes p {
     font-family: orator !important;
 }
 .zoom {
-	overflow: hidden;
+    overflow: hidden;
 }
 .zoom img {
     object-fit: cover;
     width: 550px;
     height: 680px;
     max-width: 100%;
-	-moz-transition: all 0.3s;
-	-webkit-transition: all 0.3s;
-	transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
 }
 .zoom:hover img {
-	-moz-transform: scale(1.1);
-	-webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
     transform: scale(1.1);
     filter: blur(0.5px);
 }
-.exposicoes-btn-text{
+.exposicoes-btn-text {
     position: absolute;
-	left: 5%;
-	right: 5%;
-	bottom: 20px;
-	z-index: 10;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	color: #ffffff !important;
-	text-align: center;
-	font-weight: 700;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    left: 5%;
+    right: 5%;
+    bottom: 20px;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #ffffff !important;
+    text-align: center;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
     font-family: stark;
+}
+/* ATIVIDADES */
+.atv-img {
+    object-fit: cover;
+
+    /* width: 300px; */
+    height: 680px!important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 1) !important;
 }

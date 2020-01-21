@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <!-- TELA INICIAL -->
+    {{-- TELA INICIAL --}}
     <div id="inicio">
         {{-- TELA INICIAL - DESKTOP --}}
         <div class="desktop">
@@ -110,7 +110,7 @@
         </div>
     </div>
 
-    <!-- INFORMAÇÕES -->
+    {{-- INFORMAÇÕES --}}
     <section id="informacoes">
         {{-- INFORMAÇÕES - DESKTOP --}}
         <div class="desktop row mr-0">
@@ -153,10 +153,86 @@
             </div>
         </div>
     </section>
-    <br>
-    {{-- EXPOSICOES --}}
-    <section id="exposicoes">
 
+    {{-- ATIVIDADES DIFERENCIADAS --}}
+    <section id="atividades-diferenciadas">
+        <div class="mobile text-center mt-3">
+            <p class="h2">Atividades Diferenciadas</p>
+        </div>
+        <div id="slideShowAtividades" class="carousel slide text-center" data-ride="carousel">
+            <ol class="carousel-indicators">
+                
+
+                @if (empty($atividades))
+                <li data-target="#slideShowAtividades" data-slide-to="0" class="active"></li>
+                @else
+                <div hidden="true">{{$counter = 0}}</div>
+                @foreach ($atividades as $atividade)
+                @if($counter == 0)
+                <li data-target="#slideShowAtividades" data-slide-to="0" class="active"></li>
+                @else
+                <li data-target="#slideShowAtividades" data-slide-to="{{$counter}}"></li>
+                @endif
+                <div hidden="false">{{$counter = $counter + 1}}</div>
+                @endforeach
+                @endif
+            </ol>
+            <div class="carousel-inner">
+                @if (empty($atividades))
+                <div class="carousel-item active atv-img mx-auto">
+                    <img class="d-block w-100" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p class="h4">Não há atividades diferenciadas no momento</p>
+                    </div>
+                </div>
+                @else
+                <div hidden="false">{{$counter = 0}}</div>
+                @foreach ($atividades as $atividade)
+                @if($counter == 0)
+                <div class="carousel-item active">
+                    <img class="d-block w-100 atv-img mx-auto"
+                        src="data:image/jpeg;base64,<?= base64_encode($atividade['imagem']) ?>">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p class="h2">{{$atividade['titulo']}}</p>
+                        <p class="h4">{{$atividade['descricao']}}</p>
+                        <p class="h4">Vagas: {{$atividade['quantidade_inscritos']}}</p>
+                        <p class="h4">{{$atividade['data_inicial']}} - {{$atividade['data_final']}}</p>
+                    </div>
+                </div>
+                @else
+                <div class="carousel-item">
+                    <img class="d-block w-100 atv-img mx-auto"
+                        src="data:image/jpeg;base64,<?= base64_encode($atividade['imagem']) ?>">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p class="h2">{{$atividade['titulo']}}</p>
+                        <p class="h4">{{$atividade['descricao']}}</p>
+                        <p class="h4">Vagas: {{$atividade['quantidade_inscritos']}}</p>
+                        <p class="h4">{{$atividade['data_inicial']}} - {{$atividade['data_final']}}</p>
+                    </div>
+                </div>
+                @endif
+                <div hidden="false">{{$counter = $counter + 1}}</div>
+                @endforeach
+                @endif
+            </div>
+            <a class="carousel-control-prev" href="#slideShowAtividades" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#slideShowAtividades" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Próximo</span>
+            </a>
+        </div>
+
+    </section>
+
+    {{-- EXPOSICOES --}}
+    <div class="mobile text-center mt-3">
+            <p class="h2">Exposições</p>
+        </div>
+    <section id="exposicoes">
+        
         <div id="exposicoes-galeria" class="row mr-0 desktop">
             <div class="col-md-4 p-0">
                 <div id="exposicoes-img-astronomia" class="zoom text-center">
@@ -181,6 +257,9 @@
                             <div class="modal-body">
                                 <div class="container-fluid">
                                     <div class="row">
+                                        @if(empty($astronomia))
+                                        <p>Infelizmente não há exposições relacionadas a esse tema :,(</p>
+                                        @endif
                                         @foreach ($astronomia as $evento)
                                         <div class="col-sm-3">
                                             <div class="card exposicoes-card" style="width: 16rem;">
@@ -227,6 +306,9 @@
                             <div class="modal-body">
                                 <div class="container-fluid">
                                     <div class="row">
+                                        @if(empty($biodiversidade))
+                                        <p>Infelizmente não há exposições relacionadas a esse tema :,(</p>
+                                        @endif
                                         @foreach ($biodiversidade as $evento)
                                         <div class="col-sm-3">
                                             <div class="card exposicoes-card" style="width: 16rem;">
@@ -273,6 +355,9 @@
                             <div class="modal-body">
                                 <div class="container-fluid">
                                     <div class="row">
+                                        @if(empty($origem_do_humano))
+                                        <p>Infelizmente não há exposições relacionadas a esse tema :,(</p>
+                                        @endif
                                         @foreach ($origem_do_humano as $evento)
                                         <div class="col-sm-3">
                                             <div class="card exposicoes-card" style="width: 16rem;">
@@ -322,7 +407,9 @@
                                     </button>
                                 </div>
                                 <div class="modal-body ">
-
+                                    @if(empty($astronomia))
+                                    <p>Infelizmente não há exposições relacionadas a esse tema :,(</p>
+                                    @endif
                                     @foreach ($astronomia as $evento)
 
                                     <div class="card  exposicoes-card" style="width: 100%;">
@@ -368,6 +455,9 @@
                                 <div class="modal-body">
                                     <div class="container-fluid">
                                         <div class="row">
+                                            @if(empty($biodiversidade))
+                                            <p>Infelizmente não há exposições relacionadas a esse tema :,(</p>
+                                            @endif
                                             @foreach ($biodiversidade as $evento)
                                             <div class="col-sm-3">
                                                 <div class="card exposicoes-card" style="width: 16rem;">
@@ -414,6 +504,9 @@
                                 <div class="modal-body">
                                     <div class="container-fluid">
                                         <div class="row">
+                                            @if(empty($origem_do_humano))
+                                            <p>Infelizmente não há exposições relacionadas a esse tema :,(</p>
+                                            @endif
                                             @foreach ($origem_do_humano as $evento)
                                             <div class="col-sm-3">
                                                 <div class="card exposicoes-card" style="width: 16rem;">
@@ -585,6 +678,7 @@
                 </div>
             </div>
     </section>
+
     {{-- FOOTER--}}
     <footer id="footer">
         <div class="desktop">
