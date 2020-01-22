@@ -70,7 +70,11 @@ class InstituicaoDAOTest extends TestCase
         \assertContainsEquals($dados0, $array);
         \assertContainsEquals($dados1, $array);
     }
-
+    /**
+     * testa se a função INSERT adiciona o ID do resgistro do banco no objeto
+     *
+     * @return void
+     */
     public function testINSERT_acrescentaIDnoObjeto(){
         $inst = new Instituicao("colegio", "diretor", "endereço dif", "96A", "Feira", "BA",
                                         "44999000","tel", "federal");
@@ -92,6 +96,7 @@ class InstituicaoDAOTest extends TestCase
         \assertEquals($inst->getCidade(),$instDB->getCidade(), "as cidades não são iguais" );
         \assertEquals($inst->getUF(),$instDB->getUF(), "os estados/UF não são iguais" );
     }
+
     public static function tearDownAfterClass(): void{
         //apagando os objetos do banco de dados
         self::$dao->DELETE(self::$inst0);
