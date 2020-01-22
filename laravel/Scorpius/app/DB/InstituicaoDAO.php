@@ -24,13 +24,13 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $resultado;
     }
     function UPDATE($instituicao): bool{
-        $sql = "UPDATE instituicao
+        /**$sql = "UPDATE instituicao
         SET nome = $instituicao->getNome, endereco = $instituicao->endereco, numero = $instituicao->numero,
         cidade_UF = $instituicao->cidade_UF, cep = $instituicao->cep, telefone = $instituicao->telefone,
         tipo_Instituicao = $instituicao->tipo_Instituicao
         WHERE id = $instituicao->id";
         
-        $resultado = $this->dataBase->query($sql);
+        $resultado = $this->dataBase->query($sql);**/
         return true;
     }
     function DELETE($instituicao): bool{
@@ -49,11 +49,14 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         $resultado = $this->dataBase->query($sql);
         $row = $resultado->fetch_assoc();
 
-        if($resultado->num_rows == 1){//um select pelo ID, só vai encontrar no maximo um resultado
+        if($resultado->num_rows == 1){
             if($asArray){
-                return [$row];
-            }
+                $registros = [];
+                $registros[] = $row;
 
+                return $registros;
+            }
+        
             $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
                                 $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["ID"]);
             return $obj;
@@ -79,19 +82,17 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss", $nome, $endereco);
         $stmt->execute();
-        $row = $stmt->get_result()->fetch_assoc();
+        $result = $stmt->get_result()->fetch_assoc();
 
-        if($row==[]){
+        if($result==[]){
             throw new \Exception("Nenhuma instituição foi encontrada");
         }
 
         if($array){
-            return $row;
+            return $result;
         }
         else {
-            $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
-                                $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["ID"]);
-            return $obj;
+            //construir o objeto e retornar
         }
     }
     /**
@@ -106,4 +107,23 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $array;
     }
 
+    /**
+     * Insere na tabela professor_instituicao, vinculando uma instituicao a um responsavel
+     * @param $ID ID da tabela
+     * @param $cont_A quantidade de agendamentos
+     * @param $contAC quantidade de agendamentos cancelados
+     * @param $ativo 
+     * @param $instituicao_ID ID da instituicao vinculada ao professor
+     * @param $usuario_ID ID do usuario do responsavel pela instituicao
+     */
+    function INSERT_Professor_Instituicao($cont_A, $cont_AC, $ativo, $instituicao_ID, $usuario_ID): bool{
+        $sql = "INSERT INTO professor_instituicao (cont_agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (
+            '$cont_A', 
+            '$cont_AC', 
+            '$ativo', 
+            '$instituicao_ID', 
+            '$usuario_ID'
+        )";
+        return $this->dataBase->query($sql);
+    }
 }
