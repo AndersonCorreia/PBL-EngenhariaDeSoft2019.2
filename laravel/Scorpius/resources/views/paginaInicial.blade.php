@@ -202,7 +202,7 @@
                         <div class="carousel-caption d-none d-md-block">
                             <p class="h2">{{$atividade['titulo']}}</p>
                             <p class="h4">{{$atividade['descricao']}}</p>
-                            <p class="h4">Vagas por turno: {{$atividade['quantidade_inscritos']}}</p>
+                            
                             <p class="h4">{{$atividade['data_inicial']}} - {{$atividade['data_final']}}</p>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                         <div class="carousel-caption d-none d-md-block">
                             <p class="h2">{{$atividade['titulo']}}</p>
                             <p class="h4">{{$atividade['descricao']}}</p>
-                            <p class="h4">Vagas por turno: {{$atividade['quantidade_inscritos']}}</p>
+                            
                             <p class="h4">{{$atividade['data_inicial']}} - {{$atividade['data_final']}}</p>
                         </div>
                     </div>
@@ -265,7 +265,6 @@
                                         <p class="card-text">{{$atividade['descricao']}}</p>
                                     </div>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Vagas por turno: {{$atividade['quantidade_inscritos']}}</li>
                                         <li class="list-group-item">Início: {{$atividade['data_inicial']}}</li>
                                         <li class="list-group-item">Fim: {{$atividade['data_final']}}</li>
                                     </ul>
