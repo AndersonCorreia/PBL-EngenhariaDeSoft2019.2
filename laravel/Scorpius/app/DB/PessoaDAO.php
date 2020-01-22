@@ -14,9 +14,17 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject {
         //usa a variavel $dataBase para  fazer a query no banco
         $this->dataBase;
     }
-    function UPDATE($pessoa): bool{
-        return true;
+    
+    function UPDATE($usuario): bool{
+        $sql = "UPDATE usuario
+        SET nome = $usuario->nome, email = $usuario->email, telefone = $usuario->telefone,
+        senha_nova = $usuario->senha_nova
+        WHERE id = usuario->id";
+
+        $resultado = $this->dataBase->query($sql);
+        return $resultado;
     }
+    
     function DELETE($pessoa): bool{
 
     }
