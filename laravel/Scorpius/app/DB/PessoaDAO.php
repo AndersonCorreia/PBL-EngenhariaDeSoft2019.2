@@ -40,8 +40,9 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject {
      */
     function SELECTbyName($name): int{
         $sql = "SELECT ID FROM usuario WHERE nome = $name";
-        $id_user = $this->dataBase->query($sql);
-        return $id_user;
+        $result = $this->dataBase->query($sql);
+        $row = $result->fetch_assoc();
+        return $row["ID"];
     }
 
     /**

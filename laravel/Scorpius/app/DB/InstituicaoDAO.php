@@ -115,12 +115,12 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
      * @param $instituicao_ID ID da instituicao vinculada ao professor
      * @param $usuario_ID ID do usuario do responsavel pela instituicao
      */
-    function INSERT_Professor_Instituicao($cont_A, $cont_AC, $ativo, $instituicao_ID, $usuario_ID): bool{
+    function INSERT_Professor_Instituicao( $instituicao_ID, $usuario_ID): bool{
         $sql = "INSERT INTO professor_instituicao (cont_agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) 
         VALUES (
-            '$cont_A', 
-            '$cont_AC', 
-            '$ativo', 
+            0, 
+            0, 
+            1, 
             '$instituicao_ID', 
             '$usuario_ID'
         )";

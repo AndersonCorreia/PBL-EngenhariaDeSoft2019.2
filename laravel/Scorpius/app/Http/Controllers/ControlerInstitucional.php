@@ -74,7 +74,7 @@ class ControlerInstitucional extends Controller {
         //Vincula a instituicao ao representante, inserindo a relação na tabela professor_instituicao 
         $pessoa = new PessoaDAO();
         $id_user = $pessoa->SELECTbyName($nome);
-        $DAO->INSERT_Professor_Instituicao(0, 0, 0, $_POST['ID'], $id_user);                
+        $DAO->INSERT_Professor_Instituicao($_POST['ID'], $id_user);                
         return redirect()->route('instituição.show');
     }
 
