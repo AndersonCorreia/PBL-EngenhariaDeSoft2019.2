@@ -21,15 +21,15 @@ USE `scorpius` ;
 -- Table `scorpius`.`exposicao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(50) NOT NULL,
   `tipo_evento` ENUM('atividade diferenciada', 'atividade permanente') NOT NULL,
-  `tema_evento` ENUM('astronomia', 'biodiversidade', 'origem do humano') NULL DEFAULT NULL,
+  `tema_evento` ENUM('astronomia', 'biodiversidade', 'origem do humano') DEFAULT NULL,
   `descricao` VARCHAR(300) NOT NULL,
-  `quantidade_inscritos` INT NULL DEFAULT NULL,
+  `quantidade_inscritos` INT  DEFAULT NULL,
   `data_inicial` DATE NOT NULL,
-  `data_final` DATE NULL DEFAULT NULL,
-  `imagem` MEDIUMBLOB NULL DEFAULT NULL,
+  `data_final` DATE DEFAULT NULL,
+  `imagem` MEDIUMBLOB DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `titulo_UNIQUE` (`titulo` ASC))
 ENGINE = InnoDB;
@@ -39,7 +39,7 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`cidade_UF`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`cidade_UF` (
-  `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `cidade` VARCHAR(30) NOT NULL,
   `UF` CHAR(2) NOT NULL,
   PRIMARY KEY (`ID`))
@@ -50,7 +50,7 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`instituicao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`instituicao` (
-  `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `responsavel` VARCHAR(40) NOT NULL,
   `endereco` VARCHAR(50) NOT NULL,
@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`instituicao` (
   `cidade_UF_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_instituicao_cidade_UF_idx` (`cidade_UF_ID` ASC),
+  UNIQUE INDEX `instituicao_UNIQUE` (`nome`, `endereco`),
   CONSTRAINT `fk_instituicao_cidade_UF`
     FOREIGN KEY (`cidade_UF_ID`)
     REFERENCES `scorpius`.`cidade_UF` (`ID`)
@@ -107,7 +108,7 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`professor_instituicao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`professor_instituicao` (
-  `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `cont_Agendamento` SMALLINT NOT NULL,
   `cont_agendamento_cancelado` SMALLINT NOT NULL,
   `ativo` TINYINT NOT NULL,
@@ -133,7 +134,7 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`turma`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
-  `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(10) NOT NULL,
   `Ano_Escolar` VARCHAR(12) NOT NULL,
   `Ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
@@ -152,7 +153,7 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`agendamento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento` (
-  `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `Turma` INT NOT NULL,
   `Visita` INT NOT NULL,
   `Data_Agendamento` DATETIME NOT NULL,
@@ -199,7 +200,7 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`permissao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`permissao` (
-  `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `permissao` VARCHAR(40) NOT NULL,
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
@@ -217,8 +218,8 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`exposicao_agendamento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento` (
-  `ID` INT UNSIGNED NOT NULL,
-  `exposicao_ID` INT NOT NULL,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `exposicao_ID` INT UNSIGNED NOT NULL,
   `agendamento_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_exposicao_agendamento_exposicao1_idx` (`exposicao_ID` ASC),
@@ -240,7 +241,7 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`aluno`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`aluno` (
-  `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `Turma` INT NOT NULL,
   `Nome` VARCHAR(50) NOT NULL,
   `Idade` INT NOT NULL,
@@ -259,7 +260,7 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`visitante`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`visitante` (
-  `ID` INT UNSIGNED NULL DEFAULT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `isAluno` TINYINT(1) NOT NULL,
   `Nome` VARCHAR(50) NOT NULL,
   `Status_Checkin` ENUM('compareceu', 'não compareceu') NOT NULL,
