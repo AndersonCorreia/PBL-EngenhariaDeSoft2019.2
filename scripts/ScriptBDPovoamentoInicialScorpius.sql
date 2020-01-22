@@ -38,7 +38,7 @@ INSERT INTO cidade_uf (ID, cidade, UF) VALUES (1, 'Salvador', 'BA');
 INSERT INTO cidade_uf (ID, cidade, UF) VALUES (2,'Feira de Santana', 'BA');
 INSERT INTO cidade_uf (ID, cidade, UF) VALUES (3,'Bonfim de Feira ', 'BA');
 INSERT INTO cidade_uf (ID, cidade, UF) VALUES (4,'Jaguara', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (5,'Governador João Durval Carneir', 'BA');
+INSERT INTO cidade_uf (ID, cidade, UF) VALUES (5,'Governador João Durval Carneiro', 'BA');
 INSERT INTO cidade_uf (ID, cidade, UF) VALUES (6,'Humildes', 'BA');
 INSERT INTO cidade_uf (ID, cidade, UF) VALUES (7,'Jaíba', 'BA');
 INSERT INTO cidade_uf (ID, cidade, UF) VALUES (8,'Maria Quitéria', 'BA');

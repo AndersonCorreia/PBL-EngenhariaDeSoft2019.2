@@ -88,6 +88,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::resource('enviar-eventos', 'enviarEventosController');
 
 //rota para visualizar corbetura dos testes
-Route::get('testes', function(){
-    redirect("public/build/coverage",307);
+Route::get('/testes', function(){
+    return redirect("/build/coverage/index.html",307);
 });

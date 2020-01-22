@@ -40,5 +40,8 @@ abstract class DataObject{
     public function setID(DataAccessObject $dao ){ 
         $this->ID= $dao->getLastID();
     }
+    public function getID(){
+        return $this->ID;
+    }
 }
 ?>

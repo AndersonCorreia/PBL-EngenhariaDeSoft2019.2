@@ -20,9 +20,9 @@ class InstituicaoDAOTest extends TestCase
         catch(\mysqli_sql_exception $e){
             print("\n erro na conexão com o SGBD, O banco de dados foi iniciado ?? \n");
         }
-        self::$inst0 = new Instituicao("colegio x", "diretor", "endereço", "96A", "Feira", "BA",
+        self::$inst0 = new Instituicao("colegio x", "diretor", "endereço", "96A", "Feira de Santana", "BA",
                                         "44999000","tel", "federal");
-        self::$inst1 = new Instituicao("colegio z", "diretor", "endereço", "96A", "Feira", "BA",
+        self::$inst1 = new Instituicao("colegio z", "diretor", "endereço", "96A", "Feira de Santana", "BA",
                                         "44999000","tel", "federal");
         self::$DAO->INSERT($inst0);
         self::$DAO->INSERT($inst1);
@@ -32,12 +32,66 @@ class InstituicaoDAOTest extends TestCase
      *
      * @return void
      */
-    public function testSELECT()
-    {
-        
-        \assertTrue(true);
+    public function testSELECT(){
+
+        $inst = self::$DAO->SELECT("colegio x", "endereço", false);//false é para retornar o objeto
+        \assertEquals(self::$inst0->getID(),$inst->getID());
+
+        $inst = self::$DAO->SELECT("colegio z", "endereço", false);
+        \assertEquals(self::$inst1->getID(),$inst->getID());
+    }
+    /**
+     * Teste da função SELECT ao procurar uma instituição que não existe
+     * uma exeption deve ser lançada.
+     *
+     * @return void
+     */
+    public function testSELECT_instituicaoInexistente(){
+        try{
+            self::$DAO->SELECT("não existe", "endereço", false);
+        }
+        catch(\Exception $e){
+            \assertEquals("Nenhuma instituição foi encontrada", $e->getMessage());
+        }
+    }
+    
+    /**
+     * teste da função getNomeEnderecoALL, que deve retornar uma array com o nome e endereço
+     * de todas as instituições
+     *
+     * @return void
+     */
+    public function test_getNomeEnderecoALL(){
+
+        $array = self::$DAO->getNomeEnderecoALL();
+        $dados0 = ["nome" => self::$inst0->getNome(), "endereco" => self::$inst0->getEndereco()];
+        $dados1 = ["nome" => self::$inst1->getNome(), "endereco" => self::$inst1->getEndereco()];
+
+        \assertContainsEquals($dados0, $array);
+        \assertContainsEquals($dados1, $array);
     }
 
+    public function testINSERT_acrescentaIDnoObjeto(){
+        $inst = new Instituicao("colegio", "diretor", "endereço dif", "96A", "Feira", "BA",
+                                        "44999000","tel", "federal");
+        self::$DAO->INSERT($inst);
+        \assertNotNull(self::$inst1->getID());
+    }
+    /**
+     * Testando o metodo INSERT com uma cidade que não estava no banco no povoamento
+     *
+     * @return void
+     */
+    public function testINSERT_CidadeNovaNoBanco(){
+
+        $inst = new Instituicao("colegio y", "diretor", "alagoinhas", "96A", "Alagoinhas", "BA",
+                                        "44999000","tel", "Estadual");
+        self::$DAO->INSERT($inst);
+        $instDB = self::$DAO->SELECTbyID($inst->getID(), false);
+
+        \assertEquals($inst->getCidade(),$instDB->getCidade(), "as cidades não são iguais" );
+        \assertEquals($inst->getUF(),$instDB->getUF(), "os estados/UF não são iguais" );
+    }
     public static function tearDownAfterClass(): void{
         //apagando os objetos do banco de dados
         self::$dao->DELETE(self::$inst0);
