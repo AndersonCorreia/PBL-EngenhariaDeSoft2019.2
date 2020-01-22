@@ -2,6 +2,7 @@
 
 namespace App\DB;
 use App\Model\Users\Pessoa;//falta inserir as outras classes
+use App\Model\Users\Usuario;
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe pessoa
@@ -31,6 +32,18 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject {
     function SELECTbyCPF(): Pessoa{
 
     }
+
+    /**
+     * Seleciona o ID do usuario com o nome passado, caso exista.
+     * @param [string] $nome nome do usuario
+     * @return id_user ID do usuario com o nome passado. 
+     */
+    function SELECTbyName($name): int{
+        $sql = "SELECT ID FROM usuario WHERE nome = $name";
+        $id_user = $this->dataBase->query($sql);
+        return $id_user;
+    }
+
     /**
      * Retorna todas as permissões de determinado tipo de usuario;
      *

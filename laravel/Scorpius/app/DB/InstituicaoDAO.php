@@ -106,4 +106,24 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $array;
     }
 
+    /**
+     * Insere na tabela professor_instituicao, vinculando uma instituicao a um responsavel
+     * @param $ID ID da tabela
+     * @param $cont_A quantidade de agendamentos
+     * @param $contAC quantidade de agendamentos cancelados
+     * @param $ativo 
+     * @param $instituicao_ID ID da instituicao vinculada ao professor
+     * @param $usuario_ID ID do usuario do responsavel pela instituicao
+     */
+    function INSERT_Professor_Instituicao($cont_A, $cont_AC, $ativo, $instituicao_ID, $usuario_ID): bool{
+        $sql = "INSERT INTO professor_instituicao (cont_agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) 
+        VALUES (
+            '$cont_A', 
+            '$cont_AC', 
+            '$ativo', 
+            '$instituicao_ID', 
+            '$usuario_ID'
+        )";
+        return $this->dataBase->query($sql);
+    }
 }

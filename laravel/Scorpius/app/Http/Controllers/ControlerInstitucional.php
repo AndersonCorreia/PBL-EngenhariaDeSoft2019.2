@@ -51,12 +51,11 @@ class ControlerInstitucional extends Controller {
      * @return page redirecionar o usuario para a pagina de instituições
      */
     public function CadastrarInstituicao() {
-        //codigo para cadastrar a instituição e vincular ao usuario
-        
+        //codigo para cadastrar a instituição
+        $DAO = new InstituicaoDAO();
+        $nome = $_POST['Instituicao'];
         if($_POST["onlyLink"]==false){
-            //cadastra e vincular
             $instituicao = new Instituicao();
-            $nome = $_POST['Instituicao'];
             $responsavel = $_POST['Responsavel'];
             $telefone = $_POST['Telefone'];
             $endereco = $_POST['Endereco'];
@@ -66,17 +65,16 @@ class ControlerInstitucional extends Controller {
             $estado = $_POST['Estado'];
             $tipo = $_POST['Tipo'];
 
+            //armazena na classe
             $instituicao->__Construct($nome, $responsavel, $telefone, $endereco, $numero,
                         $cep, $cidade, $estado, $tipo);
-            
-            // POST['ID'];
-
-        }else {
-            //apenas vincular
-            //id da instituição disponivel no post
-
+            //armazena no banco
+            $DAO->INSERT($instituicao);
         }
-        
+        //Vincula a instituicao ao representante, inserindo a relação na tabela professor_instituicao 
+        $pessoa = new PessoaDAO();
+        $id_user = $pessoa->SELECTbyName($nome);
+        $DAO->INSERT_Professor_Instituicao(0, 0, 0, $_POST['ID'], $id_user);                
         return redirect()->route('instituição.show');
     }
 
