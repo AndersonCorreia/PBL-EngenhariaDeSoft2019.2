@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Model\Instituicao;
 use Illuminate\Http\Request;
 use App\DB\InstituicaoDAO;
+use App\DB\PessoaDAO;
+use App\Http\Requests\StoreUpdadeInstituicao;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
+
 class ControlerInstitucional extends Controller {   
     /**
      * Retorna tela de instiuição
@@ -29,6 +32,7 @@ class ControlerInstitucional extends Controller {
         ];
         return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
     }
+
     /**
      * retornar a tela de cadastro de instituições para o usuario
      *
@@ -47,6 +51,18 @@ class ControlerInstitucional extends Controller {
             return view('TelaInstituicaoEnsino.cadastroInstituicao', $variaveis);
         }
     }
+
+    /**
+     * Undocumented function
+     *
+     * @param StoreUpdateInstituicao $request
+     * @return void
+     */
+    public function Store(StoreUpdateInstituicao $request){
+        dd('Cadastro efetuado com sucesso!');
+
+    }
+
     /**
      * Função que deve cadastrar uma instituição e vincula-la ao usuario.
      *

@@ -4,6 +4,14 @@
 
 @section('conteudo')
 
+@if($errors->any())
+    <ul>
+        @foreach($errors->all() as $eror)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+
 <form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('CadastroInstituição.post')}}">
     {{csrf_field()}}
     <input id="onlyLink" type="hidden" name="onlyLink" value="false">{{-- valor para informar ao back-end se a instituição já existe --}}
@@ -29,7 +37,7 @@
 
             <div class="form-group col-sm-8">    
                 <span>Responsável pela Instituição</span>
-                <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" placeholder="Nome do Responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" value="{{old('Responsavel')}}" placeholder="Nome completo do Responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
             </div>
 
             <div class="form-group col-sm-4">

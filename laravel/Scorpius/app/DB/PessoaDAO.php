@@ -44,7 +44,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject {
     /**
      * Seleciona o ID do usuario com o nome passado, caso exista.
      * @param [string] $nome nome do usuario
-     * @return id_user ID do usuario com o nome passado. 
+     * @return ID do usuario com o nome passado. 
      */
     function SELECTbyName($name): int{
         $sql = "SELECT ID FROM usuario WHERE nome = $name";
