@@ -18,7 +18,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject {
     function UPDATE($usuario): bool{
         $sql = "UPDATE usuario
         SET nome = $usuario->nome, email = $usuario->email, telefone = $usuario->telefone,
-        senha_nova = $usuario->senha_nova
+        senha = $usuario->senha
         WHERE id = usuario->id";
 
         $resultado = $this->dataBase->query($sql);

@@ -35,11 +35,28 @@ class AlteraUsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {//request são os dados do formulario
         $email = $request->email;
         $nome = $request->nome;
         $telefone = $request->telefone;
-        $senha = $request->senha;
+        $senha_nova = $request->senha_nova;
+        $senha_antiga = $request->senha_antiga;
+
+//tem que fazer a condicional se a senha antiga estiver errada não poder fazer a alteração
+        //if($senha_antiga for diferente da senha do bd)
+            //retorna que não pode alterar dados
+
+        $usuario = new PessoaDAO();
+        $id_user = $usuario->SELECTbyName($nome);
+        $dadosUsuario = [
+            'email' => $email,
+            'nome' => $nome,
+            'telefone' => $telefone,
+            'senha' => $senha_nova,
+            'id' =>$id_user
+        ];
+            
+        $usuario->UPDATE($dadosUsuario);
         return 'dados alterados com sucesso!';
     }
 
