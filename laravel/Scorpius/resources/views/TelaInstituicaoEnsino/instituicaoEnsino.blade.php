@@ -67,7 +67,7 @@
     }
 
     .instituicoes{
-        width: 400px;
+        width: 800px;
         height: 100px;
         border: solid 2px black;
         padding: 20px;
@@ -97,6 +97,10 @@
 
     h2{
         align-items: center;
+    }
+
+    td, th{
+        padding: 0px 20px 0px 20px;
     }
    
 
