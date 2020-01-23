@@ -26,15 +26,6 @@ class Instituicao extends \App\DB\interfaces\DataObject {
 		$this->telefone = $tel;
 		$this->tipo_Instituicao = $tipo;
 	}
-
-
-    public function agendaInstituicao($instituicao): boolean{
-
-	}
-	
-    public function desvincularInstituicao($instituicao): boolean{
-
-	}
 	
 	public static function buscar(int $id){
 		$result = (new InstituicaoDAO)->SELECTbyID($id);
@@ -48,9 +39,6 @@ class Instituicao extends \App\DB\interfaces\DataObject {
 
 	public static function listarInstituicoes(){
 		return (new InstituicaoDAO)->SELECT_ALL();
-	}
-	public function getID(){
-		return $this->ID;
 	}
 	public function getNome() {
 		return $this->nome;

@@ -12,6 +12,7 @@ class InstituicaoDAOTest extends TestCase
     protected static $DAO;
     protected static $inst0;
     protected static $inst1;
+    protected static $inst2;
 
     public static function setUpBeforeClass(): void{
         try {
@@ -20,7 +21,7 @@ class InstituicaoDAOTest extends TestCase
         catch(\mysqli_sql_exception $e){
             print("\n erro na conexão com o SGBD, O banco de dados foi iniciado ?? \n");
         }
-        self::$inst0 = new Instituicao("colegio x", "diretor", "endereço", "96A", "Feira de Santana", "BA",
+        self::$inst0 = new Instituicao("colegio xy", "diretor", "endereço", "96A", "Feira de Santana", "BA",
                                         "44999000","tel", "federal");
         self::$inst1 = new Instituicao("colegio z", "diretor", "endereço", "96A", "Feira de Santana", "BA",
                                         "44999000","tel", "federal");
@@ -34,7 +35,7 @@ class InstituicaoDAOTest extends TestCase
      */
     public function testSELECT(){
 
-        $inst = self::$DAO->SELECT("colegio x", "endereço", false);//false é para retornar o objeto
+        $inst = self::$DAO->SELECT("colegio xy", "endereço", false);//false é para retornar o objeto
         \assertEquals(self::$inst0->getID(),$inst->getID());
 
         $inst = self::$DAO->SELECT("colegio z", "endereço", false);
@@ -79,6 +80,7 @@ class InstituicaoDAOTest extends TestCase
         $inst = new Instituicao("colegio", "diretor", "endereço dif", "96A", "Feira", "BA",
                                         "44999000","tel", "federal");
         self::$DAO->INSERT($inst);
+        self::$DAO->DELETE($inst);
         \assertNotNull(self::$inst1->getID());
     }
     /**
@@ -88,8 +90,9 @@ class InstituicaoDAOTest extends TestCase
      */
     public function testINSERT_CidadeNovaNoBanco(){
 
-        $inst = new Instituicao("colegio y", "diretor", "alagoinhas", "96A", "Alagoinhas", "BA",
+        self::$inst2 = new Instituicao("colegio y", "diretor", "alagoinhas", "96A", "Alagoinhas", "BA",
                                         "44999000","tel", "Estadual");
+        $inst = self::$inst2;
         self::$DAO->INSERT($inst);
         $instDB = self::$DAO->SELECTbyID($inst->getID(), false);
 
@@ -101,5 +104,6 @@ class InstituicaoDAOTest extends TestCase
         //apagando os objetos do banco de dados
         self::$DAO->DELETE(self::$inst0);
         self::$DAO->DELETE(self::$inst1);
+        self::$DAO->DELETE(self::$inst2);
     }
 }

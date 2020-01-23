@@ -54,6 +54,7 @@ class Empregado extends Pessoa{
     }
 
     public function setTipo(string $tipo){
+        $this->setAlterado();
         $this->tipo = $tipo;
     }
 }

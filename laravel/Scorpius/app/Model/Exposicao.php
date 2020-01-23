@@ -61,7 +61,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
     }
     public function setTema($tema)
     {
-        $this->alterado();
+        $this->setAlterado();
         $this->tema = $tema;
     }
     public function getTema()
@@ -111,7 +111,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
 
     public function setImage($imagem)
     {
-        $this->alterado();
+        $this->setAlterado();
         $this->imagem = $imagem;
     }
     public function getImage()

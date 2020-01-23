@@ -42,7 +42,9 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`cidade_UF` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `cidade` VARCHAR(30) NOT NULL,
   `UF` CHAR(2) NOT NULL,
-  PRIMARY KEY (`ID`))
+  PRIMARY KEY (`ID`),
+  UNIQUE INDEX `cidade_UF_UNIQUE` (`cidade`, `UF`) 
+  )
 ENGINE = InnoDB;
 
 

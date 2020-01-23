@@ -34,26 +34,30 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $resultado;
     }
     function UPDATE($instituicao): bool{
+        $id= $instituicao->getID();
         $nome = $instituicao->getNome(); 
-        $responsavel = $instituicao->getResponsavel();
+        $resp = $instituicao->getResponsavel();
         $endereco = $instituicao->getEndereco();
         $numero = $instituicao->getNumero();
         $cidade =$instituicao->getCidade();
         $UF = $instituicao->getUF(); 
         $cep = $instituicao->getCep(); 
-        $telefone = $instituicao->getTelefone();
+        $tel = $instituicao->getTelefone();
         $tipo = $instituicao->getTipo_Instituicao();
 
         $this->INSERT_Cidade_UF($cidade, $UF);
 
-        $sql = "UPDATE instituicao
-        SET nome = $instituicao->getNome, endereco = $instituicao->endereco, numero = $instituicao->numero,
-        cidade_UF = $instituicao->cidade_UF, cep = $instituicao->cep, telefone = $instituicao->telefone,
-        tipo_Instituicao = $instituicao->tipo_Instituicao
-        WHERE id = $instituicao->id";
-        
-        $resultado = $this->dataBase->query($sql);
-        return true;
+        $join ="instituicao i LEFT JOIN cidade_UF c ON c.cidade = ? AND c.UF = ?";
+        $set  ="nome = ?, responsavel = ?, endereco = ?, numero = ?, cidade_UF_ID =c.id , 
+                cep = ?, telefone = ?, tipo_Instituicao = ?";
+        $sql  = "UPDATE $join SET $set WHERE i.id = ?";
+
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ssssssssss", $cidade, $UF, $nome, $resp, $endereco, $numero, $cep, $tel, $tipo, $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        return $resultado;
     }
     function DELETE($instituicao): bool{
         return $this->DELETEbyID($instituicao->getID());
@@ -66,8 +70,9 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
     }
 
     function SELECTbyID(int $id, bool $asArray=true){
-
-        $sql = "SELECT * FROM instituicao i LEFT JOIN cidade_UF c ON i.cidade_UF_ID = c.ID WHERE i.id=$id";
+        $select = "i.ID, nome, responsavel, endereco, numero, cep, telefone, tipo_instituicao, cidade, UF";
+        $join = "instituicao i LEFT JOIN cidade_UF c ON i.cidade_UF_ID = c.ID";
+        $sql = "SELECT $select FROM $join WHERE i.id=$id";
         $resultado = $this->dataBase->query($sql);
         $row = $resultado->fetch_assoc();
 
@@ -75,9 +80,8 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
             if($asArray){
                 return [$row];
             }
-
             $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
-                                $row["UF"],$row["cep"],$row["tipo_instituicao"],$row["i.ID"]);
+                                $row["UF"],$row["cep"],$row["telefone"],$row["tipo_instituicao"],$row["ID"]);
             return $obj;
         }
         throw new \Exception("Nenhuma instituição foi encontrada com o id $id");
@@ -97,7 +101,8 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
      */
     function SELECT(string $nome, string $endereco, bool $array=true){
         $join = "instituicao i LEFT JOIN cidade_UF c ON i.cidade_UF_ID = c.ID";
-        $sql = "SELECT * FROM $join WHERE i.nome = ? AND i.endereco = ?";
+        $select = "i.ID, nome, responsavel, endereco, numero, cep, telefone, tipo_instituicao, cidade, UF";
+        $sql = "SELECT $select FROM $join WHERE i.nome = ? AND i.endereco = ?";
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss", $nome, $endereco);
         $stmt->execute();
@@ -112,7 +117,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         }
         else {
             $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
-                                $row["UF"],$row["cep"],$row["tipo_instituicao"],$row["i.ID"]);
+                                $row["UF"],$row["cep"],$row["telefone"],$row["tipo_instituicao"],$row["ID"]);
             return $obj;
         }
     }

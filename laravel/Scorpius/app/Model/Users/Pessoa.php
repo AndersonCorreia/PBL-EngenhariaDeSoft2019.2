@@ -30,7 +30,8 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	 * @param [type] $novaSenha nova senha da pessoa
 	 * @return void
 	 */
-	public function alterarSenha($novaSenha){
+	public function setSenha($novaSenha){
+		$this->setAlterado();
         $this->senha = $novaSenha;
     }
 
@@ -39,6 +40,7 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	}
 
 	public function setNome($nome) {
+		$this->setAlterado();
 		$this->nome = $nome;
 	}
 
@@ -46,15 +48,12 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 		return $this->cpf;
 	}
 
-	public function setCpf($cpf) {
-		$this->cpf = $cpf;
-	}
-
 	public function getTelefone() {
 		return $this->telefone;
 	}
 
 	public function setTelefone($telefone) {
+		$this->setAlterado();
 		$this->telefone = $telefone;
 	}
 
@@ -63,6 +62,7 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	}
 
 	public function setEmail($email) {
+		$this->setAlterado();
 		$this->email = $email;
 	}
 

@@ -18,7 +18,7 @@ abstract class DataAccessObject {
      */
     function __Construct(){
         
-        mysqli_report(MYSQLI_REPORT_STRICT);//faz o mysqli lançar exception no erro de conexão entre outros
+        mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);//faz o mysqli lançar exception no erro de conexão entre outros
         $ini = parse_ini_file(__DIR__."/../../../php.ini");
         $this->dataBase = new \mysqli(
             $ini["DB_HOST"],
