@@ -5,6 +5,14 @@ INSERT INTO tipo_usuario (ID, nome) VALUES (9, 'funcionario');
 INSERT INTO tipo_usuario (ID, nome) VALUES (7, 'institucional');
 INSERT INTO tipo_usuario (ID, nome) VALUES (6, 'visitante');
 
+-- Insert dos professores --
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (1, 2, 0, TRUE, 201, 601);
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (2, 3, 1, TRUE, 202, 701); 
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (3, 5, 2, TRUE, 203, 801); 
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (4, 2, 7, TRUE, 204, 802); 
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (5, 2, 1, TRUE, 205, 901); 
+
+
 -- Insert dos usuarios --
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
 (601, 'Francisco Hugo Rezende', 'franciscohr@maquinas.com.br', 'fhr601', '92546317599', '75994628820', 6);
@@ -34,28 +42,28 @@ INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('realizar backup',10)
 INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('gerenciar permissões',10);
 
 -- INSERT das cidades --
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (1, 'Salvador', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (2,'Feira de Santana', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (3,'Bonfim de Feira ', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (4,'Jaguara', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (5,'Governador João Durval Carneiro', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (6,'Humildes', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (7,'Jaíba', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (8,'Maria Quitéria', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (9,'Matinha', 'BA');
-INSERT INTO cidade_uf (ID, cidade, UF) VALUES (10,'Tiquaruçu', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (1, 'Salvador', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (2,'Feira de Santana', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (3,'Bonfim de Feira ', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (4,'Jaguara', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (5,'Governador', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (6,'Humildes', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (7,'Jaíba', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (8,'Maria Quitéria', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (9,'Matinha', 'BA');
+INSERT INTO cidade_UF (ID, cidade, UF) VALUES (10,'Tiquaruçu', 'BA');
 
 -- INSERT das Instituições --
-INSERT INTO instituicao (ID, nome, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
-(201, 'Universidade Estadual de Feira de Santana', 'Av. Transnordestina', 's/n', '44036-900', '7531618000', 'Estadual', 2);
-INSERT INTO instituicao (ID, nome, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
-(202, 'Colégio Modelo Luis Eduardo Magalhães', 'Rua Vasco Filho', '15', '44003-246', '7532237666', 'Estadual', 2);
-INSERT INTO instituicao (ID, nome, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
-(203, 'Instituto Federal Bahia - Campus Feira de Santana', 'Rodovia BR 324 - Km 102', 's/n', '44135-000', '7532216475', 'Federal', 2);
-INSERT INTO instituicao (ID, nome, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
-(204, 'Escola Municipal Ana Brandoa', 'Rotatória da Avenida João Durval Carneiro', 's/n', '44001-001', '7536224055', 'Municipal', 2);
-INSERT INTO instituicao (ID, nome, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
-(205, 'Colégio Helyos', 'Avenida Eduardo Fróes da Mota', '1100', '44078-015', '7536254455', 'Privada', 2);
+INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
+(201, 'Universidade Estadual de Feira de Santana','João De Souza','Av. Transnordestina', 's/n', '44036-900', '7531618000', 'Estadual', 1);
+INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
+(202, 'Colégio Modelo Luis Eduardo Magalhães','Maria Das Dores','Rua Vasco Filho', '15', '44003-246', '7532237666', 'Estadual', 2);
+INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
+(203, 'Instituto Federal Bahia - Campus Feira de Santana','Joaquim Da Silva', 'Rodovia BR 324 - Km 102', 's/n', '44135-000', '7532216475', 'Federal', 3);
+INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
+(204, 'Escola Municipal Ana Brandoa','Marcos Feliciano', 'Rotatória da Avenida João Durval Carneiro', 's/n', '44001-001', '7536224055', 'Municipal', 4);
+INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
+(205, 'Colégio Helyos','Manoel Santo Espedito', 'Avenida Eduardo Fróes da Mota', '1100', '44078-015', '7536254455', 'Privada', 5);
 
 -- INSERT dos estagiários --
 INSERT INTO estagiario (matricula, usuario_ID) VALUES('cgg1', 801);

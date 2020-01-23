@@ -7,7 +7,7 @@
 <h1>Instituicao ({{$registros[0]['nome']}})</h1>
 <div>
 <form action="{{route('user.instituicoes.atualizar',$registros[0]['ID'])}}" method="POST" enctype="multipart/form-data">
-    {{csrf_field()}}
+{{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">
             <div class="form-group col-sm-12 d-block">
@@ -21,37 +21,37 @@
 
             <div class="form-group col-sm-8">    
                 <span>Responsável pela Instituição</span>
-                <input class="form-control"  type="text" maxlength="40" name="nameResponsavel" placeholder="Nome do Responsável"  value="{{isset($registros[0]['responsavel']) ? $registros[0]['responsavel'] : ''}}" required>
+                <input class="form-control"  type="text" maxlength="40" name="Responsavel" placeholder="Nome do Responsável"  value="{{isset($registros[0]['responsavel']) ? $registros[0]['responsavel'] : ''}}" required>
             </div>
             
             <div class="form-group col-sm-4">
                 <span>Telefone da instituicão</span>
-                <input class="form-control" type="tel" maxlength="14" name="nameTelefone" placeholder="(99)99999-9999" value="{{isset($registros[0]['telefone']) ? $registros[0]['telefone'] : ''}}" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
+                <input class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" value="{{isset($registros[0]['telefone']) ? $registros[0]['telefone'] : ''}}" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
             </div> 
 
             <div class="form-group col-sm-8">
                 <span>Endereço da Instituição</span>
-                <input class="form-control"  type="text" maxlength="50" name="nameEndereco" placeholder="Informe Rua e Bairro" value="{{isset($registros[0]['endereco']) ? $registros[0]['endereco'] : ''}}" required>
+                <input class="form-control"  type="text" maxlength="50" name="Endereco" placeholder="Informe Rua e Bairro" value="{{isset($registros[0]['endereco']) ? $registros[0]['endereco'] : ''}}" required>
             </div>
 
             <div class="form-group col-sm-2">    
                 <span>Numero</span>
-                <input class="form-control" type="text" name="nameNumero" maxlength="5" placeholder="xxx" value="{{isset($registros[0]['numero']) ? $registros[0]['numero'] : ''}}" required>
+                <input class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx" value="{{isset($registros[0]['numero']) ? $registros[0]['numero'] : ''}}" required>
             </div>
 
             <div class="form-group col-sm-2">
                 <span>CEP</span>
-                <input class="form-control" type="text" name="nameCEP" maxlength="9" placeholder="99999-999" value="{{isset($registros[0]['cep']) ? $registros[0]['cep'] : ''}}" required>
+                <input class="form-control" type="text" name="CEP" maxlength="9" placeholder="99999-999" value="{{isset($registros[0]['cep']) ? $registros[0]['cep'] : ''}}" required>
             </div>
 
             <div class="form-group col-sm-4">
                 <span>Cidade</span>
-                <input class="form-control"  type="text" name="nameCidade" placeholder="Informe a Cidade" value="{{isset($registros[0]['cidade']) ? $registros[0]['cidade'] : ''}}" required>
+                <input class="form-control"  type="text" name="Cidade" placeholder="Informe a Cidade" value="{{isset($registros[0]['cidade']) ? $registros[0]['cidade'] : ''}}" required>
             </div>
 
             <div class="form-group col-sm-3">
                 <span>Estado</span>    
-                <select name="select"  class="custom-select" required>
+                <select id="estado" name="Estado"  class="custom-select" required>
                     <option  value="BA" selected>Bahia</option> 
                     <option  value="MA">Maranhão</option>
                     <option  value="PI">Piauí</option>
@@ -66,7 +66,7 @@
             
             <div class="form-group col-sm-5">
                 <span>Tipo da Instituição</span>
-                <select name="tipo"  class="custom-select" placeholder="Tipo de instituição" required>
+                <select id="tipo" name="Tipo"  class="custom-select" placeholder="Tipo de instituição" required>
                     <option  value="Privada">Privada</option> 
                     <option  value="Federal">Federal</option>
                     <option  value="Distrital">Distrital</option>
