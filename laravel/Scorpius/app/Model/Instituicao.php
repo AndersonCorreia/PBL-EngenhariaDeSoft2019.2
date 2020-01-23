@@ -95,6 +95,14 @@ class Instituicao extends \App\DB\interfaces\DataObject {
 		$this->setAlterado();
 		$this->cidade = $cidade;
 	}
+	public function getUF() {
+		return $this->UF;
+	}
+
+	public function setUF(string $uf) {
+		$this->setAlterado();
+		$this->UF = $uf;
+	}
 
 	public function getCep() {
 		return $this->cep;

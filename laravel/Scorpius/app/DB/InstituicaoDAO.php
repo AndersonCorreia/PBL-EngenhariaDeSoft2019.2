@@ -19,11 +19,11 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         $tel = $instituicao->getTelefone();
         $tipo = $instituicao->getTipo_Instituicao();
 
-        INSERT_Cidade_UF($cidade, $instituicao);
+        $this->INSERT_Cidade_UF($cidade, $UF);
 
         $campos = "(nome, responsavel, endereco, numero, cidade_UF_id, cep, telefone, tipo_instituicao)";
         $select = "SELECT ?, ?, ?, ?, c.id, ?, ?, ? FROM cidade_UF c WHERE c.cidade = ? AND c.UF = ?";
-        $sql = "INSERT INTO instituicao $campos";
+        $sql = "INSERT INTO instituicao $campos $select";
 
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("sssssssss", $nome, $resp, $endereco, $numero, $cep, $tel, $tipo, $cidade, $UF);
@@ -44,7 +44,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         $telefone = $instituicao->getTelefone();
         $tipo = $instituicao->getTipo_Instituicao();
 
-        INSERT_Cidade_UF($cidade, $instituicao);
+        $this->INSERT_Cidade_UF($cidade, $UF);
 
         $sql = "UPDATE instituicao
         SET nome = $instituicao->getNome, endereco = $instituicao->endereco, numero = $instituicao->numero,
@@ -77,10 +77,10 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
             }
 
             $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
-                                $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["i.ID"]);
+                                $row["UF"],$row["cep"],$row["tipo_instituicao"],$row["i.ID"]);
             return $obj;
         }
-        return [];
+        throw new \Exception("Nenhuma instituição foi encontrada com o id $id");
     }
     function SELECT_ALL(String $table="instituicao"){
         return parent::SELECT_ALL($table);
@@ -112,7 +112,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         }
         else {
             $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
-                                $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["i.ID"]);
+                                $row["UF"],$row["cep"],$row["tipo_instituicao"],$row["i.ID"]);
             return $obj;
         }
     }

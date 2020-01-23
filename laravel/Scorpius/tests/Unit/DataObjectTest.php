@@ -34,8 +34,8 @@ class DataObjectTest extends TestCase
 
             self::$object = self::$dao->SELECTbyID($id, false);
             //testando al alterações
-            \assertEquals("colegio Z",$objAtualizado->getNome());
-            \assertEquals("66B",$objAtualizado->getNumero());
+            \assertEquals("colegio Z",self::$object->getNome());
+            \assertEquals("66B",self::$object->getNumero());
         }catch(\Throwable $e){
             \assertTrue(false,  $e);
         }
