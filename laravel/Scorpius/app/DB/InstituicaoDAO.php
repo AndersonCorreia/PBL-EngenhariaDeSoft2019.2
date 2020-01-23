@@ -10,20 +10,42 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
     function INSERT($instituicao): bool{
 
         $nome = $instituicao->getNome(); 
-        $responsavel = $instituicao->getResponsavel();
+        $resp = $instituicao->getResponsavel();
         $endereco = $instituicao->getEndereco();
         $numero = $instituicao->getNumero();
-        $cidade =$instituicao->getCidade(); 
+        $cidade =$instituicao->getCidade();
+        $UF = $instituicao->getUF(); 
         $cep = $instituicao->getCep(); 
-        $telefone = $instituicao->getTelefone();
-        $tipo_Instituicao = $instituicao->getTipo_Instituicao();
-        $sql;
+        $tel = $instituicao->getTelefone();
+        $tipo = $instituicao->getTipo_Instituicao();
 
-        $resultado = $this->dataBase->query($sql);
-        $instituicao->setID($this);
+        INSERT_Cidade_UF($cidade, $instituicao);
+
+        $campos = "(nome, responsavel, endereco, numero, cidade_UF_id, cep, telefone, tipo_instituicao)";
+        $select = "SELECT ?, ?, ?, ?, c.id, ?, ?, ? FROM cidade_UF c WHERE c.cidade = ? AND c.UF = ?";
+        $sql = "INSERT INTO instituicao $campos";
+
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("sssssssss", $nome, $resp, $endereco, $numero, $cep, $tel, $tipo, $cidade, $UF);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $instituicao->setID($this);//adcionando ID no objeto que acabou de ser inserido
+
         return $resultado;
     }
     function UPDATE($instituicao): bool{
+        $nome = $instituicao->getNome(); 
+        $responsavel = $instituicao->getResponsavel();
+        $endereco = $instituicao->getEndereco();
+        $numero = $instituicao->getNumero();
+        $cidade =$instituicao->getCidade();
+        $UF = $instituicao->getUF(); 
+        $cep = $instituicao->getCep(); 
+        $telefone = $instituicao->getTelefone();
+        $tipo = $instituicao->getTipo_Instituicao();
+
+        INSERT_Cidade_UF($cidade, $instituicao);
+
         $sql = "UPDATE instituicao
         SET nome = $instituicao->getNome, endereco = $instituicao->endereco, numero = $instituicao->numero,
         cidade_UF = $instituicao->cidade_UF, cep = $instituicao->cep, telefone = $instituicao->telefone,
@@ -55,7 +77,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
             }
 
             $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
-                                $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["ID"]);
+                                $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["i.ID"]);
             return $obj;
         }
         return [];
@@ -125,5 +147,19 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
             '$usuario_ID'
         )";
         return $this->dataBase->query($sql);
+    }
+    /**
+     * Tenta inserir uma cidade e estado na tabela, caso a mesma já exita o erro é ignorado.
+     * O objetivo é garantir que a cidade e estado exista na tabela antes de um inserção de instituição
+     * @param [type] $cidade
+     * @param [type] $uf
+     * @return void
+     */
+    private function INSERT_Cidade_UF($cidade, $uf){
+        
+        $sql = "INSERT IGNORE INTO cidade_UF (cidade, uf) VALUES (?, ?)";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ss", $cidade, $uf);
+        $stmt->execute();
     }
 }
