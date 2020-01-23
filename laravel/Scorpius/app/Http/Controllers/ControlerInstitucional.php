@@ -53,10 +53,9 @@ class ControlerInstitucional extends Controller {
     public function CadastrarInstituicao() {
         //codigo para cadastrar a instituição
         $DAO = new InstituicaoDAO();
-        $nome = $_POST['Instituicao'];
         if($_POST["onlyLink"]==false){
-            $instituicao = new Instituicao();
             $responsavel = $_POST['Responsavel'];
+            $nome = $_POST['Instituicao'];
             $telefone = $_POST['Telefone'];
             $endereco = $_POST['Endereco'];
             $numero = $_POST['Numero'];
@@ -66,14 +65,13 @@ class ControlerInstitucional extends Controller {
             $tipo = $_POST['Tipo'];
 
             //armazena na classe
-            $instituicao->__Construct($nome, $responsavel, $telefone, $endereco, $numero,
+            $instituicao = new Instituicao($nome, $responsavel, $telefone, $endereco, $numero,
                         $cep, $cidade, $estado, $tipo);
             //armazena no banco
             $DAO->INSERT($instituicao);
         }
         //Vincula a instituicao ao representante, inserindo a relação na tabela professor_instituicao 
-        $pessoa = new PessoaDAO();
-        $id_user = $pessoa->SELECTbyName($nome);
+        $id_user = $_SESSION["ID"];//supondo que vai existir essa variavel
         $DAO->INSERT_Professor_Instituicao($_POST['ID'], $id_user);                
         return redirect()->route('instituição.show');
     }

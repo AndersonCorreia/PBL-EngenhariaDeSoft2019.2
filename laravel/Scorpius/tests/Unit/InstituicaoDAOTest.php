@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 require_once __DIR__."/../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
 use App\DB\InstituicaoDAO;
-use App\model\users\Instituicao;
+use App\model\Instituicao;
 class InstituicaoDAOTest extends TestCase
 {
     protected static $DAO;
@@ -24,8 +24,8 @@ class InstituicaoDAOTest extends TestCase
                                         "44999000","tel", "federal");
         self::$inst1 = new Instituicao("colegio z", "diretor", "endereço", "96A", "Feira de Santana", "BA",
                                         "44999000","tel", "federal");
-        self::$DAO->INSERT($inst0);
-        self::$DAO->INSERT($inst1);
+        self::$DAO->INSERT(self::$inst0);
+        self::$DAO->INSERT(self::$inst1);
     }
     /**
      * Teste da função SELECT
@@ -99,7 +99,7 @@ class InstituicaoDAOTest extends TestCase
 
     public static function tearDownAfterClass(): void{
         //apagando os objetos do banco de dados
-        self::$dao->DELETE(self::$inst0);
-        self::$dao->DELETE(self::$inst1);
+        self::$DAO->DELETE(self::$inst0);
+        self::$DAO->DELETE(self::$inst1);
     }
 }
