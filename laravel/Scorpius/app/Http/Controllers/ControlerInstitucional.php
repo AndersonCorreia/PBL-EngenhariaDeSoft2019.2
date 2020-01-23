@@ -12,10 +12,12 @@ class ControlerInstitucional extends Controller {
      * @return telaInstituicao
      */
     public function telaInstituicao() {
+        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
+        $id_user = 601;
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Instituições",
-            'registros' => instituicao::listarInstituicoes()
+            'registros' => instituicao::listarInstituicoes($id_user)
         ];
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
@@ -89,10 +91,40 @@ class ControlerInstitucional extends Controller {
 
     public function atualizarInstituicao(Request $req, $id) {
         //para atualizar os dados usar os sets do objeto e finalizar a função ( o deconstrutor salvar no banco)
+        $DAO = new InstituicaoDAO();
+        $nome = $_POST['Instituicao'];
+        $responsavel = $_POST['Responsavel'];
+        $telefone = $_POST['Telefone'];
+        $endereco = $_POST['Endereco'];
+        $numero = $_POST['Numero'];
+        $cep = $_POST['CEP'];
+        $cidade = $_POST['Cidade'];
+        $estado = $_POST['Estado'];
+        $tipo = $_POST['Tipo'];
+  
+        //armazena na classe
+        $instituicao = new Instituicao( 
+            $nome,
+            $responsavel,
+            $endereco,
+            $numero,
+            $cidade,
+            $estado,
+            $cep,
+            $telefone,
+            $tipo,
+            $id
+        );       
+        //altera no banco
+        $DAO->UPDATE($instituicao);
+        return redirect()->route('instituição.show');
+    
     }
 
     public function deletarInstituicao($id) {
-        instituicao::deletar($id);
+        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
+        $id_user = 601;
+        instituicao::deletar($id ,$id_user);
 
         return redirect()->route('instituição.show');
     }
