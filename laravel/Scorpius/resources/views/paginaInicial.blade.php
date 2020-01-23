@@ -74,6 +74,9 @@
                             href="{{ route('entrar') }}">ENTRAR</a>
                         <a id="btn-cadastrar" class="btn btn-primary" href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
                     </div>
+                    <a href="#informacoes">
+                        <i class="fas fa-angle-double-down" aria-hidden="true" id="seta" ></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -120,7 +123,38 @@
         {{-- INFORMAÇÕES - DESKTOP --}}
         <div class="desktop row mr-0">
             <div id="informacoes-left" class="col-md-6">
-                <img id="informacoes-left-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+                {{-- APRESENTAÇÃO DE SLIDE COM FOTOS - DESKTOP --}}
+                <div id="img" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#img" data-slide-to="0" class="active"></li>
+                        <li data-target="#img" data-slide-to="1"></li>
+                        <li data-target="#img" data-slide-to="2"></li>
+                        <li data-target="#img" data-slide-to="3"></li>
+                        <li data-target="#img" data-slide-to="4"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div id="imgs" class="carousel-item active">
+                            <img id="informacoes-left-img" class="d-block w-100"
+                            src="{{ asset('img\tela_inicial\observatorio-antares.jpg') }}">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="informacoes-left-img" class="d-block w-100"
+                            src="{{ asset('img\tela_inicial\observatorio-antares-2.jpg') }}">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="informacoes-left-img" class="d-block w-100"
+                                src="{{ asset('img\tela_inicial\observatorio-antares-3.jpg') }}">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="informacoes-left-img" class="d-block w-100"
+                                src="{{ asset('img\tela_inicial\observatorio-antares-4.jpg') }}">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="informacoes-left-img" class="d-block w-100"
+                                src="{{ asset('img\tela_inicial\observatorio-antares-5.jpg') }}">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="informacoes-right" class="col-md-6">
                 <h1 id="informacoes-right-titulo">
@@ -142,7 +176,38 @@
         {{-- INFORMAÇÕES - MOBILE --}}
         <div class="mobile">
             <div id="mobile-informacoes-left">
-                <img id="mobile-informacoes-left-img" src="{{ asset('img/tela_inicial/observatorio-antares.jpg') }}">
+                {{-- APRESENTAÇÃO DE SLIDE COM FOTOS - MOBILE --}}
+                <div id="img" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#img" data-slide-to="0" class="active"></li>
+                        <li data-target="#img" data-slide-to="1"></li>
+                        <li data-target="#img" data-slide-to="2"></li>
+                        <li data-target="#img" data-slide-to="3"></li>
+                        <li data-target="#img" data-slide-to="4"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div id="imgs" class="carousel-item active">
+                            <img id="mobile-informacoes-left-img" class="d-block w-100"
+                            src="{{ asset('img\tela_inicial\observatorio-antares.jpg') }}">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="mobile-informacoes-left-img" class="d-block w-100"
+                            src="{{ asset('img\tela_inicial\observatorio-antares-2.jpg') }}">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="mobile-informacoes-left-img" class="d-block w-100"
+                                src="{{ asset('img\tela_inicial\observatorio-antares-3.jpg') }}">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="mobile-informacoes-left-img" class="d-block w-100"
+                                src="{{ asset('img\tela_inicial\observatorio-antares-4.jpg') }}">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="mobile-informacoes-left-img" class="d-block w-100"
+                                src="{{ asset('img\tela_inicial\observatorio-antares-5.jpg') }}">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="mobile-informacoes-right">
                 <h4 id="mobile-informacoes-right-titulo"> SOBRE O OBSERVATÓRIO</h4>
@@ -161,7 +226,7 @@
     
     {{-- ATIVIDADES DIFERENCIADAS --}}
     <div class="desktop text-center mt-3 mb-3">
-        <p class="h2">Atividades diferenciadas</p>
+        <p class="h1">Atividades Diferenciadas</p>
     </div>
     <section id="atividades-diferenciadas">
         <div class="desktop">
@@ -283,10 +348,9 @@
         </div>
     </section>
     
-    {{-- EXPOSICOES --}}
+    {{-- EXPOSICOES - DESKTOP --}}
     <div class="text-center mt-3 mb-3">
-        
-        <p class="h2">Exposições</p>
+        <p class="h1">Exposições</p>
     </div>
     <section id="exposicoes">
 
@@ -295,7 +359,7 @@
                 <div id="exposicoes-img-astronomia" class="zoom text-center">
                     <img src="{{ asset('img/tela_inicial/background-astronomia.jpg') }}" alt="Astronomia">
                     <button type="button" class="exposicoes-btn-text text-center btn bg-transparent" data-toggle="modal"
-                        data-target="#Astronomia">
+                        data-target="#Astronomia" id="titulo-exposicao">
                         Astronomia
                     </button>
                 </div>
@@ -345,7 +409,7 @@
                 <div class="zoom text-center">
                     <img src="{{ asset('img/tela_inicial/background-biodiversidade.jpg') }}" alt="Astronomia">
                     <button type="button" class="exposicoes-btn-text text-center btn bg-transparent" data-toggle="modal"
-                        data-target="#biodiversidade">
+                        data-target="#biodiversidade" id="titulo-exposicao">
                         Biodiversidade
                     </button>
                 </div>
@@ -394,7 +458,7 @@
                 <div class="zoom text-center">
                     <img src="{{ asset('img/tela_inicial/background-origem-1.jpg') }}" alt="Astronomia">
                     <button type="button" class="exposicoes-btn-text text-center btn bg-transparent" data-toggle="modal"
-                        data-target="#origem-do-humano">
+                        data-target="#origem-do-humano" id="titulo-exposicao">
                         Origem do Homem
                     </button>
                 </div>
@@ -441,13 +505,14 @@
             </div>
         </div>
 
+        {{-- EXPOSICOES - MOBILE --}}
         <div class="mobile">
             <div id="exposicoes-galeria" class="row mr-0 p-0">
                 <div class="col-md-4 p-0">
                     <div id="exposicoes-img-astronomia" class="zoom text-center">
                         <img src="{{ asset('img/tela_inicial/background-astronomia.jpg') }}" alt="Astronomia">
                         <button type="button" class="exposicoes-btn-text text-center btn bg-transparent"
-                            data-toggle="modal" data-target="#AstronomiaMB">
+                            data-toggle="modal" data-target="#AstronomiaMB" id="mobile-titulo-exposicao">
                             Astronomia
                         </button>
                     </div>
@@ -494,7 +559,7 @@
                     <div class="zoom text-center">
                         <img src="{{ asset('img/tela_inicial/background-biodiversidade.jpg') }}" alt="Astronomia">
                         <button type="button" class="exposicoes-btn-text text-center btn bg-transparent"
-                            data-toggle="modal" data-target="#biodiversidadeMB">
+                            data-toggle="modal" data-target="#biodiversidadeMB" id="mobile-titulo-exposicao">
                             Biodiversidade
                         </button>
                     </div>
@@ -543,7 +608,7 @@
                     <div class="zoom text-center">
                         <img src="{{ asset('img/tela_inicial/background-origem-1.jpg') }}" alt="Astronomia">
                         <button type="button" class="exposicoes-btn-text text-center btn bg-transparent"
-                            data-toggle="modal" data-target="#origem-do-humanoMB">
+                            data-toggle="modal" data-target="#origem-do-humanoMB" id="mobile-titulo-exposicao">
                             Origem do Homem
                         </button>
                     </div>

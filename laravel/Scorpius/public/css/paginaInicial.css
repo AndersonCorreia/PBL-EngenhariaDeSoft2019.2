@@ -108,6 +108,10 @@
         width: 100% !important;
         margin-top: 5%;
     }
+    #mobile-titulo-exposicao{
+        font-size: 30px;
+        text-align: center;
+    }
     #mobile-agendamento {
         padding: 3%;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -137,6 +141,11 @@
     width: 95%;
     float: right;
 }
+#seta{
+    font-size: 40px;
+    margin-top: 90%;
+    color: #2F8DF8;
+}
 /* Botões de ENTRAR/CADSTRAR */
 #btn-login {
     position: absolute;
@@ -153,6 +162,8 @@
 #img-nome-scorpius {
     width: 60%;
     margin-left: 10%;
+    margin-top: 2%;
+    margin-bottom: -4%;
 }
 /* Menu principal */
 #menu {
@@ -321,9 +332,6 @@
     color: whitesmoke;
 }
 /* Exposições */
-#exposicoes {
-    /* margin-top: 8%; */
-}
 #exposicoes h5 {
     font-family: stark !important;
 }
@@ -361,6 +369,10 @@
     font-weight: 700;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
     font-family: stark;
+}
+#titulo-exposicao{
+    font-size: 40px;
+    text-align: center;
 }
 /* ATIVIDADES */
 .atv-img {
