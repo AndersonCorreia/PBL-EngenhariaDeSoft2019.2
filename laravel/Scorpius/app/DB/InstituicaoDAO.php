@@ -90,7 +90,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         }
         else {
             $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
-                                $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["ID"]);
+                                $row["UF"],$row["CEP"],$row["tipo_instituicao"],$row["i.ID"]);
             return $obj;
         }
     }
