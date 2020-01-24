@@ -223,16 +223,15 @@
 
 /* INFORMAÇÕES */
 #informacoes {
-    margin-top: 5% !important;
-    margin-bottom: 5% !important;
-    padding-top: 5%;
+    margin-top: 3% !important;
+    margin-bottom: 3% !important;
 }
 #informacoes-left-img {
     float: left;
     width: 100%;
+    height: 150%;
     border-bottom-right-radius: 180px;
     border-top-right-radius: 180px;
-    padding-top: 10%;
     align-content: left;
 }
 #informacoes-right {
@@ -242,7 +241,7 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-size: 350%;
-    padding-top: 15%;
+    padding-top: 10%;
 }
 #informacoes-right-conteudo {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -256,9 +255,8 @@
 
 /* AGENDAMENTO / ENDEREÇO / CONTATO */
 #agendamento-endereco-informacoes {
-    margin-top: 5% !important;
-    margin-bottom: 8% !important;
-    padding-top: 5% !important;
+    margin-top: 3% !important;
+    margin-bottom: 3% !important;
 }
 #aec-left-agendamento {
     margin-bottom: 3%;
@@ -335,8 +333,9 @@
 #exposicoes h5 {
     font-family: stark !important;
 }
-#exposicoes p {
-    font-family: orator !important;
+#titulo-exposicao{
+    font-size: 40px;
+    text-align: center;
 }
 .zoom {
     overflow: hidden;
@@ -369,10 +368,6 @@
     font-weight: 700;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
     font-family: stark;
-}
-#titulo-exposicao{
-    font-size: 40px;
-    text-align: center;
 }
 /* ATIVIDADES */
 .atv-img {

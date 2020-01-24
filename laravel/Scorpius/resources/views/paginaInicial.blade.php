@@ -41,7 +41,7 @@
                             src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}">
 
                         <div id="menu-botoes">
-                            <a id="menu-botoes-antares" href="http://www.antares.uefs.br/">
+                            <a id="menu-botoes-antares" href="http://www.antares.uefs.br/" target="_blank">
                                 ANTARES
                             </a>
                             <a id="menu-botoes-atividades" href="#atividades-diferenciadas">
@@ -91,7 +91,7 @@
                     href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
             </div>
             <div id="mobile-menu-img">
-                <a href="http://www.antares.uefs.br/">
+                <a href="http://www.antares.uefs.br/" target="_blank">
                     <img id="mobile-menu-img-logo" class="img-fluid"
                     src="{{ asset('img/tela_inicial/logo-somente-galacia-img.png') }}" alt="Scorpius - Antares">
                 </a>
@@ -124,7 +124,7 @@
         <div class="desktop row mr-0">
             <div id="informacoes-left" class="col-md-6">
                 {{-- APRESENTAÇÃO DE SLIDE COM FOTOS - DESKTOP --}}
-                <div id="img" class="carousel slide" data-ride="carousel">
+                <div id="img" class="carousel slide carousel-fade" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#img" data-slide-to="0" class="active"></li>
                         <li data-target="#img" data-slide-to="1"></li>
@@ -135,25 +135,33 @@
                     <div class="carousel-inner">
                         <div id="imgs" class="carousel-item active">
                             <img id="informacoes-left-img" class="d-block w-100"
-                            src="{{ asset('img\tela_inicial\observatorio-antares.jpg') }}">
+                            src="{{ asset('img\tela_inicial\observatorio-antares.jpg') }}" alt="Primeiro Slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="informacoes-left-img" class="d-block w-100" 
+                            src="{{ asset('img\tela_inicial\observatorio-antares-2.jpg') }}" alt="Segundo Slide">
                         </div>
                         <div class="carousel-item">
                             <img id="informacoes-left-img" class="d-block w-100"
-                            src="{{ asset('img\tela_inicial\observatorio-antares-2.jpg') }}">
+                            src="{{ asset('img\tela_inicial\observatorio-antares-3.jpg') }}" alt="Terceiro Slide">
                         </div>
                         <div class="carousel-item">
                             <img id="informacoes-left-img" class="d-block w-100"
-                                src="{{ asset('img\tela_inicial\observatorio-antares-3.jpg') }}">
+                            src="{{ asset('img\tela_inicial\observatorio-antares-4.jpg') }}" alt="Quarto Slide">
                         </div>
                         <div class="carousel-item">
                             <img id="informacoes-left-img" class="d-block w-100"
-                                src="{{ asset('img\tela_inicial\observatorio-antares-4.jpg') }}">
-                        </div>
-                        <div class="carousel-item">
-                            <img id="informacoes-left-img" class="d-block w-100"
-                                src="{{ asset('img\tela_inicial\observatorio-antares-5.jpg') }}">
+                            src="{{ asset('img\tela_inicial\observatorio-antares-5.jpg') }}" alt="Quinto Slide">
                         </div>
                     </div>
+                    <a class="carousel-control-prev" href="#img" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                    <a class="carousel-control-next" href="#img" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Próximo</span>
+                    </a>
                 </div>
             </div>
             <div id="informacoes-right" class="col-md-6">
@@ -177,7 +185,7 @@
         <div class="mobile">
             <div id="mobile-informacoes-left">
                 {{-- APRESENTAÇÃO DE SLIDE COM FOTOS - MOBILE --}}
-                <div id="img" class="carousel slide" data-ride="carousel">
+                <div id="img" class="carousel slide carousel-fade" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#img" data-slide-to="0" class="active"></li>
                         <li data-target="#img" data-slide-to="1"></li>
@@ -188,25 +196,33 @@
                     <div class="carousel-inner">
                         <div id="imgs" class="carousel-item active">
                             <img id="mobile-informacoes-left-img" class="d-block w-100"
-                            src="{{ asset('img\tela_inicial\observatorio-antares.jpg') }}">
+                            src="{{ asset('img\tela_inicial\observatorio-antares.jpg') }}" alt="Primeiro Slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="mobile-informacoes-left-img" class="d-block w-100" 
+                            src="{{ asset('img\tela_inicial\observatorio-antares-2.jpg') }}" alt="Segundo Slide">
                         </div>
                         <div class="carousel-item">
                             <img id="mobile-informacoes-left-img" class="d-block w-100"
-                            src="{{ asset('img\tela_inicial\observatorio-antares-2.jpg') }}">
+                            src="{{ asset('img\tela_inicial\observatorio-antares-3.jpg') }}" alt="Terceiro Slide">
                         </div>
                         <div class="carousel-item">
                             <img id="mobile-informacoes-left-img" class="d-block w-100"
-                                src="{{ asset('img\tela_inicial\observatorio-antares-3.jpg') }}">
+                            src="{{ asset('img\tela_inicial\observatorio-antares-4.jpg') }}" alt="Quarto Slide">
                         </div>
                         <div class="carousel-item">
                             <img id="mobile-informacoes-left-img" class="d-block w-100"
-                                src="{{ asset('img\tela_inicial\observatorio-antares-4.jpg') }}">
-                        </div>
-                        <div class="carousel-item">
-                            <img id="mobile-informacoes-left-img" class="d-block w-100"
-                                src="{{ asset('img\tela_inicial\observatorio-antares-5.jpg') }}">
+                            src="{{ asset('img\tela_inicial\observatorio-antares-5.jpg') }}" alt="Quinto Slide">
                         </div>
                     </div>
+                    <a class="carousel-control-prev" href="#img" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                    <a class="carousel-control-next" href="#img" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Próximo</span>
+                    </a>
                 </div>
             </div>
             <div id="mobile-informacoes-right">
@@ -225,15 +241,13 @@
     </section> <br>
     
     {{-- ATIVIDADES DIFERENCIADAS --}}
-    <div class="desktop text-center mt-3 mb-3">
-        <p class="h1">Atividades Diferenciadas</p>
-    </div>
     <section id="atividades-diferenciadas">
+        <div class="desktop text-center mt-3 mb-3">
+            <p class="h1">ATIVIDADES DIFERENCIADAS</p>
+        </div>
         <div class="desktop">
             <div id="slideShowAtividades" class="carousel slide text-center" data-ride="carousel">
                 <ol class="carousel-indicators">
-
-
                     @if (empty($atividades))
                     <li data-target="#slideShowAtividades" data-slide-to="0" class="active"></li>
                     @else
@@ -299,7 +313,7 @@
         </div>
         <div class="mobile text-center mt-3">
 
-            <p class="h2">Atividades Diferenciadas</p>
+            <p class="h2">ATIVIDADES DIFERENCIADAS</p>
 
             <div class="btn-group-vertical btn-lg btn-block">
                 @if (empty($atividades))
@@ -349,11 +363,10 @@
     </section>
     
     {{-- EXPOSICOES - DESKTOP --}}
-    <div class="text-center mt-3 mb-3">
-        <p class="h1">Exposições</p>
-    </div>
     <section id="exposicoes">
-
+        <div class="text-center mt-3 mb-3">
+            <p class="h1">EXPOSIÇÕES</p>
+        </div>
         <div id="exposicoes-galeria" class="row mr-0 desktop">
             <div class="col-md-4 p-0">
                 <div id="exposicoes-img-astronomia" class="zoom text-center">
@@ -651,7 +664,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -669,7 +681,7 @@
                 <div id="aec-left" class="col-md-4">
                     <div id="aec-left-agendamento">
                         <div id="aec-left-agendamento-card" class="mx-auto">
-                            <p class="h1 text-center">Agendamento</p>
+                            <p class="h1 text-center">AGENDAMENTO</p>
                             <div class="card bg-transparent"
                                 style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
                                 <a href="{{ route('entrar') }}">
@@ -754,7 +766,7 @@
                 </div>
             </div>
             <div id="mobile-ec">
-                <p class="h2 text-center">Endereço e Contato</p>
+                <p class="h2 text-center">ENDEREÇO E CONTATO</p>
                 <div class="card"
                     style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
                     <div id="aec-right-ec-mapa" class="z-depth-1-half map-container-6" style="height: 400px">
