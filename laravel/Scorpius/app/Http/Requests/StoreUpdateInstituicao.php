@@ -37,7 +37,6 @@ class StoreUpdateInstituicao extends FormRequest
     public function messages()
     {
         return [
-            //'Responsavel.required' => 'Campo nome obrigatorio',
             'Responsavel.min' => 'digite o nome completo',
         ];
     }

@@ -100,10 +100,27 @@ class InstituicaoDAOTest extends TestCase
         \assertEquals($inst->getUF(),$instDB->getUF(), "os estados/UF não são iguais" );
     }
 
+    /**
+     * Teste para o INSERT na tabela professorInstituicao
+     *
+     * @return void
+     */
+    public function testINSERT_professorInstituicao(){
+        
+        $insert0 = self::$DAO->INSERT_Professor_Instituicao(self::$inst0->getID(), 601);
+        $insert1 = self::$DAO->INSERT_Professor_Instituicao(self::$inst1->getID(), 701);
+        \assertTrue($insert0);
+        \assertTrue($insert1);
+        
+    }
+
     public static function tearDownAfterClass(): void{
         //apagando os objetos do banco de dados
         self::$DAO->DELETE(self::$inst0);
         self::$DAO->DELETE(self::$inst1);
         self::$DAO->DELETE(self::$inst2);
+        self::$DAO->DELETE_professor_instituicao(self::$DAO->SELECT_Professor_Instituicao(self::$inst0->getID() ));
+        self::$DAO->DELETE_professor_instituicao(self::$DAO->SELECT_Professor_Instituicao(self::$inst1->getID() ));
+
     }
 }

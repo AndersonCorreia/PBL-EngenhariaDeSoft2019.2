@@ -186,6 +186,31 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $this->dataBase->query($sql);
     }
     /**
+     * Deletar um elemento da tabela professor_instituicao
+     *
+     * @param integer $id da tabela
+     * @return result
+     */
+    function DELETE_Professor_Instituicao(int $id){
+        $sql = "DELETE FROM professor_instituicao WHERE ID = $id ";
+        $result = $this->dataBase->query($sql);
+        return $result;
+    }
+    /**
+     * Selecionar o ID da tabela professor_instituicao 
+     *
+     * @param integer $ID_inst ID da instituicao
+     * @return int ID da tabela
+     */
+    function SELECT_Professor_Instituicao(int $ID_inst){
+        $sql = "SELECT ID professor_instituicao WHERE instituicao_ID = $ID_inst";
+        $result = $this->dataBase->query($sql);
+        $array = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $array['ID'];
+    }
+    
+    /**
      * Tenta inserir uma cidade e estado na tabela, caso a mesma já exita o erro é ignorado.
      * O objetivo é garantir que a cidade e estado exista na tabela antes de um inserção de instituição
      * @param [type] $cidade
