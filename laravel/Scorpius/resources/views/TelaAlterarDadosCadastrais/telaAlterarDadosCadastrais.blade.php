@@ -25,7 +25,7 @@
                 <br><br><br>
             
                 <label> <b>Nome Completo:</b> </label> <br>
-                <input type="text" name="nome" placeholder="Meu nome">      <!--Caixa de texto p/ atualizar nome-->
+                <input type="text" name="nome" placeholder="Meu nome completo">      <!--Caixa de texto p/ atualizar nome-->
                 <br><br><br>
 
                 <label> <b>Telefone:</b> </label> <br>

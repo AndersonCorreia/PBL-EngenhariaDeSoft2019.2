@@ -34,39 +34,49 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $resultado;
     }
     function UPDATE($instituicao): bool{
-        $id= $instituicao->getID();
-        $nome = $instituicao->getNome(); 
-        $resp = $instituicao->getResponsavel();
-        $endereco = $instituicao->getEndereco();
-        $numero = $instituicao->getNumero();
-        $cidade =$instituicao->getCidade();
-        $UF = $instituicao->getUF(); 
-        $cep = $instituicao->getCep(); 
-        $tel = $instituicao->getTelefone();
-        $tipo = $instituicao->getTipo_Instituicao();
 
-        $this->INSERT_Cidade_UF($cidade, $UF);
+        $params =[
+            $cidade =$instituicao->getCidade(),
+            $UF = $instituicao->getUF(),
+            $nome = $instituicao->getNome(),
+            $resp = $instituicao->getResponsavel(),
+            $endereco = $instituicao->getEndereco(),
+            $numero = $instituicao->getNumero(),
+            $cep = $instituicao->getCep(),
+            $tel = $instituicao->getTelefone(),
+            $tipo = $instituicao->getTipo_Instituicao(),
+            $id= $instituicao->getID()];
 
+        $this->INSERT_Cidade_UF($params[0], $params[1]);
+        
         $join ="instituicao i LEFT JOIN cidade_UF c ON c.cidade = ? AND c.UF = ?";
         $set  ="nome = ?, responsavel = ?, endereco = ?, numero = ?, cidade_UF_ID =c.id , 
                 cep = ?, telefone = ?, tipo_Instituicao = ?";
         $sql  = "UPDATE $join SET $set WHERE i.id = ?";
 
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("ssssssssss", $cidade, $UF, $nome, $resp, $endereco, $numero, $cep, $tel, $tipo, $id);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-
-        return $resultado;
+       
+        $stmt->bind_param("sssssssssi", ...$params);
+        
+        return $stmt->execute();
     }
+
     function DELETE($instituicao): bool{
         return $this->DELETEbyID($instituicao->getID());
     }
     
-    function DELETEbyID(int $id){
-        $sql = "DELETE FROM instituicao WHERE id = $id ";
-        $resultado = $this->dataBase->query($sql);
-        return $resultado;
+    /**
+     * Atualiza o campo ativo da tabela professor_instituicao para falso, para simular exclusão de uma instiuição;
+     * @param integer $id ID da instiuicao;
+     * @param integer $user_ID ID do usuário;
+     * @return boolean true caso operação ocorra com sucesso, caso contrário retorna false;
+     */
+    function DELETEbyID(int $id, int  $user_ID){
+        $sql = "UPDATE professor_instituicao pf SET pf.ativo=0 WHERE pf.instituicao_ID = ? and pf.usuario_ID = ? ";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ii",$id,$user_ID);
+        
+        return $stmt->execute();
     }
 
     function SELECTbyID(int $id, bool $asArray=true){
@@ -86,8 +96,30 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         }
         throw new \Exception("Nenhuma instituição foi encontrada com o id $id");
     }
+
+
     function SELECT_ALL(String $table="instituicao"){
         return parent::SELECT_ALL($table);
+    }
+
+    /**
+     * Realiza uma busca de instituições relacionadas ao número de ID do usuário;
+     * Retornando apenas as intituições que estão relacionadas ao usuário em questão;
+     * @param integer $id do usuário;
+     * @return array associativo com os dados;
+     */
+    function SELECTbyUsuario_ID($id){
+        $select = "i.ID, nome, responsavel, endereco, numero, cidade_UF_id, cep, telefone, tipo_instituicao";
+        $sql="SELECT $select FROM instituicao i INNER JOIN professor_instituicao pi ON i.id = pi.instituicao_ID WHERE usuario_ID = '$id' and ativo = 1";
+        $resultado = $this->dataBase->query($sql);
+        $registros = [];
+        if($resultado->num_rows > 0) {
+            while($row = $resultado->fetch_assoc()) {
+                $registros[] = $row;
+            }
+            return $registros;
+        } 
+
     }
 
     /**
