@@ -100,7 +100,6 @@ class InstituicaoDAOTest extends TestCase
         \assertEquals($inst->getUF(),$instDB->getUF(), "os estados/UF não são iguais" );
     }
 
-<<<<<<< HEAD
     /**
      * Teste para o INSERT na tabela professorInstituicao
      *
@@ -115,31 +114,6 @@ class InstituicaoDAOTest extends TestCase
         
     }
 
-=======
-    public function testDELETE(){
-        $universidade = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN", 
-        "Feira de Santana", "Bahia", "57849241","32458745", "Estadual");
-        
-        self::$DAO->INSERT($universidade);
-        $issuperior = self::$DAO->DELETE($universidade);
-
-        \assertNull($issuperior);
-    }
-
-    public function testUPDATE(){
-        $testInst = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
-         "Feira de Santana", "Bahia","57849241","32458745", "Estadual");
-
-        self::$DAO->UPDATE($testInst);
-       
-        assertNotEquals('UEFS', $testInst->getNome());
-        assertNotEquals('Evandro', $testInst->getResponsavel());
-        assertNotEquals('Avenida Transnordestina', $testInst->getEndereco());
-        assertNotEquals('SN', $testInst->getNumero());
-    }
-
-
->>>>>>> Completando os Testes de Instituição
     public static function tearDownAfterClass(): void{
         //apagando os objetos do banco de dados
         self::$DAO->DELETE(self::$inst0);
