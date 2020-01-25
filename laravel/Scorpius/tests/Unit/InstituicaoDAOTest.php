@@ -41,13 +41,6 @@ class InstituicaoDAOTest extends TestCase
         $inst = self::$DAO->SELECT("colegio z", "endereço", false);
         \assertEquals(self::$inst1->getID(),$inst->getID());
     }
-    /**
-     * Teste da função SELECT ao procurar uma instituição que não existe
-     * uma exeption deve ser lançada.
-     *
-     * @return void
-     */
-
 
     public function testDELETE(){
         $universidade = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
@@ -70,6 +63,12 @@ class InstituicaoDAOTest extends TestCase
         \assertNotEquals('Avenida Transnordestina', $testInst->getEndereco());
         \assertNotEquals('SN', $testInst->getNumero());
     }
+    /**
+     * Teste da função SELECT ao procurar uma instituição que não existe
+     * uma exeption deve ser lançada.
+     *
+     * @return void
+     */
     public function testSELECT_instituicaoInexistente(){
         try{
             self::$DAO->SELECT("não existe", "endereço", false);

@@ -66,15 +66,14 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
     }
     
     /**
-     * Atualiza o campo ativo da tabela professor_instituicao para falso, para simular exclusão de uma instiuição;
+     * Deletar uma instituição do banco com base no ID
      * @param integer $id ID da instiuicao;
-     * @param integer $user_ID ID do usuário;
      * @return boolean true caso operação ocorra com sucesso, caso contrário retorna false;
      */
-    function DELETEbyID(int $id, int  $user_ID){
-        $sql = "UPDATE professor_instituicao pf SET pf.ativo=0 WHERE pf.instituicao_ID = ? and pf.usuario_ID = ? ";
+    function DELETEbyID(int $id){
+        $sql = "DELETE FROM instituicao WHERE id = ?";;
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("ii",$id,$user_ID);
+        $stmt->bind_param("i",$id);
         
         return $stmt->execute();
     }
@@ -100,26 +99,6 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
 
     function SELECT_ALL(String $table="instituicao"){
         return parent::SELECT_ALL($table);
-    }
-
-    /**
-     * Realiza uma busca de instituições relacionadas ao número de ID do usuário;
-     * Retornando apenas as intituições que estão relacionadas ao usuário em questão;
-     * @param integer $id do usuário;
-     * @return array associativo com os dados;
-     */
-    function SELECTbyUsuario_ID($id){
-        $select = "i.ID, nome, responsavel, endereco, numero, cidade_UF_id, cep, telefone, tipo_instituicao";
-        $sql="SELECT $select FROM instituicao i INNER JOIN professor_instituicao pi ON i.id = pi.instituicao_ID WHERE usuario_ID = '$id' and ativo = 1";
-        $resultado = $this->dataBase->query($sql);
-        $registros = [];
-        if($resultado->num_rows > 0) {
-            while($row = $resultado->fetch_assoc()) {
-                $registros[] = $row;
-            }
-            return $registros;
-        } 
-
     }
 
     /**
@@ -165,51 +144,6 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $array;
     }
 
-    /**
-     * Insere na tabela professor_instituicao, vinculando uma instituicao a um responsavel
-     * @param $ID ID da tabela
-     * @param $cont_A quantidade de agendamentos
-     * @param $contAC quantidade de agendamentos cancelados
-     * @param $ativo 
-     * @param $instituicao_ID ID da instituicao vinculada ao professor
-     * @param $usuario_ID ID do usuario do responsavel pela instituicao
-     */
-    function INSERT_Professor_Instituicao( $instituicao_ID, $usuario_ID): bool{
-        $sql = "INSERT INTO professor_instituicao (cont_agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) 
-        VALUES (
-            0, 
-            0, 
-            1, 
-            '$instituicao_ID', 
-            '$usuario_ID'
-        )";
-        return $this->dataBase->query($sql);
-    }
-    /**
-     * Deletar um elemento da tabela professor_instituicao
-     *
-     * @param integer $id da tabela
-     * @return result
-     */
-    function DELETE_Professor_Instituicao(int $id){
-        $sql = "DELETE FROM professor_instituicao WHERE ID = $id ";
-        $result = $this->dataBase->query($sql);
-        return $result;
-    }
-    /**
-     * Selecionar o ID da tabela professor_instituicao 
-     *
-     * @param integer $ID_inst ID da instituicao
-     * @return int ID da tabela
-     */
-    function SELECT_Professor_Instituicao(int $ID_inst){
-        $sql = "SELECT ID professor_instituicao WHERE instituicao_ID = $ID_inst";
-        $result = $this->dataBase->query($sql);
-        $array = $result->fetch_all(MYSQLI_ASSOC);
-
-        return $array['ID'];
-    }
-    
     /**
      * Tenta inserir uma cidade e estado na tabela, caso a mesma já exita o erro é ignorado.
      * O objetivo é garantir que a cidade e estado exista na tabela antes de um inserção de instituição

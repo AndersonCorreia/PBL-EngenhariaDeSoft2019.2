@@ -32,6 +32,15 @@ abstract class DataObject{
         $this->alterado= $alterado;
     }
     /**
+     * retorna a informação se o objeto foi alterado ou não, caso tenha sido alterarado sera salvo
+     * no banco no desconstrutor;
+     *
+     * @return boolean informa se o objeto foi alterado ou não
+     */
+    protected function getAlterado(bool $alterado=true){
+       return $this->alterado;
+    }
+    /**
      * setar o ID deste objeto, tal ação só pode ser feita pelo objeto DAO que fez o INSERT no banco.
      *
      * @param DataAccessObject $dao
