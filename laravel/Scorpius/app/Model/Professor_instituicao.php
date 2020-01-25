@@ -1,6 +1,7 @@
 <?php
 
 namespace app\Model;
+use App\DB\Professor_InstituicaoDAO;
 use app\Model\Users\Usuario;
 use app\Model\Instituicao;
 
@@ -23,6 +24,16 @@ class Professor_Instituicao extends \App\DB\interfaces\DataObject {
         }
     }
 
+    
+	public static function desativarByID(int $id, $user_ID){
+		$result = (new Professor_InstituicaoDAO)->desativarByID($id, $user_ID);
+		return $result;
+	}
+
+	public static function listarInstituicoes($id){
+		return (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID($id);
+    }
+    
     public function getProfessor(){
         return $this->Usuario;
     }

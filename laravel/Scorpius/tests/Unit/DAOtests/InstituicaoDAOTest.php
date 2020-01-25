@@ -38,8 +38,8 @@ class InstituicaoDAOTest extends TestCase
         $inst = self::$DAO->SELECT("colegio xy", "endereço", false);//false é para retornar o objeto
         \assertEquals(self::$inst0->getID(),$inst->getID());
 
-        $inst = self::$DAO->SELECT("colegio z", "endereço", false);
-        \assertEquals(self::$inst1->getID(),$inst->getID());
+        $inst = self::$DAO->SELECT("colegio z", "endereço", true);
+        \assertEquals(self::$inst1->getID(),$inst["ID"]);
     }
 
     public function testDELETE(){

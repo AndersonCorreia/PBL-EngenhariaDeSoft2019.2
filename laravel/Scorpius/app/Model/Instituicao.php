@@ -32,14 +32,6 @@ class Instituicao extends \App\DB\interfaces\DataObject {
 		return $result;
 	}
 
-	public static function deletar(int $id, $user_ID){
-		$result = (new InstituicaoDAO)->DELETEbyID($id, $user_ID);
-		return $result;
-	}
-
-	public static function listarInstituicoes($id){
-		return (new InstituicaoDAO)->SELECTbyUsuario_ID($id);
-	}
 	public function getNome() {
 		return $this->nome;
 	}

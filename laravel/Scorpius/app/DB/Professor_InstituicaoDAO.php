@@ -49,10 +49,10 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
      * @param integer $user_ID ID do usuário;
      * @return boolean true caso operação ocorra com sucesso, caso contrário retorna false;
      */
-    function DesativarByID(int $Instituicao_id, int  $user_ID){
+    function desativarByID(int $Instituicao_id, int  $user_ID){
         $sql = "UPDATE professor_instituicao pf SET pf.ativo=0 WHERE pf.instituicao_ID = ? and pf.usuario_ID = ? ";
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("ii",$id,$user_ID);
+        $stmt->bind_param("ii",$Instituicao_id,$user_ID);
         
         return $stmt->execute();
     }
@@ -63,10 +63,10 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
      * @param integer $user_ID ID do usuário;
      * @return boolean true caso operação ocorra com sucesso, caso contrário retorna false;
      */
-    function AtivarByID(int $Instituicao_id, int  $user_ID){
+    function ativarByID(int $Instituicao_id, int  $user_ID){
         $sql = "UPDATE professor_instituicao pf SET pf.ativo=1 WHERE pf.instituicao_ID = ? and pf.usuario_ID = ? ";
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("ii",$id,$user_ID);
+        $stmt->bind_param("ii",$Instituicao_id,$user_ID);
         
         return $stmt->execute();
     }
@@ -74,7 +74,7 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
     function SELECTbyID(int $I_id,int $U_id, bool $asArray=true){
         $select = "*";
         $join = "professor_instituicao pi";
-        $sql = "SELECT $select FROM $join WHERE pi.instituicao_ID = $I_id AND pi.usuario_id = $U_id";
+        $sql = "SELECT $select FROM $join WHERE pi.instituicao_ID = $I_id AND pi.usuario_id = $U_id AND pi.ativo = 1";
         $resultado = $this->dataBase->query($sql);
         $row = $resultado->fetch_assoc();
 
@@ -99,43 +99,20 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
      * @param integer $id do usuário;
      * @return array associativo com os dados;
      */
-    function SELECTbyUsuario_ID($U_id, $ativo= true){
-        $select = "instituicao_ID";
-        $filtrar = $filtrar_ativo ? "AND ativo = 1" : "";
-        $sql="SELECT $select FROM professor_instituicao pi WHERE usuario_ID = '$I_id' $filtrar";
+    function SELECTbyUsuario_ID($U_id, $filtrar_ativo= true){
+        $select = "instituicao_ID, nome, endereco, responsavel, telefone";
+        $filtrar = $filtrar_ativo ? "AND pi.ativo = 1" : "";
+        $join = "professor_instituicao pi LEFT JOIN instituicao i ON pi.instituicao_id = i.id";
+        $sql="SELECT $select FROM $join WHERE pi.usuario_ID = $U_id $filtrar";
         $resultado = $this->dataBase->query($sql);
 
-        if($resultado->num_rows == 1){
-            if($asArray){
-                return [$row];
-            }
+        if($resultado->num_rows > 0){
+            $registros = $resultado->fetch_all(MYSQLI_ASSOC);
             return $registros;
         } 
-
+        throw new \Exception("O usuario não tem nenhum instituição cadastrada");
+        
     }
-    /**
-     * Realiza uma busca de instituições relacionadas ao número de ID do usuário;
-     * Retornando apenas as intituições que estão relacionadas ao usuário em questão;
-     * @param integer $id do usuário;
-     * @param bool $ativo se verdadeiro filtrar apenas entre os registro com a coluna ativo = true,
-     * se false retorna todos os registros
-     * @return array associativo com os dados;
-     */
-    function SELECTbyInstituicao_ID($I_id,bool $filtrar_ativo= true){
-        $select = "usuario_ID";
-        $filtrar = $filtrar_ativo ? "AND ativo = 1" : "";
-        $sql="SELECT $select FROM professor_instituicao pi WHERE instituicao_ID = '$I_id' $filtrar";
-        $resultado = $this->dataBase->query($sql);
-
-        if($resultado->num_rows == 1){
-            if($asArray){
-                return [$row];
-            }
-            return $registros;
-        }
-
-    }
-    
     /**
      * Deletar um elemento da tabela professor_instituicao
      *

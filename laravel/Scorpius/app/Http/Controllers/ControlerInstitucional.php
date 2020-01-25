@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Model\Instituicao;
+use App\Model\Professor_Instituicao;
 use Illuminate\Http\Request;
 use App\DB\InstituicaoDAO;
+use App\DB\Professor_InstituicaoDAO;
 use App\DB\PessoaDAO;
 use App\Http\Requests\StoreUpdadeInstituicao;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
@@ -20,7 +22,7 @@ class ControlerInstitucional extends Controller {
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Instituições",
-            'registros' => instituicao::listarInstituicoes($id_user)
+            'registros' => Professor_Instituicao::listarInstituicoes($id_user)
         ];
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
@@ -70,7 +72,8 @@ class ControlerInstitucional extends Controller {
      */
     public function CadastrarInstituicao() {
         //codigo para cadastrar a instituição
-        $DAO = new InstituicaoDAO();
+        $instituicaoDAO = new Professor_InstituicaoDAO();
+        $pro_instDAO = new Professor_InstituicaoDAO();
         if($_POST["onlyLink"]==false){
             $responsavel = $_POST['Responsavel'];
             $nome = $_POST['Instituicao'];
@@ -86,11 +89,19 @@ class ControlerInstitucional extends Controller {
             $instituicao = new Instituicao($nome, $responsavel, $telefone, $endereco, $numero,
                         $cep, $cidade, $estado, $tipo);
             //armazena no banco
-            $DAO->INSERT($instituicao);
+            $instituicaoDAO->INSERT($instituicao);
+            $_POST["ID"] = $instituicao->getID();
         }
         //Vincula a instituicao ao representante, inserindo a relação na tabela professor_instituicao 
-        $id_user = $_SESSION["ID"];//supondo que vai existir essa variavel
-        $DAO->INSERT_Professor_Instituicao($_POST['ID'], $id_user);                
+        //$id_user = $_SESSION["ID"];
+        $id_user = 601;//temporario para evitar o erro na tela
+        try{
+            $pro_instDAO->INSERTbyID($_POST['ID'], $id_user);
+        }
+        catch(\MysqliException $e){
+            $pro_instDAO->ativarbyID($_POST['ID'], $id_user);
+        }   
+
         return redirect()->route('instituição.show');
     }
 
@@ -140,7 +151,7 @@ class ControlerInstitucional extends Controller {
     public function deletarInstituicao($id) {
         //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
         $id_user = 601;
-        instituicao::deletar($id ,$id_user);
+        Professor_Instituicao::desativarByID($id ,$id_user);
 
         return redirect()->route('instituição.show');
     }

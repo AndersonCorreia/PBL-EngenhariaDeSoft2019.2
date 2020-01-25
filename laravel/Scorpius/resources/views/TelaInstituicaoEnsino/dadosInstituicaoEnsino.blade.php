@@ -4,9 +4,9 @@
 
 @section('conteudo')
 
-<h1>Instituicao ({{$registros[0]['nome']}})</h1>
+<h1>Instituicao ({{$registros['nome']}})</h1>
 <div>
-<form action="{{route('user.instituicoes.atualizar',$registros[0]['ID'])}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('user.instituicoes.atualizar',$registros['ID'])}}" method="POST" enctype="multipart/form-data">
 {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">
@@ -14,39 +14,39 @@
                 <span class="col-10">Instituição de Ensino</span>
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-14 col-sm-9 m-0 p-0 float-sm-left">
-                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" value="{{isset($registros[0]['nome']) ? $registros[0]['nome'] : ''}}" list="instList" required autofocus>
+                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" value="{{isset($registros['nome']) ? $registros['nome'] : ''}}" list="instList" required autofocus>
                     
                 </div>
             </div>
 
             <div class="form-group col-sm-8">    
                 <span>Responsável pela Instituição</span>
-                <input class="form-control"  type="text" maxlength="40" name="Responsavel" placeholder="Nome do Responsável"  value="{{isset($registros[0]['responsavel']) ? $registros[0]['responsavel'] : ''}}" required>
+                <input class="form-control"  type="text" maxlength="40" name="Responsavel" placeholder="Nome do Responsável"  value="{{isset($registros['responsavel']) ? $registros['responsavel'] : ''}}" required>
             </div>
             
             <div class="form-group col-sm-4">
                 <span>Telefone da instituicão</span>
-                <input class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" value="{{isset($registros[0]['telefone']) ? $registros[0]['telefone'] : ''}}" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
+                <input class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" value="{{isset($registros['telefone']) ? $registros['telefone'] : ''}}" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
             </div> 
 
             <div class="form-group col-sm-8">
                 <span>Endereço da Instituição</span>
-                <input class="form-control"  type="text" maxlength="50" name="Endereco" placeholder="Informe Rua e Bairro" value="{{isset($registros[0]['endereco']) ? $registros[0]['endereco'] : ''}}" required>
+                <input class="form-control"  type="text" maxlength="50" name="Endereco" placeholder="Informe Rua e Bairro" value="{{isset($registros['endereco']) ? $registros['endereco'] : ''}}" required>
             </div>
 
             <div class="form-group col-sm-2">    
                 <span>Numero</span>
-                <input class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx" value="{{isset($registros[0]['numero']) ? $registros[0]['numero'] : ''}}" required>
+                <input class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx" value="{{isset($registros['numero']) ? $registros['numero'] : ''}}" required>
             </div>
 
             <div class="form-group col-sm-2">
                 <span>CEP</span>
-                <input class="form-control" type="text" name="CEP" maxlength="9" placeholder="99999-999" value="{{isset($registros[0]['cep']) ? $registros[0]['cep'] : ''}}" required>
+                <input class="form-control" type="text" name="CEP" maxlength="9" placeholder="99999-999" value="{{isset($registros['cep']) ? $registros['cep'] : ''}}" required>
             </div>
 
             <div class="form-group col-sm-4">
                 <span>Cidade</span>
-                <input class="form-control"  type="text" name="Cidade" placeholder="Informe a Cidade" value="{{isset($registros[0]['cidade']) ? $registros[0]['cidade'] : ''}}" required>
+                <input class="form-control"  type="text" name="Cidade" placeholder="Informe a Cidade" value="{{isset($registros['cidade']) ? $registros['cidade'] : ''}}" required>
             </div>
 
             <div class="form-group col-sm-3">

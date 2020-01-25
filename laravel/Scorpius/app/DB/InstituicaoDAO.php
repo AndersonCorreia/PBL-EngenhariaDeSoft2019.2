@@ -87,7 +87,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
 
         if($resultado->num_rows == 1){//um select pelo ID, só vai encontrar no maximo um resultado
             if($asArray){
-                return [$row];
+                return $row;
             }
             $obj = new Instituicao($row["nome"],$row["responsavel"],$row["endereco"],$row["numero"],$row["cidade"],
                                 $row["UF"],$row["cep"],$row["telefone"],$row["tipo_instituicao"],$row["ID"]);

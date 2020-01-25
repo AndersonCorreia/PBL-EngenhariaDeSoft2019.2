@@ -29,6 +29,7 @@ class DataObjectTest extends TestCase
             self::$object->setNome("colegio Z");
             self::$object->setNumero("66B");
             $id = self::$object->getID();
+            \assertTrue(self::$object->getAlterado());
             //apagando o objeto
             self::$object = null;
 
