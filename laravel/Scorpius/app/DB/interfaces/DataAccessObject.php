@@ -44,7 +44,7 @@ abstract class DataAccessObject {
      * @param [type] $object o objeto correspondente aos dados que devem ser inseridos no banco
      * @return boolean true se a query for realizada com sucesso, false se não for concluida com sucesso
      */
-    abstract function INSERT($object): bool;
+    abstract function INSERT(object $object): bool;
 
     /**
      * Realiza uma ou mais querys de UPDATE no banco de dados, para alterar
@@ -53,7 +53,7 @@ abstract class DataAccessObject {
      * @param [type] $object o objeto correspondente aos dados que devem ser atualizados no banco
      * @return boolean true se a query for realizada com sucesso, false se não for concluida com sucesso
      */
-    abstract function UPDATE($object): bool;
+    abstract function UPDATE(object $object): bool;
     
     /**
      * Realiza uma ou mais querys de DELETE no banco de dados, para deletar
@@ -62,7 +62,7 @@ abstract class DataAccessObject {
      * @param [type] $object o objeto correspondente aos dados que devem ser deletados do banco
      * @return boolean true se a query for realizada com sucesso, false se não for concluida com sucesso
      */
-    abstract function DELETE($object): bool;
+    abstract function DELETE(object $object): bool;
 
     /**
      * Retorna o ID da ultima operação feita no banco

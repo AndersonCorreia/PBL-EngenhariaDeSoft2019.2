@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\DAOtests;
 
 use PHPUnit\Framework\TestCase;
 use App\Model\Instituicao;
 use App\DB\InstituicaoDAO as DAO;
 
-require_once __DIR__."/../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
+require_once __DIR__."/../../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
 
 class DataObjectTest extends TestCase
 {

@@ -119,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`professor_instituicao` (
   PRIMARY KEY (`ID`),
   INDEX `fk_professor_instituicao_instituicao1_idx` (`instituicao_ID` ASC),
   INDEX `fk_professor_instituicao_usuario1_idx` (`usuario_ID` ASC),
+  UNIQUE INDEX `professor_instituicao_UNIQUE` (`instituicao_ID`, `usuario_ID`),
   CONSTRAINT `fk_professor_instituicao_instituicao1`
     FOREIGN KEY (`instituicao_ID`)
     REFERENCES `scorpius`.`instituicao` (`ID`)

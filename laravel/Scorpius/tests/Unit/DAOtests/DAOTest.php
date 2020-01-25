@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\DAOtests;
 
 use PHPUnit\Framework\TestCase;
 use App\DB\PessoaDAO;

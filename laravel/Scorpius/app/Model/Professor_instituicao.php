@@ -2,9 +2,9 @@
 
 namespace app\Model;
 use app\Model\Users\Usuario;
-use app\Model\instituicao;
+use app\Model\Instituicao;
 
-class Professor_instituicao extends \App\DB\interfaces\DataObject {
+class Professor_Instituicao extends \App\DB\interfaces\DataObject {
     private $Usuario;
     private $Instituicao;
     private $Qtd_agendamentos;
@@ -64,4 +64,8 @@ class Professor_instituicao extends \App\DB\interfaces\DataObject {
     public function getPorcentagemCancelamentos(){
         return $this->Qtd_cancelamentos/$this->Qtd_agendamentos*100;
     }
+
+    protected function save(){
+		(new Professor_InstituicaoDAO)->UPDATE($this);
+	}
 }

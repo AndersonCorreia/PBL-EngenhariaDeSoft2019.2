@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\DAOtests;
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__."/../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
+require_once __DIR__."/../../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
 use App\DB\InstituicaoDAO;
 use App\model\Instituicao;
 class InstituicaoDAOTest extends TestCase
@@ -99,7 +99,7 @@ class InstituicaoDAOTest extends TestCase
      * @return void
      */
     public function testINSERT_acrescentaIDnoObjeto(){
-        $inst = new Instituicao("colegio", "diretor", "endereço dif", "96A", "Feira", "BA",
+        $inst = new Instituicao("colegio", "diretor", "endereço dif", "96A", "Feira de Santana", "BA",
                                         "44999000","tel", "federal");
         self::$DAO->INSERT($inst);
         self::$DAO->DELETE($inst);
@@ -122,27 +122,10 @@ class InstituicaoDAOTest extends TestCase
         \assertEquals($inst->getUF(),$instDB->getUF(), "os estados/UF não são iguais" );
     }
 
-    /**
-     * Teste para o INSERT na tabela professorInstituicao
-     *
-     * @return void
-     */
-    public function testINSERT_professorInstituicao(){
-        
-        $insert0 = self::$DAO->INSERT_Professor_Instituicao(self::$inst0->getID(), 601);
-        $insert1 = self::$DAO->INSERT_Professor_Instituicao(self::$inst1->getID(), 701);
-        \assertTrue($insert0);
-        \assertTrue($insert1);
-        
-    }
-
     public static function tearDownAfterClass(): void{
         //apagando os objetos do banco de dados
         self::$DAO->DELETE(self::$inst0);
         self::$DAO->DELETE(self::$inst1);
         self::$DAO->DELETE(self::$inst2);
-        self::$DAO->DELETE_professor_instituicao(self::$DAO->SELECT_Professor_Instituicao(self::$inst0->getID() ));
-        self::$DAO->DELETE_professor_instituicao(self::$DAO->SELECT_Professor_Instituicao(self::$inst1->getID() ));
-
     }
 }

@@ -2,6 +2,7 @@
 namespace App\DB;
 use App\Model\Instituicao;
 use App\Model\Usuario;
+use App\Model\Professor_Instituicao;
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao.
@@ -9,7 +10,21 @@ use App\Model\Usuario;
 class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
 
     function INSERT($Professor_instituicao): bool{
-        
+        $p_id = $Professor_instituicao->getProfessor()->getID();
+        $i_id = $Professor_instituicao->getInstituicao()->getID();
+        $result = $this->INSERTbyID($i_id, $p_id);
+        $Professor_instituicao->setID($this);
+        return $result;
+    }
+    /**
+     * Insere na tabela professor_instituicao, vinculando uma instituicao a um usuario
+     * @param $instituicao_ID ID da instituicao vinculada ao professor
+     * @param $usuario_ID ID do usuario 
+     */
+    function INSERTbyID( $instituicao_ID, $usuario_ID): bool{
+        $sql = "INSERT INTO professor_instituicao (cont_agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) 
+        VALUES ( 0,0, 1, '$instituicao_ID', '$usuario_ID')";
+        return $this->dataBase->query($sql);
     }
     function UPDATE($Professor_instituicao): bool{
         $join ="instituicao i LEFT JOIN cidade_UF c ON c.cidade = ? AND c.UF = ?";
@@ -56,16 +71,16 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $stmt->execute();
     }
 
-    function SELECTbyID(int $id, bool $asArray=true){
-        $select ;
-        $join ;
-        $sql = "SELECT $select FROM $join WHERE i.id=$id";
+    function SELECTbyID(int $I_id,int $U_id, bool $asArray=true){
+        $select = "*";
+        $join = "professor_instituicao pi";
+        $sql = "SELECT $select FROM $join WHERE pi.instituicao_ID = $I_id AND pi.usuario_id = $U_id";
         $resultado = $this->dataBase->query($sql);
         $row = $resultado->fetch_assoc();
 
         if($resultado->num_rows == 1){//um select pelo ID, só vai encontrar no maximo um resultado
             if($asArray){
-                return [$row];
+                return $row;
             }
             $obj;//criar os objetos do usuario e instituição usando os demais DAO;
             return $p_i;
@@ -120,27 +135,14 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         }
 
     }
-    /**
-     * Insere na tabela professor_instituicao, vinculando uma instituicao a um responsavel
-     * @param $ID ID da tabela
-     * @param $cont_A quantidade de agendamentos
-     * @param $contAC quantidade de agendamentos cancelados
-     * @param $ativo 
-     * @param $Professor_instituicao_ID ID da instituicao vinculada ao professor
-     * @param $usuario_ID ID do usuario do responsavel pela instituicao
-     */
-    function INSERT_Professor_Instituicao( $Professor_instituicao_ID, $usuario_ID): bool{
-        $sql = "INSERT INTO professor_instituicao (cont_agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) 
-        VALUES ( 0,0, 1, '$Professor_instituicao_ID', '$usuario_ID')";
-        return $this->dataBase->query($sql);
-    }
+    
     /**
      * Deletar um elemento da tabela professor_instituicao
      *
      * @param integer $id da tabela
      * @return result
      */
-    function DELETE_Professor_Instituicao(int $id){
+    function DELETEbyID(int $id){
         $sql = "DELETE FROM professor_instituicao WHERE ID = $id ";
         $result = $this->dataBase->query($sql);
         return $result;
