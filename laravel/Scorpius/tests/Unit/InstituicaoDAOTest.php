@@ -47,6 +47,29 @@ class InstituicaoDAOTest extends TestCase
      *
      * @return void
      */
+
+
+    public function testDELETE(){
+        $universidade = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
+        "Feira de Santana", "Bahia", "57849241", "32458745", "Estadual");
+        
+        self::$DAO->INSERT($universidade);
+        $issuperior = self::$DAO->DELETE($universidade);
+
+        \assertNull($issuperior);
+    }
+
+    public function testUPDATE(){
+        $testInst = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
+        "Feira de Santana", "Bahia", "57849241", "32458745", "Estadual");
+
+        self::$DAO->UPDATE($testInst);
+        
+        \assertNotEquals('UEFS', $testInst->getNome());
+        \assertNotEquals('Evandro', $testInst->getResponsavel());
+        \assertNotEquals('Avenida Transnordestina', $testInst->getEndereco());
+        \assertNotEquals('SN', $testInst->getNumero());
+    }
     public function testSELECT_instituicaoInexistente(){
         try{
             self::$DAO->SELECT("não existe", "endereço", false);
