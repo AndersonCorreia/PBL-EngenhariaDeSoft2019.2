@@ -166,4 +166,13 @@ class ControlerInstitucional extends Controller {
             return ["error" => true];
         }
     }
+
+    public function calendario() {
+        $variaveis = [
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Agendar visita"
+        ];
+
+        return view('TelaInstituicaoEnsino.calendar', $variaveis);
+    }
 }
