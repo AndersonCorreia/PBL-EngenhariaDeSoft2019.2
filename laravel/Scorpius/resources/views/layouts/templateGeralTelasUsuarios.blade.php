@@ -9,7 +9,7 @@
                     @if ($item['texto']==($paginaAtual ?? 'Inicio')){{--Para destacar a pagina atual no menu --}}
                         <a class="nav-link bg-secondary rounded active" href="{{$item['link']}}">{{$item['texto']}}</a>
                     @else
-                        <a class="nav-link" href="{{$item['link']}}">{{$item['texto']}}</a>
+                        <a class="nav-link rounded" href="{{$item['link']}}">{{$item['texto']}}</a>
                     @endif
                 @endforeach
             </nav>
