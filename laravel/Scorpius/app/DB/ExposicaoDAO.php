@@ -3,9 +3,6 @@
 namespace App\DB;
 use App\Model\Exposicao;
 
-/**
- * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao.
- */
 class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
 {
 
