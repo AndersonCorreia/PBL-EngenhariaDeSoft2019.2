@@ -34,29 +34,35 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $resultado;
     }
     function UPDATE($instituicao): bool{
-
+        $cidade =$instituicao->getCidade();
+        $UF = $instituicao->getUF();
+        
+        $row = $this->SELECT_Cidade_UF_ID($cidade, $UF);
+        $cidade_id;
+        if($row==[]){
+            $this-> INSERT_Cidade_UF($cidade, $UF);
+            $cidade_id = $this->SELECT_Cidade_UF_ID($cidade, $UF)['ID'];
+        } else{
+            $cidade_id =$row['ID'];
+        }
         $params =[
-            $cidade =$instituicao->getCidade(),
-            $UF = $instituicao->getUF(),
             $nome = $instituicao->getNome(),
             $resp = $instituicao->getResponsavel(),
             $endereco = $instituicao->getEndereco(),
             $numero = $instituicao->getNumero(),
+            $cidade_id,
             $cep = $instituicao->getCep(),
             $tel = $instituicao->getTelefone(),
             $tipo = $instituicao->getTipo_Instituicao(),
             $id= $instituicao->getID()];
 
-        $this->INSERT_Cidade_UF($params[0], $params[1]);
-        
-        $join ="instituicao i LEFT JOIN cidade_UF c ON c.cidade = ? AND c.UF = ?";
-        $set  ="nome = ?, responsavel = ?, endereco = ?, numero = ?, cidade_UF_ID =c.id , 
+        $set  ="nome = ?, responsavel = ?, endereco = ?, numero = ?, cidade_UF_ID =? , 
                 cep = ?, telefone = ?, tipo_Instituicao = ?";
-        $sql  = "UPDATE $join SET $set WHERE i.id = ?";
+        $sql  = "UPDATE instituicao i SET $set WHERE i.id = ?";
 
         $stmt = $this->dataBase->prepare($sql);
        
-        $stmt->bind_param("sssssssssi", ...$params);
+        $stmt->bind_param("ssssssssi", ...$params);
         
         return $stmt->execute();
     }
@@ -157,5 +163,18 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss", $cidade, $uf);
         $stmt->execute();
+    }
+
+     /**
+     * Retorna o id da cidade correspondente na tabela cidade_UF 
+     * @param [type] $cidade
+     * @param [type] $uf
+     * @return array
+     */
+    private function SELECT_Cidade_UF_ID($cidade, $uf){
+        $sql = "SELECT ID FROM cidade_UF c where cidade='$cidade' and uf='$uf'";
+        $stmt = $this->dataBase->query($sql);    
+        $row = $stmt->fetch_assoc();
+        return $row;     
     }
 }

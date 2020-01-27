@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Model;
+namespace App\Model;
 use App\DB\Professor_InstituicaoDAO;
 use app\Model\Users\Usuario;
 use app\Model\Instituicao;

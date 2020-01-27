@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Instituicao;
-use App\Model\Professor_Instituicao;
+use App\Model\Professor_instituicao;
 use Illuminate\Http\Request;
 use App\DB\InstituicaoDAO;
 use App\DB\Professor_InstituicaoDAO;
@@ -22,7 +22,7 @@ class ControlerInstitucional extends Controller {
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Instituições",
-            'registros' => Professor_Instituicao::listarInstituicoes($id_user)
+            'registros' => Professor_instituicao::listarInstituicoes($id_user)
         ];
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }

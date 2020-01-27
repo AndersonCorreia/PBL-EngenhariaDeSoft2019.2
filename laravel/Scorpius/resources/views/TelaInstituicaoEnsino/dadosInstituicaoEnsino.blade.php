@@ -9,7 +9,7 @@
 <form action="{{route('user.instituicoes.atualizar',$registros['ID'])}}" method="POST" enctype="multipart/form-data">
 {{csrf_field()}}
     <fieldset>
-        <div class="form-row col-msm">
+        <div class="form-row col-msm">   
             <div class="form-group col-sm-12 d-block">
                 <span class="col-10">Instituição de Ensino</span>
                 <input type="hidden" name="_method" value="put">
@@ -18,7 +18,6 @@
                     
                 </div>
             </div>
-
             <div class="form-group col-sm-8">    
                 <span>Responsável pela Instituição</span>
                 <input class="form-control"  type="text" maxlength="40" name="Responsavel" placeholder="Nome do Responsável"  value="{{isset($registros['responsavel']) ? $registros['responsavel'] : ''}}" required>
@@ -48,31 +47,61 @@
                 <span>Cidade</span>
                 <input class="form-control"  type="text" name="Cidade" placeholder="Informe a Cidade" value="{{isset($registros['cidade']) ? $registros['cidade'] : ''}}" required>
             </div>
+            <?php
+                #
+                # Função que ajuda a desenhar o controle HTML select
+                #
+                function combobox($arrDados, $valorSelecionado = null) {
+                    foreach ($arrDados as $key => $value) {
+                        $selected = ($valorSelecionado == $key) ? "selected=\"selected\"" : null;
+                        echo "<option value=\"$key\" $selected >$value</option>";
+                    }
+                }
+
+                #
+                # Array com os dados de nossa combo
+                #
+                $tipoInst = array(
+                    "Privada" => "Privada",
+                    "Federal"  => "Federal",
+                    "Distrital" => "Distrital",
+                    "Estadual" => "Estadual",
+                    "Municipal" => "Municipal",
+                    "Organização Não-Governamental" => "Organização Não-Governamental"
+                );
+
+                #
+                # Array com os dados de nossa combo
+                #
+                $estado = array(
+                    "BA" => "Bahia",
+                    "MA" => "Maranhão",
+                    "PI" => "Piauí",
+                    "CE" => "Ceará",
+                    "RN" => "Rio Grande do Norte",
+                    "PB" => "Paraíba",
+                    "PE" => "Pernambuco",
+                    "AL" => "Alagoas",
+                    "SE" => "Sergipe" 
+                );
+
+                $valor_selecionado_instituicao = $registros['tipo_instituicao'];
+                $valor_selecionado_estado = $registros['UF'];
+                //dd($valor_selecionado);
+
+                ?>
 
             <div class="form-group col-sm-3">
                 <span>Estado</span>    
                 <select id="estado" name="Estado"  class="custom-select" required>
-                    <option  value="BA" selected>Bahia</option> 
-                    <option  value="MA">Maranhão</option>
-                    <option  value="PI">Piauí</option>
-                    <option  value="CE">Ceará</option>
-                    <option  value="RN">Rio Grande do Norte</option>
-                    <option  value="PB">Paraíba</option>
-                    <option  value="PE">Pernambuco</option>
-                    <option  value="AL">Alagoas</option>
-                    <option  value="SE">Sergipe</option>
+                     <?php combobox($estado, $valor_selecionado_estado); ?>
                 </select>
             </div>
             
             <div class="form-group col-sm-5">
                 <span>Tipo da Instituição</span>
-                <select id="tipo" name="Tipo"  class="custom-select" placeholder="Tipo de instituição" required>
-                    <option  value="Privada">Privada</option> 
-                    <option  value="Federal">Federal</option>
-                    <option  value="Distrital">Distrital</option>
-                    <option  value="Estadual">Estadual</option>
-                    <option  value="Municipal">Municipal</option>
-                    <option  value="Organização Não-Governamental">Organização Não-Governamental</option>
+                <select id="tipo" name="Tipo"  class="custom-select" placeholder="Tipo de instituição" required>                   
+                    <?php combobox($tipoInst, $valor_selecionado_instituicao); ?>
                 </select>
             </div>
         </div>
