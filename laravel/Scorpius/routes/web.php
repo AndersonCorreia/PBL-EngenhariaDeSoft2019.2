@@ -22,6 +22,9 @@ Route::get('/login-administrativo', ['uses' => 'InicialController@loginAdm'])->n
 // chama tela de alterar dados cadastrais localizada no controller através do método index
 Route::resource('AlterarDadosUsuario', 'AlteraUsuarioController');
 
+// chama tela do horario dos estagiários localizada no controller através do método index
+Route::resource('horarioEstagiario', 'horarioEstagiarioController');
+
 /**
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que
  * gerencia o cadastro normal dos visitantes/responsáveis.
