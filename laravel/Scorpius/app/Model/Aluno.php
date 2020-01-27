@@ -4,12 +4,12 @@ namespace App\Model;
 
 use App\DB\AlunoDAO;
 
-class Aluno extends App\DB\interfaces\DataObject
+class Aluno extends \App\DB\interfaces\DataObject
 {
-    private nome;
-    private idade;
-    private turma;
-    private aluno;
+    private $nome;
+    private $idade;
+    private $turma;
+    private $aluno;
 
     public function __Construct()
     {
@@ -48,7 +48,7 @@ class Aluno extends App\DB\interfaces\DataObject
 
     public function getIdade()
     {
-        retunr $this->idade;
+        return $this->idade;
     }
 
     public function setTurma($turma)
