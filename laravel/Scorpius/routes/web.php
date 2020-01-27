@@ -96,4 +96,4 @@ Route::get('/testes', function(){
     return redirect("/build/coverage/index.html",307);
 });
 
-Route::get('/calendario', 'ControlerInstitucional@calendario');
+Route::get('/calendario', 'UserController@calendario');
