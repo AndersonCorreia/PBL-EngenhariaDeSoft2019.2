@@ -6,18 +6,18 @@ INSERT INTO tipo_usuario (ID, nome) VALUES (7, 'institucional');
 INSERT INTO tipo_usuario (ID, nome) VALUES (6, 'visitante');
 
 -- Insert dos usuarios --
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(601, 'Francisco Hugo Rezende', 'franciscohr@maquinas.com.br', 'fhr601', '92546317599', '75994628820', 6);
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(701, 'Cristiane Benedita Almada', 'crisada@vinhas.fot.br', 'cba701', '25073799526', '75996462376', 7);
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(801, 'Caio Giovanni Gonçalves', 'caiogoncalves@ideia.com.br', 'cgg801', '99559754580', '75994068404', 8);
-INSERT INTO usuario (nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES                -- segundo estagiario --
-('Felipe Benjamin Monteiro', 'felipe-6@vente.com.br', 'fbm802', '95244698559', '75983373121', 8);
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(901, 'Isabelly Bruna Souza', 'isabellybrunarocha@rizzo.com', 'ibr901', '01218158549', '75982143156', 9);
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(1001, 'Marcelo Mateus Augusto da Rocha', 'mateusrocha@tema.com.br', 'mmar1001', '08212660559', '75995055492', 10);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(601, 'Francisco Hugo Rezende', 'franciscohr@maquinas.com.br', 'fhr601', '92546317599', '75994628820', 1, 6);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(701, 'Cristiane Benedita Almada', 'crisada@vinhas.fot.br', 'cba701', '25073799526', '75996462376', 1, 7);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(801, 'Caio Giovanni Gonçalves', 'caiogoncalves@ideia.com.br', 'cgg801', '99559754580', '75994068404', 1, 8);
+INSERT INTO usuario (nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES                -- segundo estagiario --
+('Felipe Benjamin Monteiro', 'felipe-6@vente.com.br', 'fbm802', '95244698559', '75983373121', 1, 8);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(901, 'Isabelly Bruna Souza', 'isabellybrunarocha@rizzo.com', 'ibr901', '01218158549', '75982143156', 1, 9);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(1001, 'Marcelo Mateus Augusto da Rocha', 'mateusrocha@tema.com.br', 'mmar1001', '08212660559', '75995055492', 1, 10);
 
 -- INSERT das permissões padrões dos  tipos de usuario --
 INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('realizar check-in',8);

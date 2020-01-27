@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`usuario` (
   `senha` VARCHAR(20) NOT NULL,
   `CPF` CHAR(11) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
+  `ativo` TINYINT(1) DEFAULT  0, 
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
@@ -105,6 +106,17 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`usuario` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `scorpius`.`cidade_UF`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`email_verificacao` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `usuario_email` VARCHAR(40) NOT NULL,
+  `token` VARCHAR(40) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE INDEX `usuario_email_UNIQUE` (`usuario_email` ASC)
+  )
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`professor_instituicao`
@@ -138,9 +150,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Nome` VARCHAR(10) NOT NULL,
-  `Ano_Escolar` VARCHAR(12) NOT NULL,
-  `Ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
+  `nome` VARCHAR(10) NOT NULL,
+  `ano_escolar` VARCHAR(12) NOT NULL,
+  `ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
   `professor_instituicao_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_turma_professor_instituicao1_idx` (`professor_instituicao_ID` ASC),
@@ -252,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`aluno` (
   INDEX `fk_aluno_turma1_idx` (`turma_ID` ASC),
   CONSTRAINT `fk_aluno_turma1`
     FOREIGN KEY (`turma_ID`)
-    REFERENCES `scorpius`.`turma_ID` (`ID`)
+    REFERENCES `scorpius`.`turma` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
