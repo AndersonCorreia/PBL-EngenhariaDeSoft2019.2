@@ -245,15 +245,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`aluno` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Turma` INT NOT NULL,
-  `Nome` VARCHAR(50) NOT NULL,
-  `Idade` INT NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
+  `idade` INT NOT NULL,
   `turma_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_aluno_turma1_idx` (`turma_ID` ASC),
   CONSTRAINT `fk_aluno_turma1`
     FOREIGN KEY (`turma_ID`)
-    REFERENCES `scorpius`.`turma` (`ID`)
+    REFERENCES `scorpius`.`turma_ID` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
