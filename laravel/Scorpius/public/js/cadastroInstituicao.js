@@ -6,7 +6,7 @@
  */
 const preencherForm = function(data, status) {
         if (status != "success" || data.error) {
-            alert(" Erro ao recuperar as informações tente cadastrar manualmente");
+            alert("Erro ao recuperar as informações tente cadastrar manualmente");
         } else {
             $("#nomeInst").val(data.nome).attr("readonly", "");
             $("#resp").val(data.responsavel).attr("readonly", "");

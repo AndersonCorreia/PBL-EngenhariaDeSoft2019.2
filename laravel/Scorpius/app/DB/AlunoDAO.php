@@ -27,6 +27,10 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
         return $this->dataBase->query($sql);;
     }
 
+    public function DELETE($aluno): bool{
+        return $this->DELETEbyID($aluno->getID());
+    }
+
     public function DELETEbyID($id)
     {
         return $this->dataBase->query("DELETE FROM aluno WHERE ID = $id");;

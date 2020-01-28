@@ -20,7 +20,7 @@ function getMenuLinksAll(){
         'cadastrar e modificar atividades'=>    ['link'=>'#' , 'texto'=>'Gerenciamento de Eventos' ],
         'criar usuarios'=>                      ['link'=>'#' , 'texto'=>'Cadastrar Usuário' ],
         'gerenciar usuarios'=>                  ['link'=>'#' , 'texto'=>'Gerenciar Usuários' ],
-        'ver confiabilidade das Instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],
+        'ver confiabilidade das instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],
         'ver log de atividade'=>                ['link'=>'#' , 'texto'=>'Histórico de Atividades' ],
         'realizar backup'=>                     ['link'=>'#' , 'texto'=>'Realizar Backup' ],
         'gerenciar permissões'=>                ['link'=>'#' , 'texto'=>'Gerenciar Permissões' ]//creio que seria melhor ser permissão apenas para o adm

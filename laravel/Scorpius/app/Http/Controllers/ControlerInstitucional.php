@@ -162,7 +162,7 @@ class ControlerInstitucional extends Controller {
             $DAO = new InstituicaoDAO();
             return $DAO->SELECT($nome, $endereco);
         }
-        catch(\Exception $e) {
+        catch(\Throwable $e) {
             return ["error" => true];
         }
     }

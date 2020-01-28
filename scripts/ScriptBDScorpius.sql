@@ -107,14 +107,19 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`usuario` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `scorpius`.`cidade_UF`
+-- Table `scorpius`.`email_verificacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`email_verificacao` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `usuario_email` VARCHAR(40) NOT NULL,
   `token` VARCHAR(40) NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE INDEX `usuario_email_UNIQUE` (`usuario_email` ASC)
+  INDEX `fk_email_verficacao_usuario1` (`usuario_email` ASC),
+  CONSTRAINT `fk_email_verficacao_usuario1`
+    FOREIGN KEY (`usuario_email`)
+    REFERENCES `scorpius`.`usuario` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
   )
 ENGINE = InnoDB;
 
@@ -194,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
   `Turno` ENUM('manha', 'tarde', 'noite') NOT NULL,
   `Status` ENUM('realizada', 'não realizada', 'instituição ausente') NOT NULL,
   `agendamento_ID` INT UNSIGNED NOT NULL,
-  `ID_acompanhante` INT UNSIGNED NOT NULL,
+  `ID_acompanhante` INT UNSIGNED,
   PRIMARY KEY (`ID`),
   INDEX `fk_visita_agendamento1_idx` (`agendamento_ID` ASC),
   INDEX `fk_visita_usuario1_idx` (`ID_acompanhante` ASC),
