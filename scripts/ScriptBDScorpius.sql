@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`usuario` (
   `senha` VARCHAR(20) NOT NULL,
   `CPF` CHAR(11) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
+  `ativo` TINYINT(1) DEFAULT  0, 
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
@@ -105,6 +106,22 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`usuario` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `scorpius`.`email_verificacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`email_verificacao` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `usuario_email` VARCHAR(40) NOT NULL,
+  `token` VARCHAR(40) NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_email_verficacao_usuario1` (`usuario_email` ASC),
+  CONSTRAINT `fk_email_verficacao_usuario1`
+    FOREIGN KEY (`usuario_email`)
+    REFERENCES `scorpius`.`usuario` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+  )
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`professor_instituicao`
@@ -119,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`professor_instituicao` (
   PRIMARY KEY (`ID`),
   INDEX `fk_professor_instituicao_instituicao1_idx` (`instituicao_ID` ASC),
   INDEX `fk_professor_instituicao_usuario1_idx` (`usuario_ID` ASC),
+  UNIQUE INDEX `professor_instituicao_UNIQUE` (`instituicao_ID`, `usuario_ID`),
   CONSTRAINT `fk_professor_instituicao_instituicao1`
     FOREIGN KEY (`instituicao_ID`)
     REFERENCES `scorpius`.`instituicao` (`ID`)
@@ -137,9 +155,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Nome` VARCHAR(10) NOT NULL,
-  `Ano_Escolar` VARCHAR(12) NOT NULL,
-  `Ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
+  `nome` VARCHAR(10) NOT NULL,
+  `ano_escolar` VARCHAR(12) NOT NULL,
+  `ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
   `professor_instituicao_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_turma_professor_instituicao1_idx` (`professor_instituicao_ID` ASC),
@@ -181,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
   `Turno` ENUM('manha', 'tarde', 'noite') NOT NULL,
   `Status` ENUM('realizada', 'não realizada', 'instituição ausente') NOT NULL,
   `agendamento_ID` INT UNSIGNED NOT NULL,
-  `ID_acompanhante` INT UNSIGNED NOT NULL,
+  `ID_acompanhante` INT UNSIGNED,
   PRIMARY KEY (`ID`),
   INDEX `fk_visita_agendamento1_idx` (`agendamento_ID` ASC),
   INDEX `fk_visita_usuario1_idx` (`ID_acompanhante` ASC),
@@ -244,9 +262,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`aluno` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Turma` INT NOT NULL,
-  `Nome` VARCHAR(50) NOT NULL,
-  `Idade` INT NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
+  `idade` INT NOT NULL,
   `turma_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_aluno_turma1_idx` (`turma_ID` ASC),

@@ -1,14 +1,14 @@
 <?php
 
 namespace app\Model\users;
-
+use App\DB\PessoaDAO;
 abstract class Pessoa extends \App\DB\interfaces\DataObject {
-    private $nome;
-    private $cpf;
-    private $telefone;
-    private $email;
-	private $senha;
-	private $tipo;
+    protected $nome;
+    protected $cpf;
+    protected $telefone;
+    protected $email;
+	protected $senha;
+	protected $tipo;
 
 	/**
 	 * Metodo de login do usuario do sistema. 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\DAOtests;
 
 use PHPUnit\Framework\TestCase;
 use App\Model\Instituicao;
 use App\DB\InstituicaoDAO as DAO;
 
-require_once __DIR__."/../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
+require_once __DIR__."/../../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
 
 class DataObjectTest extends TestCase
 {
@@ -29,6 +29,7 @@ class DataObjectTest extends TestCase
             self::$object->setNome("colegio Z");
             self::$object->setNumero("66B");
             $id = self::$object->getID();
+            \assertTrue(self::$object->getAlterado());
             //apagando o objeto
             self::$object = null;
 

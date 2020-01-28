@@ -71,8 +71,8 @@
                         src="{{ asset('img/tela_inicial/img-background-v3.png') }}">
                     <div id="btn-login">
                         <a id="btn-entrar" class="btn btn-outline-primary text-white"
-                            href="{{ route('entrar') }}">ENTRAR</a>
-                        <a id="btn-cadastrar" class="btn btn-primary" href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
+                            href="/entrar">ENTRAR</a>
+                        <a id="btn-cadastrar" class="btn btn-primary" href="/cadastrar">CADASTRAR-SE</a>
                     </div>
                     <a href="#informacoes">
                         <i class="fas fa-angle-double-down" aria-hidden="true" id="seta" ></i>
@@ -86,9 +86,9 @@
                 src="{{ asset('img/tela_inicial/somente-nome-img.png') }}">
             <div id="mobile-btn-login">
                 <a id="mobile-btn-entrar" class="btn btn-outline-primary text-white btn-lg btn-block"
-                    href="{{ route('entrar') }}">ENTRAR</a>
+                    href="/entrar">ENTRAR</a>
                 <a id="mobile-btn-cadastrar" class="btn btn-primary btn-lg btn-block"
-                    href="{{ route('cadastrar') }}">CADASTRAR-SE</a>
+                    href="/cadastrar">CADASTRAR-SE</a>
             </div>
             <div id="mobile-menu-img">
                 <a href="http://www.antares.uefs.br/" target="_blank">
@@ -685,7 +685,7 @@
                             <p class="h1 text-center">AGENDAMENTO</p>
                             <div class="card bg-transparent"
                                 style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
-                                <a href="{{ route('entrar') }}">
+                                <a href="/entrar">
                                     <img id="aec-left-agendamento-card-img" class="card-img bg-transparente"
                                         src="{{ asset('img/tela_inicial/background-agendamento.jpg') }}">
                                 </a>
@@ -760,7 +760,7 @@
                 <p class="h2 text-center">AGENDAMENTO</p>
                 <div class="card bg-transparent"
                     style="border-top-right-radius:30px;border-top-left-radius:30px;border-bottom-right-radius:30px;border-bottom-left-radius:30px;">
-                    <a href="{{ route('entrar') }}">
+                    <a href="/entrar">
                         <img id="aec-left-agendamento-card-img" class="card-img bg-transparente"
                             src="{{ asset('img/tela_inicial/background-agendamento.jpg') }}">
                     </a>

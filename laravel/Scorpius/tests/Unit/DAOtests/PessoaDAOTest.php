@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\DAOtests;
 
 use PHPUnit\Framework\TestCase;
 // o require abaixo é para não ser necessario escrever $this->assert podendo escrever apenas assert
 //se for adcionado na classe do phpunit tira a necessidade de colocar esse require nos testes,
 // contudo todos teriam que fazer isso manualmente pois o  framework esta no .gitignore
-require_once __DIR__."/../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
+require_once __DIR__."/../../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
 use App\DB\PessoaDAO;
 
 class PessoaDAOTest extends TestCase
@@ -83,7 +83,7 @@ class PessoaDAOTest extends TestCase
      */
     public function testGetPermissoesPadraoFuncionario(){
         $permissoes = self::$DAO->getPermissoes("funcionario");
-
+        
         \assertContains(["permissao"=>"realizar check-in"], $permissoes);
         \assertContains(["permissao"=>"gerenciamento de visitas"],$permissoes);
         \assertContains(["permissao"=>"designar horários para estagiarios"],$permissoes);
@@ -98,7 +98,7 @@ class PessoaDAOTest extends TestCase
      */
     public function testGetPermissoesPadraoADM(){
         $permissoes = self::$DAO->getPermissoes("adm");
-
+        
         \assertContains(["permissao"=>"criar usuarios"], $permissoes);
         \assertContains(["permissao"=>"gerenciar usuarios"],$permissoes);
         \assertContains(["permissao"=>"ver confiabilidade das Instituições"],$permissoes);

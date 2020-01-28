@@ -5,27 +5,19 @@ INSERT INTO tipo_usuario (ID, nome) VALUES (9, 'funcionario');
 INSERT INTO tipo_usuario (ID, nome) VALUES (7, 'institucional');
 INSERT INTO tipo_usuario (ID, nome) VALUES (6, 'visitante');
 
--- Insert dos professores --
-INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (1, 2, 0, TRUE, 201, 601);
-INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (2, 3, 1, TRUE, 202, 701); 
-INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (3, 5, 2, TRUE, 203, 801); 
-INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (4, 2, 7, TRUE, 204, 802); 
-INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (5, 2, 1, TRUE, 205, 901); 
-
-
 -- Insert dos usuarios --
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(601, 'Francisco Hugo Rezende', 'franciscohr@maquinas.com.br', 'fhr601', '92546317599', '75994628820', 6);
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(701, 'Cristiane Benedita Almada', 'crisada@vinhas.fot.br', 'cba701', '25073799526', '75996462376', 7);
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(801, 'Caio Giovanni Gonçalves', 'caiogoncalves@ideia.com.br', 'cgg801', '99559754580', '75994068404', 8);
-INSERT INTO usuario (nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES                -- segundo estagiario --
-('Felipe Benjamin Monteiro', 'felipe-6@vente.com.br', 'fbm802', '95244698559', '75983373121', 8);
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(901, 'Isabelly Bruna Souza', 'isabellybrunarocha@rizzo.com', 'ibr901', '01218158549', '75982143156', 9);
-INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, tipo_usuario_ID) VALUES
-(1001, 'Marcelo Mateus Augusto da Rocha', 'mateusrocha@tema.com.br', 'mmar1001', '08212660559', '75995055492', 10);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(601, 'Francisco Hugo Rezende', 'franciscohr@maquinas.com.br', 'fhr601', '92546317599', '75994628820', 1, 6);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(701, 'Cristiane Benedita Almada', 'crisada@vinhas.fot.br', 'cba701', '25073799526', '75996462376', 1, 7);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(801, 'Caio Giovanni Gonçalves', 'caiogoncalves@ideia.com.br', 'cgg801', '99559754580', '75994068404', 1, 8);
+INSERT INTO usuario (nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES                -- segundo estagiario --
+('Felipe Benjamin Monteiro', 'felipe-6@vente.com.br', 'fbm802', '95244698559', '75983373121', 1, 8);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(901, 'Isabelly Bruna Souza', 'isabellybrunarocha@rizzo.com', 'ibr901', '01218158549', '75982143156', 1, 9);
+INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+(1001, 'Marcelo Mateus Augusto da Rocha', 'mateusrocha@tema.com.br', 'mmar1001', '08212660559', '75995055492', 1, 10);
 
 -- INSERT das permissões padrões dos  tipos de usuario --
 INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('realizar check-in',8);
@@ -64,6 +56,13 @@ INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone,
 (204, 'Escola Municipal Ana Brandoa','Marcos Feliciano', 'Rotatória da Avenida João Durval Carneiro', 's/n', '44001-001', '7536224055', 'Municipal', 4);
 INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
 (205, 'Colégio Helyos','Manoel Santo Espedito', 'Avenida Eduardo Fróes da Mota', '1100', '44078-015', '7536254455', 'Privada', 5);
+
+-- Insert em professor_instituicao --
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (1, 2, 0, TRUE, 201, 601);
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (2, 3, 1, TRUE, 202, 701); 
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (3, 5, 2, TRUE, 203, 801); 
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (4, 2, 7, TRUE, 204, 802); 
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (5, 2, 1, TRUE, 205, 901); 
 
 -- INSERT dos estagiários --
 INSERT INTO estagiario (matricula, usuario_ID) VALUES('cgg1', 801);

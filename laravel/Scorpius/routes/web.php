@@ -13,7 +13,7 @@
 Route::get('/', ['uses'=>'InicialController@inicio'])->name('paginaInicial');
 
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
-Route::get('/cadastro', ['uses'=>'InicialController@telaCadastro'])->name('cadastrar');
+Route::resource('/cadastrar', 'CadastroController');
 // Chama o metódo do Inicialcontroller que retorna a página de entrar (login).
 Route::get('/entrar', ['uses'=>'InicialController@telaEntrar'])->name('entrar');
 
@@ -22,18 +22,24 @@ Route::get('/login-administrativo', ['uses' => 'InicialController@loginAdm'])->n
 // chama tela de alterar dados cadastrais localizada no controller através do método index
 Route::resource('AlterarDadosUsuario', 'AlteraUsuarioController');
 
+// chama tela do horario dos estagiários localizada no controller através do método index
+Route::resource('horarioEstagiario', 'horarioEstagiarioController');
+
 /**
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que
  * gerencia o cadastro normal dos visitantes/responsáveis.
  */
-Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\CadastroController@cadastroNormal'])->name('cadastro.normal');
-
+//Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\CadastroController@cadastroNormal'])->name('cadastro.normal');
+Route::get('/verificacao-email/{email}/{token}', 'EmailVerificacaoController@index');
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
 Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show");
 
 
+Route::get('/dashboard/turmas', ['as'=>'dashboard.turmas', function(){
+    return view('telaTurma.index');
+}]);
 /**
  * Rota para retornar a tela para cadastra uma instituição
  */
@@ -92,3 +98,5 @@ Route::resource('enviar-eventos', 'enviarEventosController');
 Route::get('/testes', function(){
     return redirect("/build/coverage/index.html",307);
 });
+
+Route::get('/calendario', 'UserController@calendario');

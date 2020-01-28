@@ -41,7 +41,7 @@
 @endsection
 <div class="text-center mx-auto col-md-10">
     <h1>Entre</h1>
-    <h5>Não possui uma conta? <a href="{{ route('cadastrar') }}"> Cadastre-se</a>.</h5>
+    <h5>Não possui uma conta? <a href="/cadastrar"> Cadastre-se</a>.</h5>
     <div id="redes-socias">
         <a style="font-size: 15px;" href="{{ url('/login/facebook') }}" class="btn btn-primary btn-lg btn-block" style="font-size:13px;color:white">
             <i class="fa fa-facebook-square" style="font-size:13px;color:white"></i> Entrar com o Facebook

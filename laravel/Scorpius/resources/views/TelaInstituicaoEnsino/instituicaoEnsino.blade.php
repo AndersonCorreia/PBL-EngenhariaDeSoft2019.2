@@ -32,8 +32,8 @@
         </div>
 
         <div class="botoes">
-                <a class="btn col btn-primary" href="{{route('user.instituicoes.editar', $registro['ID'])}}">Atualizar</a>
-                <a  href="{{route('user.instituicoes.deletar', $registro['ID'])}}" class="btn col btn-danger">Deletar</a>
+                <a class="btn col btn-primary" href="{{route('user.instituicoes.editar', $registro['instituicao_ID'])}}">Atualizar</a>
+                <a  href="{{route('user.instituicoes.deletar', $registro['instituicao_ID'])}}" class="btn col btn-danger">Deletar</a>
         </div>
         </div>
         @endforeach
