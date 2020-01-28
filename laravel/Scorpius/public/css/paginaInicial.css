@@ -196,13 +196,13 @@
     left: 82%;
     color: #696969;
 }
-#menu-botoes-atividades {
+#menu-botoes-exposicoes {
     position: absolute;
     top: 61%;
     left: 77%;
     color: #696969;
 }
-#menu-botoes-exposicoes {
+#menu-botoes-atividades {
     position: absolute;
     top: 83%;
     left: 75%;
@@ -224,7 +224,7 @@
 /* INFORMAÇÕES */
 #informacoes {
     margin-top: 3% !important;
-    margin-bottom: 3% !important;
+    margin-bottom: 1% !important;
 }
 #informacoes-left-img {
     float: left;
@@ -330,6 +330,9 @@
     color: whitesmoke;
 }
 /* Exposições */
+#exposicoes{
+    margin-bottom: 2%;
+}
 #exposicoes h5 {
     font-family: stark !important;
 }
@@ -372,10 +375,7 @@
 /* ATIVIDADES */
 .atv-img {
     object-fit: cover;
-
-    /* width: 300px; */
     height: 680px !important;
-    
 }
 .carousel-caption{
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
