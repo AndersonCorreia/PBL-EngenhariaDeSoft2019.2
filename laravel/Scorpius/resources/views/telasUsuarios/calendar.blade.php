@@ -17,7 +17,7 @@
     <div class="container p-2 bg-primary">
         <div class="col bg-secondary text-center font-weight-bold">
             <button type="button" class=" btn btn-default seta-esquerda"></button>
-            <span> {{$dataInterval[0] ?? "01/02/2020"}} - a - {{$dataInterval[1] ?? "20/02/2020"}} </span>
+            <span> {{$dataInterval[0] ?? "01/02"}} - a - {{$dataInterval[1] ?? "20/02"}} </span>
             <button type="button" class="btn btn-default seta-direita"></span></button>
         </div>
         <hr class="my-1 bg-light">
@@ -33,13 +33,13 @@
                 <div class="row m-1 p-0"> 
                     <div id="data{{$i}}" class="col-3 p-1">{{ $visitas[$i]["data"] ?? "27/01 SEG" }}</div> 
                     <div class="col-3 py-1">
-                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["manha.cor"] ?? 'bg-light'}}"></button>
+                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["manha.btn"] ?? 'bg-light'}}"></button>
                     </div>
                     <div class="col-3 py-1">
-                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["tarde.cor"] ?? 'btn-light'}}"></button>
+                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["tarde.btn"] ?? 'btn-light'}}"></button>
                     </div>
                     <div class="col-3 py-1">
-                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["noite.cor"] ?? 'btn-light'}}"></button>
+                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["noite.btn"] ?? 'btn-light'}}"></button>
                     </div>
                 </div>
                     <hr class="col-12 m-0 p-0 linha rounded bg-primary">

@@ -83,7 +83,7 @@ class PessoaDAOTest extends TestCase
      */
     public function testGetPermissoesPadraoFuncionario(){
         $permissoes = self::$DAO->getPermissoes("funcionario");
-
+        
         \assertContains(["permissao"=>"realizar check-in"], $permissoes);
         \assertContains(["permissao"=>"gerenciamento de visitas"],$permissoes);
         \assertContains(["permissao"=>"designar horários para estagiarios"],$permissoes);
@@ -98,7 +98,7 @@ class PessoaDAOTest extends TestCase
      */
     public function testGetPermissoesPadraoADM(){
         $permissoes = self::$DAO->getPermissoes("adm");
-
+        
         \assertContains(["permissao"=>"criar usuarios"], $permissoes);
         \assertContains(["permissao"=>"gerenciar usuarios"],$permissoes);
         \assertContains(["permissao"=>"ver confiabilidade das Instituições"],$permissoes);
