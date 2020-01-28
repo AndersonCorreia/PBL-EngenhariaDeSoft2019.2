@@ -21,10 +21,11 @@ class VisitaTest extends TestCase {
         foreach ($visitas as $v) {
             $v->preencherArrayForCalendario($array);
         }
-
-        \assertContains(["27/01" =>["data" => "27/01 SEG", "manha.btn" => "btn-success"]],$array);
-        \assertContains(["27/01" =>["data" => "27/01 SEG", "noite.btn" => "btn-danger"]],$array);
-        \assertContains(["30/01" =>["data" => "30/01 QUI", "tarde.btn" => "btn-success"]],$array);
+        
+        \assertEquals("27/01 SEG",$array["27/01"]["data"]);
+        \assertEquals("btn-success",$array["27/01"]["manha.btn"]);
+        \assertEquals("btn-danger",$array["27/01"]["noite.btn"]);
+        \assertEquals("btn-success",$array["30/01"]["tarde.btn"]);
     }
 
     public function test_preencherArrayForCalendario_turnosVazios(){
