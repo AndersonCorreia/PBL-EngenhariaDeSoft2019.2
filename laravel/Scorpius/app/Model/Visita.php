@@ -32,7 +32,8 @@ class Visita extends \App\DB\interfaces\DataObject {
         else {
             $btn = $this->btnClasses["disponivel"];
         }
-        $array[]= ["data" => "$dm $day", "$this->Turno.btn" => $btn ];
+        $array[$dm]["data"] = "$dm $day";
+        $array[$dm]["$this->Turno.btn"] = $btn;
     }
 
     /**

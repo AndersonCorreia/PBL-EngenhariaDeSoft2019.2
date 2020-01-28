@@ -29,21 +29,23 @@
                     <div class="col">Tarde</div>
                     <div class="col">Noite</div>
                 </div>
-                @for ($i = 0; $i < 5; $i++)
-                <div class="row m-1 p-0"> 
-                    <div id="data{{$i}}" class="col-3 p-1">{{ $visitas[$i]["data"] ?? "27/01 SEG" }}</div> 
-                    <div class="col-3 py-1">
-                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["manha.btn"] ?? 'bg-light'}}"></button>
+                @foreach ($visitas as $v)
+                    @if ($loop->index < 5)
+                    <div class="row m-1 p-0"> 
+                        <div id="data{{$loop->index}}" class="col-3 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
+                        <div class="col-3 py-1">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["manha.btn"] ?? 'bg-light'}}"></button>
+                        </div>
+                        <div class="col-3 py-1">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["tarde.btn"] ?? 'btn-light'}}"></button>
+                        </div>
+                        <div class="col-3 py-1">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["noite.btn"] ?? 'btn-light'}}"></button>
+                        </div>
                     </div>
-                    <div class="col-3 py-1">
-                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["tarde.btn"] ?? 'btn-light'}}"></button>
-                    </div>
-                    <div class="col-3 py-1">
-                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["noite.btn"] ?? 'btn-light'}}"></button>
-                    </div>
-                </div>
                     <hr class="col-12 m-0 p-0 linha rounded bg-primary">
-                @endfor
+                    @endif
+                @endforeach
             </div>
             <div class="col-lg-6 pb-2 bg-info text-center border-left border-dark ">
                 <div class="row m-0 mb-2 d-none d-lg-flex"> 
@@ -52,21 +54,23 @@
                     <div class="col">Tarde</div>
                     <div class="col">Noite</div>
                 </div>
-                @for ($i = 0; $i < 5; $i++)
-                <div class="row m-1 p-0"> 
-                    <div id="data{{$i}}" class="col-3 p-1">{{ $visitas[$i]["data"] ?? "27/01 SEG" }}</div> 
-                    <div class="col-3 py-1">
-                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["manha.cor"] ?? 'bg-light'}}"></button>
+                @foreach ($visitas as $v)
+                    @if ($loop->index >4)
+                    <div class="row m-1 p-0"> 
+                        <div id="data{{$loop->index}}" class="col-3 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
+                        <div class="col-3 py-1">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["manha.btn"] ?? 'bg-light'}}"></button>
+                        </div>
+                        <div class="col-3 py-1">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["tarde.btn"] ?? 'btn-light'}}"></button>
+                        </div>
+                        <div class="col-3 py-1">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["noite.btn"] ?? 'btn-light'}}"></button>
+                        </div>
                     </div>
-                    <div class="col-3 py-1">
-                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["tarde.cor"] ?? 'btn-light'}}"></button>
-                    </div>
-                    <div class="col-3 py-1">
-                        <button id="manhã{{$i}}" type="button" class="btn w-50 h-75 {{$visitas[$i]["noite.cor"] ?? 'btn-light'}}"></button>
-                    </div>
-                </div>
                     <hr class="col-12 m-0 p-0 linha rounded bg-primary">
-                @endfor
+                    @endif
+                @endforeach
                 </div>
             </div>
         </div>

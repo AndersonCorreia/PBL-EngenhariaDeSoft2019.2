@@ -22,9 +22,9 @@ class VisitaTest extends TestCase {
             $v->preencherArrayForCalendario($array);
         }
 
-        \assertContains(["data" => "27/01 SEG", "manha.btn" => "btn-success"],$array);
-        \assertContains(["data" => "27/01 SEG", "noite.btn" => "btn-danger"],$array);
-        \assertContains(["data" => "30/01 QUI", "tarde.btn" => "btn-success"],$array);
+        \assertContains(["27/01" =>["data" => "27/01 SEG", "manha.btn" => "btn-success"]],$array);
+        \assertContains(["27/01" =>["data" => "27/01 SEG", "noite.btn" => "btn-danger"]],$array);
+        \assertContains(["30/01" =>["data" => "30/01 QUI", "tarde.btn" => "btn-success"]],$array);
     }
 
     public function test_preencherArrayForCalendario_turnosVazios(){
@@ -34,7 +34,7 @@ class VisitaTest extends TestCase {
         $v->preencherArrayForCalendario($array);
         
         //testa se é prenchido apenas com o turno que deveria existir
-        \assertNotContains(["data" => "27/01 SEG", "tarde.btn" => "btn-success"],$array);
-        \assertNotContains(["data" => "27/01 SEG", "noite.btn" => "btn-success"],$array);
+        \assertNotContains(["30/01" =>["data" => "27/01 SEG", "tarde.btn" => "btn-success"]],$array);
+        \assertNotContains(["30/01" =>["data" => "27/01 SEG", "noite.btn" => "btn-success"]],$array);
     }
 }
