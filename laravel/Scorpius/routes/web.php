@@ -101,10 +101,14 @@ Route::get('/testes', function(){
 
 Route::get('/calendario', 'UserController@calendario');
 
+//Rotas para agendamento de uma conta individual
+Route::get('/agendamentoUsuario', 'UserController@agendamentoIndividual');
+Route::post('/agendamentoUsuario', 'UserController@agendarContaIndividual');
+
 //Rotas para agendamento de uma instituicao
 Route::get('/agendamento', 'UserController@agendamento');
 Route::post('/agendamento', 'UserController@agendarInstituicao')->name("AgendarInstituicao.post");
 
+//Rota para retornar a tela de Gerenciamento de Visitas.
 Route::get('/gerenciamentoDeVisita', 'ControllerVisita@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
-/**
-* Rota para retornar a tela de Gerenciamento de Visitas.
+

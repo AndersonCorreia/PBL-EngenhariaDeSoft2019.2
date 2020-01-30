@@ -52,8 +52,23 @@ class UserController extends Controller
         return view('telasUsuarios.formularioAgendamento', $variaveis);
     }
 
+    public function agendamentoIndividual(){
+        $variaveis = [
+            'itensMenu' => getMenuLinks("visitante"),
+            'paginaAtual' => "Agendar visita"
+        ];
+
+        return view('telasUsuarios.formularioAgendamentoIndividual', $variaveis);
+    }
+
     //inserir dados do agendamento pelo POST na classe e no banco de dados
     public function agendarInstituicao(){
+
+        
+    }
+
+    //inserir dados do agendamento pelo POST na classe e no banco de dados
+    public function agendarContaIndividual(){
 
         
     }
