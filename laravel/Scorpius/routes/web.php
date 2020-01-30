@@ -101,6 +101,6 @@ Route::get('/testes', function(){
 
 Route::get('/calendario', 'UserController@calendario');
 
-Route::get('/gerenciamentoDeVisita', 'ControllerVisita@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
+Route::get('/gerenciamentoDeVisita', ['uses'=>'VisitaController@getTelaVisita'])->name("telaGerenciamentoDeVisitas.show");
 /**
 * Rota para retornar a tela de Gerenciamento de Visitas.
