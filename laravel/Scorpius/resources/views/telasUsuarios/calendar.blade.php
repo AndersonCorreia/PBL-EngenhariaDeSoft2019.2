@@ -14,58 +14,65 @@
 --}}
 
 @section('conteudo')
-    <div class="container p-2 bg-primary">
-        <div class="col bg-secondary text-center font-weight-bold">
+<div class="container font-weight-bold text-center" >
+    <div class="row col-lg-11 col-10 mb-1">
+        <div class="col-2 p-1"><span> Legenda :</span></div>
+        <div class="col p-1 "><button class="btn btn-primary w-auto"></button> <span> seu agendamento</span></div>
+        <div class="col p-1 "><button class="btn btn-success w-auto"></button> <span> Disponivel</span></div>
+        <div class="col p-1 "><button class="btn btn-danger w-auto"></button> <span> Lista de espera</span></div>
+    </div>
+    <div id="calendario" class="col p-2 border">
+        <div class="col text-primary font-weight-bold">
             <button type="button" class=" btn btn-default seta-esquerda"></button>
             <span> {{$dataInterval[0] ?? "01/02"}} - a - {{$dataInterval[1] ?? "20/02"}} </span>
             <button type="button" class="btn btn-default seta-direita"></span></button>
         </div>
         <hr class="my-1 bg-light">
-        <div class="row m-0 font-weight-bold">
-            <div class="col col-lg-6 pb-2 text-center bg-warning border-right border-dark">
-                <div class="row m-0 mb-2  font-weight-bold"> 
-                    <div class="col">Dia</div> 
-                    <div class="col">Manhã</div>
-                    <div class="col">Tarde</div>
-                    <div class="col">Noite</div>
+        <div class="row m-0 font-weight-bold text-monospace">
+            <div class="col-12 col-lg-6 pb-2 text-center border-right">
+                <div class="row m-0 mb-2 p-0"> 
+                    <div class="col-4 p-0">Dia</div> 
+                    <div class="col  p-0">Manhã</div>
+                    <div class="col p-0">Tarde</div>
+                    <div class="col p-0">Noite</div>
                 </div>
                 @foreach ($visitas as $v)
                     @if ($loop->index < 5)
-                    <div class="row m-1 p-0"> 
-                        <div id="data{{$loop->index}}" class="col-3 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
-                        <div class="col-3 py-1">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["manha.btn"] ?? 'bg-light'}}"></button>
+                    <div class="row p-1"> 
+                        <div id="data{{$loop->index}}" class="col-4 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
+                        <div class="col py-1 p-0">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
                         </div>
-                        <div class="col-3 py-1">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["tarde.btn"] ?? 'btn-light'}}"></button>
+                        <div class="col py-1 p-0">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
                         </div>
-                        <div class="col-3 py-1">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["noite.btn"] ?? 'btn-light'}}"></button>
+                        <div class="col py-1 p-0">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
                         </div>
                     </div>
                     <hr class="col-12 m-0 p-0 linha rounded bg-primary">
                     @endif
                 @endforeach
             </div>
-            <div class="col-lg-6 pb-2 bg-info text-center border-left border-dark ">
-                <div class="row m-0 mb-2 d-none d-lg-flex"> 
-                    <div class="col">Dia</div> 
-                    <div class="col">Manhã</div>
-                    <div class="col">Tarde</div>
-                    <div class="col">Noite</div>
+            <div class="col col-lg-6 pb-2 text-center border-left">
+                <div class="row m-0 mb-2 d-none d-lg-flex p-0"> 
+                    <div class="col-4 p-0">Dia</div> 
+                    <div class="col p-0">Manhã</div>
+                    <div class="col p-0">Tarde</div>
+                    <div class="col p-0">Noite</div>
                 </div>
                 @foreach ($visitas as $v)
                     @if ($loop->index >4)
-                    <div class="row m-1 p-0"> 
-                        <div id="data{{$loop->index}}" class="col-3 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
-                        <div class="col-3 py-1">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["manha.btn"] ?? 'bg-light'}}"></button>
+                    <div class="row p-1"> 
+                        <div id="data{{$loop->index}}" class="col-4 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
+                        <div class="col py-1 p-0">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
                         </div>
-                        <div class="col-3 py-1">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["tarde.btn"] ?? 'btn-light'}}"></button>
+                        <div class="col py-1 p-0">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
                         </div>
-                        <div class="col-3 py-1">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 {{$v["noite.btn"] ?? 'btn-light'}}"></button>
+                        <div class="col py-1 p-0">
+                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["noite.btn"] ?? 'bg-light'}} "></button>
                         </div>
                     </div>
                     <hr class="col-12 m-0 p-0 linha rounded bg-primary">
@@ -75,6 +82,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('css')
@@ -82,9 +90,10 @@
     .linha {
         height: 0.3vh;
     }
-    .glyphicon {
-        color: blueviolet;
+    #calendario {
+        background-color: rgb(245, 245, 248);
     }
+
 /**
 *** Seta para ESQUERDA
 **/

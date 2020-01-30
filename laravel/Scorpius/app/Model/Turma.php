@@ -7,4 +7,8 @@ use App\DB\TurmaDAO;
 class Turma extends \App\DB\interfaces\DataObject
 {
     private $quantidade_pessoas;
-    private 
+
+    protected function save(){
+        
+    }
+}

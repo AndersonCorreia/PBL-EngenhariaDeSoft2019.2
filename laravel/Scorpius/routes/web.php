@@ -103,7 +103,7 @@ Route::get('/calendario', 'UserController@calendario');
 
 Route::get('/gerenciamentoDeVisita', ['uses'=>'VisitaController@getTelaVisita'])->name("telaGerenciamentoDeVisitas.show");
 //Rotas para agendamento de uma instituicao
-Route::get('/agendamento', 'UserController@agendamento');
+Route::get('/agendamento', 'UserController@agendamento')->name("Agendar.show");
 Route::post('/agendamento', 'UserController@agendarInstituicao')->name("AgendarInstituicao.post");
 
 /**

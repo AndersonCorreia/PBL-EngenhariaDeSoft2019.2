@@ -54,6 +54,7 @@ class Professor_InstituicaoDAOTest extends TestCase
         $universidade = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
         "Feira de Santana", "Bahia", "57849241", "32458745", "Estadual", 10);
         self::$instituicaoDAO->INSERT($universidade);
+        var_dump($universidade->getID());
         self::$DAO->INSERTbyID($universidade->getID(), 601);
         $issuperior = self::$DAO->desativarByID($universidade->getID(), 601);
 
