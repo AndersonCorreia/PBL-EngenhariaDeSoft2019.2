@@ -79,9 +79,12 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
     function DELETEbyID(int $id){
         $sql = "DELETE FROM instituicao WHERE id = ?";;
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("i",$id);
-        
-        return $stmt->execute();
+        $result = $stmt->bind_param("i",$id);
+        if($result){
+            return $stmt->execute();    
+        }else{
+            throw new \Exception("Nenhuma instituição foi encontrada com o id $id");
+        }
     }
 
     function SELECTbyID(int $id, bool $asArray=true){

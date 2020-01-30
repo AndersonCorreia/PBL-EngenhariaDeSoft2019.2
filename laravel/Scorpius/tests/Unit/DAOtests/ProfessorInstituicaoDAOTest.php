@@ -49,6 +49,20 @@ class Professor_InstituicaoDAOTest extends TestCase
     public function testUPDATE(){
      
     }
+
+    public function testdesativarByID(){
+        $universidade = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
+        "Feira de Santana", "Bahia", "57849241", "32458745", "Estadual", 10);
+        self::$instituicaoDAO->INSERT($universidade);
+        self::$DAO->INSERTbyID($universidade->getID(), 601);
+        $issuperior = self::$DAO->desativarByID($universidade->getID(), 601);
+
+        \assertTrue($issuperior, "Erro ao desativar Instituição" );
+        $registros = self::$DAO->SELECTbyUsuario_ID(601);
+        \assertNotContains( "UEFS", $registros);
+
+    }
+
     /**
      * testa se a função INSERT adiciona o ID do resgistro do banco no objeto
      *
