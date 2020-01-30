@@ -38,5 +38,23 @@ class UserController extends Controller
         return view('TelasUsuarios.calendar', $variaveis);
     }
 
-    
+    /**
+     * Exibir tela de agendamento de uma instituicao
+     *
+     * @return void
+     */
+    public function agendamento(){
+        $variaveis = [
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Agendar visita"
+        ];
+
+        return view('telasUsuarios.formularioAgendamento', $variaveis);
+    }
+
+    //inserir dados do agendamento pelo POST na classe e no banco de dados
+    public function agendarInstituicao(){
+
+        
+    }
 }

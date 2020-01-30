@@ -100,3 +100,8 @@ Route::get('/testes', function(){
 });
 
 Route::get('/calendario', 'UserController@calendario');
+
+//Rotas para agendamento de uma instituicao
+Route::get('/agendamento', 'UserController@agendamento');
+Route::post('/agendamento', 'UserController@agendarInstituicao')->name("AgendarInstituicao.post");
+
