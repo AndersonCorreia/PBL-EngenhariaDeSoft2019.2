@@ -3,6 +3,8 @@
 @section('title', 'Agendamento')
 
 @section('conteudo')
+
+@include('telasUsuarios.calendar')
 <form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('AgendarInstituicao.post')}}">
     {{csrf_field()}}
     <fieldset>

@@ -41,7 +41,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         $cidade_id;
         if($row==[]){
             $this-> INSERT_Cidade_UF($cidade, $UF);
-            $cidade_id = $this->SELECT_Cidade_UF_ID($cidade, $UF)['ID'];
+            $cidade_id = $this->getLastID();
         } else{
             $cidade_id =$row['ID'];
         }

@@ -5,12 +5,12 @@
  * estar no InicialController em vez daqui, mas não é de bom tom, pois como falei acima 
  * é uma questão de segurança
  */
-namespace App\Http\Controllers\Funcionario;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-class ControllerVisita extends Controller{
+require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
+class VisitaController extends Controller{
 
 
     public function getTelaVisita(){

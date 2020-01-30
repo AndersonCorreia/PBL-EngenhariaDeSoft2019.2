@@ -106,7 +106,7 @@ Route::get('/agendamentoUsuario', 'UserController@agendamentoIndividual');
 Route::post('/agendamentoUsuario', 'UserController@agendarContaIndividual');
 
 //Rotas para agendamento de uma instituicao
-Route::get('/agendamento', 'UserController@agendamento');
+Route::get('/agendamento', 'UserController@agendamento')->name("Agendar.show");
 Route::post('/agendamento', 'UserController@agendarInstituicao')->name("AgendarInstituicao.post");
 
 //Rota para retornar a tela de Gerenciamento de Visitas.
