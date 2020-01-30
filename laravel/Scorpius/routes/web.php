@@ -106,6 +106,5 @@ Route::get('/gerenciamentoDeVisita', ['uses'=>'VisitaController@getTelaVisita'])
 Route::get('/agendamento', 'UserController@agendamento');
 Route::post('/agendamento', 'UserController@agendarInstituicao')->name("AgendarInstituicao.post");
 
-Route::get('/gerenciamentoDeVisita', 'ControllerVisita@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
 /**
 * Rota para retornar a tela de Gerenciamento de Visitas.
