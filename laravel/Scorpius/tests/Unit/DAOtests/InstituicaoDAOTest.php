@@ -48,20 +48,26 @@ class InstituicaoDAOTest extends TestCase
         
         self::$DAO->INSERT($universidade);
         $issuperior = self::$DAO->DELETE($universidade);
+        \assertTrue($issuperior, "Erro ao deletar");
 
-        \assertNull($issuperior);
+        $issuperior = self::$DAO->DELETE($universidade);
+
+        \assertFalse($issuperior, "Erro ao deletar");
+
     }
 
     public function testUPDATE(){
-        $testInst = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
-        "Feira de Santana", "Bahia", "57849241", "32458745", "Estadual");
+        $testInst1 = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
+        "Feira de Santana", "Bahia", "57849241", "32458745", "Estadual", 1000);
 
-        self::$DAO->UPDATE($testInst);
-        
-        \assertNotEquals('UEFS', $testInst->getNome());
-        \assertNotEquals('Evandro', $testInst->getResponsavel());
-        \assertNotEquals('Avenida Transnordestina', $testInst->getEndereco());
-        \assertNotEquals('SN', $testInst->getNumero());
+        $issuperior = self::$DAO->UPDATE($testInst);
+        \assertFalse($issuperior, "Erro ao atualizar", $testInst->getNome());
+
+        self::$inst1->setNumero("20");
+
+        $testInst2 = self::$DAO->SELECT($inst1->getNome(), $inst1->getEndereco(), false);
+
+        \assertEquals($testInst2->getNumero(), self::$inst1->getNumero());
     }
     /**
      * Teste da função SELECT ao procurar uma instituição que não existe
