@@ -175,7 +175,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
      * @return array
      */
     private function SELECT_Cidade_UF_ID($cidade, $uf){
-        $sql = "SELECT ID FROM cidade_UF c where cidade='$cidade' and uf='$uf'";
+        $sql = "SELECT ID FROM cidade_UF c where c.cidade='$cidade' and c.uf='$uf'";
         $stmt = $this->dataBase->query($sql);    
         $row = $stmt->fetch_assoc();
         return $row;     

@@ -20,10 +20,10 @@ Route::get('/entrar', ['uses'=>'InicialController@telaEntrar'])->name('entrar');
 Route::get('/login-administrativo', ['uses' => 'InicialController@loginAdm'])->name('loginAdm');
 
 // chama tela de alterar dados cadastrais localizada no controller através do método index
-Route::resource('AlterarDadosUsuario', 'AlteraUsuarioController');
+Route::resource('/AlterarDadosUsuario', 'AlteraUsuarioController');
 
 // chama tela do horario dos estagiários localizada no controller através do método index
-Route::resource('horarioEstagiario', 'horarioEstagiarioController');
+Route::resource('/horarioEstagiario', 'horarioEstagiarioController');
 
 /**
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que

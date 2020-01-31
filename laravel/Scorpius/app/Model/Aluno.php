@@ -10,9 +10,8 @@ class Aluno extends \App\DB\interfaces\DataObject
     private $idade;
     private $turma;
     private $aluno;
-    private $ID;
 
-    public function __Construct($ID, $nome, $idade)
+    public function __Construct($nome, $idade, $ID=null )
     {
         $this->nome = $nome;
         $this->idade = $idade;
@@ -72,7 +71,6 @@ class Aluno extends \App\DB\interfaces\DataObject
 
     public function setTurma($turma)
     {
-        $this->setAlterado();
         $this->turma = $turma;
     }
 
