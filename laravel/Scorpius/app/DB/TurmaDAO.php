@@ -50,6 +50,7 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
             'turma' => $turma->fetch_assoc(),
             'alunos' => $alunos
         ];
+        return $dados;
     }
     public function DELETEbyNome($professor_ID, $nome){
         $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nome);
