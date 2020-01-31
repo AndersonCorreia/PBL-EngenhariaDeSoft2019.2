@@ -7,23 +7,23 @@
     {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">
-            </div>
-            <div class="form-group col-sm-4">
-                <span>Data</span></br>
+            <div class="form-group col-md-6">
+                <label for="inputData">Data</label>
                 <input class="form-control" type="date" id="data" name="data" required>
             </div>
-            <div class="form-group col-sm-4">
-                <span>Turno</span>
+            <div class="form-group col-md-6">
+                <label for="selectTurno">Turno</label>
                 <select id="turno" name="turno" class="custom-select" placeholder="turno" required>
                     <option value="manhã">Manhã</option>
                     <option value="tarde">Tarde</option>
                     <option value="noite">Noite</option>
                 </select>
             </div>
+        </div>
             <div class="form-group col-sm-12 visitantes">
                 <span><h6>Dados dos visitantes</h6></span>
                 <div class="row box">
-                    <div class="col-md-4 m-0 p-1 ">
+                    <div class="col-md-5 m-0 p-1 ">
                         <input id="visitante" class="form-control"  type="text" maxlength="40" name="Visitante" placeholder="Nome" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-3">
@@ -33,17 +33,18 @@
                         <input id="idade" class="form-control"  type="text" maxlength="3" name="idade" placeholder="idade" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-1">
-                        <button type="button" class="btn btn-primary clone">+</button>
+                        <button type="button" class="btn btn-primary btn-sm btn-block clone">+</button>
                     </div>
                     <div class="col-md-1">
-                        <input type="button" class="btn btn-primary btn_remove" value="-">
+                        <button type="button" class="btn btn-primary btn-sm btn-block btn_remove">-</button>
                     </div>
                 </div>
             </div>
             <div class="form-group col-sm-12">
-                <textarea name="obs" cols="30" rows="3" placeholder="Alguma Observação"></textarea>
+                <label for="exampleFormControlTextarea1">Observações</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-            <div class="input-group-append mt-2">
+            <div class="btn-lg btn-block">
                 <button id="submit" type="submit" class="btn mr-2 btn-primary">Solicitar Agendamento</button>
                 <a href="#"><button type="button" class="btn btn-danger">Cancelar</button> </a>
             </div>
