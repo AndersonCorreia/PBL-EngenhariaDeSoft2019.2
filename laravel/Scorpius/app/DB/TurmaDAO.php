@@ -5,7 +5,7 @@ use App\Model\Turma;
 use App\Model\Aluno;
 
 class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
-    public function INSERT($turma, $alunos): bool
+    public function INSERT_CriarTurma($turma, $alunos): bool
     {
         $nome = $turma->getNome();
         $ano_escolar = $turma->getAno_escolar();
@@ -18,15 +18,16 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
             '$ensino',
             '$professor_ID'
         )";
-        $turma = $this->dataBase->query($sql);
+        $this->dataBase->query($sql);
         
         $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nome);
+        $turma->setID($turma_ID);
         foreach($alunos as $aluno){
             $aluno->setTurma($turma_ID);
             $aluno->novoAluno();
         }
     }
-    public function UPDATE($professor_ID, $nomeAntigo, $turma){
+    public function UPDATE_TURMA($professor_ID, $nomeAntigo, $turma){
         $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nomeAntigo);
 
         $sql = "UPDATE turma 
@@ -66,7 +67,7 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
     {
         $sql = "SELECT * FROM turma WHERE professor_instituicao_ID = $professor_ID";
         $resultado = $this->dataBase->query($sql);
-        $row = $resultado->fetch_assoc();
+        $row = $resultado;//$resultado->fetch_assoc();
         $rowAlunos = new AlunoDAO;
         $alunos = array();
         foreach($row as $turma){
@@ -78,11 +79,25 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
         ];
         return $dados;
     }
+    public function UPDATE_ALUNO($turma_ID, $aluno)
+    {
+        $sql = "UPDATE aluno 
+        SET nome = '$aluno->getNome()', 
+        idade = '$aluno->getIdade()'
+        WHERE turma_ID = $turma_ID";
+        return $this->dataBase->query($sql);
+    }
     function SELECT_ALL(String $table = "turma")
     {
         return parent::SELECT_ALL($table);
     }
     function DELETE($turma): bool{
         
+    }
+    public function INSERT($turma): bool
+    {
+    }
+    public function UPDATE($turma): bool
+    {
     }
 }

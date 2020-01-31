@@ -37,9 +37,7 @@ Route::get('/verificacao-email/{email}/{token}', 'EmailVerificacaoController@ind
 Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show");
 
 
-Route::get('/dashboard/turmas', ['as'=>'dashboard.turmas', function(){
-    return view('telaTurma.index');
-}]);
+Route::get('/dashboard/{professor_ID}/turmas', 'TurmaController@index');
 /**
  * Rota para retornar a tela para cadastra uma instituição
  */

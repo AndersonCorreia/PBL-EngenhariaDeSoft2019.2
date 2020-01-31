@@ -10,6 +10,7 @@ class Turma extends \App\DB\interfaces\DataObject
     private $ano_escolar;
     private $ensino;
     private $professor_ID;
+    private $turma_ID;
     private $turma;
 
     function __Construct()
@@ -23,20 +24,26 @@ class Turma extends \App\DB\interfaces\DataObject
         $this->ensino = $turma['ensino'];
         $this->professor_ID = $turma['professor_ID'];
 
-        $this->turma->INSERT($this, $alunos);
+        $this->turma->INSERT_CriarTurma($this, $alunos);
         return $this;
     }
 
-    // protected function save(){
+    protected function save(){
     //     (new \app\DB\TurmaDAO)->UPDATE($this);
-    // }
+     }
     // Funcoes do BD
-    public function atualizarDados($professor_ID, $nomeAntigo, $turma, $alunos)
+    public function atualizarDados($professor_ID, $nomeAntigo, $turma)
     {
-        return $this->turma->UPDATE($professor_ID, $nomeAntigo, $turma, $alunos);
+        return $this->turma->UPDATE_TURMA($professor_ID, $nomeAntigo, $turma);
     }
     public function excluirTurma($professor_ID, $nome){
         return $this->turma->DELETE($professor_ID, $nome);
+    }
+    public function todasTurmas($professor_ID){
+        return $this->turma->SELECT_ALL_byProfessorID($professor_ID);
+    }
+    public function editarAluno($turma_ID, $aluno){
+        return $this->turma->UPDATE_ALUNO($turma_ID, $aluno);
     }
     // GETTERS E SETTERS
     public function setNome($nome)

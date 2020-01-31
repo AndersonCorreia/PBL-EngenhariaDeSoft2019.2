@@ -21,12 +21,12 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
         // dd($resultado)
         return $resultado;
     }
-    public function UPDATE($turma_ID, $aluno): bool
+    public function UPDATE_ALUNO($turma_ID, $aluno): bool
     {
         $sql = "UPDATE aluno 
         SET nome = '$aluno->getNome()', idade = $aluno->getIdade()
         WHERE turma_ID = $turma_ID";
-        return $this->dataBase->query($sql);;
+        return $this->dataBase->query($sql);
     }
     public function SELECTbyTurma($turma_ID)
     {
@@ -53,5 +53,8 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
     function SELECT_ALL(String $table = "aluno")
     {
         return parent::SELECT_ALL($table);
+    }
+    public function UPDATE($aluno): bool
+    {
     }
 }
