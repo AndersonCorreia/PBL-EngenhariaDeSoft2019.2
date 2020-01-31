@@ -12,11 +12,12 @@ class Aluno extends \App\DB\interfaces\DataObject
     private $aluno;
     private $ID;
 
-    public function __Construct($nome, $idade)
+    public function __Construct($ID, $nome, $idade)
     {
         $this->nome = $nome;
         $this->idade = $idade;
         $this->aluno = new AlunoDAO();
+        $this->ID = $ID;
     }
     // public function __Construct($nome, $idade)
     // {
@@ -46,7 +47,7 @@ class Aluno extends \App\DB\interfaces\DataObject
     {
         return $this->ID;
     }
-    
+
     public function setNome($nome)
     {
         $this->setAlterado();

@@ -1,10 +1,12 @@
 <?php
 
 namespace App\DB;
+
 use App\Model\Turma;
 use App\Model\Aluno;
 
-class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
+class TurmaDAO extends \App\DB\interfaces\DataAccessObject
+{
     public function INSERT_CriarTurma($turma, $alunos): bool
     {
         $nome = $turma->getNome();
@@ -19,15 +21,16 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
             '$professor_ID'
         )";
         $this->dataBase->query($sql);
-        
+
         $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nome);
         $turma->setID($turma_ID);
-        foreach($alunos as $aluno){
+        foreach ($alunos as $aluno) {
             $aluno->setTurma($turma_ID);
             $aluno->novoAluno();
         }
     }
-    public function UPDATE_TURMA($professor_ID, $nomeAntigo, $turma){
+    public function UPDATE_TURMA($professor_ID, $nomeAntigo, $turma)
+    {
         $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nomeAntigo);
 
         $sql = "UPDATE turma 
@@ -39,7 +42,7 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
     }
 
     public function SELECTbyNome($professor_ID, $nome)
-    {   
+    {
         $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nome);
         $alunos = new AlunoDAO;
         $alunos->SELECTbyTurma($turma_ID);
@@ -52,15 +55,22 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
         ];
         return $dados;
     }
-    public function DELETEbyNome($professor_ID, $nome){
+    public function DELETEbyNome($professor_ID, $nome)
+    {
         $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nome);
+        $alunos = new AlunoDAO;
+        $alunos->DELETEbyTurma($turma_ID);
+        return $this->dataBase->query("DELETE FROM turma WHERE ID = $turma_ID");
+    }
+    public function DELETEbyID($turma_ID)
+    {
         $alunos = new AlunoDAO;
         $alunos->DELETEbyTurma($turma_ID);
         return $this->dataBase->query("DELETE FROM turma WHERE ID = $turma_ID");
     }
     public function SELECT_IDbyNome($professor_ID, $nome)
     {
-        $sql = "SELECT ID FROM turma WHERE professor_ID = $professor_ID AND nome = '$nome'";
+        $sql = "SELECT ID FROM turma WHERE professor_instituicao_ID = $professor_ID AND nome = '$nome'";
         $resultado = $this->dataBase->query($sql);
         return $resultado->fetch_assoc();
     }
@@ -68,11 +78,14 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
     {
         $sql = "SELECT * FROM turma WHERE professor_instituicao_ID = $professor_ID";
         $resultado = $this->dataBase->query($sql);
-        $row = $resultado;//$resultado->fetch_assoc();
+        $row = $resultado; //$resultado->fetch_assoc();
         $rowAlunos = new AlunoDAO;
         $alunos = array();
-        foreach($row as $turma){
-            $alunos[] = $rowAlunos->SELECTbyTurma($turma['ID']);
+
+        foreach ($row as $turma) {
+            foreach ($rowAlunos->SELECTbyTurma($turma['ID']) as $aluno) {
+                $alunos[] = $aluno;
+            }
         }
         $dados = [
             'turmas' => $row,
@@ -92,13 +105,10 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject{
     {
         return parent::SELECT_ALL($table);
     }
-    function DELETE($turma): bool{
-        
-    }
+    function DELETE($turma): bool
+    { }
     public function INSERT($turma): bool
-    {
-    }
+    { }
     public function UPDATE($turma): bool
-    {
-    }
+    { }
 }

@@ -32,7 +32,7 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
     {
         $sql = "SELECT * FROM aluno WHERE turma_ID = $turma_ID";
         $resultado = $this->dataBase->query($sql);
-        return $resultado->fetch_assoc(); 
+        return $resultado; 
     }
 
     public function DELETEbyTurma($turma_ID){

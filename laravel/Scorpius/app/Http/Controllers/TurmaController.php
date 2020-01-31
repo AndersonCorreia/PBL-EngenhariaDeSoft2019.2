@@ -13,6 +13,18 @@ class TurmaController extends Controller
         $turma = new Turma;
         $turmas = $turma->todasTurmas($professor_ID);
         $variaveis = [
+            'professor_ID' =>$professor_ID,
+            'itensMenu' => getMenuLinks("visitante"),
+            'turmas' => $turmas
+        ];
+        return view('telaTurma.index', $variaveis);
+    }
+    public function excluirTurma($professor_ID){
+        $turma = new Turma;
+        $turma->excluirTurma(intval($_POST['turma']));
+        $turmas = $turma->todasTurmas($professor_ID);
+        $variaveis = [
+            'professor_ID' =>$professor_ID,
             'itensMenu' => getMenuLinks("visitante"),
             'turmas' => $turmas
         ];

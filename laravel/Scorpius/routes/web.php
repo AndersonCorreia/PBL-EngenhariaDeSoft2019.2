@@ -38,6 +38,7 @@ Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("insti
 
 
 Route::get('/dashboard/{professor_ID}/turmas', 'TurmaController@index');
+Route::post('/dashboard/{professor_ID}/turmas', 'TurmaController@excluirTurma')->name("excluirTurma");
 /**
  * Rota para retornar a tela para cadastra uma instituição
  */
