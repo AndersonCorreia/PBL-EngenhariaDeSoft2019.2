@@ -7,7 +7,6 @@
     {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">
-            <span><h5>Dados para o agendamento</h5></span>
             </div>
             <div class="form-group col-sm-4">
                 <span>Data</span></br>
@@ -24,11 +23,14 @@
             <div class="form-group col-sm-12 visitantes">
                 <span><h6>Dados dos visitantes</h6></span>
                 <div class="row box">
-                    <div class="col-md-7 m-0 p-1 ">
-                        <input id="visitante" class="form-control"  type="text" maxlength="40" name="Visitante" placeholder="Nome completo" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                    <div class="col-md-4 m-0 p-1 ">
+                        <input id="visitante" class="form-control"  type="text" maxlength="40" name="Visitante" placeholder="Nome" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-3">
                         <input id="RG" class="form-control"  type="text" maxlength="15" name="RG" placeholder="RG" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input id="idade" class="form-control"  type="text" maxlength="3" name="idade" placeholder="idade" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-1">
                         <button type="button" class="btn btn-primary clone">+</button>
