@@ -29,9 +29,8 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
             '$data_final', 
             '$imagem'
         )";
-        //usa a variavel $dataBase para  fazer a query no banco
+
         $resultado = $this->dataBase->query($sql);
-        dd($resultado);
         return $resultado;
     }
     function UPDATE($exposicao): bool

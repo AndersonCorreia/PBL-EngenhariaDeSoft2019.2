@@ -10,23 +10,38 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
     function INSERT($aluno): bool{
         $nome = $aluno->getNome();
         $idade = $aluno->getIdade();
-        $turma = $aluno->getTurma();
+        $turma_ID = $aluno->getTurma();
 
         $sql = "INSERT INTO aluno (nome, idade, turma_ID) VALUE (
             '$nome',
-            '$idade',
-            '$turma'
+            $idade,
+            $turma_ID
         )";
         $resultado = $this->dataBase->query($sql);
-        dd($resultado);
+        // dd($resultado)
         return $resultado;
     }
-    public function UPDATE($aluno): bool
+    public function UPDATE($turma_ID, $aluno): bool
     {
-        $sql = "UPDATE aluno SET nome = $aluno->getNome(), idade = $aluno->getIdade()";
+        $sql = "UPDATE aluno 
+        SET nome = '$aluno->getNome()', idade = $aluno->getIdade()
+        WHERE turma_ID = $turma_ID";
         return $this->dataBase->query($sql);;
     }
+    public function SELECTbyTurma($turma_ID)
+    {
+        $sql = "SELECT * FROM aluno WHERE turma_ID = $turma_ID";
+        $resultado = $this->dataBase->query($sql);
+        return $resultado->fetch_assoc(); 
+    }
 
+    public function DELETEbyTurma($turma_ID){
+        return $this->dataBase->query("DELETE FROM aluno WHERE turma_ID = $turma_ID");
+    }
+    public function DELETE_Aluno_ByTurma($aluno_ID)
+    {
+        return $this->dataBase->query("DELETE FROM aluno WHERE ID = $aluno_ID");
+    }
     public function DELETE($aluno): bool{
         return $this->DELETEbyID($aluno->getID());
     }
