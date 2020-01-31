@@ -13,6 +13,7 @@ class InstituicaoDAOTest extends TestCase
     protected static $inst0;
     protected static $inst1;
     protected static $inst2;
+    protected static $inst3;
 
     public static function setUpBeforeClass(): void{
         try {
@@ -44,7 +45,7 @@ class InstituicaoDAOTest extends TestCase
 
     public function testDELETE(){
         $universidade = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
-        "Feira de Santana", "Bahia", "57849241", "32458745", "Estadual");
+        "Feira de Santana", "BA", "57849241", "32458745", "Estadual");
         
         self::$DAO->INSERT($universidade);
         $issuperior = self::$DAO->DELETE($universidade);
@@ -52,20 +53,18 @@ class InstituicaoDAOTest extends TestCase
     }
 
     public function testUPDATE(){
-        $testInst1 = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
-        "Feira de Santana", "Bahia", "57849241", "32458745", "Estadual");
+        self::$inst2 = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
+        "Feira de Santana", "BA", "57849241", "32458745", "Estadual");
 
-        $issuperior = self::$DAO->INSERT($testInst1);
+        $issuperior = self::$DAO->INSERT(self::$inst2);
         \assertTrue($issuperior, "Erro ao inserir");
-        $testInst1->setNumero("20");
-        $issuperior = self::$DAO->UPDATE($testInst1);
-
+        self::$inst2->setNumero("20");
+        $issuperior = self::$DAO->UPDATE(self::$inst2);
         \assertTrue($issuperior, "Erro ao atualizar");
 
-        $testInst2 = self::$DAO->SELECT($testInst1->getNome(), $testInst1->getEndereco(), false);
+        $testInst2 = self::$DAO->SELECT(self::$inst2->getNome(), self::$inst2->getEndereco(), false);
 
-        \assertEquals($testInst2->getNumero(), $testInst1->getNumero());
-        self::$DAO->DELETE($testInst2);
+        \assertEquals($testInst2->getNumero(), self::$inst2->getNumero());
     }
     /**
      * Teste da função SELECT ao procurar uma instituição que não existe
@@ -116,9 +115,9 @@ class InstituicaoDAOTest extends TestCase
      */
     public function testINSERT_CidadeNovaNoBanco(){
 
-        self::$inst2 = new Instituicao("colegio y", "diretor", "alagoinhas", "96A", "Alagoinhas", "BA",
+        self::$inst3 = new Instituicao("colegio y", "diretor", "alagoinhas", "96A", "Alagoinhas", "BA",
                                         "44999000","tel", "Estadual");
-        $inst = self::$inst2;
+        $inst = self::$inst3;
         self::$DAO->INSERT($inst);
         $instDB = self::$DAO->SELECTbyID($inst->getID(), false);
 
@@ -131,5 +130,6 @@ class InstituicaoDAOTest extends TestCase
         self::$DAO->DELETE(self::$inst0);
         self::$DAO->DELETE(self::$inst1);
         self::$DAO->DELETE(self::$inst2);
+        self::$DAO->DELETE(self::$inst3);
     }
 }

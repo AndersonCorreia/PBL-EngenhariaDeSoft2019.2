@@ -108,6 +108,18 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
+    public function testTelainstituicao_editar()
+    {
+        $response = $this->get('/instituicao/editar/201');
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Testa se a rota carrega normalmente.
+     *
+     * @return void
+     */
     public function testTelaAgendamentoUsuario()
     {
         $response = $this->get('/agendamentoUsuario');

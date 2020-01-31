@@ -51,16 +51,13 @@ class Professor_InstituicaoDAOTest extends TestCase
     }
 
     public function testdesativarByID(){
-        $universidade = new Instituicao("UEFS", "Evandro", "Avenida Transnordestina", "SN",
-        "Feira de Santana", "Bahia", "57849241", "32458745", "Estadual", 10);
-        self::$instituicaoDAO->INSERT($universidade);
-        var_dump($universidade->getID());
+        $universidade = self::$inst0;
         self::$DAO->INSERTbyID($universidade->getID(), 601);
         $issuperior = self::$DAO->desativarByID($universidade->getID(), 601);
 
         \assertTrue($issuperior, "Erro ao desativar Instituição" );
         $registros = self::$DAO->SELECTbyUsuario_ID(601);
-        \assertNotContains( "UEFS", $registros);
+        \assertNotContains( ["nome" =>"colegio xy"], $registros);
 
     }
 
@@ -78,22 +75,19 @@ class Professor_InstituicaoDAOTest extends TestCase
      * @return void
      */
     public function testINSERT_professorInstituicao(){
-        
-        $insert0 = self::$DAO->INSERTbyID(self::$inst0->getID(), 601);
-        $insert1 = self::$DAO->INSERTbyID(self::$inst1->getID(), 701);
-        \assertTrue($insert0);
-        \assertTrue($insert1);
+    
+        $insert = self::$DAO->INSERTbyID(self::$inst1->getID(), 701);
+        \assertTrue($insert);
         
     }
 
     public static function tearDownAfterClass(): void{
         //apagando os objetos do banco de dados
-        $dados0 =self::$DAO->SELECTbyID(self::$inst0->getID(), 601 );
-        $dados1 =self::$DAO->SELECTbyID(self::$inst1->getID(), 701 );
+        $dados0 =self::$DAO->SELECTbyID(self::$inst0->getID(), 601, true, false);
+        $dados1 =self::$DAO->SELECTbyID(self::$inst1->getID(), 701, true, false);
         self::$DAO->DELETEbyID($dados0["ID"]);
         self::$DAO->DELETEbyID($dados1["ID"]);
         self::$instituicaoDAO->DELETE(self::$inst0);
         self::$instituicaoDAO->DELETE(self::$inst1);
-
     }
 }

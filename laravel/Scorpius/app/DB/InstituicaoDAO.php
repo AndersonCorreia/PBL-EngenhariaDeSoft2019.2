@@ -27,8 +27,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
 
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("sssssssss", $nome, $resp, $endereco, $numero, $cep, $tel, $tipo, $cidade, $UF);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
+        $resultado = $stmt->execute();
         $instituicao->setID($this);//adcionando ID no objeto que acabou de ser inserido
 
         return $resultado;
@@ -77,14 +76,10 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
      * @return boolean true caso operação ocorra com sucesso, caso contrário retorna false;
      */
     function DELETEbyID(int $id){
-        $sql = "DELETE FROM instituicao WHERE id = ?";;
+        $sql = "DELETE FROM instituicao WHERE id = ?";
         $stmt = $this->dataBase->prepare($sql);
         $result = $stmt->bind_param("i",$id);
-        if($result){
-            return $stmt->execute();    
-        }else{
-            throw new \Exception("Nenhuma instituição foi encontrada com o id $id");
-        }
+        return $stmt->execute();
     }
 
     function SELECTbyID(int $id, bool $asArray=true){
@@ -102,12 +97,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
                                 $row["UF"],$row["cep"],$row["telefone"],$row["tipo_instituicao"],$row["ID"]);
             return $obj;
         }
-        throw new \Exception("Nenhuma instituição foi encontrada com o id $id");
-    }
-
-
-    function SELECT_ALL(String $table="instituicao"){
-        return parent::SELECT_ALL($table);
+        throw new \Exception("Nenhuma instituição foi encontrada");
     }
 
     /**

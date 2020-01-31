@@ -71,10 +71,11 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $stmt->execute();
     }
 
-    function SELECTbyID(int $I_id,int $U_id, bool $asArray=true){
+    function SELECTbyID(int $I_id,int $U_id, bool $asArray=true, $filtrar_ativo=true){
         $select = "*";
         $join = "professor_instituicao pi";
-        $sql = "SELECT $select FROM $join WHERE pi.instituicao_ID = $I_id AND pi.usuario_id = $U_id AND pi.ativo = 1";
+        $filtrar = $filtrar_ativo ? "AND pi.ativo = 1" : "";
+        $sql = "SELECT $select FROM $join WHERE pi.instituicao_ID = $I_id AND pi.usuario_id = $U_id $filtrar";
         $resultado = $this->dataBase->query($sql);
         $row = $resultado->fetch_assoc();
 
@@ -85,7 +86,7 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
             $obj;//criar os objetos do usuario e instituição usando os demais DAO;
             return $p_i;
         }
-        throw new \Exception("Nenhum registro foi encontrado com o id $id");
+        throw new \Exception("Nenhum registro foi encontrado");
     }
 
 
