@@ -29,17 +29,31 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
             $aluno->novoAluno();
         }
     }
-    public function UPDATE_TURMA($professor_ID, $nomeAntigo, $turma)
+    public function INSERT_ALUNO($turma_ID, $aluno)
     {
-        $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nomeAntigo);
-
+        $novoAluno = new Aluno($aluno['nome'], $aluno['idade'], $turma_ID);
+        return $novoAluno->novoAluno();
+    }
+    public function UPDATE_TURMA($turma_ID, $turma)
+    {   
+        $nome = $turma['nome'];
+        $anoEscolar = $turma['ano'];
+        $ensino = $turma['ensino'];
         $sql = "UPDATE turma 
-        SET nome = '$turma->getNome()', 
-        ano_escolar = '$turma->getAno_escolar()',
-        ensino = '$turma->getEnsino()' 
+        SET nome = '$nome', 
+        ano_escolar = '$anoEscolar',
+        ensino = '$ensino' 
         WHERE ID = $turma_ID";
         return $this->dataBase->query($sql);
     }
+    public function UPDATE_NOME_TURMA($turma_ID, $novoNome)
+    {
+        $sql = "UPDATE turma 
+        SET nome = '$novoNome', 
+        WHERE ID = $turma_ID";
+        return $this->dataBase->query($sql);
+    }
+    
 
     public function SELECTbyNome($professor_ID, $nome)
     {
@@ -104,6 +118,14 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
     function SELECT_ALL(String $table = "turma")
     {
         return parent::SELECT_ALL($table);
+    }
+    function DELETE_ALUNObyID($aluno_ID){
+        $aluno = new AlunoDAO();
+        $aluno->DELETEbyID($aluno_ID);
+    }
+    function UPDATE_NOME_ALUNObyID($aluno_ID, $novoNome){
+        $aluno = new AlunoDAO();
+        $aluno->UPDATE_NOME_ALUNO($aluno_ID, $novoNome);
     }
     function DELETE($turma): bool
     { }

@@ -1,74 +1,209 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
 @section('title', 'Turmas')
+@section('css.head')
+<style>
+    @media only screen and (max-width: 580px) {
+        .btn-excluir-turma {
+            padding-left: 15px !important;
+            -webkit-box-flex: 0 !important;
+            flex: 0 0 auto !important;
+            max-width: 100% !important;
+            width: 27% !important;
+        }
 
+        .div-btn-turma {
+            -webkit-box-flex: 0 !important;
+            flex: 0 0 70% !important;
+            max-width: 70% !important;
+        }
+    }
+
+    .btn-editar-excluir {
+        width: 27% !important;
+    }
+</style>
+@endsection
 @section('conteudo')
-<div class="container">
-    <div id="parte-top">
-        {{-- Botão cadastrar novas turmas --}}
-        <a href="" id="cadastrar-turmas" class="btn btn-secondary">
-            <i class="fas fa-plus-circle    "></i>
-            Cadastrar novas turmas
-        </a>
-    </div>
-    <div id="parte-bottom">
-        {{-- Titulo --}}
-        <nav class="navbar navbar-light bg-light">
-            <span class="navbar-brand mb-0 h1">Suas turmas:</span>
-        </nav>
-        {{-- Lista de turmas --}}
-        <span aria-disabled="false" value=""></span>
-        <div class="list-group">
-            @foreach($turmas['turmas'] as $turma)
-            <form method="POST" action="{{ route('excluirTurma', ['0'=>$professor_ID]) }}">
-                @csrf
-                
-                <input type="hidden" name="turma" value="{{$turma['ID']}}">
-                <input type="hidden" name="professor_ID" value="{{$professor_ID}}">
-                <button type="button" class="btn btn-primary list-group-item list-group-item-action active"
-                    data-toggle="modal" data-target="#turma{{$turma['ID']}}">
-                    {{$turma['nome']}}
-                    <button type="submit" class="btn btn-danger">
-
-                        <i class="fas fa-trash    "></i>
-                    </button>
-                </button>
-            </form>
-            @endforeach
+<div class="container-fluid bg-white p-4"
+    style="border-bottom-right-radius:30px;border-bottom-left-radius:30px;border-top-right-radius:30px;border-top-left-radius:30px">
+    <div class="container-fluid">
+        <div id="parte-top">
+            {{-- Alertas --}}
+            @if($msg == NULL)
+            @elseif ($msg['ERRO'] == 'TRUE')
+            <div class="alert alert-danger" role="alert">{{$msg['MSG']}}</div>
+            @elseif($msg['ERRO'] == 'FALSE')
+            <div class="alert alert-success" role="alert">{{$msg['MSG']}}</div>
+            @endif
+            {{-- Botão cadastrar novas turmas --}}
+            <a href="" id="cadastrar-turmas" class="btn btn-secondary">
+                <i class="fas fa-plus-circle    "></i>
+                Cadastrar nova turma e alunos
+            </a>
         </div>
-        {{-- Modals das turmas --}}
-        <div id="modals">
-            @foreach($turmas['turmas'] as $turma)
-            <div class="modal fade" id="turma{{$turma['ID']}}" tabindex="-1" role="dialog"
-                aria-labelledby="{{$turma['ID']}}Title" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="{{$turma['ID']}}Title">{{$turma['nome']}}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+        <div id="parte-bottom">
+
+            {{-- Titulo --}}
+            <nav class="navbar navbar-light">
+                <span class="navbar-brand mb-0 h1">Suas turmas:</span>
+            </nav>
+            {{-- Lista de turmas --}}
+            <span aria-disabled="false" value=""></span>
+            <div class="">
+                @foreach($turmas['turmas'] as $turma)
+                {{-- EXCLUIR TURMA --}}
+                <form class="mb-2" method="POST" action="{{ route('excluirTurma', ['0'=>$professor_ID]) }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-10 div-btn-turma">
+                            <input type="hidden" name="turma_ID" value="{{$turma['ID']}}">
+                            <input type="hidden" name="professor_ID" value="{{$professor_ID}}">
+                            <button type="button" class="btn btn-secondary btn-turma btn-lg btn-block"
+                                data-toggle="modal" data-target="#turma{{$turma['ID']}}">
+                                {{$turma['nome']}}
+
                             </button>
                         </div>
-                        <div class="modal-body">
-                            {{-- {{dd($turmas['alunos'])}} --}}
-                            @foreach ($turmas['alunos'] as $aluno)
-                            
-                            @if($aluno['turma_ID'] == $turma['ID'])
-                            {{$aluno['nome']}}
-                            <div></div>
-                            @endif
-
-                            @endforeach
+                        <div class="btn-editar-excluir col-sm-2">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#editarTurma{{$turma['ID']}}">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <button type="submit" class=" btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+                <div class="modal fade" id="editarTurma{{$turma['ID']}}" tabindex="-1" role="dialog"
+                    aria-labelledby="editarTurma{{$turma['ID']}}Title" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editarTurma{{$turma['ID']}}Title">Editar turma
+                                    <strong>{{$turma['nome']}}</strong></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="POST" action="{{ route('editarTurma', ['0'=>$professor_ID]) }}">
+                                <div class="modal-body">
+                                    {{-- EDITAR TURMA --}}
+
+                                    @csrf
+                                    <input name="turma_ID" type="hidden" value="{{$turma['ID']}}">
+                                    <div class="container">
+                                        <div>
+                                            <label for="nome{{$turma['ID']}}">Nome</label>
+                                            <input placeholder="{{$turma['nome']}}" type="text" class="form-control"
+                                                id="nome{{$turma['ID']}}" name="nomeTurma">
+                                        </div>
+                                        <div>
+                                            <label for="anoEscolar{{$turma['ID']}}">Ano escolar</label>
+                                            <input placeholder="{{$turma['ano_escolar']}}" type="text"
+                                                class="form-control" id="anoEscolar{{$turma['ID']}}"
+                                                name="anoEscolar">
+                                        </div>
+                                        <div>
+                                            <label for="ensino{{$turma['nome']}}">Tipo de ensino</label>
+                                            <select id="ensino{{$turma['nome']}}" name="ensino" class="form-control">
+                                                <option selected value="Ensino Fundamental">Ensino Fundamental</option>
+                                                <option value="Ensino Médio">Ensino Médio</option>
+                                                <option value="Ensino Técnico">Ensino Técnico</option>
+                                                <option value="Ensino Superior">Ensino Superior</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+                @endforeach
+                {{-- Modals das turmas --}}
+                <div id="modals">
+                    @foreach($turmas['turmas'] as $turma)
+                    <div class="modal fade" id="turma{{$turma['ID']}}" tabindex="-1" role="dialog"
+                        aria-labelledby="{{$turma['ID']}}Title" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="{{$turma['ID']}}Title">{{$turma['nome']}}</h5>
+                                    <input name="turma_ID" type="hidden" value="{{$turma['ID']}}">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul class="list-group list-group-flush">
+                                        @foreach ($turmas['alunos'] as $aluno)
+                                        @if($aluno['turma_ID'] == $turma['ID'])
+                                        <li class="list-group-item mx-auto">
+                                            {{-- EXCLUIR ALUNO --}}
+                                            <form method="POST"
+                                                action="{{ route('excluirAluno', ['0'=>$professor_ID]) }}">
+                                                @csrf
+                                                <input name="aluno_ID" type="hidden" value="{{$aluno['ID']}}">
+                                                <div class="row">
+                                                    <div class="col-md-auto">
+                                                        <p class="h5">{{$aluno['nome']}}</p>
+                                                    </div>
+                                                    <div class="col-md-auto">
+                                                        <p class="h5">{{$aluno['idade']}} anos</p>
+                                                    </div>
+                                                    <div class="col-md-auto float-right">
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </li>
+                                        @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-toggle="collapse" href="#adcAlunoTurma{{$turma['ID']}}"
+                                    role="button" aria-expanded="false" aria-controls="adcAlunoTurma{{$turma['ID']}}">
+                                        <i class="fas fa-plus-circle"></i>
+                                            Adicionar aluno
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <div class="collapse" id="adcAlunoTurma{{$turma['ID']}}" style="width:100% !important">
+                                        <form method="POST" action="{{ route('adicionarAluno', ['0'=>$professor_ID]) }}" class="btn-lg btn-block">
+                                            @csrf
+                                            <input type="hidden" name="turma_ID" value="{{$turma['ID']}}">
+                                            <div class="card card-body">
+                                                <div>
+                                                    <label for="adcNomeAluno{{$turma['ID']}}">Nome do aluno</label>
+                                                    <input type="text" class="form-control"
+                                                        id="adcNomeAluno{{$turma['ID']}}" name="nomeAluno">
+                                                </div>
+                                                <div>
+                                                    <label for="adcIdadeAluno{{$turma['ID']}}">Idade</label>
+                                                    <input type="number" class="form-control"
+                                                        id="adcIdadeAluno{{$turma['ID']}}" name="idadeAluno">
+                                                </div><br>
+                                                <button type="submit" class="btn btn-success">
+                                                    <i class="fas fa-plus-circle    "></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
-            @endforeach
         </div>
     </div>
-</div>
-@endsection
+    @endsection

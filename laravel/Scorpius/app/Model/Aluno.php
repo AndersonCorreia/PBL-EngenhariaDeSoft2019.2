@@ -11,7 +11,7 @@ class Aluno extends \App\DB\interfaces\DataObject
     private $turma;
     private $aluno;
 
-    public function __Construct($nome, $idade, $ID=null )
+    public function __Construct($nome, $idade, $ID )
     {
         $this->nome = $nome;
         $this->idade = $idade;
@@ -24,14 +24,14 @@ class Aluno extends \App\DB\interfaces\DataObject
     //     $this->idade = $idade;
     //     $this->aluno = new AlunoDAO();
     // }
-    public function novoAluno(): Aluno
+    public function novoAluno(): bool
     {
         // $this->nome = $dados['nome'];
         // $this->idade = $dados['idade'];
         // $this->turma = $dados['turma'];
 
-        $this->aluno->INSERT($this);
-        return $this;
+        
+        return $this->aluno->INSERT($this);;
     }
     protected function save()
     {

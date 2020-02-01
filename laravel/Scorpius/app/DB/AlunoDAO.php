@@ -10,12 +10,12 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
     function INSERT($aluno): bool{
         $nome = $aluno->getNome();
         $idade = $aluno->getIdade();
-        $turma_ID = $aluno->getTurma();
-
+        $turma_ID = $aluno->getID();
+    
         $sql = "INSERT INTO aluno (nome, idade, turma_ID) VALUE (
             '$nome',
-            $idade,
-            $turma_ID
+            '$idade',
+            '$turma_ID'
         )";
         $resultado = $this->dataBase->query($sql);
         // dd($resultado)
@@ -26,6 +26,13 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
         $sql = "UPDATE aluno 
         SET nome = '$aluno->getNome()', idade = $aluno->getIdade()
         WHERE ID = $aluno->getID()";
+        return $this->dataBase->query($sql);
+    }
+    public function UPDATE_NOME_ALUNO($aluno_ID, $novoNome): bool
+    {
+        $sql = "UPDATE aluno 
+        SET nome = '$novoNome'
+        WHERE ID = $aluno_ID";
         return $this->dataBase->query($sql);
     }
     public function SELECTbyTurma($turma_ID)

@@ -63,8 +63,8 @@
                 <input name="nome" id="nome" type="text" class="form-control" placeholder="">
             </div>
             <div class="col">
-                <label for="sobrenome">Sobrenome</label>
-                <input name="sobrenome" id="sobrenome" type="text" class="form-control" placeholder="">
+                <label  for="sobrenome">Sobrenome</label>
+                <input onclick="verificacao()" name="sobrenome" id="sobrenome" type="text" class="form-control" placeholder="">
             </div>
         </div>
     </div>
@@ -128,4 +128,8 @@
         </h6>
 </form>
 
+@endsection
+
+@section('js')
+<script src="{{ asset("/js/paginaInicial.js")}}" ></script>
 @endsection

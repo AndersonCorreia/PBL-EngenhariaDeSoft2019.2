@@ -42,8 +42,24 @@ class Turma extends \App\DB\interfaces\DataObject
     public function todasTurmas($professor_ID){
         return $this->turma->SELECT_ALL_byProfessorID($professor_ID);
     }
+    public function editarTurma($turma_ID, $novaTurma){
+        $this->turma->UPDATE_TURMA($turma_ID, $novaTurma);
+    }
+    public function editarNomeTurma($turma_ID, $novoNome){
+        $this->turma->UPDATE_NOME_TURMA($turma_ID, $novoNome);
+    }
     public function editarAluno($turma_ID, $aluno){
         return $this->turma->UPDATE_ALUNO($turma_ID, $aluno);
+    }
+    public function excluirAluno($aluno_ID){
+        return $this->turma->DELETE_ALUNObyID($aluno_ID);
+    }
+    public function editarNomeAluno($aluno_ID, $novoNome){
+        return $this->turma->UPDATE_NOME_ALUNObyID($aluno_ID, $novoNome);
+    }
+    public function adicionaAluno($turma_ID, $aluno)
+    {
+        return $this->turma->INSERT_ALUNO($turma_ID, $aluno);
     }
     // GETTERS E SETTERS
     public function setNome($nome)
@@ -66,7 +82,7 @@ class Turma extends \App\DB\interfaces\DataObject
         return $this->ano_escolar;
     }
 
-    public function setEnsito($ensino)
+    public function setEnsino($ensino)
     {
         $this->setAlterado();
         $this->ensino = $ensino;
