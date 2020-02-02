@@ -37,12 +37,6 @@ class InicialController extends Controller
         ];
         return view('paginaInicial', $variaveis);
     }
-
-    // retorna a tela de cadastro
-    public function telaCadastro()
-    {
-        return view('telaCadastro.index');
-    }
     //retorna a tela de entrar
     public function telaEntrar()
     {

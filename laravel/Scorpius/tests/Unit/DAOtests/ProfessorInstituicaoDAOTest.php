@@ -39,15 +39,15 @@ class Professor_InstituicaoDAOTest extends TestCase
      * @return void
      */
     public function testSELECTbyID(){
-
+        $this->markTestIncomplete();
     }
 
     public function testDELETE(){
-
+        $this->markTestIncomplete();
     }
 
     public function testUPDATE(){
-     
+        $this->markTestIncomplete();
     }
 
     public function testdesativarByID(){
@@ -67,7 +67,7 @@ class Professor_InstituicaoDAOTest extends TestCase
      * @return void
      */
     public function testINSERT_acrescentaIDnoObjeto(){
-
+        $this->markTestIncomplete();
     }
     /**
      * Teste para o INSERT na tabela professorInstituicao

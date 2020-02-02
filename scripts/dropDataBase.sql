@@ -1,1 +1,1 @@
-DROP DATABASE 'scorpius';
+DROP DATABASE scorpius;

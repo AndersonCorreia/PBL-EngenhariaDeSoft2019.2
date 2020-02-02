@@ -24,6 +24,10 @@
             <directory suffix=".php">./app/DB</directory>
             <directory suffix=".php">./app/Model</directory>
             <directory suffix=".php">./app/Http/Controllers</directory>
+            <exclude>
+                <directory suffix=".php">./app/Http/Controllers/Auth</directory>
+                <directory suffix=".php">./app/Http/Controllers/Admin</directory>
+            </exclude>
         </whitelist>
     </filter>
     <php>

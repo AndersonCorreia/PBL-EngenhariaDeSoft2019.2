@@ -107,6 +107,21 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         ];
         return $dados;
     }
+    public function SELECTbyprofessorID($id){
+        $join = "turma as t LEFT JOIN professor_instituicao as pi ON t.professor_instituicao_ID = pi.ID";
+        $sql = "SELECT * FROM $join WHERE pi.usuario_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->blind_param("i",$id);
+        $stmt->execute();
+        $result = $stmt->getResult()->fetch_all(MYSQLI_ASSOC);
+
+        if($result == []){
+            throw new \APP\Exceptions\NenhumaTurmaCadastradaException();
+        }
+
+        return $result;
+    }
+
     public function UPDATE_ALUNO($turma_ID, $aluno)
     {
         $sql = "UPDATE aluno 

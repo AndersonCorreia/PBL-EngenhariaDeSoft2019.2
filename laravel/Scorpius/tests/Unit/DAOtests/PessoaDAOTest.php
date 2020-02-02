@@ -30,7 +30,7 @@ class PessoaDAOTest extends TestCase
      * @return void
      */
     public function testINSERT_Visitante(){
-
+        $this->markTestIncomplete();
     }
     /**
      * Teste de inserção de um objeto da classe Professor no banco de dados
@@ -38,7 +38,7 @@ class PessoaDAOTest extends TestCase
      * @return void
      */
     public function testINSERT_Professor(){
-
+        $this->markTestIncomplete();
     }
     /**
      * Teste de inserção de um objeto da classe Estagiario no banco de dados
@@ -46,7 +46,7 @@ class PessoaDAOTest extends TestCase
      * @return void
      */
     public function testINSERT_Estagiario(){
-
+        $this->markTestIncomplete();
     }
     /**
      * Teste de inserção de um objeto da classe Funcionario no banco de dados
@@ -54,7 +54,7 @@ class PessoaDAOTest extends TestCase
      * @return void
      */
     public function testINSERT_Funcionario(){
-
+        $this->markTestIncomplete();
     }
     /**
      * Teste de inserção de um objeto da classe ADM no banco de dados
@@ -62,7 +62,7 @@ class PessoaDAOTest extends TestCase
      * @return void
      */
     public function testINSERT_ADM(){
-
+        $this->markTestIncomplete();
     }
     /**
      * Testando se as permissões padrões de estagiario são retornadas corretamente ao 

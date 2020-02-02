@@ -24,7 +24,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testTelacadastrar()
+    public function testTelaCadastrar()
     {
         $response = $this->get('/cadastrar');
 
@@ -48,7 +48,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testTelaLogin_administrativo()
+    public function testTelaLoginAdministrativo()
     {
         $response = $this->get('/login-administrativo');
 
@@ -72,7 +72,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testTelahorarioEstagiario()
+    public function testTelaHorarioEstagiario()
     {
         $response = $this->get('/horarioEstagiario');
 
@@ -84,7 +84,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testTelainstituicao()
+    public function testTelaInstituicao()
     {
         $response = $this->get('/instituicao');
 
@@ -96,7 +96,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testTelainstituicao_cadastro()
+    public function testTelaInstituicaoCadastro()
     {
         $response = $this->get('/instituicao/cadastro');
 
@@ -108,7 +108,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testTelainstituicao_editar()
+    public function testTelaInstituicaoEditar()
     {
         $response = $this->get('/instituicao/editar/201');
 
@@ -138,4 +138,17 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /**
+     * Testa se a rota carrega normalmente.
+     *
+     * @return void
+     */
+    public function testTelaGerenciamentoDeVisita()
+    {
+        $response = $this->get('/gerenciamentoDeVisita');
+
+        $response->assertStatus(200);
+    }
+    
 }

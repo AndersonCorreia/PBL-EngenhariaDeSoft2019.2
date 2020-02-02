@@ -61,7 +61,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "testes": "vendor\\bin\\phpunit"
-        
+        "testes": "vendor\\bin\\phpunit --testdox --color=auto",
+        "testesUnit": "vendor\\bin\\phpunit --testdox --testsuite Unit --color=always",
+        "testesFeature": "vendor\\bin\\phpunit --testdox --testsuite Feature --color=always"
     }
 }

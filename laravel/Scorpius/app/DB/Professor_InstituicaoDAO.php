@@ -111,7 +111,7 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
             $registros = $resultado->fetch_all(MYSQLI_ASSOC);
             return $registros;
         } 
-        throw new \Exception("O usuario não tem nenhum instituição cadastrada");
+        throw new \App\Exceptions\NenhumaInstCadastradaException();
         
     }
     /**

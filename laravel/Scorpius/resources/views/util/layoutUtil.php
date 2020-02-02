@@ -8,6 +8,7 @@ function getMenuLinksAll(){
         'visitante1'=>      ['link'=>'#' , 'texto'=>'Gerenciar Visitas' ],
         'institucional0'=>  ['link'=>'/instituicao/cadastro' , 'texto'=>'Cadastro de Instituições' ],
         'institucional1'=>  ['link'=>'/instituicao' , 'texto'=>'Instituições' ],
+        'institucional2'=>  ['link'=>'#' , 'texto'=>'Turmas' ],
         'visitante2'=>      ['link'=>'#' , 'texto'=>'Histórico de Visitas' ],
         'visitante3'=>      ['link'=>'#' , 'texto'=>'Alterar Dados' ],
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
@@ -45,6 +46,7 @@ function getMenuLinks(String $tipoUsuario="visitante"){
         if( $tipoUsuario=="institucional" ){
             $links[]=$menuLinks["institucional0"];
             $links[]=$menuLinks["institucional1"];
+            $links[]=$menuLinks["institucional2"];
         }
         $links[]=$menuLinks['visitante2'];
         $links[]=$menuLinks['visitante3'];

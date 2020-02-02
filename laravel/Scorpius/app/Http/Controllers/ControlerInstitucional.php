@@ -27,14 +27,6 @@ class ControlerInstitucional extends Controller {
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
 
-    public function telaDadosInstituicao() {
-        $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições"
-        ];
-        return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
-    }
-
     /**
      * retornar a tela de cadastro de instituições para o usuario
      *
@@ -52,17 +44,6 @@ class ControlerInstitucional extends Controller {
         }finally{
             return view('TelaInstituicaoEnsino.cadastroInstituicao', $variaveis);
         }
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param StoreUpdateInstituicao $request
-     * @return void
-     */
-    public function Store(StoreUpdateInstituicao $request){
-        dd('Cadastro efetuado com sucesso!');
-
     }
 
     /**
