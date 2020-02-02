@@ -14,6 +14,7 @@ class InstituicaoDAOTest extends TestCase
     protected static $inst1;
     protected static $inst2;
     protected static $inst3;
+    protected static $inst4;
 
     public static function setUpBeforeClass(): void{
         try {
@@ -124,6 +125,25 @@ class InstituicaoDAOTest extends TestCase
         \assertEquals($inst->getCidade(),$instDB->getCidade(), "as cidades não são iguais" );
         \assertEquals($inst->getUF(),$instDB->getUF(), "os estados/UF não são iguais" );
     }
+    /**
+     * Testando o metodo UPDATE com uma cidade que não estava no banco no povoamento
+     *
+     * @return void
+     */
+    public function testUpdate_CidadeNovaNoBanco(){
+
+        self::$inst4 = new Instituicao("colegio abc", "diretor", "alagoinhas", "96A", "Alagoinhas", "BA",
+                                        "44999000","tel", "Estadual");
+        $inst = self::$inst4;
+        self::$DAO->INSERT($inst);
+        $inst->setCidade("Fortaleza");
+        $inst->setUF("CE");
+        self::$DAO->UPDATE($inst);
+        $instDB = self::$DAO->SELECTbyID($inst->getID(), false);
+
+        \assertEquals($inst->getCidade(),$instDB->getCidade(), "as cidades não são iguais" );
+        \assertEquals($inst->getUF(),$instDB->getUF(), "os estados/UF não são iguais" );
+    }
 
     public static function tearDownAfterClass(): void{
         //apagando os objetos do banco de dados
@@ -131,5 +151,6 @@ class InstituicaoDAOTest extends TestCase
         self::$DAO->DELETE(self::$inst1);
         self::$DAO->DELETE(self::$inst2);
         self::$DAO->DELETE(self::$inst3);
+        self::$DAO->DELETE(self::$inst4);
     }
 }
