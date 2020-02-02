@@ -118,6 +118,11 @@ Route::post('/agendamentoUsuario', 'UserController@agendarContaIndividual');
 Route::get('/agendamento', 'UserController@agendamento')->name("Agendar.show");
 Route::post('/agendamento', 'UserController@agendarInstituicao')->name("AgendarInstituicao.post");
 
+<<<<<<< HEAD
 //Rota para retornar a tela de Gerenciamento de Visitas.
 Route::get('/gerenciamentoDeVisita', 'Funcionario\VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
+=======
+//Rota para retornar a Tela de Gerenciamento de Visitas.
+Route::get('/gerenciamentoDeVisita', 'VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
+>>>>>>> Ajuste na Rota da Tela de Gerenciamento de Visitas
 
