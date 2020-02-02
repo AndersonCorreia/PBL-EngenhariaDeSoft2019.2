@@ -3,7 +3,7 @@
 @section('title', 'Agendar Visita')
 
 @section('conteudo')
-<form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('AgendarInstituicao.post')}}">
+<form id="form.agendamento" class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('AgendarInstituicao.post')}}">
     {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">

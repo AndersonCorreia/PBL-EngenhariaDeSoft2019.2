@@ -31,7 +31,7 @@
                 </ul>
         </div>
         {{--<hr class="m-0 bg-primary">--}}
-        <div class="p-4">
+        <div class="p-4 container">
             @yield('conteudo')
         </div>
     </div>
@@ -126,19 +126,19 @@
             width: 18%;
         }
     }
-    #menuLateral ::-webkit-scrollbar {
-        width: 3%;
+    #menuLateral ::-webkit-scrollbar{
+        width: 0.3vw;
     }
 
     /* aqui é para personalizar o fundo da barra*/
-    #menuLateral ::-webkit-scrollbar-track {
+    #menuLateral ::-webkit-scrollbar-track{
         background: rgba(250, 250, 250, 0.3);
         border-radius: 20px;
     }
 
     /* aqui é a alça da barra, que demonstra a altura que você está na página
 estou colocando uma cor azul clara nela*/
-    #menuLateral ::-webkit-scrollbar-thumb {
+    #menuLateral ::-webkit-scrollbar-thumb{
         border-radius: 20px;
         background: royalblue;
     }

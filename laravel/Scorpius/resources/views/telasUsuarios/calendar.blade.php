@@ -2,85 +2,88 @@
 
 @section('title', 'calendario')
 {{-- 
-    $dataInterval é um array na posição 0 deve ter uma string da primeira data que aparece no calendario
-    já na posição 1 a ultima
-    
     $visitas é uma matriz as linhas representam datas e deve ter posições numericas
     deve ter as colunas 'data' uma string como '27/11 seg', e as colunas 'manha.cor','tarde.cor','noite.cor'
     que informam as cores dos bottoes atraves de classe do bootstrap, 
     ao seja se o turno esta disponivel ocupado e etc
 
     $legenda array para as cores usadas na legendas dos turnos
+
+    $tipoUser array que contem informações de acordo o tipo de usuario
 --}}
 
 @section('conteudo')
-<div class="container font-weight-bold text-center" >
-    <div class="row col-lg-11 col-10 mb-1">
-        <div class="col-2 p-1"><span> Legenda :</span></div>
-        <div class="col p-1 "><button class="btn btn-primary w-auto"></button> <span> seu agendamento</span></div>
-        <div class="col p-1 "><button class="btn btn-success w-auto"></button> <span> Disponivel</span></div>
-        <div class="col p-1 "><button class="btn btn-danger w-auto"></button> <span> Lista de espera</span></div>
+<div class="row col-12 pr-0 pl-4 font-weight-bold text-center barra" >
+    <div class="row col-11 mb-1 m-0 p-0 text-left">
+        <div class="col-lg-2 col-6 py-1"><span> Legenda :</span></div>
+        <div class="col  p-1 "><button class="btn {{ $legenda["proprio"] }} w-auto"></button> <span> seu agendamento</span></div>
+        <div class="col-lg-4 col-6 py-1"><button class="btn {{ $legenda["disponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.disponivel"]}}</span></div>
+        <div class="col p-1 "><button class="btn {{ $legenda["indisponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.indisponivel"]}}</span></div>
     </div>
-    <div id="calendario" class="col p-2 border">
-        <div class="col text-primary font-weight-bold">
-            <button type="button" class=" btn btn-default seta-esquerda"></button>
-            <span> {{$dataInterval[0] ?? "01/02"}} - a - {{$dataInterval[1] ?? "20/02"}} </span>
-            <button type="button" class="btn btn-default seta-direita"></span></button>
-        </div>
-        <hr class="my-1 bg-light">
-        <div class="row m-0 font-weight-bold text-monospace">
-            <div class="col-12 col-lg-6 pb-2 text-center border-right">
-                <div class="row m-0 mb-2 p-0"> 
-                    <div class="col-4 p-0">Dia</div> 
-                    <div class="col  p-0">Manhã</div>
-                    <div class="col p-0">Tarde</div>
-                    <div class="col p-0">Noite</div>
-                </div>
-                @foreach ($visitas as $v)
-                    @if ($loop->index < 5)
-                    <div class="row p-1"> 
-                        <div id="data{{$loop->index}}" class="col-4 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
-                        <div class="col py-1 p-0">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
-                        </div>
-                        <div class="col py-1 p-0">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
-                        </div>
-                        <div class="col py-1 p-0">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
-                        </div>
-                    </div>
-                    <hr class="col-12 m-0 p-0 linha rounded bg-primary">
-                    @endif
-                @endforeach
+    <div class="row col-12 m-0 p-0">
+        <div id="calendario" class="col-12 col-lg-8 p-2 m-0 border overflow-auto barra">
+            <div class="col text-dark font-weight-bold">
+                <button type="button" class=" btn btn-default seta-esquerda"></button>
+                <span> {{$visitas["dataInicio"] ?? "01/02"}} - a - {{$visitas["dataFim"] ?? "20/02"}} </span>
+                <button type="button" class="btn btn-default seta-direita"></span></button>
             </div>
-            <div class="col col-lg-6 pb-2 text-center border-left">
-                <div class="row m-0 mb-2 d-none d-lg-flex p-0"> 
-                    <div class="col-4 p-0">Dia</div> 
-                    <div class="col p-0">Manhã</div>
-                    <div class="col p-0">Tarde</div>
-                    <div class="col p-0">Noite</div>
-                </div>
-                @foreach ($visitas as $v)
-                    @if ($loop->index >4)
-                    <div class="row p-1"> 
-                        <div id="data{{$loop->index}}" class="col-4 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
-                        <div class="col py-1 p-0">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
-                        </div>
-                        <div class="col py-1 p-0">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
-                        </div>
-                        <div class="col py-1 p-0">
-                            <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border-right border-secondary {{$v["noite.btn"] ?? 'bg-light'}} "></button>
-                        </div>
+            <hr class="my-1 linha rounded bg-light">
+            <div class="row m-0 font-weight-bold text-monospace">
+                <div class="col-12 col-lg-6 pb-2 text-center border-right border-light">
+                    <div class="row m-0 mb-2 p-0"> 
+                        <div class="col-4 p-0">Dia</div> 
+                        <div class="col  p-0">Manhã</div>
+                        <div class="col p-0">Tarde</div>
+                        <div class="col p-0">Noite</div>
                     </div>
-                    <hr class="col-12 m-0 p-0 linha rounded bg-primary">
-                    @endif
-                @endforeach
+                    @foreach ($visitas as $v)
+                        @if ($loop->index < 7 && $loop->index > 1)
+                        <div class="row p-1"> 
+                            <div id="data{{$loop->index}}" class="col-4 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
+                            <div class="col py-1 p-0">
+                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
+                            </div>
+                            <div class="col py-1 p-0">
+                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
+                            </div>
+                            <div class="col py-1 p-0">
+                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
+                            </div>
+                        </div>
+                        <hr class="col-12 m-0 p-0 linha rounded bg-light">
+                        @endif
+                    @endforeach
+                </div>
+                <div class="col col-lg-6 pb-2 text-center border-left border-light">
+                    <div class="row m-0 mb-2 d-none d-lg-flex p-0"> 
+                        <div class="col-4 p-0">Dia</div> 
+                        <div class="col p-0">Manhã</div>
+                        <div class="col p-0">Tarde</div>
+                        <div class="col p-0">Noite</div>
+                    </div>
+                    @foreach ($visitas as $v)
+                        @if ($loop->index > 6)
+                        <div class="row p-1"> 
+                            <div id="data{{$loop->index}}" class="col-4 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
+                            <div class="col py-1 p-0">
+                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
+                            </div>
+                            <div class="col py-1 p-0">
+                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
+                            </div>
+                            <div class="col py-1 p-0">
+                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["noite.btn"] ?? 'bg-light'}} "></button>
+                            </div>
+                        </div>
+                        <hr class="col-12 m-0 p-0 linha rounded bg-light">
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
+        @yield('exposicoes')
+        @include('telasUsuarios.escolhaDeExposicoes')
+    </div>
     </div>
 </div>
 @endsection
@@ -90,8 +93,26 @@
     .linha {
         height: 0.3vh;
     }
-    #calendario {
-        background-color: rgb(245, 245, 248);
+    #calendario, #exposicoes {
+        background-color: rgb(240, 240, 246);
+        height: auto;
+        max-height: 50.5vh;
+    }
+    .barra ::-webkit-scrollbar {
+        width: 0.5vw;
+    }
+
+    /* aqui é para personalizar o fundo da barra*/
+    .barra ::-webkit-scrollbar-track {
+        background: rgb(255, 255, 255);
+        border-radius: 20px;
+    }
+
+    /* aqui é a alça da barra, que demonstra a altura que você está na página
+estou colocando uma cor azul clara nela*/
+    .barra ::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        background: rgb(180, 180, 200);
     }
 
 /**
@@ -104,9 +125,9 @@
   width: 0; 
   height: 0; 
 
-  border-top: 2.5vh solid transparent;
-  border-bottom: 2.5vh solid transparent; 
-  border-right: 2.3vw solid rebeccapurple; 
+  border-top: 2.7vh solid transparent;
+  border-bottom: 2.7vh solid transparent; 
+  border-right: 2.2vw solid black; 
 }
 
 /**
@@ -119,9 +140,9 @@
   width: 0; 
   height: 0; 
 
-  border-top: 2.5vh solid transparent;
-  border-bottom: 2.5vh solid transparent;
-  border-left: 2.3vw solid rebeccapurple;
+  border-top: 2.7vh solid transparent;
+  border-bottom: 2.7vh solid transparent;
+  border-left: 2.2vw solid black;
 }
 
 /**

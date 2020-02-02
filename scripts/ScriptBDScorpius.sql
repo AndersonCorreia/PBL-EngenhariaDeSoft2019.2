@@ -197,12 +197,13 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
   `ID` INT UNSIGNED NOT NULL,
   `Data_Visita` DATE NOT NULL,
   `Turno` ENUM('manha', 'tarde', 'noite') NOT NULL,
-  `Status` ENUM('realizada', 'não realizada', 'instituição ausente') NOT NULL,
-  `agendamento_ID` INT UNSIGNED NOT NULL,
+  `Status` ENUM('realizada', 'não realizada', 'instituição ausente') NOT NULL DEFAULT 'não realizada',
+  `agendamento_ID` INT UNSIGNED,
   `ID_acompanhante` INT UNSIGNED,
   PRIMARY KEY (`ID`),
   INDEX `fk_visita_agendamento1_idx` (`agendamento_ID` ASC),
-  INDEX `fk_visita_usuario1_idx` (`ID_acompanhante` ASC),
+  INDEX `fk_visita_usuario1_idx` (`ID_acompanhante`),
+  UNIQUE INDEX `Data_Turno_UNIQUE` (`Data_Visita` , `Turno`),
   CONSTRAINT `fk_visita_agendamento1`
     FOREIGN KEY (`agendamento_ID`)
     REFERENCES `scorpius`.`agendamento` (`ID`)

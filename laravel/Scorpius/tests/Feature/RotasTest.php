@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class RotasGetTest extends TestCase
 {
     /**
      * Testa se a rota da tela inicial carrega normalmente.

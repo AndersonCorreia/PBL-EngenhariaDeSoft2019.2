@@ -28,11 +28,25 @@ class UserController extends Controller
         foreach ($visitas as $v) {
             $v->preencherArrayForCalendario($array);
         }
+
+        $exposicoes = [];
+        $atividades = [];
+        
+        for($i=0 ; $i<6 ; $i++){
+            $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
+            $atividades[]= ["titulo"=> "atividade$i", "descrição" => "ferias divertidas De 07 a 09 de janeiro"];
+        }
         //fim da parte para testes
+        $visitante = ["leg.disponivel" => "Disponivel:(de acordo limite de participantes)", "leg.indisponivel" => "Disponivel:(havera visita escolar)", "tipo" => "visitante"];
+        $institucional = ["leg.disponivel" => "Disponivel", "leg.indisponivel" => "Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Agendar visita",
-            'visitas' => $array
+            'visitas' => $array,
+            'legenda' => $visitas[0]->getBtnClasses(),
+            'tipoUser'=> $institucional,
+            'exposicoes'=> $exposicoes,
+            'atividades'=> $atividades
         ];
 
         return view('TelasUsuarios.calendar', $variaveis);

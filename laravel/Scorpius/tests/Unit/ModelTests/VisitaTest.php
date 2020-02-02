@@ -24,7 +24,7 @@ class VisitaTest extends TestCase {
         
         \assertEquals("27/01 SEG",$array["27/01"]["data"]);
         \assertEquals("btn-success",$array["27/01"]["manha.btn"]);
-        \assertEquals("btn-danger",$array["27/01"]["noite.btn"]);
+        \assertEquals("btn-warning",$array["27/01"]["noite.btn"]);
         \assertEquals("btn-success",$array["30/01"]["tarde.btn"]);
     }
 
@@ -37,5 +37,20 @@ class VisitaTest extends TestCase {
         //testa se é prenchido apenas com o turno que deveria existir
         \assertNotContains(["30/01" =>["data" => "27/01 SEG", "tarde.btn" => "btn-success"]],$array);
         \assertNotContains(["30/01" =>["data" => "27/01 SEG", "noite.btn" => "btn-success"]],$array);
+    }
+
+    public function test_preencherArrayForCalendario_intervaloDatas(){
+        $visitas= [];
+        $visitas[] = new Visita( new \DateTime("27-01-2020"), "manha", "realizada");
+        $visitas[] = new Visita( new \DateTime("27-01-2020"), "noite", "realizada");
+        $visitas[] = new Visita( new \DateTime("03-02-2020"), "tarde", "realizada");
+        $array = [];
+
+        foreach ($visitas as $v) {
+            $v->preencherArrayForCalendario($array);
+        }
+
+        \assertEquals("27 de Janeiro", $array["dataInicio"]);
+        \assertEquals("03 de Fevereiro", $array["dataFim"]);
     }
 }
