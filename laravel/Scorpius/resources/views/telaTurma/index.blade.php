@@ -30,11 +30,14 @@
     <div class="container-fluid">
         <div id="parte-top">
             {{-- Alertas --}}
-            @if($msg == NULL)
-            @elseif ($msg['ERRO'] == 'TRUE')
-            <div class="alert alert-danger" role="alert">{{$msg['MSG']}}</div>
-            @elseif($msg['ERRO'] == 'FALSE')
-            <div class="alert alert-success" role="alert">{{$msg['MSG']}}</div>
+            @if (session('erro'))
+            <div class="alert alert-danger">
+                {{ session('erro') }}
+            </div>
+            @elseif (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
             @endif
             {{-- Botão cadastrar novas turmas --}}
             <a href="" id="cadastrar-turmas" class="btn btn-secondary">
@@ -46,11 +49,14 @@
 
             {{-- Titulo --}}
             <nav class="navbar navbar-light">
-                <span class="navbar-brand mb-0 h1">Suas turmas:</span>
+                <span class="navbar-brand mb-0 h1">Suas turmas: </span>
             </nav>
             {{-- Lista de turmas --}}
             <span aria-disabled="false" value=""></span>
             <div class="">
+                @if($turmas['turmas']->num_rows == NULL)
+                <div class="alert alert-secondary" role="alert">Não há turmas cadastradas.</div>
+                @endif
                 @foreach($turmas['turmas'] as $turma)
                 {{-- EXCLUIR TURMA --}}
                 <form class="mb-2" method="POST" action="{{ route('excluirTurma', ['0'=>$professor_ID]) }}">
@@ -76,6 +82,7 @@
                         </div>
                     </div>
                 </form>
+
                 <div class="modal fade" id="editarTurma{{$turma['ID']}}" tabindex="-1" role="dialog"
                     aria-labelledby="editarTurma{{$turma['ID']}}Title" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -96,22 +103,38 @@
                                     <div class="container">
                                         <div>
                                             <label for="nome{{$turma['ID']}}">Nome</label>
-                                            <input placeholder="{{$turma['nome']}}" type="text" class="form-control"
+                                            <input maxlength="10" minlength="1" value="{{$turma['nome']}}"
+                                                placeholder="{{$turma['nome']}}" type="text" class="form-control"
                                                 id="nome{{$turma['ID']}}" name="nomeTurma">
                                         </div>
                                         <div>
                                             <label for="anoEscolar{{$turma['ID']}}">Ano escolar</label>
-                                            <input placeholder="{{$turma['ano_escolar']}}" type="text"
-                                                class="form-control" id="anoEscolar{{$turma['ID']}}"
-                                                name="anoEscolar">
+                                            <input value="{{$turma['ano_escolar']}}"
+                                                placeholder="{{$turma['ano_escolar']}}" type="text" class="form-control"
+                                                id="anoEscolar{{$turma['ID']}}" name="anoEscolar">
                                         </div>
                                         <div>
                                             <label for="ensino{{$turma['nome']}}">Tipo de ensino</label>
                                             <select id="ensino{{$turma['nome']}}" name="ensino" class="form-control">
-                                                <option selected value="Ensino Fundamental">Ensino Fundamental</option>
+                                                <option value="{{$turma['ensino']}}" selected>{{$turma['ensino']}}
+                                                </option>
+                                                @if($turma['ensino'] == 'Ensino Fundamental')
                                                 <option value="Ensino Médio">Ensino Médio</option>
                                                 <option value="Ensino Técnico">Ensino Técnico</option>
                                                 <option value="Ensino Superior">Ensino Superior</option>
+                                                @elseif($turma['ensino'] == 'Ensino Médio')
+                                                <option value="Ensino Fundamental">Ensino Fundamental</option>
+                                                <option value="Ensino Técnico">Ensino Técnico</option>
+                                                <option value="Ensino Superior">Ensino Superior</option>
+                                                @elseif($turma['ensino'] == 'Ensino Técnico')
+                                                <option value="Ensino Fundamental">Ensino Fundamental</option>
+                                                <option value="Ensino Médio">Ensino Médio</option>
+                                                <option value="Ensino Superior">Ensino Superior</option>
+                                                @elseif($turma['ensino'] == 'Ensino Superior')
+                                                <option value="Ensino Fundamental">Ensino Fundamental</option>
+                                                <option value="Ensino Médio">Ensino Médio</option>
+                                                <option value="Ensino Técnico">Ensino Técnico</option>
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -134,12 +157,63 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="{{$turma['ID']}}Title">{{$turma['nome']}}</h5>
-                                    <input name="turma_ID" type="hidden" value="{{$turma['ID']}}">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <input type="hidden" value="{{$quantidade_alunos = 0}}">
+                                    @foreach ($turmas['alunos'] as $aluno)
+                                    @if($aluno['turma_ID'] == $turma['ID'])
+                                    <input type="hidden" value="{{$quantidade_alunos++}}">
+                                    @endif
+                                    @endforeach
+                                    <p class="h5 modal-title" id="{{$turma['ID']}}Title">{{$turma['nome']}} </p>
+                                    <p class="h5 modal-title ml-5"> Quantidade: {{$quantidade_alunos}}</p>
+                                    {{-- <p class="h6 modal-title">Escolaridade: {{$turma['ano_escolar']}}</p>
+                                    <p class="h6 modal-title">Ensino: {{$turma['ensino']}}</h5>
+                                        <input name="turma_ID" type="hidden" value="{{$turma['ID']}}"> --}}
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                 </div>
+                                <div class="container btn-lg btn-block">
+
+                                    @if ($quantidade_alunos<40) <button type="button" class="btn btn-primary btn-block"
+                                        data-toggle="collapse" href="#adcAlunoTurma{{$turma['ID']}}" role="button"
+                                        aria-expanded="false" aria-controls="adcAlunoTurma{{$turma['ID']}}">
+                                        Adicionar aluno
+                                        </button>
+                                        @endif
+                                </div>
+                                <div class="container">
+                                    <div class="collapse" id="adcAlunoTurma{{$turma['ID']}}"
+                                        style="width:100% !important">
+                                        <form method="POST" action="{{ route('adicionarAluno', ['0'=>$professor_ID]) }}"
+                                            class="">
+                                            @csrf
+
+                                            <input type="hidden" name="turma_ID" value="{{$turma['ID']}}">
+                                            <div class="form-row align-items-center">
+                                                <div class="col-auto">
+                                                    <div>
+                                                        <input placeholder="Nome do aluno" type="text"
+                                                            class="form-control" id="adcNomeAluno{{$turma['ID']}}"
+                                                            name="nomeAluno">
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div>
+                                                        <input placeholder="Idade" type="number" class="form-control"
+                                                            id="adcIdadeAluno{{$turma['ID']}}" name="idadeAluno">
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <button type="submit" class="btn btn-success">
+                                                        <i class="fas fa-plus-circle    "></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
                                 <div class="modal-body">
                                     <ul class="list-group list-group-flush">
                                         @foreach ($turmas['alunos'] as $aluno)
@@ -158,7 +232,8 @@
                                                         <p class="h5">{{$aluno['idade']}} anos</p>
                                                     </div>
                                                     <div class="col-md-auto float-right">
-                                                        <button type="submit" class="btn btn-danger">
+                                                        <button onclick="alertInputWrong()" type=""
+                                                            class="btn btn-danger">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </div>
@@ -170,33 +245,8 @@
                                     </ul>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-toggle="collapse" href="#adcAlunoTurma{{$turma['ID']}}"
-                                    role="button" aria-expanded="false" aria-controls="adcAlunoTurma{{$turma['ID']}}">
-                                        <i class="fas fa-plus-circle"></i>
-                                            Adicionar aluno
-                                    </button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                    <div class="collapse" id="adcAlunoTurma{{$turma['ID']}}" style="width:100% !important">
-                                        <form method="POST" action="{{ route('adicionarAluno', ['0'=>$professor_ID]) }}" class="btn-lg btn-block">
-                                            @csrf
-                                            <input type="hidden" name="turma_ID" value="{{$turma['ID']}}">
-                                            <div class="card card-body">
-                                                <div>
-                                                    <label for="adcNomeAluno{{$turma['ID']}}">Nome do aluno</label>
-                                                    <input type="text" class="form-control"
-                                                        id="adcNomeAluno{{$turma['ID']}}" name="nomeAluno">
-                                                </div>
-                                                <div>
-                                                    <label for="adcIdadeAluno{{$turma['ID']}}">Idade</label>
-                                                    <input type="number" class="form-control"
-                                                        id="adcIdadeAluno{{$turma['ID']}}" name="idadeAluno">
-                                                </div><br>
-                                                <button type="submit" class="btn btn-success">
-                                                    <i class="fas fa-plus-circle    "></i>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

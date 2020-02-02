@@ -61,6 +61,12 @@ class Turma extends \App\DB\interfaces\DataObject
     {
         return $this->turma->INSERT_ALUNO($turma_ID, $aluno);
     }
+    public function pegarTurmaPeloID($turma_ID){
+        return $this->turma->SELECTbyID($turma_ID);
+    }
+    public function verificaTurmaExistente($professor_ID, $nome){
+        return $this->turma->SEARCHbyNome($professor_ID, $nome);
+    }
     // GETTERS E SETTERS
     public function setNome($nome)
     {

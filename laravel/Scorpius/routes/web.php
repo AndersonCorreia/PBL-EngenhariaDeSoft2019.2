@@ -37,7 +37,7 @@ Route::get('/verificacao-email/{email}/{token}', 'EmailVerificacaoController@ind
 Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show");
 
 
-Route::get('/dashboard/{professor_ID}/turmas', 'TurmaController@index');
+Route::get('/dashboard/{professor_ID}/turmas', 'TurmaController@index')->name('telaTurmas');
 Route::post('/dashboard/{professor_ID}/turmas/excluir', 'TurmaController@excluirTurma')->name("excluirTurma");
 Route::post('/dashboard/{professor_ID}/turmas/editar', 'TurmaController@editarTurma')->name("editarTurma");
 

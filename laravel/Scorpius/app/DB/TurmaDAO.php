@@ -55,26 +55,11 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
     }
     
 
-    public function SELECTbyNome($professor_ID, $nome)
+    public function SELECTbyID($turma_ID)
     {
-        $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nome);
-        $alunos = new AlunoDAO;
-        $alunos->SELECTbyTurma($turma_ID);
-
         $sql = "SELECT * FROM turma WHERE ID = $turma_ID";
         $turma = $this->dataBase->query($sql);
-        $dados = [
-            'turma' => $turma->fetch_assoc(),
-            'alunos' => $alunos
-        ];
-        return $dados;
-    }
-    public function DELETEbyNome($professor_ID, $nome)
-    {
-        $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nome);
-        $alunos = new AlunoDAO;
-        $alunos->DELETEbyTurma($turma_ID);
-        return $this->dataBase->query("DELETE FROM turma WHERE ID = $turma_ID");
+        return $turma->fetch_assoc();
     }
     public function DELETEbyID($turma_ID)
     {
@@ -82,11 +67,25 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         $alunos->DELETEbyTurma($turma_ID);
         return $this->dataBase->query("DELETE FROM turma WHERE ID = $turma_ID");
     }
-    public function SELECT_IDbyNome($professor_ID, $nome)
+    public function SELECTbyprofessorID($id){
+        $join = "turma as t LEFT JOIN professor_instituicao as pi ON t.professor_instituicao_ID = pi.ID";
+        $sql = "SELECT * FROM $join WHERE pi.usuario_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->blind_param("i",$id);
+        $stmt->execute();
+        $result = $stmt->getResult()->fetch_all(MYSQLI_ASSOC);
+
+        if($result == []){
+            throw new \APP\Exceptions\NenhumaTurmaCadastradaException();
+        }
+
+        return $result;
+    }
+    public function SEARCHbyNome($professor_ID, $nome)
     {
         $sql = "SELECT ID FROM turma WHERE professor_instituicao_ID = $professor_ID AND nome = '$nome'";
         $resultado = $this->dataBase->query($sql);
-        return $resultado->fetch_assoc();
+        return $resultado->num_rows > 0;
     }
     public function SELECT_ALL_byProfessorID($professor_ID)
     {
@@ -107,21 +106,6 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         ];
         return $dados;
     }
-    public function SELECTbyprofessorID($id){
-        $join = "turma as t LEFT JOIN professor_instituicao as pi ON t.professor_instituicao_ID = pi.ID";
-        $sql = "SELECT * FROM $join WHERE pi.usuario_ID = ?";
-        $stmt = $this->dataBase->prepare($sql);
-        $stmt->blind_param("i",$id);
-        $stmt->execute();
-        $result = $stmt->getResult()->fetch_all(MYSQLI_ASSOC);
-
-        if($result == []){
-            throw new \APP\Exceptions\NenhumaTurmaCadastradaException();
-        }
-
-        return $result;
-    }
-
     public function UPDATE_ALUNO($turma_ID, $aluno)
     {
         $sql = "UPDATE aluno 
