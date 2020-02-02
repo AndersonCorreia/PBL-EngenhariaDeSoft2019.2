@@ -40,6 +40,7 @@ Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("insti
 Route::get('/dashboard/{professor_ID}/turmas', 'TurmaController@index')->name('telaTurmas');
 Route::post('/dashboard/{professor_ID}/turmas/excluir', 'TurmaController@excluirTurma')->name("excluirTurma");
 Route::post('/dashboard/{professor_ID}/turmas/editar', 'TurmaController@editarTurma')->name("editarTurma");
+Route::post('/dashboard/{professor_ID}/turmas/cadastrar', 'TurmaController@cadastrarTurma')->name("cadastrarTurma");
 
 Route::post('dashboard/{professor_ID}/turmas/excluir-aluno', 'TurmaController@excluirAluno')->name("excluirAluno");
 Route::post('dashboard/{professor_ID}/turmas/adicionar-aluno', 'TurmaController@adicionarAluno')->name("adicionarAluno");

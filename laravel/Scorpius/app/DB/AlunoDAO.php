@@ -10,7 +10,7 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
     function INSERT($aluno): bool{
         $nome = $aluno->getNome();
         $idade = $aluno->getIdade();
-        $turma_ID = $aluno->getID();
+        $turma_ID = $aluno->getTurma();
     
         $sql = "INSERT INTO aluno (nome, idade, turma_ID) VALUE (
             '$nome',

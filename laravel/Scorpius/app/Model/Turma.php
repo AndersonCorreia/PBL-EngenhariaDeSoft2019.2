@@ -36,6 +36,9 @@ class Turma extends \App\DB\interfaces\DataObject
     {
         return $this->turma->UPDATE_TURMA($professor_ID, $nomeAntigo, $turma);
     }
+    public function cadastrarTurma($alunos){
+        return $this->turma->INSERT_CriarTurma($this, $alunos);
+    }
     public function excluirTurma($turma_ID){
         return $this->turma->DELETEbyID($turma_ID);
     }

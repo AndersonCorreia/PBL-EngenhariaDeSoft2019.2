@@ -7,11 +7,11 @@ use App\Model\Aluno;
 
 class TurmaDAO extends \App\DB\interfaces\DataAccessObject
 {
-    public function INSERT_CriarTurma($turma, $alunos): bool
+    public function INSERT_CriarTurma($turma, $alunos)
     {
         $nome = $turma->getNome();
         $ano_escolar = $turma->getAno_escolar();
-        $ensino = $turma->getEnsino;
+        $ensino = $turma->getEnsino();
         $professor_ID = $turma->getProfessor_ID();
 
         $sql = "INSERT INTO turma (nome, ano_escolar, ensino, professor_instituicao_ID) VALUES (
@@ -22,8 +22,7 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         )";
         $this->dataBase->query($sql);
 
-        $turma_ID = $this->SELECT_IDbyNome($professor_ID, $nome);
-        $turma->setID($turma_ID);
+        $turma_ID = $this->dataBase->insert_id;
         foreach ($alunos as $aluno) {
             $aluno->setTurma($turma_ID);
             $aluno->novoAluno();
@@ -31,7 +30,8 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
     }
     public function INSERT_ALUNO($turma_ID, $aluno)
     {
-        $novoAluno = new Aluno($aluno['nome'], $aluno['idade'], $turma_ID);
+        $novoAluno = new Aluno($aluno['nome'], $aluno['idade']);
+        $novoAluno->setTurma($turma_ID);
         return $novoAluno->novoAluno();
     }
     public function UPDATE_TURMA($turma_ID, $turma)
