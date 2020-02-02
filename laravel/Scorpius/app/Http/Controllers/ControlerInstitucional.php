@@ -9,6 +9,8 @@ use App\DB\InstituicaoDAO;
 use App\DB\Professor_InstituicaoDAO;
 use App\DB\PessoaDAO;
 use App\Http\Requests\StoreUpdadeInstituicao;
+use Symfony\Component\Mime\Message;
+
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class ControlerInstitucional extends Controller {   
@@ -19,12 +21,29 @@ class ControlerInstitucional extends Controller {
     public function telaInstituicao() {
         //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
         $id_user = 601;
-        $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições",
-            'registros' => Professor_instituicao::listarInstituicoes($id_user)
-        ];
-        return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
+        $erro=null;
+        $variaveis=null;
+        $registro=null;
+        try{
+            $registro = Professor_instituicao::listarInstituicoes($id_user);
+        }catch(\Exception $e){
+            $erro = $e->getMessage();
+        }finally{
+            $variaveis = [
+                'itensMenu' => getMenuLinks("institucional"),
+                'paginaAtual' => "Instituições",
+                'registros' => $registro, 
+                'erros' => $erro
+            ];
+            if(!$erro){
+                $erro=null;
+                return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
+            }else{
+                return view('TelaInstituicaoEnsino.errorNenhumaInstituicao', $variaveis); 
+            }
+           
+        }
+       
     }
 
     /**

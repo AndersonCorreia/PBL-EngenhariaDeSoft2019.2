@@ -57,6 +57,11 @@ Route::post('/instituicao/cadastro', 'ControlerInstitucional@cadastrarInstituica
 Route::get("/instituicao/dados/{nome}/{endereco}/", "ControlerInstitucional@getInstituicao");
 
 /**
+ * Rota exibir erro, caso não exista instituições cadastradas.
+ */
+Route::get('/instituicao/erro','ControlerInstitucional@telaInstituicao')->name("errorNenhumaInstituicao.show");
+
+/**
  * Rota para editar instituicao.
  */
 Route::get('/instituicao/editar/{id}',['as'=>'user.instituicoes.editar','uses'=>'ControlerInstitucional@editarInstituicao']);
