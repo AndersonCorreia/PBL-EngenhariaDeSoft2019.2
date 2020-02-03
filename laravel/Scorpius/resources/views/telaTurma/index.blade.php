@@ -10,7 +10,6 @@
             flex: 0 0 auto !important;
             max-width: 100% !important;
             margin-top: 0% !important;
-
         }
 
         .div-btn-turma {
@@ -19,12 +18,16 @@
             max-width: 70% !important;
         }
 
+        .row-btn-turma {
+            margin-bottom: 5% !important;
+        }
+
         #btn-turma {
             height: 100%;
         }
     }
 
-    #idade-aluno-info{
+    #idade-aluno-info {
         float: right !important;
     }
 
@@ -82,8 +85,9 @@
                                                 <span>Sobre turma:</span>
                                             </div>
                                             <div class="col-auto">
-                                                <input maxlength="10" minlength="1" placeholder="Nome da turma" type="text" class="form-control"
-                                                    id="cadastrar-turma-nome-turma" name="nomeTurma">
+                                                <input maxlength="10" minlength="1" placeholder="Nome da turma"
+                                                    type="text" class="form-control" id="cadastrar-turma-nome-turma"
+                                                    name="nomeTurma">
                                             </div>
                                             <div class="col-auto">
                                                 <input placeholder="Ano escolar" type="text" class="form-control"
@@ -117,7 +121,8 @@
                                                     <div class="form-row align-items-center">
                                                         <div class="col-md-10">
                                                             <div>
-                                                                <input onclick="verificaTurma()" placeholder="Nome do aluno" type="text"
+                                                                <input onclick="verificaTurma()"
+                                                                    placeholder="Nome do aluno" type="text"
                                                                     class="form-control btn-block"
                                                                     id="adcNomeAluno{{$cont}}"
                                                                     name="nomeAluno{{$cont}}">
@@ -173,9 +178,9 @@
                 @foreach($turmas['turmas'] as $turma)
 
                 {{--  Botões Editar/Excluir turma --}}
-                <div class="row">
+                <div class="row row-btn-turma">
 
-                    {{-- Botão editar --}}
+                    {{-- Botão da turma --}}
                     <div class="col-sm-10 div-btn-turma">
                         <input type="hidden" name="professor_ID" value="{{$professor_ID}}">
                         <button id="btn-turma" type="button" class="btn btn-secondary btn-turma btn-lg btn-block"
@@ -185,18 +190,25 @@
                         </button>
                     </div>
 
-                    {{-- Botão excluir --}}
+                    {{-- Botão editar/excluir --}}
                     <div class="btn-editar-excluir col-sm-2 mt-1">
-                        <form class="mb-2" method="POST" action="{{ route('excluirTurma', ['0'=>$professor_ID]) }}">
+                        <form class="mb-2" method="POST"
+                            action="{{ route('excluirTurma', ['0'=>$professor_ID]) }}">
                             @csrf
                             <input type="hidden" name="turma_ID" value="{{$turma['ID']}}">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#editarTurma{{$turma['ID']}}">
-                                <i class="fas fa-pen"></i>
-                            </button>
-                            <button type="submit" class=" btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                                        data-target="#editarTurma{{$turma['ID']}}">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
 
@@ -357,16 +369,16 @@
                                                 action="{{ route('excluirAluno', ['0'=>$professor_ID]) }}">
                                                 @csrf
                                                 <input name="aluno_ID" type="hidden" value="{{$aluno['ID']}}">
-                                                    <div class="row">
+                                                <div class="row">
                                                     <div class="col-md-4 mx-auto">
                                                         <p class="h5 float-left">{{$aluno['nome']}}</p>
                                                     </div>
                                                     <div class="col-md-4 mx-auto">
-                                                        @if ($aluno['idade'] <10)
-                                                        <p class="h5 float-right">{{$aluno['idade']}} ano</p>
-                                                        @else
-                                                        <p class="h5 float-right">{{$aluno['idade']}} anos</p>
-                                                        @endif
+                                                        @if ($aluno['idade'] <10) <p class="h5 float-right">
+                                                            {{$aluno['idade']}} ano</p>
+                                                            @else
+                                                            <p class="h5 float-right">{{$aluno['idade']}} anos</p>
+                                                            @endif
                                                     </div>
                                                     <div class="col-md-4 mx-auto">
                                                         <button type="submit" class="btn btn-danger float-right">
