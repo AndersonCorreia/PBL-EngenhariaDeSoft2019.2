@@ -28,23 +28,6 @@ use App\Model\Agendamento;
         $resultado = $this->dataBase->query($sql);
         // dd($resultado)
         return $resultado;
-
-
-
-
-
-
-
-        $campos = "(nome, responsavel, endereco, numero, cidade_UF_id, cep, telefone, tipo_instituicao)";
-        $select = "SELECT ?, ?, ?, ?, c.id, ?, ?, ? FROM cidade_UF c WHERE c.cidade = ? AND c.UF = ?";
-        $sql = "INSERT INTO instituicao $campos $select";
-
-        $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("sssssssss", $nome, $resp, $endereco, $numero, $cep, $tel, $tipo, $cidade, $UF);
-        $resultado = $stmt->execute();
-        $instituicao->setID($this);//adcionando ID no objeto que acabou de ser inserido
-
-        return $resultado;
     }
 
  }
