@@ -1,6 +1,4 @@
-@extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'calendario')
 {{-- 
     $visitas é uma matriz as linhas representam datas e deve ter posições numericas
     deve ter as colunas 'data' uma string como '27/11 seg', e as colunas 'manha.cor','tarde.cor','noite.cor'
@@ -12,13 +10,12 @@
     $tipoUser array que contem informações de acordo o tipo de usuario
 --}}
 
-@section('conteudo')
 <div class="row col-12 pr-0 pl-4 font-weight-bold text-center barra" >
-    <div class="row col-11 mb-1 m-0 p-0 text-left">
+    <div class="row col-12 mb-1 m-0 p-0 text-left">
         <div class="col-lg-2 col-6 py-1"><span> Legenda :</span></div>
-        <div class="col  p-1 "><button class="btn {{ $legenda["proprio"] }} w-auto"></button> <span> seu agendamento</span></div>
-        <div class="col-lg-4 col-6 py-1"><button class="btn {{ $legenda["disponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.disponivel"]}}</span></div>
-        <div class="col p-1 "><button class="btn {{ $legenda["indisponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.indisponivel"]}}</span></div>
+        <div class="col col-lg-3 py-1"><button class="btn {{ $legenda["proprio"] }} w-auto"></button> <span> seu agendamento</span></div>
+        <div class="col-lg-2 col-6 py-1"><button class="btn {{ $legenda["disponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.disponivel"]}}</span></div>
+        <div class="col col-lg-5 p-1 "><button class="btn {{ $legenda["indisponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.indisponivel"]}}</span></div>
     </div>
     <div class="row col-12 m-0 p-0">
         <div id="calendario" class="col-12 col-lg-8 p-2 m-0 border overflow-auto barra">
@@ -81,36 +78,38 @@
                 </div>
             </div>
         </div>
-        @yield('exposicoes')
         @include('telasUsuarios.escolhaDeExposicoes')
     </div>
     </div>
 </div>
-@endsection
 
 @section('css')
 <style>
     .linha {
         height: 0.3vh;
     }
-    #calendario, #exposicoes {
+    #formulario {
+        background-color: rgb(240, 240, 246);
+        height: auto;
+    }
+    #calendario, #exposicoes{
         background-color: rgb(240, 240, 246);
         height: auto;
         max-height: 50.5vh;
     }
-    .barra ::-webkit-scrollbar {
+    html ::-webkit-scrollbar {
         width: 0.5vw;
     }
 
     /* aqui é para personalizar o fundo da barra*/
-    .barra ::-webkit-scrollbar-track {
+    html ::-webkit-scrollbar-track {
         background: rgb(255, 255, 255);
         border-radius: 20px;
     }
 
     /* aqui é a alça da barra, que demonstra a altura que você está na página
 estou colocando uma cor azul clara nela*/
-    .barra ::-webkit-scrollbar-thumb {
+    html ::-webkit-scrollbar-thumb {
         border-radius: 20px;
         background: rgb(180, 180, 200);
     }

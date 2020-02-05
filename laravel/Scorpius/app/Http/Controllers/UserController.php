@@ -8,8 +8,12 @@ require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class UserController extends Controller
 {
 
-    //
-    public function calendario() {
+    /**
+     * Exibir tela de agendamento de uma instituicao
+     *
+     * @return void
+     */
+    public function agendamento(){
         //para testes
         $visitas= [];
         $agen = new \App\Model\Agendamento();
@@ -37,8 +41,7 @@ class UserController extends Controller
             $atividades[]= ["titulo"=> "atividade$i", "descrição" => "ferias divertidas De 07 a 09 de janeiro"];
         }
         //fim da parte para testes
-        $visitante = ["leg.disponivel" => "Disponivel:(de acordo limite de participantes)", "leg.indisponivel" => "Disponivel:(havera visita escolar)", "tipo" => "visitante"];
-        $institucional = ["leg.disponivel" => "Disponivel", "leg.indisponivel" => "Lista de Espera", "tipo" => "institucional"];
+        $institucional = ["leg.disponivel" => "Disponivel", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Agendar visita",
@@ -49,30 +52,49 @@ class UserController extends Controller
             'atividades'=> $atividades
         ];
 
-        return view('TelasUsuarios.calendar', $variaveis);
-    }
-
-    /**
-     * Exibir tela de agendamento de uma instituicao
-     *
-     * @return void
-     */
-    public function agendamento(){
-        $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Agendar visita"
-        ];
-
-        return view('telasUsuarios.formularioAgendamento', $variaveis);
+        return view('TelasUsuarios.agendamento', $variaveis);
     }
 
     public function agendamentoIndividual(){
+        //para testes
+        $visitas= [];
+        $agen = new \App\Model\Agendamento();
+        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("25-02-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("26-02-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("27-02-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("30-02-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("30-03-2020"), "tarde", "realizada");
+        $array = [];
+
+        foreach ($visitas as $v) {
+            $v->preencherArrayForCalendario($array);
+        }
+
+        $exposicoes = [];
+        $atividades = [];
+        
+        for($i=0 ; $i<6 ; $i++){
+            $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
+            $atividades[]= ["titulo"=> "atividade$i", "descrição" => "ferias divertidas De 07 a 09 de janeiro"];
+        }
+        //fim da parte para testes
+        $visitante = ["leg.disponivel" => "Disponivel", "leg.indisponivel" => "Disponivel: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'itensMenu' => getMenuLinks("visitante"),
-            'paginaAtual' => "Agendar visita"
+            'paginaAtual' => "Agendar visita",
+            'visitas' => $array,
+            'legenda' => $visitas[0]->getBtnClasses(),
+            'tipoUser'=> $visitante,
+            'exposicoes'=> $exposicoes,
+            'atividades'=> $atividades
         ];
 
-        return view('telasUsuarios.formularioAgendamentoIndividual', $variaveis);
+        return view('TelasUsuarios.agendamento', $variaveis);
     }
 
     //inserir dados do agendamento pelo POST na classe e no banco de dados

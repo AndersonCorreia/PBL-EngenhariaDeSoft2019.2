@@ -107,9 +107,6 @@ Route::resource('enviar-eventos', 'enviarEventosController');
 Route::get('/testes', function(){
     return redirect("/build/coverage/index.html",307);
 });
-
-Route::get('/calendario', 'UserController@calendario');
-
 //Rotas para agendamento de uma conta individual
 Route::get('/agendamentoUsuario', 'UserController@agendamentoIndividual');
 Route::post('/agendamentoUsuario', 'UserController@agendarContaIndividual');

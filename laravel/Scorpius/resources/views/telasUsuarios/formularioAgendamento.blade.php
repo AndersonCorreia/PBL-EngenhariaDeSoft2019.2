@@ -1,8 +1,3 @@
-@extends('layouts.templateGeralTelasUsuarios')
-
-@section('title', 'Agendamento')
-
-@section('conteudo')
 
 <form id="form.agendamento" class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('AgendarInstituicao.post')}}">
     {{csrf_field()}}
@@ -20,9 +15,6 @@
                         @endforeach
                     @endif
                     </datalist>
-                </div>
-                <div class="col-sm-2 mt-1 m-0 mt-sm-0 float-sm-right d-block">
-                    <button type="button" class= "btn btn-primary float-right " onclick="getDados()"> Buscar </button>
                 </div>
             </div>
             <div class="form-group col-sm-3">
@@ -72,7 +64,6 @@
         </div>
     </fieldset>
 </form>
-@endsection
 
 @section('css')
 <style type="text/css">
