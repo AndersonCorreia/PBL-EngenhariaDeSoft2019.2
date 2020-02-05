@@ -24,26 +24,25 @@ class ControlerInstitucional extends Controller {
         $erro=null;
         $variaveis=null;
         $registro=null;
-        try{
-            $registro = Professor_instituicao::listarInstituicoes($id_user);
-        }catch(\Exception $e){
-            $erro = $e->getMessage();
-        }finally{
-            $variaveis = [
-                'itensMenu' => getMenuLinks("institucional"),
-                'paginaAtual' => "Instituições",
-                'registros' => $registro, 
-                'erros' => $erro
-            ];
-            if(!$erro){
-                $erro=null;
-                return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
-            }else{
-                return view('TelaInstituicaoEnsino.errorNenhumaInstituicao', $variaveis); 
-            }
-           
-        }
-       
+        $registro = Professor_instituicao::listarInstituicoes($id_user);
+
+        $variaveis = [
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Instituições",
+            'registros' => $registro, 
+            'erros' => $erro
+        ];
+
+        return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
+    }
+
+    public function nenhumaInstituicao(){
+        $variaveis = [
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Instituições",
+        ];
+
+        return view('TelaInstituicaoEnsino.errorNenhumaInstituicao', $variaveis);
     }
 
     /**

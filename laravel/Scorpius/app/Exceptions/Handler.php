@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {   
         if($exception instanceof NenhumaInstCadastradaException){
-            return redirect()->route('errorNenhumaInstituição.show');
+            return redirect()->route('errorNenhumaInstituicao.show');
 
         }elseif($exception instanceof NenhumaTurmaCadastradaException){
             return redirect()->route('errorNenhumaTurma.show');

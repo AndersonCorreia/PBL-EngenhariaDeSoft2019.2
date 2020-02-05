@@ -60,7 +60,12 @@ Route::get("/instituicao/dados/{nome}/{endereco}/", "ControlerInstitucional@getI
 /**
  * Rota exibir erro, caso não exista instituições cadastradas.
  */
-Route::get('/instituicao/erro','ControlerInstitucional@telaInstituicao')->name("errorNenhumaInstituicao.show");
+Route::get('/instituicao/erro','ControlerInstitucional@nenhumaInstituicao')->name("errorNenhumaInstituicao.show");
+
+/**
+ * Rota exibir erro, caso não existam turmas cadastradas.
+ */
+Route::get('/turma/erro','ControlerInstitucional@telaInstituicao')->name("errorNenhumaTurma.show");
 
 /**
  * Rota para editar instituicao.

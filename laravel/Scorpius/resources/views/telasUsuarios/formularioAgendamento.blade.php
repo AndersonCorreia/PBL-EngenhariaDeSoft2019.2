@@ -18,11 +18,11 @@
                 </div>
             </div>
             <div class="form-group col-sm-3">
-                <span>Turma</span></br>
+                <span>Turma</span><br>
                 <input class="form-control" type="text" required>
             </div>
             <div class="form-group col-sm-3">
-                <span>Data</span></br>
+                <span>Data</span><br>
                 <input class="form-control" type="date" id="data" name="data" required>
             </div>
             <div class="form-group col-sm-3">
