@@ -11,17 +11,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 require_once __DIR__."/../../../../resources/views/util/layoutUtil.php";
 
-class VisitaController extends Controller{
+class HorarioController extends Controller{
 
 
-    public function getTelaVisita(){
+    public function getTelaHorarioEstagiario(){
         //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
         $id_user = 601;
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Gerenciamento de Visitas",
         ];
-        return view('telaGerenciamentoDeVisitas.telaGerenciamentoDeVisitas', $variaveis);
+        return view('TelaPropostaHorarioFuncionario.telaGerenciamentoDehorarios', $variaveis);
     }
 }
 ?>

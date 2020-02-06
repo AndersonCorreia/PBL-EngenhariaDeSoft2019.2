@@ -122,3 +122,12 @@ Route::post('/agendamento', 'UserController@agendarInstituicao')->name("AgendarI
 
 //Rota para retornar a tela de Gerenciamento de Visitas.
 Route::get('/gerenciamentoDeVisita', 'Funcionario\VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
+
+Route::group(
+    ['midlleware'=>[], 
+    'prefix'=>'funcionario',
+    'namespace'=>'Funcionario'],
+    function(){
+        Route::get('/confirmacaoHorario', 'HorarioController@getTelaHorarioEstagiario')->name("telaGerenciamentoDehorarios.show");
+    }
+);

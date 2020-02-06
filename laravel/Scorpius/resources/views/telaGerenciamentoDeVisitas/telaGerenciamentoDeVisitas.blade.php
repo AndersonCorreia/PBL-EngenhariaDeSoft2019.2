@@ -4,6 +4,7 @@
 
 @section('conteudo')
 
+
 <h2>BEM VINDO, FUNCIONÁRIO</h2>
 <div class="form-row col-msm">
     <div class="form-group col-sm-7 d-block">
@@ -21,33 +22,33 @@
             <tbody>
                 <tr>
                     <th scope="row" class="table-secondary">Segunda</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td id="segundaManha"></td>
+                    <td id="segundaTarde"></td>
+                    <td id="segundaNoite"></td>
                 </tr>
                 <tr>
                     <th scope="row" class="table-secondary">Terça</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td id="tercaManha"></td>
+                    <td id="tercaTarde"></td>
+                    <td id="tercaNoite"></td>
                 </tr>
                 <tr>
                     <th scope="row" class="table-secondary">Quarta</th>
-                    <td>Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
+                    <td id="quartaManha"></td>
+                    <td id="quartaTarde"></td>
+                    <td id="quartaNoite"></td>
                 </tr>
                 <tr>
                     <th scope="row" class="table-secondary">Quinta</th>
-                    <td>Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
+                    <td id="quintaManha"></td>
+                    <td id="quintaTarde"></td>
+                    <td id="quintaNoite"></td>
                 </tr>
                 <tr>
                     <th scope="row" class="table-secondary">Sexta</th>
-                    <td>Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
+                    <td id="sextaManha"></td>
+                    <td id="sextaTarde"></td>
+                    <td id="sextaNoite"></td>
                 </tr>
             </tbody>
         </table>
@@ -57,6 +58,10 @@
         <textarea class="form-control" id="Textarea" rows="15" disabled></textarea>
     </div>
 </div>
+<script>
+    
+
+</script>
 <style>
     h3{
         margin: 50px 0px 20px 0px;
