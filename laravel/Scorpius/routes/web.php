@@ -131,3 +131,6 @@ Route::group(
         Route::get('/confirmacaoHorario', 'HorarioController@getTelaHorarioEstagiario')->name("telaGerenciamentoDehorarios.show");
     }
 );
+
+//Rota para retornar a tela da Proposta de Horário do Estagiário.
+Route::get('/demandaWeb', 'horarioEstagiarioController@index')->name("HorarioEstagiario.show");
