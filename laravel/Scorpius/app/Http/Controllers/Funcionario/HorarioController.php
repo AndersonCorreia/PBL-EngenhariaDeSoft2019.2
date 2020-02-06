@@ -9,19 +9,28 @@ namespace App\Http\Controllers\Funcionario;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\DB\Proposta_horarioDAO;
 require_once __DIR__."/../../../../resources/views/util/layoutUtil.php";
 
 class HorarioController extends Controller{
 
 
     public function getTelaHorarioEstagiario(){
-        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
-        $id_user = 601;
+        $DAO = new Proposta_horarioDAO();
+      
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Gerenciamento de Visitas",
+            'estagiarios'=> $DAO->buscaEstagiarioALL()
         ];
-        return view('TelaPropostaHorarioFuncionario.telaGerenciamentoDehorarios', $variaveis);
+        try{
+           
+            
+        }finally{
+            return view('TelaPropostaHorarioFuncionario.telaGerenciamentoDehorarios', $variaveis);
+        }
+
+       
     }
 }
 ?>
