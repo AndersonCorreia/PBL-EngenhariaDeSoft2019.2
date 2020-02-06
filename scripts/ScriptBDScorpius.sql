@@ -158,37 +158,59 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
   `nome` VARCHAR(10) NOT NULL,
   `ano_escolar` VARCHAR(12) NOT NULL,
   `ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
-  `professor_instituicao_ID` INT UNSIGNED NOT NULL,
+  `professor_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `fk_turma_professor_instituicao1_idx` (`professor_instituicao_ID` ASC),
-  CONSTRAINT `fk_turma_professor_instituicao1`
-    FOREIGN KEY (`professor_instituicao_ID`)
-    REFERENCES `scorpius`.`professor_instituicao` (`ID`)
+  INDEX `fk_turma_professor_idx` (`professor_ID` ASC),
+  CONSTRAINT `fk_turma_professor1`
+    FOREIGN KEY (`professor_ID`)
+    REFERENCES `scorpius`.`usuario` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `scorpius`.`agendamento_institucional`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento_institucional` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Visita` INT NOT NULL,
+  `Data_Agendamento` DATETIME NOT NULL,
+  `Status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado') NOT NULL,
+  `turma_ID` INT UNSIGNED NOT NULL,
+  `instituicao_ID` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_agendamento_institucional_turma1_idx` (`turma_ID` ASC),
+  CONSTRAINT `fk_agendamento_institucional_turma1`
+    FOREIGN KEY (`turma_ID`)
+    REFERENCES `scorpius`.`turma` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  INDEX `fk_agendamento_institucional_instituicao1_idx` (`instituicao_ID` ASC),
+  CONSTRAINT `fk_agendamento_institucional_instituicao1`
+    FOREIGN KEY (`instituicao_ID`)
+    REFERENCES `scorpius`.`instituicao` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`agendamento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Turma` INT NOT NULL,
   `Visita` INT NOT NULL,
   `Data_Agendamento` DATETIME NOT NULL,
-  `Exposicao` INT NOT NULL,
   `Status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado') NOT NULL,
-  `turma_ID` INT UNSIGNED NOT NULL,
+  `usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `fk_agendamento_turma1_idx` (`turma_ID` ASC),
-  CONSTRAINT `fk_agendamento_turma1`
-    FOREIGN KEY (`turma_ID`)
-    REFERENCES `scorpius`.`turma` (`ID`)
+  INDEX `fk_agendamento_usuario1_idx` (`usuario_ID` ASC),
+  CONSTRAINT `fk_agendamento_usuario1`
+    FOREIGN KEY (`usuario_ID`)
+    REFERENCES `scorpius`.`usuario` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`visita`
@@ -236,21 +258,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `scorpius`.`exposicao_agendamento`
+-- Table `scorpius`.`exposicao_agendamento_institucional`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento` (
+CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento_institucional` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `exposicao_ID` INT UNSIGNED NOT NULL,
-  `agendamento_ID` INT UNSIGNED NOT NULL,
+  `agendamento_institucional_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `fk_exposicao_agendamento_exposicao1_idx` (`exposicao_ID` ASC),
-  INDEX `fk_exposicao_agendamento_agendamento1_idx` (`agendamento_ID` ASC),
-  CONSTRAINT `fk_exposicao_agendamento_exposicao1`
+  INDEX `fk_exposicao_agendamento_institucional_exposicao1_idx` (`exposicao_ID` ASC),
+  INDEX `fk_exposicao_agendamento_institucional_agendamento1_idx` (`agendamento_ID` ASC),
+  CONSTRAINT `fk_exposicao_agendamento_institucional_exposicao1`
     FOREIGN KEY (`exposicao_ID`)
     REFERENCES `scorpius`.`exposicao` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_exposicao_agendamento_agendamento1`
+  CONSTRAINT `fk_exposicao_agendamento_institucional_agendamento1`
     FOREIGN KEY (`agendamento_ID`)
     REFERENCES `scorpius`.`agendamento` (`ID`)
     ON DELETE NO ACTION
