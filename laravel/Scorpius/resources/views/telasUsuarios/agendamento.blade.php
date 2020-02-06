@@ -4,14 +4,15 @@
 
 @section('conteudo')
 
-@include('telasUsuarios.calendar')
+@include('telasUsuarios._includes.escolhaDeExposicoes')
+@include('telasUsuarios._includes.calendar')
 
 <div class="row col-12 pl-5 pr-4">
     <div id="formulario" class="col-12 border">
     @if($tipoUser["tipo"] == "institucional")
-        @include('telasUsuarios.formularioAgendamento')
+        @include('telasUsuarios._includes.formularioAgendamento')
     @else
-        @include('telasUsuarios.formularioAgendamentoIndividual')
+        @include('telasUsuarios._includes.formularioAgendamentoIndividual')
     @endif
     </div>
 </div>

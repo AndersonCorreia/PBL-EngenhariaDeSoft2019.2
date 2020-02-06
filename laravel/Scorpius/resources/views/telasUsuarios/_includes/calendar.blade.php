@@ -78,8 +78,6 @@
                 </div>
             </div>
         </div>
-        @include('telasUsuarios.escolhaDeExposicoes')
-    </div>
     </div>
 </div>
 

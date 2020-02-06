@@ -24,7 +24,7 @@
                     <li class="mr-3 float-right w-auto">
                         <a href="#" class="mr-5">
                             <img class="rounded-circle" height=40vh src="{{ asset("img/user-default-img.png")}}">
-                            <span class="ml-1">{{$nomeUsuario ?? 'Fulano'}}</span>
+                            <span class="ml-1">{{$nomeUsuario ?? 'Larissa'}}</span>
                         </a> 
                         <a href="#" title="Sair"><img href="#" alt="exit-icon" class="rounded-lg" width=40vw src="{{ asset("img/exit-img.jpg")}}"></a>   
                     </li>

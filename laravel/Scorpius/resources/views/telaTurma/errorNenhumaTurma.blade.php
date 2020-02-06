@@ -1,6 +1,6 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Instituições')
+@section('title', 'Turmas')
 
 @section('conteudo')
 <div class="alert alert-danger" role="alert">

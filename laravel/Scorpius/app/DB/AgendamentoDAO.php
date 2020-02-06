@@ -7,6 +7,7 @@ use App\Model\Agendamento;
  */
 
  class AgendamentoDAO extends \App\DB\interfaces\DataAccessObject {
+
     function INSERT($agendamento): bool{
 
         $turma = $agendamento->getTurma(); 
@@ -28,7 +29,15 @@ use App\Model\Agendamento;
         $resultado = $this->dataBase->query($sql);
         // dd($resultado)
         return $resultado;
+
     }
 
+    function UPDATE($Agendamento): bool{
+
+    }
+
+    function DELETE($agendamento): bool{
+
+    }
  }
 
