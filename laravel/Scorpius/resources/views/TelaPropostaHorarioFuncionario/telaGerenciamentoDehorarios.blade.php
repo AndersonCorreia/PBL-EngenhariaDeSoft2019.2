@@ -1,27 +1,41 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Horários dos estagiários - Funcionário')
+@section('title', 'Confirmar Horários dos Estagiários')
 
 @section('conteudo')
+
 <div class="matricula">
-    <div class="col-md-5 col-sm-9 m-0 p-0 float-sm-left">
-        <h4>NOME DO ESTAGIÁRIO</h4>
-        <input id="nomeInst" class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" list="instList" required autofocus>
-        <datalist id="instList">
-            @if (($estagiarios ?? false))
-            @foreach ($estagiarios as $est)
-            <option class="opList" value="{{$est['nome']}}">
-                @endforeach
-                @endif
-        </datalist>
-    </div>
-    <div class="input-group-append">
-        <h4>COMPROVANTE DE MATRÍCULA</h4>
-        <button type="button" class="btn btn-secondary">Download</button>
+    <div class="form-row">
+        <div class="col-7  float-left">
+            <div class="form-group row">
+                <h5 class="col-sm-12 col-form-label">Nome do Estagiário</h5>
+                <div class="col-5">
+                    <input id="nomeInst" class="form-control" type="text" name="estagiario" placeholder="Insira o Nome da instituicão" list="instList" required autofocus>
+                    <datalist id="instList">
+                        @if (($estagiarios ?? false))
+                        @foreach ($estagiarios as $est)
+                        <option class="opList" value="{{$est['nome']}}">
+                            @endforeach
+                            @endif
+                    </datalist>
+                </div>
+                <button type="button" class="btn btn-primary float-left " buscar> Buscar </button>
+            </div>
+
+        </div>
+
+        <div class="col-4">
+            <div class="input-group-append">
+                <h6>Comprovante de Matrícula</h6>
+                <button type="button" class="btn btn-secondary" download>Download</button>
+            </div>
+        </div>
     </div>
 
+
+
     <div class="calendario">
-    <h4>CRONOGRAMA SEMANAL DO SEMESTRE</h4>
+    <h5>Cronograma Semanal do Semestre</h5>
     <table class="table table-hover">
             <thead>
                 <tr class="table-primary">
@@ -73,17 +87,17 @@
 <style>
 
     h4{
-        padding: 0px 0px 10px 0px;
+        padding: 0px 30px 10px 30px;
     }
     .calendario{
-        padding:50px 0px 0px 0px ;
+        padding:50px 30px 0px 30px ;
     }
 
     .download {
-        padding-left: 40px;
+        padding-left: 60px;
     }
 
-    .btn {
+    [download] {
         text-align: top;
         width: 200px;
         height: 40px;
@@ -95,17 +109,27 @@
         cursor: hand;
         /* para o IE 5.x */
     }
-    .input-group-append{
-        padding: 0px 0px 0px 50px;
+
+    
+    [buscar]{
+        padding: 0px 20px 0px 20px;
         display: flex;
         flex-direction:column;
         align-items: center;
     }
 
-    table {
+    /*Posição do botão do download */
+    .input-group-append{
+        padding: 0px 50px 0px 50px;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+    }
+
+    table{
         border-collapse: separate;
         border-spacing: 0 8px;
-        margin-top: -8px;
+        margin-top: -4px;
         text-align: center;
     }
 
