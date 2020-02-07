@@ -6,10 +6,10 @@
 
 <div class="matricula">
     <div class="form-row">
-        <div class="col-7  float-left">
+        <div class="col-5  float-left">
             <div class="form-group row">
-                <h5 class="col-sm-12 col-form-label">Nome do Estagiário</h5>
-                <div class="col-5">
+                <label class="col-sm-12 col-form-label">Nome do Estagiário</label>
+                <div class="col-9">
                     <input id="nomeInst" class="form-control" type="text" name="estagiario" placeholder="Insira o Nome da instituicão" list="instList" required autofocus>
                     <datalist id="instList">
                         @if (($estagiarios ?? false))
@@ -26,7 +26,7 @@
 
         <div class="col-4">
             <div class="input-group-append">
-                <h6>Comprovante de Matrícula</h6>
+                <label>Comprovante de Matrícula</label>
                 <button type="button" class="btn btn-secondary" download>Download</button>
             </div>
         </div>
