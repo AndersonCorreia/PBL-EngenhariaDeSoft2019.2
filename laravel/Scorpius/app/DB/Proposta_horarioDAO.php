@@ -31,4 +31,8 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         throw new \Exception("Nenhum estagiario encontrado");
     }
 
+    function buscaHorarioEstagiario($id){
+        
+    }
+
 }

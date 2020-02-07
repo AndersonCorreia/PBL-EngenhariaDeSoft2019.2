@@ -3,7 +3,6 @@
 @section('title', 'Confirmar Horários dos Estagiários')
 
 @section('conteudo')
-
 <div class="matricula">
     <div class="form-row">
         <div class="col-5  float-left">
@@ -81,9 +80,26 @@
 </div>
 @endsection
 
-<script>
+@section('js')
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        jQuery('[buscar]').click(e => {
+            e.preventDefault() //evita ação de botão      
+            $.get("{{route('retornaProposta', 12)}}",function(estagiarios){
+                console.log(estagiarios)
+            })
+            /*jQuery.ajax({
+                method:"GET",
+                url: "confirmacaoHorario",
+                data: { id:12 },
+                success(data) {
+                   console.log(data)
+                }
+            })*/
+        })
 
-</script>
+    </script>
+    @endsection
 <style>
 
     h4{

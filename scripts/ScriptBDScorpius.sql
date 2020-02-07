@@ -263,6 +263,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento_institucional` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `exposicao_ID` INT UNSIGNED NOT NULL,
+  `agendamento_ID` INT UNSIGNED NOT NULL,
   `agendamento_institucional_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_exposicao_agendamento_institucional_exposicao1_idx` (`exposicao_ID` ASC),
@@ -354,10 +355,11 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`proposta_horario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`proposta_horario` (
-  `dia_semana` VARCHAR(45) NOT NULL,
+ `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+ `dia_semana` VARCHAR(45) NOT NULL,
   `turno` VARCHAR(45) NOT NULL,
   `estagiario_usuario_ID` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`dia_semana`, `turno`, `estagiario_usuario_ID`),
+  PRIMARY KEY (`ID`),
   INDEX `fk_proposta_horario_estagiario1_idx` (`estagiario_usuario_ID` ASC),
   CONSTRAINT `fk_proposta_horario_estagiario1`
     FOREIGN KEY (`estagiario_usuario_ID`)

@@ -23,14 +23,12 @@ class HorarioController extends Controller{
             'paginaAtual' => "Gerenciamento de Visitas",
             'estagiarios'=> $DAO->buscaEstagiarioALL()
         ];
-        try{
-           
-            
-        }finally{
             return view('TelaPropostaHorarioFuncionario.telaGerenciamentoDehorarios', $variaveis);
-        }
+    }
 
-       
+    public function getProposta($id){
+        $DAO = new Proposta_horarioDAO();
+        var_dump($id);
     }
 }
 ?>
