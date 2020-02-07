@@ -38,7 +38,7 @@ class horarioEstagiarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'Proposta de carga horária enviada com sucesso!';
     }
 
     /**
