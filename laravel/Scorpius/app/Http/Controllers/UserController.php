@@ -17,16 +17,18 @@ class UserController extends Controller
         //para testes
         $visitas= [];
         $agen = new \App\Model\Agendamento();
+        $visitas[] = new \App\Model\Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
         $visitas[] = new \App\Model\Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "manha", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("25-02-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("26-02-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("27-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("30-02-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("30-03-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("03-02-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("05-02-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("06-02-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
         $array = [];
 
         foreach ($visitas as $v) {
@@ -38,7 +40,6 @@ class UserController extends Controller
         
         for($i=0 ; $i<6 ; $i++){
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
-            $atividades[]= ["titulo"=> "atividade$i", "descrição" => "ferias divertidas De 07 a 09 de janeiro"];
         }
         //fim da parte para testes
         $institucional = ["leg.disponivel" => "Disponivel", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
@@ -48,8 +49,7 @@ class UserController extends Controller
             'visitas' => $array,
             'legenda' => $visitas[0]->getBtnClasses(),
             'tipoUser'=> $institucional,
-            'exposicoes'=> $exposicoes,
-            'atividades'=> $atividades
+            'exposicoes'=> $exposicoes
         ];
 
         return view('TelasUsuarios.agendamento', $variaveis);
@@ -64,11 +64,11 @@ class UserController extends Controller
         $visitas[] = new \App\Model\Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "manha", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("25-02-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("26-02-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("27-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("30-02-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("30-03-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("03-02-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("05-02-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("06-02-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
         $array = [];
 
         foreach ($visitas as $v) {
@@ -80,7 +80,6 @@ class UserController extends Controller
         
         for($i=0 ; $i<6 ; $i++){
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
-            $atividades[]= ["titulo"=> "atividade$i", "descrição" => "ferias divertidas De 07 a 09 de janeiro"];
         }
         //fim da parte para testes
         $visitante = ["leg.disponivel" => "Disponivel", "leg.indisponivel" => "Disponivel: (havera visita escolar)", "tipo" => "visitante"];
@@ -90,8 +89,7 @@ class UserController extends Controller
             'visitas' => $array,
             'legenda' => $visitas[0]->getBtnClasses(),
             'tipoUser'=> $visitante,
-            'exposicoes'=> $exposicoes,
-            'atividades'=> $atividades
+            'exposicoes'=> $exposicoes
         ];
 
         return view('TelasUsuarios.agendamento', $variaveis);

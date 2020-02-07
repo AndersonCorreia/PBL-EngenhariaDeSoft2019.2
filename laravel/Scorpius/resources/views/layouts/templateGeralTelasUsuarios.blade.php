@@ -31,7 +31,7 @@
                 </ul>
         </div>
         {{--<hr class="m-0 bg-primary">--}}
-        <div class="p-4 container">
+        <div class="p-lg-4 pt-4 container">
             @yield('conteudo')
         </div>
     </div>

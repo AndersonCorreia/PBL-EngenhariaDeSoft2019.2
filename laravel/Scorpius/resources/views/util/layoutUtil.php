@@ -4,12 +4,12 @@ require_once __DIR__."/../../../app/DB/PessoaDAO.php";
 function getMenuLinksAll(){
     return [//todos os possiveis links do menu, utilizado no layout da area administrativa
         'inicio'=>          ['link'=>'#' , 'texto'=>'Inicio' ],// texto é o nome que vai estar dentro da tag <a>
-        'visitante0'=>      ['link'=>'#' , 'texto'=>'Agendar Visita' ],
+        'visitante0'=>      ['link'=>route('Agendar.show') , 'texto'=>'Agendar Visita' ],
         'visitante1'=>      ['link'=>'#' , 'texto'=>'Gerenciar Visitas' ],
         'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições' ],
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
         'institucional2'=>  ['link'=>route('telaTurmas',601), 'texto'=>'Turmas' ],
-        'visitante2'=>      ['link'=>route('Agendar.show') , 'texto'=>'Histórico de Visitas' ],
+        'visitante2'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
         'visitante3'=>      ['link'=>'#' , 'texto'=>'Alterar Dados' ],
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
         'estagiario1'=>     ['link'=>'#' , 'texto'=>'Resumo da Semana' ],

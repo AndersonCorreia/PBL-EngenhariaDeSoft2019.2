@@ -3,6 +3,7 @@
     {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">
+            <span><h5>Dados para o agendamento</h5></span>
             <div class="form-group col-md-6">
                 <label for="inputData">Data</label>
                 <input class="form-control" type="date" id="data" name="data" required>

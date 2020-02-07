@@ -4,11 +4,14 @@
 
 @section('conteudo')
 
-@include('telasUsuarios._includes.escolhaDeExposicoes')
-@include('telasUsuarios._includes.calendar')
-
-<div class="row col-12 pl-5 pr-4">
-    <div id="formulario" class="col-12 border">
+<div class="row col-12 ">
+    <div class="col-12 m-0 p-0">
+        @include('telasUsuarios._includes.escolhaDeExposicoes')
+    </div>
+    <div class="col-12 mt-4 p-0">
+        @include('telasUsuarios._includes.calendar')
+    </div>
+    <div id="formulario" class="col-12 mt-4 border">
     @if($tipoUser["tipo"] == "institucional")
         @include('telasUsuarios._includes.formularioAgendamento')
     @else

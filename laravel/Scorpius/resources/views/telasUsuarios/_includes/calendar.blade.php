@@ -10,48 +10,44 @@
     $tipoUser array que contem informações de acordo o tipo de usuario
 --}}
 
-<div class="row col-12 pr-0 pl-4 font-weight-bold text-center barra" >
-    <div class="row col-12 mb-1 m-0 p-0 text-left">
-        <div class="col-lg-2 col-6 py-1"><span> Legenda :</span></div>
-        <div class="col col-lg-3 py-1"><button class="btn {{ $legenda["proprio"] }} w-auto"></button> <span> seu agendamento</span></div>
-        <div class="col-lg-2 col-6 py-1"><button class="btn {{ $legenda["disponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.disponivel"]}}</span></div>
-        <div class="col col-lg-5 p-1 "><button class="btn {{ $legenda["indisponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.indisponivel"]}}</span></div>
-    </div>
+<div class="row col-12 m-0 p-0 font-weight-bold text-center barra" >
     <div class="row col-12 m-0 p-0">
-        <div id="calendario" class="col-12 col-lg-8 p-2 m-0 border overflow-auto barra">
-            <div class="col text-dark font-weight-bold">
+        <div id="calendario" class="col-12 p-2 m-0 border overflow-auto barra">
+            <div class="col p-0 text-dark font-weight-bold">
                 <button type="button" class=" btn btn-default seta-esquerda"></button>
-                <span> {{$visitas["dataInicio"] ?? "01/02"}} - a - {{$visitas["dataFim"] ?? "20/02"}} </span>
+                <span> {{$visitas["dataInicio"] ?? "01/02"}} -a- {{$visitas["dataFim"] ?? "20/02"}} </span>
                 <button type="button" class="btn btn-default seta-direita"></span></button>
             </div>
             <hr class="my-1 linha rounded bg-light">
-            <div class="row m-0 font-weight-bold text-monospace">
-                <div class="col-12 col-lg-6 pb-2 text-center border-right border-light">
-                    <div class="row m-0 mb-2 p-0"> 
-                        <div class="col-4 p-0">Dia</div> 
-                        <div class="col  p-0">Manhã</div>
-                        <div class="col p-0">Tarde</div>
-                        <div class="col p-0">Noite</div>
+            <div class="row col-12 m-0 font-weight-bold text-monospace">
+                <div class="row col-12 pb-2 m-0 px-0 text-center ">
+                    <div class="row m-0 col-lg-1 mb-2 m-lg-0 pt-1 p-0 border-right"> 
+                        <div class="col-4 col-lg-12 p-0 my-lg-3">Dia</div> 
+                        <div class="col col-lg-12 p-0">Manhã</div>
+                        <div class="col col-lg-12 my-lg-2 p-0">Tarde</div>
+                        <div class="col col-lg-12 p-0">Noite</div>
                     </div>
+                    <div class="col-lg-11 p-0 m-0 col row">
                     @foreach ($visitas as $v)
-                        @if ($loop->index < 7 && $loop->index > 1)
-                        <div class="row p-1"> 
-                            <div id="data{{$loop->index}}" class="col-4 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
-                            <div class="col py-1 p-0">
+                        @if ($loop->index>1 && $loop->index<12 )
+                        <div class="row col-md m-0 p-0 border-right border-left "> 
+                            <div id="data{{$loop->index}}" class="col-4 col-lg-12 p-2">{{ $v["data"] ?? "27/01 SEG" }}</div> 
+                            <div class="col col-lg-12 py-1 p-0">
                                 <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
                             </div>
-                            <div class="col py-1 p-0">
+                            <div class="col col-lg-12 py-1 p-0">
                                 <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
                             </div>
-                            <div class="col py-1 p-0">
+                            <div class="col col-lg-12 py-1 p-0">
                                 <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
                             </div>
                         </div>
-                        <hr class="col-12 m-0 p-0 linha rounded bg-light">
+                        <hr class="col-12 d-lg-none m-0 p-0 linha rounded bg-light">
                         @endif
                     @endforeach
+                    </div>
                 </div>
-                <div class="col col-lg-6 pb-2 text-center border-left border-light">
+                {{-- <div class="col col-lg-6 pb-2 text-center border-left border-light">
                     <div class="row m-0 mb-2 d-none d-lg-flex p-0"> 
                         <div class="col-4 p-0">Dia</div> 
                         <div class="col p-0">Manhã</div>
@@ -75,7 +71,14 @@
                         <hr class="col-12 m-0 p-0 linha rounded bg-light">
                         @endif
                     @endforeach
-                </div>
+                </div> --}}
+            </div>
+            <hr class="my-1 linha rounded bg-light col-11">
+            <div class="row col-12 mb-1 m-0 p-0 pt-1 text-left">
+                <div class="col-12 col-lg-2 py-1 text-center d-none d-lg-block"><span> Legenda:</span></div>
+                <div class="col-7 col-lg-3 py-1"><button class="btn {{ $legenda["proprio"] }} w-auto"></button> <span> Seu Agendamento</span></div>
+                <div class="col-5 col-lg-3 py-1"><button class="btn {{ $legenda["disponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.disponivel"]}}</span></div>
+                <div class="col-12 col-lg-4 py-1 "><button class="btn {{ $legenda["indisponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.indisponivel"]}}</span></div>
             </div>
         </div>
     </div>
@@ -93,7 +96,6 @@
     #calendario, #exposicoes{
         background-color: rgb(240, 240, 246);
         height: auto;
-        max-height: 50.5vh;
     }
     html ::-webkit-scrollbar {
         width: 0.5vw;
@@ -122,9 +124,9 @@ estou colocando uma cor azul clara nela*/
   width: 0; 
   height: 0; 
 
-  border-top: 2.7vh solid transparent;
-  border-bottom: 2.7vh solid transparent; 
-  border-right: 2.2vw solid black; 
+  border-top: 1.7vh solid transparent;
+  border-bottom: 1.7vh solid transparent; 
+  border-right: 1.3vw solid black; 
 }
 
 /**
@@ -137,9 +139,9 @@ estou colocando uma cor azul clara nela*/
   width: 0; 
   height: 0; 
 
-  border-top: 2.7vh solid transparent;
-  border-bottom: 2.7vh solid transparent;
-  border-left: 2.2vw solid black;
+  border-top: 1.7vh solid transparent;
+  border-bottom: 1.7vh solid transparent;
+  border-left: 1.3vw solid black;
 }
 
 /**
