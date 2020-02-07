@@ -15,11 +15,11 @@
             padding: 5px; 
         }
     </style>
-    <h1>Proposta de Horário</h1>
+    <h3>Proposta de Horário</h3>
     <br>
 
         <div class="guia">
-        <span class="badge badge-pill badge-secondary"><h2>Guia de Matrícula</h2></span>
+        <span class="badge badge-pill badge-secondary"><h4>Guia de Matrícula</h4></span>
         <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
         <input type="file"/>
         <br><br><br>
@@ -31,7 +31,7 @@
         
 
             <div class="calendario">
-    <h4>PROPOSTA DE CARGA HORÁRIA SEMANAL</h4>
+    <h5>PROPOSTA DE CARGA HORÁRIA SEMANAL</h5>
     <table class="table table-hover">
             <thead>
                 <tr class="table-primary">

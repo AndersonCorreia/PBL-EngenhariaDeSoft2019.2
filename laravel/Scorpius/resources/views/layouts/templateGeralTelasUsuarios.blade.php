@@ -18,8 +18,8 @@
     <div class="content bg-light">
         <div id="menuTopo" class="d-flex m-0 pt-2 w-100 h-auto border-bottom">
                 <ul class=" w-100">
-                    <li id="menuTopoTitle" class="ml-5 pt-1 pb-0 my-0 float-left w-50">
-                        <h2>@yield('title', $paginaAtual ?? 'Pagina do Visitante')</h2>
+                    <li id="menuTopoTitle" class="ml-4 pt-1 pb-0 my-0 float-left w-50">
+                        <h3>@yield('title', $paginaAtual ?? 'Pagina do Visitante')</h3>
                     </li>
                     <li class="mr-3 float-right w-auto">
                         <a href="#" class="mr-5">

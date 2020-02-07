@@ -5,11 +5,11 @@
 @section('conteudo')
 <div class="matricula">
     <div class="form-row">
-        <div class="col-5  float-left">
+        <div class="col-6  float-right">
             <div class="form-group row">
-                <label class="col-sm-12 col-form-label">Nome do Estagiário</label>
+                <label class="col-sm-12 col-form-label" nomeEstagiario >Nome do Estagiário</label>
                 <div class="col-9">
-                    <input id="nomeInst" class="form-control" type="text" name="estagiario" placeholder="Insira o Nome da instituicão" list="instList" required autofocus>
+                    <input id="nomeInst" class="form-control" type="text" name="estagiario" placeholder="Insira o Nome do Estagiário" list="instList" required autofocus>
                     <datalist id="instList">
                         @if (($estagiarios ?? false))
                         @foreach ($estagiarios as $est)
@@ -30,8 +30,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div class="calendario">
     <h5>Cronograma Semanal do Semestre</h5>
@@ -78,6 +76,13 @@
             </tbody>
         </table>
 </div>
+
+<div class="form-group">
+                <label for="Observacao" placeholder="Descrição"><b>Observações:</b></label>  <!--Caixa de texto de obsservação-->
+                <textarea class="form-control" name="Observacao" rows="3"></textarea>
+                </div>
+            
+                <input type="submit" value="Enviar" name="proposta" class="submit_button">  <!--botao p/ confirmar os dados-->
 @endsection
 
 @section('js')
@@ -106,11 +111,18 @@
         padding: 0px 30px 10px 30px;
     }
     .calendario{
-        padding:50px 30px 0px 30px ;
+        padding:20px 30px 0px 0px ;
     }
 
     .download {
         padding-left: 60px;
+    }
+    .submit_button{
+            background-color: cornflowerblue;
+            color: white;
+            border: 5px;
+            border-radius: 5px;
+            padding: 5px; 
     }
 
     [download] {
@@ -125,7 +137,6 @@
         cursor: hand;
         /* para o IE 5.x */
     }
-
     
     [buscar]{
         padding: 0px 20px 0px 20px;
