@@ -39,11 +39,11 @@
             <form action="AlterarDadosUsuario" method="POST">
             {{csrf_field()}}
                 <label><b>Digite sua senha atual:</b></label> <br>  
-                <input type="text" name ="senha_antiga">  <!--Caixa de texto p/ senha atual-->
+                <input type="password" name ="senha_antiga">  <!--Caixa de texto p/ senha atual-->
                 <br><br><br>
 
                 <label><b>Digite sua nova senha*:</b></label> <br>   
-                <input type="text" name ="senha_nova"> <br>  <!--Caixa de texto p/ nova senha-->
+                <input type="password" name ="senha_nova"> <br>  <!--Caixa de texto p/ nova senha-->
 
                 <h5>*Mínimo 8 dígitos</h5>   <br>
                 <input type="submit" value="Alterar senha" name="alterar_senha" class="submit_button">  <!--botao p/ confirmar os novos dados-->
