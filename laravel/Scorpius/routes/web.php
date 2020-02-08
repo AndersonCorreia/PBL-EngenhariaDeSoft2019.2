@@ -34,7 +34,7 @@ Route::get('/verificacao-email/{email}/{token}', 'EmailVerificacaoController@ind
 /**
  * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
  */
-Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show");
+Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show")->middleware('authInstitucional');
 
 
 Route::get('/dashboard/{professor_ID}/turmas', 'TurmaController@index')->name('telaTurmas');

@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 require_once __DIR__."/../../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
 use App\DB\AlunoDAO;
-use AppzDB\Aluno;
+use App\DB\Aluno;
 
 class AlunoDAOTest extends TestCase
 {
