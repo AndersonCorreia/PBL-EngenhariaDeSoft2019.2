@@ -15,7 +15,7 @@
             padding: 5px; 
         }
     </style>
-    <h3>Proposta de Horário</h3>
+    <h3>Minha Proposta de Horário</h3>
     <br>
 
         <div class="guia">

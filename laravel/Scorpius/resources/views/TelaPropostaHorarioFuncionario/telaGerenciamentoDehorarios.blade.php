@@ -80,7 +80,7 @@
 
     <div class="form-group">
         <input type="submit" value="Alterar" name="proposta" class="submit_button col-2">  <!--botao p/ confirmar os dados-->
-        <input type="submit" value="Salvar" name="proposta" class="submit_button col-2">  <!--botao p/ confirmar os dados-->
+        <input type="submit" value="Salvar" name="proposta" class="submit_buttons col-2">  <!--botao p/ confirmar os dados-->
     </div>
 @endsection
 
@@ -117,9 +117,20 @@
         padding-left: 60px;
     }
 
-    /*configurando design dos botões de salvar e alterar*/
-    .submit_button{
+    /*configurando design do botão alterar*/
+    .submit_buttons{
         background-color: #007bff;
+        position: absolute;
+        left: 680px;
+        color: white;
+        border: 5px;
+        border-radius: 5px;
+        padding: 5px; 
+    }
+    
+    /*configurando design do botão salvar*/
+    .submit_button{
+        background-color: #dd2c00;  
         position: absolute;
         left: 680px;
         color: white;
