@@ -267,15 +267,15 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento_institucional` (
   `agendamento_institucional_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_exposicao_agendamento_institucional_exposicao1_idx` (`exposicao_ID` ASC),
-  INDEX `fk_exposicao_agendamento_institucional_agendamento1_idx` (`agendamento_ID` ASC),
+  INDEX `fk_exposicao_agendamento_institucional_agendamento1_idx` (`agendamento_institucional_ID` ASC),
   CONSTRAINT `fk_exposicao_agendamento_institucional_exposicao1`
     FOREIGN KEY (`exposicao_ID`)
     REFERENCES `scorpius`.`exposicao` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_exposicao_agendamento_institucional_agendamento1`
-    FOREIGN KEY (`agendamento_ID`)
-    REFERENCES `scorpius`.`agendamento` (`ID`)
+    FOREIGN KEY (`agendamento_institucional_ID`)
+    REFERENCES `scorpius`.`agendamento_institucional` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
