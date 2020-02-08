@@ -44,6 +44,14 @@ class ControlerInstitucional extends Controller {
 
         return view('TelaInstituicaoEnsino.errorNenhumaInstituicao', $variaveis);
     }
+    public function nenhumaTurma(){
+        $variaveis = [
+            'itensMenu' => getMenuLinks("institucional"),
+            'paginaAtual' => "Turma",
+        ];
+
+        return view('TelaInstituicaoEnsino.errorNenhumaTurma', $variaveis);
+    }
 
     /**
      * retornar a tela de cadastro de instituições para o usuario

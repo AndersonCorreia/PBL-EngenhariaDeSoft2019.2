@@ -16,14 +16,18 @@ Route::get('/', ['uses'=>'InicialController@inicio'])->name('paginaInicial');
 Route::resource('/cadastrar', 'CadastroController');
 // Chama o metódo do Inicialcontroller que retorna a página de entrar (login).
 Route::get('/entrar', ['uses'=>'InicialController@telaEntrar'])->name('entrar');
-
+Route::post('/entrar','UserController@login')->name('login');
+Route::get("/logout", 'UserController@logout')->name('logout');
 Route::get('/login-administrativo', ['uses' => 'InicialController@loginAdm'])->name('loginAdm');
+Route::post('/login-administrativo','UserController@loginADM')->name('loginAdm.post');
 
-// chama tela de alterar dados cadastrais localizada no controller através do método index
-Route::resource('/AlterarDadosUsuario', 'AlteraUsuarioController');
+// Testes. PAGINA TEMPORARIA
+Route::resource('enviar-eventos', 'enviarEventosController');
 
-// chama tela do horario dos estagiários localizada no controller através do método index
-Route::resource('/horarioEstagiario', 'horarioEstagiarioController');
+//rota para visualizar corbetura dos testes
+Route::get('/testes', function(){
+    return redirect("/build/coverage/index.html",307);
+});
 
 /**
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que
@@ -32,72 +36,14 @@ Route::resource('/horarioEstagiario', 'horarioEstagiarioController');
 //Route::post('/cadastro/cadastrar-se', ['as'=>'cadastro.normal', 'uses'=>'Admin\CadastroController@cadastroNormal'])->name('cadastro.normal');
 Route::get('/verificacao-email/{email}/{token}', 'EmailVerificacaoController@index');
 /**
- * Rota para a tela de instituicões de ensino dentro do escopo de usuário.
- */
-Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show")->middleware('authInstitucional');
-
-
-Route::get('/dashboard/{professor_ID}/turmas', 'TurmaController@index')->name('telaTurmas');
-Route::post('/dashboard/{professor_ID}/turmas/excluir', 'TurmaController@excluirTurma')->name("excluirTurma");
-Route::post('/dashboard/{professor_ID}/turmas/editar', 'TurmaController@editarTurma')->name("editarTurma");
-Route::post('/dashboard/{professor_ID}/turmas/cadastrar', 'TurmaController@cadastrarTurma')->name("cadastrarTurma");
-
-Route::post('dashboard/{professor_ID}/turmas/excluir-aluno', 'TurmaController@excluirAluno')->name("excluirAluno");
-Route::post('dashboard/{professor_ID}/turmas/adicionar-aluno', 'TurmaController@adicionarAluno')->name("adicionarAluno");
-/**
- * Rota para retornar a tela para cadastra uma instituição
- */
-Route::get('/instituicao/cadastro', 'ControlerInstitucional@telaCadastroInstituicao')->name("CadastroIntituição.show");
-/**
- * Rota para casdastra uma instituição e vinculala a um usuario
- */
-Route::post('/instituicao/cadastro', 'ControlerInstitucional@cadastrarInstituicao')->name("CadastroInstituição.post");
-/**
- * rota para retornar o JSON com os dados de uma instituição.
- */
-Route::get("/instituicao/dados/{nome}/{endereco}/", "ControlerInstitucional@getInstituicao");
-
-/**
- * Rota exibir erro, caso não exista instituições cadastradas.
- */
-Route::get('/instituicao/erro','ControlerInstitucional@nenhumaInstituicao')->name("errorNenhumaInstituicao.show");
-
-/**
- * Rota exibir erro, caso não existam turmas cadastradas.
- */
-Route::get('/turma/erro','ControlerInstitucional@telaInstituicao')->name("errorNenhumaTurma.show");
-
-/**
- * Rota para editar instituicao.
- */
-Route::get('/instituicao/editar/{id}',['as'=>'user.instituicoes.editar','uses'=>'ControlerInstitucional@editarInstituicao']);
-/**
- * Rota para deletar instituicao.
- */
-Route::get('/instituicao/deletar/{id}',['as'=>'user.instituicoes.deletar','uses'=>'ControlerInstitucional@deletarInstituicao']);
-
-Route::put('/instituicao/atualizar/{id}',['as'=>'user.instituicoes.atualizar','uses'=>'ControlerInstitucional@atualizarInstituicao']);
-
-/**
  * Após confirmação dos dados da rota acima, retorna a tela de "Prosseguir" da verificação de email. Essa tela
  * só tem o intuito de informar que um email foi enviado para o inbox do visitante/responsável. Por isso usei o 
  * get, pois é só uma tela para mostrar informações.
  */
 // Route::get('cadastro/cadastre-se/confirmacao-email', ['uses'=>'InicialController@prosseguirVerificacaoEmail']);
-
 // rotas para cadastro com facebook e google
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
-
-// Authentication Routes...
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-// Registration Routes...
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
-
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');

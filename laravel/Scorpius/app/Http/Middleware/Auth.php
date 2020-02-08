@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AuthenticatedAdministrativo
+class Auth
 {
     /**
      * Handle an incoming request.
@@ -14,8 +14,12 @@ class AuthenticatedAdministrativo
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-        $nameRota = \Route::currentRouteName();
+    {   
+        if($request->session()->has('ID')){
+            return $next($request);
+        }
+        print("vc não esta logado");
         return $next($request);
+        return redirect()->route('entrar');
     }
 }

@@ -3,10 +3,57 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DB\PessoaDAO;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
-class UserController extends Controller
-{
+class UserController extends Controller{   
+
+    /**
+     * Função para realizar o login do usuario, preencher a sessão com o ID, nome e Tipo do usuario
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public function login(Request $request){
+        $user = $request["e-mail"];
+        $senha = $request["senha"];
+        $DAO = new PessoaDAO();
+        $usuario = $DAO->UserLogin($user, $senha);//lança uma exception se as informações estiverem incorretas
+
+        $request->session()->regenerate();//a documentação falava que era para previnir um ataque chamado "session fixation"
+        session(["ID" => $usuario["ID"], "nome" => $usuario["nome"], "tipo" => $usuario["tipo"]]);
+
+        return redirect()->route("dashboard");
+    }
+    
+    /**
+     * Função para realizar o login do usuario, preencher a sessão com o ID e nome;
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public function loginADM(Request $request){
+        $user = $request["usuario"];
+        $senha = $request["senha"];
+        $DAO = new PessoaDAO();
+        $usuario = $DAO->UserLogin($user, $senha);//lança uma exception se as informações estiverem incorretas
+
+        $request->session()->regenerate();//a documentação falava que era para previnir um ataque chamado "session fixation"
+        session(["ID" => $usuario["ID"], "nome" => $usuario["nome"] ]);
+
+        return redirect()->route("dashboard.adm");
+    }
+    /**
+     * faz o logout do usuario apagando todos os dados da sessão
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public function logout(Request $request){
+
+        $request->session()->flush();
+        return redirect()->route("paginaInicial");
+    }
 
     /**
      * Exibir tela de agendamento de uma instituicao
@@ -42,7 +89,7 @@ class UserController extends Controller
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
-        $institucional = ["leg.disponivel" => "Disponivel", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
+        $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
             'paginaAtual' => "Agendar visita",
@@ -82,7 +129,7 @@ class UserController extends Controller
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
-        $visitante = ["leg.disponivel" => "Disponivel", "leg.indisponivel" => "Disponivel: (havera visita escolar)", "tipo" => "visitante"];
+        $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'itensMenu' => getMenuLinks("visitante"),
             'paginaAtual' => "Agendar visita",

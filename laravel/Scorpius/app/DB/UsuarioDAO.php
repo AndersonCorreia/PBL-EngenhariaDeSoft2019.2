@@ -50,7 +50,7 @@ class UsuarioDAO extends DataAccessObject{
         return FALSE;
     }
     function SELECTbyTipo($tipo){
-        $sql = "SELECT * FROM tipo_usuario WHERE nome='$tipo'";
+        $sql = "SELECT * FROM tipo_usuario WHERE tipo='$tipo'";
         $resultado = $this->dataBase->query($sql);
         $row = $resultado->fetch_assoc();
         return $row['ID'];

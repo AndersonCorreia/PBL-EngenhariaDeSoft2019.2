@@ -51,7 +51,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth' => \App\Http\Middleware\Auth::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
@@ -61,7 +61,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'authInstitucional' => \App\Http\Middleware\AuthenticateInstitucional::class
+        'authInstitucional' => \App\Http\Middleware\AuthorizeInstitucional::class,
+        'authVisitante' => \App\Http\Middleware\AuthorizeVisitante::class,
+        'authAdministrativo' => \App\Http\Middleware\AuthorizeAdministrativo::class
     ];
 
     /**
@@ -74,11 +76,13 @@ class Kernel extends HttpKernel
     protected $middlewarePriority = [
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\Authenticate::class,
+        \App\Http\Middleware\Auth::class,
         \Illuminate\Routing\Middleware\ThrottleRequests::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
-        'authInstitucional' => \App\Http\Middleware\AuthenticateInstitucional::class
+        \App\Http\Middleware\AuthorizeAdministrativo::class,
+        \App\Http\Middleware\AuthorizeVisitante::class,
+        \App\Http\Middleware\AuthorizeInstitucional::class
     ];
 }

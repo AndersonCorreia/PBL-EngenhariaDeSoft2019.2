@@ -1,9 +1,9 @@
 -- INSERT do tipos de usuarios --
-INSERT INTO tipo_usuario (ID, nome) VALUES (10, 'adm');
-INSERT INTO tipo_usuario (ID, nome) VALUES (8, 'estagiario');
-INSERT INTO tipo_usuario (ID, nome) VALUES (9, 'funcionario');
-INSERT INTO tipo_usuario (ID, nome) VALUES (7, 'institucional');
-INSERT INTO tipo_usuario (ID, nome) VALUES (6, 'visitante');
+INSERT INTO tipo_usuario (ID, tipo) VALUES (10, 'adm');
+INSERT INTO tipo_usuario (ID, tipo) VALUES (8, 'estagiario');
+INSERT INTO tipo_usuario (ID, tipo) VALUES (9, 'funcionario');
+INSERT INTO tipo_usuario (ID, tipo) VALUES (7, 'institucional');
+INSERT INTO tipo_usuario (ID, tipo) VALUES (6, 'visitante');
 
 -- Insert dos usuarios --
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES

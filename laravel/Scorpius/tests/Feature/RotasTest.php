@@ -14,7 +14,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaInicial()
     {
-        $response = $this->get('/');
+        $response = $this->get(route("paginaInicial"));
 
         $response->assertStatus(200);
     }
@@ -38,7 +38,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaEntrar()
     {
-        $response = $this->get('/entrar');
+        $response = $this->get(route('entrar'));
 
         $response->assertStatus(200);
     }
@@ -50,7 +50,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaLoginAdministrativo()
     {
-        $response = $this->get('/login-administrativo');
+        $response = $this->get(route("loginAdm"));
 
         $response->assertStatus(200);
     }
@@ -74,7 +74,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaHorarioEstagiario()
     {
-        $response = $this->get('/horarioEstagiario');
+        $response = $this->get(route("HorarioEstagiario.show"));
 
         $response->assertStatus(200);
     }
@@ -86,7 +86,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaInstituicao()
     {
-        $response = $this->get('/instituicao');
+        $response = $this->get(route("instituição.show"));
 
         $response->assertStatus(200);
     }
@@ -98,7 +98,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaInstituicaoCadastro()
     {
-        $response = $this->get('/instituicao/cadastro');
+        $response = $this->get(route("CadastroIntituição.show"));
 
         $response->assertStatus(200);
     }
@@ -110,7 +110,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaInstituicaoEditar()
     {
-        $response = $this->get('/instituicao/editar/201');
+        $response = $this->get(route('user.instituicoes.editar',201));
 
         $response->assertStatus(200);
     }
@@ -122,7 +122,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaAgendamentoUsuario()
     {
-        $response = $this->get('/agendamentoUsuario');
+        $response = $this->get(route('AgendarAvulso.show'));
 
         $response->assertStatus(200);
     }
@@ -134,7 +134,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaAgendamento()
     {
-        $response = $this->get('/agendamento');
+        $response = $this->get(route("Agendar.show"));
 
         $response->assertStatus(200);
     }
@@ -146,7 +146,18 @@ class RotasGetTest extends TestCase
      */
     public function testTelaGerenciamentoDeVisita()
     {
-        $response = $this->get('/gerenciamentoDeVisita');
+        $response = $this->get(route("telaGerenciamentoDeVisitas.show"));
+
+        $response->assertStatus(200);
+    }
+    /**
+     * Testa se a rota carrega normalmente.
+     *
+     * @return void
+     */
+    public function testTelaGerenciamentoDeHorarios()
+    {
+        $response = $this->get(route("telaGerenciamentoDehorarios.show"));
 
         $response->assertStatus(200);
     }

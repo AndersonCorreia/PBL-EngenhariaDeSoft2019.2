@@ -77,9 +77,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`tipo_usuario` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(20) NOT NULL,
+  `tipo` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC))
+  UNIQUE INDEX `nome_UNIQUE` (`tipo` ASC))
 ENGINE = InnoDB;
 
 

@@ -42,16 +42,16 @@
     <h1>Login administrativo</h1>
 </div>
 <br>
-<form class="form-group mx-auto col-md-10" action="" method="POST">
+<form class="form-group mx-auto col-md-10" action={{ route("loginAdm.post")}} method="POST">
     <!-- Usuário -->
     <div class="form-group">
         <label for="usuario">Usuário</label>
-        <input class="form-control" id="usuario" name="usuario" type="text">
+        <input class="form-control" id="usuario" name="usuario" type="text" required>
     </div>
     <!-- Senha -->
     <div class="form-group">
         <label for="senha">Senha</label>
-        <input minlength="4" maxlength="8" type="password" class="form-control" id="senha">
+        <input minlength="4" maxlength="8" type="password" class="form-control" id="senha" name="senha" required>
     </div>
 
     <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Entrar</button>

@@ -4,8 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AuthenticateInstitucional
-{
+class AuthorizeInstitucional{
     /**
      * Handle an incoming request.
      *
@@ -13,12 +12,13 @@ class AuthenticateInstitucional
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(\Illuminate\Http\Request $request, Closure $next)
-    {   
+    public function handle(\Illuminate\Http\Request $request, Closure $next){   
         
-        if($request->session()->get('ID')){
+        if($request->session()->get('tipo') == 'institucional'){
             return $next($request);
         }
+        print("    esta conta não é de instituição");
         return $next($request);
+        return redirect()->route('dashboard');
     }
 }
