@@ -36,7 +36,8 @@
     <table class="table table-hover">
             <thead>
                 <tr class="table-primary">
-                    <th scope="col">&nbsp;</th>
+                    
+                    <th scope="col">Dia/Turno</th>
                     <th scope="col">Manhã</th>
                     <th scope="col">Tarde</th>
                     <th scope="col">Noite</th>
@@ -45,44 +46,42 @@
             <tbody>
                 <tr>
                     <th scope="row" class="table-secondary">Segunda</th>
-                    <td id="segundaManha"></td>
-                    <td id="segundaTarde"></td>
-                    <td id="segundaNoite"></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
                 </tr>
                 <tr>
                     <th scope="row" class="table-secondary">Terça</th>
-                    <td id="tercaManha"></td>
-                    <td id="tercaTarde"></td>
-                    <td id="tercaNoite"></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
                 </tr>
                 <tr>
                     <th scope="row" class="table-secondary">Quarta</th>
-                    <td id="quartaManha"></td>
-                    <td id="quartaTarde"></td>
-                    <td id="quartaNoite"></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
                 </tr>
                 <tr>
                     <th scope="row" class="table-secondary">Quinta</th>
-                    <td id="quintaManha"></td>
-                    <td id="quintaTarde"></td>
-                    <td id="quintaNoite"></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
                 </tr>
                 <tr>
                     <th scope="row" class="table-secondary">Sexta</th>
-                    <td id="sextaManha"></td>
-                    <td id="sextaTarde"></td>
-                    <td id="sextaNoite"></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
                 </tr>
             </tbody>
         </table>
 </div>
 
-<div class="form-group">
-                <label for="Observacao" placeholder="Descrição"><b>Observações:</b></label>  <!--Caixa de texto de obsservação-->
-                <textarea class="form-control" name="Observacao" rows="3"></textarea>
-                </div>
-            
-                <input type="submit" value="Enviar" name="proposta" class="submit_button">  <!--botao p/ confirmar os dados-->
+    <div class="form-group">
+        <input type="submit" value="Alterar" name="proposta" class="submit_button col-2">  <!--botao p/ confirmar os dados-->
+        <input type="submit" value="Salvar" name="proposta" class="submit_button col-2">  <!--botao p/ confirmar os dados-->
+    </div>
 @endsection
 
 @section('js')
@@ -117,20 +116,27 @@
     .download {
         padding-left: 60px;
     }
+
+    /*configurando design dos botões de salvar e alterar*/
     .submit_button{
-            background-color: cornflowerblue;
-            color: white;
-            border: 5px;
-            border-radius: 5px;
-            padding: 5px; 
+        background-color: #007bff;
+        position: absolute;
+        left: 680px;
+        color: white;
+        border: 5px;
+        border-radius: 5px;
+        padding: 5px; 
     }
 
+    /*configurando design do botão de download*/
     [download] {
         text-align: top;
         width: 200px;
         height: 40px;
         border:3px black;
-        background: transparent url(/../img/logo-download.png) no-repeat center center;
+        background: transparent url(/../img/logo-download.png) no-repeat;
+        background-position: left 15% bottom 50%;
+        background-size: 18px;
         overflow: hidden;
         cursor: pointer;
         /* vai por o cursor como forma de mão ao passar por cima do botão */

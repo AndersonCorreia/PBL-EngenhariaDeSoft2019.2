@@ -35,7 +35,7 @@
     <table class="table table-hover">
             <thead>
                 <tr class="table-primary">
-                    <th scope="col">Dia</th>
+                    <th scope="col">Dia/Turno</th>
                     <th scope="col">Manhã</th>
                     <th scope="col">Tarde</th>
                     <th scope="col">Noite</th>
