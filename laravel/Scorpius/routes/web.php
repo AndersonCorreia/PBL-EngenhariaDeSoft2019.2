@@ -58,26 +58,3 @@ Route::resource('enviar-eventos', 'enviarEventosController');
 Route::get('/testes', function(){
     return redirect("/build/coverage/index.html",307);
 });
-//Rotas para agendamento de uma conta individual
-Route::get('/agendamentoUsuario', 'UserController@agendamentoIndividual');
-Route::post('/agendamentoUsuario', 'UserController@agendarContaIndividual');
-
-//Rotas para agendamento de uma instituicao
-Route::get('/agendamento', 'UserController@agendamento')->name("Agendar.show");
-Route::post('/agendamento', 'UserController@agendarInstituicao')->name("AgendarInstituicao.post");
-
-//Rota para retornar a tela de Gerenciamento de Visitas.
-Route::get('/gerenciamentoDeVisita', 'Funcionario\VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
-
-Route::group(
-    ['midlleware'=>[], 
-    'prefix'=>'funcionario',
-    'namespace'=>'Funcionario'],
-    function(){
-        Route::get('/confirmacaoHorario', 'HorarioController@getTelaHorarioEstagiario')->name("telaGerenciamentoDehorarios.show");
-        Route::get('/confirmacaoHorario/{id}', 'HorarioController@getProposta')->name("retornaProposta");
-    }
-);
-
-//Rota para retornar a tela da Proposta de Horário do Estagiário.
-Route::get('/demandaWeb', 'horarioEstagiarioController@index')->name("HorarioEstagiario.show");

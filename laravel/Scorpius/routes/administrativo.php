@@ -9,6 +9,7 @@ Route::group(
     'namespace'=>'Funcionario'],
     function(){
         Route::get('/confirmacaoHorario', 'HorarioController@getTelaHorarioEstagiario')->name("telaGerenciamentoDehorarios.show");
+        Route::get('/confirmacaoHorario/{id}', 'HorarioController@getProposta')->name("retornaProposta");
     }
 );
 
