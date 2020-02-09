@@ -27,7 +27,7 @@
                             <div class="col col-lg-12 p-0 mt-4 m-0">Manhã</div>
                             <div class="col col-lg-12 p-0 mt-1 m-0">Tarde</div>
                         @else
-                            <div class="col col-lg-12 p-0">Noite</div>
+                            <div class="col col-lg-12 p-0 mt-4 m-0">Noite</div>
                         @endif
                     </div>
                     <div class="col-lg-11 p-0 m-0 col row">

@@ -40,45 +40,36 @@ function getMenuLinksAll(){
 function getMenuLinks(){
     $menuLinks= getMenuLinksAll();
     $links= [];
-    if( session("ID", true) ){
+    $tipoUsuario = session('tipo','institucional');//caso não esteja logado carrega o institucional
 
-        $tipoUsuario = session('tipo');
-        $links=[$menuLinks['inicio']];//adcionando o inicio que vale para todos
-
-        if($tipoUsuario=="visitante" || $tipoUsuario=="institucional"){
-            $links['collapseAgend']=$menuLinks['collapseAgend'];
-            $links[]=$menuLinks['visitante1'];
-
-            if( $tipoUsuario=="institucional" ){
-                $links[]=$menuLinks["institucional0"];
-                $links[]=$menuLinks["institucional1"];
-                $links[]=$menuLinks["institucional2"];
-                $links['collapseAgend']['itens'][]=$menuLinks['AgendarDiurnoIns'];
-            }
-            
-            $links['collapseAgend']['itens'][]=$menuLinks['AgendarDiurnoVis'];
-            $links['collapseAgend']['itens'][]=$menuLinks['AgendarNoturno'];
-            $links['collapseAgend']['itens'][]=$menuLinks['AgendarAtividade'];
-            $links[]=$menuLinks['visitante2'];
-            $links[]=$menuLinks['visitante3'];
+    $links=[$menuLinks['inicio']];//adcionando o inicio que vale para todos
+    if($tipoUsuario=="visitante" || $tipoUsuario=="institucional"){
+        $links['collapseAgend']=$menuLinks['collapseAgend'];
+        $links[]=$menuLinks['visitante1'];
+        if( $tipoUsuario=="institucional" ){
+            $links[]=$menuLinks["institucional0"];
+            $links[]=$menuLinks["institucional1"];
+            $links[]=$menuLinks["institucional2"];
+            $links['collapseAgend']['itens'][]=$menuLinks['AgendarDiurnoIns'];
         }
-        else {
-            if($tipoUsuario=="estagiario"){
-                $links[]=$menuLinks["estagiario0"];
-                $links[]=$menuLinks["estagiario1"];
-                $links[]=$menuLinks["estagiario2"];
-            }
-
-            $DAO = new \PessoaDAO;
-            $permissoes = $DAO->getPermissoes($tipoUsuario);
-
-            foreach ($permissoes as $value) {
-                $links[]=$menuLinks[$value["permissao"]];
-            }
-        }
+        
+        $links['collapseAgend']['itens'][]=$menuLinks['AgendarDiurnoVis'];
+        $links['collapseAgend']['itens'][]=$menuLinks['AgendarNoturno'];
+        $links['collapseAgend']['itens'][]=$menuLinks['AgendarAtividade'];
+        $links[]=$menuLinks['visitante2'];
+        $links[]=$menuLinks['visitante3'];
     }
     else {
-        $links = $menuLinks;
+        if($tipoUsuario=="estagiario"){
+            $links[]=$menuLinks["estagiario0"];
+            $links[]=$menuLinks["estagiario1"];
+            $links[]=$menuLinks["estagiario2"];
+        }
+        $DAO = new \PessoaDAO;
+        $permissoes = $DAO->getPermissoes($tipoUsuario);
+        foreach ($permissoes as $value) {
+            $links[]=$menuLinks[$value["permissao"]];
+        }
     }
     
     return $links;
