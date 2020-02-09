@@ -10,9 +10,9 @@ class Visita extends \App\DB\interfaces\DataObject {
     public $Agendamento;
     public $Acompanhante;
                                             //cor verde                     //cor amarela              //cor azul
-    private $btnClasses = ["disponivel" => "btn-success", "indisponivel" => "btn-warning", "proprio" => "btn-primary"];
-    private $abrevDia = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
-    private $mes = ["Janeiro", "Fevereiro", "Março", "Abril","Maio", "Junho", "Julho",
+    private static $btnClasses = ["disponivel" => "btn-success", "indisponivel" => "btn-warning", "proprio" => "btn-primary"];
+    private static $abrevDia = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
+    private static $mes = ["Janeiro", "Fevereiro", "Março", "Abril","Maio", "Junho", "Julho",
                     "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                     
     public function __Construct(\DateTime $data, string $turno, string $status, Agendamento $agend=null, Empregado $acomp=null){
@@ -33,8 +33,8 @@ class Visita extends \App\DB\interfaces\DataObject {
     public function preencherArrayForCalendario(array &$array){
         $dm = $this->Data->format("d/m");
         $d = $this->Data->format("d");
-        $day = $this->abrevDia[$this->Data->format("w")];
-        $mes = $this->mes[$this->Data->format("m")-1];
+        $day = self::$abrevDia[$this->Data->format("w")];
+        $mes = self::$mes[$this->Data->format("m")-1];
         $btn = $this->verificarDisponibilidade();
 
         if( !isset($array["dataInicio"]) ){
@@ -48,13 +48,13 @@ class Visita extends \App\DB\interfaces\DataObject {
     private function verificarDisponibilidade(){
         
         if($this->Agendamento != null){
-            return $this->btnClasses["indisponivel"];
+            return self::$btnClasses["indisponivel"];
         }
         elseif( $this->isAgendamentoDoUsuarioLogado() ){
-            return $this->btnClasses["proprio"];
+            return self::$btnClasses["proprio"];
         }
         else {
-            return $this->btnClasses["disponivel"];
+            return self::$btnClasses["disponivel"];
         }
     }
 
@@ -62,6 +62,9 @@ class Visita extends \App\DB\interfaces\DataObject {
         return false; //concluir despois da sessão esta funcionando e classe de agendamento completa
     }
 
+    public static function setCorIndisponivel($btnCor){
+        self::$btnClasses['indisponivel']= $btnCor;
+    }
     /**
      * Get the value of data
      */ 
@@ -147,7 +150,7 @@ class Visita extends \App\DB\interfaces\DataObject {
      */ 
     public function getBtnClasses()
     {
-        return $this->btnClasses;
+        return self::$btnClasses;
     }
 }
 

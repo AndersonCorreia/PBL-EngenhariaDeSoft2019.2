@@ -19,7 +19,7 @@ class HorarioController extends Controller{
         $DAO = new Proposta_horarioDAO();
       
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
+            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Gerenciamento de Visitas",
             'estagiarios'=> $DAO->buscaEstagiarioALL()
         ];

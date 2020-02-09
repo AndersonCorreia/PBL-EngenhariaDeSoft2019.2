@@ -5,9 +5,9 @@
     que informam as cores dos bottoes atraves de classe do bootstrap, 
     ao seja se o turno esta disponivel ocupado e etc
 
-    $legenda array para as cores usadas na legendas dos turnos
+    $legendaCores array para as cores usadas na legendas dos turnos
 
-    $tipoUser array que contem informações de acordo o tipo de usuario
+    $tipoUserLegenda array que contem informações de acordo o tipo de usuario
 --}}
 
 <div class="row col-12 m-0 p-0 font-weight-bold text-center barra" >
@@ -21,64 +21,45 @@
             <hr class="my-1 linha rounded bg-light">
             <div class="row col-12 m-0 font-weight-bold text-monospace">
                 <div class="row col-12 pb-2 m-0 px-0 text-center ">
-                    <div class="row m-0 col-lg-1 mb-2 m-lg-0 pt-1 p-0 border-right"> 
-                        <div class="col-4 col-lg-12 p-0 my-lg-3">Dia</div> 
-                        <div class="col col-lg-12 p-0">Manhã</div>
-                        <div class="col col-lg-12 my-lg-2 p-0">Tarde</div>
-                        <div class="col col-lg-12 p-0">Noite</div>
+                    <div class="row m-0 col-lg-1 mb-2 m-lg-0 pt-1 p-0 border-right">
+                        <div class="col-4 col-lg-12 p-0 mt-lg-3 ">Dia</div>
+                        @if(($turno ?? "diurno")==="diurno")  
+                            <div class="col col-lg-12 p-0 mt-4 m-0">Manhã</div>
+                            <div class="col col-lg-12 p-0 mt-1 m-0">Tarde</div>
+                        @else
+                            <div class="col col-lg-12 p-0">Noite</div>
+                        @endif
                     </div>
                     <div class="col-lg-11 p-0 m-0 col row">
                     @foreach ($visitas as $v)
                         @if ($loop->index>1 && $loop->index<12 )
                         <div class="row col-md m-0 p-0 border-right border-left "> 
-                            <div id="data{{$loop->index}}" class="col-4 col-lg-12 p-2">{{ $v["data"] ?? "27/01 SEG" }}</div> 
-                            <div class="col col-lg-12 py-1 p-0">
-                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
-                            </div>
-                            <div class="col col-lg-12 py-1 p-0">
-                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
-                            </div>
-                            <div class="col col-lg-12 py-1 p-0">
-                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
-                            </div>
+                            <div id="data{{$loop->index}}" class="col-4 col-lg-12 p-2">{{ $v["data"] ?? "27/01 SEG" }}</div>
+                            @if(($turno ?? "diurno")==="diurno") 
+                                <div class="col col-lg-12 py-1 p-0">
+                                    <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
+                                </div>
+                                <div class="col col-lg-12 py-1 p-0">
+                                    <button id="tarde{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
+                                </div>
+                            @else
+                                <div class="col col-lg-12 py-1 p-0">
+                                    <button id="noite{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
+                                </div>
+                            @endif
                         </div>
                         <hr class="col-12 d-lg-none m-0 p-0 linha rounded bg-light">
                         @endif
                     @endforeach
                     </div>
                 </div>
-                {{-- <div class="col col-lg-6 pb-2 text-center border-left border-light">
-                    <div class="row m-0 mb-2 d-none d-lg-flex p-0"> 
-                        <div class="col-4 p-0">Dia</div> 
-                        <div class="col p-0">Manhã</div>
-                        <div class="col p-0">Tarde</div>
-                        <div class="col p-0">Noite</div>
-                    </div>
-                    @foreach ($visitas as $v)
-                        @if ($loop->index > 6)
-                        <div class="row p-1"> 
-                            <div id="data{{$loop->index}}" class="col-4 p-1">{{ $v["data"] ?? "27/01 SEG" }}</div> 
-                            <div class="col py-1 p-0">
-                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
-                            </div>
-                            <div class="col py-1 p-0">
-                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
-                            </div>
-                            <div class="col py-1 p-0">
-                                <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["noite.btn"] ?? 'bg-light'}} "></button>
-                            </div>
-                        </div>
-                        <hr class="col-12 m-0 p-0 linha rounded bg-light">
-                        @endif
-                    @endforeach
-                </div> --}}
             </div>
             <hr class="my-1 linha rounded bg-light col-11">
             <div class="row col-12 mb-1 m-0 p-0 pt-1 text-left">
                 <div class="col-12 col-lg-2 py-1 text-center d-none d-lg-block"><span> Legenda:</span></div>
-                <div class="col-7 col-lg-3 py-1"><button class="btn {{ $legenda["proprio"] }} w-auto"></button> <span> Seu Agendamento</span></div>
-                <div class="col-5 col-lg-3 py-1"><button class="btn {{ $legenda["disponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.disponivel"]}}</span></div>
-                <div class="col-12 col-lg-4 py-1 "><button class="btn {{ $legenda["indisponivel"] }} w-auto"></button> <span> {{$tipoUser["leg.indisponivel"]}}</span></div>
+                <div class="col-7 col-lg-3 py-1"><button class="btn {{ $legendaCores["proprio"] }} w-auto"></button> <span> Seu Agendamento</span></div>
+                <div class="col-5 col-lg-3 py-1"><button class="btn {{ $legendaCores["disponivel"] }} w-auto"></button> <span> {{$tipoUserLegenda["leg.disponivel"]}}</span></div>
+                <div class="col-12 col-lg-4 py-1 "><button class="btn {{ $legendaCores["indisponivel"] }} w-auto"></button> <span> {{$tipoUserLegenda["leg.indisponivel"]}}</span></div>
             </div>
         </div>
     </div>

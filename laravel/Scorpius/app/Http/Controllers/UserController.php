@@ -83,20 +83,20 @@ class UserController extends Controller{
         }
 
         $exposicoes = [];
-        $atividades = [];
-        
         for($i=0 ; $i<6 ; $i++){
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
+        $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
+            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
-            'legenda' => $visitas[0]->getBtnClasses(),
-            'tipoUser'=> $institucional,
-            'exposicoes'=> $exposicoes
+            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'tipoUserLegenda'=> $institucional,
+            'tipoAtividade' => $tipoAtividade,
+            $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
         ];
 
         return view('TelasUsuarios.agendamento', $variaveis);
@@ -123,25 +123,64 @@ class UserController extends Controller{
         }
 
         $exposicoes = [];
-        $atividades = [];
-        
         for($i=0 ; $i<6 ; $i++){
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
+        $tipoAtividade ="exposições";
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
-            'itensMenu' => getMenuLinks("visitante"),
+            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
-            'legenda' => $visitas[0]->getBtnClasses(),
-            'tipoUser'=> $visitante,
-            'exposicoes'=> $exposicoes
+            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'tipoUserLegenda'=> $visitante,
+            'tipoAtividade' => $tipoAtividade,
+            $tipoAtividade => $exposicoes
         ];
 
         return view('TelasUsuarios.agendamento', $variaveis);
     }
+    public function agendamentoNoturno(){
+        //para testes
+        $visitas= [];
+        $agen = new \App\Model\Agendamento();
+        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "noite", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("03-02-2020"), "noite", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("06-02-2020"), "noite", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("08-02-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("09-02-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("10-02-2020"), "noite", "realizada", $agen);
+        $array = [];
+        \App\Model\Visita::setCorIndisponivel('btn-danger');
+        
+        foreach ($visitas as $v) {
+            $v->preencherArrayForCalendario($array, "btn-danger");
+        }
+        $atividades = [];
+        for($i=0 ; $i<1 ; $i++){
+            $atividades[]= ["titulo"=> "Telescopio", "descrição" => "Observação do céu noturno"];
+        }
+        //fim da parte para testes
+        $tipoAtividade = 'atividade';
+        $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Indisponivel", "tipo" => "visitante"];
+        $variaveis = [
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Agendar Visita",
+            'visitas' => $array,
+            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'tipoUserLegenda'=> $visitante,
+            'tipoAtividade' => $tipoAtividade,
+            'turno' => 'noturno',
+            $tipoAtividade => $atividades
+        ];
 
+        return view('TelasUsuarios.agendamentoNoturno', $variaveis);
+    }
     //inserir dados do agendamento pelo POST na classe e no banco de dados
     public function agendarInstituicao(){
 

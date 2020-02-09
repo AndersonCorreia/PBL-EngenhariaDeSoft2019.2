@@ -1,9 +1,9 @@
 
-<form id="form.agendamento" class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('AgendarDiunoVisitante.post')}}">
+<form id="form.agendamento" class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('AgendarDiurnoVisitante.post')}}">
     {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">
-            <span><h5>Dados para o agendamento</h5></span>
+            <span class="col-12"><h5>Dados para o agendamento</h5></span>
             <div class="form-group col-md-6">
                 <label for="inputData">Data</label>
                 <input class="form-control" type="date" id="data" name="data" required>

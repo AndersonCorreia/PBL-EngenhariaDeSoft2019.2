@@ -27,8 +27,8 @@ class ControlerInstitucional extends Controller {
         $registro = Professor_instituicao::listarInstituicoes($id_user);
 
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Ver Instituiçoes",
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Ver Instituiçoes Cadastradas",
             'registros' => $registro, 
             'erros' => $erro
         ];
@@ -38,15 +38,15 @@ class ControlerInstitucional extends Controller {
 
     public function nenhumaInstituicao(){
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Ver Instituiçoes",
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Ver Instituiçoes Cadastradas",
         ];
 
         return view('TelaInstituicaoEnsino.errorNenhumaInstituicao', $variaveis);
     }
     public function nenhumaTurma(){
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
+            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Turma",
         ];
 
@@ -61,7 +61,7 @@ class ControlerInstitucional extends Controller {
     public function telaCadastroInstituicao() {
         
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
+            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Cadastrar Instituição"   
         ];
         try{
@@ -115,8 +115,8 @@ class ControlerInstitucional extends Controller {
     public function editarInstituicao($id) {
 
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Ver Instituiçoes",
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Ver Instituiçoes Cadastradas",
             'registros' => instituicao::buscar($id)
         ];
         return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);

@@ -16,7 +16,7 @@ class TurmaController extends Controller
         $turmas = $turma->todasTurmas($professor_ID);
         $variaveis = [
             'professor_ID' => $professor_ID,
-            'itensMenu' => getMenuLinks("institucional"),
+            'itensMenu' => getMenuLinks(),
             'turmas' => $turmas
         ];
         return view('telaTurma.index', $variaveis);

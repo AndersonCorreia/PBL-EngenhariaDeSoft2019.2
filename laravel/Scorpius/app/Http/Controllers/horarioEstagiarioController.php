@@ -15,7 +15,7 @@ class horarioEstagiarioController extends Controller
     public function index()
     {
         $variaveis = [
-            'itensMenu' => getMenuLinksAll()
+            'itensMenu' => getMenuLinks()
         ];
         return view('TeladoHorarioEstagiario.HorarioEstagiario',$variaveis);
     }

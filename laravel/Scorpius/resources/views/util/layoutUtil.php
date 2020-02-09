@@ -8,9 +8,9 @@ function getMenuLinksAll(){
         'AgendarDiurnoVis'=>   ['link'=>route('AgendarDiurnoVisitante.show') , 'texto'=>'Exposições Diurnas - Individual' ],
         'AgendarNoturno'=>  ['link'=>route('AgendarNoturno.show') , 'texto'=>'Atividades Noturnas' ],
         'AgendarAtividade'=>['link'=>route('AgendarAtividade.show') , 'texto'=>'Atividades Diferenciadas' ],
-        'dropdownAgend' =>  ['texto'=> 'Agendar Visita', 'itens' => array() ],
+        'collapseAgend' =>  ['texto'=> 'Agendar Visita', 'itens' => array() ],
         'visitante1'=>      ['link'=>'#' , 'texto'=>'Gerenciar Visitas' ],
-        'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições' ],
+        'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições Cadastradas' ],
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
         'institucional2'=>  ['link'=>route('telaTurmas',601), 'texto'=>'Turmas' ],
         'visitante2'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
@@ -46,19 +46,19 @@ function getMenuLinks(){
         $links=[$menuLinks['inicio']];//adcionando o inicio que vale para todos
 
         if($tipoUsuario=="visitante" || $tipoUsuario=="institucional"){
-            $links['dropdownAgend']=$menuLinks['dropdownAgend'];
+            $links['collapseAgend']=$menuLinks['collapseAgend'];
             $links[]=$menuLinks['visitante1'];
 
             if( $tipoUsuario=="institucional" ){
                 $links[]=$menuLinks["institucional0"];
                 $links[]=$menuLinks["institucional1"];
                 $links[]=$menuLinks["institucional2"];
-                $links['dropdownAgend']['itens'][]=$menuLinks['AgendarDiurnoIns'];
+                $links['collapseAgend']['itens'][]=$menuLinks['AgendarDiurnoIns'];
             }
             
-            $links['dropdownAgend']['itens'][]=$menuLinks['AgendarDiurnoVis'];
-            $links['dropdownAgend']['itens'][]=$menuLinks['AgendarNoturno'];
-            $links['dropdownAgend']['itens'][]=$menuLinks['AgendarAtividade'];
+            $links['collapseAgend']['itens'][]=$menuLinks['AgendarDiurnoVis'];
+            $links['collapseAgend']['itens'][]=$menuLinks['AgendarNoturno'];
+            $links['collapseAgend']['itens'][]=$menuLinks['AgendarAtividade'];
             $links[]=$menuLinks['visitante2'];
             $links[]=$menuLinks['visitante3'];
         }

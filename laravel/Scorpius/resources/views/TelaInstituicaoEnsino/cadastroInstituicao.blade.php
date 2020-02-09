@@ -19,7 +19,7 @@
     <fieldset>
         <div class="form-row col-msm">
             <div class="form-group col-sm-12 d-block">
-                <span class="col-12">Instituição de Ensino</span>
+                <span class="col-12 p-0">Instituição de Ensino</span>
                 <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
                     <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" list="instList" required autofocus>
                     <datalist id="instList">

@@ -6,15 +6,15 @@
         <div class="h-75 overflow-auto">
             <nav class="p-lg-2 pr-1 py-1 navbar-left flex-column">
                 @foreach ($itensMenu as $key => $item){{--Para adicionar os itens do menu dinamicamente --}}
-                    @if ($key==="dropdownAgend")
+                    @if ($key==="collapseAgend")
                         @if ($item['texto']==($paginaAtual ?? 'Inicio')){{--Para destacar a pagina atual no menu --}}
-                        <a class="nav-link m-1 rounded bg-secondary " role="button" id="dropdownAgendButton" data-toggle="collapse" href="#collapseAgendamento" aria-controls="collapseAgendamento" aria-expanded="false">
-                            {{$item['texto'] }}
-                        </a>
+                            <a class="nav-link m-1 rounded bg-secondary " role="button" id="collapseAgendButton" data-toggle="collapse" href="#collapseAgendamento" aria-controls="collapseAgendamento" aria-expanded="true">
+                                {{$item['texto'] }}
+                            </a>
                         @else
-                        <a class="nav-link m-1 rounded" role="button" id="dropdownAgendButton" data-toggle="collapse" href="#collapseAgendamento" aria-controls="collapseAgendamento" aria-expanded="false">
-                            {{$item['texto'] }}
-                        </a>
+                            <a class="nav-link m-1 rounded" role="button" id="collapseAgendButton" data-toggle="collapse" href="#collapseAgendamento" aria-controls="collapseAgendamento" aria-expanded="false">
+                                {{$item['texto'] }}
+                            </a>
                         @endif
                         <div class="collapse m-1 ml-4 rounded bg-secondary" id="collapseAgendamento">
                             @foreach ($item['itens'] as $drop)
@@ -67,7 +67,7 @@
     nav a {
         color: ghostwhite;
     }
-    nav a:hover , nav a:focus {
+    #menuLateral nav a:hover ,#menuLateral nav a:focus{
         color: royalblue;
         background-color: ghostwhite;
     }
