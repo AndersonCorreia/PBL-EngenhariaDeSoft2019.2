@@ -4,12 +4,29 @@
     <div id="menuLateral" class= "bg-dark border-right border-dark">
         <img id="logo" class = "px-md-3 px-2 pt-3 mb-3" src="{{ asset("img/scorpius-whited.png")}}" height=auto  width=100%> 
         <div class="h-75 overflow-auto">
-            <nav class="p-lg-2 p-1 navbar-left flex-column">
-                @foreach ($itensMenu as $item){{--Para adicionar os itens do menu dinamicamente --}}
-                    @if ($item['texto']==($paginaAtual ?? 'Inicio')){{--Para destacar a pagina atual no menu --}}
-                        <a class="nav-link bg-secondary rounded active" href="{{$item['link']}}">{{$item['texto']}}</a>
+            <nav class="p-lg-2 pr-1 py-1 navbar-left flex-column">
+                @foreach ($itensMenu as $key => $item){{--Para adicionar os itens do menu dinamicamente --}}
+                    @if ($key==="dropdownAgend")
+                        @if ($item['texto']==($paginaAtual ?? 'Inicio')){{--Para destacar a pagina atual no menu --}}
+                        <a class="nav-link m-1 rounded bg-secondary " role="button" id="dropdownAgendButton" data-toggle="collapse" href="#collapseAgendamento" aria-controls="collapseAgendamento" aria-expanded="false">
+                            {{$item['texto'] }}
+                        </a>
+                        @else
+                        <a class="nav-link m-1 rounded" role="button" id="dropdownAgendButton" data-toggle="collapse" href="#collapseAgendamento" aria-controls="collapseAgendamento" aria-expanded="false">
+                            {{$item['texto'] }}
+                        </a>
+                        @endif
+                        <div class="collapse m-1 ml-4 rounded bg-secondary" id="collapseAgendamento">
+                            @foreach ($item['itens'] as $drop)
+                                <a class="nav-link my-1 m-0 rounded" href={{$drop["link"]}}>{{$drop['texto'] }}</a>
+                            @endforeach
+                        </div>
                     @else
-                        <a class="nav-link rounded" href="{{$item['link']}}">{{$item['texto']}}</a>
+                        @if ($item['texto']==($paginaAtual ?? 'Inicio')){{--Para destacar a pagina atual no menu --}}
+                            <a class="nav-link bg-secondary m-1 rounded active" href="{{$item['link']}}">{{$item['texto']}}</a>
+                        @else
+                            <a class="nav-link m-1 rounded" href="{{$item['link']}}">{{$item['texto']}}</a>
+                        @endif
                     @endif
                 @endforeach
             </nav>
@@ -47,10 +64,13 @@
         height: 100vh;
     }
 
-    a {
+    nav a {
         color: ghostwhite;
     }
-
+    nav a:hover , nav a:focus {
+        color: royalblue;
+        background-color: ghostwhite;
+    }
     hr {
         height: 0.1vh;
     }

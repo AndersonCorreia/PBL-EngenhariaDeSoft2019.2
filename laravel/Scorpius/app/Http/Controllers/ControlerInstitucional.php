@@ -28,7 +28,7 @@ class ControlerInstitucional extends Controller {
 
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições",
+            'paginaAtual' => "Ver Instituiçoes",
             'registros' => $registro, 
             'erros' => $erro
         ];
@@ -39,7 +39,7 @@ class ControlerInstitucional extends Controller {
     public function nenhumaInstituicao(){
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições",
+            'paginaAtual' => "Ver Instituiçoes",
         ];
 
         return view('TelaInstituicaoEnsino.errorNenhumaInstituicao', $variaveis);
@@ -62,7 +62,7 @@ class ControlerInstitucional extends Controller {
         
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Cadastro de Instituições"   
+            'paginaAtual' => "Cadastrar Instituição"   
         ];
         try{
             $DAO = new InstituicaoDAO();
@@ -79,7 +79,7 @@ class ControlerInstitucional extends Controller {
      */
     public function CadastrarInstituicao() {
         //codigo para cadastrar a instituição
-        $instituicaoDAO = new Professor_InstituicaoDAO();
+        $instituicaoDAO = new InstituicaoDAO();
         $pro_instDAO = new Professor_InstituicaoDAO();
         if($_POST["onlyLink"]==false){
             $responsavel = $_POST['Responsavel'];
@@ -116,7 +116,7 @@ class ControlerInstitucional extends Controller {
 
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições",
+            'paginaAtual' => "Ver Instituiçoes",
             'registros' => instituicao::buscar($id)
         ];
         return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);

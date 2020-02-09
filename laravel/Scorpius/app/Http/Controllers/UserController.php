@@ -92,7 +92,7 @@ class UserController extends Controller{
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Agendar visita",
+            'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legenda' => $visitas[0]->getBtnClasses(),
             'tipoUser'=> $institucional,
@@ -132,7 +132,7 @@ class UserController extends Controller{
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'itensMenu' => getMenuLinks("visitante"),
-            'paginaAtual' => "Agendar visita",
+            'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legenda' => $visitas[0]->getBtnClasses(),
             'tipoUser'=> $visitante,

@@ -23,6 +23,7 @@ class AuthorizeAdministrativo{
         $permissao = $this->RotasPermissoes[$nameRota];
         $DAO = new PessoaDAO();
         $user = $DAO->SELECTbyID(session("ID",601));//pegando um user visitante por default pra evitar erro
+        session(['tipo' => $user['tipo'] ]);
 
         if($permissao = $user['tipo'] || $DAO->asPermissao($user["tipo"], $permissao) ){
             return $next($request);
@@ -38,6 +39,7 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes[ "HorarioEstagiario.show" ] = "estagiario";
 
         $this->RotasPermissoes[ "telaGerenciamentoDehorarios.show" ] = 'designar horários para estagiarios';
+        $this->RotasPermissoes[ "retornaProposta" ] = 'designar horários para estagiarios';
         $this->RotasPermissoes[ "telaGerenciamentoDeVisitas.show" ] = 'gerenciamento de visitas';
         //$this->RotasPermissoes["nome da rota" ] = 'permissão associada como ta escrito no banco';
     }
