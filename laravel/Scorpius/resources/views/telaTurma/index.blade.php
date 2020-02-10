@@ -66,7 +66,7 @@
                     aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         {{-- Conteudos do modal --}}
-                        <form action="{{route("cadastrarTurma", ['professor_ID'=>$professor_ID])}}" method="POST">
+                        <form action="{{ route('turma.cadastrarTurma') }}" method="POST">
                             @csrf
                             <div class="modal-content">
                                 <div class="modal-header bg-secondary text-white">
@@ -81,19 +81,19 @@
                                     <div class="container">
                                         <div class="form-row align-items-center border p-2 rounded bg-light"
                                             id="cadastrar-turmas-modal-topo">
-                                            <div class="col-auto">
+                                            <div class="col-md-2">
                                                 <span>Sobre turma:</span>
                                             </div>
-                                            <div class="col-auto">
+                                            <div id="col-nome-turma" class="col-md-3">
                                                 <input maxlength="10" minlength="1" placeholder="Nome da turma"
                                                     type="text" class="form-control" id="cadastrar-turma-nome-turma"
                                                     name="nomeTurma">
                                             </div>
-                                            <div class="col-auto">
+                                            <div id="col-ano-turma" class="col-md-3">
                                                 <input placeholder="Ano escolar" type="text" class="form-control"
                                                     id="cadastrar-turma-ano-turma" name="anoEscolar">
                                             </div>
-                                            <div class="col-auto">
+                                            <div class="col-md-4">
                                                 <select class="form-control" name="ensino"
                                                     id="cadastrar-turma-ensino-turma">
                                                     <option value="Ensino Fundamental" selected>Ensino Fundamental
@@ -107,40 +107,60 @@
 
                                         <div id="cadastrar-turma-inputs-alunos" class="form-row btn-block">
                                             <div class="btn-block bg-light border p-2 rounded">
-                                                Alunos da turma:
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        Alunos da turma:
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input id="quantidade-alunos" name="quantidade_alunos" type="hidden" value="5">
+                                                        <span class="float-right btn btn-secondary" id="quantidade-alunos-turma">Quantidade: 1</span>
+                                                    </div>
+                                                </div>
                                                 <small id="helper" class="form-text text-muted">ATENÇÃO
-                                                    <li>São no máx. 40 alunos e no min. 5.</li>
-                                                    <li>Só serão considerados os campos que estiverem completamente
-                                                        preenchidos (Nome do aluno e Idade), os demais serão
-                                                        desconsiderados.</li>
+                                                    <li>São no máx. 50 alunos e no min. 5.</li>
+                                                    <li>Certifique-se de que preencheu todos os campos corretamente</li>
                                                 </small>
+
                                             </div>
-                                            <ul class="list-group">
-                                                @for($cont = 1; $cont <= 40; $cont++) <li
-                                                    class="list-group-item bg-light" id="aluno{{$cont}}">
+                                            <ul class="list-group" id="lista-inputs-alunos">
+                                                <li class="list-group-item bg-light inputs-alunos">
                                                     <div class="form-row align-items-center">
                                                         <div class="col-md-10">
-                                                            <div>
-                                                                <input onclick="verificaTurma()"
-                                                                    placeholder="Nome do aluno" type="text"
-                                                                    class="form-control btn-block"
-                                                                    id="adcNomeAluno{{$cont}}"
-                                                                    name="nomeAluno{{$cont}}">
-                                                            </div>
+                                                            <input onclick="verificaTurma()" id="nomeAluno1"  placeholder="Nome do aluno"
+                                                                type="text" class="form-control btn-block"
+                                                                class="adcNomeAluno" name="nomeAluno1">
                                                         </div>
-
                                                         <div class="col-md-2">
-                                                            <div>
-                                                                <input placeholder="Idade" type="number"
-                                                                    class="form-control btn-block"
-                                                                    id="adcIdadeAluno{{$cont}}"
-                                                                    name="idadeAluno{{$cont}}">
-                                                            </div>
+                                                            <input onclick="verificaTurma()" id="idadeAluno1"  placeholder="Idade" type="number"
+                                                                class="form-control btn-block" class="adcIdadeAluno"
+                                                                name="idadeAluno1">
                                                         </div>
                                                     </div>
-                                                    </li>
-                                                    @endfor
+                                                </li>
                                             </ul>
+                                            <div class="row mt-2">
+                                                <div class="col-md-6">
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 pr-1">
+                                                            <button type="button" class="btn btn-primary float-right"
+                                                                id="btn-clona">
+                                                                Adicionar aluno
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-sm-6 pl-1">
+                                                            <button type="button" id="btn-remove"
+                                                                class="btn btn-danger float-right">
+                                                                Remover último
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     {{-- FIM - Container form --}}
@@ -148,7 +168,7 @@
                                 {{-- FIM - Corpo do modal --}}
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                    <button type="submit" class="btn btn-primary">Cadastrar turma</button>
+                                    <button onmouseover="cadastrar()" type="submit" class="btn btn-success">Cadastrar turma</button>
                                 </div>
                             </div>
                         </form>
@@ -192,8 +212,7 @@
 
                     {{-- Botão editar/excluir --}}
                     <div class="btn-editar-excluir col-sm-2 mt-1">
-                        <form class="mb-2" method="POST"
-                            action="{{ route('excluirTurma', ['0'=>$professor_ID]) }}">
+                        <form class="mb-2" method="POST" action="{{ route('turma.excluirTurma') }}">
                             @csrf
                             <input type="hidden" name="turma_ID" value="{{$turma['ID']}}">
                             <div class="row">
@@ -231,7 +250,7 @@
                             </div>
 
                             {{-- Formulario editar turma --}}
-                            <form method="POST" action="{{ route('editarTurma', ['0'=>$professor_ID]) }}">
+                            <form method="POST" action="{{ route('turma.editarTurma') }}">
                                 <div class="modal-body">
                                     @csrf
                                     <input name="turma_ID" type="hidden" value="{{$turma['ID']}}">
@@ -327,8 +346,7 @@
                                 <div class="container">
                                     <div class="collapse" id="adcAlunoTurma{{$turma['ID']}}"
                                         style="width:100% !important">
-                                        <form method="POST"
-                                            action="{{ route('adicionarAluno', ['0'=>$professor_ID]) }}">
+                                        <form method="POST" action="{{ route('turma.adicionarAluno') }}">
                                             @csrf
                                             <input type="hidden" name="turma_ID" value="{{$turma['ID']}}">
                                             <div class="form-row align-items-center">
@@ -365,8 +383,7 @@
                                         @foreach ($turmas['alunos'] as $aluno)
                                         @if($aluno['turma_ID'] == $turma['ID'])
                                         <li class="list-group-item mx-auto" style="width: 100% !important">
-                                            <form method="POST"
-                                                action="{{ route('excluirAluno', ['0'=>$professor_ID]) }}">
+                                            <form method="POST" action="{{ route('turma.excluirAluno') }}">
                                                 @csrf
                                                 <input name="aluno_ID" type="hidden" value="{{$aluno['ID']}}">
                                                 <div class="row">
@@ -408,9 +425,52 @@
     </div>
     @endsection
     @section('js')
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/normalize.css"></script>
+    <script>
+
+        $(document).ready(function(){
+            for(var i = 1; i < 5; i++){
+                adicionar();
+            }
+            return;
+        });
         function verificaTurma(){
+            if($('#cadastrar-turma-nome-turma').val() == ''){
+                $('#cadastrar-turma-nome-turma').removeClass("is-valid");
+                $('#cadastrar-turma-nome-turma').addClass("is-invalid");
+            }else{
+                $('#cadastrar-turma-nome-turma').removeClass("is-invalid");
+                $('#cadastrar-turma-nome-turma').addClass("is-valid");
+            }
+            if($('#cadastrar-turma-ano-turma').val() == ''){
+                $('#cadastrar-turma-ano-turma').removeClass("is-valid");
+                $('#cadastrar-turma-ano-turma').addClass("is-invalid");
+            }else{
+                $('#cadastrar-turma-ano-turma').removeClass("is-invalid");
+                $('#cadastrar-turma-ano-turma').addClass("is-valid");
+            }
+            var cont = parseInt($('#quantidade-alunos-turma').text().replace('Quantidade: ', ''));
+            
+            for(var i = 1; i < cont+1; ++i){
+                
+                if($('#nomeAluno' + i).val() == ''){                    
+                    $('#nomeAluno' + i).removeClass("is-valid");
+                    $('#nomeAluno' + i).addClass("is-invalid");
+                }else{
+                    $('#nomeAluno' + i).removeClass("is-invalid");
+                    $('#nomeAluno' + i).addClass("is-valid");
+                } 
+                if($('#idadeAluno' + i).val() == ''){
+                    $('#idadeAluno' + i).removeClass("is-valid");
+                    $('#idadeAluno' + i).addClass("is-invalid");
+                }else{
+                    $('#idadeAluno' + i).removeClass("is-invalid");
+                    $('#idadeAluno' + i).addClass("is-valid");
+                } 
+            }
             let nome = document.getElementById("cadastrar-turma-nome-turma");
             let ano = document.getElementById("cadastrar-turma-ano-turma");
             if(nome.value == ""){
@@ -418,6 +478,77 @@
             }
             if(ano.value == ""){
                 return alert("Não esqueca de preencher o ANO ESCOLAR da turma!");
+            }
+        }
+        function adicionar(){
+            var element = $('.inputs-alunos:last').clone();
+            var cont = element.children('.form-row').children('.col-md-10').children('input').attr('name').replace('nomeAluno', '');
+            if(cont > 49){
+                return alert('Quantidade máxima de alunos numa turma atingida')
+            }
+            element.children('.form-row').children('.col-md-10').children('input').attr('name', 'nomeAluno' + (++cont));
+            element.children('.form-row').children('.col-md-2').children('input').attr('name', 'idadeAluno' + (cont));
+            element.children('.form-row').children('.col-md-10').children('input').attr('id', 'nomeAluno' + (cont));
+            element.children('.form-row').children('.col-md-2').children('input').attr('id', 'idadeAluno' + (cont));
+            element.children('.form-row').children('.col-md-10').children('input').val('');
+            element.children('.form-row').children('.col-md-2').children('input').val('');
+            $('#lista-inputs-alunos').append(element);
+            $('#quantidade-alunos').val(cont);
+            return $('#quantidade-alunos-turma').text('Quantidade: ' + cont);
+        }
+        function remover(){
+            if($('.inputs-alunos').length == 5){
+                return
+            }
+            $('.inputs-alunos:last').remove();
+            var cont = $('#quantidade-alunos-turma').text().replace('Quantidade: ', '');
+            $('#quantidade-alunos').val(--cont);
+            return $('#quantidade-alunos-turma').text('Quantidade: ' + (cont));
+        }
+        $('#btn-clona').on("click", adicionar);
+        $('#btn-remove').on("click", remover);
+
+        function cadastrar(){
+            var trava = 0;
+            if($('#cadastrar-turma-nome-turma').val() == ''){
+                ++trava;
+                $('#cadastrar-turma-nome-turma').removeClass("is-valid");
+                $('#cadastrar-turma-nome-turma').addClass("is-invalid");
+            }else{
+                $('#cadastrar-turma-nome-turma').removeClass("is-invalid");
+                $('#cadastrar-turma-nome-turma').addClass("is-valid");
+            }
+            if($('#cadastrar-turma-ano-turma').val() == ''){
+                ++trava;
+                $('#cadastrar-turma-ano-turma').removeClass("is-valid");
+                $('#cadastrar-turma-ano-turma').addClass("is-invalid");
+            }else{
+                $('#cadastrar-turma-ano-turma').removeClass("is-invalid");
+                $('#cadastrar-turma-ano-turma').addClass("is-valid");
+            }
+            var cont = parseInt($('#quantidade-alunos-turma').text().replace('Quantidade: ', ''));
+            
+            for(var i = 1; i < cont+1; ++i){
+                
+                if($('#nomeAluno' + i).val() == ''){
+                    ++trava;                    
+                    $('#nomeAluno' + i).removeClass("is-valid");
+                    $('#nomeAluno' + i).addClass("is-invalid");
+                }else{
+                    $('#nomeAluno' + i).removeClass("is-invalid");
+                    $('#nomeAluno' + i).addClass("is-valid");
+                } 
+                if($('#idadeAluno' + i).val() == ''){
+                    ++trava;
+                    $('#idadeAluno' + i).removeClass("is-valid");
+                    $('#idadeAluno' + i).addClass("is-invalid");
+                }else{
+                    $('#idadeAluno' + i).removeClass("is-invalid");
+                    $('#idadeAluno' + i).addClass("is-valid");
+                } 
+            }
+            if(trava>0){
+                alert("Por favor, preencha todos os campos!");
             }
         }
     </script>
