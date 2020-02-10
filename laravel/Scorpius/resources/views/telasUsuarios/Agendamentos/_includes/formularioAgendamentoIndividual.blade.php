@@ -6,11 +6,11 @@
             <span class="col-12"><h5>Dados para o agendamento</h5></span>
             <div class="form-group col-md-6">
                 <label for="inputData">Data</label>
-                <input class="form-control" type="date" id="data" name="data" required>
+            <input class="form-control" type="date" id="data" max="{{$visitas['dataLimite']}}" name="data" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="selectTurno">Turno</label>
-                <select id="turno" name="turno" class="custom-select" placeholder="turno" required>
+                <select id="turno" name="turno" id="turno" class="custom-select" placeholder="turno" required>
                     <option value="manhã">Manhã</option>
                     <option value="tarde">Tarde</option>
                     <option value="noite">Noite</option>
@@ -60,27 +60,4 @@
         text-decoration: none;
     }
 </style>
-@endsection
-
-@section('js')
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/normalize.css"></script>
-<script>
-$(document).foundation();
-
-$('.clone').click(function(e){
-    e.preventDefault();
-    $('.box:first').clone().appendTo($('.visitantes'));
-    $('.box').last().find('input[type="text"]').val('');
-});
-$('form').on('click', '.btn_remove', function(e){
-    e.preventDefault();
-    if ($('.box').length > 1){
-        $(this).parents('.box').remove();
-    }
-    
- });
-</script>
 @endsection

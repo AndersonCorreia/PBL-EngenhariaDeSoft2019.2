@@ -22,10 +22,10 @@ class VisitaTest extends TestCase {
             $v->preencherArrayForCalendario($array);
         }
         
-        \assertEquals("27/01 SEG",$array["27/01"]["data"]);
-        \assertEquals("btn-success",$array["27/01"]["manha.btn"]);
-        \assertEquals("btn-warning",$array["27/01"]["noite.btn"]);
-        \assertEquals("btn-success",$array["30/01"]["tarde.btn"]);
+        \assertEquals("27/01 SEG",$array["2020-01-27"]["data"]);
+        \assertEquals("btn-success",$array["2020-01-27"]["manha.btn"]);
+        \assertEquals("btn-warning",$array["2020-01-27"]["noite.btn"]);
+        \assertEquals("btn-success",$array["2020-01-30"]["tarde.btn"]);
     }
 
     public function test_preencherArrayForCalendario_turnosVazios(){

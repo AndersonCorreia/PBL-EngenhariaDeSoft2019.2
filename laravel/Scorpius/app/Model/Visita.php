@@ -32,17 +32,19 @@ class Visita extends \App\DB\interfaces\DataObject {
      */
     public function preencherArrayForCalendario(array &$array){
         $dm = $this->Data->format("d/m");
+        $dma=$this->Data->format("Y-m-d");
         $d = $this->Data->format("d");
         $day = self::$abrevDia[$this->Data->format("w")];
         $mes = self::$mes[$this->Data->format("m")-1];
         $btn = $this->verificarDisponibilidade();
-
+        
         if( !isset($array["dataInicio"]) ){
             $array["dataInicio"] = "$d de $mes";
         }
         $array["dataFim"] = "$d de $mes";
-        $array[$dm]["data"] = "$dm $day";
-        $array[$dm]["$this->Turno.btn"] = $btn;
+        $array["dataLimite"] = $this->Data->format("Y-m-d");
+        $array[$dma]["data"] = "$dm $day";
+        $array[$dma]["$this->Turno.btn"] = $btn;
     }
 
     private function verificarDisponibilidade(){

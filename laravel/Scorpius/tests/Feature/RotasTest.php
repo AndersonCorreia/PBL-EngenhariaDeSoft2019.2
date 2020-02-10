@@ -122,7 +122,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaAgendamentoUsuario()
     {
-        $response = $this->get(route('AgendarAvulso.show'));
+        $response = $this->get(route('AgendarDiurnoVisitante.show'));
 
         $response->assertStatus(200);
     }
@@ -134,7 +134,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaAgendamento()
     {
-        $response = $this->get(route("Agendar.show"));
+        $response = $this->get(route("AgendarDiurnoInstituição.show"));
 
         $response->assertStatus(200);
     }

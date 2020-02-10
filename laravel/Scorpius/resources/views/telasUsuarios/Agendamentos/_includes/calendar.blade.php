@@ -31,20 +31,23 @@
                         @endif
                     </div>
                     <div class="col-lg-11 p-0 m-0 col row">
-                    @foreach ($visitas as $v)
-                        @if ($loop->index>1 && $loop->index<12 )
+                    @foreach ($visitas as $dia => $v)
+                        @if ($loop->index>2 && $loop->index<13 )
                         <div class="row col-md m-0 p-0 border-right border-left "> 
                             <div id="data{{$loop->index}}" class="col-4 col-lg-12 p-2">{{ $v["data"] ?? "27/01 SEG" }}</div>
                             @if(($turno ?? "diurno")==="diurno") 
                                 <div class="col col-lg-12 py-1 p-0">
-                                    <button id="manhã{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
+                                    <button id="manhã{{$loop->index}}" type="button" onclick="setDataTurno('{{$dia}}','manhã')"
+                                        class="btn w-50 h-100 border border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
                                 </div>
                                 <div class="col col-lg-12 py-1 p-0">
-                                    <button id="tarde{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
+                                    <button id="tarde{{$loop->index}}" type="button" onclick="setDataTurno('{{$dia}}','tarde')"
+                                        class="btn w-50 h-100 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
                                 </div>
                             @else
                                 <div class="col col-lg-12 py-1 p-0">
-                                    <button id="noite{{$loop->index}}" type="button" class="btn w-50 h-75 border border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
+                                    <button id="noite{{$loop->index}}" type="button" onclick="setDataTurno('{{$dia}}','noite')"
+                                        class="btn w-50 h-100 border border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
                                 </div>
                             @endif
                         </div>

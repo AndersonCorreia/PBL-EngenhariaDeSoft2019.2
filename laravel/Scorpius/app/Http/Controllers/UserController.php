@@ -99,7 +99,7 @@ class UserController extends Controller{
             $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
         ];
 
-        return view('TelasUsuarios.agendamento', $variaveis);
+        return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
     }
 
     public function agendamentoIndividual(){
@@ -139,7 +139,7 @@ class UserController extends Controller{
             $tipoAtividade => $exposicoes
         ];
 
-        return view('TelasUsuarios.agendamento', $variaveis);
+        return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
     }
     public function agendamentoNoturno(){
         //para testes
@@ -179,7 +179,7 @@ class UserController extends Controller{
             $tipoAtividade => $atividades
         ];
 
-        return view('TelasUsuarios.agendamentoNoturno', $variaveis);
+        return view('telasUsuarios.Agendamentos.agendamentoNoturno', $variaveis);
     }
     //inserir dados do agendamento pelo POST na classe e no banco de dados
     public function agendarInstituicao(){
