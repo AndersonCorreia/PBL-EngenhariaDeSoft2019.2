@@ -37,12 +37,12 @@
 
             <div class="form-group col-sm-8">    
                 <span>Responsável pela Instituição</span>
-                <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" value="{{old('Responsavel')}}" placeholder="Nome completo do Responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" value="" placeholder="Nome completo do Responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
             </div>
 
             <div class="form-group col-sm-4">
                 <span>Telefone da instituicão</span>
-                <input id="tel" class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
+                <input id="tel" class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD no formato (xx)xxxxx-xxxx" required>
             </div> 
 
             <div class="form-group col-sm-8">

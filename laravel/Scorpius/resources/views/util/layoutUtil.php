@@ -12,7 +12,7 @@ function getMenuLinksAll(){
         'visitante1'=>      ['link'=>'#' , 'texto'=>'Gerenciar Visitas' ],
         'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições Cadastradas' ],
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
-        'institucional2'=>  ['link'=>route('telaTurmas'), 'texto'=>'Turmas' ],
+        'institucional2'=>  ['link'=>route('turma.index'), 'texto'=>'Turmas' ],
         'visitante2'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
         'visitante3'=>      ['link'=>'#' , 'texto'=>'Alterar Meus Dados' ],
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
