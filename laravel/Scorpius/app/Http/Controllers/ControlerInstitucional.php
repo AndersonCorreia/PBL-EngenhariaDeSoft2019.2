@@ -19,8 +19,7 @@ class ControlerInstitucional extends Controller {
      * @return telaInstituicao
      */
     public function telaInstituicao() {
-        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
-        $id_user = 601;
+        $id_user = session('ID',601);
         $erro=null;
         $variaveis=null;
         $registro=null;
@@ -100,8 +99,7 @@ class ControlerInstitucional extends Controller {
             $_POST["ID"] = $instituicao->getID();
         }
         //Vincula a instituicao ao representante, inserindo a relação na tabela professor_instituicao 
-        //$id_user = $_SESSION["ID"];
-        $id_user = 601;//temporario para evitar o erro na tela
+        $id_user = session('ID');//temporario para evitar o erro na tela
         try{
             $pro_instDAO->INSERTbyID($_POST['ID'], $id_user);
         }
@@ -120,11 +118,9 @@ class ControlerInstitucional extends Controller {
             'registros' => instituicao::buscar($id)
         ];
         return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
-       
     }
 
     public function atualizarInstituicao(Request $req, $id) {
-        //para atualizar os dados usar os sets do objeto e finalizar a função ( o deconstrutor salvar no banco)
         $DAO = new InstituicaoDAO();
         $nome = $_POST['Instituicao'];
         $responsavel = $_POST['Responsavel'];
@@ -156,8 +152,7 @@ class ControlerInstitucional extends Controller {
     }
 
     public function deletarInstituicao($id) {
-        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
-        $id_user = 601;
+        $id_user = session('ID',601);
         Professor_Instituicao::desativarByID($id ,$id_user);
 
         return redirect()->route('instituição.show');
