@@ -45,7 +45,7 @@ class AlteraUsuarioController extends Controller
 //tem que fazer a condicional se a senha antiga estiver errada não poder fazer a alteração
         //if($senha_antiga for diferente da senha do bd)
             //retorna que não pode alterar dados
-
+        $variavel = $_POST['aria-pressed'] == true;
         $usuario = new PessoaDAO();
         $id_user = $usuario->SELECTbyName($nome);
         $dadosUsuario = [

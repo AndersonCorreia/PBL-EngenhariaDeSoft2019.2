@@ -102,4 +102,18 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject {
 
         return $row;
     }
+    public function INSERT_horario($id, $demandaWeb)
+    {
+        foreach($demandaWeb['horarios'] as $horarios){
+            foreach($horarios as $horario){
+                $sql = "INSERT INTO horario_estagiario (dia_semana, turno, estagiario_usuario_ID) VALUES (
+                    '$horario[0]',
+                    '$horario[1]',
+                    '$id'
+                    
+                )";
+                
+            }
+        }
+    }
 }
