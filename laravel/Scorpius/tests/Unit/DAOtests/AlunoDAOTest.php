@@ -14,8 +14,6 @@ class AlunoDAOTest extends TestCase
     protected static $inst0;
     protected static $inst1;
     protected static $inst2;
-    protected static $inst3;
-    protected static $inst4;
 
     public static function setUpBeforeClass(): void{
         try {
@@ -77,7 +75,7 @@ class AlunoDAOTest extends TestCase
         $testInst2 = self::$DAO->SELECTbyTurma(self::$inst2->getTurma());
         \assertEquals(self::$inst2->getIdade(), $testInst2->getIdade());
 
-        
+
         $var0 = self::$DAO->UPDATE_NOME_ALUNO(self::$inst2->getID(), "Anna");
         \assertTrue($var0, "Erro ao atualizar");
 
