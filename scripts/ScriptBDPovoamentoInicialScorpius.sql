@@ -62,8 +62,8 @@ INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancela
 INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (2, 3, 1, TRUE, 202, 701);
 
 -- INSERT dos estagiários --
-INSERT INTO estagiario (matricula, usuario_ID) VALUES('cgg1', 801);
-INSERT INTO estagiario (matricula, usuario_ID) VALUES('fbm1', 802);
+INSERT INTO estagiario (guia_matricula, usuario_ID) VALUES('cgg1', 801);
+INSERT INTO estagiario (guia_matricula, usuario_ID) VALUES('fbm1', 802);
 
 -- INSERT das exposições --
 INSERT INTO exposicao (ID, titulo, tipo_evento, tema_evento, descricao, quantidade_inscritos, data_inicial, data_final, imagem) VALUES
