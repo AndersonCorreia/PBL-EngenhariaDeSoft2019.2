@@ -1,5 +1,5 @@
 
-<form id="form.agendamento" class="col-lg-10 col-xl-9 col-12 m-2" method="POST" action="{{route('AgendarInstituicao.post')}}">
+<form id="form.agendamento" class="col-lg-10 col-xl-9 col-12 m-2" method="POST" action="{{route('AgendarDiurnoInstituicao.post')}}">
     {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">
@@ -23,11 +23,11 @@
             </div>
             <div class="form-group col-sm-3">
                 <span>Data</span><br>
-                <input class="form-control" type="date" id="data" name="data" required>
+                <input class="form-control" type="date" id="data" max="{{$visitas['dataLimite']}}" name="data" required>
             </div>
             <div class="form-group col-sm-3">
                 <span>Turno</span>
-                <select id="turno" name="turno" class="custom-select" placeholder="turno" required>
+                <select id="turno" name="turno" id="turno" class="custom-select" placeholder="turno" required>
                     <option value="manhã">Manhã</option>
                     <option value="tarde">Tarde</option>
                     <option value="noite">Noite</option>
@@ -78,27 +78,4 @@
         text-decoration: none;
     }
 </style>
-@endsection
-
-@section('js')
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/normalize.css"></script>
-<script>
-$(document).foundation();
-
-$('.clone').click(function(e){
-    e.preventDefault();
-    $('.box:first').clone().appendTo($('.responsaveis'));
-    $('.box').last().find('input[type="text"]').val('');
-});
-$('form').on('click', '.btn_remove', function(e){
-    e.preventDefault();
-    if ($('.box').length > 1){
-        $(this).parents('.box').remove();
-    }
-    
- });
-</script>
 @endsection

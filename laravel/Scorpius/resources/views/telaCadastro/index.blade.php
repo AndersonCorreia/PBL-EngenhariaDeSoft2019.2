@@ -60,19 +60,19 @@
         <div class="form-row">
             <div class="col">
                 <label for="nome">Nome</label>
-                <input name="nome" id="nome" type="text" class="form-control" placeholder="">
+                <input name="nome" id="nome" type="text" class="form-control" placeholder="" required>
             </div>
             <div class="col">
                 <label  for="sobrenome">Sobrenome</label>
-                <input onclick="verificacao()" name="sobrenome" id="sobrenome" type="text" class="form-control" placeholder="">
+                <input  name="sobrenome" id="sobrenome" type="text" class="form-control" placeholder="" required>
             </div>
         </div>
     </div>
     <!-- E-mail -->
     <div class="form-group">
         <label for="emailCadastro">E-mail</label>
-        <input class="form-control" placeholder="exemplo@exemplo.com" id="emailCadastro" name="email" type="text"
-            aria-describedby="emailHelp">
+        <input class="form-control" placeholder="exemplo@exemplo.com" id="emailCadastro" name="email" type="email"
+            required aria-describedby="emailHelp">
         @if($ERRO == 'EMAIL')
         <small id="emailHelp" class="form-text text-danger">{{$MSG_ERRO}}</small>
         @else
@@ -86,8 +86,8 @@
             <!-- CPF -->
             <div class="col">
                 <label for="cpfCadastro">CPF</label>
-                <input aria-describedby="cpfHelp" name="cpf" id="cpfCadastro" placeholder="000.000.000-00" type="text" minlength="11"
-                    maxlength="11" class="form-control">
+                <input aria-describedby="cpfHelp" name="cpf" id="cpfCadastro" placeholder="00000000000" type="text" minlength="11" inputmode="number"
+                    maxlength="11" class="form-control" required pattern="[0-9]{11}" title="Informe apenas os numeros do CPF sem '.' e sem '-'.">
                 @if($ERRO == 'CPF')
                 <small id="cpfHelp" class="form-text text-danger">{{$MSG_ERRO}}</small>
                 @endif
@@ -106,21 +106,22 @@
         <!-- Telefone -->
         <div class="form-group">
             <label for="telefone">Telefone</label>
-            <input name="telefone" placeholder="75999999999" minlength="10" maxlength="11" type="text"
-                class="form-control" id="telefone">
+            <input name="telefone" placeholder="(75)99999-9999" type="text" class="form-control" id="telefone"
+                pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD no formato (xx)xxxxx-xxxx" required>
         </div>
         <!-- Senha -->
         <div class="form-group">
             <label for="senha1">Senha</label>
-            <input minlength="4" maxlength="8" type="password" class="form-control" id="senha1">
+            <input minlength="4" maxlength="8" type="password" class="form-control" id="senha1" required>
         </div>
         <!-- Repitir senha -->
         <div class="form-group">
             <label for="senha2">Repita a senha</label>
-            <input name="senha" minlength="4" maxlength="8" type="password" class="form-control" id="senha2">
+            <input name="senha" minlength="4" maxlength="8" onkeyup="confirmarSenha()" aria-describedby="senhaHelp" type="password" class="form-control" id="senha2" required>
+            <small id="senhaHelp" class="form-text text-danger"></small>
         </div>
 
-        <button type="submit" class="btn btn-success btn-lg btn-block">Cadastre-se</button>
+        <button id='submit' type="submit" onclick="confirmarSenhaSubmit()" class="btn btn-success btn-lg btn-block">Cadastre-se</button>
         <h1></h1>
         <h6 class="float-right" style="font-size:13px">
             Por cadastre-se, você aceita os <a target="_blank" href="">Termos</a> e a
@@ -131,5 +132,5 @@
 @endsection
 
 @section('js')
-<script src="{{ asset("/js/paginaInicial.js")}}" ></script>
+<script src="{{ asset("/js/paginaCadastro.js")}}" ></script>
 @endsection

@@ -14,7 +14,7 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         $ensino = $turma->getEnsino();
         $professor_ID = $turma->getProfessor_ID();
 
-        $sql = "INSERT INTO turma (nome, ano_escolar, ensino, professor_instituicao_ID) VALUES (
+        $sql = "INSERT INTO turma (nome, ano_escolar, ensino, professor_ID) VALUES (
             '$nome',
             '$ano_escolar',
             '$ensino',
@@ -68,7 +68,7 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         return $this->dataBase->query("DELETE FROM turma WHERE ID = $turma_ID");
     }
     public function SELECTbyprofessorID($id){
-        $join = "turma as t LEFT JOIN professor_instituicao as pi ON t.professor_instituicao_ID = pi.ID";
+        $join = "turma as t LEFT JOIN professor_instituicao as pi ON t.professor_ID = pi.ID";
         $sql = "SELECT * FROM $join WHERE pi.usuario_ID = ?";
         $stmt = $this->dataBase->prepare($sql);
         $stmt->blind_param("i",$id);
@@ -83,13 +83,13 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
     }
     public function SEARCHbyNome($professor_ID, $nome)
     {
-        $sql = "SELECT ID FROM turma WHERE professor_instituicao_ID = $professor_ID AND nome = '$nome'";
+        $sql = "SELECT ID FROM turma WHERE professor_ID = $professor_ID AND nome = '$nome'";
         $resultado = $this->dataBase->query($sql);
         return $resultado->num_rows > 0;
     }
     public function SELECT_ALL_byProfessorID($professor_ID)
     {
-        $sql = "SELECT * FROM turma WHERE professor_instituicao_ID = $professor_ID";
+        $sql = "SELECT * FROM turma WHERE professor_ID = $professor_ID";
         $resultado = $this->dataBase->query($sql);
         $row = $resultado; //$resultado->fetch_assoc();
         $rowAlunos = new AlunoDAO;

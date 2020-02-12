@@ -17,12 +17,6 @@ class Aluno extends \App\DB\interfaces\DataObject
         $this->idade = $idade;
         $this->aluno = new AlunoDAO();
     }
-    // public function __Construct($nome, $idade)
-    // {
-    //     $this->nome = $nome;
-    //     $this->idade = $idade;
-    //     $this->aluno = new AlunoDAO();
-    // }
     public function novoAluno(): bool
     {
         // $this->nome = $dados['nome'];
@@ -30,7 +24,7 @@ class Aluno extends \App\DB\interfaces\DataObject
         // $this->turma = $dados['turma'];
 
         
-        return $this->aluno->INSERT($this);;
+        return $this->aluno->INSERT($this);
     }
     protected function save()
     {

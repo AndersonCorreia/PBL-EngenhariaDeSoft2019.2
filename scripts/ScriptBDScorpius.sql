@@ -323,7 +323,7 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`estagiario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`estagiario` (
-  `matricula` VARCHAR(45) NOT NULL,
+  `guia_matricula` VARCHAR(45) NOT NULL,
   `usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`usuario_ID`),
   CONSTRAINT `fk_estagiario_usuario1`

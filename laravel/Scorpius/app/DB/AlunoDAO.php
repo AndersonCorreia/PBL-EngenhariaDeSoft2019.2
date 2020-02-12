@@ -56,7 +56,7 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
 
     public function DELETEbyID($id)
     {
-        return $this->dataBase->query("DELETE FROM aluno WHERE ID = $id");;
+        return $this->dataBase->query("DELETE FROM aluno WHERE ID = $id");
     }
     function SELECT_ALL(String $table = "aluno")
     {

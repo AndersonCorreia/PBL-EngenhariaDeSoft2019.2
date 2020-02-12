@@ -4,13 +4,17 @@ require_once __DIR__."/../../../app/DB/PessoaDAO.php";
 function getMenuLinksAll(){
     return [//todos os possiveis links do menu, utilizado no layout da area administrativa
         'inicio'=>          ['link'=>'#' , 'texto'=>'Inicio' ],// texto é o nome que vai estar dentro da tag <a>
-        'visitante0'=>      ['link'=>route('Agendar.show') , 'texto'=>'Agendar Visita' ],
+        'AgendarDiurnoIns'=>   ['link'=>route('AgendarDiurnoInstituição.show') , 'texto'=>'Exposições Diurnas - Instituição' ],
+        'AgendarDiurnoVis'=>   ['link'=>route('AgendarDiurnoVisitante.show') , 'texto'=>'Exposições Diurnas - Individual' ],
+        'AgendarNoturno'=>  ['link'=>route('AgendarNoturno.show') , 'texto'=>'Atividades Noturnas' ],
+        'AgendarAtividade'=>['link'=>route('AgendarAtividade.show') , 'texto'=>'Atividades Diferenciadas' ],
+        'collapseAgend' =>  ['texto'=> 'Agendar Visita', 'itens' => array() ],
         'visitante1'=>      ['link'=>'#' , 'texto'=>'Gerenciar Visitas' ],
-        'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições' ],
+        'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições Cadastradas' ],
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
-        'institucional2'=>  ['link'=>route('telaTurmas',601), 'texto'=>'Turmas' ],
+        'institucional2'=>  ['link'=>route('turma.index'), 'texto'=>'Turmas' ],
         'visitante2'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
-        'visitante3'=>      ['link'=>'#' , 'texto'=>'Alterar Dados' ],
+        'visitante3'=>      ['link'=>'#' , 'texto'=>'Alterar Meus Dados' ],
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
         'estagiario1'=>     ['link'=>'#' , 'texto'=>'Resumo da Semana' ],
         'estagiario2'=>     ['link'=>'#' , 'texto'=>'Demanda WEB' ],
@@ -31,23 +35,27 @@ function getMenuLinksAll(){
  * Retorna array com informações (link e texto para a tag <a> ) para o menu do layout geral de telas,
  * apartir de do tipo de usuario. realizar uma consulta ao banco para pegar as permissões
  *
- * @param string $tipoUsuario tipo do usuario para paginas especificas de determinado tipo de usuario, por exemplo Demanda web para estagiario
  * @return array array com os campos link e texto para o menu do layout geral do sistema
  */
-function getMenuLinks(String $tipoUsuario="visitante"){
+function getMenuLinks(){
     $menuLinks= getMenuLinksAll();
-    $tipoUsuario = strtolower($tipoUsuario);
+    $links= [];
+    $tipoUsuario = session('tipo','institucional');//caso não esteja logado carrega o institucional
+
     $links=[$menuLinks['inicio']];//adcionando o inicio que vale para todos
-
     if($tipoUsuario=="visitante" || $tipoUsuario=="institucional"){
-        $links[]=$menuLinks['visitante0'];
+        $links['collapseAgend']=$menuLinks['collapseAgend'];
         $links[]=$menuLinks['visitante1'];
-
         if( $tipoUsuario=="institucional" ){
             $links[]=$menuLinks["institucional0"];
             $links[]=$menuLinks["institucional1"];
             $links[]=$menuLinks["institucional2"];
+            $links['collapseAgend']['itens'][]=$menuLinks['AgendarDiurnoIns'];
         }
+        
+        $links['collapseAgend']['itens'][]=$menuLinks['AgendarDiurnoVis'];
+        $links['collapseAgend']['itens'][]=$menuLinks['AgendarNoturno'];
+        $links['collapseAgend']['itens'][]=$menuLinks['AgendarAtividade'];
         $links[]=$menuLinks['visitante2'];
         $links[]=$menuLinks['visitante3'];
     }
@@ -57,14 +65,12 @@ function getMenuLinks(String $tipoUsuario="visitante"){
             $links[]=$menuLinks["estagiario1"];
             $links[]=$menuLinks["estagiario2"];
         }
-
-        $DAO = new \PessoaDAO;
+        $DAO = new App\DB\PessoaDAO;
         $permissoes = $DAO->getPermissoes($tipoUsuario);
-
         foreach ($permissoes as $value) {
             $links[]=$menuLinks[$value["permissao"]];
         }
     }
-
+    
     return $links;
 };

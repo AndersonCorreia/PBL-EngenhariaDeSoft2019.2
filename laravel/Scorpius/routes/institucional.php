@@ -4,14 +4,14 @@
  */
 Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show");
 
-Route::get('/dashboard/{professor_ID}/turmas', 'TurmaController@index')->name('telaTurmas');
-Route::post('/dashboard/{professor_ID}/turmas/excluir', 'TurmaController@excluirTurma')->name("excluirTurma");
-Route::post('/dashboard/{professor_ID}/turmas/editar', 'TurmaController@editarTurma')->name("editarTurma");
-Route::post('/dashboard/{professor_ID}/turmas/cadastrar', 'TurmaController@cadastrarTurma')->name("cadastrarTurma");
+/* Turmas */
+Route::get('dashboard/turmas', 'TurmaController@index')->name('turma.index');
+Route::post('dashboard/turmas/excluir-turma', 'TurmaController@excluirTurma')->name('turma.excluirTurma');
+Route::post('dashboard/turmas/editar-turma', 'TurmaController@editarTurma')->name('turma.editarTurma');
+Route::post('dashboard/turmas/cadastrar-turma', 'TurmaController@cadastrarTurma')->name('turma.cadastrarTurma');
 
-Route::post('dashboard/{professor_ID}/turmas/excluir-aluno', 'TurmaController@excluirAluno')->name("excluirAluno");
-Route::post('dashboard/{professor_ID}/turmas/adicionar-aluno', 'TurmaController@adicionarAluno')->name("adicionarAluno");
-
+Route::post('dashboard/turmas/excluir-aluno', 'TurmaController@excluirAluno')->name('turma.excluirAluno');
+Route::post('dashboard/turmas/adicionar-aluno', 'TurmaController@adicionarAluno')->name('turma.adicionarAluno');
 /**
  * Rota para retornar a tela para cadastra uma instituição
  */
@@ -48,5 +48,5 @@ Route::put('/instituicao/atualizar/{id}',['as'=>'user.instituicoes.atualizar','u
 
 
 //Rotas para agendamento de uma instituicao
-Route::get('/agendamento', 'UserController@agendamento')->name("Agendar.show");
-Route::post('/agendamento', 'UserController@agendarInstituicao')->name("AgendarInstituicao.post");
+Route::get('/instituicao/agendamento', 'UserController@agendamento')->name("AgendarDiurnoInstituição.show");
+Route::post('/instituicao/agendamento', 'UserController@agendarInstituicao')->name("AgendarDiurnoInstituicao.post");

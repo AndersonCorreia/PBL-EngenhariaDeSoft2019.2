@@ -10,27 +10,30 @@ require_once __DIR__ . "/../../../resources/views/util/layoutUtil.php";
 
 class TurmaController extends Controller
 {
-    public function index($professor_ID, $variaveis = null)
+    public function index($variaveis = null)
     {
+        $professor_ID = session('ID');
         $turma = new Turma();
         $turmas = $turma->todasTurmas($professor_ID);
         $variaveis = [
             'professor_ID' => $professor_ID,
-            'itensMenu' => getMenuLinks("institucional"),
+            'itensMenu' => getMenuLinks(),
             'turmas' => $turmas
         ];
         return view('telaTurma.index', $variaveis);
     }
 
-    public function excluirTurma($professor_ID)
+    public function excluirTurma()
     {
+        $professor_ID = session('ID');
         $turma = new Turma();
 
         $turma->excluirTurma(intval($_POST['turma_ID']));
-        return redirect()->route('telaTurmas', ['professor_ID' => $professor_ID])->with('success', 'Turma excluida com sucesso!');
+        return redirect()->route('turma.index')->with('success', 'Turma excluida com sucesso!');
     }
-    public function editarTurma($professor_ID)
+    public function editarTurma()
     {
+        $professor_ID = session('ID');
         $turma = new Turma();
         $turma_ID = intval($_POST['turma_ID']);
         $nome = $_POST['nomeTurma'];
@@ -56,18 +59,20 @@ class TurmaController extends Controller
             $turma->editarTurma($turma_ID, $novaTurma);
         }
 
-        return redirect()->route('telaTurmas', ['professor_ID' => $professor_ID])->with('success', 'Turma editada com sucesso!');
+        return redirect()->route('turma.index')->with('success', 'Turma editada com sucesso!');
     }
-    public function excluirAluno($professor_ID)
+    public function excluirAluno()
     {
+        $professor_ID = session('ID');
         $turma = new Turma();
         $aluno_ID = intval($_POST['aluno_ID']);
 
         $turma->excluirAluno($aluno_ID);
-        return redirect()->route('telaTurmas', ['professor_ID' => $professor_ID])->with('success', 'Aluno excluido com sucesso!');
+        return redirect()->route('turma.index')->with('success', 'Aluno excluido com sucesso!');
     }
-    public function adicionarAluno($professor_ID)
+    public function adicionarAluno()
     {
+        $professor_ID = session('ID');
         $turma = new Turma();
         $turma_ID = intval($_POST['turma_ID']);
         if ($_POST['nomeAluno'] == "") {
@@ -77,11 +82,11 @@ class TurmaController extends Controller
             return redirect()->back()->with('erro', 'Insira uma idade para o aluno!');
         }
         $turma->adicionaAluno($turma_ID, ['nome' => $_POST['nomeAluno'], 'idade' => intval($_POST['idadeAluno'])]);
-        return redirect()->route('telaTurmas', ['professor_ID' => $professor_ID])->with('success', 'Aluno adicionado com sucesso!');
+        return redirect()->route('turma.index')->with('success', 'Aluno adicionado com sucesso!');
     }
-    public function cadastrarTurma($professor_ID)
+    public function cadastrarTurma()
     {
-
+        $professor_ID = session('ID');
         $nomeTurma = $_POST['nomeTurma'];
         $ano = $_POST['anoEscolar'];
         $ensino = $_POST['ensino'];
@@ -94,24 +99,21 @@ class TurmaController extends Controller
         }
 
         $alunos = array();
-        $quantidade = 0;
-        for ($i = 1; $i <= 40; $i++) {
+        for ($i = 1; $i <= $_POST['quantidade_alunos']; $i++) {
             $nome = $_POST['nomeAluno' . $i];
             $idade = $_POST['idadeAluno' . $i];
-            if (!($nome == "" || $idade == "")) {
-                $alunos[] = new Aluno($nome, $idade);
-                $quantidade++;
+            if ($nome == "" || $idade == "") {
+                return redirect()->back()->with('erro', "Campos dos alunos incompletos, por favor preencha todos os campos!");
             }
+            $alunos[] = new Aluno($nome, $idade);    
         }
-        if ($quantidade < 5) {
-            return redirect()->back()->with('erro', 'Quantidade de alunos baixa, por favor, insira pelo menos 5 alunos!');
-        }
+        
         
         $turma->setNome($nomeTurma);
         $turma->setAno_escolar($ano);
         $turma->setEnsino($ensino);
         $turma->setProfessor_ID($professor_ID);
         $turma->cadastrarTurma($alunos);
-        return redirect()->route('telaTurmas', ['professor_ID' => $professor_ID])->with('success', 'Turma cadastrada com sucesso!');
+        return redirect()->route('turma.index')->with('success', 'Turma cadastrada com sucesso!');
     }
 }

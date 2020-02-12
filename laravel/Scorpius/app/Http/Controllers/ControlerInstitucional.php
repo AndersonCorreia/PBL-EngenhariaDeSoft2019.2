@@ -19,16 +19,15 @@ class ControlerInstitucional extends Controller {
      * @return telaInstituicao
      */
     public function telaInstituicao() {
-        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
-        $id_user = 601;
+        $id_user = session('ID',601);
         $erro=null;
         $variaveis=null;
         $registro=null;
         $registro = Professor_instituicao::listarInstituicoes($id_user);
 
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições",
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Ver Instituiçoes Cadastradas",
             'registros' => $registro, 
             'erros' => $erro
         ];
@@ -38,15 +37,15 @@ class ControlerInstitucional extends Controller {
 
     public function nenhumaInstituicao(){
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições",
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Ver Instituiçoes Cadastradas",
         ];
 
         return view('TelaInstituicaoEnsino.errorNenhumaInstituicao', $variaveis);
     }
     public function nenhumaTurma(){
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
+            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Turma",
         ];
 
@@ -61,8 +60,8 @@ class ControlerInstitucional extends Controller {
     public function telaCadastroInstituicao() {
         
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Cadastro de Instituições"   
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Cadastrar Instituição"   
         ];
         try{
             $DAO = new InstituicaoDAO();
@@ -79,7 +78,7 @@ class ControlerInstitucional extends Controller {
      */
     public function CadastrarInstituicao() {
         //codigo para cadastrar a instituição
-        $instituicaoDAO = new Professor_InstituicaoDAO();
+        $instituicaoDAO = new InstituicaoDAO();
         $pro_instDAO = new Professor_InstituicaoDAO();
         if($_POST["onlyLink"]==false){
             $responsavel = $_POST['Responsavel'];
@@ -100,8 +99,7 @@ class ControlerInstitucional extends Controller {
             $_POST["ID"] = $instituicao->getID();
         }
         //Vincula a instituicao ao representante, inserindo a relação na tabela professor_instituicao 
-        //$id_user = $_SESSION["ID"];
-        $id_user = 601;//temporario para evitar o erro na tela
+        $id_user = session('ID');//temporario para evitar o erro na tela
         try{
             $pro_instDAO->INSERTbyID($_POST['ID'], $id_user);
         }
@@ -115,16 +113,14 @@ class ControlerInstitucional extends Controller {
     public function editarInstituicao($id) {
 
         $variaveis = [
-            'itensMenu' => getMenuLinks("institucional"),
-            'paginaAtual' => "Instituições",
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Ver Instituiçoes Cadastradas",
             'registros' => instituicao::buscar($id)
         ];
         return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
-       
     }
 
     public function atualizarInstituicao(Request $req, $id) {
-        //para atualizar os dados usar os sets do objeto e finalizar a função ( o deconstrutor salvar no banco)
         $DAO = new InstituicaoDAO();
         $nome = $_POST['Instituicao'];
         $responsavel = $_POST['Responsavel'];
@@ -156,8 +152,7 @@ class ControlerInstitucional extends Controller {
     }
 
     public function deletarInstituicao($id) {
-        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
-        $id_user = 601;
+        $id_user = session('ID',601);
         Professor_Instituicao::desativarByID($id ,$id_user);
 
         return redirect()->route('instituição.show');

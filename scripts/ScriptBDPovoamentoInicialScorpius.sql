@@ -7,7 +7,7 @@ INSERT INTO tipo_usuario (ID, tipo) VALUES (6, 'visitante');
 
 -- Insert dos usuarios --
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
-(601, 'Francisco Hugo Rezende', 'franciscohr@maquinas.com.br', 'fhr601', '92546317599', '75994628820', 1, 6);
+(601, 'Francisco Hugo Rezende', 'franciscohr@maquinas.com.br', 'fhr601', '92546317599', '75994628820', 1, 7);
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
 (701, 'Cristiane Benedita Almada', 'crisada@vinhas.fot.br', 'cba701', '25073799526', '75996462376', 1, 7);
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
@@ -59,14 +59,11 @@ INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone,
 
 -- Insert em professor_instituicao --
 INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (1, 2, 0, TRUE, 201, 601);
-INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (2, 3, 1, TRUE, 202, 701); 
-INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (3, 5, 2, TRUE, 203, 801); 
-INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (4, 2, 7, TRUE, 204, 802); 
-INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (5, 2, 1, TRUE, 205, 901); 
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (2, 3, 1, TRUE, 202, 701);
 
 -- INSERT dos estagiários --
-INSERT INTO estagiario (matricula, usuario_ID) VALUES('cgg1', 801);
-INSERT INTO estagiario (matricula, usuario_ID) VALUES('fbm1', 802);
+INSERT INTO estagiario (guia_matricula, usuario_ID) VALUES('cgg1', 801);
+INSERT INTO estagiario (guia_matricula, usuario_ID) VALUES('fbm1', 802);
 
 -- INSERT das propostas de horarios --
 INSERT INTO proposta_horario(dia_semana, turno, estagiario_usuario_ID) VALUES ('segunda', 'manhã', 802),('terça', 'tarde', 801),('quarta','tarde',801)
