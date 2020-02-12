@@ -47,6 +47,11 @@
             <div class="input-group-append">
                 <label>Comprovante de Matrícula</label>
                 <button type="button" class="btn btn-secondary" download>Download</button>
+                $bool = baixarPDF("./Downloads/", "apresentacaoEduardo.pdf");
+
+                if(!$bool){
+                    echo = "Erro!";
+                }
             </div>
         </div>
     </div>

@@ -14,6 +14,25 @@ class horarioEstagiarioController extends Controller
         ];
         return view('TeladoHorarioEstagiario.HorarioEstagiario',$variaveis);
     }
+    
+    function downloadGuiaMatricula(){
+        $msg = false;
+
+        if(isset($_FILES['guia_matricula'])){
+            $extensao = strtolower(substr($_FILES['guia_matricula']['name'], -4));
+            $novo_nome = md5(time()) . $extensao;
+            $diretorio = "guiaDeMatricula/";
+            move_uploaded_file($_FILES['guia_matricula']['tmp_name'], $diretorio.@novo_nome);
+
+            $sql_code = "INSERT INTO estagiario(guia_matricula, usuario_ID) VALUES($novo_nome, null)";
+            
+            if($mysql = $this->dataBase->query($sql))
+                $msg = "Arquivo enviado com sucesso!";
+            else
+                $msg = "Falha ao enviar arquivo!";
+        }
+    }
+    
     public function cadastrarHorario()
     {
         $seg_manha = $_POST['seg-manha'];
