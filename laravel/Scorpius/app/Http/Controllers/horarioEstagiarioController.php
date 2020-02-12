@@ -35,34 +35,60 @@ class horarioEstagiarioController extends Controller
     
     public function cadastrarHorario()
     {
-        $seg_manha = $_POST['seg-manha'];
-        $seg_tarde = $_POST['seg-tarde'];
-        $seg_noite = $_POST['seg-noite'];
-        
-        $ter_manha = $_POST['ter-manha'];
-        $ter_tarde = $_POST['ter-tarde'];
-        $ter_noite = $_POST['ter-noite'];
-        
-        $qua_manha = $_POST['qua-manha'];
-        $qua_tarde = $_POST['qua-tarde'];
-        $qua_noite = $_POST['qua-noite'];
-        
-        $qui_manha = $_POST['qui-manha'];
-        $qui_tarde = $_POST['qui-tarde'];
-        $qui_noite = $_POST['qui-noite'];
-        
-        $sex_manha = $_POST['sex-manha'];
-        $sex_tarde = $_POST['sex-tarde'];
-        $sex_noite = $_POST['sex-noite'];
         
         $guia = $_POST['guia'];
         $observacao = $_POST['observacao'];
         $horarios = array();
 
-        if($seg_manha == 'on'){
+        if(isset($_POST['seg-manha'])){
             $horarios[] = ['Segunda', 'Manhã'];
         }
+        if(isset($_POST['seg-tarde'])){
+            $horarios = ['Segunda', 'Tarde'];
+        }
+        if(isset($_POST['seg-noite'])){
+            $horarios[] = ['Segunda', 'Noite'];
+        }
 
+        if(isset($_POST['ter-manha'])){
+            $horarios[] = ['Terça', 'Manhã'];
+        }
+        if(isset($_POST['ter-tarde'])){
+            $horarios = ['Terça', 'Tarde'];
+        }
+        if(isset($_POST['ter-noite'])){
+            $horarios[] = ['Terça', 'Noite'];
+        }
+
+        if(isset($_POST['qua-manha'])){
+            $horarios[] = ['Quarta', 'Manhã'];
+        }
+        if(isset($_POST['qua-tarde'])){
+            $horarios = ['Quarta', 'Tarde'];
+        }
+        if(isset($_POST['qua-noite'])){
+            $horarios[] = ['Quarta', 'Noite'];
+        }
+
+        if(isset($_POST['qui-manha'])){
+            $horarios[] = ['Quinta', 'Manhã'];
+        }
+        if(isset($_POST['qui-tarde'])){
+            $horarios = ['Quinta', 'Tarde'];
+        }
+        if(isset($_POST['qui-noite'])){
+            $horarios[] = ['Quinta', 'Noite'];
+        }
+
+        if(isset($_POST['sex-manha'])){
+            $horarios[] = ['Sexta', 'Manhã'];
+        }
+        if(isset($_POST['sex-tarde'])){
+            $horarios = ['Sexta', 'Tarde'];
+        }
+        if(isset($_POST['sex-noite'])){
+            $horarios[] = ['Sexta', 'Noite'];
+        }
         
     }
    
