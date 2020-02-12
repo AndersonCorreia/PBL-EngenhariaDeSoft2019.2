@@ -36,7 +36,7 @@ class AuthorizeAdministrativo{
     public function setRotasPermissoes(){
         //"estagiario" representa as permissões especificas do estagiario
         $this->RotasPermissoes[ "HorarioEstagiario.show" ] = "estagiario";
-
+        $this->RotasPermissoes["retornaProposta"]='rota ajax';
         $this->RotasPermissoes[ "telaGerenciamentoDehorarios.show" ] = 'designar horários para estagiarios';
         $this->RotasPermissoes[ "telaGerenciamentoDeVisitas.show" ] = 'gerenciamento de visitas';
         //$this->RotasPermissoes["nome da rota" ] = 'permissão associada como ta escrito no banco';
