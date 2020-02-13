@@ -21,7 +21,8 @@
             <div class="form-group col-sm-12 d-block">
                 <span class="col-12 p-0">Instituição de Ensino</span>
                 <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
-                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Insira o Nome da instituicão" list="instList" required autofocus>
+                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" 
+                    placeholder="Nome da instituição" list="instList" required autofocus>
                     <datalist id="instList">
                     @if (($instituicoes ?? false))
                         @foreach ($instituicoes as $inst)
@@ -30,28 +31,31 @@
                     @endif
                     </datalist>
                 </div>
-                <div class="col-sm-2 mt-1 m-0 mt-sm-0 float-sm-right d-block">
+                <div class="col-sm-2 mt-1 m-0 p-0 mt-sm-0 float-sm-right d-block">
                     <button type="button" class= "btn btn-primary float-right " onclick="getDados()"> Buscar </button>
                 </div>
             </div>
 
             <div class="form-group col-sm-8">    
-                <span>Responsável pela Instituição</span>
-                <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" value="" placeholder="Nome completo do Responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                <span>Responsável pela instituição</span>
+                <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" value="" 
+                placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
             </div>
 
             <div class="form-group col-sm-4">
-                <span>Telefone da instituicão</span>
-                <input id="tel" class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD no formato (xx)xxxxx-xxxx" required>
+                <span>Telefone da instituição</span>
+                <input id="tel" class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" 
+                pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD no formato (xx)xxxxx-xxxx" required>
             </div> 
 
             <div class="form-group col-sm-8">
-                <span>Endereço da Instituição</span>
-                <input id="endereco" class="form-control"  type="text" maxlength="50" name="Endereco" placeholder="Informe Rua e Bairro" required>
+                <span>Endereço da instituição</span>
+                <input id="endereco" class="form-control"  type="text" maxlength="50" name="Endereco" 
+                placeholder="Rua e Bairro" required>
             </div>
 
             <div class="form-group col-sm-2 col-4">    
-                <span>Numero</span>
+                <span>Número</span>
                 <input id="numero" class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx" required>
             </div>
 
@@ -62,7 +66,7 @@
 
             <div class="form-group col-sm-4">
                 <span>Cidade</span>
-                <input id="cidade" class="form-control"  type="text" name="Cidade" placeholder="Informe a Cidade" required>
+                <input id="cidade" class="form-control"  type="text" name="Cidade" required>
             </div>
 
             <div class="form-group col-sm-3">
@@ -92,7 +96,7 @@
                 </select>
             </div>
             
-            <div class="input-group-append mt-2">
+            <div class="input-group-append mt-0 form-group col-sm-12">
                 <button id="submit" type="submit" class="btn mr-2 btn-primary">Cadastrar e Vincular instituição</button>
                 <a href={{route("instituição.show")}}><button type="button" class="btn btn-danger">Cancelar</button> </a>
             </div>

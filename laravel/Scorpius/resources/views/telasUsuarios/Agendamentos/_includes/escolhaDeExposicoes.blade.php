@@ -1,6 +1,6 @@
 <div id="exposicoes" class="col-12 border text-left font-weight-bold overflow-auto barra">
     <div class="col-12 p-2">
-        <span> Selecione as {{$tipoAtividade}} que deseja conhecer <span>
+        <span> Selecione as {{$tipoAtividade}} a serem visitadas: <span>
     </div>
     <hr class="bg-light col-12 linha rounded p-0 m-0">
     <fieldset form="form.agendamento" class="col-12">

@@ -14,9 +14,13 @@
     <div class="row col-12 m-0 p-0">
         <div id="calendario" class="col-12 p-2 m-0 border overflow-auto barra">
             <div class="col p-0 text-dark font-weight-bold">
-                <button type="button" class=" btn btn-default seta-esquerda"></button>
-                <span> {{$visitas["dataInicio"] ?? "01/02"}} -a- {{$visitas["dataFim"] ?? "20/02"}} </span>
-                <button type="button" class="btn btn-default seta-direita"></span></button>
+                <button type="button" class=" btn btn-default seta">
+                    <i class="fas fa-angle-left"></i>
+                </button>
+                <span> {{$visitas["dataInicio"] ?? "01/02"}}  a  {{$visitas["dataFim"] ?? "20/02"}} </span>
+                <button type="button" class=" btn btn-default seta">
+                    <i class="fas fa-angle-right"></i>
+                </button>
             </div>
             <hr class="my-1 linha rounded bg-light">
             <div class="row col-12 m-0 font-weight-bold text-monospace">
@@ -59,10 +63,21 @@
             </div>
             <hr class="my-1 linha rounded bg-light col-11">
             <div class="row col-12 mb-1 m-0 p-0 pt-1 text-left">
-                <div class="col-12 col-lg-2 py-1 text-center d-none d-lg-block"><span> Legenda:</span></div>
-                <div class="col-7 col-lg-3 py-1"><button class="btn {{ $legendaCores["proprio"] }} w-auto"></button> <span> Seu Agendamento</span></div>
-                <div class="col-5 col-lg-3 py-1"><button class="btn {{ $legendaCores["disponivel"] }} w-auto"></button> <span> {{$tipoUserLegenda["leg.disponivel"]}}</span></div>
-                <div class="col-12 col-lg-4 py-1 "><button class="btn {{ $legendaCores["indisponivel"] }} w-auto"></button> <span> {{$tipoUserLegenda["leg.indisponivel"]}}</span></div>
+                <div class="col-12 col-lg-2 py-1 text-center d-none d-lg-block">
+                    <span> Legenda:</span>
+                </div>
+                <div class="col-7 col-lg-3 py-1">
+                    <button class="btn {{ $legendaCores["proprio"] }} w-auto"></button> 
+                    <span> Seu agendamento</span>
+                </div>
+                <div class="col-5 col-lg-3 py-1">
+                    <button class="btn {{ $legendaCores["disponivel"] }} w-auto"></button>
+                    <span> {{$tipoUserLegenda["leg.disponivel"]}}</span>
+                </div>
+                <div class="col-12 col-lg-4 py-1 ">
+                    <button class="btn {{ $legendaCores["indisponivel"] }} w-auto"></button>
+                    <span> {{$tipoUserLegenda["leg.indisponivel"]}}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -98,67 +113,19 @@ estou colocando uma cor azul clara nela*/
         background: rgb(180, 180, 200);
     }
 
-/**
-*** Seta para ESQUERDA
-**/
-.seta-esquerda:before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  width: 0; 
-  height: 0; 
+    /**
+    *** Seta
+    **/
+    .seta:before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        width: 0; 
+        height: 0; 
 
-  border-top: 1.7vh solid transparent;
-  border-bottom: 1.7vh solid transparent; 
-  border-right: 1.3vw solid black; 
-}
-
-/**
-*** Seta para DIREITA
-**/
-.seta-direita:before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  width: 0; 
-  height: 0; 
-
-  border-top: 1.7vh solid transparent;
-  border-bottom: 1.7vh solid transparent;
-  border-left: 1.3vw solid black;
-}
-
-/**
-*** Seta para CIMA
-**/
-.seta-cima:before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
-  width: 0; 
-  height: 0; 
-
-  border-left: 1vw solid transparent;
-  border-right: 1vw solid transparent;
-  border-bottom: 1vw solid black;
-}
-
-/**
-*** Seta para BAIXO
-**/
-.seta-baixo:before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
-  width: 0; 
-  height: 0; 
-
-  border-left: 1vw solid transparent;
-  border-right: 1vw solid transparent;
-  border-top: 1vw solid #f00;
-}
+        border-top: 1.7vh solid transparent;
+        border-bottom: 1.7vh solid transparent;
+    }
 
 </style>
 @endsection

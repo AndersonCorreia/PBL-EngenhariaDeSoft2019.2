@@ -4,14 +4,18 @@
 
 @section('conteudo')
 
-<div class="row col-12 ">
-    <div class="col-12 m-0 p-0">
+<div class="row col-12 container-fluid shadow-sm bg-white p-4"
+    style="border-bottom-right-radius:30px;border-bottom-left-radius:30px;border-top-right-radius:30px;border-top-left-radius:30px">
+    <div class="col-12 m-0 p-0 container-fluid shadow-sm bg-white p-2"
+        style="border-bottom-right-radius:30px;border-bottom-left-radius:30px;border-top-right-radius:30px;border-top-left-radius:30px">
         @include('telasUsuarios.Agendamentos._includes.escolhaDeExposicoes')
     </div>
-    <div class="col-12 mt-4 p-0">
+    <div class="col-12 mt-4 p-0 container-fluid shadow-sm bg-white p-2"
+        style="border-bottom-right-radius:30px;border-bottom-left-radius:30px;border-top-right-radius:30px;border-top-left-radius:30px">
         @include('telasUsuarios.Agendamentos._includes.calendar')
     </div>
-    <div id="formulario" class="col-12 mt-4 border">
+    <div id="formulario" class="col-12 mt-4 border container-fluid shadow-sm bg-white p-2"
+        style="border-bottom-right-radius:30px;border-bottom-left-radius:30px;border-top-right-radius:30px;border-top-left-radius:30px">
     @if($tipoUserLegenda["tipo"] == "institucional")
         @include('telasUsuarios.Agendamentos._includes.formularioAgendamento')
     @else
