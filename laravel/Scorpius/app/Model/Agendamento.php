@@ -7,27 +7,27 @@ use App\DB\AgendamentoDAO;
 
 class Agendamento extends \App\DB\interfaces\DataObject 
 {
-	private $turma;
 	private $visita;
-	private $dataAgendamento;
+	private $data;
 	private $exposicao;
 	private $statusAg;
-	private $turmaID;
-	private $agendamento;
+    private $turmaID;
+    private $instituicaoID;
+	private $agendamentoDAO;
 
 	public function __Construct(){
-		$this->agendamento = new AgendamentoDAO();
+		$this->agendamentoDAO = new AgendamentoDAO();
 	}
 
 	public function novoAgendamento($dados): Agendamento
     {
         $this->turma = $dados['turma'];
         $this->visita = $dados['visita'];
-		$this->dataAgendamento = $dados['dataAgendamento'];
+		$this->data = $dados['data'];
 		$this->exposicao = $dados['exposicao'];
         $this->statusAg = $dados['statusAg'];
         $this->turmaID = $dados['turmaID'];
-		$this->agendamento->INSERT($this);
+		$this->agendamentoDAO->INSERT($this);
         return $this;
 	}
 	
@@ -66,14 +66,14 @@ class Agendamento extends \App\DB\interfaces\DataObject
         return $this->visita;
 	}
 	
-	public function setDataAgendamento($dataAgendamento)
+	public function setdata($data)
     {
         $this->setAlterado();
-        $this->dataAgendamento = $dataAgendamento;
+        $this->data = $data;
     }
-    public function getDataAgendamento()
+    public function getdata()
     {
-        return $this->dataAgendamento;
+        return $this->data;
 	}
 	
 	public function setExposicao($exposicao)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DB\PessoaDAO;
+use App\Model\agendamento;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class UserController extends Controller{   
@@ -181,15 +182,45 @@ class UserController extends Controller{
 
         return view('telasUsuarios.Agendamentos.agendamentoNoturno', $variaveis);
     }
-    //inserir dados do agendamento pelo POST na classe e no banco de dados
+    /**
+     * Cadastrar novo agendamento de uma conta usuário Institucional 
+     * inserir dados do agendamento pelo POST na classe agendamento, que chama o método de
+     * inserir no banco de dados
+     * @return void
+     */
     public function agendarInstituicao(){
-
-        
+        //ID	Visita	Data_Agendamento	Status	turma_ID	instituicao_ID
+        //não terminado
+        $dados = [
+            //'visita' => $id_visita,
+            'dataAgendamento' => $_POST['data'],
+            'status' => 1,
+            'turmaID' => $id_turma,
+            'instituicaoID' => $id_instituicao
+        ];
+        $agendamento = new Agendamento();
+        $agendamento->novoAgendamento($dados);
+        return redirect()->route('AgendarDiurnoInstituição.show');
     }
 
-    //inserir dados do agendamento pelo POST na classe e no banco de dados
-    public function agendarContaIndividual(){
-
-        
+    /**
+     * Cadastrar novo agendamento de uma conta usuário visitante normal
+     * inserir dados do agendamento pelo POST na classe agendamento, que chama o método de
+     * inserir no banco de dados
+     * @return void
+     */
+    public function agendarContaIndividual() {
+        //dados da tabela	ID	Visita	Data_Agendamento	Status	usuario_ID
+        //não terminado
+        $id_user = session('ID');
+        $dados = [
+            //'visita' => $id_visita,
+            'dataAgendamento' => $_POST['data'],
+            'status' => 1,
+            'usuario_ID' => $id_user 
+        ];
+        $agendamento = new Agendamento();
+        $agendamento->novoAgendamento($dados);
+        return redirect()->route('AgendarDiurnoVisitante.show');
     }
 }

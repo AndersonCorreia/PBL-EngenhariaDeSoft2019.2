@@ -4,7 +4,7 @@ action="{{route('AgendarDiurnoVisitante.post')}}">
     <fieldset>
         <div class="form-group col-sm-12 visitantes">
             <span><h5>Dados para o agendamento</h5></span>
-            <div class="row box">
+            <div class="row">
                 <div class="col-md-6">
                     <label for="inputData">Data</label>
                     <input class="form-control" type="date" id="data" max="{{$visitas['dataLimite']}}" name="data" required>
@@ -14,14 +14,16 @@ action="{{route('AgendarDiurnoVisitante.post')}}">
                     <select id="turno" name="turno" id="turno" class="custom-select" placeholder="turno" required>
                         <option value="manhã">Manhã</option>
                         <option value="tarde">Tarde</option>
-                        <option value="noite">Noite</option>
                     </select>
                 </div>
             </div>
             
         </div>
-            <div class="form-group col-sm-12 visitantes">
-                <span><h6>Dados dos visitantes</h6></span>
+            <div class="form-group col-sm-12 dados-pessoais">
+                <p><h6>Dados dos visitantes</h6></p>
+                <div class="row btns col-md-12">
+                    <button type="button" class="btn btn-success mr-2 btn_add">Adicionar</button>
+                </div>
                 <div class="row box">
                     <div class="col-md-5 m-0">
                         <span>Nome</span>
@@ -33,22 +35,19 @@ action="{{route('AgendarDiurnoVisitante.post')}}">
                         <span>Idade</span>
                     </div>
                     <div class="col-md-5 m-0">
-                        <input id="visitante" class="form-control"  type="text" maxlength="40" name="Visitante" 
+                        <input id="visitante" class="form-control"  type="text" maxlength="40" name="Visitante[]" 
                         placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-3">
-                        <input id="RG" class="form-control"  type="text" maxlength="15" name="RG" 
+                        <input id="RG" class="form-control"  type="text" maxlength="15" name="RG[]" 
                         placeholder="xxxxxxxxxxxxxxxxx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-2">
-                        <input id="idade" class="form-control"  type="text" maxlength="3" name="idade" 
+                        <input id="idade" class="form-control"  type="text" maxlength="3" name="idade[]" 
                         placeholder="xxx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
-                    <div class="col-md-1">
-                        <button type="button" class="btn btn-primary clone">+</button>
-                    </div>
-                    <div class="col-md-1">
-                        <button type="button" class="btn btn-primary btn_remove">-</button>
+                    <div class='col-md-1'>
+                        <button type="button" class="btn btn-secondary btn_remove">-</button>
                     </div>
                 </div>
             </div>
@@ -65,7 +64,7 @@ action="{{route('AgendarDiurnoVisitante.post')}}">
 
 @section('css')
 <style type="text/css">
-    form .visitantes{
+    form .dados-pessoais{
         padding:2%;
         margin-top: 14;
     }

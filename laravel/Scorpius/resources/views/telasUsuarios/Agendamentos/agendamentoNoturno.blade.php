@@ -18,27 +18,34 @@
 
 @endsection
 
-@section('js')
 
+@section('css')
+<script rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/normalize.css"></script>
+<script rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css"></script>
+@endsection
+
+@section('js')
 <script src={{ asset('js/agendamento.js') }}></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/normalize.css"></script>
 <script>
 $(document).foundation();
 
-$('.clone').click(function(e){
+$('.dados-pessoais').on('click', '.btn_add', function(e){
     e.preventDefault();
-    $('.box:first').clone().appendTo($('.responsaveis'));
-    $('.box').last().find('input[type="text"]').val('');
+    var element = $($('.box')[0]).clone();
+    element.find('.nome').attr('id', null);
+    element.find('.cargo').attr('id', null);
+    element.find('.nome').attr('val', null);
+    element.find('.cargo').attr('val', null);
+    $('.dados-pessoais').append(element);
 });
-$('form').on('click', '.btn_remove', function(e){
+
+$('.dados-pessoais').on('click', '.btn_remove', function(e){
     e.preventDefault();
     if ($('.box').length > 1){
-        $(this).parents('.box').remove();
+        let div = $(this).parent().parent();
+        $(div).remove()
     }
-    
- });
+});
 </script>
-
 @endsection
