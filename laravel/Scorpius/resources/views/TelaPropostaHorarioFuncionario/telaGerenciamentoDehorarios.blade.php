@@ -112,6 +112,7 @@
 @section('js')
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
+    $(document).ready(function() {
         let horarios = new Map()
         const horario_original= new Map()
         let carregaNome = (e)=>{
@@ -126,36 +127,41 @@
         $('tbody td').find('button').prop("disabled", true);
         $('button[type=submit]').prop("disabled", true);
 
-        $("input[name=estagiario]").focusout(function(){         
-            jQuery('[buscar]').click(e => {
+
+        let inputNme = $("input[name=estagiario]")
+        jQuery('[buscar]').click(e => {
                 e.preventDefault() //evita ação de botão
-
+                $('tbody td').find('button').removeClass('btn btn-success').addClass('btn btn-outline')
                 $('button[type=submit]').prop("disabled", false);
-                $('button[cancelar]').prop("disabled", true);
+                $('button[cancelar]').prop("disabled", true);                
+                if(inputNme.val()!=''){ 
+                    const filterID = estagiario => estagiario.nome == inputNme.val()
+                    let result = est.filter(filterID)
+                    let estID=result[0].ID
+                    var url = "{{ route('retornaProposta', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
+                    url = url.replace(":id", estID); // isso vai corrigir a string gerada com o id correto.
 
-                const filterID = estagiario => estagiario.nome == $(this).val()
-                let result = est.filter(filterID)
-                let estID=parseInt(result[0].ID)
-                var url = "{{ route('retornaProposta', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
-                url = url.replace(":id", estID); // isso vai corrigir a string gerada com o id correto.
+                    $.ajaxSetup({
+                        headers: {
+                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                         }
+                    });
+                    $.get(url,function(estagiarios){
+                        for(let estagiario of estagiarios){
+                            let dias = estagiario.dia_semana
+                            let turnos = estagiario.turno
+                            let obj={turno: turnos, dia: dias}
+                            horarios.set(`${obj.turno}+${obj.dia}`,obj)
+                            horario_original.set(`${obj.turno}+${obj.dia}`,obj)
+                            pinta(dias,turnos)
+                        }
+                    })           
+                } else{
+                    $('tbody td').find('button').prop("disabled", true);
+                    $('button[type=submit]').prop("disabled", true);
+                }          
+            })  
 
-                $.ajaxSetup({
-                    headers: {
-                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                     }
-                });
-                $.get(url,function(estagiarios){
-                    for(let estagiario of estagiarios){
-                        let dias = estagiario.dia_semana
-                        let turnos = estagiario.turno
-                        let obj={turno: turnos, dia: dias}
-                        horarios.set(`${obj.turno}+${obj.dia}`,obj)
-                        horario_original.set(`${obj.turno}+${obj.dia}`,obj)
-                        pinta(dias,turnos)
-                    }
-                })           
-            })            
-        })
         jQuery('[alterar]').click(e => {
             e.preventDefault() //evita ação de botão
             $('tbody td').find('button').prop("disabled", false); 
@@ -194,6 +200,7 @@
 
             //location.reload();
         })
+    })
 
     function pinta(dias,turnos){
         switch (dias){
