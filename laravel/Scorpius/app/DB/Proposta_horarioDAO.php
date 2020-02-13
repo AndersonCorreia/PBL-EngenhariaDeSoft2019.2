@@ -19,7 +19,7 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
     }
 
     function buscaEstagiarioALL( ){
-        $sql = 'SELECT a.nome  from estagiario e join usuario a on a.ID = e.usuario_ID';
+        $sql = 'SELECT a.nome, a.ID  from estagiario e join usuario a on a.ID = e.usuario_ID';
         $resultado = $this->dataBase->query($sql);
         if($resultado->num_rows > 0) {
             while($row = $resultado->fetch_assoc()) {
@@ -32,7 +32,19 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
     }
 
     function buscaHorarioEstagiario($id){
-        
+        $sql = 'SELECT p.dia_semana, p.turno FROM proposta_horario p WHERE estagiario_usuario_ID=?';
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        if($resultado->num_rows > 0) {
+            while($row = $resultado->fetch_assoc()) {
+                $registros[] = $row;
+            }  
+            return $registros;
+        }
+        throw new \Exception("Nenhum estagiario encontrado");
+       
     }
 
 }

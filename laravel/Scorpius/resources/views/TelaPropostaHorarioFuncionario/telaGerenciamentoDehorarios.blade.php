@@ -3,6 +3,30 @@
 @section('title', 'Confirmar Horários dos Estagiários')
 
 @section('conteudo')
+{{csrf_field()}}
+<meta name="csrf-token" content="{{csrf_token()}}">
+<!-- Modal -->
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmar Horário Estagiário</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja confirmar as alterações?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="matricula">
     <div class="form-row">
         <div class="col-6  float-right">
@@ -11,11 +35,7 @@
                 <div class="col-9">
                     <input id="nomeInst" class="form-control" type="text" name="estagiario" placeholder="Insira o Nome do Estagiário" list="instList" required autofocus>
                     <datalist id="instList">
-                        @if (($estagiarios ?? false))
-                        @foreach ($estagiarios as $est)
-                        <option class="opList" value="{{$est['nome']}}">
-                            @endforeach
-                            @endif
+                       
                     </datalist>
                 </div>
                 <button type="button" class="btn btn-primary float-left " buscar> Buscar </button>
@@ -43,68 +63,194 @@
                     <th scope="col">Noite</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
+            <tbody >
+                <tr class="segunda">
                     <th scope="row" class="table-secondary">Segunda</th>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="manha" manha>08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="tarde" tarde>14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="noite" noite>18:00 - 22:00</button></td>
                 </tr>
-                <tr>
+                <tr class="terca">
                     <th scope="row" class="table-secondary">Terça</th>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="manha" manha>08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="tarde" tarde>14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="noite" noite>18:00 - 22:00</button></td>
                 </tr>
-                <tr>
+                <tr class="quarta">
                     <th scope="row" class="table-secondary">Quarta</th>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="manha" manha>08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="tarde" tarde>14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="noite" noite>18:00 - 22:00</button></td>
                 </tr>
-                <tr>
+                <tr class="quinta">
                     <th scope="row" class="table-secondary">Quinta</th>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="manha" manha>08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="tarde" tarde>14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="noite" noite>18:00 - 22:00</button></td>
                 </tr>
-                <tr>
+                <tr class="sexta">
                     <th scope="row" class="table-secondary">Sexta</th>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">08:00 - 12:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">14:00 - 18:00</button></td>
-                    <td><button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button" aria-pressed="false">18:00 - 22:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="manha" manha>08:00 - 12:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="tarde" tarde>14:00 - 18:00</button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="noite" noite>18:00 - 22:00</button></td>
                 </tr>
             </tbody>
         </table>
 </div>
 
     <div class="form-group">
-        <input type="submit" value="Alterar" name="proposta" class="submit_button col-2">  <!--botao p/ confirmar os dados-->
-        <input type="submit" value="Salvar" name="proposta" class="submit_buttons col-2">  <!--botao p/ confirmar os dados-->
+        <button type="submit" class="btn btn-success col-2" value="enviar" data-toggle="modal" data-target="#modalExemplo"  enviar>
+           Enviar
+            <i class="fa fa-send"></i>
+        </button>
+        <button type="submit" value="alterar" name="proposta" class="btn btn-primary col-2" alterar>Alterar</button>  <!--botao p/ confirmar os dados-->
+        <button type="submit" value="cancelar" name="proposta" class="btn btn-danger col-2" cancelar>Cancelar</button> <!--botao p/ confirmar os dados-->
+        
     </div>
 @endsection
 
 @section('js')
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
-        jQuery('[buscar]').click(e => {
-            e.preventDefault() //evita ação de botão      
-            $.get("{{route('retornaProposta', 12)}}",function(estagiarios){
-                console.log(estagiarios)
-            })
-            /*jQuery.ajax({
-                method:"GET",
-                url: "confirmacaoHorario",
-                data: { id:12 },
-                success(data) {
-                   console.log(data)
-                }
-            })*/
+        let horarios = new Map()
+        const horario_original= new Map()
+        let carregaNome = (e)=>{
+            for(let i=0; i<e.length; i++){
+                $('#instList').append(`<option class="opList" value="${e[i].nome}">`)
+            }
+        }
+        let est = @json($estagiarios);
+
+        carregaNome(est);
+
+        $('tbody td').find('button').prop("disabled", true);
+        $('button[type=submit]').prop("disabled", true);
+
+        $("input[name=estagiario]").focusout(function(){         
+            jQuery('[buscar]').click(e => {
+                e.preventDefault() //evita ação de botão
+
+                $('button[type=submit]').prop("disabled", false);
+                $('button[cancelar]').prop("disabled", true);
+
+                const filterID = estagiario => estagiario.nome == $(this).val()
+                let result = est.filter(filterID)
+                let estID=parseInt(result[0].ID)
+                var url = "{{ route('retornaProposta', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
+                url = url.replace(":id", estID); // isso vai corrigir a string gerada com o id correto.
+
+                $.ajaxSetup({
+                    headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+                });
+                $.get(url,function(estagiarios){
+                    for(let estagiario of estagiarios){
+                        let dias = estagiario.dia_semana
+                        let turnos = estagiario.turno
+                        let obj={turno: turnos, dia: dias}
+                        horarios.set(`${obj.turno}+${obj.dia}`,obj)
+                        horario_original.set(`${obj.turno}+${obj.dia}`,obj)
+                        pinta(dias,turnos)
+                    }
+                })           
+            })            
+        })
+        jQuery('[alterar]').click(e => {
+            e.preventDefault() //evita ação de botão
+            $('tbody td').find('button').prop("disabled", false); 
+            $('button[alterar]').prop("disabled", true); 
+            $('button[cancelar]').prop("disabled", false); 
         })
 
+        $('tbody td').find('button').click(e=>{
+            e.preventDefault() //evita ação de botão
+            let buttonTrash = $(e.target)
+            buttonTrash.toggleClass('btn btn-success')
+            let turnos = buttonTrash[0].value
+            let quantTrash = buttonTrash.parent().parent()
+            let dias = quantTrash[0].className
+            let obj = new Object({turno: turnos, dia: dias})
+            if(buttonTrash.hasClass("btn-success")){
+                horarios.set(`${obj.turno}+${obj.dia}`,obj)
+            }else{               
+                horarios.delete(`${obj.turno}+${obj.dia}`)                   
+            }  
+        })
+
+        jQuery('[cancelar]').click(e=>{
+            e.preventDefault() //evita ação de botão
+            $('tbody td').find('button').removeClass('btn btn-success').addClass('btn btn-outline')
+            horarios = new Map(horario_original); 
+            horarios.forEach((vl, cha) => {
+                pinta(vl.dia,vl.turno)
+            })  
+            $('tbody td').find('button').prop("disabled", true);
+            $('button[alterar]').prop("disabled", false);
+            $('button[cancelar]').prop("disabled", true);  
+        })
+
+        jQuery('[enviar]').click(e=>{
+
+            //location.reload();
+        })
+
+    function pinta(dias,turnos){
+        switch (dias){
+                case 'segunda':
+                    if(turnos == 'manha'){
+                        $('.segunda td').find('button[manha]').toggleClass('btn btn-success')                                  
+                    }else if(turnos == 'tarde'){
+                        $('.segunda td').find('button[tarde]').toggleClass('btn btn-success')
+                    }
+                    break
+                case 'terca':
+                    if(turnos == 'manha'){
+                        $('.terca td').find('button[manha]').toggleClass('btn btn-success')
+                    }else if(turnos == 'tarde'){
+                        $('.terca td').find('button[tarde]').toggleClass('btn btn-success')
+                    }   
+                    break
+                case 'quarta':
+                    if(turnos == 'manha'){
+                        $('.quarta td').find('button[manha]').toggleClass('btn btn-success')
+                    }else if(turnos == 'tarde'){
+                        $('.quarta td').find('button[tarde]').toggleClass('btn btn-success')
+                    }
+                    break 
+                case 'quinta':
+                    if(turnos == 'manha'){
+                        $('.quinta td').find('button[manha]').toggleClass('btn btn-success')
+                    }else if(turnos == 'tarde'){
+                        $('.quinta td').find('button[tarde]').toggleClass('btn btn-success')
+                    }
+                    break
+                case 'sexta':
+                    if(turnos == 'manha'){
+                        $('.sexta td').find('button[manha]').toggleClass('btn btn-success')
+                    }else if(turnos == 'tarde'){
+                        $('.sexta td').find('button[tarde]').toggleClass('btn btn-success')
+                    }   
+                    break    
+                default:
+                    console.log('dia incorreto')
+        }
+    }
     </script>
     @endsection
+
 <style>
+
+    table td button.btn-outline{
+        border: 1px solid rgb(93, 98, 105);  
+    }   
+
+    button[type=submit]{
+        border-bottom-right-radius: 20px; 
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+    }
 
     h4{
         padding: 0px 30px 10px 30px;

@@ -14,7 +14,8 @@
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "league/flysystem": "^1.0",
-        "socialiteproviders/facebook": "^1.0"
+        "socialiteproviders/facebook": "^1.0",
+        "tijsverkoyen/css-to-inline-styles": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
