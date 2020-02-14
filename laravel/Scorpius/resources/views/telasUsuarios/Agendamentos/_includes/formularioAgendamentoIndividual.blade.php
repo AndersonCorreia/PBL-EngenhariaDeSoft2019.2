@@ -40,12 +40,12 @@
                 </div>
             </div>
         </div>
-        <div>
-            <button id="btn-adicionar" type="button" class="mt-2 btn btn-success btn_add">
+        <div class="ml-3 mt-2">
+            <button id="btn-adicionar" type="button" class="btn btn-success btn_add">
                 <i class="fas fa-plus    "></i>
                 Adicionar
             </button>
-            <button id="btn-remover" type="button" class="mt-2 btn btn-danger btn_remove">
+            <button id="btn-remover" type="button" class="btn btn-danger btn_remove">
                 <i class="fas fa-minus    "></i>
                 Remover
             </button>

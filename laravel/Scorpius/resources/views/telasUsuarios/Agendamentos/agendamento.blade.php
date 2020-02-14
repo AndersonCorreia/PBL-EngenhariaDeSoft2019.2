@@ -32,25 +32,26 @@
 <script src={{ asset('js/agendamento.js') }}></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script>
 <script>
-    $(document).foundation();
-
-$('.dados-pessoais').on('click', '.btn_add', function(e){
-    e.preventDefault();
-    var element = $($('.box')[0]).clone();
-    element.find('.nome').attr('id', null);
-    element.find('.cargo').attr('id', null);
-    element.find('.nome').attr('val', null);
-    element.find('.cargo').attr('val', null);
-    $('.dados-pessoais').append(element);
-});
-
-$('.dados-pessoais').on('click', '.btn_remove', function(e){
-    e.preventDefault();
-    if ($('.box').length > 1){
-        let div = $(this).parent().parent();
-        $(div).remove()
+function adicionar(){
+    var element = $('.box:last').clone();
+    var cont = element.children('.nome-responsavel').children('input').attr('name').replace('responsavel', '');
+    if(cont > 4){
+        return alert('Quantidade máx. de responsáveis atingida');
     }
-});
+    element.children('.nome-responsavel').children('input').attr('name', 'responsavel' + (++cont));
+    element.children('.cargo-responsavel').children('input').attr('name', 'cargo' + cont);
+    element.children('.nome-responsavel').children('input').val('');
+    element.children('.cargo-responsavel').children('input').val('');
+    $('#dados-responsavel-campos').append(element);
+
+}
+function remover(){
+    if($('.box').length > 1){
+        $('.box:last').remove();
+    }
+}
+$('#btn-adicionar').on("click", adicionar);
+$('#btn-remover').on("click", remover);
 </script>
 
 @endsection
