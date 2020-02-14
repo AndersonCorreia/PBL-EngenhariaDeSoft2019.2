@@ -3,15 +3,16 @@
 @section('title', 'Agendamento')
 
 @section('conteudo')
+<link rel="stylesheet" href="{{ asset('css/scorpius.css') }}">
 
-<div class="row col-12 ">
-    <div class="col-12 m-0 p-0">
+<div class="row col-12 scorpius-border p-3">
+    <div class="col-12 m-0 p-0 scorpius-border-shadow p-3 ">
         @include('telasUsuarios.Agendamentos._includes.escolhaDeExposicoes')
     </div>
-    <div class="col-12 mt-4 p-0">
+    <div class="col-12 mt-4 p-0 scorpius-border-shadow p-3">
         @include('telasUsuarios.Agendamentos._includes.calendar')
     </div>
-    <div id="formulario" class="col-12 mt-4 border">
+    <div id="formulario" class="col-12 mt-4 scorpius-border-shadow p-3">
         @include('telasUsuarios.Agendamentos._includes.formularioAgendamentoIndividual')
     </div>
 </div>

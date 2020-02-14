@@ -1,7 +1,7 @@
-<form id="form.agendamento" class="col-lg-10 col-xl-9 col-12 m-2" method="POST" action="{{route('AgendarDiurnoInstituicao.post')}}">
+<form id="form.agendamento" class="container-fluid m-0 p-2" method="POST" action="{{route('AgendarDiurnoInstituicao.post')}}">
     {{csrf_field()}}
     <fieldset>
-        <div class="form-row col-msm">
+        <div class="form-row col-sm">
             <span><h5>Dados para o agendamento</h5></span>
             <div class="form-group col-sm-12 d-block">
                 <span>Instituição de Ensino</span>

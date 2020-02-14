@@ -3,24 +3,21 @@
 @section('title', 'Agendamento')
 
 @section('conteudo')
+<link rel="stylesheet" href="{{ asset('css/scorpius.css') }}">
 
-<div class="row col-12 container-fluid shadow-sm bg-white p-4"
-    style="border-bottom-right-radius:30px;border-bottom-left-radius:30px;border-top-right-radius:30px;border-top-left-radius:30px">
-    <div class="col-12 m-0 p-0 container-fluid shadow-sm bg-white p-2"
-        style="border-bottom-right-radius:30px;border-bottom-left-radius:30px;border-top-right-radius:30px;border-top-left-radius:30px">
+<div class="row col-12 scorpius-border container-fluid p-4 mr-3">
+    <div class="col-12 m-0 p-0  scorpius-border-shadow container-fluid p-2">
         @include('telasUsuarios.Agendamentos._includes.escolhaDeExposicoes')
     </div>
-    <div class="col-12 mt-4 p-0 container-fluid shadow-sm bg-white p-2"
-        style="border-bottom-right-radius:30px;border-bottom-left-radius:30px;border-top-right-radius:30px;border-top-left-radius:30px">
+    <div class="col-12 mt-4 p-0 scorpius-border-shadow container-fluid p-2">
         @include('telasUsuarios.Agendamentos._includes.calendar')
     </div>
-    <div id="formulario" class="col-12 mt-4 border container-fluid shadow-sm bg-white p-2"
-        style="border-bottom-right-radius:30px;border-bottom-left-radius:30px;border-top-right-radius:30px;border-top-left-radius:30px">
-    @if($tipoUserLegenda["tipo"] == "institucional")
+    <div id="formulario" class="col-12 mt-4 scorpius-border-shadow container-fluid p-2">
+        @if($tipoUserLegenda["tipo"] == "institucional")
         @include('telasUsuarios.Agendamentos._includes.formularioAgendamento')
-    @else
+        @else
         @include('telasUsuarios.Agendamentos._includes.formularioAgendamentoIndividual')
-    @endif
+        @endif
     </div>
 </div>
 @endsection
@@ -35,7 +32,7 @@
 <script src={{ asset('js/agendamento.js') }}></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script>
 <script>
-$(document).foundation();
+    $(document).foundation();
 
 $('.dados-pessoais').on('click', '.btn_add', function(e){
     e.preventDefault();
