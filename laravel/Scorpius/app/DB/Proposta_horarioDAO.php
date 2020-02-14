@@ -44,7 +44,19 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
             return $registros;
         }
         throw new \Exception("Nenhum estagiario encontrado");
-       
     }
+
+    function salvaHorarioEstagiario($id, $dia, $turno){
+        $sql = "INSERT IGNORE INTO horario_estagiario(dia_semana, turno, estagiario_usuario_ID) VALUES (?, ?, ?)";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("sss", $dia, $turno,$id);
+        $result = $stmt->execute();
+        if($result){
+            return $result; 
+        }
+        throw new \Exception("Erro ao inserir");
+    }
+
+
 
 }

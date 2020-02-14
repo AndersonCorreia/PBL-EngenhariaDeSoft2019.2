@@ -31,5 +31,13 @@ class HorarioController extends Controller{
         $horario = $DAO->buscaHorarioEstagiario($id);
         return Response::json($horario);
     }
+
+    public function enviaHorario(Request $req){
+        $DAO = new Proposta_horarioDAO();
+        $horarios = $req->horario_definitivo; 
+        foreach($horarios as $valor){
+                $DAO->salvaHorarioEstagiario($req->ID ,$valor['dia'],$valor['turno']);
+        }
+        return "true";
+    }
 }
-?>

@@ -20,7 +20,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+        <button type="button" class="btn btn-primary" salvarMudanca>Salvar mudanças</button>
       </div>
     </div>
   </div>
@@ -114,30 +114,31 @@
     <script>
     $(document).ready(function() {
         let horarios = new Map()
-        const horario_original= new Map()
+        let horario_original= new Map()
         let carregaNome = (e)=>{
             for(let i=0; i<e.length; i++){
                 $('#instList').append(`<option class="opList" value="${e[i].nome}">`)
             }
         }
-        let est = @json($estagiarios);
-
-        carregaNome(est);
+        let estagiarios = @json($estagiarios);
+      
+        carregaNome(estagiarios);
 
         $('tbody td').find('button').prop("disabled", true);
         $('button[type=submit]').prop("disabled", true);
 
 
-        let inputNme = $("input[name=estagiario]")
+        let inputNome = $("input[name=estagiario]")
+       
         jQuery('[buscar]').click(e => {
                 e.preventDefault() //evita ação de botão
+                horarios = new Map()
+                horario_original= new Map()
                 $('tbody td').find('button').removeClass('btn btn-success').addClass('btn btn-outline')
                 $('button[type=submit]').prop("disabled", false);
                 $('button[cancelar]').prop("disabled", true);                
-                if(inputNme.val()!=''){ 
-                    const filterID = estagiario => estagiario.nome == inputNme.val()
-                    let result = est.filter(filterID)
-                    let estID=result[0].ID
+                if(inputNome.val()!=''){ 
+                    estID = getID(estagiarios,inputNome.val())
                     var url = "{{ route('retornaProposta', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
                     url = url.replace(":id", estID); // isso vai corrigir a string gerada com o id correto.
 
@@ -196,44 +197,73 @@
             $('button[cancelar]').prop("disabled", true);  
         })
 
-        jQuery('[enviar]').click(e=>{
+        jQuery('[salvarMudanca]').click(e=>{
+            e.preventDefault()
+            $.ajax({
+                url:"{{route('enviaHorario')}}",
+                method:'post',
+                data:{
+                    ID:getID(estagiarios,inputNome.val()),
+                    horario_definitivo:strMapToObj(horarios)
+                },
+                success(retorno){
+                    location.reload();
+                },
+                error(erro){
+                    console.log(erro)
+                }
 
-            //location.reload();
+            })
         })
     })
+
+    function getID(estagiarios,nome){
+        const filterID = estagiario => estagiario.nome == nome
+        let result = estagiarios.filter(filterID)
+        return result[0].ID
+    }
+
+    function strMapToObj(strMap) {
+        let obj = Object.create(null);
+        let i=0;
+        for (let [k,v] of strMap) {
+            obj[k] = v
+        }
+        return obj;
+    }
 
     function pinta(dias,turnos){
         switch (dias){
                 case 'segunda':
-                    if(turnos == 'manha'){
+                    if(turnos == 'manhã'){
                         $('.segunda td').find('button[manha]').toggleClass('btn btn-success')                                  
                     }else if(turnos == 'tarde'){
                         $('.segunda td').find('button[tarde]').toggleClass('btn btn-success')
                     }
                     break
-                case 'terca':
-                    if(turnos == 'manha'){
+                case 'terça':
+                    if(turnos == 'manhã'){
                         $('.terca td').find('button[manha]').toggleClass('btn btn-success')
                     }else if(turnos == 'tarde'){
                         $('.terca td').find('button[tarde]').toggleClass('btn btn-success')
                     }   
                     break
                 case 'quarta':
-                    if(turnos == 'manha'){
+                    if(turnos == 'manhã'){
                         $('.quarta td').find('button[manha]').toggleClass('btn btn-success')
                     }else if(turnos == 'tarde'){
                         $('.quarta td').find('button[tarde]').toggleClass('btn btn-success')
                     }
                     break 
                 case 'quinta':
-                    if(turnos == 'manha'){
+                    if(turnos == 'manhã'){
                         $('.quinta td').find('button[manha]').toggleClass('btn btn-success')
                     }else if(turnos == 'tarde'){
                         $('.quinta td').find('button[tarde]').toggleClass('btn btn-success')
                     }
                     break
                 case 'sexta':
-                    if(turnos == 'manha'){
+                    if(turnos == 'manhã'){
                         $('.sexta td').find('button[manha]').toggleClass('btn btn-success')
                     }else if(turnos == 'tarde'){
                         $('.sexta td').find('button[tarde]').toggleClass('btn btn-success')

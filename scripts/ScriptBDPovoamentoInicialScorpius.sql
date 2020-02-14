@@ -1,4 +1,4 @@
-USE `SCORPIUS`;
+USE `scorpius`;
 
 -- INSERT do tipos de usuarios --
 INSERT INTO tipo_usuario (ID, tipo) VALUES (10, 'adm');
