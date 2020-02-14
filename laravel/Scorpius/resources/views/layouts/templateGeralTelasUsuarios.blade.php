@@ -48,7 +48,7 @@
                 </ul>
         </div>
         {{--<hr class="m-0 bg-primary">--}}
-        <div class="p-lg-4 pt-4 container">
+        <div class="p-lg-4 pt-4 ml-lg-3 container">
             @yield('conteudo')
         </div>
     </div>
@@ -108,6 +108,23 @@
             float: left;
             position: fixed;
         }
+    }
+    
+    html ::-webkit-scrollbar {
+        width: 0.5vw;
+    }
+
+    /* aqui é para personalizar o fundo da barra*/
+    html ::-webkit-scrollbar-track {
+        background: rgb(255, 255, 255);
+        border-radius: 20px;
+    }
+
+    /* aqui é a alça da barra, que demonstra a altura que você está na página
+estou colocando uma cor azul clara nela*/
+    html ::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        background: rgb(180, 180, 200);
     }
 
     @media (max-width: 650px) {

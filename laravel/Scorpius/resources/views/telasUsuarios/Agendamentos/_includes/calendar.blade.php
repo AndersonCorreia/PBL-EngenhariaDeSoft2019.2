@@ -10,22 +10,22 @@
     $tipoUserLegenda array que contem informações de acordo o tipo de usuario
 --}}
 
-<div class="row col-12 m-0 p-0 font-weight-bold text-center barra" >
+<div class="row col-12 m-0 p-0 font-weight-bold text-center" >
     <div class="row col-12 m-0 p-0">
-        <div id="calendario" class="col-12 p-2 m-0 border overflow-auto barra">
+        <div id="calendario" class="col-12 p-2 m-0 overflow-auto barra">
             <div class="col p-0 text-dark font-weight-bold">
-                <button type="button" class=" btn btn-default seta">
+                <button type="button" class=" btn btn-default">
                     <i class="fas fa-angle-left"></i>
                 </button>
                 <span> {{$visitas["dataInicio"] ?? "01/02"}}  a  {{$visitas["dataFim"] ?? "20/02"}} </span>
-                <button type="button" class=" btn btn-default seta">
+                <button type="button" class=" btn btn-default">
                     <i class="fas fa-angle-right"></i>
                 </button>
             </div>
             <hr class="my-1 linha rounded bg-light">
             <div class="row col-12 m-0 font-weight-bold text-monospace">
-                <div class="row col-12 pb-2 m-0 px-0 text-center ">
-                    <div class="row m-0 col-lg-1 mb-2 m-lg-0 pt-1 p-0 border-right">
+                <div class="row col-12 p-0 m-0 px-0 text-center ">
+                    <div class="row m-1 col-lg-1 mb-2 m-lg-0 pt-1 p-0 border">
                         <div class="col-4 col-lg-12 p-0 mt-lg-3 ">Dia</div>
                         @if(($turno ?? "diurno")==="diurno")  
                             <div class="col col-lg-12 p-0 mt-4 m-0">Manhã</div>
@@ -37,7 +37,7 @@
                     <div class="col-lg-11 p-0 m-0 col row">
                     @foreach ($visitas as $dia => $v)
                         @if ($loop->index>2 && $loop->index<13 )
-                        <div class="row col-md m-0 p-0 border-right border-left "> 
+                        <div class="row col-md m-md-0 mx-md-1 p-0 border"> 
                             <div id="data{{$loop->index}}" class="col-4 col-lg-12 p-2">{{ $v["data"] ?? "27/01 SEG" }}</div>
                             @if(($turno ?? "diurno")==="diurno") 
                                 <div class="col col-lg-12 py-1 p-0">
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <hr class="my-1 linha rounded bg-light col-11">
+            <hr class="my-1 m-0 p-0 linha rounded bg-light col-12">
             <div class="row col-12 mb-1 m-0 p-0 pt-1 text-left">
                 <div class="col-12 col-lg-2 py-1 text-center d-none d-lg-block">
                     <span> Legenda:</span>
@@ -87,44 +87,6 @@
 <style>
     .linha {
         height: 0.3vh;
-    }
-    #formulario {
-        background-color: rgb(240, 240, 246);
-        height: auto;
-    }
-    #calendario, #exposicoes{
-        background-color: rgb(240, 240, 246);
-        height: auto;
-    }
-    html ::-webkit-scrollbar {
-        width: 0.5vw;
-    }
-
-    /* aqui é para personalizar o fundo da barra*/
-    html ::-webkit-scrollbar-track {
-        background: rgb(255, 255, 255);
-        border-radius: 20px;
-    }
-
-    /* aqui é a alça da barra, que demonstra a altura que você está na página
-estou colocando uma cor azul clara nela*/
-    html ::-webkit-scrollbar-thumb {
-        border-radius: 20px;
-        background: rgb(180, 180, 200);
-    }
-
-    /**
-    *** Seta
-    **/
-    .seta:before {
-        content: "";
-        display: inline-block;
-        vertical-align: middle;
-        width: 0; 
-        height: 0; 
-
-        border-top: 1.7vh solid transparent;
-        border-bottom: 1.7vh solid transparent;
     }
 
 </style>
