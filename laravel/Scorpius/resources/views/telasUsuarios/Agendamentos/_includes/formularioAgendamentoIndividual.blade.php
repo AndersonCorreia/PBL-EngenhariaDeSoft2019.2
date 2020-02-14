@@ -39,7 +39,7 @@
                         pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                 </div>
                 <div class="col-md-1">
-                    <button type="button" class="btn btn-danger btn-remove">
+                    <button type="button" class="btn btn-danger btn-remover">
                         <i class="fas fa-minus"></i>
                     </button>
                 </div>

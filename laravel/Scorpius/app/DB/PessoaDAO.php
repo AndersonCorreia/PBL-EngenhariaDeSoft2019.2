@@ -122,7 +122,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         //     $sqlDemanda = "UPDATE demanda_web SET guia = '$guia', observacao = '$observacao' WHERE ID = $existeDWED";
         //     $this->dataBase->query($sqlDemanda);
             
-        //     if (!(empty($demandaWeb['horaros']))) {
+        //     if (!(empty($demandaWeb['horarios']))) {
         //         foreach ($demandaWeb['horarios'] as $horarios) {
         //             foreach ($horarios as $horario) {
         //                 $sql = "INSERT INTO horario_estagiario (dia_semana, turno, demanda_web_ID) VALUES (
