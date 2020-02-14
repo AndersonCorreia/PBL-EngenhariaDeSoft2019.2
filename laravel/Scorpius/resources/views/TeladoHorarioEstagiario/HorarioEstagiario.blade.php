@@ -22,7 +22,7 @@ border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-ra
     <br>
 
     <div class="user_input_forms">
-        <form action="{{ route('HorarioEstagiario.enviarHorario') }}" method="POST">
+        <form action="{{ route('HorarioEstagiario.enviarHorario') }}" method="POST" enctype=”multipart/form-data”>
             {{csrf_field()}}
 
             <div class="guia">
