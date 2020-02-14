@@ -38,7 +38,7 @@
             <p class="h6 mt-3">Adicionar outros responsáveis</p>
             <div id="dados-responsavel-campos">
                 <div class="row box mt-1">
-                    <div class="col-md-8 nome-responsavel">
+                    <div class="col-md-7 nome-responsavel">
                         <input class="form-control nome" type="text" maxlength="40" name="responsavel1"
                             placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
@@ -46,16 +46,17 @@
                         <input class="form-control cargo" type="text" maxlength="40" name="cargo1" placeholder="Cargo"
                             pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-danger btn-remover">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="mt-2 ml-3">
                 <button id="btn-adicionar" type="button" class="btn btn-success">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Adicionar
-                </button>
-                <button id="btn-remover" class="btn btn-danger">
-                    <i class="fa fa-minus" aria-hidden="true"></i>
-                    Remover
                 </button>
             </div>
             <div id="observacoes" class="mt-3">

@@ -49,7 +49,7 @@ function adicionar(){
 //         $('.box:last').remove();
 //     }
 // }
-$('form').on('click', '.btn-remove', function(e){
+$('form').on('click', '.btn-remover', function(e){
     e.preventDefault();
     if ($('.box').length > 1){
         $(this).parents('.box').remove();
