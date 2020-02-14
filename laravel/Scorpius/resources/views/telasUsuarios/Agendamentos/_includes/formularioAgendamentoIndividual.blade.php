@@ -30,13 +30,18 @@
                     <input id="visitante" class="form-control" type="text" maxlength="40" name="visitante1"
                         placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                 </div>
-                <div class="col-md-4 rg-visitante">
+                <div class="col-md-3 rg-visitante">
                     <input id="RG" class="form-control" type="text" maxlength="15" name="rg1"
                         placeholder="xxxxxxxxxxxxxxxxx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                 </div>
                 <div class="col-md-4 idade-visitante">
                     <input id="idade" class="form-control" type="text" maxlength="3" name="idade1" placeholder="xxx"
                         pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                </div>
+                <div class="col-md-1">
+                    <button id="btn-remover" type="button" class="btn btn-danger btn-remove">
+                        <i class="fas fa-minus    "></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -45,11 +50,6 @@
                 <i class="fas fa-plus    "></i>
                 Adicionar
             </button>
-            <button id="btn-remover" type="button" class="btn btn-danger btn_remove">
-                <i class="fas fa-minus    "></i>
-                Remover
-            </button>
-
         </div>
     </div>
     <div id="observacoes" class="mt-3">
