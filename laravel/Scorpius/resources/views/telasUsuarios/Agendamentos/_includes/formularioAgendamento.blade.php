@@ -4,7 +4,7 @@
 
     <div id="dados-agendamento">
         <p class="h5">Dados para o agendamento</p>
-        <label class="mt-2" for="nome-instituicao">Dados da instituicao</label>
+        <label class="mt-2" for="nome-instituicao">Selecione a instituição</label>
         <select class="form-control" id="nome-instituicao" name="instituicao">
             @if (($instituicoes ?? false))
             @foreach ($instituicoes as $inst)
@@ -22,11 +22,16 @@
                 <input class="form-control" type="date" id="data" max="{{$visitas['dataLimite']}}" name="data" required>
             </div>
             <div class="col-md-4">
+            @if(($turno ?? "diurno")==="diurno") 
                 <label for="turno">Turno</label>
                 <select id="turno" name="turno" id="turno" class="custom-select" placeholder="turno" required>
                     <option value="manhã">Manhã</option>
                     <option value="tarde">Tarde</option>
                 </select>
+            @else
+                <label for="selectTurno">Turno</label>
+                <input class="form-control" type="text" placeholder="Noturno" readonly>
+            @endif
             </div>
         </div>
         <div id="dados-responsavel" class="mt-3">

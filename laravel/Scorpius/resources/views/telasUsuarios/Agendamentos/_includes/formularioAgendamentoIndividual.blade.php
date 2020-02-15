@@ -5,28 +5,33 @@
         <p class="h5">Dados para o agendamento</p>
         <div id="data-turno" class="row">
             <div class="col-md-6">
-                <label for="inputData">Data</label>
+                <label for="inputData">Data desejada</label>
                 <input class="form-control" type="date" id="data" max="{{$visitas['dataLimite']}}" name="data" required>
             </div>
             <div class="col-md-6">
+            @if(($turno ?? "diurno")==="diurno") 
                 <label for="selectTurno">Turno</label>
                 <select id="turno" name="turno" id="turno" class="custom-select" placeholder="turno" required>
                     <option value="manhã">Manhã</option>
                     <option value="tarde">Tarde</option>
                 </select>
+            @else
+                <label for="selectTurno">Turno</label>
+                <input class="form-control" type="text" placeholder="Noturno" readonly>
+            @endif
             </div>
         </div>
     </div>
     <div id="dados-visitante" class="mt-4 dados-pessoais">
         <p class="h6">Dados dos visitantes</p>
         <div class="row">
-            <div class="col-md-4">Nome</div>
-            <div class="col-md-4">RG</div>
-            <div class="col-md-4">Idade</div>
+            <div class="col-md-7">Nome</div>
+            <div class="col-md-3">RG</div>
+            <div class="col-md-1">Idade</div>
         </div>
         <div id="dados-visitantes-campos">
             <div class="row box mb-2">
-                <div class="col-md-4 nome-visitante">
+                <div class="col-md-7 nome-visitante">
                     <input id="visitante" class="form-control" type="text" maxlength="40" name="visitante1"
                         placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                 </div>
@@ -34,7 +39,7 @@
                     <input id="RG" class="form-control" type="text" maxlength="15" name="rg1"
                         placeholder="xxxxxxxxxxxxxxxxx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                 </div>
-                <div class="col-md-4 idade-visitante">
+                <div class="col-md-1 idade-visitante">
                     <input id="idade" class="form-control" type="text" maxlength="3" name="idade1" placeholder="xxx"
                         pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                 </div>
