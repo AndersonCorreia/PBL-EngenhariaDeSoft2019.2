@@ -22,18 +22,33 @@ INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_
 (1001, 'Marcelo Mateus Augusto da Rocha', 'mateusrocha@tema.com.br', 'mmar1001', '08212660559', '75995055492', 1, 10);
 
 -- INSERT das permissões padrões dos  tipos de usuario --
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('realizar check-in',8);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('realizar check-in',9);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('gerenciamento de visitas',9);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('designar horários para estagiarios',9);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('relatorio dos agendamentos',9);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('cadastrar e modificar atividades',9);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('criar usuarios',10);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('gerenciar usuarios',10);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('ver confiabilidade das Instituições',10);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('ver log de atividade',10);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('realizar backup',10);
-INSERT INTO permissao (permissao, tipo_usuario_ID) VALUES ('gerenciar permissões',10);
+INSERT INTO permissao (permissao, ID) VALUES ('realizar check-in',1);
+INSERT INTO permissao (permissao, ID) VALUES ('demanda web',2);
+INSERT INTO permissao (permissao, ID) VALUES ('gerenciamento de visitas',3);
+INSERT INTO permissao (permissao, ID) VALUES ('designar horários para estagiarios',4);
+INSERT INTO permissao (permissao, ID) VALUES ('relatorio dos agendamentos',5);
+INSERT INTO permissao (permissao, ID) VALUES ('cadastrar e modificar atividades',6);
+INSERT INTO permissao (permissao, ID) VALUES ('criar usuarios',7);
+INSERT INTO permissao (permissao, ID) VALUES ('gerenciar usuarios',8);
+INSERT INTO permissao (permissao, ID) VALUES ('ver confiabilidade das Instituições',9);
+INSERT INTO permissao (permissao, ID) VALUES ('ver log de atividade',10);
+INSERT INTO permissao (permissao, ID) VALUES ('realizar backup',11);
+INSERT INTO permissao (permissao, ID) VALUES ('gerenciar permissões',12);
+
+-- INSERT das permissões padrões dos  tipos de usuario --
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (1,8);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (2,8);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (1,9);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (3,9);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (4,9);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (5,9);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (6,9);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (7,10);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (8,10);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (9,10);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (10,10);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (11,10);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (12,10);
 
 -- INSERT das cidades --
 INSERT INTO cidade_UF (ID, cidade, UF) VALUES (1, 'Salvador', 'BA');

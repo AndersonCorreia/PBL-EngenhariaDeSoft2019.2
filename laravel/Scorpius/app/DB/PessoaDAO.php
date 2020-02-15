@@ -68,7 +68,8 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
      */
     function getPermissoes(string $tipoUsuario): array
     {
-        $join = "permissao p LEFT JOIN tipo_usuario t ON p.tipo_usuario_ID = t.ID";
+        $join ="( permissao as p LEFT JOIN permissao_tipo as pt 
+                ON p.ID = pt.permissao_ID ) LEFT JOIN tipo_usuario as t ON pt.tipo_usuario_ID = t.ID ";
         $result = $this->dataBase->query("SELECT (permissao) FROM $join WHERE t.tipo = '$tipoUsuario'");
         $array = $result->fetch_all(MYSQLI_ASSOC);
         return $array;
@@ -76,7 +77,8 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 
     function asPermissao($tipo, $permissao)
     {
-        $join = "permissao p LEFT JOIN tipo_usuario t ON p.tipo_usuario_ID = t.ID";
+        $join ="( permissao as p LEFT JOIN permissao_tipo as pt 
+                ON p.ID = pt.permissao_ID ) LEFT JOIN tipo_usuario as t ON pt.tipo_usuario_ID = t.ID ";
         $result = $this->dataBase->query("SELECT (permissao) FROM $join WHERE p.permissao = '$permissao' AND t.tipo = '$tipo' ");
 
         if ($result->num_rows > 0) {

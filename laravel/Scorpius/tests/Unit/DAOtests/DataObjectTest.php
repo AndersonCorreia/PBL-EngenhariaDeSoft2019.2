@@ -15,7 +15,7 @@ class DataObjectTest extends TestCase
 
     public static function setUpBeforeClass(): void{
         
-        self::$object = new Instituicao("colegio x", "diretor", "endereço", "96A", "Feira de Santana", "BA",
+        self::$object = new Instituicao("colegio x", "diretor", "endereço99", "96A", "Feira de Santana", "BA",
                                         "44999000","tel", "federal");
         self::$dao = new DAO();
         self::$dao->INSERT(self::$object);
