@@ -7,10 +7,12 @@ use App\Model\Users\Usuario;
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe pessoa
- * e todas as subclasses.
  */
 class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 {
+    public function __Construct(){
+        parent::__Construct("usuario");
+    }
 
     function INSERT($pessoa): bool
     {
@@ -29,13 +31,6 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         return $resultado;
     }
 
-    function DELETE($pessoa): bool
-    {
-    }
-    function SELECT_ALL(String $table = "usuario")
-    {
-        return parent::SELECT_ALL($table); // inves de apenas retorna criar os objetos da classe
-    }
     /**
      * Seleciona o ID do usuario com o nome passado, caso exista.
      * @param [string] $nome nome do usuario

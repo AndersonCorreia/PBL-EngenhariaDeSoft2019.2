@@ -2,10 +2,9 @@
 
 namespace App\Model;
 
-/*use App\Model\Users\Professor_instituicao;*/ //nao entendi mto bem o que essa classe estava fazendo antes
-use App\DB\AgendamentoDAO;
+use App\DB\AgendamentoInstitucionalDAO;
 
-class Agendamento extends \App\DB\interfaces\DataObject 
+class AgendamentoInstitucional extends \App\DB\interfaces\DataObject 
 {
 	private $visita;
 	private $data;
@@ -16,12 +15,11 @@ class Agendamento extends \App\DB\interfaces\DataObject
 	private $agendamentoDAO;
 
 	public function __Construct(){
-		$this->agendamentoDAO = new AgendamentoDAO();
+		$this->agendamentoDAO = new AgendamentoInstitucionalDAO();
 	}
 
 	public function novoAgendamento($dados): Agendamento
     {
-        $this->turma = $dados['turma'];
         $this->visita = $dados['visita'];
 		$this->data = $dados['data'];
 		$this->exposicao = $dados['exposicao'];
@@ -33,7 +31,7 @@ class Agendamento extends \App\DB\interfaces\DataObject
 	
 	protected function save()
     {
-        (new \app\DB\AgendamentoDAO)->UPDATE($this);
+        (new \app\DB\AgendamentoInstitucionalDAO)->UPDATE($this);
 	}
 
 	public function setID($ID)
@@ -105,8 +103,4 @@ class Agendamento extends \App\DB\interfaces\DataObject
     {
         return $this->turmaID;
     }
-	
-    /*protected function save(){
-		(new InstituicaoDAO)->UPDATE($this);
-	}*/ //na classe so tinha essa funcao
 }

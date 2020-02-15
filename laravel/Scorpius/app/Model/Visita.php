@@ -13,9 +13,9 @@ class Visita extends \App\DB\interfaces\DataObject {
     private static $btnClasses = ["disponivel" => "btn-success", "indisponivel" => "btn-warning", "proprio" => "btn-primary"];
     private static $abrevDia = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
     private static $mes = ["Janeiro", "Fevereiro", "Março", "Abril","Maio", "Junho", "Julho",
-                    "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+                            "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                     
-    public function __Construct(\DateTime $data, string $turno, string $status, Agendamento $agend=null, Empregado $acomp=null){
+    public function __Construct(\DateTime $data, string $turno, string $status, AgendamentoInstitucional $agend=null, Empregado $acomp=null){
         $this->Data = $data;
         $this->Turno = $turno;
         $this->Status = $status;
@@ -144,7 +144,7 @@ class Visita extends \App\DB\interfaces\DataObject {
     }
 
     protected function save(){
-		//(new InstituicaoDAO)->UPDATE($this);
+		(new VisitaDAO)->UPDATE($this);
 	}
 
     /**

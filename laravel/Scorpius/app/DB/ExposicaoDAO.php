@@ -5,6 +5,9 @@ use App\Model\Exposicao;
 
 class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
 {
+    public function __Construct(){
+        parent::__Construct("exposicao");
+    }
 
     function INSERT($exposicao): bool
     {
@@ -44,13 +47,6 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
         return $resultado;
     }
 
-    function DELETEbyID($id)
-    {
-        $sql = "DELETE FROM exposicao WHERE id = $id ";
-        $resultado = $this->dataBase->query($sql);
-        return $resultado;
-    }
-
     function SELECTbyID($id): array
     {
 
@@ -66,12 +62,5 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
         }
 
         return $registros;
-    }
-    function SELECT_ALL(String $table = "exposicao")
-    {
-        return parent::SELECT_ALL($table);
-    }
-    function DELETE($instituicao): bool{
-        
     }
 }

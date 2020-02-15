@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DB\PessoaDAO;
-use App\Model\agendamento;
+use App\Model\AgendamentoInstitucional;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class UserController extends Controller{   
@@ -64,7 +64,7 @@ class UserController extends Controller{
     public function agendamento(){
         //para testes
         $visitas= [];
-        $agen = new \App\Model\Agendamento();
+        $agen = new \App\Model\AgendamentoInstitucional();
         $visitas[] = new \App\Model\Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
@@ -106,7 +106,7 @@ class UserController extends Controller{
     public function agendamentoIndividual(){
         //para testes
         $visitas= [];
-        $agen = new \App\Model\Agendamento();
+        $agen = new \App\Model\AgendamentoInstitucional();
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
         $visitas[] = new \App\Model\Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
@@ -145,7 +145,7 @@ class UserController extends Controller{
     public function agendamentoNoturno(){
         //para testes
         $visitas= [];
-        $agen = new \App\Model\Agendamento();
+        $agen = new \App\Model\AgendamentoInstitucional();
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
         $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "noite", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);

@@ -5,6 +5,11 @@ namespace App\DB;
 use App\Model\Users\Usuario;
 use \App\DB\interfaces\DataAccessObject;
 class UsuarioDAO extends DataAccessObject{
+
+    public function __Construct(){
+        parent::__Construct("usuario");
+    }
+
     function INSERT($usuario): bool
     {
         $nome = $usuario->getNome();
@@ -61,7 +66,6 @@ class UsuarioDAO extends DataAccessObject{
     }
     function UPDATE(object $object): bool{}
     
-    function DELETE(object $object): bool{}
     function UPDATEATIVO($email): bool
     {
         $sql = "UPDATE usuario SET ativo = 1 WHERE email='$email'";

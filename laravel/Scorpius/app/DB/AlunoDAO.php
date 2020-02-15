@@ -7,7 +7,11 @@ use PhpParser\Node\Expr\Cast\Bool_;
 
 class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
 
-    function INSERT($aluno): bool{
+    public function __Construct(){
+        parent::__Construct("aluno");
+    }
+
+    public function INSERT($aluno): bool{
         $nome = $aluno->getNome();
         $idade = $aluno->getIdade();
         $turma_ID = $aluno->getTurma();
@@ -28,6 +32,7 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
         WHERE ID = $aluno->getID()";
         return $this->dataBase->query($sql);
     }
+
     public function UPDATE_NOME_ALUNO($aluno_ID, $novoNome): bool
     {
         $sql = "UPDATE aluno 
@@ -49,20 +54,9 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
     {
         return $this->dataBase->query("DELETE FROM aluno WHERE ID = $aluno_ID");
     }
-    public function DELETE($aluno): bool
-    {
-        return $this->DELETEbyID($aluno->getID());
-    }
 
-    public function DELETEbyID($id)
-    {
-        return $this->dataBase->query("DELETE FROM aluno WHERE ID = $id");
-    }
-    function SELECT_ALL(String $table = "aluno")
-    {
-        return parent::SELECT_ALL($table);
-    }
     public function UPDATE($aluno): bool
     {
+        return $this->UPDATE_ALUNO($aluno);
     }
 }
