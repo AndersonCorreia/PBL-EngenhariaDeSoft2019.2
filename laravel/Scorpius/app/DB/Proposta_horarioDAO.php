@@ -46,15 +46,34 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         throw new \Exception("Nenhum estagiario encontrado");
     }
 
-    function salvaHorarioEstagiario($id, $dia, $turno){
-        $sql = "INSERT IGNORE INTO horario_estagiario(dia_semana, turno, estagiario_usuario_ID) VALUES (?, ?, ?)";
+    /**
+     * Deletar uma horario de estagiario do banco com base no ID
+     * @param $id ID da estagiario;
+     * @return boolean true caso operação ocorra com sucesso, caso contrário retorna false;
+     */
+    function DELETEbyID($id){
+        $sql = "DELETE FROM horario_estagiario WHERE estagiario_usuario_ID = ?";
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("sss", $dia, $turno,$id);
-        $result = $stmt->execute();
-        if($result){
-            return $result; 
+        $result = $stmt->bind_param("s",$id);
+        if($stmt->execute()){
+            $stmt->close();
+            return true;
+        }else{
+            throw new \Exception("Erro ao deletar horário");
         }
-        throw new \Exception("Erro ao inserir");
+    }
+
+    function salvaHorarioEstagiario($id, $dia, $turno){
+            $sql = "INSERT IGNORE INTO horario_estagiario(dia_semana, turno, estagiario_usuario_ID) VALUES (?, ?, ?)";
+            $stmt = $this->dataBase->prepare($sql);
+            $stmt->bind_param("sss", $dia, $turno,$id);
+            $result = $stmt->execute();
+            if($result){
+                return $result; 
+            }
+            throw new \Exception("Erro ao inserir horário");
+        
+        
     }
 
 
