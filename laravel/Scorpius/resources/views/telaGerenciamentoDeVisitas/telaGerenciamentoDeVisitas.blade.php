@@ -1,61 +1,50 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Gerenciar Visitas')
+@section('title', 'Gerenciar Visitas Agendadas')
 
 @section('conteudo')
 
-
-<h2>BEM VINDO, FUNCIONÁRIO</h2>
 <div class="form-row col-msm">
     <div class="form-group col-sm-7 d-block">
-        <h3>CRONOGRAMA DE VISITAS PROGRAMADAS</h3>
-        <h4>Agendamento Semanal</h4>
+        <h5>Cronograma de Visitas Programadas</h5>
         <table class="table table-hover">
             <thead>
-                <tr class="table-primary">
-                    <th scope="col">&nbsp;</th>
-                    <th scope="col">Manhã</th>
-                    <th scope="col">Tarde</th>
-                    <th scope="col">Noite</th>
+            <tr class="table-primary">
+                    <th scope="col">Turno/Dia</th>
+                    <th scope="col">Segunda</th>
+                    <th scope="col">Terça</th>
+                    <th scope="col">Quarta</th>
+                    <th scope="col">Quinta</th>
+                    <th scope="col">Sexta</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row" class="table-secondary">Segunda</th>
+                    <th scope="row" class="table-secondary">Manhã</th>
                     <td id="segundaManha"></td>
-                    <td id="segundaTarde"></td>
-                    <td id="segundaNoite"></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="table-secondary">Terça</th>
                     <td id="tercaManha"></td>
-                    <td id="tercaTarde"></td>
-                    <td id="tercaNoite"></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="table-secondary">Quarta</th>
                     <td id="quartaManha"></td>
-                    <td id="quartaTarde"></td>
-                    <td id="quartaNoite"></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="table-secondary">Quinta</th>
                     <td id="quintaManha"></td>
-                    <td id="quintaTarde"></td>
-                    <td id="quintaNoite"></td>
+                    <td id="sextaManha"></td>
                 </tr>
                 <tr>
-                    <th scope="row" class="table-secondary">Sexta</th>
-                    <td id="sextaManha"></td>
+                    <th scope="row" class="table-secondary">Tarde</th>
+                    <td id="segundaTarde"></td>
+                    <td id="tercaTarde"></td>
+                    <td id="quartaTarde"></td>
+                    <td id="quintaTarde"></td>
                     <td id="sextaTarde"></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-secondary">Noite</th>
+                    <td id="segundaNoite"></td>
+                    <td id="tercaNoite"></td>
+                    <td id="quartaNoite"></td>
+                    <td id="quintaNoite"></td>
                     <td id="sextaNoite"></td>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div class="form-group col-sm-5">   
-        <h3>LISTA E ESPERA</h3>
-        <textarea class="form-control" id="Textarea" rows="15" disabled></textarea>
     </div>
 </div>
 <script>
@@ -63,13 +52,10 @@
 
 </script>
 <style>
-    h3{
-        margin: 50px 0px 20px 0px;
-    }
-    h4 {
+    h5 {
         display: block;
-        text-align: center;
-        margin: 50px 0px 20px 0px;
+    
+        margin: 10px 0px 10px 5px;
     }
 
     table {
@@ -78,10 +64,10 @@
         margin-top: -8px;
     }
 
+    /*Organização das linhas da tabela*/
     td {
-
         border-left-width: 0;
-        min-width: 120px;
+        min-width: 190px;
         height: 100px;
     }
 

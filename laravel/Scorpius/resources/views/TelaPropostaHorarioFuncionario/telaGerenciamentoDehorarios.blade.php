@@ -51,6 +51,20 @@
         </div>
     </div>
 
+    <div class="row mb-1">
+        <div class="col-sm-12">
+            <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Observações do Estagiário </h4>
+                    <h7 class="card-subtitle mb-2 text-muted">Título da Mensagem</h7>
+                    <p class="card-text"> Corpo da Mensagem. Avisos, comunicados, observações e/ou mensagens enviadas pelo Estagiário.
+                    Referem-se ao conteúdo da Guia de Matrícula anexa em "Download".
+                    Consulte o Estagiário para demais questionamentos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="calendario">
     <h5>Cronograma Semanal do Semestre</h5>
     <table class="table table-hover">
@@ -66,29 +80,29 @@
                 </tr>
             </thead>
             <tbody >
-                <tr class="manhã">
+                <tr class="manha">
                     <th scope="row" class="table-secondary">Manhã</th>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="segunda" segunda></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="terça" terca></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quarta" quarta></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quinta" quinta></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="sexta" sexta></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="segundaManha" segunda></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="tercaManha" terca></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quartaManha" quarta></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quintaManha" quinta></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="sextaManha" sexta></button></td>
                 </tr>
                 <tr class="tarde">
                     <th scope="row" class="table-secondary">Tarde</th>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="segunda" segunda></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="terça" terca></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quarta" quarta></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quinta" quinta></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="sexta" sexta></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="segundaTarde" segunda></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="tercaTarde" terca></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quartaTarde" quarta></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quintaTarde" quinta></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="sextaTarde" sexta></button></td>
                 </tr>
                 <tr class="noite">
                     <th scope="row" class="table-secondary">Noite</th>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="segunda" segunda></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="terça" terca></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quarta" quarta></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quinta" quinta></button></td>
-                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="sexta" sexta></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="segundaTarde" segunda></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="tercaTared" terca></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quartaTarde" quarta></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="quintaTarde" quinta></button></td>
+                    <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false" value="sextaTarde" sexta></button></td>
                 </tr>
             </tbody>
         </table>
@@ -294,7 +308,7 @@
         padding: 0px 30px 10px 30px;
     }
     .calendario{
-        padding:20px 30px 0px 0px ;
+        padding:20px 2px 0px 0px ;
     }
 
     .download {
@@ -348,7 +362,7 @@
 
     /*Posição do botão do download */
     .input-group-append{
-        padding: 0px 50px 0px 50px;
+        padding: 0px 100px 0px 50px;
         display: flex;
         flex-direction:column;
         align-items: center;
