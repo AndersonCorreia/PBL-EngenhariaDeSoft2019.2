@@ -92,6 +92,9 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         $sql = "SELECT * FROM turma WHERE professor_ID = $professor_ID";
         $resultado = $this->dataBase->query($sql);
         $row = $resultado; //$resultado->fetch_assoc();
+        if($resultado->num_rows == 0){
+            Throws (new \Exceptions\NenhumaTurmaCadastradaException());
+        }
         $rowAlunos = new AlunoDAO;
         $alunos = array();
 

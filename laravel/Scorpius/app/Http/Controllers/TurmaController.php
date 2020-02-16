@@ -116,4 +116,19 @@ class TurmaController extends Controller
         $turma->cadastrarTurma($alunos);
         return redirect()->route('turma.index')->with('success', 'Turma cadastrada com sucesso!');
     }
+
+    /**
+     * Listar as turmas que são de um determinado professor para exibir na tela de agendamento.
+     *
+     * @param [type] $professor_ID id do usuario professor/responsavel
+     * @return array de turmas ou erro
+     */
+    public function listarTurmas(){
+        
+            $professor_ID = session('ID');
+            $turma = new Turma();
+            $turmas = $turma->todasTurmas($professor_ID);
+            return view('telasUsuarios.Agendamentos._includes.formularioAgendamento', $turmas['turmas']); 
+          
+    }
 }
