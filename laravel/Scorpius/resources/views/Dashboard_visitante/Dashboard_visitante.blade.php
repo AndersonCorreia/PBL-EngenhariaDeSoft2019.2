@@ -11,7 +11,7 @@
         .notificacoes{
             border: 1px solid gray;
             border-radius: 5px 5px 5px 5px;
-            padding: 10px;
+            padding: 3px;
             float: left;
         }
         .scroll{
@@ -28,19 +28,19 @@
         .calendario{
             padding: 60px;
         }
-        .coluna_calendario{
-            border: 1px solid gray;
-            border-radius: 5px 5px 5px 5px;
-            padding: 10px;
+        .coluna_calendario{        
             float: middle;
+        }
+        .container-fluid{
+            border-bottom-right-radius: 20px; 
+        border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px;
         }
     </style>
  
     <body>
-        <div class="container-fluid m-0 bg-gray p-4" style="border-bottom-right-radius: 20px; 
-        border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px">
+        <div class="container-fluid m-0 bg-gray p-4">
             <div class = "row notificacoes_agendamentos">
-                <div class = "col-md-5 notificacoes">
+                <div class = "col-md-5 notificacoes pr-5">
                     <div class = "card">
                         <h4>Notificações</h4>
                         <div class = "card scroll">
@@ -56,18 +56,7 @@
                     <div class = "card">
                         <h4>Agendamentos</h4>
                         <div class = "card scroll">
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Colégio y, 18 DEZ, 2020 (noite) - Aguardando confirmação<br>Exposição x, 30 alunos</label>
-                            </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Colégio y, 18 DEZ, 2020 (noite) - Aguardando confirmação<br>Exposição x, 30 alunos</label>
-                            </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Colégio y, 18 DEZ, 2020 (noite) - Aguardando confirmação<br>Exposição x, 30 alunos</label>
-                            </div>
+                           {{--@include('Dashboard_visitante._includes.agendamento')--}} 
                         </div>
                     </div>
                 </div>
@@ -75,7 +64,9 @@
             &nbsp;
             <div class = "row calendario">
                 <div class = "col-md-10 coluna_calendario"></div>
-                    <div id = "calendar"></div>
+                    <div id = "calendar">
+                    @include('Dashboard_visitante._includes.calendar')
+                    </div>
 
             </div>
         </div>
