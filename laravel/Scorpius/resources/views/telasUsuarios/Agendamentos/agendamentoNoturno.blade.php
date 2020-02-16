@@ -44,12 +44,18 @@ function adicionar(){
      $('#dados-visitantes-campos').append(element);
 
 }
-function remover(){
-    if($('.box').length > 1){
-        $('.box:last').remove();
+// function remover(){
+//     if($('.box').length > 1){
+//         $('.box:last').remove();
+//     }
+// }
+$('form').on('click', '.btn-remover', function(e){
+    e.preventDefault();
+    if ($('.box').length > 1){
+        $(this).parents('.box').remove();
     }
-}
+ });
 $('#btn-adicionar').on("click", adicionar);
-$('#btn-remover').on("click", remover);
+// $('#btn-removers').on("click", remover);
 </script>
 @endsection

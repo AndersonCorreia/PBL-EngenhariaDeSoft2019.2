@@ -6,13 +6,13 @@ use PHPUnit\Framework\TestCase;
 
 require_once __DIR__."/../../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php";
 use App\model\Visita;
-use App\model\Agendamento;
+use App\model\AgendamentoInstitucional;
 
 class VisitaTest extends TestCase {
 
     public function test_preencherArrayForCalendario(){
         $visitas= [];
-        $agen = new Agendamento();
+        $agen = new AgendamentoInstitucional();
         $visitas[] = new Visita( new \DateTime("27-01-2020"), "manha", "realizada");
         $visitas[] = new Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
         $visitas[] = new Visita( new \DateTime("30-01-2020"), "tarde", "realizada");

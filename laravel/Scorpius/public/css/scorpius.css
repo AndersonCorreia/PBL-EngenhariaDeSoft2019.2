@@ -21,6 +21,18 @@
     border-top-left-radius: 20px;
     background-color: #fff !important;
 }
+.border-all-100 {
+    border-bottom-right-radius: 100px !important;
+    border-bottom-left-radius: 100px !important;
+    border-top-right-radius: 100px !important;
+    border-top-left-radius: 100px !important;
+}
+.border-all-50 {
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+}
 .border-all-30 {
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;

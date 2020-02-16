@@ -4,10 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DB\PessoaDAO;
-use App\Model\agendamento;
+use App\Model\AgendamentoInstitucional;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class UserController extends Controller{   
+
+    function getDashboard(){
+        //para testes
+        $visitas= [];
+        $agen = new \App\Model\Agendamento();
+        $visitas[] = new \App\Model\Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("03-02-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
+        $visitas[] = new \App\Model\Visita( new \DateTime("05-02-2020"), "tarde", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("06-02-2020"), "manha", "realizada");
+        $visitas[] = new \App\Model\Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
+        $array = [];
+
+        foreach ($visitas as $v) {
+            $v->preencherArrayForCalendario($array);
+        }
+
+        $exposicoes = [];
+        for($i=0 ; $i<6 ; $i++){
+            $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
+        }
+        //fim da parte para testes
+        $tipoAtividade ="exposições";
+        $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
+        $variaveis = [
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Agendar Visita",
+            'visitas' => $array,
+            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'tipoUserLegenda'=> $institucional,
+            'tipoAtividade' => $tipoAtividade,
+            $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
+        ];
+
+        return view("Dashboard_visitante.Dashboard_visitante",$variaveis);
+    }
 
     /**
      * Função para realizar o login do usuario, preencher a sessão com o ID, nome e Tipo do usuario
@@ -64,7 +106,7 @@ class UserController extends Controller{
     public function agendamento(){
         //para testes
         $visitas= [];
-        $agen = new \App\Model\Agendamento();
+        $agen = new \App\Model\AgendamentoInstitucional();
         $visitas[] = new \App\Model\Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
@@ -106,7 +148,7 @@ class UserController extends Controller{
     public function agendamentoIndividual(){
         //para testes
         $visitas= [];
-        $agen = new \App\Model\Agendamento();
+        $agen = new \App\Model\AgendamentoInstitucional();
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
         $visitas[] = new \App\Model\Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
@@ -145,7 +187,7 @@ class UserController extends Controller{
     public function agendamentoNoturno(){
         //para testes
         $visitas= [];
-        $agen = new \App\Model\Agendamento();
+        $agen = new \App\Model\AgendamentoInstitucional();
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
         $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "noite", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);

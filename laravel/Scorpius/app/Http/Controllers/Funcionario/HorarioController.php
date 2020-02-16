@@ -33,11 +33,19 @@ class HorarioController extends Controller{
     }
 
     public function enviaHorario(Request $req){
-        $DAO = new Proposta_horarioDAO();
+       $DAO = new Proposta_horarioDAO();
         $horarios = $req->horario_definitivo; 
-        foreach($horarios as $valor){
-                $DAO->salvaHorarioEstagiario($req->ID ,$valor['dia'],$valor['turno']);
-        }
-        return "true";
+        $result;
+        if(isset($horarios)){
+            $result = $DAO->DELETEbyID($req->ID);
+            if($result){
+                foreach($horarios as $valor){
+                    $result = $DAO->salvaHorarioEstagiario($req->ID ,$valor['dia'],$valor['turno']);
+                }
+            }
+        }else{
+            $DAO->DELETEbyID($req->ID);
+        } 
+        
     }
 }

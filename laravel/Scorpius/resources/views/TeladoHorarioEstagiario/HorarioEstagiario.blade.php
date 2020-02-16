@@ -16,183 +16,153 @@
         padding: 5px;
     }
 </style>
-<div class="container-fluid m-0 bg-white p-4" style="border-bottom-right-radius: 20px; 
-border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px">
-    <h3>Minha Proposta de Horário</h3>
-    <br>
+<div class="scorpius-border container-fluid m-0 p-4">
+    <p class="h3">Minha proposta de horário</p>
 
-    <div class="user_input_forms">
-        <form action="{{ route('HorarioEstagiario.enviarHorario') }}" method="POST">
-            {{csrf_field()}}
+    <form action="{{ route('HorarioEstagiario.enviarHorario') }}" method="POST">
+        {{csrf_field()}}
 
-            <div class="guia">
-                <span class="badge badge-pill badge-secondary">
-                    <h4>Guia de Matrícula</h4>
-                </span>
-                <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
-                <input name="guia" type="file" />
-                <br><br><br>
-            </div>
-            <div class="container-fluid shadow p-4" style="border-bottom-right-radius: 20px; 
-            border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px">
-                <div class="mb-3">
-                    <p class="h3 float-left">Proposta de horário</p>
-    
+        <div id="guia" class="scorpius-border-shadow p-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="h5">Guia de matrícula: </p>
                 </div>
-                <div class="border-bottom mb-1">- </div>
-                <div class="calendario mt-3">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <p class="h5">Dia / Turno</p>
-                        </div>
-                        <div class="col-md-3">
-                            <p class="h5">Manhã</p>
-                        </div>
-                        <div class="col-md-3">
-                            <p class="h5">Tarde</p>
-                        </div>
-                        <div class="col-md-3">
-                            <p class="h5">Noite</p>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-3">
-                            <p class="h5">Segunda</p>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="seg-manha" autocomplete="off" type="checkbox">
-                                08:00 - 12:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="seg-tarde" autocomplete="off" type="checkbox">
-                                14:00 - 18:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="seg-noite" autocomplete="off" type="checkbox">
-                                18:00 - 22:00
-                            </label>
-                        </div>
-                    </div>
-    
-                    <div class="row mt-1">
-                        <div class="col-md-3">
-                            <p class="h5">Terça</p>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="ter-manha" autocomplete="off" type="checkbox">
-                                08:00 - 12:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="ter-tarde" autocomplete="off" type="checkbox">
-                                14:00 - 18:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="ter-noite" autocomplete="off" type="checkbox">
-                                18:00 - 22:00
-                            </label>
-                        </div>
-                    </div>
-    
-                    <div class="row mt-1">
-                        <div class="col-md-3">
-                            <p class="h5">Quarta</p>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="qua-manha" autocomplete="off" type="checkbox">
-                                08:00 - 12:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="qua-tarde" autocomplete="off" type="checkbox">
-                                14:00 - 18:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="qua-noite" autocomplete="off" type="checkbox">
-                                18:00 - 22:00
-                            </label>
-                        </div>
-                    </div>
-    
-    
-                    <div class="row mt-1">
-                        <div class="col-md-3">
-                            <p class="h5">Quinta</p>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="qui-manha" autocomplete="off" type="checkbox">
-                                08:00 - 12:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="qui-tarde" autocomplete="off" type="checkbox">
-                                14:00 - 18:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="qui-noite" autocomplete="off" type="checkbox">
-                                18:00 - 22:00
-                            </label>
-                        </div>
-    
-                    </div>
-                    <div class="row mt-1">
-                        <div class="col-md-3">
-                            <p class="h5">Sexta</p>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="sex-manha" autocomplete="off" type="checkbox">
-                                08:00 - 12:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="sex-tarde" autocomplete="off" type="checkbox">
-                                14:00 - 18:00
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="btn btn-outline-secondary btn-lg">
-                                <input name="sex-noite" autocomplete="off" type="checkbox">
-                                18:00 - 22:00
-                            </label>
-                        </div>
-    
-                    </div>
+                <div class="col-md-9">
+                    <input name="guia" type="file"/>
                 </div>
             </div>
-            <br> <br>
-
-            <div class="form-group">
-                <label for="Observacao" placeholder="Descrição"><b>Observações:</b></label>
-                <!--Caixa de texto de obsservação-->
-                <textarea class="form-control" name="observacao" rows="3"></textarea>
+        </div>
+        <div class="mt-3 container-fluid scorpius-border-shadow p-4">
+            <div class="mb-3">
+                <p class="h3 float-left">Proposta de horário</p>
             </div>
-            <button type="submit" class="btn btn-success float-right" style="border-bottom-right-radius: 20px; 
-                border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px">
-                Enviar
+            <div class="mb-1">-</div>
+            <div id="calendario" class="p-2">
+                <div class="row">
+                    <div class="col-md-2 p-0"></div>
+                    <div class="col-md-2 p-0">
+                        <p class="h5">Segunda</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="h5">Terça</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="h5">Quarta</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="h5">Quinta</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="h5">Sexta</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-2">
+                        <p class="h6">08:00 - 12:00</p>
+                    </div>
+                    <div class="col-md-2 0-0">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="seg-manha" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="ter-manha" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="qua-manha" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="qui-manha" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="sex-manha" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <p class="h6">14:00 - 18:00</p>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="seg-tarde" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="ter-tarde" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="qua-tarde" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="qui-tarde" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="sex-tarde" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <p class="h6">18:00 - 22:00</p>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="seg-noite" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="ter-noite" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="qua-noite" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="qui-noite" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn btn-outline-secondary btn-lg">
+                            <input name="sex-noite" autocomplete="off" class="p-0" type="checkbox">
+                        </label>
+                    </div>
+                </div>
+                <div class="border-bottom mt-1">.</div>
+                <div class="mt-3">
+                    <label for="observacoes" class="ml-1 float-left">
+                        <p class="h5 float-left">Observações</p>
+                    </label>
+                    <textarea placeholder="Digite aqui observações sobre seu horário..." maxlength="100"
+                        id="observacoes" class="form-control" name="observacao" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <button class="btn btn-success float-right border-all-100">
                 <i class="fa fa-send"></i>
+                Enviar
             </button>
-            <!--botao p/ enviar os dados-->
-            {{-- <input type="submit" value="Enviar Proposta" name="proposta" class="submit_button">  <!--botao p/ enviar os dados--> --}}
-        </form>
+        </div>
+    </form>
 
-    </div>
-    @endsection
+</div>
+@endsection

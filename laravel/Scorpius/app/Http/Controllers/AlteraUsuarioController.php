@@ -36,11 +36,19 @@ class AlteraUsuarioController extends Controller
      */
     public function store(Request $request)
     {//request são os dados do formulario
-        $email = $request->email;
-        $nome = $request->nome;
-        $telefone = $request->telefone;
-        $senha_nova = $request->senha_nova;
-        $senha_antiga = $request->senha_antiga;
+        $email = $_POST['email'];
+        $nome = $_POST['nome'];
+        $telefone = $_POST['telefone'];
+        $senha_nova = $_POST['senha_nova'];
+        $senha_antiga = $_POST['senha_antiga'];
+
+        while(1){
+
+            $variavel = 
+            $variavel = 
+            $variavel = 
+
+        }
 
 //tem que fazer a condicional se a senha antiga estiver errada não poder fazer a alteração
         //if($senha_antiga for diferente da senha do bd)

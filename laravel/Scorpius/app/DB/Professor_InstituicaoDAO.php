@@ -9,6 +9,10 @@ use App\Model\Professor_Instituicao;
  */
 class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
 
+    public function __Construct(){
+        parent::__Construct("professor_instituicao");
+    }
+
     function INSERT($Professor_instituicao): bool{
         $p_id = $Professor_instituicao->getProfessor()->getID();
         $i_id = $Professor_instituicao->getInstituicao()->getID();
@@ -71,7 +75,7 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $stmt->execute();
     }
 
-    function SELECTbyID(int $I_id,int $U_id, bool $asArray=true, $filtrar_ativo=true){
+    function SELECTbyInstituicaoID_UserID(int $I_id,int $U_id, bool $asArray=true, $filtrar_ativo=true){
         $select = "*";
         $join = "professor_instituicao pi";
         $filtrar = $filtrar_ativo ? "AND pi.ativo = 1" : "";
@@ -87,11 +91,6 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
             return $p_i;
         }
         throw new \Exception("Nenhum registro foi encontrado");
-    }
-
-
-    function SELECT_ALL(String $table="professor_instituicao"){
-        return parent::SELECT_ALL($table);
     }
 
     /**
@@ -112,17 +111,5 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
             return $registros;
         } 
         throw new \App\Exceptions\NenhumaInstCadastradaException();
-        
-    }
-    /**
-     * Deletar um elemento da tabela professor_instituicao
-     *
-     * @param integer $id da tabela
-     * @return result
-     */
-    function DELETEbyID(int $id){
-        $sql = "DELETE FROM professor_instituicao WHERE ID = $id ";
-        $result = $this->dataBase->query($sql);
-        return $result;
     }
 }

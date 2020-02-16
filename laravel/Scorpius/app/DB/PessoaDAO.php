@@ -7,10 +7,12 @@ use App\Model\Users\Usuario;
 
 /**
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe pessoa
- * e todas as subclasses.
  */
 class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 {
+    public function __Construct(){
+        parent::__Construct("usuario");
+    }
 
     function INSERT($pessoa): bool
     {
@@ -29,13 +31,6 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         return $resultado;
     }
 
-    function DELETE($pessoa): bool
-    {
-    }
-    function SELECT_ALL(String $table = "usuario")
-    {
-        return parent::SELECT_ALL($table); // inves de apenas retorna criar os objetos da classe
-    }
     /**
      * Seleciona o ID do usuario com o nome passado, caso exista.
      * @param [string] $nome nome do usuario
@@ -73,7 +68,8 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
      */
     function getPermissoes(string $tipoUsuario): array
     {
-        $join = "permissao p LEFT JOIN tipo_usuario t ON p.tipo_usuario_ID = t.ID";
+        $join ="( permissao as p LEFT JOIN permissao_tipo as pt 
+                ON p.ID = pt.permissao_ID ) LEFT JOIN tipo_usuario as t ON pt.tipo_usuario_ID = t.ID ";
         $result = $this->dataBase->query("SELECT (permissao) FROM $join WHERE t.tipo = '$tipoUsuario'");
         $array = $result->fetch_all(MYSQLI_ASSOC);
         return $array;
@@ -81,7 +77,8 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 
     function asPermissao($tipo, $permissao)
     {
-        $join = "permissao p LEFT JOIN tipo_usuario t ON p.tipo_usuario_ID = t.ID";
+        $join ="( permissao as p LEFT JOIN permissao_tipo as pt 
+                ON p.ID = pt.permissao_ID ) LEFT JOIN tipo_usuario as t ON pt.tipo_usuario_ID = t.ID ";
         $result = $this->dataBase->query("SELECT (permissao) FROM $join WHERE p.permissao = '$permissao' AND t.tipo = '$tipo' ");
 
         if ($result->num_rows > 0) {
@@ -122,7 +119,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         //     $sqlDemanda = "UPDATE demanda_web SET guia = '$guia', observacao = '$observacao' WHERE ID = $existeDWED";
         //     $this->dataBase->query($sqlDemanda);
             
-        //     if (!(empty($demandaWeb['horaros']))) {
+        //     if (!(empty($demandaWeb['horarios']))) {
         //         foreach ($demandaWeb['horarios'] as $horarios) {
         //             foreach ($horarios as $horario) {
         //                 $sql = "INSERT INTO horario_estagiario (dia_semana, turno, demanda_web_ID) VALUES (

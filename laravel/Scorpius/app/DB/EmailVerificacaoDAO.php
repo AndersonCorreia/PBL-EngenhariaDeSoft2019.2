@@ -7,6 +7,10 @@ use PhpParser\Node\Expr\Cast\Bool_;
 
 class EmailVerificacaoDAO extends \App\DB\interfaces\DataAccessObject{
 
+    public function __Construct(){
+        parent::__Construct("email_verificacao");
+    }
+
     function INSERT($email_verificacao): bool{
         $usuario_email = $email_verificacao->getUsuario_email();
         $token = $email_verificacao->getToken();
@@ -37,16 +41,6 @@ class EmailVerificacaoDAO extends \App\DB\interfaces\DataAccessObject{
     {
         return $this->dataBase->query("DELETE FROM email_verificacao WHERE usuario_email = '$email'");;
     }
-    function SELECT_ALL(String $table = "email")
-    {
-        return parent::SELECT_ALL($table);
-    }
-
-    function UPDATE(object $object): bool{}
     
-    function DELETE(object $object): bool{}
-
-    function getLastID(): int{
-        return $this->dataBase->insert_id;
-    }
+    function UPDATE(object $object): bool{}
 }

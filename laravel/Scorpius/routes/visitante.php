@@ -14,3 +14,6 @@
  //Rotas para agendamento de uma individual
  Route::get('/agendamento/atividades', 'UserController@agendamentoIndividual')->name('AgendarAtividade.show');
  Route::post('/agendamento/atividades', 'UserController@agendarContaIndividual')->name('AgendarAtividade.post');
+
+ //Rota dashboard visitante
+ Route::get('/visitante/dashboard', 'UserController@getDashboard')->name('dashboard.show');

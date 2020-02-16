@@ -35,21 +35,26 @@
     <div class="content bg-light">
         <div id="menuTopo" class="d-flex m-0 pt-2 w-100 h-auto border-bottom">
                 <ul class=" w-100">
-                    <li id="menuTopoTitle" class="ml-4 pt-1 pb-0 my-0 float-left w-50">
+                    <li id="menuTopoTitle" class="ml-4 pt-1 pb-0 my-0 float-left">
                         <h3>@yield('title', $paginaAtual ?? 'Pagina do Visitante')</h3>
                     </li>
-                    <li class="mr-3 float-right w-auto">
-                        <a href="#" class="mr-5">
+                    <li class="mr-3 col float-right text-center w-auto font-weight-bold">
+                        <a href="#" class="mr-2 m-0">
                             <img class="rounded-circle" height=40vh src="{{ asset("img/user-default-img.png")}}">
+                            <div class="col-6 m-0 p-0 float-right">
                             <span class="ml-1">{{session("nome") ?? 'Larissa'}}</span>
+                            <small class="float-buttom">{{session('tipo')}}</small>
+                            </div>
                         </a> 
-                        <a href={{route("logout")}} title="Sair"><img alt="exit-icon" class="rounded-lg" width=40vw src="{{ asset("img/exit-img.jpg")}}"></a>   
+                        <a href={{route("logout")}} title="Sair"><img alt="exit-icon" class="rounded-lg m-0 p-0" width=40vw src="{{ asset("img/exit-img.jpg")}}"></a>   
                     </li>
                 </ul>
         </div>
         {{--<hr class="m-0 bg-primary">--}}
         <div class="p-lg-4 pt-4 container">
-            @yield('conteudo')
+           <div class="scorpius-border m-0 p-0">
+                @yield('conteudo')
+           </div>
         </div>
     </div>
 </div>
