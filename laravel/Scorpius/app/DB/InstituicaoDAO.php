@@ -7,6 +7,10 @@ use App\Model\Instituicao;
  */
 class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
 
+    public function __Construct(){
+        parent::__Construct("instituicao");
+    }
+
     function INSERT($instituicao): bool{
 
         $nome = $instituicao->getNome(); 
@@ -32,6 +36,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
 
         return $resultado;
     }
+    
     function UPDATE($instituicao): bool{
         $cidade =$instituicao->getCidade();
         $UF = $instituicao->getUF();
@@ -63,22 +68,6 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
        
         $stmt->bind_param("ssssssssi", ...$params);
         
-        return $stmt->execute();
-    }
-
-    function DELETE($instituicao): bool{
-        return $this->DELETEbyID($instituicao->getID());
-    }
-    
-    /**
-     * Deletar uma instituição do banco com base no ID
-     * @param integer $id ID da instiuicao;
-     * @return boolean true caso operação ocorra com sucesso, caso contrário retorna false;
-     */
-    function DELETEbyID(int $id){
-        $sql = "DELETE FROM instituicao WHERE id = ?";
-        $stmt = $this->dataBase->prepare($sql);
-        $result = $stmt->bind_param("i",$id);
         return $stmt->execute();
     }
 

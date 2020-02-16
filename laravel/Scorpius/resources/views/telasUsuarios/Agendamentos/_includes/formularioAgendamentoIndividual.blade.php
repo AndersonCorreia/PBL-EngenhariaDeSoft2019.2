@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="ml-3 mt-2">
-            <button id="btn-adicionar" type="button" class="btn btn-success btn_add">
+            <button id="btn-adicionarInd" type="button" class="btn btn-success btn_add">
                 <i class="fas fa-plus    "></i>
                 Adicionar
             </button>

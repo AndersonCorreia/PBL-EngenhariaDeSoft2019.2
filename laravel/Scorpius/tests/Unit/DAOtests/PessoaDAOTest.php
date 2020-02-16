@@ -120,7 +120,7 @@ class PessoaDAOTest extends TestCase
         \assertCount(5,$permissoes);
         
         $permissoes = self::$DAO->getPermissoes("estagiario");
-        \assertCount(1,$permissoes);
+        \assertCount(2,$permissoes);
     }
 
 }

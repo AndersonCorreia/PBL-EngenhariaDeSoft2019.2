@@ -22,23 +22,23 @@ class AuthorizeAdministrativo{
         $nameRota = \Route::currentRouteName();
         $permissao = $this->RotasPermissoes[$nameRota];
         $DAO = new PessoaDAO();
-        $user = $DAO->SELECTbyID(session("ID",601));//pegando um user visitante por default pra evitar erro
+        $user = $DAO->SELECTbyID(session("ID",901));
         session(['tipo' => $user['tipo'] ]);
 
         if($permissao = $user['tipo'] || $DAO->asPermissao($user["tipo"], $permissao) ){
             return $next($request);
         }
         
-        print_r("            Esse usuario não tem permissão para acessar essa pagina");
-        return $next($request);
+        print_r(" Esse usuario não tem permissão para acessar essa pagina");
+        return $next($request);//temporariamente retorna a tela normalmente
         return redirect()->route('dashboard');
     }
 
     public function setRotasPermissoes(){
         //"estagiario" representa as permissões especificas do estagiario
         $this->RotasPermissoes[ "HorarioEstagiario.show" ] = "estagiario";
-        $this->RotasPermissoes["retornaProposta"]='rota ajax';
-        $this->RotasPermissoes["enviaHorario"]='rota post ajax';
+        $this->RotasPermissoes[ "enviaHorario" ]='designar horários para estagiarios';
+        $this->RotasPermissoes[ "retornaProposta" ]='designar horários para estagiarios';
         $this->RotasPermissoes[ "telaGerenciamentoDehorarios.show" ] = 'designar horários para estagiarios';
         $this->RotasPermissoes[ "retornaProposta" ] = 'designar horários para estagiarios';
         $this->RotasPermissoes[ "telaGerenciamentoDeVisitas.show" ] = 'gerenciamento de visitas';

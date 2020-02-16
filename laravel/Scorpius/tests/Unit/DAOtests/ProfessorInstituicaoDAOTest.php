@@ -83,8 +83,8 @@ class Professor_InstituicaoDAOTest extends TestCase
 
     public static function tearDownAfterClass(): void{
         //apagando os objetos do banco de dados
-        $dados0 =self::$DAO->SELECTbyID(self::$inst0->getID(), 601, true, false);
-        $dados1 =self::$DAO->SELECTbyID(self::$inst1->getID(), 701, true, false);
+        $dados0 =self::$DAO->SELECTbyInstituicaoID_UserID(self::$inst0->getID(), 601, true, false);
+        $dados1 =self::$DAO->SELECTbyInstituicaoID_UserID(self::$inst1->getID(), 701, true, false);
         self::$DAO->DELETEbyID($dados0["ID"]);
         self::$DAO->DELETEbyID($dados1["ID"]);
         self::$instituicaoDAO->DELETE(self::$inst0);

@@ -238,24 +238,39 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `scorpius`.`permissao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`permissao` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `permissao` VARCHAR(40) NOT NULL,
+  `permissao` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`ID`)
+  )
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `scorpius`.`permissao_tipo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`permissao_tipo` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `permissao_ID` INT UNSIGNED NOT NULL,
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_permissao_tipo_usuario1_idx` (`tipo_usuario_ID` ASC),
-  UNIQUE INDEX `permissao_UNIQUE` (`permissao`, `tipo_usuario_ID`),
+  INDEX `fk_permissao1_idx` (`permissao_ID`),
+  UNIQUE INDEX `permissao_tipo_UNIQUE` (`permissao_ID`, `tipo_usuario_ID`),
   CONSTRAINT `fk_permissao_tipo_usuario1`
     FOREIGN KEY (`tipo_usuario_ID`)
     REFERENCES `scorpius`.`tipo_usuario` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_permissao1`
+    FOREIGN KEY (`permissao_ID`)
+    REFERENCES `scorpius`.`permissao` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    )
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`exposicao_agendamento_institucional`

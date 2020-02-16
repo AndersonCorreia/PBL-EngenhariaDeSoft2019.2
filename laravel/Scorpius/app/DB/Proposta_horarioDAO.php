@@ -6,6 +6,11 @@ use App\Model\Instituicao;
  * Classe para fornecer um Objeto de Acesso aos Dados( DAO) relacionados a classe Instituicao.
  */
 class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
+
+    public function __Construct(){
+        parent::__Construct("proposta_horario");
+    }
+
     function INSERT(object $object): bool{
 
     }
@@ -13,10 +18,6 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
    function UPDATE(object $object): bool{
 
    }
-    
-    function DELETE(object $object): bool{
-
-    }
 
     function buscaEstagiarioALL( ){
         $sql = 'SELECT a.nome, a.ID  from estagiario e join usuario a on a.ID = e.usuario_ID';

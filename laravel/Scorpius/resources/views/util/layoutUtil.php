@@ -17,7 +17,7 @@ function getMenuLinksAll(){
         'visitante3'=>      ['link'=>'#' , 'texto'=>'Alterar Meus Dados' ],
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
         'estagiario1'=>     ['link'=>'#' , 'texto'=>'Resumo da Semana' ],
-        'estagiario2'=>     ['link'=>'#' , 'texto'=>'Demanda WEB' ],
+        'demanda web'=>     ['link'=>'#' , 'texto'=>'Demanda WEB' ],
         'realizar check-in'=>                   ['link'=>'#' , 'texto'=>'Check-in' ],
         'designar horários para estagiarios'=>  ['link'=>'#' , 'texto'=>'Horários dos Estagiários' ],
         'gerenciamento de visitas'=>            ['link'=>'#' , 'texto'=>'Gerenciamento de Visitas' ],
@@ -40,10 +40,11 @@ function getMenuLinksAll(){
 function getMenuLinks(){
     $menuLinks= getMenuLinksAll();
     $links= [];
-    $tipoUsuario = session('tipo','institucional');//caso não esteja logado carrega o institucional
+    $tipoUsuario = session('tipo');
 
     $links=[$menuLinks['inicio']];//adcionando o inicio que vale para todos
     if($tipoUsuario=="visitante" || $tipoUsuario=="institucional"){
+
         $links['collapseAgend']=$menuLinks['collapseAgend'];
         $links[]=$menuLinks['visitante1'];
         if( $tipoUsuario=="institucional" ){
@@ -63,7 +64,6 @@ function getMenuLinks(){
         if($tipoUsuario=="estagiario"){
             $links[]=$menuLinks["estagiario0"];
             $links[]=$menuLinks["estagiario1"];
-            $links[]=$menuLinks["estagiario2"];
         }
         $DAO = new App\DB\PessoaDAO;
         $permissoes = $DAO->getPermissoes($tipoUsuario);

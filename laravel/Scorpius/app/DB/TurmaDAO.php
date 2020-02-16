@@ -7,6 +7,10 @@ use App\Model\Aluno;
 
 class TurmaDAO extends \App\DB\interfaces\DataAccessObject
 {
+    public function __Construct(){
+        parent::__Construct("turma");
+    }
+
     public function INSERT_CriarTurma($turma, $alunos)
     {
         $nome = $turma->getNome();
@@ -114,10 +118,7 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         WHERE turma_ID = $turma_ID";
         return $this->dataBase->query($sql);
     }
-    function SELECT_ALL(String $table = "turma")
-    {
-        return parent::SELECT_ALL($table);
-    }
+    
     function DELETE_ALUNObyID($aluno_ID){
         $aluno = new AlunoDAO();
         $aluno->DELETEbyID($aluno_ID);
@@ -126,8 +127,6 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         $aluno = new AlunoDAO();
         $aluno->UPDATE_NOME_ALUNO($aluno_ID, $novoNome);
     }
-    function DELETE($turma): bool
-    { }
     public function INSERT($turma): bool
     { }
     public function UPDATE($turma): bool
