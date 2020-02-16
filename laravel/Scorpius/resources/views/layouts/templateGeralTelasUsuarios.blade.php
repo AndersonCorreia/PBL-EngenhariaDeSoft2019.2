@@ -52,7 +52,9 @@
         </div>
         {{--<hr class="m-0 bg-primary">--}}
         <div class="p-lg-4 pt-4 container">
-            @yield('conteudo')
+           <div class="scorpius-border m-0 p-0">
+                @yield('conteudo')
+           </div>
         </div>
     </div>
 </div>

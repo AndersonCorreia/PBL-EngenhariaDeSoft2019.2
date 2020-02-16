@@ -54,6 +54,19 @@ function adicionar(){
     element.children('.cargo-responsavel').children('input').val('');
     $('#dados-responsavel-campos').append(element);
 }
+function adicionarInd(){
+    var element = $('.box:last').clone();
+    var cont = element.children('.nome-responsavel').children('input').attr('name').replace('responsavel', '');
+    if(cont > 4){
+        return alert('Quantidade máx. de responsáveis atingida');
+    }
+    element.children('.nome-visitante').children('input').attr('name', 'responsavel' + (++cont));
+    element.children('.rg-visitante').children('input').attr('name', 'cargo' + cont);
+    element.children('.nome-visitante').children('input').val('');
+    element.children('.rg-visitante').children('input').val('');
+    $('#dados-visitantes-campos').append(element);
+}
+
 $('form').on('click', '.btn-remover', function(e){
     e.preventDefault();
     if ($('.box').length > 1){
@@ -61,6 +74,7 @@ $('form').on('click', '.btn-remover', function(e){
     }
  });
 $('#btn-adicionar').on("click", adicionar);
+$('#btn-adicionarInd').on("click", adicionarInd);
 // $('.btn-remover').on("click", remover);
 </script>
 
