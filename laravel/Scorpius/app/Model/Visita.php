@@ -15,12 +15,13 @@ class Visita extends \App\DB\interfaces\DataObject {
     private static $mes = ["Janeiro", "Fevereiro", "Março", "Abril","Maio", "Junho", "Julho",
                             "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                     
-    public function __Construct(\DateTime $data, string $turno, string $status, AgendamentoInstitucional $agend=null, Empregado $acomp=null){
+    public function __Construct(\DateTime $data, string $turno, string $status, AgendamentoInstitucional $agend=null, Empregado $acomp=null, int $id=null){
         $this->Data = $data;
         $this->Turno = $turno;
         $this->Status = $status;
         $this->Agendamento = $agend;
         $this->Acompanhante = $acomp;
+        $this->ID = $id;
     }
     
     /**
