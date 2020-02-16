@@ -33,7 +33,7 @@ Route::get('/instituicao/erro','ControlerInstitucional@nenhumaInstituicao')->nam
 /**
  * Rota exibir erro, caso não existam turmas cadastradas.
  */
-Route::get('/turma/erro','ControlerInstitucional@nenhumaInstituicao')->name("errorNenhumaTurma.show");
+Route::get('/turma/erro','ControlerInstitucional@nenhumaTurma')->name("errorNenhumaTurma.show");
 
 /**
  * Rota para editar instituicao.
