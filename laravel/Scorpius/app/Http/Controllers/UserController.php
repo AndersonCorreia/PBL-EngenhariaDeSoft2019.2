@@ -13,7 +13,7 @@ class UserController extends Controller{
     function getDashboard(){
         //para testes
         $visitas= [];
-        $agen = new \App\Model\Agendamento();
+        $agen = new \App\Model\AgendamentoInstitucional();
         $visitas[] = new \App\Model\Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
