@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Instituicao;
+use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
 use App\DB\VisitaDAO;
 use App\Model\AgendamentoInstitucional;
@@ -37,11 +39,17 @@ class UserController extends Controller{
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
+
+        $erro=null;
+        $variaveis=null;
+        $registro=null;
+        $registro = Professor_instituicao::listarInstituicoes(701);
         $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
+            'registros' => $registro,
             'visitas' => $array,
             'legendaCores' => $visitas[0]->getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
