@@ -173,57 +173,20 @@ $(function() {
             sex: []
         };
         
-        // SEGUNDA
-        if ($("#seg-manha").attr("aria-pressed") == "true") {
-            horarios["seg"].push("Manha");
-        }
-        if ($("#seg-tarde").attr("aria-pressed") == "true") {
-            horarios["seg"].push("Tarde");
-        }
-        if ($("#seg-noite").attr("aria-pressed") == "true") {
-            horarios["seg"].push("Noite");
-        }
-        //  TERÇA
-        if ($("#ter-manha").attr("aria-pressed") == "true") {
-            horarios["ter"].push("Manha");
-        }
-        if ($("#ter-tarde").attr("aria-pressed") == "true") {
-            horarios["ter"].push("Tarde");
-        }
-        if ($("#ter-noite").attr("aria-pressed") == "true") {
-            horarios["ter"].push("Noite");
-        }
-        // QUARTA
-        if ($("#qua-manha").attr("aria-pressed") == "true") {
-            horarios["qua"].push("Manha");
-        }
-        if ($("#qua-tarde").attr("aria-pressed") == "true") {
-            horarios["qua"].push("Tarde");
-        }
-        if ($("#qua-noite").attr("aria-pressed") == "true") {
-            horarios["qua"].push("Noite");
-        }
-        // QUINTA
-        if ($("#qui-manha").attr("aria-pressed") == "true") {
-            horarios["qui"].push("Manha");
-        }
-        if ($("#qui-tarde").attr("aria-pressed") == "true") {
-            horarios["qui"].push("Tarde");
-        }
-        if ($("#qui-noite").attr("aria-pressed") == "true") {
-            horarios["qui"].push("Noite");
-        }
-        // SEXTA
-        if ($("#sex-manha").attr("aria-pressed") == "true") {
-            horarios["sex"].push("Manha");
-        }
-        if ($("#sex-tarde").attr("aria-pressed") == "true") {
-            horarios["sex"].push("Tarde");
-        }
-        if ($("#sex-noite").attr("aria-pressed") == "true") {
-            horarios["sex"].push("Noite");
-        }
-        
+        // var hasDemanda = 0;
+        dias = ["seg", "ter", "qua", "qui", "sex"];
+        turnos = ["manha", "tarde", "noite"];
+        dias.forEach(dia => {
+            turnos.forEach(turno => {
+                if ($("#" + dia + '-' + turno).attr("aria-pressed") == "true") {
+                    horarios[dia].push(turno);
+                    // hasDemanda++;
+                }
+            });
+        });
+        // if(hasDemanda < 1){
+        //     horarios = null;
+        // }
         $.ajax({
             url: "{{ route('estagiario.enviarHorario') }}",
             method: "POST",
@@ -235,6 +198,8 @@ $(function() {
             },
             dataType: 'json',
             success: function(data) {
+                // console.log(data);
+                // console.log(typeof(data['success']));
                 if(!(data['success'])){
                     return Swal.fire(
                     "Erro ao enviar a proposta de horário",

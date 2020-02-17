@@ -64,6 +64,8 @@ class horarioEstagiarioController extends Controller
                     $horarios[] = ['Sexta', $horario];
                 }
             }
+        }else{
+            $horarios = array();
         }
         
         if(isset($_POST['observacao'])){
