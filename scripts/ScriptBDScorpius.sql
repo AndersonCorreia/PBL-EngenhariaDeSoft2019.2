@@ -338,8 +338,9 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`estagiario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`estagiario` (
-  `guia_matricula` MEDIUMBLOB NOT NULL,
-  `observacao` VARCHAR(100) DEFAULT NULL,
+  `hasDemanda` TINYINT(1) DEFAULT  0,
+  `guia_matricula` MEDIUMBLOB DEFAULT NULL,
+  `observacao` VARCHAR(80) DEFAULT NULL,
   `usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`usuario_ID`),
   CONSTRAINT `fk_estagiario_usuario1`

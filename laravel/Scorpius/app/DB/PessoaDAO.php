@@ -111,59 +111,35 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
     }
     public function INSERT_horario($id_estagiario, $demandaWeb)
     {
-        // editar proposta
-        // $existeDWED = $this->existeDemanda($id_estagiario);
-        // if ($existeDWED != NULL) {
-        //     $guia = $demandaWeb['guia'];
-        //     $observacao = $demandaWeb['observacao'];
-        //     $sqlDemanda = "UPDATE demanda_web SET guia = '$guia', observacao = '$observacao' WHERE ID = $existeDWED";
-        //     $this->dataBase->query($sqlDemanda);
-            
-        //     if (!(empty($demandaWeb['horarios']))) {
-        //         foreach ($demandaWeb['horarios'] as $horarios) {
-        //             foreach ($horarios as $horario) {
-        //                 $sql = "INSERT INTO horario_estagiario (dia_semana, turno, demanda_web_ID) VALUES (
-        //             '$horario[0]',
-        //             '$horario[1]',
-        //             '$existeDWED'
-                    
-        //         )";
-        //                 $this->dataBase->query($sql);
-        //             }
-        //         }
-        //     }
-        // }
+        if($this->hasDemanda($id_estagiario)){
+            $this->dataBase->query("DELETE FROM horario_estagiario WHERE estagiario_usuario_ID = $id_estagiario");
+        }
         $guia = $demandaWeb['guia'];
         $observacao = $demandaWeb['observacao'];
-        $sqlDemanda = "INSERT INTO demanda_web (guia, observacao, estagiario_usuario_ID) VALUES (
-            '$guia',
-            '$observacao',
-            '$id_estagiario
-        )";
-        $this->dataBase->query($sqlDemanda);
-        $id_demanda = $this->getLastID();
-        if (!(empty($demandaWeb['horaros']))) {
-            foreach ($demandaWeb['horarios'] as $horarios) {
-                foreach ($horarios as $horario) {
-                    $sql = "INSERT INTO horario_estagiario (dia_semana, turno, demanda_web_ID) VALUES (
+        $sqlDemanda = "UPDATE estagiario SET hasDemanda = 1, guia_matricula = '$guia', observacao =  '$observacao'
+        WHERE usuario_ID = $id_estagiario";
+        $demanda = $this->dataBase->query($sqlDemanda);
+        if (!(empty($demandaWeb['horarios']))) {
+            foreach ($demandaWeb['horarios'] as $horario) {
+                    $sql = "INSERT INTO horario_estagiario (dia_semana, turno, estagiario_usuario_ID) VALUES (
                     '$horario[0]',
                     '$horario[1]',
-                    '$id_demanda'
-                    
+                    '$id_estagiario'
                 )";
-                    $this->dataBase->query($sql);
-                }
+                $this->dataBase->query($sql);   
             }
         }
+        return $demanda;
     }
-    public function existeDemanda($id)
+    public function hasDemanda($id)
     {
-        $sql = "SELECT ID FROM demanda_web WHERE estagiario_usuario_ID = $id";
+        $sql = "SELECT hasDemanda FROM estagiario WHERE usuario_ID = $id";
         $result = $this->dataBase->query($sql);
-        if ($result->num_rows >= 1) {
-            return $result->fetch_assoc();
+        $row = $result->fetch_assoc();
+        if ($row['hasDemanda'] == 1) {
+            return true;
         }
 
-        return $result->fetch_assoc();
+        return false;
     }
 }
