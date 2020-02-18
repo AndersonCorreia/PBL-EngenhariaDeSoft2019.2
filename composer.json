@@ -1,8 +1,8 @@
 {
     "scripts": {
-        "serve": "php laravel\\Scorpius\\artisan serve",
-        "testes": "laravel\\Scorpius\\vendor\\bin\\phpunit -c laravel\\Scorpius\\phpunit.xml --testdox --color=auto",
-        "testesUnit": "laravel\\Scorpius\\vendor\\bin\\phpunit -c laravel\\Scorpius\\phpunit.xml --testdox --testsuite Unit --color=always",
-        "testesFeature": "laravel\\Scorpius\\vendor\\bin\\phpunit -c laravel\\Scorpius\\phpunit.xml --testdox --testsuite Feature --color=always"
+        "serve": "php laravel/Scorpius/artisan serve",
+        "testes": "laravel/Scorpius/vendor/bin/phpunit -c laravel/Scorpius/phpunit.xml --testdox --color=auto",
+        "testesUnit": "laravel/Scorpius/vendor/bin/phpunit -c laravel/Scorpius/phpunit.xml --testdox --testsuite Unit --color=always",
+        "testesFeature": "laravel/Scorpius/vendor/bin/phpunit -c laravel/Scorpius/phpunit.xml --testdox --testsuite Feature --color=always"
     }
 }

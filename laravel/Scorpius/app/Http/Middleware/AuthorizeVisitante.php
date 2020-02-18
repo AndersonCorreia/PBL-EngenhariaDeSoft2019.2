@@ -15,14 +15,8 @@ class AuthorizeVisitante
      */
     public function handle($request, Closure $next){
         
-        $this->setRotasPermissoes();
-        $nameRota = \Route::currentRouteName();
-        $permissao = $this->RotasPermissoes[$nameRota];
-        $DAO = new PessoaDAO();
-        $user = $DAO->SELECTbyID(session("ID",601));//pegando um user visitante por default pra evitar erro
-        session(['tipo' => $user['tipo'] ]);
-
-        if( $permissao = $user['tipo'] || $DAO->asPermissao($user["tipo"], $permissao)){
+        $tipo = session("tipo", "institucional");
+        if( $tipo == 'visitante' || $tipo == 'institucional'){
             return $next($request);
         }
         print("\Esta conta não é de instituição ou de visitante");
