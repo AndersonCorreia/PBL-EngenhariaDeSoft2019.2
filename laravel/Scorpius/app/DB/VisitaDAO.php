@@ -50,7 +50,7 @@ class VisitaDAO extends DataAccessObject{
             }else {
                 //$agendamentoInst = terminar depois
             }
-            $data = new \DateTime($elemento['data_Visita']);
+            $data = new \DateTime($elemento['data_visita']);
 
             return new Visita($data, $elemento['turno'], $elemento["status"],$agendamentoInst);
 
