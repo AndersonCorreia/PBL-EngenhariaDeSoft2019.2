@@ -86,8 +86,10 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	 * @throws Exception caso seja setado o tipo incorreto;
 	 * @return void
 	 */
-	public abstract function setTipo(string $tipo);
-
+	public function setTipo(string $tipo) {
+		$this->setAlterado();
+		$this->tipo_usuario = $tipo;
+    }
 	protected function save(){
 		(new \app\DB\PessoaDAO)->UPDATE($this);
 	}
