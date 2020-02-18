@@ -176,6 +176,29 @@ class UserController extends Controller{
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
     }
+
+    public function agendamentoAtividadeDiferenciada(){
+        $DAO = new VisitaDAO();
+        $dataAtual = now();
+        $dataFim = now();
+        $dataFim = $dataFim->add(new \DateInterval("P2M"));//depois mudar para 1 mes
+        $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim,true,20);
+        $array = [];
+
+        //fim da parte para testes
+        $tipoAtividade ="atividade-diferenciada";
+        $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
+        $variaveis = [
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Agendar Visita",
+            'visitas' => $array,
+            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'tipoUserLegenda'=> $visitante,
+            'tipoAtividade' => $tipoAtividade,
+        ];
+
+        return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
+    }
     public function agendamentoNoturno(){
         $DAO = new VisitaDAO();
         $dataAtual = now();
