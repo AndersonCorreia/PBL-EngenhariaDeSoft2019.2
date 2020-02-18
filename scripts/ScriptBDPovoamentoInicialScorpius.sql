@@ -9,7 +9,7 @@ INSERT INTO tipo_usuario (ID, tipo) VALUES (6, 'visitante');
 
 -- Insert dos usuarios --
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
-(601, 'Francisco Hugo Rezende', 'franciscohr@maquinas.com.br', 'fhr601', '92546317599', '75994628820', 1, 7);
+(601, 'Francisco Hugo Rezende', 'franciscohr@maquinas.com.br', 'fhr601', '92546317599', '75994628820', 1, 6);
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
 (701, 'Cristiane Benedita Almada', 'crisada@vinhas.fot.br', 'cba701', '25073799526', '75996462376', 1, 7);
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
@@ -103,6 +103,15 @@ INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-20','tarde');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-20','noite');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-21','noite');
 
+-- INSERT DOS Agentamentos de Usuário --
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(1, 1, '2020-02-10 14:00:00', 'pendente', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(2, 3, '2020-03-10 14:00:00', 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(3, 5, '2020-03-11 14:00:00', 'cancelado pelo funcionario', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(4, 7, '2020-03-13 14:00:00', 'pendente', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(5, 9, '2020-03-15 08:00:00', 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(6, 11, '2020-03-17 08:00:00', 'pendente', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(7, 13, '2020-03-19 14:00:00', 'cancelado pelo usuario', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(8, 15, '2020-03-20 18:00:00', 'pendente', 601);
 
 -- INSERT das exposições --
 INSERT INTO exposicao (ID, titulo, tipo_evento, tema_evento, descricao, quantidade_inscritos, data_inicial, data_final, imagem) VALUES
