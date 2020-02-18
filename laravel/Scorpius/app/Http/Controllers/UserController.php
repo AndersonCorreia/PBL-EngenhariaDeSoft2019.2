@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Instituicao;
+use App\Model\Visita;
 use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
 use App\DB\VisitaDAO;
@@ -39,11 +40,11 @@ class UserController extends Controller{
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
-
+        $id_user = session('ID',701);
         $erro=null;
         $variaveis=null;
         $registro=null;
-        $registro = Professor_instituicao::listarInstituicoes(701);
+        $registro = Visita::listarAgendamentos($id_user);
         $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
@@ -59,6 +60,8 @@ class UserController extends Controller{
 
         return view("Dashboard_visitante.Dashboard_visitante",$variaveis);
     }
+
+
 
     /**
      * Função para realizar o login do usuario, preencher a sessão com o ID, nome e Tipo do usuario

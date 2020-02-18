@@ -7,22 +7,24 @@
         <table class="table-borderless">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Responsavel</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{$registro['nome']}}</td>
-                    <td>{{$registro['responsavel']}}</td>
+                    <td>{{trim(substr($registro['Data_Agendamento'], 0, 11))}}</td>
+                    <td>{{trim(substr($registro['Data_Agendamento'], 11, 14))}}</td>
+                    <td>{{trim($registro['Status'])}}</td>
                 </tr>
             </tbody>
         </table>
         </div>
 
         <div class="botoes">
-                <a class="btn col btn-primary" href="{{route('user.instituicoes.editar', $registro['instituicao_ID'])}}">Confirmar</a>
-                <a  href="{{route('user.instituicoes.deletar', $registro['instituicao_ID'])}}" class="btn col btn-danger">Cancelar</a>
+                <a class="btn col btn-primary" href="{{route('user.instituicoes.editar', $registro['ID'])}}">Confirmar</a>
+                <a  href="{{route('user.instituicoes.deletar', $registro['ID'])}}" class="btn col btn-danger">Cancelar</a>
         </div>
         </div>
         @endforeach
@@ -31,7 +33,8 @@
 
 <style>
     .instituicoes{
-        height:100px;    
+        height:100px;
+        width:500px;     
     }
 
     .instBotoes{
@@ -57,6 +60,8 @@
 
     td, th{
         padding: 0px 20px 0px 20px;
+        width:100px;
+        text-align: center;
     }
    
 

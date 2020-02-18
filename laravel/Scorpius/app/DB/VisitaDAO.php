@@ -1,7 +1,6 @@
 <?php
 
 namespace App\DB;
-
 use App\Model\Visita;
 use \App\DB\interfaces\DataAccessObject;
 
@@ -16,6 +15,18 @@ class VisitaDAO extends DataAccessObject{
     }
 
     public function UPDATE($Visita): bool{
+
+    }
+
+    public function SELECTbyAgendamentoID($id){
+        
+        $sql="SELECT a.ID,a.Data_Agendamento,a.Status FROM agendamento a WHERE usuario_ID=?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("s",$id);
+        $stmt->execute();
+        $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return $ArrayResult;
 
     }
     /**
