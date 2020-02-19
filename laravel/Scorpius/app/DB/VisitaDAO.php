@@ -29,6 +29,14 @@ class VisitaDAO extends DataAccessObject{
         return $ArrayResult;
 
     }
+
+    public function SELECTbyNotificacaoID($id){
+        $sql = "SELECT Mensagem FROM notificacao WHERE usuario_ID=?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
     /**
      * Retorna registros da tabela visita num array, com filtros de data inicial, data final
      * e limita a quantidade de resultados;

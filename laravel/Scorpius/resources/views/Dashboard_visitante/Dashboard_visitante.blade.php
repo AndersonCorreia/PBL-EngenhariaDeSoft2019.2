@@ -47,8 +47,9 @@
                         <h4 class="card-title" >Suas Notificações</h4>
                     </div>
                         <div class = "card-body scroll">
-                            <h5>A visita do xx foi cancelada por motivo yy </h5>
-                            
+                            @foreach($notificacoes as $notif)
+                                <h5>$notif['Mensagem']</h5>
+                            @endforeach
                         </div>
                     </div>
                 </div>

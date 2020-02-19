@@ -45,12 +45,14 @@ class UserController extends Controller{
         $variaveis=null;
         $registro=null;
         $registro = Visita::listarAgendamentos($id_user);
+        $notificacao = Visita::listarNotificacao($id_user);
         $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'registros' => $registro,
+            'notificacoes' => $notificacao,
             'visitas' => $array,
             'legendaCores' => $visitas[0]->getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
