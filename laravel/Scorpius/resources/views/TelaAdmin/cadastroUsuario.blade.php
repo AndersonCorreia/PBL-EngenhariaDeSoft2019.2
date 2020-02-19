@@ -16,7 +16,7 @@ Senha
 Confirmacao
 Tel de contato
 tipo de usuario --}}
-<form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('.post')}}">
+<form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('CadastroUsuario.post')}}">
     {{csrf_field()}}
     <div class="form-group">
         <label for="Nome">Nome</label>
@@ -31,15 +31,23 @@ tipo de usuario --}}
         <input type="password" class="form-control" id="ConfSenha" placeholder="Repita a Senha">
       </div>
       <div class="form-group">
-        <label for="phone">Telefone de contato</label>
-        <input type="phone" class="form-control" id="phone" placeholder="Seu Telefone">
+        <label for="Telefone">Telefone de contato</label>
+        <input type="phone" class="form-control" id="Telefone" placeholder="Telefone">
+      </div>
+      <div class="form-group">
+        <label for="cpf">CPF</label>
+        <input type="cpf" class="form-control" id="cpf" placeholder="CPF">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Email">
       </div>
       <div class="form-group">
         <label for="UserType">Tipo do Usuário</label>
         <select class="form-control" id="UserType">
-          <option>Administrador</option>
-          <option>Funcionário</option>
-          <option>Estagiário</option>
+          <option value="10">Administrador</option>
+          <option value="9">Funcionário</option>
+          <option value="8">Estagiário</option>
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Cadastrar</button>

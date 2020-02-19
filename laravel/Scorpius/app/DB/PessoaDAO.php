@@ -17,7 +17,25 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
     function INSERT($pessoa): bool
     {
         //usa a variavel $dataBase para  fazer a query no banco
-        $this->dataBase;
+        //$this->dataBase;
+        $nome = $pessoa->getNome();
+        $senha = $pessoa->getSenha();
+        $tipo_usuario = $pessoa -> getTipo();
+        $email = $pessoa -> getEmail();
+        $cpf = $pessoa -> getCPF();
+        $telefone = $pessoa -> getTelefone();
+
+
+        $campos = "(nome, senha, tipo_usuario_ID, email, cpf, telefone)";
+        $select = "SELECT ?, ?, ?, ?, ?, ? FROM usuario";
+        $sql = "INSERT INTO usuario $campos $select";
+
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ssssss", $nome, $senha, $tipo_usuario, $email, $cpf, $telefone);
+        $resultado = $stmt->execute();
+        $pessoa->setID($this);//adcionando ID no objeto que acabou de ser inserido
+
+        return $resultado;
     }
 
     function UPDATE($usuario): bool

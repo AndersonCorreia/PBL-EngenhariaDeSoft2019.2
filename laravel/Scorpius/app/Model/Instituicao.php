@@ -44,7 +44,7 @@ class Instituicao extends \App\DB\interfaces\DataObject {
 		return $this->responsavel;
 	}
 
-	public function setResponsavel(string $responsalvel) {
+	public function setResponsavel(string $responsavel) {
 		$this->setAlterado();
 		$this->responsavel = $responsavel;
 	}

@@ -12,7 +12,10 @@ Route::group(
 );
 
 //Rota de Cadastro de usuarios administrativos do sistema
-Route::get('/admin/cadastro', 'Admin\UserCadastroController@telaCadastroUsuario')->name("CadastroUsuario.show");
+Route::get('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.show");
+
+Route::post('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.post");
+
 
 Route::group(
     ['midlleware'=>[], 
