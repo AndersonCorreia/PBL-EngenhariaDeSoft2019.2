@@ -68,15 +68,15 @@
                 </div>
                 <div class="col-7 col-lg-3 py-1">
                     <button class="btn {{ $legendaCores["proprio"] }} w-auto"></button> 
-                    <span> Seu agendamento</span>
+                    <span>Seu agendamento</span>
                 </div>
                 <div class="col-5 col-lg-3 py-1">
                     <button class="btn {{ $legendaCores["disponivel"] }} w-auto"></button>
-                    <span> {{$tipoUserLegenda["leg.disponivel"]}}</span>
+                    <span> {{$leg_calend_dashboard["leg.disponivel"]}}</span>
                 </div>
                 <div class="col-12 col-lg-4 py-1 ">
                     <button class="btn {{ $legendaCores["indisponivel"] }} w-auto"></button>
-                    <span> {{$tipoUserLegenda["leg.indisponivel"]}}</span>
+                    <span> {{$leg_calend_dashboard["leg.indisponivel"]}}</span>
                 </div>
             </div>
         </div>

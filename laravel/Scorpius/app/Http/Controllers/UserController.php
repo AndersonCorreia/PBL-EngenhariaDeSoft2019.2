@@ -49,6 +49,7 @@ class UserController extends Controller{
         $agenda_institucional = Visita::listarAgendamentosInstitucionais($id_user);
         $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
+        $leg_calend_dashboard = ["leg.disponivel" => "Disponível", "leg.indisponivel"=> "Aguardando Confirmação","tipo"=>"leg_calendario_dashboard"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
@@ -59,6 +60,7 @@ class UserController extends Controller{
             'legendaCores' => $visitas[0]->getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
             'tipoAtividade' => $tipoAtividade,
+            'leg_calend_dashboard'=>$leg_calend_dashboard,
             $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
         ];
 

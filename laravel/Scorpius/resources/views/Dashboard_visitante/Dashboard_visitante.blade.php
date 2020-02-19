@@ -79,7 +79,7 @@
             <div class = "row calendario">
                 <div class = "col-md-10 coluna_calendario"></div>
                     <div id = "calendar">
-                    @include('Dashboard_visitante._includes.calendar')
+                    @include('Dashboard_visitante._includes.calendarDash')
                     </div>
             </div>
             </div>
