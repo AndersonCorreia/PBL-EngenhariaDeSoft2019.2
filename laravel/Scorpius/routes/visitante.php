@@ -11,9 +11,11 @@
  Route::get('/agendamento/noturno', 'UserController@agendamentoNoturno')->name('AgendarNoturno.show');
  Route::post('/agendamento/noturno', 'UserController@agendarNoturno')->name('AgendarNoturno.post');
 
- //Rotas para agendamento de uma individual
- Route::get('/agendamento/atividades', 'UserController@agendamentoIndividual')->name('AgendarAtividade.show');
+ //Rotas para agendamento de uma individual para atividades diferenciadas
+ Route::get('/agendamento/atividades', 'UserController@agendamentoAtividadeDiferenciada')->name('AgendarAtividade.show');
  Route::post('/agendamento/atividades', 'UserController@agendarContaIndividual')->name('AgendarAtividade.post');
 
  //Rota dashboard visitante
  Route::get('/visitante/dashboard', 'UserController@getDashboard')->name('dashboard.show');
+
+Route::get('/visitante/dashboard/confirmarcao/{id}/{status}', 'UserController@confirmacaoAgendamento')->name('confirma');

@@ -6,7 +6,7 @@
 @section('conteudo')
 
 <div class="scorpius-border container-fluid m-0 p-4">
-    <p class="h3">Minha proposta de horário</p>
+    <p class="h3">Minha Proposta de Horário</p>
 
     <form name="formEnviarDemanda" autocomplete="off">
         @csrf
@@ -15,7 +15,7 @@
         <div id="guia" class="scorpius-border-shadow p-4">
             <div class="row">
                 <div class="col-md-3">
-                    <p class="h5">Guia de matrícula: </p>
+                    <p class="h5">Guia de Matrícula: </p>
                 </div>
                 <div class="col-md-9">
                     <input id="guia" name="guia" type="file" class="form-control-anexo"/>
@@ -24,7 +24,7 @@
         </div>
         <div class="mt-3 container-fluid scorpius-border-shadow p-4">
             <div class="mb-3">
-                <p class="h3 float-left">Proposta de horário</p>
+                <p class="h3 float-left">Proposta de Horário</p>
             </div>
             <div class="border-bottom mt-1">.</div>
             <div id="calendario" class="p-2 text-center">

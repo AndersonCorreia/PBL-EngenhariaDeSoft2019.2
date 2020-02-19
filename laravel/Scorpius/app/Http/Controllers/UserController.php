@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Instituicao;
+use App\Model\Visita;
 use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
 use App\DB\VisitaDAO;
@@ -39,17 +40,19 @@ class UserController extends Controller{
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
-
+        $id_user = session('ID',601);
         $erro=null;
         $variaveis=null;
         $registro=null;
-        $registro = Professor_instituicao::listarInstituicoes(701);
+        $registro = Visita::listarAgendamentos($id_user);
+        $notificacao = Visita::listarNotificacao($id_user);
         $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'registros' => $registro,
+            'notificacoes' => $notificacao,
             'visitas' => $array,
             'legendaCores' => $visitas[0]->getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
@@ -59,6 +62,14 @@ class UserController extends Controller{
 
         return view("Dashboard_visitante.Dashboard_visitante",$variaveis);
     }
+
+    public function confirmacaoAgendamento($id,$status){
+      
+        $retorno=(new VisitaDAO())->confirmaAgendamento($id,$status);
+        return redirect()->route("dashboard.show");
+    }
+
+
 
     /**
      * Função para realizar o login do usuario, preencher a sessão com o ID, nome e Tipo do usuario
@@ -172,6 +183,29 @@ class UserController extends Controller{
             'tipoUserLegenda'=> $visitante,
             'tipoAtividade' => $tipoAtividade,
             $tipoAtividade => $exposicoes
+        ];
+
+        return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
+    }
+
+    public function agendamentoAtividadeDiferenciada(){
+        $DAO = new VisitaDAO();
+        $dataAtual = now();
+        $dataFim = now();
+        $dataFim = $dataFim->add(new \DateInterval("P2M"));//depois mudar para 1 mes
+        $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim,true,20);
+        $array = [];
+
+        //fim da parte para testes
+        $tipoAtividade ="atividade-diferenciada";
+        $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
+        $variaveis = [
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Agendar Visita",
+            'visitas' => $array,
+            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'tipoUserLegenda'=> $visitante,
+            'tipoAtividade' => $tipoAtividade,
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);

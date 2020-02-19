@@ -18,7 +18,7 @@ function getMenuLinksAll(){
         'estagiario1'=>     ['link'=>'#' , 'texto'=>'Resumo da Semana' ],
         'demanda web'=>     ['link'=>route('estagiario.show') , 'texto'=>'Demanda WEB' ],
         'realizar check-in'=>                   ['link'=>'#' , 'texto'=>'Check-in' ],
-        'designar horários para estagiarios'=>  ['link'=>'#' , 'texto'=>'Horários dos Estagiários' ],
+        'designar horários para estagiarios'=>  ['link'=>route('telaGerenciamentoDehorarios.show') , 'texto'=>'Horários dos Estagiários' ],
         'gerenciamento de visitas'=>            ['link'=>'#' , 'texto'=>'Gerenciamento de Visitas' ],
         'relatorio dos agendamentos'=>          ['link'=>'#' , 'texto'=>'Relatórios de Agendamentos' ],
         'cadastrar e modificar atividades'=>    ['link'=>'#' , 'texto'=>'Gerenciamento de Eventos' ],
