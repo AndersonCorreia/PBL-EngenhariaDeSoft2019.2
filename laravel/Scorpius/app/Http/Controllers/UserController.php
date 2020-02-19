@@ -94,7 +94,7 @@ class UserController extends Controller{
         $request->session()->regenerate();//a documentação falava que era para previnir um ataque chamado "session fixation"
         session(["ID" => $usuario["ID"], "nome" => $usuario["nome"], "tipo" => $usuario["tipo"]]);
 
-        return redirect()->route("dashboard");
+        return redirect()->route("dashboard.show");
     }
     
     /**
