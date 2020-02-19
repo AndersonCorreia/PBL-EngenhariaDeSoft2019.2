@@ -35,6 +35,7 @@
     </style>
  
     <body>
+    {{csrf_field()}}
     <div class="container-fluid bg-white p-4" style="border-bottom-right-radius: 20px; 
     border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px">
         <div class="col-12 m-0 p-0">
@@ -46,9 +47,9 @@
                     <div class = "card-header">
                         <h4 class="card-title" >Suas Notificações</h4>
                     </div>
-                        <div class = "card-body scroll">
-                            @foreach($notificacoes as $notif)
-                                <h5>$notif['Mensagem']</h5>
+                        <div class = "card-body scroll">                     
+                            @foreach($notificacoes as $notificacao)
+                                <h5>{{$notificacao['Mensagem']}}</h5>
                             @endforeach
                         </div>
                     </div>
