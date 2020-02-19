@@ -13,16 +13,16 @@ function getMenuLinksAll(){
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
         'institucional2'=>  ['link'=>route('turma.index'), 'texto'=>'Turmas' ],
         'visitante0'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
-        'visitante1'=>      ['link'=>'#' , 'texto'=>'Alterar Meus Dados' ],
+        'visitante1'=>      ['link'=>'/AlterarDadosUsuario' , 'texto'=>'Alterar Meus Dados' ],
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
         'estagiario1'=>     ['link'=>'#' , 'texto'=>'Resumo da Semana' ],
-        'demanda web'=>     ['link'=>route('estagiario.show') , 'texto'=>'Demanda WEB' ],
+        'demanda web'=>     ['link'=>route('demandaWeb.show') , 'texto'=>'Demanda WEB' ],
         'realizar check-in'=>                   ['link'=>'#' , 'texto'=>'Check-in' ],
         'designar horários para estagiarios'=>  ['link'=>route('telaGerenciamentoDehorarios.show') , 'texto'=>'Horários dos Estagiários' ],
         'gerenciamento de visitas'=>            ['link'=>'#' , 'texto'=>'Gerenciamento de Visitas' ],
         'relatorio dos agendamentos'=>          ['link'=>'#' , 'texto'=>'Relatórios de Agendamentos' ],
         'cadastrar e modificar atividades'=>    ['link'=>'#' , 'texto'=>'Gerenciamento de Eventos' ],
-        'criar usuarios'=>                      ['link'=>'#' , 'texto'=>'Cadastrar Usuário' ],
+        'criar usuarios'=>                      ['link'=>route("CadastroUsuario.show") , 'texto'=>'Cadastrar Usuário' ],
         'gerenciar usuarios'=>                  ['link'=>'#' , 'texto'=>'Gerenciar Usuários' ],
         'ver confiabilidade das instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],
         'ver log de atividade'=>                ['link'=>'#' , 'texto'=>'Histórico de Atividades' ],
@@ -45,7 +45,6 @@ function getMenuLinks(){
     if($tipoUsuario=="visitante" || $tipoUsuario=="institucional"){
 
         $links['collapseAgend']=$menuLinks['collapseAgend'];
-        $links[]=$menuLinks['visitante1'];
         if( $tipoUsuario=="institucional" ){
             $links[]=$menuLinks["institucional0"];
             $links[]=$menuLinks["institucional1"];

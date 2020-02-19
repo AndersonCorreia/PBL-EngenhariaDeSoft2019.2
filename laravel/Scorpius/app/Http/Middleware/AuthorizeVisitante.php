@@ -15,7 +15,7 @@ class AuthorizeVisitante
      */
     public function handle($request, Closure $next){
         
-        $tipo = session("tipo", "institucional");
+        $tipo = session("tipo");
         if( $tipo == 'visitante' || $tipo == 'institucional'){
             return $next($request);
         }

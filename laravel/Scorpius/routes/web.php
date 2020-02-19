@@ -58,8 +58,3 @@ Route::resource('enviar-eventos', 'enviarEventosController');
 Route::get('/testes', function(){
     return redirect("/build/coverage/index.html",307);
 });
-
-
-//Rota para retornar a tela da Proposta de Horário do Estagiário.
-Route::get('/demandaWeb', 'horarioEstagiarioController@index')->name("estagiario.show");
-Route::post('/demandaWeb/enviar-horario', 'horarioEstagiarioController@cadastrarHorario')->name("estagiario.enviarHorario");

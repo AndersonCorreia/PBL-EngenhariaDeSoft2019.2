@@ -188,7 +188,7 @@ $(function() {
         //     horarios = null;
         // }
         $.ajax({
-            url: "{{ route('estagiario.enviarHorario') }}",
+            url: "{{ route('demandaWeb.post') }}",
             method: "POST",
             data: {
                 observacao: $('#obs').val(),

@@ -74,7 +74,7 @@ class RotasGetTest extends TestCase
      */
     public function testTelaHorarioEstagiario()
     {
-        $response = $this->get(route("HorarioEstagiario.show"));
+        $response = $this->get(route("demandaWeb.show"));
 
         $response->assertStatus(200);
     }

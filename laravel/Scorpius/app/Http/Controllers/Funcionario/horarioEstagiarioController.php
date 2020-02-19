@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Funcionario;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Users\Empregado;
-require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
+require_once __DIR__."/../../../../resources/views/util/layoutUtil.php";
 
 class horarioEstagiarioController extends Controller
 {
