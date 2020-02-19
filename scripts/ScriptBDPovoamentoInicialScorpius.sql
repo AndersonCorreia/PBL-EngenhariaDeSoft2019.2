@@ -135,15 +135,15 @@ INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, tur
 (8, 16, '2020-03-21 18:00:00', 'cancelado pelo usuario', 8, 201);
 
 -- INSERT notificações --
-INSERT INTO notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
+INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
 (1, '2020-03-21 15:00:00', 'A visita do dia 21/03/2020 foi cancelada por causa da chuva', 701);
-INSERT INTO notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
+INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
 (2, '2020-02-12 13:00:00', 'Venha conferir a nossa nova exposição: \'Dinossauros\'', 701);
-INSERT INTO notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
+INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
 (3, '2020-02-12 13:00:00', 'Venha conferir a nossa nova exposição: \'Dinossauros\'', 601);
-INSERT INTO notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
+INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
 (4, '2020-03-15 10:00:00', 'visita 17/03/2020 cancelada. Entre em contato para mais informações', 601);
-INSERT INTO notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
+INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
 (5, '2020-03-11 00:00:00', 'visita 13/03/2020 cancelada. Entre em contato para mais informações', 601);
 
 -- INSERT em estagiario --

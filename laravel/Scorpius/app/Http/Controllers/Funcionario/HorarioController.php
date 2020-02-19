@@ -18,11 +18,18 @@ class HorarioController extends Controller{
 
     public function getTelaHorarioEstagiario(){
         $DAO = new Proposta_horarioDAO();
-        $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'estagiarios'=> $DAO->buscaEstagiarioALL()
-        ];
-            return view('TelaPropostaHorarioFuncionario.telaGerenciamentoDehorarios', $variaveis);
+        $variaveis=['itensMenu' => getMenuLinks()];
+        try{
+            $estagiarios = $DAO->buscaEstagiarioALL();
+            $variaveis = [
+                'itensMenu' => getMenuLinks(),
+                'estagiarios'=> $estagiarios
+            ];
+        }catch(\Exception $e){
+            return view('TelaPropostaHorarioFuncionario.errorNenhumaProposta', $variaveis);
+        }
+       
+        return view('TelaPropostaHorarioFuncionario.telaGerenciamentoDehorarios', $variaveis);
     }
 
     public function getProposta($id){
@@ -35,6 +42,15 @@ class HorarioController extends Controller{
         $DAO = new Proposta_horarioDAO();
         $observacao = $DAO->buscaObservacaoEstagiario($id);
         return Response::json($observacao);
+    }
+
+    public function nenhumaProposta(){
+        $variaveis = [
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Horarios estagiarios",
+        ];
+
+        return view('TelaPropostaHorarioFuncionario.errorNenhumaProposta', $variaveis);
     }
 
     public function enviaHorario(Request $req){
