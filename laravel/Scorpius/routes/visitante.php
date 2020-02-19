@@ -17,3 +17,5 @@
 
  //Rota dashboard visitante
  Route::get('/visitante/dashboard', 'UserController@getDashboard')->name('dashboard.show');
+
+Route::get('/visitante/dashboard/confirmarcao/{id}/{status}', 'UserController@confirmacaoAgendamento')->name('confirma');

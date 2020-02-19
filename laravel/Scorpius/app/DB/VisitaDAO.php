@@ -18,6 +18,13 @@ class VisitaDAO extends DataAccessObject{
 
     }
 
+    public function confirmaAgendamento($id,$status){
+        $sql="UPDATE agendamento a SET a.Status=? WHERE a.ID=?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ss",$status,$id);
+        return $stmt->execute();
+    }
+
     public function SELECTbyAgendamentoID($id){
         
         $sql="SELECT a.ID,a.Data_Agendamento,a.Status FROM agendamento a WHERE usuario_ID=?";

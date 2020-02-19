@@ -1,5 +1,5 @@
 
-<form method="get" action="#">
+<form method="GET"  action="#" enctype="multipart/form-data">
     {{csrf_field()}}
     @foreach($registros as $registro)
     <div class= "instBotoes">
@@ -23,8 +23,9 @@
         </div>
 
         <div class="botoes">
-                <a class="btn col btn-primary" href="{{route('user.instituicoes.editar', $registro['ID'])}}">Confirmar</a>
-                <a  href="{{route('user.instituicoes.deletar', $registro['ID'])}}" class="btn col btn-danger">Cancelar</a>
+            
+                <a  href="{{route('confirma',[$registro['ID'],'confirmado'])}}" class="btn col btn-primary">Confimar</a>
+                <a  href="{{route('confirma', [$registro['ID'],'cancelado pelo usuario'])}}" class="btn col btn-danger">Cancelar</a>
         </div>
         </div>
         @endforeach
