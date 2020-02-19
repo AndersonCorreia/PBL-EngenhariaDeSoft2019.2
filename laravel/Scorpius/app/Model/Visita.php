@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 use App\Model\Users\Empregado;
+use App\DB\VisitaDAO;
 
 class Visita extends \App\DB\interfaces\DataObject {
 
@@ -22,6 +23,10 @@ class Visita extends \App\DB\interfaces\DataObject {
         $this->Agendamento = $agend;
         $this->Acompanhante = $acomp;
         $this->ID = $id;
+    }
+
+    public static function listarAgendamentos($id){
+		return (new visitaDAO)->SELECTbyAgendamentoID($id);
     }
     
     /**

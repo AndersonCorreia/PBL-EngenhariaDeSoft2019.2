@@ -5,17 +5,26 @@
     <div id="dados-agendamento">
         <p class="h5">Dados para o agendamento</p>
         <label class="mt-2" for="nome-instituicao">Selecione a instituição</label>
-        <select class="form-control" id="nome-instituicao" name="instituicao">
-            @if (($instituicoes ?? false))
-            @foreach ($instituicoes as $inst)
-            <option class="opList" value="{{$inst['nome']}} ; Endereço: {{$inst['endereco']}}">
+        <input id="nome-instituicao"  class="form-control" type="text" name="Instituicao" 
+            placeholder="Nome da instituição" list="instList" required autofocus>
+        <datalist id="instList">
+            @if (($instituicao ?? false))
+                @foreach ($instituicao as $inst)
+                    <option class="opList" value="{{$inst['nome']}}" >
                 @endforeach
-                @endif
-        </select>
+            @endif
+        </datalist>
         <div class="row mt-3">
             <div class="col-md-4">
                 <label for="turma">Turma</label>
-                <input id="turma" name="turma" class="form-control" type="text" required>
+                <input id="turma" name="turma" class="form-control" type="text" list="listTurma" placeholder="Nome da turma" required autofocus> 
+                <datalist id="listTurma">
+                    @if (($turmas ?? false))
+                        @foreach ($turmas as $turma)
+                            <option class="opList" value="{{$turma['nome']}}" >
+                        @endforeach
+                    @endif
+                </datalist>
             </div>
             <div class="col-md-4">
                 <label for="data">Data</label>
@@ -24,7 +33,7 @@
             <div class="col-md-4">
             @if(($turno ?? "diurno")==="diurno") 
                 <label for="turno">Turno</label>
-                <select id="turno" name="turno" id="turno" class="custom-select" placeholder="turno" required>
+                <select id="turno" name="turno" class="custom-select" placeholder="turno" required>
                     <option value="manhã">Manhã</option>
                     <option value="tarde">Tarde</option>
                 </select>
@@ -79,7 +88,7 @@
             Cancelar
         </a>
     </div>
-    {{-- <div class="form-row col-sm">
+    <!-- {{-- <div class="form-row col-sm">
         <span>
             <h5>Dados para o agendamento</h5>
         </span>
@@ -92,8 +101,8 @@
                     @if (($instituicoes ?? false))
                     @foreach ($instituicoes as $inst)
                     <option class="opList" value="{{$inst['nome']}} ; Endereço: {{$inst['endereco']}}">
-    @endforeach
-    @endif
+                    @endforeach
+                @endif
     </datalist>
     </div>
     </div>
@@ -159,7 +168,7 @@
             Cancelar
         </a>
     </div>
-    </div> --}}
+    </div> --}} -->
 
 </form>
 
