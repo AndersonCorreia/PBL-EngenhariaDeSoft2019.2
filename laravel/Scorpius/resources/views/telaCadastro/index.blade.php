@@ -60,11 +60,13 @@
         <div class="form-row">
             <div class="col">
                 <label for="nome">Nome</label>
-                <input name="nome" id="nome" type="text" class="form-control" placeholder="" required>
+                <input name="nome" id="nome" type="text" class="form-control" placeholder=""
+                    pattern="[a-zA-ZÀ-Úà-ú]+$$" title="Infome apenas letras"required >
             </div>
             <div class="col">
                 <label  for="sobrenome">Sobrenome</label>
-                <input  name="sobrenome" id="sobrenome" type="text" class="form-control" placeholder="" required>
+                <input  name="sobrenome" id="sobrenome" type="text" class="form-control" placeholder=""
+                    pattern="[a-zA-ZÀ-Úà-ú ]+$$" title="Infome apenas letras" required>
             </div>
         </div>
     </div>

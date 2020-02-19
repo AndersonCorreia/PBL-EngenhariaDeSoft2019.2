@@ -45,7 +45,7 @@
             <div class="form-group col-sm-8">    
                 <span>Responsável pela Instituição</span>
                 <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" value="" 
-                placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" title="Infome apenas letras" required>
             </div>
 
             <div class="form-group col-sm-4">
