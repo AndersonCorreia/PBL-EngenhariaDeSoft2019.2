@@ -87,11 +87,11 @@
                                             <div id="col-nome-turma" class="col-md-3">
                                                 <input maxlength="10" minlength="1" placeholder="Nome da turma"
                                                     type="text" class="form-control" id="cadastrar-turma-nome-turma"
-                                                    name="nomeTurma">
+                                                    name="nomeTurma" required>
                                             </div>
                                             <div id="col-ano-turma" class="col-md-3">
                                                 <input placeholder="Ano escolar" type="text" class="form-control"
-                                                    id="cadastrar-turma-ano-turma" name="anoEscolar">
+                                                    id="cadastrar-turma-ano-turma" name="anoEscolar" required>
                                             </div>
                                             <div class="col-md-4">
                                                 <select class="form-control" name="ensino"
@@ -112,8 +112,10 @@
                                                         Alunos da turma:
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input id="quantidade-alunos" name="quantidade_alunos" type="hidden" value="5">
-                                                        <span class="float-right btn btn-secondary" id="quantidade-alunos-turma">Quantidade: 1</span>
+                                                        <input id="quantidade-alunos" name="quantidade_alunos"
+                                                            type="hidden" value="5">
+                                                        <span class="float-right btn btn-secondary"
+                                                            id="quantidade-alunos-turma">Quantidade: 1</span>
                                                     </div>
                                                 </div>
                                                 <small id="helper" class="form-text text-muted">ATENÇÃO
@@ -125,15 +127,23 @@
                                             <ul class="list-group" id="lista-inputs-alunos">
                                                 <li class="list-group-item bg-light inputs-alunos">
                                                     <div class="form-row align-items-center">
-                                                        <div class="col-md-10">
-                                                            <input onclick="verificaTurma()" id="nomeAluno1"  placeholder="Nome do aluno"
-                                                                type="text" class="form-control btn-block"
-                                                                class="adcNomeAluno" name="nomeAluno1">
+                                                        <div class="col-md-9">
+                                                            <input onclick="verificaTurma()" id="nomeAluno1"
+                                                                placeholder="Nome do aluno" type="text"
+                                                                class="form-control btn-block" class="adcNomeAluno"
+                                                                name="nomeAluno1" required>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <input onclick="verificaTurma()" id="idadeAluno1"  placeholder="Idade" type="number"
+                                                            <input onclick="verificaTurma()" id="idadeAluno1"
+                                                                placeholder="Idade" type="number"
                                                                 class="form-control btn-block" class="adcIdadeAluno"
-                                                                name="idadeAluno1">
+                                                                name="idadeAluno1" required>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <button type="button" 
+                                                                class="btn btn-danger btn-remove float-right">
+                                                                <i class="fa fa-minus" aria-hidden="true"></i>                                                                
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -145,17 +155,12 @@
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-sm-6 pr-1">
+                                                        </div>
+                                                        <div class="col-sm-6 pl-1">
                                                             <button type="button" class="btn btn-primary float-right"
                                                                 id="btn-clona">
                                                                 Adicionar aluno
                                                                 <i class="fas fa-plus"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-sm-6 pl-1">
-                                                            <button type="button" id="btn-remove"
-                                                                class="btn btn-danger float-right">
-                                                                Remover último
-                                                                <i class="fas fa-trash"></i>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -168,7 +173,8 @@
                                 {{-- FIM - Corpo do modal --}}
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                    <button onmouseover="cadastrar()" type="submit" class="btn btn-success">Cadastrar turma</button>
+                                    <button onmouseover="cadastrar()" type="submit" class="btn btn-success">Cadastrar
+                                        turma</button>
                                 </div>
                             </div>
                         </form>
@@ -261,7 +267,7 @@
                                             <label for="nome{{$turma['ID']}}">Nome</label>
                                             <input maxlength="10" minlength="1" value="{{$turma['nome']}}"
                                                 placeholder="{{$turma['nome']}}" type="text" class="form-control"
-                                                id="nome{{$turma['ID']}}" name="nomeTurma">
+                                                id="nome{{$turma['ID']}}" name="nomeTurma" required>
                                         </div>
 
                                         {{-- Ano escolar --}}
@@ -269,7 +275,7 @@
                                             <label for="anoEscolar{{$turma['ID']}}">Ano escolar</label>
                                             <input value="{{$turma['ano_escolar']}}"
                                                 placeholder="{{$turma['ano_escolar']}}" type="text" class="form-control"
-                                                id="anoEscolar{{$turma['ID']}}" name="anoEscolar">
+                                                id="anoEscolar{{$turma['ID']}}" name="anoEscolar" required>
                                         </div>
 
                                         {{-- Tipo de ensino --}}
@@ -355,14 +361,14 @@
                                                     <div>
                                                         <input placeholder="Nome do aluno" type="text"
                                                             class="form-control" id="adcNomeAluno{{$turma['ID']}}"
-                                                            name="nomeAluno">
+                                                            name="nomeAluno" required>
                                                     </div>
                                                 </div>
                                                 {{-- Idade do aluno --}}
                                                 <div class="col-auto">
                                                     <div>
                                                         <input placeholder="Idade" type="number" class="form-control"
-                                                            id="adcIdadeAluno{{$turma['ID']}}" name="idadeAluno">
+                                                            id="adcIdadeAluno{{$turma['ID']}}" name="idadeAluno" required>
                                                     </div>
                                                 </div>
                                                 {{-- Submit do formulario --}}
@@ -430,7 +436,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/normalize.css"></script>
     <script>
-
         $(document).ready(function(){
             for(var i = 1; i < 5; i++){
                 adicionar();
@@ -474,39 +479,55 @@
             let nome = document.getElementById("cadastrar-turma-nome-turma");
             let ano = document.getElementById("cadastrar-turma-ano-turma");
             if(nome.value == ""){
-                return alert("Não esqueca de preencher o NOME da turma!");
+                // return alert("Não esqueca de preencher o NOME da turma!");
             }
             if(ano.value == ""){
-                return alert("Não esqueca de preencher o ANO ESCOLAR da turma!");
+                // return alert("Não esqueca de preencher o ANO ESCOLAR da turma!");
             }
         }
         function adicionar(){
             var element = $('.inputs-alunos:last').clone();
-            var cont = element.children('.form-row').children('.col-md-10').children('input').attr('name').replace('nomeAluno', '');
+            var cont = element.children('.form-row').children('.col-md-9').children('input').attr('name').replace('nomeAluno', '');
             if(cont > 49){
                 return alert('Quantidade máxima de alunos numa turma atingida')
             }
-            element.children('.form-row').children('.col-md-10').children('input').attr('name', 'nomeAluno' + (++cont));
+            element.children('.form-row').children('.col-md-9').children('input').attr('name', 'nomeAluno' + (++cont));
             element.children('.form-row').children('.col-md-2').children('input').attr('name', 'idadeAluno' + (cont));
-            element.children('.form-row').children('.col-md-10').children('input').attr('id', 'nomeAluno' + (cont));
+            element.children('.form-row').children('.col-md-9').children('input').attr('id', 'nomeAluno' + (cont));
             element.children('.form-row').children('.col-md-2').children('input').attr('id', 'idadeAluno' + (cont));
-            element.children('.form-row').children('.col-md-10').children('input').val('');
+            element.children('.form-row').children('.col-md-9').children('input').val('');
             element.children('.form-row').children('.col-md-2').children('input').val('');
             $('#lista-inputs-alunos').append(element);
             $('#quantidade-alunos').val(cont);
             return $('#quantidade-alunos-turma').text('Quantidade: ' + cont);
         }
-        function remover(){
-            if($('.inputs-alunos').length == 5){
-                return
-            }
-            $('.inputs-alunos:last').remove();
-            var cont = $('#quantidade-alunos-turma').text().replace('Quantidade: ', '');
-            $('#quantidade-alunos').val(--cont);
-            return $('#quantidade-alunos-turma').text('Quantidade: ' + (cont));
-        }
+        // function remover(e){
+        //     e.preventDefault();            
+        //     if ($('.inputs-alunos').length > 5){
+        //         $(this).parents('.inputs-alunos').remove();
+        //         var cont = $('#quantidade-alunos-turma').text().replace('Quantidade: ', '');
+        //         $('#quantidade-alunos').val(--cont);
+        //         return $('#quantidade-alunos-turma').text('Quantidade: ' + (cont));
+        //     }
+        // }
+        // $('form').on('click', '.btn-remove', function(e){
+        //     e.preventDefault();
+        //     if ($('.form-row').length > 5){
+        //         $(this).parents('.box').remove();
+        //     }
+        // });
         $('#btn-clona').on("click", adicionar);
-        $('#btn-remove').on("click", remover);
+        // $('.btn-remove').on("click", remover);
+
+        $('form').on('click', '.btn-remove', function(e){
+            e.preventDefault();
+            if ($('.inputs-alunos').length > 5){
+                $(this).parents('.form-row').parents('.inputs-alunos').remove();
+                var cont = $('#quantidade-alunos-turma').text().replace('Quantidade: ', '');
+                $('#quantidade-alunos').val(--cont);
+                return $('#quantidade-alunos-turma').text('Quantidade: ' + (cont));
+            }
+        });
 
         function cadastrar(){
             var trava = 0;
@@ -548,7 +569,7 @@
                 } 
             }
             if(trava>0){
-                alert("Por favor, preencha todos os campos!");
+                // alert("Por favor, preencha todos os campos!");
             }
         }
     </script>
