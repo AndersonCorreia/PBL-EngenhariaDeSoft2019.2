@@ -169,4 +169,11 @@ class ControlerInstitucional extends Controller {
         }
     }
 
+    public function getInstituicoesProfessor(){
+        $id_user = session('ID');
+        $instituicao = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID($U_id, true);
+        return view('telasUsuarios.Agendamentos._includes.formularioAgendamento')->with('instituicao', $instituicao); 
+
+    }
+
 }

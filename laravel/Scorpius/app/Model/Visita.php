@@ -28,6 +28,10 @@ class Visita extends \App\DB\interfaces\DataObject {
     public static function listarAgendamentos($id){
 		return (new visitaDAO)->SELECTbyAgendamentoID($id);
     }
+
+    public static function listarNotificacao($id){
+        return (new visitaDAO)->SELECTbyNotificacaoID($id);
+    }
     
     /**
      * Preenche o array recebido como parametro com informações sobre esta visita.

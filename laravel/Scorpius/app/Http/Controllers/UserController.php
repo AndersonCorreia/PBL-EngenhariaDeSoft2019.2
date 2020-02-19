@@ -45,12 +45,14 @@ class UserController extends Controller{
         $variaveis=null;
         $registro=null;
         $registro = Visita::listarAgendamentos($id_user);
+        $notificacao = Visita::listarNotificacao($id_user);
         $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'registros' => $registro,
+            'notificacoes' => $notificacao,
             'visitas' => $array,
             'legendaCores' => $visitas[0]->getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
@@ -181,6 +183,29 @@ class UserController extends Controller{
             'tipoUserLegenda'=> $visitante,
             'tipoAtividade' => $tipoAtividade,
             $tipoAtividade => $exposicoes
+        ];
+
+        return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
+    }
+
+    public function agendamentoAtividadeDiferenciada(){
+        $DAO = new VisitaDAO();
+        $dataAtual = now();
+        $dataFim = now();
+        $dataFim = $dataFim->add(new \DateInterval("P2M"));//depois mudar para 1 mes
+        $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim,true,20);
+        $array = [];
+
+        //fim da parte para testes
+        $tipoAtividade ="atividade-diferenciada";
+        $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
+        $variaveis = [
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Agendar Visita",
+            'visitas' => $array,
+            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'tipoUserLegenda'=> $visitante,
+            'tipoAtividade' => $tipoAtividade,
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
