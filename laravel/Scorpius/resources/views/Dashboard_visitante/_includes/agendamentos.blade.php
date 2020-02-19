@@ -1,6 +1,7 @@
 
 <form method="GET"  action="#" enctype="multipart/form-data">
     {{csrf_field()}}
+
     @foreach($registros as $registro)
     <div class= "instBotoes">
         <div class="instituicoes card" >
@@ -23,8 +24,8 @@
         </div>
 
         <div class="botoes">
-                <a  href="{{route('confirma',[$registro['ID'],'confirmado'])}}" class="btn col btn-primary" value="{{$registro['Status']}}" confirmar>Confimar</a>
-                <a  href="{{route('confirma', [$registro['ID'],'cancelado pelo usuario'])}}" class="btn col btn-danger" value="{{$registro['Status']}}" cancelar>Cancelar</a>
+                <a  href="{{route('confirma',[$registro['ID'],'confirmado'])}}" class="btn col btn-primary status" value="{{$registro['Status']}}" confirmar>Confimar</a>
+                <a  href="{{route('confirma', [$registro['ID'],'cancelado pelo usuario'])}}" class="btn col btn-danger status" value="{{$registro['Status']}}" cancelar>Cancelar</a>
         </div>
         </div>
         @endforeach
@@ -34,14 +35,20 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 $(document).ready(function() {
-    //$('[confirmar]').css({"cursor": "default", "pointer-events": "none", "user-select": "none", "opacity": "0.3"}).attr('tabindex', -1);
-    //$('[cancelar]').css({"cursor": "default", "pointer-events": "none", "user-select": "none", "opacity": "0.3"}).attr('tabindex', -1);
-    let status = $('[confirmar]')
-    for(let td of status){
-        //console.log(td.setAttribute)
-        td.setAttribute("style", "cursor: default; pointer-events: none;user-select:none; opacity: 0.3;");
+    let statusConfirmado = $('[confirmar]')
+    let statusCancelado = $('[cancelar]')
+    for(let i=0; i<statusConfirmado.length; i++){
+        let value1 = statusConfirmado[i].getAttribute("value");
+        let value2 = statusCancelado[i].getAttribute("value");
+        if(!value1.search("cancelado") || !value1.search("confirmado")){
+            statusConfirmado[i].setAttribute("style", "cursor: default; pointer-events: none;user-select:none; opacity: 0.3;");
+        }
+        if(!value2.search("cancelado")){
+            statusCancelado[i].setAttribute("style", "cursor: default; pointer-events: none;user-select:none; opacity: 0.3;");
+        }
     }
 })
+
 
 </script>
 @endsection

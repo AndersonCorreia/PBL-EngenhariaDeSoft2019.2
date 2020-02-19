@@ -40,7 +40,7 @@ class UserController extends Controller{
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
-        $id_user = session('ID',701);
+        $id_user = session('ID');
         $erro=null;
         $variaveis=null;
         $registro=null;
@@ -68,6 +68,12 @@ class UserController extends Controller{
     public function confirmacaoAgendamento($id,$status){
       
         $retorno=(new VisitaDAO())->confirmaAgendamento($id,$status);
+        return redirect()->route("dashboard.show");
+    }
+
+    public function confirmaAgendamentoInstituicao($id,$status){
+      
+        $retorno=(new VisitaDAO())->confirmaAgendamentoInstituicao($id,$status);
         return redirect()->route("dashboard.show");
     }
 

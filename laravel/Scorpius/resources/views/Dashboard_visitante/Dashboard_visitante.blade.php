@@ -64,6 +64,7 @@
                                     @include('Dashboard_visitante._includes.agendamentos')
                                 @endif
                                 @if(session('ID')=='701')
+                                    {{--dd($agenda_institucional)--}}
                                     @include('Dashboard_visitante._includes.agendamentosInstitucional')                                
                                 @endif   
                         </div>

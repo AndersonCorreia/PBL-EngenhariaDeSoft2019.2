@@ -19,7 +19,7 @@ class ControlerInstitucional extends Controller {
      * @return telaInstituicao
      */
     public function telaInstituicao() {
-        $id_user = session('ID',601);
+        $id_user = session('ID');
         $erro=null;
         $variaveis=null;
         $registro=null;

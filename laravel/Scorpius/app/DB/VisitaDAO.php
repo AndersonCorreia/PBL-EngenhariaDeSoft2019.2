@@ -25,6 +25,13 @@ class VisitaDAO extends DataAccessObject{
         return $stmt->execute();
     }
 
+    public function confirmaAgendamentoInstituicao($id,$status){
+        $sql="UPDATE agendamento_institucional a SET a.Status=? WHERE ID=?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ss",$status,$id);
+        return $stmt->execute();
+    }
+
     public function SELECTbyAgendamentoID($id){
         
         $sql="SELECT a.ID,a.Data_Agendamento,a.Status FROM agendamento a WHERE usuario_ID=?";
@@ -55,6 +62,7 @@ class VisitaDAO extends DataAccessObject{
         $stmt->bind_param("i",$id);
         $stmt->execute();
         $ArrayResult=$stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        //dd($ArrayResult);
        return $ArrayResult;  
      }
 
