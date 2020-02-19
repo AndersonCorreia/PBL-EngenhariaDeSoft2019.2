@@ -45,6 +45,19 @@ class VisitaDAO extends DataAccessObject{
         return $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
        
     }
+
+    public function SELECTbyAgendamentoInstitucional($id){
+        $sql="SELECT a.Data_Agendamento, a.Status, a.ID, a.instituicao_ID, t.nome, t.ano_escolar
+              FROM agendamento_institucional a LEFT JOIN turma t ON a.turma_ID=t.ID 
+              LEFT JOIN instituicao i ON a.instituicao_ID=i.ID
+              WHERE t.professor_ID=?";
+        $stmt=$this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        $ArrayResult=$stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+       return $ArrayResult;  
+     }
+
     /**
      * Retorna registros da tabela visita num array, com filtros de data inicial, data final
      * e limita a quantidade de resultados;

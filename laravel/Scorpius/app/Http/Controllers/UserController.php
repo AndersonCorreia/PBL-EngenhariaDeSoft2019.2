@@ -40,12 +40,13 @@ class UserController extends Controller{
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
-        $id_user = session('ID',601);
+        $id_user = session('ID',701);
         $erro=null;
         $variaveis=null;
         $registro=null;
         $registro = Visita::listarAgendamentos($id_user);
         $notificacao = Visita::listarNotificacao($id_user);
+        $agenda_institucional = Visita::listarAgendamentosInstitucionais($id_user);
         $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
@@ -53,6 +54,7 @@ class UserController extends Controller{
             'paginaAtual' => "Agendar Visita",
             'registros' => $registro,
             'notificacoes' => $notificacao,
+            'agenda_institucional' => $agenda_institucional,
             'visitas' => $array,
             'legendaCores' => $visitas[0]->getBtnClasses(),
             'tipoUserLegenda'=> $institucional,

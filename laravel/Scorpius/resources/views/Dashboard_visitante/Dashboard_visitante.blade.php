@@ -59,8 +59,13 @@
                     <div class = "card-header">
                         <h4 class="card-title" >Seus Agendamentos</h4>
                     </div>
-                        <div class = "card-body scroll">                      
-                            @include('Dashboard_visitante._includes.agendamentos')
+                        <div class = "card-body scroll">                        
+                                @if(session('ID')=='601')
+                                    @include('Dashboard_visitante._includes.agendamentos')
+                                @endif
+                                @if(session('ID')=='701')
+                                    @include('Dashboard_visitante._includes.agendamentosInstitucional')                                
+                                @endif   
                         </div>
                         </div>
                 </div>
