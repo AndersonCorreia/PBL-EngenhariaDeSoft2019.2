@@ -47,6 +47,23 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         throw new \Exception("Nenhum estagiario encontrado");
     }
 
+    function buscaObservacaoEstagiario($id){
+        $sql = 'SELECT e.observacao FROM estagiario e WHERE usuario_ID=?';
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        if($resultado->rows != NULL) {
+            while($row = $resultado->fetch_assoc()) {
+                $registros[] = $row;
+            }  
+            return $registros;
+        }
+        throw new \Exception("Nenhum Estagiário encontrado");
+    }
+
+
+
     /**
      * Deletar uma horario de estagiario do banco com base no ID
      * @param $id ID da estagiario;

@@ -42,7 +42,7 @@
                             @if(($turno ?? "diurno")==="diurno") 
                                 <div class="col col-lg-12 py-1 p-0">
                                     <button id="manhã{{$loop->index}}" type="button" onclick="setDataTurno('{{$dia}}','manhã')"
-                                        class="btn w-50 h-100 border border-secondary {{$v["manha.btn"] ?? 'bg-light'}} "></button>
+                                        class="btn w-50 h-100 border border-secondary {{$v["manhã.btn"] ?? 'bg-light'}} "></button>
                                 </div>
                                 <div class="col col-lg-12 py-1 p-0">
                                     <button id="tarde{{$loop->index}}" type="button" onclick="setDataTurno('{{$dia}}','tarde')"

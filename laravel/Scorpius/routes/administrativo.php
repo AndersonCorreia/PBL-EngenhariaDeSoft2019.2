@@ -1,7 +1,15 @@
 <?php
 
 //Rota para retornar a tela de Gerenciamento de Visitas.
-Route::get('/gerenciamentoDeVisita', 'Funcionario\VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
+
+Route::group(
+    ['midlleware'=>[], 
+    'prefix'=>'funcionario',
+    'namespace'=>'Funcionario'],
+    function(){
+        Route::get('/gerenciamentoDeVisitas', 'VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
+    }
+);
 
 //Rota de Cadastro de usuarios administrativos do sistema
 Route::get('/admin/cadastro', 'Admin\UserCadastroController@telaCadastroUsuario')->name("CadastroUsuario.show");

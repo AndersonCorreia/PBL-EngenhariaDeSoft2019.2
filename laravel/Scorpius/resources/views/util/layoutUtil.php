@@ -9,17 +9,16 @@ function getMenuLinksAll(){
         'AgendarNoturno'=>  ['link'=>route('AgendarNoturno.show') , 'texto'=>'Atividades Noturnas' ],
         'AgendarAtividade'=>['link'=>route('AgendarAtividade.show') , 'texto'=>'Atividades Diferenciadas' ],
         'collapseAgend' =>  ['texto'=> 'Agendar Visita', 'itens' => array() ],
-        'visitante1'=>      ['link'=>'#' , 'texto'=>'Gerenciar Visitas' ],
         'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições Cadastradas' ],
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
         'institucional2'=>  ['link'=>route('turma.index'), 'texto'=>'Turmas' ],
-        'visitante2'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
-        'visitante3'=>      ['link'=>'#' , 'texto'=>'Alterar Meus Dados' ],
+        'visitante0'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
+        'visitante1'=>      ['link'=>'#' , 'texto'=>'Alterar Meus Dados' ],
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
         'estagiario1'=>     ['link'=>'#' , 'texto'=>'Resumo da Semana' ],
-        'demanda web'=>     ['link'=>'#' , 'texto'=>'Demanda WEB' ],
+        'demanda web'=>     ['link'=>route('estagiario.show') , 'texto'=>'Demanda WEB' ],
         'realizar check-in'=>                   ['link'=>'#' , 'texto'=>'Check-in' ],
-        'designar horários para estagiarios'=>  ['link'=>'#' , 'texto'=>'Horários dos Estagiários' ],
+        'designar horários para estagiarios'=>  ['link'=>route('telaGerenciamentoDehorarios.show') , 'texto'=>'Horários dos Estagiários' ],
         'gerenciamento de visitas'=>            ['link'=>'#' , 'texto'=>'Gerenciamento de Visitas' ],
         'relatorio dos agendamentos'=>          ['link'=>'#' , 'texto'=>'Relatórios de Agendamentos' ],
         'cadastrar e modificar atividades'=>    ['link'=>'#' , 'texto'=>'Gerenciamento de Eventos' ],
@@ -57,8 +56,8 @@ function getMenuLinks(){
         $links['collapseAgend']['itens'][]=$menuLinks['AgendarDiurnoVis'];
         $links['collapseAgend']['itens'][]=$menuLinks['AgendarNoturno'];
         $links['collapseAgend']['itens'][]=$menuLinks['AgendarAtividade'];
-        $links[]=$menuLinks['visitante2'];
-        $links[]=$menuLinks['visitante3'];
+        $links[]=$menuLinks['visitante0'];
+        $links[]=$menuLinks['visitante1'];
     }
     else {
         if($tipoUsuario=="estagiario"){

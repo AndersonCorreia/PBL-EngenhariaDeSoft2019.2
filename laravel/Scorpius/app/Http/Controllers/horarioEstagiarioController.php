@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Users\Empregado;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class horarioEstagiarioController extends Controller
@@ -17,61 +18,73 @@ class horarioEstagiarioController extends Controller
     
     public function cadastrarHorario()
     {
-        
         $guia = $_POST['guia'];
-        $observacao = $_POST['observacao'];
-        $horarios = array();
+        
+        // try {
 
-        if(isset($_POST['seg-manha'])){
-            $horarios[] = ['Segunda', 'Manhã'];
-        }
-        if(isset($_POST['seg-tarde'])){
-            $horarios = ['Segunda', 'Tarde'];
-        }
-        if(isset($_POST['seg-noite'])){
-            $horarios[] = ['Segunda', 'Noite'];
-        }
+        //     $guiaRAW = $_FILES['guia']['tmp_name'];
+        //     $tamanho = $_FILES['guia']['size'];
 
-        if(isset($_POST['ter-manha'])){
-            $horarios[] = ['Terça', 'Manhã'];
-        }
-        if(isset($_POST['ter-tarde'])){
-            $horarios = ['Terça', 'Tarde'];
-        }
-        if(isset($_POST['ter-noite'])){
-            $horarios[] = ['Terça', 'Noite'];
-        }
+        //     if ($guiaRAW != "none") {
+        //         $fp = fopen($guiaRAW, "rb");
+        //         $guia = fread($fp, $tamanho);
+        //         $guia = addslashes($guia);
+        //         fclose($fp);
+        //     }
+        // }catch(Exception $e){
+        //     $message['success'] = false;
+        //     $message['error'] = 'Erro na guia de matricula';
+        //     echo json_encode($message);
+        // }
+        // $horarios = array();
 
-        if(isset($_POST['qua-manha'])){
-            $horarios[] = ['Quarta', 'Manhã'];
-        }
-        if(isset($_POST['qua-tarde'])){
-            $horarios = ['Quarta', 'Tarde'];
-        }
-        if(isset($_POST['qua-noite'])){
-            $horarios[] = ['Quarta', 'Noite'];
-        }
-
-        if(isset($_POST['qui-manha'])){
-            $horarios[] = ['Quinta', 'Manhã'];
-        }
-        if(isset($_POST['qui-tarde'])){
-            $horarios = ['Quinta', 'Tarde'];
-        }
-        if(isset($_POST['qui-noite'])){
-            $horarios[] = ['Quinta', 'Noite'];
-        }
-
-        if(isset($_POST['sex-manha'])){
-            $horarios[] = ['Sexta', 'Manhã'];
-        }
-        if(isset($_POST['sex-tarde'])){
-            $horarios = ['Sexta', 'Tarde'];
-        }
-        if(isset($_POST['sex-noite'])){
-            $horarios[] = ['Sexta', 'Noite'];
+        if(isset($_POST['horarios'])){
+            if(isset($_POST['horarios']['seg'])){
+                foreach($_POST['horarios']['seg'] as $horario){
+                    $horarios[] = ['Segunda', $horario];
+                }
+            }
+            if(isset($_POST['horarios']['ter'])){
+                foreach($_POST['horarios']['ter'] as $horario){
+                    $horarios[] = ['Terca', $horario];
+                }
+            }
+            if(isset($_POST['horarios']['qua'])){
+                foreach($_POST['horarios']['qua'] as $horario){
+                    $horarios[] = ['Quarta', $horario];
+                }
+            }
+            if(isset($_POST['horarios']['qui'])){
+                foreach($_POST['horarios']['qui'] as $horario){
+                    $horarios[] = ['Quinta', $horario];
+                }
+            }
+            if(isset($_POST['horarios']['sex'])){
+                foreach($_POST['horarios']['sex'] as $horario){
+                    $horarios[] = ['Sexta', $horario];
+                }
+            }
+        }else{
+            $horarios = array();
         }
         
+        if(isset($_POST['observacao'])){
+            $obs = $_POST['observacao'];
+        }
+
+        $demandaWeb = [
+            'guia' => $guia,
+            'horarios' => $horarios,
+            'observacao' => $obs
+        ];
+
+        $ID = session('ID');
+        $estagiario = new Empregado();
+        $resultado = $estagiario->novaDemandaWeb($ID, $demandaWeb);
+
+        $message['success'] = $resultado;
+        $message['error'] = 'Erro ao enviar proposta de horário';
+        echo json_encode($message);
     }
    
 }

@@ -216,12 +216,12 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`visita`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
-  `ID` INT UNSIGNED NOT NULL,
-  `Data_Visita` DATE NOT NULL,
-  `Turno` ENUM('manha', 'tarde', 'noite') NOT NULL,
-  `Status` ENUM('realizada', 'não realizada', 'instituição ausente') NOT NULL DEFAULT 'não realizada',
-  `agendamento_ID` INT UNSIGNED,
-  `ID_acompanhante` INT UNSIGNED,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `data_visita` DATE NOT NULL,
+  `turno` ENUM('manhã', 'tarde', 'noite') NOT NULL,
+  `status` ENUM('realizada', 'não realizada', 'instituição ausente') NOT NULL DEFAULT 'não realizada',
+  `agendamento_ID` INT UNSIGNED DEFAULT NULL,
+  `ID_acompanhante` INT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_visita_agendamento1_idx` (`agendamento_ID` ASC),
   INDEX `fk_visita_usuario1_idx` (`ID_acompanhante`),
@@ -338,7 +338,9 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`estagiario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`estagiario` (
-  `guia_matricula` VARCHAR(45) NOT NULL,
+  `hasDemanda` TINYINT(1) DEFAULT  0,
+  `guia_matricula` MEDIUMBLOB DEFAULT NULL,
+  `observacao` VARCHAR(80) DEFAULT NULL,
   `usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`usuario_ID`),
   CONSTRAINT `fk_estagiario_usuario1`

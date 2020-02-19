@@ -6,27 +6,24 @@
         
     <style>
         .notificacoes_agendamentos{
-            padding: 60px;
+            padding: 10px ;
         }
         .notificacoes{
-            border: 1px solid gray;
-            border-radius: 5px 5px 5px 5px;
-            padding: 3px;
-            float: left;
+            
         }
         .scroll{
-            max-height: 100px;
+            max-height: 300px;
             overflow-y: auto;
             padding: 10px;
         }
-        .agendamentos{
-            border: 1px solid gray;
-            border-radius: 5px 5px 5px 5px;
-            padding: 10px;
-            float: right;
+       .card-body{
+            height: 300px;
+        }
+        .card{
+            height: 300px;
         }
         .calendario{
-            padding: 60px;
+           
         }
         .coluna_calendario{        
             float: middle;
@@ -38,60 +35,46 @@
     </style>
  
     <body>
-        <div class="container-fluid m-0 bg-gray p-4">
+    <div class="container-fluid bg-white p-4" style="border-bottom-right-radius: 20px; 
+    border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px">
+        <div class="col-12 m-0 p-0">
+            <div class="container-fluid bg-white shadow p-3" style="border-bottom-right-radius: 20px; 
+            border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px">
             <div class = "row notificacoes_agendamentos">
-                <div class = "col-md-5 notificacoes pr-5">
+                <div class = "col-md-5 notificacoes">
                     <div class = "card">
-                        <h4>Notificações</h4>
-                        <div class = "card scroll">
-                            <h5>example4</h5>
-                            <h5>example3</h5>
-                            <h5>example2</h5>
-                            <h5>example1</h5>
+                    <div class = "card-header">
+                        <h4 class="card-title" >Suas Notificações</h4>
+                    </div>
+                        <div class = "card-body scroll">
+                            <h5>A visita do xx foi cancelada por motivo yy </h5>
+                            
                         </div>
                     </div>
                 </div>
-                <div class = "cold-md-2"></div>
-                <div class = "col-md-5 agendamentos">
+                <div class = "col-md-7 agendamentos">
                     <div class = "card">
-                        <h4>Agendamentos</h4>
-                        <div class = "card scroll">
-                           {{--@include('Dashboard_visitante._includes.agendamento')--}} 
-                        </div>
+                    <div class = "card-header">
+                        <h4 class="card-title" >Seus Agendamentos</h4>
                     </div>
+                        <div class = "card-body scroll">                      
+                            @include('Dashboard_visitante._includes.agendamentos')
+                        </div>
+                        </div>
                 </div>
             </div>
-            &nbsp;
+            </div>
+            </div>
+            <div class="col-12 mt-4 p-0">
+            <div class="container-fluid shadow p-4" style="border-bottom-right-radius: 20px; 
+            border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px">
             <div class = "row calendario">
                 <div class = "col-md-10 coluna_calendario"></div>
                     <div id = "calendar">
                     @include('Dashboard_visitante._includes.calendar')
                     </div>
-
             </div>
-        </div>
+            </div>
+            </div>
     </body>
 @endsection
-<!--
-            <div class = "container-fluid">
-            <div class = "row">
-                <div class = "col-md-6">
-                    <h4><b>--notificações--</b></h4>
-                    <div class = "card scrollbar-ripe">
-                        <div class = "card-body">
-                            <h5>algum exemplo</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6"> 
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"> <b>Seus Agendamentos</b> </h5>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
--->

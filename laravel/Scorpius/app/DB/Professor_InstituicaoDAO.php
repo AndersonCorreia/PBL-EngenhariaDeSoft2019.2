@@ -31,16 +31,7 @@ class Professor_InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $this->dataBase->query($sql);
     }
     function UPDATE($Professor_instituicao): bool{
-        $join ="instituicao i LEFT JOIN cidade_UF c ON c.cidade = ? AND c.UF = ?";
-        $set  ="nome = ?, responsavel = ?, endereco = ?, numero = ?, cidade_UF_ID =c.id , 
-                cep = ?, telefone = ?, tipo_Instituicao = ?";
-        $sql  = "UPDATE $join SET $set WHERE i.id = ?";
-
-        $stmt = $this->dataBase->prepare($sql);
-       
-        $stmt->bind_param("sssssssssi", ...$params);
         
-        return $stmt->execute();
     }
 
     function DELETE($Professor_instituicao): bool{

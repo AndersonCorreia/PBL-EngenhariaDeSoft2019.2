@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Instituicao;
+use App\Model\Visita;
+use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
+use App\DB\VisitaDAO;
 use App\Model\AgendamentoInstitucional;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
@@ -12,7 +16,7 @@ class UserController extends Controller{
     function getDashboard(){
         //para testes
         $visitas= [];
-        $agen = new \App\Model\Agendamento();
+        $agen = new \App\Model\AgendamentoInstitucional();
         $visitas[] = new \App\Model\Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
         $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
@@ -36,11 +40,17 @@ class UserController extends Controller{
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
         //fim da parte para testes
+        $id_user = session('ID',701);
+        $erro=null;
+        $variaveis=null;
+        $registro=null;
+        $registro = Visita::listarAgendamentos($id_user);
         $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
+            'registros' => $registro,
             'visitas' => $array,
             'legendaCores' => $visitas[0]->getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
@@ -50,6 +60,8 @@ class UserController extends Controller{
 
         return view("Dashboard_visitante.Dashboard_visitante",$variaveis);
     }
+
+
 
     /**
      * Função para realizar o login do usuario, preencher a sessão com o ID, nome e Tipo do usuario
@@ -104,23 +116,14 @@ class UserController extends Controller{
      * @return void
      */
     public function agendamento(){
-        //para testes
-        $visitas= [];
-        $agen = new \App\Model\AgendamentoInstitucional();
-        $visitas[] = new \App\Model\Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("03-02-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("05-02-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("06-02-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
-        $array = [];
 
+        $DAO = new VisitaDAO();
+        $dataAtual = now();
+        $dataFim = now();
+        $dataFim = $dataFim->add(new \DateInterval("P2M"));//depois mudar para 1 mes
+        $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim,true,20);
+
+        $array = [];
         foreach ($visitas as $v) {
             $v->preencherArrayForCalendario($array);
         }
@@ -146,19 +149,11 @@ class UserController extends Controller{
     }
 
     public function agendamentoIndividual(){
-        //para testes
-        $visitas= [];
-        $agen = new \App\Model\AgendamentoInstitucional();
-        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("03-02-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("05-02-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("06-02-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
+        $DAO = new VisitaDAO();
+        $dataAtual = now();
+        $dataFim = now();
+        $dataFim = $dataFim->add(new \DateInterval("P2M"));//depois mudar para 1 mes
+        $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim,true,20);
         $array = [];
 
         foreach ($visitas as $v) {
@@ -184,20 +179,35 @@ class UserController extends Controller{
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
     }
+
+    public function agendamentoAtividadeDiferenciada(){
+        $DAO = new VisitaDAO();
+        $dataAtual = now();
+        $dataFim = now();
+        $dataFim = $dataFim->add(new \DateInterval("P2M"));//depois mudar para 1 mes
+        $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim,true,20);
+        $array = [];
+
+        //fim da parte para testes
+        $tipoAtividade ="atividade-diferenciada";
+        $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
+        $variaveis = [
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Agendar Visita",
+            'visitas' => $array,
+            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'tipoUserLegenda'=> $visitante,
+            'tipoAtividade' => $tipoAtividade,
+        ];
+
+        return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
+    }
     public function agendamentoNoturno(){
-        //para testes
-        $visitas= [];
-        $agen = new \App\Model\AgendamentoInstitucional();
-        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "noite", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("03-02-2020"), "noite", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("06-02-2020"), "noite", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("08-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("09-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("10-02-2020"), "noite", "realizada", $agen);
+        $DAO = new VisitaDAO();
+        $dataAtual = now();
+        $dataFim = now();
+        $dataFim = $dataFim->add(new \DateInterval("P2M"));//depois mudar para 1 mes
+        $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim,false,20);
         $array = [];
         \App\Model\Visita::setCorIndisponivel('btn-danger');
         
