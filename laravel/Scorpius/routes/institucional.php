@@ -51,5 +51,5 @@ Route::put('/instituicao/atualizar/{id}',['as'=>'user.instituicoes.atualizar','u
 Route::get('/instituicao/agendamento', 'UserController@agendamento')->name("AgendarDiurnoInstituição.show");
 Route::post('/instituicao/agendamento', 'UserController@agendarInstituicao')->name("AgendarDiurnoInstituicao.post");
 
-Route::get('instituicao/agendamento/dados', 'TurmaController@listarTurmas');
-Route::get('instituicao/agendamento/dados', 'ControlerInstitucional@getInstituicoesProfessor');
+Route::get('instituicao/agendamento/dados/turmas', 'TurmaController@listarTurmas');
+Route::get('instituicao/agendamento/dados/instituicao', 'ControlerInstitucional@getInstituicoesProfessor');
