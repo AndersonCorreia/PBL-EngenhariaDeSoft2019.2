@@ -125,10 +125,13 @@ class TurmaController extends Controller
      */
     public function listarTurmas(){
         
-            $professor_ID = session('ID');
+            $professor_ID = session('ID', 701);
             $turma = new Turma();
             $turmas = $turma->todasTurmas($professor_ID);
-            return view('telasUsuarios.Agendamentos._includes.formularioAgendamento', $turmas['turmas']); 
+            if($turmas['turmas']->num_rows == 0){
+                throw new \App\Exceptions\NenhumaTurmaCadastradaException();
+            }
+            return view('telasUsuarios.Agendamentos._includes.formularioAgendamento')->with('turmas', $turmas['turmas']); 
           
     }
 }

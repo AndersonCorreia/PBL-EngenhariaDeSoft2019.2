@@ -8,8 +8,8 @@
         <input id="nome-instituicao"  class="form-control" type="text" name="Instituicao" 
             placeholder="Nome da instituição" list="instList" required autofocus>
         <datalist id="instList">
-            @if (($instituicoes ?? false))
-                @foreach ($instituicoes as $inst)
+            @if (($instituicao ?? false))
+                @foreach ($instituicao as $inst)
                     <option class="opList" value="{{$inst['nome']}}" >
                 @endforeach
             @endif
@@ -19,13 +19,11 @@
                 <label for="turma">Turma</label>
                 <input id="turma" name="turma" class="form-control" type="text" list="listTurma" placeholder="Nome da turma" required autofocus> 
                 <datalist id="listTurma">
-                
                     @if (($turmas ?? false))
                         @foreach ($turmas as $turma)
                             <option class="opList" value="{{$turma['nome']}}" >
                         @endforeach
                     @endif
-
                 </datalist>
             </div>
             <div class="col-md-4">
