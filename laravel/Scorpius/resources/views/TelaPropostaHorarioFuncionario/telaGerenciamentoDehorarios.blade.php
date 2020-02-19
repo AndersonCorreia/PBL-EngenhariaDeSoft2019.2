@@ -31,7 +31,7 @@
     <div class="form-row">
         <div class="col-6  float-right">
             <div class="form-group row">
-                <label class="col-sm-12 col-form-label" nomeEstagiario >Nome do Estagiário</label>
+                <label class="col-sm-12 col-form-label pt-3" nomeEstagiario >Nome do Estagiário</label>
                 <div class="col-9">
                     <input id="nomeInst" class="form-control" type="text" name="estagiario" placeholder="Insira o Nome do Estagiário" list="instList" required autofocus>
                     <datalist id="instList">
@@ -45,7 +45,7 @@
 
         <div class="col-4">
             <div class="input-group-append">
-                <label>Comprovante de Matrícula</label>
+                <label class = "pt-3">Comprovante de Matrícula</label>
                 <button type="button" class="btn btn-secondary" download>Download</button>
             </div>
         </div>

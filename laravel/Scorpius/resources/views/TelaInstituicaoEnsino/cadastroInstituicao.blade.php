@@ -1,6 +1,6 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Cadastro de Instituição')
+@section('title', 'Cadastrar Instituição de Ensino')
 
 @section('conteudo')
 
@@ -12,15 +12,20 @@
     </ul>
 @endif
 
-<form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('CadastroInstituição.post')}}">
+<div class="form-group col-12 pt-3">
+<h5>Insira os Dados da Instituição</h5>
+</div>
+
+<form class="col-xl-12 col-12 mx-sm-auto mt-sm-1" method="POST" action="{{route('CadastroInstituição.post')}}">
     {{csrf_field()}}
     <input id="onlyLink" type="hidden" name="onlyLink" value="false">{{-- valor para informar ao back-end se a instituição já existe --}}
     <input id="id" type="hidden" name="ID">{{-- prenchido pelo js caso o usuario clique em "buscar" --}}
     <fieldset>
         <div class="form-row col-msm">
-            <div class="form-group col-sm-12 d-block">
-                <span class="col-12 p-0">Instituição de Ensino</span>
-                <div class="col-md-10 col-sm-9 m-0 p-0 float-sm-left">
+            <div class="form-group col-11">
+                <span class="col-1 p-0">Instituição de Ensino</span>
+
+                <div class="col-md-12 col-sm-1 m-0 p-0 float-sm-left">
                     <input id="nomeInst"  class="form-control" type="text" name="Instituicao" 
                     placeholder="Nome da instituição" list="instList" required autofocus>
                     <datalist id="instList">
@@ -31,25 +36,26 @@
                     @endif
                     </datalist>
                 </div>
-                <div class="col-sm-2 mt-1 m-0 p-0 mt-sm-0 float-sm-right d-block">
-                    <button type="button" class= "btn btn-primary float-right " onclick="getDados()"> Buscar </button>
-                </div>
+
             </div>
+            <div class="col-1 pt-4 float-sm-right d-block">
+                    <button type="button" class= "btn btn-primary float-right " onclick="getDados()" buscar> Buscar </button>
+                </div>
 
             <div class="form-group col-sm-8">    
-                <span>Responsável pela instituição</span>
+                <span>Responsável pela Instituição</span>
                 <input id="resp" class="form-control"  type="text" maxlength="40" name="Responsavel" value="" 
                 placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
             </div>
 
             <div class="form-group col-sm-4">
-                <span>Telefone da instituição</span>
+                <span>Telefone da Instituição</span>
                 <input id="tel" class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" 
                 pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD no formato (xx)xxxxx-xxxx" required>
             </div> 
 
             <div class="form-group col-sm-8">
-                <span>Endereço da instituição</span>
+                <span>Endereço da Instituição</span>
                 <input id="endereco" class="form-control"  type="text" maxlength="50" name="Endereco" 
                 placeholder="Rua e Bairro" required>
             </div>
@@ -85,7 +91,7 @@
             </div>
             
             <div class="form-group col-sm-5">
-                <span>Tipo da Instituição</span>
+                <span>Tipo de Instituição</span>
                 <select id="tipo" name="Tipo"  class="custom-select" placeholder="Tipo de instituição" required>
                     <option  value="Privada">Privada</option> 
                     <option  value="Federal">Federal</option>
@@ -97,7 +103,7 @@
             </div>
             
             <div class="input-group-append mt-0 form-group col-sm-12">
-                <button id="submit" type="submit" class="btn mr-2 btn-primary">Cadastrar e Vincular instituição</button>
+                <button id="submit" type="submit" class="btn mr-2 btn-primary">Cadastrar e Vincular Instituição</button>
                 <a href={{route("instituição.show")}}><button type="button" class="btn btn-danger">Cancelar</button> </a>
             </div>
 
@@ -108,8 +114,9 @@
 
 @section('css')
 <style type="text/css">
+
     form .form-group{
-        padding:2%;
+        padding:0.5%;
     }
     form span{
         color: black;

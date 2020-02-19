@@ -1,38 +1,40 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Atualizar dados')
+@section('title', 'Atualizar Dados da Instituição de Ensino')
 
 @section('conteudo')
 
-<h1>Instituicao ({{$registros['nome']}})</h1>
+<div class="form-group col-12 pt-3">
+<h5>Cadastro - {{$registros['nome']}}</h5>
+</div>
+
 <div>
-<form action="{{route('user.instituicoes.atualizar',$registros['ID'])}}" method="POST" enctype="multipart/form-data">
+<form class="col-xl-12 col-12 mx-sm-auto mt-sm-1" action="{{route('user.instituicoes.atualizar',$registros['ID'])}}" method="POST" enctype="multipart/form-data">
 {{csrf_field()}}
     <fieldset>
         <div class="form-row col-msm">   
-            <div class="form-group col-sm-12 d-block">
-                <span class="col-10">Instituição de Ensino</span>
+            <div class="form-group col-sm-12">
+                <span class="col-1 p-0">Instituição de Ensino</span>
                 <input type="hidden" name="_method" value="put">
-                <div class="col-md-14 col-sm-9 m-0 p-0 float-sm-left">
-                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Nome da instituição" 
-                    value="{{isset($registros['nome']) ? $registros['nome'] : ''}}" list="instList" required autofocus>
-                </div>
+                <input id="nomeInst"  class="form-control" type="text" name="Instituicao" placeholder="Nome da instituição" 
+                value="{{isset($registros['nome']) ? $registros['nome'] : ''}}" list="instList" required autofocus>
             </div>
+
             <div class="form-group col-sm-8">    
-                <span>Responsável pela instituição</span>
+                <span>Responsável pela Instituição</span>
                 <input class="form-control"  type="text" maxlength="40" name="Responsavel" placeholder="Nome completo do responsável"  
                 value="{{isset($registros['responsavel']) ? $registros['responsavel'] : ''}}" required>
             </div>
             
             <div class="form-group col-sm-4">
-                <span>Telefone da instituição</span>
+                <span>Telefone da Instituição</span>
                 <input class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" 
                 value="{{isset($registros['telefone']) ? $registros['telefone'] : ''}}" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" 
                 title="Numero de telefone com DD" required>
             </div> 
 
             <div class="form-group col-sm-8">
-                <span>Endereço da instituição</span>
+                <span>Endereço da Instituição</span>
                 <input class="form-control"  type="text" maxlength="50" name="Endereco" placeholder="Rua e Bairro" 
                 value="{{isset($registros['endereco']) ? $registros['endereco'] : ''}}" required>
             </div>
@@ -114,7 +116,7 @@
         </div>
     </fieldset>
         <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">Atualizar Dados</button>
+            <button type="submit" class="btn btn-primary mr-2">Atualizar Dados</button>
             <a href={{route("instituição.show")}}><button type="button" class="btn btn-danger">Cancelar</button> </a>
         </div>
     </form>
@@ -124,7 +126,7 @@
 @section('css')
 <style type="text/css">
     form .form-group{
-        padding:2%;
+        padding:0.5%;
     }
     form span{
         color: black;

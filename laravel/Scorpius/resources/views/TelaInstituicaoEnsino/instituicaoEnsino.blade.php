@@ -1,9 +1,14 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Instituições')
+@section('title', 'Minhas Instituições de Ensino')
 
 @section('conteudo')
-<h1>Instituições de Ensino</h1> 
+
+<div class="form-group col-12 pt-3">
+<h5>Instituições de Ensino Cadastradas</h5>
+</div>
+
+
 <form method="get" action="#">
     {{csrf_field()}}
     
@@ -15,7 +20,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Responsavel</th>
+                    <th>Responsável</th>
                     <th>Endereço</th>
                     <th>Telefone</th>
                 </tr>
@@ -67,10 +72,10 @@
     }
 
     .instituicoes{
-        width: 800px;
+        width: 920px;
         height: 100px;
-        border: solid 2px black;
-        padding: 20px;
+        border: solid 5px black;
+        padding: 12px;
         margin: 10px;
         display: flex;
         flex-direction:column;
@@ -100,7 +105,7 @@
     }
 
     td, th{
-        padding: 0px 20px 0px 20px;
+        padding: 0px 50px 0px 20px;
     }
    
 
