@@ -164,7 +164,7 @@ class Visita extends \App\DB\interfaces\DataObject {
     /**
      * Get the value of btnClasses
      */ 
-    public function getBtnClasses()
+    public static function getBtnClasses()
     {
         return self::$btnClasses;
     }

@@ -7,8 +7,12 @@ use App\Model\Instituicao;
 use App\Model\Visita;
 use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
+use App\DB\Professor_InstituicaoDAO;
 use App\DB\VisitaDAO;
+use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
+use App\Model\Visita;
+
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class UserController extends Controller{   
@@ -57,7 +61,7 @@ class UserController extends Controller{
             'notificacoes' => $notificacao,
             'agenda_institucional' => $agenda_institucional,
             'visitas' => $array,
-            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
             'tipoAtividade' => $tipoAtividade,
             'leg_calend_dashboard'=>$leg_calend_dashboard,
@@ -150,16 +154,19 @@ class UserController extends Controller{
         for($i=0 ; $i<6 ; $i++){
             $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
         }
-        //fim da parte para testes
         $tipoAtividade ="exposições";
+        $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID(session("ID"));
+        $turmas = (new TurmaDAO)->SELECTbyProfessorID(session("ID"));
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
-            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
             'tipoAtividade' => $tipoAtividade,
+            'instituicoes' => $instituicoes,
+            'turmas' => $turmas,
             $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
         ];
 
@@ -189,7 +196,7 @@ class UserController extends Controller{
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
-            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $visitante,
             'tipoAtividade' => $tipoAtividade,
             $tipoAtividade => $exposicoes
@@ -227,7 +234,7 @@ class UserController extends Controller{
         $dataFim = $dataFim->add(new \DateInterval("P2M"));//depois mudar para 1 mes
         $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim,false,20);
         $array = [];
-        \App\Model\Visita::setCorIndisponivel('btn-danger');
+        \App\ModelVisita::setCorIndisponivel('btn-danger');
         
         foreach ($visitas as $v) {
             $v->preencherArrayForCalendario($array, "btn-danger");
@@ -243,7 +250,7 @@ class UserController extends Controller{
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
-            'legendaCores' => $visitas[0]->getBtnClasses(),
+            'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $visitante,
             'tipoAtividade' => $tipoAtividade,
             'turno' => 'noturno',

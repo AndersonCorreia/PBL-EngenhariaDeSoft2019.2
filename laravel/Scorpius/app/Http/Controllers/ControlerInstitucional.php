@@ -49,7 +49,7 @@ class ControlerInstitucional extends Controller {
             'paginaAtual' => "Turma",
         ];
 
-        return view('TelaInstituicaoEnsino.errorNenhumaTurma', $variaveis);
+        return view('telaTurma.errorNenhumaTurma', $variaveis);
     }
 
     /**

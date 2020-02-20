@@ -71,16 +71,15 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         $alunos->DELETEbyTurma($turma_ID);
         return $this->dataBase->query("DELETE FROM turma WHERE ID = $turma_ID");
     }
-    public function SELECTbyprofessorID($id){
-        $join = "turma as t LEFT JOIN professor_instituicao as pi ON t.professor_ID = pi.ID";
-        $sql = "SELECT * FROM $join WHERE pi.usuario_ID = ?";
+    public function SELECTbyProfessorID($id){
+        $sql = "SELECT * FROM turma WHERE professor_ID = ?";
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->blind_param("i",$id);
+        $stmt->bind_param("i",$id);
         $stmt->execute();
-        $result = $stmt->getResult()->fetch_all(MYSQLI_ASSOC);
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
         if($result == []){
-            throw new \APP\Exceptions\NenhumaTurmaCadastradaException();
+            throw new \App\Exceptions\NenhumaTurmaCadastradaException();
         }
 
         return $result;
@@ -110,6 +109,7 @@ class TurmaDAO extends \App\DB\interfaces\DataAccessObject
         ];
         return $dados;
     }
+
     public function UPDATE_ALUNO($turma_ID, $aluno)
     {
         $sql = "UPDATE aluno 
