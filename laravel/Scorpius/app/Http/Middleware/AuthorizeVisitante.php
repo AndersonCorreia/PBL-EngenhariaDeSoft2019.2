@@ -24,10 +24,4 @@ class AuthorizeVisitante
         return $next($request);//temporariamente retorna a tela normalmente
         return redirect()->route('dashboard');
     }
-
-    public function setRotasPermissoes(){
-        //"estagiario" representa as permissões especificas do estagiario
-        $this->RotasPermissoes[ "dashboard.show" ] = "visitante";
-       
-    }
 }

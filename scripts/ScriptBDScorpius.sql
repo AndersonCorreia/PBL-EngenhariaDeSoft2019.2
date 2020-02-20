@@ -14,6 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema scorpius
 -- ----------------------------------------------------
+DROP DATABASE scorpius;-- apagando o banco para inserir novamente
 CREATE SCHEMA IF NOT EXISTS `scorpius` DEFAULT CHARACTER SET utf8 ;
 USE `scorpius` ;
 
@@ -174,22 +175,22 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento_institucional` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Visita` INT NOT NULL,
-  `Data_Agendamento` DATETIME NOT NULL,
-  `Status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado') NOT NULL,
-  `turma_ID` INT UNSIGNED NOT NULL,
-  `instituicao_ID` INT UNSIGNED NOT NULL,
+  `visita` INT NOT NULL,
+  `data_Agendamento` DATETIME NOT NULL,
+  `status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado') NOT NULL,
+  `turma_ID` INT UNSIGNED,
+  `professor_instituicao_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_agendamento_institucional_turma1_idx` (`turma_ID` ASC),
   CONSTRAINT `fk_agendamento_institucional_turma1`
     FOREIGN KEY (`turma_ID`)
     REFERENCES `scorpius`.`turma` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  INDEX `fk_agendamento_institucional_instituicao1_idx` (`instituicao_ID` ASC),
-  CONSTRAINT `fk_agendamento_institucional_instituicao1`
-    FOREIGN KEY (`instituicao_ID`)
-    REFERENCES `scorpius`.`instituicao` (`ID`)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
+  INDEX `fk_agendamento_institucional__professor_instituicao1_idx` (`professor_instituicao_ID` ASC),
+  CONSTRAINT `fk_agendamento_institucional_professor_instituicao1`
+    FOREIGN KEY (`professor_instituicao_ID`)
+    REFERENCES `scorpius`.`professor_instituicao` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

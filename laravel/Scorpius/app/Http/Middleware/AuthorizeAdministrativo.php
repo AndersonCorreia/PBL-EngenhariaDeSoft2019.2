@@ -25,13 +25,12 @@ class AuthorizeAdministrativo{
         $user = $DAO->SELECTbyID(session("ID",901));
         session(['tipo' => $user['tipo'] ]);
 
-        if($permissao = $user['tipo'] || $DAO->asPermissao($user["tipo"], $permissao) ){
+        if($permissao == $user['tipo'] || $DAO->asPermissao($user["tipo"], $permissao) ){
             return $next($request);
         }
-        
         print_r(" Esse usuario não tem permissão para acessar essa pagina");
         return $next($request);//temporariamente retorna a tela normalmente
-        return redirect()->route('dashboard');
+        return redirect()->route('paginaInicial');
     }
 
     public function setRotasPermissoes(){

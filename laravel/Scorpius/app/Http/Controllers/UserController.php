@@ -11,7 +11,6 @@ use App\DB\Professor_InstituicaoDAO;
 use App\DB\VisitaDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
-use App\Model\Visita;
 
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
