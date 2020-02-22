@@ -24,8 +24,8 @@
         </div>
 
         <div class="botoes">
-                <a  href="{{route('confirmaInstituicao',[$agenda['ID'],'confirmado'])}}" class="btn col btn-primary status" value="{{$agenda['Status']}}" confirmar>Confimar</a>
-                <a  href="{{route('confirmaInstituicao', [$agenda['ID'],'cancelado pelo usuario'])}}" class="btn col btn-danger status" value="{{$agenda['Status']}}" cancelar>Cancelar</a>
+                <a  href="{{route('confirmaInstituicao',[$agenda['ID'],'confirmado'])}}" class="btn col btn-primary status p-1" value="{{$agenda['Status']}}" confirmar>Confimar</a>
+                <a  href="{{route('confirmaInstituicao', [$agenda['ID'],'cancelado pelo usuario'])}}" class="btn col btn-danger status p-1" value="{{$agenda['Status']}}" cancelar>Cancelar</a>
         </div>
         </div>
         @endforeach
@@ -49,13 +49,12 @@ $(document).ready(function() {
     }
 })
 
-
 </script>
 @endsection
 
 <style>
     .instituicoes{
-        height:100px;
+        height:95px;
         width:500px;     
     }
 
@@ -68,7 +67,7 @@ $(document).ready(function() {
     .botoes{
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: center border;        
     }
 
     .btn{
@@ -80,9 +79,9 @@ $(document).ready(function() {
         align-items: center;
     }
 
-    td, th{
-        padding: 0px 20px 0px 20px;
-        width:300px;
+    td,th {
+        padding: 0px 15px 0px 15px;
+        width:20px;
         text-align: center;
     }
 </style>

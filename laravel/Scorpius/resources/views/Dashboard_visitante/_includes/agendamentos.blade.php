@@ -24,8 +24,8 @@
         </div>
 
         <div class="botoes">
-                <a  href="{{route('confirma',[$registro['ID'],'confirmado'])}}" class="btn col btn-primary status" value="{{$registro['Status']}}" confirmar>Confimar</a>
-                <a  href="{{route('confirma', [$registro['ID'],'cancelado pelo usuario'])}}" class="btn col btn-danger status" value="{{$registro['Status']}}" cancelar>Cancelar</a>
+                <a  href="{{route('confirma',[$registro['ID'],'confirmado'])}}" class="btn col btn-primary status p-1" value="{{$registro['Status']}}" confirmar>Confimar</a>
+                <a  href="{{route('confirma', [$registro['ID'],'cancelado pelo usuario'])}}" class="btn col btn-danger status p-1" value="{{$registro['Status']}}" cancelar>Cancelar</a>
         </div>
         </div>
         @endforeach
@@ -49,12 +49,11 @@ $(document).ready(function() {
     }
 })
 
-
 </script>
 @endsection
 <style>
     .instituicoes{
-        height:100px;
+        height:75px;
         width:500px;     
     }
 
@@ -67,7 +66,7 @@ $(document).ready(function() {
     .botoes{
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: center border;
     }
 
     .btn{
@@ -79,11 +78,9 @@ $(document).ready(function() {
         align-items: center;
     }
 
-    td, th{
+    td,th {
         padding: 0px 20px 0px 20px;
-        width:100px;
+        width:20px;
         text-align: center;
     }
-   
-
 </style>
