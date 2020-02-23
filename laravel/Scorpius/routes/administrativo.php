@@ -28,6 +28,14 @@ Route::group(
         Route::post('/confirmacaoHorario', 'HorarioController@enviaHorario')->name("enviaHorario");
         
         //Rota para retornar a tela da Proposta de Horário do Estagiário.
+    }
+);
+
+Route::group(
+    ['midlleware'=>[],
+    'prefix'=>'estagiario',
+    'namespace'=>'Estagiario'],
+    function(){
         Route::get('/demandaWeb', 'horarioEstagiarioController@index')->name("demandaWeb.show");
         Route::post('/demandaWeb/enviar-horario', 'horarioEstagiarioController@cadastrarHorario')->name("demandaWeb.post");
     }
