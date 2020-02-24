@@ -1,6 +1,6 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Relatório de Visitas Agendadas')
+@section('title', 'Relatórios de Visitas Agendadas')
 
 @section('conteudo')
 
@@ -45,42 +45,39 @@
             <thead>
                 <tr>
                     <th>Turno:</th> <td>Manhã</td>
+                    <th>Ano Escolar:</th> <td>1º Ano</td>
                 </tr>
             </thead>
    
             <thead>
-                <tr>
-                    <th>Nome dos Aluno:</th> 
-                    <th>Ano Escolar:</th> 
-                    <th>Idade:</th>
+                <tr class="table-primary">
+                    <th colspan="2">Nome do Aluno:</th> 
+                    <th colspan="2">Idade:</th>
+                    
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Henrique Dias Oliveira </td> 
-                    <td>2º Semestre</td>
-                    <td>14 anos</td>
+                    <td colspan="2">Henrique Dias Oliveira </td> 
+                    <td colspan="2">14 anos</td>
                 </tr>
             </tbody>
             <tbody>
                 <tr>
-                    <td>Marcos Luís Barreto</td> 
-                    <td>2º Semestre</td>
-                    <td>13 anos</td>
+                    <td colspan="2">Marcos Luís Barreto</td> 
+                    <td colspan="2">13 anos</td>
                 </tr>
             </tbody>
             <tbody>
                 <tr>
-                    <td>João Bento Souza</td> 
-                    <td>2º Semestre</td>
-                    <td>14 anos</td>
+                    <td colspan="2">João Bento Souza</td> 
+                    <td colspan="2">14 anos</td>
                 </tr>
             </tbody>
             <tbody>
                 <tr>
-                    <td>Juceline Arraes Mato</td> 
-                    <td>2º Semestre</td>
-                    <td>15 anos</td>
+                    <td colspan="2">Juceline Arraes Mato</td> 
+                    <td colspan="2">15 anos</td>
                 </tr>
             </tbody>
 
@@ -90,8 +87,8 @@
 <style>
 
     .instituicoes{
-        width: 900px;
-        height: 350px;
+        width: 850px;
+        height: 330px;
         border: solid 5px #ccc;
         padding: 12px;
         margin: 10px;
