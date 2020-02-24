@@ -19,7 +19,7 @@ class AuthorizeVisitante
         if( $tipo == 'visitante' || $tipo == 'institucional'){
             return $next($request);
         }
-        print("\Esta conta não é de instituição ou de visitante");
+        print("\Erro: esta conta não é de Instituição ou de Visitante!");
         session(['ID' => 601, 'tipo' => 'institucional']);
         return $next($request);//temporariamente retorna a tela normalmente
         return redirect()->route('dashboard');

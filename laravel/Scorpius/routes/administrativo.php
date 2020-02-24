@@ -31,6 +31,16 @@ Route::group(
 );
 
 Route::group(
+    ['midlleware'=>[], 
+    'prefix'=>'funcionario',
+    'namespace'=>'Funcionario'],
+    function(){
+        Route::get('/relatorioVisitasAgendadas', 'RelatorioVisitasController@getTelaRelatorioVisitas')->name("telaRelatorioVisitasAgendadas.show");
+    }
+);
+
+
+Route::group(
     ['midlleware'=>[],
     'prefix'=>'estagiario',
     'namespace'=>'Estagiario'],

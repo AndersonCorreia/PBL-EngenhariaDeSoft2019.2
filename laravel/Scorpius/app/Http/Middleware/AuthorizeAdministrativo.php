@@ -28,7 +28,7 @@ class AuthorizeAdministrativo{
         if($permissao == $user['tipo'] || $DAO->asPermissao($user["tipo"], $permissao) ){
             return $next($request);
         }
-        print_r(" Esse usuario não tem permissão para acessar essa pagina");
+        print_r("Este usuário não tem permissão para acessar esta página!");
         return $next($request);//temporariamente retorna a tela normalmente
         return redirect()->route('paginaInicial');
     }
@@ -42,6 +42,7 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes[ "retornaProposta" ] = 'designar horários para estagiarios';
         $this->RotasPermissoes[ "telaGerenciamentoDeVisitas.show" ] = 'gerenciamento de visitas';
         $this->RotasPermissoes["demandaWeb.show" ] = 'demanda web';
+        $this->RotasPermissoes["telaRelatorioVisitasAgendadas.show"] = 'relatorio dos agendamentos';
         //$this->RotasPermissoes["nome da rota" ] = 'permissão associada como ta escrito no banco';
     }
 }

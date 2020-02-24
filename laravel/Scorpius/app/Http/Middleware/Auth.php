@@ -18,7 +18,7 @@ class Auth
         if($request->session()->has('ID')){
             return $next($request);
         }
-        print("vc não esta logado");
+        print("Você não está conectado em uma conta!");
         return $next($request);
         return redirect()->route('entrar');
     }
