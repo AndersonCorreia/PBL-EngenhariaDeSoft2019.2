@@ -58,7 +58,6 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Observações do Estagiário </h4>
-                        <h7 class="card-subtitle mb-2 text-muted">Título da Mensagem</h7>
                         <p class="card-text"></p>
                 </div>
             </div>
