@@ -53,7 +53,7 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        if($resultado->rows != NULL) {
+        if($resultado->num_rows > 0) {
             while($row = $resultado->fetch_assoc()) {
                 $registros[] = $row;
             }  

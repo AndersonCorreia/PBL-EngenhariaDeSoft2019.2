@@ -26,7 +26,6 @@ Route::group(
         Route::get('/confirmacaoHorario/{id}', 'HorarioController@getProposta')->name("retornaProposta");
         Route::get('/confirmacaoHorario/erro','HorarioController@nenhumaProposta')->name("errorNenhumaProposta.show");
         Route::post('/confirmacaoHorario', 'HorarioController@enviaHorario')->name("enviaHorario");
-        
         //Rota para retornar a tela da Proposta de Horário do Estagiário.
     }
 );

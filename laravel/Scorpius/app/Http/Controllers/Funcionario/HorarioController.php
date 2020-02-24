@@ -35,7 +35,8 @@ class HorarioController extends Controller{
     public function getProposta($id){
         $DAO = new Proposta_horarioDAO();
         $horario = $DAO->buscaHorarioEstagiario($id);
-        return Response::json($horario);
+        $observacao = $DAO->buscaObservacaoEstagiario($id);
+        return Response::json(['horario'=>$horario,'observacao'=>$observacao]);
     }
 
     public function getObservacao($id){
