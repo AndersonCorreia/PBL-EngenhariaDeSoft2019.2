@@ -12,13 +12,13 @@
 
 <div class="row col-12 m-0 p-0 font-weight-bold text-center" >
     <div class="row col-12 m-0 p-0">
-        <div id="calendario" class="col-12 p-2 m-0 overflow-auto barra">
+        <div id="calendario" class="col-12 pt-2 px-2 m-0 overflow-auto barra">
             <div class="col p-0 text-dark font-weight-bold">
-                <button type="button" class=" btn btn-default">
+                <button id="setaLeft" type="button" class=" btn btn-default" disabled>
                     <i class="fas fa-angle-left"></i>
                 </button>
-                <span> {{$visitas["datas"]["dataInicio"] ?? "01/02"}}  a  {{$visitas["datas"]["dataFim"] ?? "20/02"}} </span>
-                <button type="button" class=" btn btn-default">
+                <span id="calendarDatas">{{$visitas["datas"]["dataInicio"]}} a {{$visitas["datas"]["dataFim"]}}</span>
+                <button id="setaRight" type="button" class=" btn btn-default">
                     <i class="fas fa-angle-right"></i>
                 </button>
             </div>
@@ -41,17 +41,32 @@
                             <div id="data{{$loop->index}}" class="col-4 col-lg-12 p-2">{{ $v["data"] ?? "27/01 SEG" }}</div>
                             @if(($turno ?? "diurno")==="diurno") 
                                 <div class="col col-lg-12 py-1 p-0">
+                                @if( isset($v["manhã.btn"]) )
                                     <button id="manhã{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','manhã')"
-                                        class="btn w-50 h-100 border border-secondary {{$v["manhã.btn"] ?? 'bg-light'}} "></button>
+                                        class="btn w-50 h-100 border border-secondary {{$v["manhã.btn"]}}"></button>
+                                @else
+                                    <button id="manhã{{$loop->index}}" type="button" aria-disabled="true"
+                                        class="btn w-50 h-100 border border-secondary btn-default" disabled></button>
+                                @endif
                                 </div>
                                 <div class="col col-lg-12 py-1 p-0">
-                                    <button id="tarde{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','tarde')"
-                                        class="btn w-50 h-100 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
+                                @if( isset($v["tarde.btn"]) )
+                                    <button id="tarde{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','manhã')"
+                                        class="btn w-50 h-100 border border-secondary {{$v["tarde.btn"]}}"></button>
+                                @else
+                                    <button id="tarde{{$loop->index}}" type="button" aria-disabled="true"
+                                        class="btn w-50 h-100 border border-secondary btn-default" disabled></button>
+                                @endif
                                 </div>
                             @else
                                 <div class="col col-lg-12 py-1 p-0">
-                                    <button id="noite{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','noite')"
-                                        class="btn w-50 h-100 border border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
+                                @if( isset($v["noite.btn"]) )
+                                    <button id="noite{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','manhã')"
+                                        class="btn w-50 h-100 border border-secondary {{$v["noite.btn"]}}"></button>
+                                @else
+                                    <button id="noite{{$loop->index}}" type="button" aria-disabled="true"
+                                        class="btn w-50 h-100 border border-secondary btn-default" disabled></button>
+                                @endif
                                 </div>
                             @endif
                         </div>
@@ -67,15 +82,15 @@
                     <span> Legenda:</span>
                 </div>
                 <div class="col-7 col-lg-3 py-1">
-                    <button class="btn {{ $legendaCores["proprio"] }} w-auto"></button> 
+                    <a class="btn {{ $legendaCores["proprio"] }} w-auto" aria-disabled="true" disabled></a> 
                     <span> Seu agendamento</span>
                 </div>
-                <div class="col-5 col-lg-3 py-1">
-                    <button class="btn {{ $legendaCores["disponivel"] }} w-auto"></button>
+                <div class="col-5 col-lg-2 py-1">
+                    <a class="btn {{ $legendaCores["disponivel"] }} w-auto" aria-disabled="true" disabled></a>
                     <span> {{$tipoUserLegenda["leg.disponivel"]}}</span>
                 </div>
-                <div class="col-12 col-lg-4 py-1 ">
-                    <button class="btn {{ $legendaCores["indisponivel"] }} w-auto"></button>
+                <div class="col-12 col-lg-5 py-1 ">
+                    <a class="btn {{ $legendaCores["indisponivel"] }} w-auto" aria-disabled="true" disabled></a>
                     <span> {{$tipoUserLegenda["leg.indisponivel"]}}</span>
                 </div>
             </div>
