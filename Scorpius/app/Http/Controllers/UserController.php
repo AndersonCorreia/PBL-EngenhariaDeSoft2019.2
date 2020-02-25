@@ -19,19 +19,19 @@ class UserController extends Controller{
     function getDashboard(){
         //para testes
         $visitas= [];
-        $agen = new \App\Model\AgendamentoInstitucional();
-        $visitas[] = new \App\Model\Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("30-01-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("03-02-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new \App\Model\Visita( new \DateTime("05-02-2020"), "tarde", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("06-02-2020"), "manha", "realizada");
-        $visitas[] = new \App\Model\Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
+        $agen = new AgendamentoInstitucional();
+        $visitas[] = new Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
+        $visitas[] = new Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
+        $visitas[] = new Visita( new \DateTime("27-01-2020"), "manha", "realizada");
+        $visitas[] = new Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
+        $visitas[] = new Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
+        $visitas[] = new Visita( new \DateTime("30-01-2020"), "manha", "realizada");
+        $visitas[] = new Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
+        $visitas[] = new Visita( new \DateTime("03-02-2020"), "manha", "realizada");
+        $visitas[] = new Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
+        $visitas[] = new Visita( new \DateTime("05-02-2020"), "tarde", "realizada");
+        $visitas[] = new Visita( new \DateTime("06-02-2020"), "manha", "realizada");
+        $visitas[] = new Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
         $array = [];
 
         foreach ($visitas as $v) {
@@ -233,7 +233,7 @@ class UserController extends Controller{
         $dataFim = $dataFim->add(new \DateInterval("P2M"));//depois mudar para 1 mes
         $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim,false,20);
         $array = [];
-        \App\ModelVisita::setCorIndisponivel('btn-danger');
+        Visita::setCorIndisponivel('btn-danger');
         
         foreach ($visitas as $v) {
             $v->preencherArrayForCalendario($array, "btn-danger");

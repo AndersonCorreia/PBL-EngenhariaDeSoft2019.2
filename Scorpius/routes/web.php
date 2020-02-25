@@ -11,6 +11,7 @@
 */
 
 Route::get('/', ['uses'=>'InicialController@inicio'])->name('paginaInicial');
+Route::get("/dashboard")->name("dashboard");//depois fazer o metodo
 
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
 Route::resource('/cadastrar', 'CadastroController');

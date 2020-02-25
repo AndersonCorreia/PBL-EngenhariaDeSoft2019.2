@@ -17,7 +17,7 @@
                 <button type="button" class=" btn btn-default">
                     <i class="fas fa-angle-left"></i>
                 </button>
-                <span> {{$visitas["dataInicio"] ?? "01/02"}}  a  {{$visitas["dataFim"] ?? "20/02"}} </span>
+                <span> {{$visitas["datas"]["dataInicio"] ?? "01/02"}}  a  {{$visitas["datas"]["dataFim"] ?? "20/02"}} </span>
                 <button type="button" class=" btn btn-default">
                     <i class="fas fa-angle-right"></i>
                 </button>
@@ -36,21 +36,21 @@
                     </div>
                     <div class="col-lg-11 p-0 m-0 col row">
                     @foreach ($visitas as $dia => $v)
-                        @if ($loop->index>2 && $loop->index<13 )
+                        @if ($loop->index>0 && $loop->index<11 )
                         <div class="row col-md m-md-0 mx-md-1 p-0 border"> 
                             <div id="data{{$loop->index}}" class="col-4 col-lg-12 p-2">{{ $v["data"] ?? "27/01 SEG" }}</div>
                             @if(($turno ?? "diurno")==="diurno") 
                                 <div class="col col-lg-12 py-1 p-0">
-                                    <button id="manhã{{$loop->index}}" type="button" onclick="setDataTurno('{{$dia}}','manhã')"
+                                    <button id="manhã{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','manhã')"
                                         class="btn w-50 h-100 border border-secondary {{$v["manhã.btn"] ?? 'bg-light'}} "></button>
                                 </div>
                                 <div class="col col-lg-12 py-1 p-0">
-                                    <button id="tarde{{$loop->index}}" type="button" onclick="setDataTurno('{{$dia}}','tarde')"
+                                    <button id="tarde{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','tarde')"
                                         class="btn w-50 h-100 border border-secondary {{$v["tarde.btn"] ?? 'bg-light'}} "></button>
                                 </div>
                             @else
                                 <div class="col col-lg-12 py-1 p-0">
-                                    <button id="noite{{$loop->index}}" type="button" onclick="setDataTurno('{{$dia}}','noite')"
+                                    <button id="noite{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','noite')"
                                         class="btn w-50 h-100 border border-secondary {{$v["noite.btn"] ?? 'btn-light'}} "></button>
                                 </div>
                             @endif
