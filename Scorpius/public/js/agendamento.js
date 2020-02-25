@@ -51,20 +51,22 @@ function proximosDias(turno){
     Turno = turno;
     if( posCalendar<1 ){
         var datafinal = $("#data").attr("max");
-        $.getJSON("/instituicao/agendamento/dados/"+ datafinal+ "/proximo", preencherCalendar);
+        $.getJSON("/agendamento/dados/"+ Turno + "/" + datafinal+ "/proximo/", preencherCalendar);
     }
     $("#setaLeft").removeAttr("disabled");
-    $("#setaRight").attr("disabled");
+    $("#setaRight").attr("disabled", "");
+    posCalendar=1;
 }
 
 function anterioresDias(turno){
     Turno = turno;
-    if( posCalendar<1 ){
+    if( posCalendar-->0 ){
         var data = $("#data").attr("min");
-        $.getJSON("/instituicao/agendamento/dados/"+ data + "/anterior", preencherCalendar);
+        $.getJSON("/agendamento/dados/"+ Turno + "/" + data + "/anterior/", preencherCalendar);
     }
     $("#setaRight").removeAttr("disabled");
-    $("#setaLeft").attr("disabled");
+    $("#setaLeft").attr("disabled","");
+    posCalendar=0;
 }
 
 /**
@@ -74,45 +76,64 @@ function anterioresDias(turno){
  * @param {*} status 
  */
 const preencherCalendar = function(data, status) {
-    if (status != "success" || data.error) {
-        alert("Erro ao recuperar as informações");
+    if (status != "success" || data == []) {
+        alert("Não há proximos dias para visita além deste periodo no sistema tente novamente outro dia");
     } else {
         var visitas = data;
         $("#calendarDatas").html( visitas["datas"]["dataInicio"] + ' a ' + visitas["datas"]["dataFim"] );
         
         var index = 0;
-        for (const [dia, v] of visitas.entries()) {
+        for (var dia in visitas) {
+            var v = visitas[dia];
             if(index>0 && index<11 ){
+                $("#data"+index).html( v["data"] );
+                $("#dia"+index).removeClass("d-none");
                 if( Turno == "diurno"){
                     var manha = $("#manhã"+index);
                     if(v.hasOwnProperty("manhã.btn")){
                         manha.click(setDataTurno(manha, dia,'manhã') ).removeAttr("disabled");
-                        manha.removeClass("btn-default").addClass(v["manhã.btn"]);
+                        manha.removeClass("btn-default","btn-success", "btn-danger", "btn-warning", "btn-primary")
+                        .addClass(v["manhã.btn"]);
                     }else {
                         manha.off().attr("disabled");
-                        manha.removeClass(v["manhã.btn"]).addClass("btn-default");
+                        manha.removeClass("btn-success", "btn-danger", "btn-warning", "btn-primary")
+                        .addClass("btn-default");
                     }
 
                     var tarde = $("#tarde"+index);
                     if(v.hasOwnProperty("tarde.btn")){
                         tarde.click(setDataTurno(tarde, dia,'tarde') ).removeAttr("disabled");
-                        tarde.removeClass("btn-default").addClass(v["tarde.btn"]);
+                        tarde.removeClass("btn-default","btn-success", "btn-danger", "btn-warning", "btn-primary")
+                        .addClass(v["tarde.btn"]);
                     }else {
                         tarde.off().attr("disabled");
-                        tarde.removeClass(v["tarde.btn"]).addClass("btn-default");
+                        tarde.removeClass("btn-success", "btn-danger", "btn-warning", "btn-primary")
+                        .addClass("btn-default");
                     }
                 }else {
                     var noite = $("#noite"+index);
                     if(v.hasOwnProperty("noite.btn")){
                         noite.click(setDataTurno(noite, dia,'noite') ).removeAttr("disabled");
-                        noite.removeClass("btn-default").addClass(v["noite.btn"]);
+                        noite.removeClass("btn-default","btn-success", "btn-danger", "btn-warning", "btn-primary")
+                        .addClass(v["noite.btn"]);
                     }else {
                         noite.off().attr("disabled");
-                        noite.removeClass(v["noite.btn"]).addClass("btn-default");
+                        noite.removeClass("btn-success", "btn-danger", "btn-warning", "btn-primary")
+                        .addClass("btn-default");
                     }
                 }
             }
             index++;
         }
+        if(index<11){
+            removerDatas(index);
+        }
+    }
+}
+
+function removerDatas(index){
+
+    for (let i = index; i < 11; i++) {
+        $("#dia"+i).addClass("d-none");
     }
 }

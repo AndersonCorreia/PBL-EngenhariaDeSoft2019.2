@@ -94,6 +94,9 @@ INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-19','tarde');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-20','tarde');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-20','noite');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-21','noite');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-22','tarde');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-23','manhã');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-24','tarde');
 
 -- INSERT DOS Agentamentos de Usuário --
 INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(1, 1, '2020-02-10 14:00:00', 'pendente', 601);
