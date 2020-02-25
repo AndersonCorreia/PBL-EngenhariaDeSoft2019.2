@@ -35,7 +35,7 @@ class AlteraUsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {//request são os dados do formulario
+    {/*request são os dados do formulario
         $email = $_POST['email'];
         $nome = $_POST['nome'];
         $telefone = $_POST['telefone'];
@@ -48,7 +48,7 @@ class AlteraUsuarioController extends Controller
             $variavel = 
             $variavel = 
 
-        }
+        }*/
 
 //tem que fazer a condicional se a senha antiga estiver errada não poder fazer a alteração
         //if($senha_antiga for diferente da senha do bd)
