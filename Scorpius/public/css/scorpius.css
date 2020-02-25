@@ -21,6 +21,10 @@
     border-top-left-radius: 20px;
     background-color: #fff !important;
 }
+.border-shadow {
+    border-color: rgba(145, 145, 145, 0.062);
+}
+
 .border-all-100 {
     border-bottom-right-radius: 100px !important;
     border-bottom-left-radius: 100px !important;

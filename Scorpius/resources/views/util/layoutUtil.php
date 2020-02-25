@@ -9,7 +9,7 @@ function getMenuLinksAll(){
         'AgendarNoturno'=>  ['link'=>route('AgendarNoturno.show') , 'texto'=>'Atividades Noturnas' ],
         'AgendarAtividade'=>['link'=>route('AgendarAtividade.show') , 'texto'=>'Atividades Diferenciadas' ],
         'collapseAgend' =>  ['texto'=> 'Agendar Visita', 'itens' => array() ],
-        'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições Cadastradas' ],
+        'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições Vínculadas' ],
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
         'institucional2'=>  ['link'=>route('turma.index'), 'texto'=>'Turmas' ],
         'visitante0'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
