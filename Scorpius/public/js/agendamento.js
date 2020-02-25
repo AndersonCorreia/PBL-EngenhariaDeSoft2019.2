@@ -80,6 +80,8 @@ const preencherCalendar = function(data, status) {
         alert("Não há proximos dias para visita além deste periodo no sistema tente novamente outro dia");
     } else {
         var visitas = data;
+        $("#data").attr("min",visitas["datas"]['data0']);
+        $("#data").attr("max",visitas["datas"]['dataLimite']);
         $("#calendarDatas").html( visitas["datas"]["dataInicio"] + ' a ' + visitas["datas"]["dataFim"] );
         
         var index = 0;

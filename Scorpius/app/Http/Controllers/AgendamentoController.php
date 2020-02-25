@@ -42,12 +42,14 @@ class AgendamentoController extends Controller{
         $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim, ($turno=="diurno"), 20);
         $array = [];
         foreach ($visitas as $v) {
-            if(count($array)<11){
+            if(count($array)<12){
                 $v->preencherArrayForCalendario($array, "btn-danger");
             }
         }
         $dataFinalReal= new \DateTime($array["datas"]["dataLimite"]);
-        $dataFinalReal->sub(new \DateInterval("P1D"));
+        if ( count($array)>11 ){
+            $dataFinalReal->sub(new \DateInterval("P1D"));
+        }
         $array["datas"]["dataLimite"] = $dataFinalReal->format("Y-m-d");
         return $array;
     }
