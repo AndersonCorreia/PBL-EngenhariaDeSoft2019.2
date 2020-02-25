@@ -21,11 +21,12 @@ const preencherForm = function(data, status) {
             $("#submit").html("Vincular instituição");
             $("#onlyV").val("true");
         }
-    }
-    /**
-     * verificar se o nome da instituição foi proveniente das lista de instituições
-     * caso o usuario clique em buscar
-     */
+}
+
+/**
+* verificar se o nome da instituição foi proveniente das lista de instituições
+* caso o usuario clique em buscar
+*/
 function verificarInputName(nomeInst) {
 
     var verificacao = false;

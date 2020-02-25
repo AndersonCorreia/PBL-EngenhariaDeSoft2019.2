@@ -52,11 +52,12 @@ class Visita extends \App\DB\interfaces\DataObject {
         $mes = self::$mes[$this->Data->format("m")-1];
         $btn = $this->verificarDisponibilidade();
         
-        if( !isset($array["dataInicio"]) ){
-            $array["dataInicio"] = "$d de $mes";
+        if( !isset($array["datas"]["dataInicio"]) ){
+            $array["datas"]["dataInicio"] = "$d de $mes";
+            $array["datas"]["data0"] = $this->Data->format("Y-m-d");
         }
-        $array["dataFim"] = "$d de $mes";
-        $array["dataLimite"] = $this->Data->format("Y-m-d");
+        $array["datas"]["dataFim"] = "$d de $mes";
+        $array["datas"]["dataLimite"] = $this->Data->format("Y-m-d");
         $array[$dma]["data"] = "$dm $day";
         $array[$dma]["$this->Turno.btn"] = $btn;
     }

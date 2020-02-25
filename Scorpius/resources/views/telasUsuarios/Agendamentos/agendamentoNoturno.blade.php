@@ -26,35 +26,8 @@
 @endsection
 
 @section('js')
-
-{{-- <script src={{ asset('js/agendamento.js') }}></script> --}}
+<script src={{ asset('js/agendamento.js') }}></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/normalize.css"></script>
-<script>
-
-function adicionarInd(){
-    var element = $('.box:last').clone();
-    var cont = element.children('.nome-visitante').children('input').attr('name').replace('responsavel', '');
-    if(cont > 4){
-        return alert('Quantidade máx. de visitantes atingida');
-    }
-    element.children('.nome-visitante').children('input').attr('name', 'visitante[]');
-    element.children('.rg-visitante').children('input').attr('name', 'rg[]');
-    element.children('.idade-visitante').children('input').attr('name', 'idade[]');
-    element.children('.nome-visitante').children('input').val('');
-    element.children('.rg-visitante').children('input').val('');
-    element.children('.idade-visitante').children('input').val('');
-    $('#dados-visitantes-campos').append(element);
-}
-
-$('form').on('click', '.btn-remover', function(e){
-    e.preventDefault();
-    if ($('.box').length > 1){
-        $(this).parents('.box').remove();
-    }
- });
-
-$('#btn-adicionarInd').on("click", adicionarInd);
-</script>
 @endsection
