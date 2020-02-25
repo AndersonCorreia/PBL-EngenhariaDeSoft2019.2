@@ -5,28 +5,6 @@
     <div id="dados-agendamento">
         <p class="h5">Dados para o agendamento</p>
         <label class="mt-2" for="nome-instituicao">Selecione a instituição</label>
-<<<<<<< HEAD
-        <input id="nome-instituicao"  class="form-control" type="text" name="Instituicao" 
-            placeholder="Nome da instituição" list="instList" required autofocus>
-        <datalist id="instList">
-            @if (($instituicao ?? false))
-                @foreach ($instituicao as $inst)
-                    <option class="opList" value="{{$inst['nome']}}" >
-                @endforeach
-            @endif
-        </datalist>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label for="turma">Turma</label>
-                <input id="turma" name="turma" class="form-control" type="text" list="listTurma" placeholder="Nome da turma" required autofocus> 
-                <datalist id="listTurma">
-                    @if (($turmas ?? false))
-                        @foreach ($turmas as $turma)
-                            <option class="opList" value="{{$turma['nome']}}" >
-                        @endforeach
-                    @endif
-                </datalist>
-=======
         <select class="form-control" id="nome-instituicao" name="instituicao">
             @if (($instituicoes ?? false))
             @foreach ($instituicoes as $inst)
@@ -44,7 +22,6 @@
                     @endforeach
                     @endif
                 </select>
->>>>>>> atualização do formulario de agendamento institucional,select da turma e instituicao
             </div>
             <div class="col-md-4">
                 <label for="data">Data</label>
