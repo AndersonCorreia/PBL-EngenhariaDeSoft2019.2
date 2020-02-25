@@ -92,3 +92,10 @@ $(function() {
         return false;
     });
 });
+
+/**
+ * função que limpar o valor do campo.
+ */
+function limpar() {
+    $(".limpavel").val("");
+}

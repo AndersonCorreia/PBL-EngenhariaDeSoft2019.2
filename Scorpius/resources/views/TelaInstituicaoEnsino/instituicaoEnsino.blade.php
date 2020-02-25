@@ -10,24 +10,30 @@
         <h5>Instituições de Ensino Vínculadas</h5>
     </div>
     @foreach($registros as $registro)
-    <div class= "row p-1 mt-3 mx-0 scorpius-border-shadow border-top border-shadow">
-        <div class="row col-10 col-md-11 my-1" >
-            <div class="row col-12 font-weight-bold">
-                <div class= "col-7 col-5 col-md-3">Nome</div>
-                <div class= "col-5 col-md-3">Responsável</div>
-                <div class= "col-8 col-md-4">Endereço</div>
-                <div class= "col-4 col-md-2 m-0">Telefone</div>
-            </div>
+    <div class= "row mt-3 mx-0 p-1 scorpius-border-shadow border-top border-shadow">
+        <div class="row col-12 col-md-11 my-1" >
             <div class="row col-12">
-                <div class="col-7 col-md-3">{{$registro['nome']}}</div>
-                <div class="col-5 col-md-3">{{$registro['responsavel']}}</div>
-                <div class="col-8 col-md-4">{{$registro['endereco']}}</div>
-                <div class="col-4 col-md-2 m-0">{{$registro['telefone']}}</div>
+                <div class= "col-8 col-5 col-md-3">
+                    <div class="col-12 p-0 my-1 font-weight-bold">Nome</div>
+                    <div class="col-12 p-0">{{$registro['nome']}}</div>
+                </div>
+                <div class= "col-4 col-md-3">
+                    <div class="col-12 p-0 my-1 font-weight-bold">Responsavel</div>
+                    <div class="col-12 p-0">{{$registro['responsavel']}}</div>
+                </div>
+                <div class= "col-8 col-md-4">
+                    <div class="col-12 p-0 my-1 font-weight-bold">Endereço</div>
+                    <div class="col-12 p-0">{{$registro['endereco']}}</div>
+                </div>
+                <div class= "col-4 col-md-2 m-0">
+                    <div class="col-12 p-0 my-1 my-md-0 font-weight-bold">Telefone</div>
+                    <div class="col-12 p-0">{{$registro['telefone']}}</div>
+                </div>
             </div>
         </div>
-        <div class="col-2 col-md-1 mx-0 my-1 p-0 float-left">
-            <a class="btn col btn-primary btn-sm p-1" href="{{route('user.instituicoes.editar', $registro['instituicao_ID'])}}">Atualizar</a>
-            <a class="btn col btn-danger btn-sm p-1" href="{{route('user.instituicoes.deletar', $registro['instituicao_ID'])}}">Deletar</a>
+        <div class="col-11 col-md-1 mx-0 my-1 p-0 text-right">
+            <a class="btn col-3 col-md-12 btn-primary btn-sm p-1" href="{{route('user.instituicoes.editar', $registro['instituicao_ID'])}}">Atualizar</a>
+            <a class="btn col-3 col-md-12 btn-danger btn-sm p-1" href="{{route('user.instituicoes.deletar', $registro['instituicao_ID'])}}">Deletar</a>
         </div>
     </div>
     @endforeach

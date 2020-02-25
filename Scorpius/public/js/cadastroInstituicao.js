@@ -52,3 +52,10 @@ function getDados() {
             "\nCaso a instituição não esteja na lista cadastre manualmente");
     }
 }
+
+/**
+ * função que limpar o valor do campo.
+ */
+function limpar() {
+    $(".limpavel").val("");
+}
