@@ -17,7 +17,8 @@ class VisitaController extends Controller{
         //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
         $id_user = 601;
         $variaveis = [
-            'itensMenu' => getMenuLinks(),    
+            'itensMenu' => getMenuLinks(), 
+            'paginaAtual' => "Gerenciamento de Visitas"   
         ];
         return view('telaGerenciamentoDeVisitas.telaGerenciamentoDeVisitas', $variaveis);
     }
