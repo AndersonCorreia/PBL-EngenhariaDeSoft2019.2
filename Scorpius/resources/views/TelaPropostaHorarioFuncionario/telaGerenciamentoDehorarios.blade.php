@@ -161,10 +161,6 @@
 
         jQuery('[buscar]').click(e => {
             e.preventDefault() //evita ação de botão
-
-
-
-            
             horarios = new Map()
             horario_original = new Map()
             botoesHorarios.removeClass('btn btn-success').addClass('btn btn-outline')

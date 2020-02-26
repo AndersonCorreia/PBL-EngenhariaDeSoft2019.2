@@ -37,34 +37,23 @@ class UserController extends Controller{
         foreach ($visitas as $v) {
             $v->preencherArrayForCalendario($array);
         }
-
-        $exposicoes = [];
-        for($i=0 ; $i<6 ; $i++){
-            $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
-        }
         //fim da parte para testes
         $id_user = session('ID');
-        $erro=null;
-        $variaveis=null;
-        $registro=null;
-        $registro = Visita::listarAgendamentos($id_user);
+        $agendamento = Visita::listarAgendamentos($id_user);
         $notificacao = Visita::listarNotificacao($id_user);
         $agenda_institucional = Visita::listarAgendamentosInstitucionais($id_user);
-        $tipoAtividade ="exposições";
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $leg_calend_dashboard = ["leg.disponivel" => "Disponível", "leg.indisponivel"=> "Aguardando Confirmação","tipo"=>"leg_calendario_dashboard"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
-            'registros' => $registro,
+            'registros' => $agendamento,
             'notificacoes' => $notificacao,
             'agenda_institucional' => $agenda_institucional,
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
-            'tipoAtividade' => $tipoAtividade,
-            'leg_calend_dashboard'=>$leg_calend_dashboard,
-            $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
+            'leg_calend_dashboard'=>$leg_calend_dashboard
         ];
 
         return view("Dashboard_visitante.Dashboard_visitante",$variaveis);
