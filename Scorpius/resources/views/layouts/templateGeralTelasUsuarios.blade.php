@@ -42,7 +42,7 @@
                         <a href="#" class="mr-2 m-0">
                             <img class="rounded-circle" height=40vh src="{{ asset("img/user-default-img.png")}}">
                             <div class="col-6 m-0 p-0 float-right">
-                            <span class="ml-1">{{session("nome") ?? 'Larissa'}}</span>
+                            <span class="ml-1">{{session("nome") ? session("nome") : 'Larissa'}}</span>
                             <small class="float-buttom">{{session('tipo')}}</small>
                             </div>
                         </a> 

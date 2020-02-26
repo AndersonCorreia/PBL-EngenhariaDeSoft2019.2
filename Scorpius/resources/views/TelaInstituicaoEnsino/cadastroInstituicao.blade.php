@@ -16,31 +16,34 @@
 <h5>Insira os Dados da Instituição</h5>
 </div>
 
-<form class="col-xl-12 col-12 mx-sm-auto mt-sm-1" method="POST" action="{{route('CadastroInstituição.post')}}">
+<form class="col-lg-12 col-12 mx-sm-auto mt-sm-1" method="POST" action="{{route('CadastroInstituição.post')}}">
     {{csrf_field()}}
     <input id="onlyLink" type="hidden" name="onlyLink" value="false">{{-- valor para informar ao back-end se a instituição já existe --}}
     <input id="id" type="hidden" name="ID">{{-- prenchido pelo js caso o usuario clique em "buscar" --}}
     <fieldset>
-        <div class="form-row col-msm">
-            <div class="form-group col-11">
-                <span class="col-1 p-0">Instituição de Ensino</span>
-
-                <div class="col-md-12 col-sm-1 m-0 p-0 float-sm-left">
-                    <input id="nomeInst"  class="form-control" type="text" name="Instituicao" 
-                    placeholder="Nome da instituição" list="instList" required autofocus>
-                    <datalist id="instList">
-                    @if (($instituicoes ?? false))
-                        @foreach ($instituicoes as $inst)
-                            <option class="opList" value="{{$inst['nome']}} ; Endereço: {{$inst['endereco']}}" >
-                        @endforeach
-                    @endif
-                    </datalist>
+        <div class="form-row col-12">
+            <div class="form-group row m-auto col-md-12 col-12">
+                <span class="col-12 p-0">Instituição de Ensino</span>
+                <div class="col-12 row m-0 p-0">
+                    <div class="col-12 col-sm m-0 p-0">
+                        <input id="nomeInst"  class="form-control limpavel" type="text" name="Instituicao" 
+                        placeholder="Nome da instituição" list="instList" required autofocus>
+                        <datalist id="instList">
+                        @if (($instituicoes ?? false))
+                            @foreach ($instituicoes as $inst)
+                                <option class="opList" value="{{$inst['nome']}} ; Endereço: {{$inst['endereco']}}" >
+                            @endforeach
+                        @endif
+                        </datalist>
+                    </div>
+                    <div class="col-sm-2 col-xl-1 col-8 my-1 mx-sm-2 my-sm-0 p-0 d-block">
+                        <button type="button" class="btn btn-primary float-right" onclick="getDados()" buscar>Buscar</button>
+                    </div>
+                    <div class="col-sm-2 col-xl-1 col-4 my-1 m-sm-0 p-0 d-block">
+                        <button type="button" class="btn btn-danger float-right" onclick="limpar()" buscar>Limpar</button>
+                    </div>
                 </div>
-
             </div>
-            <div class="col-1 pt-4 float-sm-right d-block">
-                    <button type="button" class= "btn btn-primary float-right " onclick="getDados()" buscar> Buscar </button>
-                </div>
 
             <div class="form-group col-sm-8">    
                 <span>Responsável pela Instituição</span>

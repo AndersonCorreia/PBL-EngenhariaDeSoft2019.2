@@ -2,3 +2,4 @@ git config --unset-all user.name //apagar o valor do nome do usuario de todas as
 git config --unset-all user.email //apagar o valor do email do usuario de todas as cosnfigurações, basicamente um logout.
 git reset HEAD~x --soft // apagar a quantidade x especificada de commits e MANTEM as alterações
 git reset HEAD~x --hard // apagar a quantidade x especificada de commits e DELETA as alterações
+git config --global core.editor "code --wait" //configurando o vscode como editor padrão do git

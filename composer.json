@@ -1,4 +1,7 @@
-{
+{   
+    "config": {
+        "process-timeout": 0
+    },
     "scripts": {
         "serve": "php Scorpius/artisan serve",
         "testes": "Scorpius\\vendor\\bin\\phpunit -c Scorpius/phpunit.xml --testdox --color=auto",

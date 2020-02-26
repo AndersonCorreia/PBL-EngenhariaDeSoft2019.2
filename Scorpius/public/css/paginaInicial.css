@@ -380,3 +380,17 @@
 .carousel-caption{
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
 }
+
+html ::-webkit-scrollbar{
+    width: 0.7vw;
+}
+
+html ::-webkit-scrollbar-track{
+    background: rgba(255, 224, 250, 0.562);
+    border-radius: 20px;
+}
+
+html ::-webkit-scrollbar-thumb{
+    border-radius: 20px;
+    background: rgb(79, 42, 214);
+}

@@ -21,11 +21,12 @@ const preencherForm = function(data, status) {
             $("#submit").html("Vincular instituição");
             $("#onlyV").val("true");
         }
-    }
-    /**
-     * verificar se o nome da instituição foi proveniente das lista de instituições
-     * caso o usuario clique em buscar
-     */
+}
+
+/**
+* verificar se o nome da instituição foi proveniente das lista de instituições
+* caso o usuario clique em buscar
+*/
 function verificarInputName(nomeInst) {
 
     var verificacao = false;
@@ -51,4 +52,11 @@ function getDados() {
         alert(" Para busca os dados de uma instituição selecione uma da lista." +
             "\nCaso a instituição não esteja na lista cadastre manualmente");
     }
+}
+
+/**
+ * função que limpar o valor do campo.
+ */
+function limpar() {
+    $(".limpavel").val("");
 }
