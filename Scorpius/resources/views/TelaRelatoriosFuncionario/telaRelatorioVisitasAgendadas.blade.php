@@ -6,9 +6,9 @@
 
 
 <div class="form-group row col-12">
-    <label class="col-sm-12 col-form-label pt-3" nomeEstagiario >Buscar Visita</label>
+    <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
      <div class="col-9">
-        <input id="nomeInst" class="form-control" type="text" name="estagiario" placeholder="Insira o Nome ou Cidade da Instituição" list="instList" required autofocus>
+        <input id="nomeInst" class="form-control" type="text" name="instituicao" placeholder="Insira o Nome ou Cidade da Instituição" list="instList" required autofocus>
         <datalist id="instList">            
         </datalist>
     </div>     

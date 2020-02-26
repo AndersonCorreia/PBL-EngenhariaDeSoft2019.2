@@ -1,4 +1,4 @@
-olo@extends('layouts.templateGeralTelasUsuarios')
+@extends('layouts.templateGeralTelasUsuarios')
 
 @section('title', 'Gerenciar Visitas Agendadas')
 
@@ -6,7 +6,7 @@ olo@extends('layouts.templateGeralTelasUsuarios')
 
 <div class="form-row col-msm">
     <div class="form-group col-sm-7 d-block" id="listaEspera">
-        <h5>Lista de Espera</h5>
+        <h5 class="col-sm-12">Lista de Espera</h5>
         <ul class="list-group list-group-flush">
             <!-- (Ainda nao implementado)
             Essa parte receberá do controller uma array $lista_espera com as informações
@@ -22,8 +22,8 @@ olo@extends('layouts.templateGeralTelasUsuarios')
         </ul>
     </div>
     <div class="form-group col-sm-7 d-block">
-        <h5>Cronograma de Visitas Programadas</h5>
-        <table class="table table-hover">
+        <h4 class="col-sm-12">Cronograma de Visitas Programadas</h4>
+        <table class="table table-hover col-sm-12 col-form-label">
             <thead>
             <tr class="table-primary">
                     <th scope="col">Turno/Dia</th>
@@ -38,14 +38,14 @@ olo@extends('layouts.templateGeralTelasUsuarios')
                 <tr>
                     <th scope="row" class="table-secondary">Manhã</th>
                     <td id="segundaManha">
-                        <p>Agendamento A</p>
+                        <p>Colégio Helyos</p>
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn-success">Confirmar</button>
-                            <button type="button" class="btn-danger">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" btnconf>Confirmar</button>
+                            <button type="submit" class="btn btn-danger"btncanc>Cancelar</button>
                         </div>
                         <div id="lista-espera">
-                            <button type="button" class="btn-secondary m-2"data-toggle="modal"
-                            data-target=".modal-lista-espera">Lista de espera
+                            <button type="submit" class="btn btn-secondary"data-toggle="modal"
+                            data-target=".modal-lista-espera" lista>Lista de Espera
                             </button>
                             <!-- modal da lista espera -->
                             <div class="modal fade modal-lista-espera" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -99,6 +99,27 @@ olo@extends('layouts.templateGeralTelasUsuarios')
         margin: 10px 0px 10px 5px;
     }
 
+    [btnconf]{
+        padding: 7px;
+        margin: 5px;
+        margin-top: -8px;
+        background: #00a82d;
+        width: 85px;
+        height: 40px;
+    }
+    [btncanc]{
+        padding: 7px; 
+        margin: 5px;
+        margin-top: -8px;
+        width: 85px;
+        height: 40px;
+    }
+
+    [lista]{
+        width: 170px;
+        height: 40px;
+    }
+
     table {
         border-collapse: separate;
         border-spacing: 0 8px;
@@ -108,7 +129,7 @@ olo@extends('layouts.templateGeralTelasUsuarios')
     /*Organização das linhas da tabela*/
     td {
         border-left-width: 0;
-        min-width: 190px;
+        min-width: 185px;
         height: 100px;
     }
 
