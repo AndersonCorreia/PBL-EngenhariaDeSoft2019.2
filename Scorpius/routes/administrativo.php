@@ -1,5 +1,14 @@
 <?php
 
+//Rota dashboard estagiario
+Route::get('/estagiario/dashboard', 'UserController@getDashboard')->name('dashboardEstagiario.show');
+
+//Rota dashboard funcionario
+Route::get('/funcionario/dashboard', 'UserController@getDashboard')->name('dashboardFuncionario.show');
+
+//Rota dashboard adm
+Route::get('/adm/dashboard', 'UserController@getDashboard')->name('dashboardAdm.show');
+
 //Rota para retornar a tela de Gerenciamento de Visitas.
 
 Route::group(

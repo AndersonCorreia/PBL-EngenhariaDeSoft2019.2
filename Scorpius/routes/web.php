@@ -11,7 +11,34 @@
 */
 
 Route::get('/', ['uses'=>'InicialController@inicio'])->name('paginaInicial');
-Route::get("/dashboard")->name("dashboard");//depois fazer o metodo
+
+Route::get("/dashboard", function (){
+    
+    $tipo = session("tipo");
+    $rota;
+
+    if ($tipo == null){
+        $rota = "entrar";
+    }
+    else if ($tipo == "visitante") {
+        $rota = "dashboardVisitante.show";
+    }
+    else if ($tipo == "institucional") {
+        $rota = "dashboardInstitucional.show";
+    }
+    else if ($tipo == "estagiario") {
+        $rota = "dashboardEstagiario.show";
+    }
+    else if ($tipo == "adm") {
+        $rota = "dashboardAdm.show";
+    }
+    else {
+        $rota = "dashboardFuncionario.show";
+    }
+
+    return redirect()->route($rota);
+
+})->name("dashboard");//depois fazer o metodo
 
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
 Route::resource('/cadastrar', 'CadastroController');

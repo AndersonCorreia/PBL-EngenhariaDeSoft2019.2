@@ -3,9 +3,9 @@
 require_once __DIR__."/../../../app/DB/PessoaDAO.php";
 function getMenuLinksAll(){
     return [//todos os possiveis links do menu, utilizado no layout da area administrativa
-        'inicio'=>          ['link'=>'#' , 'texto'=>'Inicio' ],// texto é o nome que vai estar dentro da tag <a>
-        'AgendarDiurnoIns'=>   ['link'=>route('AgendarDiurnoInstituição.show') , 'texto'=>'Exposições Diurnas - Instituição' ],
-        'AgendarDiurnoVis'=>   ['link'=>route('AgendarDiurnoVisitante.show') , 'texto'=>'Exposições Diurnas - Individual' ],
+        'inicio'=>          ['link'=>route("dashboard") , 'texto'=>'Inicio' ],// texto é o nome que vai estar dentro da tag <a>
+        'AgendarDiurnoIns'=>['link'=>route('AgendarDiurnoInstituição.show') , 'texto'=>'Exposições Diurnas - Instituição' ],
+        'AgendarDiurnoVis'=>['link'=>route('AgendarDiurnoVisitante.show') , 'texto'=>'Exposições Diurnas - Individual' ],
         'AgendarNoturno'=>  ['link'=>route('AgendarNoturno.show') , 'texto'=>'Atividades Noturnas' ],
         'AgendarAtividade'=>['link'=>route('AgendarAtividade.show') , 'texto'=>'Atividades Diferenciadas' ],
         'collapseAgend' =>  ['texto'=> 'Agendar Visita', 'itens' => array() ],

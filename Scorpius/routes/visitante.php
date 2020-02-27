@@ -20,8 +20,7 @@
  */
 Route::get("/agendamento/dados/{turno}/{data}/{sentido}/", "AgendamentoController@getVisitas");
 
- //Rota dashboard visitante
- Route::get('/visitante/dashboard', 'UserController@getDashboard')->name('dashboard.show');
+//Rota dashboard visitante
+Route::get('/visitante/dashboard', 'UserController@getDashboard')->name('dashboardVisitante.show');
 
 Route::get('/visitante/dashboard/confirmarcao/{id}/{status}', 'AgendamentoController@confirmacaoAgendamento')->name('confirma');
-Route::get('/instituicional/dashboard/confirmarcao/{id}/{status}', 'AgendamentoController@confirmaAgendamentoInstituicao')->name('confirmaInstituicao');

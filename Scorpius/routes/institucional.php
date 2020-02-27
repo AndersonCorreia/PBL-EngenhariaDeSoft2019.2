@@ -4,6 +4,11 @@
  */
 Route::get('/instituicao','ControlerInstitucional@telaInstituicao')->name("instituição.show");
 
+//Rota dashboard Institucional
+Route::get('/instituicional/dashboard', 'UserController@getDashboard')->name('dashboardInstitucional.show');
+
+Route::get('/instituicional/dashboard/confirmarcao/{id}/{status}', 'AgendamentoController@confirmaAgendamentoInstituicao')->name('confirmaInstituicao');
+
 /* Turmas */
 Route::get('dashboard/turmas', 'TurmaController@index')->name('turma.index');
 Route::post('dashboard/turmas/excluir-turma', 'TurmaController@excluirTurma')->name('turma.excluirTurma');
