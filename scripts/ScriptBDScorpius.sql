@@ -10,7 +10,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema scorpius
 -- ----------------------------------------------------
-DROP DATABASE scorpius;-- apagando o banco para inserir novamente
+DROP DATABASE IF EXISTS `scorpius`;-- apagando o banco para inserir novamente
 CREATE SCHEMA IF NOT EXISTS `scorpius` DEFAULT CHARACTER SET utf8 ;
 USE `scorpius` ;
 
@@ -177,14 +177,9 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
   `agendamento_institucional_ID` INT UNSIGNED DEFAULT NULL,
   `acompanhante_ID` INT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `fk_visita_agendamento_institucional_ID_idx` (`agendamento_institucional_ID` ASC),
+  INDEX `fk_visita_agendamento_institucional_ID1_idx` (`agendamento_institucional_ID` ASC),
   INDEX `fk_visita_usuario1_idx` (`acompanhante_ID`),
-  UNIQUE INDEX `Data_Turno_UNIQUE` (`Data_Visita` , `Turno`),
-  CONSTRAINT `fk_visita_agendamento_institucional_ID1`
-    FOREIGN KEY (`agendamento_institucional_ID`)
-    REFERENCES `scorpius`.`agendamento_institucional` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  UNIQUE INDEX `Data_Turno_UNIQUE` (`data_visita` , `turno`),
   CONSTRAINT `fk_visita_acompanhante_ID1`
     FOREIGN KEY (`acompanhante_ID`)
     REFERENCES `scorpius`.`usuario` (`ID`)
@@ -223,6 +218,13 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento_institucional` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+ALTER TABLE `scorpius`.`visita` 
+ADD CONSTRAINT `fk_visita_agendamento_institucional_ID1`
+    FOREIGN KEY (`agendamento_institucional_ID`)
+    REFERENCES `scorpius`.`agendamento_institucional` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`agendamento`
