@@ -20,11 +20,12 @@ class UserController extends Controller{
         
         $array = $this->getVisitas("diurno", "now", "anterior");
         $id_user = session('ID');
+        $tipo = session('tipo');
         $agendamento = Visita::listarAgendamentos($id_user);
         $notificacao = Visita::listarNotificacao($id_user);
         $agenda_institucional = Visita::listarAgendamentosInstitucionais($id_user);
-        $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
-        $leg_calend_dashboard = ["leg.disponivel" => "Disponível", "leg.indisponivel"=> "Aguardando Confirmação","tipo"=>"leg_calendario_dashboard"];
+        $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Lista de Espera disponivel", "tipo" => "institucional"];
+        $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
@@ -33,8 +34,7 @@ class UserController extends Controller{
             'agenda_institucional' => $agenda_institucional,
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
-            'tipoUserLegenda'=> $institucional,
-            'leg_calend_dashboard'=>$leg_calend_dashboard
+            'tipoUserLegenda'=> $$tipo
         ];
 
         return view("Dashboard_visitante.Dashboard_visitante",$variaveis);
@@ -57,7 +57,7 @@ class UserController extends Controller{
 
         return redirect()->route("dashboard");
     }
-    
+
     /**
      * faz o logout do usuario apagando todos os dados da sessão
      *
