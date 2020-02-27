@@ -9,10 +9,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 
 -- -----------------------------------------------------
 -- Schema scorpius
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema scorpius
 -- ----------------------------------------------------
 DROP DATABASE scorpius;-- apagando o banco para inserir novamente
 CREATE SCHEMA IF NOT EXISTS `scorpius` DEFAULT CHARACTER SET utf8 ;
@@ -20,12 +16,14 @@ USE `scorpius` ;
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`exposicao`
+-- era bom saber se uma atividade diferenciada pode ocorrer em apenas 1 turno
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(50) NOT NULL,
   `tipo_evento` ENUM('atividade diferenciada', 'atividade permanente') NOT NULL,
   `tema_evento` ENUM('astronomia', 'biodiversidade', 'origem do humano') DEFAULT NULL,
+  `turno` ENUM('manhã', 'tarde', 'diurno', 'noturno') DEFAULT "diurno",
   `descricao` VARCHAR(300) NOT NULL,
   `quantidade_inscritos` INT  DEFAULT NULL,
   `data_inicial` DATE NOT NULL,
@@ -82,7 +80,6 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`tipo_usuario` (
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `nome_UNIQUE` (`tipo` ASC))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`usuario`
@@ -169,28 +166,60 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `scorpius`.`visita`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `data_visita` DATE NOT NULL,
+  `turno` ENUM('manhã', 'tarde', 'noite') NOT NULL,
+  `status` ENUM('realizada', 'não realizada', 'instituição ausente') NOT NULL DEFAULT 'não realizada',
+  `agendamento_institucional_ID` INT UNSIGNED DEFAULT NULL,
+  `acompanhante_ID` INT UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_visita_agendamento_institucional_ID_idx` (`agendamento_institucional_ID` ASC),
+  INDEX `fk_visita_usuario1_idx` (`acompanhante_ID`),
+  UNIQUE INDEX `Data_Turno_UNIQUE` (`Data_Visita` , `Turno`),
+  CONSTRAINT `fk_visita_agendamento_institucional_ID1`
+    FOREIGN KEY (`agendamento_institucional_ID`)
+    REFERENCES `scorpius`.`agendamento_institucional` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_visita_acompanhante_ID1`
+    FOREIGN KEY (`acompanhante_ID`)
+    REFERENCES `scorpius`.`usuario` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`agendamento_institucional`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento_institucional` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `visita` INT NOT NULL,
-  `data_Agendamento` DATETIME NOT NULL,
-  `status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado') NOT NULL,
+  `visita` INT UNSIGNED NOT NULL,
+  `data_agendamento` DATETIME NOT NULL,
+  `observacao` VARCHAR(100) DEFAULT NULL,
+  `status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado', 'lista de espera') NOT NULL,
   `turma_ID` INT UNSIGNED,
   `professor_instituicao_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `fk_agendamento_institucional_turma1_idx` (`turma_ID` ASC),
+  INDEX `fk_agendamento_institucional_turma1_idx` (`turma_ID`),
   CONSTRAINT `fk_agendamento_institucional_turma1`
     FOREIGN KEY (`turma_ID`)
     REFERENCES `scorpius`.`turma` (`ID`)
     ON DELETE SET NULL
     ON UPDATE SET NULL,
-  INDEX `fk_agendamento_institucional__professor_instituicao1_idx` (`professor_instituicao_ID` ASC),
-  CONSTRAINT `fk_agendamento_institucional_professor_instituicao1`
+  INDEX `fk_agendamento_institucional__professor_instituicao_ID1_idx` (`professor_instituicao_ID`),
+  CONSTRAINT `fk_agendamento_institucional_professor_instituicao_ID1`
     FOREIGN KEY (`professor_instituicao_ID`)
     REFERENCES `scorpius`.`professor_instituicao` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  INDEX `fk_Visita_idx` (`visita`),
+  CONSTRAINT `fk_agendamento_institucional_visita1`
+    FOREIGN KEY (`visita`)
+    REFERENCES `scorpius`.`visita` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -200,8 +229,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Visita` INT NOT NULL,
-  `Data_Agendamento` DATETIME NOT NULL,
+  `visita` INT UNSIGNED NOT NULL,
+  `data_agendamento` DATETIME NOT NULL,
+  `observacao` VARCHAR(100) DEFAULT NULL,
   `Status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado') NOT NULL,
   `usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
@@ -210,31 +240,11 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento` (
     FOREIGN KEY (`usuario_ID`)
     REFERENCES `scorpius`.`usuario` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `scorpius`.`visita`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
-  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `data_visita` DATE NOT NULL,
-  `turno` ENUM('manhã', 'tarde', 'noite') NOT NULL,
-  `status` ENUM('realizada', 'não realizada', 'instituição ausente') NOT NULL DEFAULT 'não realizada',
-  `agendamento_ID` INT UNSIGNED DEFAULT NULL,
-  `ID_acompanhante` INT UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  INDEX `fk_visita_agendamento1_idx` (`agendamento_ID` ASC),
-  INDEX `fk_visita_usuario1_idx` (`ID_acompanhante`),
-  UNIQUE INDEX `Data_Turno_UNIQUE` (`Data_Visita` , `Turno`),
-  CONSTRAINT `fk_visita_agendamento1`
-    FOREIGN KEY (`agendamento_ID`)
-    REFERENCES `scorpius`.`agendamento` (`ID`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_visita_usuario1`
-    FOREIGN KEY (`ID_acompanhante`)
-    REFERENCES `scorpius`.`usuario` (`ID`)
+  INDEX `fk_Visita_idx` (`visita` ASC),
+  CONSTRAINT `fk_agendamento_visita1`
+    FOREIGN KEY (`visita`)
+    REFERENCES `scorpius`.`visita` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -279,7 +289,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento_institucional` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `exposicao_ID` INT UNSIGNED NOT NULL,
-  `agendamento_ID` INT UNSIGNED NOT NULL,
   `agendamento_institucional_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_exposicao_agendamento_institucional_exposicao1_idx` (`exposicao_ID` ASC),
@@ -296,6 +305,27 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento_institucional` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `scorpius`.`exposicao_agendamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `exposicao_ID` INT UNSIGNED NOT NULL,
+  `agendamento_ID` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_exposicao_agendamento_exposicao1_idx` (`exposicao_ID` ASC),
+  INDEX `fk_exposicao_agendamento_agendamento1_idx` (`agendamento_ID` ASC),
+  CONSTRAINT `fk_exposicao_agendamento_exposicao1`
+    FOREIGN KEY (`exposicao_ID`)
+    REFERENCES `scorpius`.`exposicao` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_exposicao_agendamento_agendamento1`
+    FOREIGN KEY (`agendamento_ID`)
+    REFERENCES `scorpius`.`agendamento` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`aluno`
@@ -314,26 +344,60 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`aluno` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `scorpius`.`responsavel`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`responsavel` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NOT NULL,
+  `cargo` VARCHAR(50) NOT NULL,
+  `status_Checkin` ENUM('compareceu', 'não compareceu') NOT NULL,
+  `agendamento_institucional_ID` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_responsavel_agendamento_institucional1_idx` (`agendamento_institucional_ID` ASC),
+  CONSTRAINT `fk_responsavel_agendamento_institucional1`
+    FOREIGN KEY (`agendamento_institucional_ID`)
+    REFERENCES `scorpius`.`agendamento_institucional` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `scorpius`.`visitante_institucional`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`visitante_institucional` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NOT NULL,
+  `status_Checkin` ENUM('compareceu', 'não compareceu') NOT NULL,
+  `idade` INT NOT NULL,
+  `agendamento_institucional_ID` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_visitante_institucional_agendamento_institucional1_idx` (`agendamento_institucional_ID` ASC),
+  CONSTRAINT `fk_visitante_institucional_agendamento_institucional1`
+    FOREIGN KEY (`agendamento_institucional_ID`)
+    REFERENCES `scorpius`.`agendamento_institucional` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`visitante`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`visitante` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `isAluno` TINYINT(1) NOT NULL,
-  `Nome` VARCHAR(50) NOT NULL,
-  `Status_Checkin` ENUM('compareceu', 'não compareceu') NOT NULL,
-  `Idade` INT NOT NULL,
-  `visita_ID` INT UNSIGNED NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
+  `status_Checkin` ENUM('compareceu', 'não compareceu') NOT NULL,
+  `idade` INT NOT NULL,
+  `rg` VARCHAR(15) NOT NULL,
+  `agendamento_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `fk_visitante_visita1_idx` (`visita_ID` ASC),
-  CONSTRAINT `fk_visitante_visita1`
-    FOREIGN KEY (`visita_ID`)
-    REFERENCES `scorpius`.`visita` (`ID`)
+  INDEX `fk_visitante_agendamento1_idx` (`agendamento_ID` ASC),
+  CONSTRAINT `fk_visitante_agendamento1`
+    FOREIGN KEY (`agendamento_ID`)
+    REFERENCES `scorpius`.`agendamento` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`estagiario`
@@ -374,8 +438,8 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`proposta_horario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`proposta_horario` (
- `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
- `dia_semana` VARCHAR(45) NOT NULL,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `dia_semana` VARCHAR(45) NOT NULL,
   `turno` VARCHAR(45) NOT NULL,
   `estagiario_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
@@ -392,51 +456,50 @@ ENGINE = InnoDB;
 -- Table `scorpius`.`Acoes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`Acoes` (
-  `idAcoes` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `atividade` TINYTEXT NOT NULL,
-  PRIMARY KEY (`idAcoes`),
+  PRIMARY KEY (`ID`),
   UNIQUE INDEX `atividade_UNIQUE` (`atividade` ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `scorpius`.`LOG`
+-- Table `scorpius`.`log`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scorpius`.`LOG` (
-  `idLOG` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `datahora` DATETIME(1) NOT NULL,
-  `Acoes_idAcoes` INT UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `scorpius`.`log` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `datahora` DATETIME NOT NULL,
+  `acoes_ID` INT UNSIGNED NOT NULL,
   `usuario_made_ID` INT UNSIGNED NOT NULL,
-  `usuario_affected_ID1` INT UNSIGNED NULL,
-  PRIMARY KEY (`idLOG`),
-  INDEX `fk_LOG_Acoes1_idx` (`Acoes_idAcoes` ASC),
-  INDEX `fk_LOG_usuario1_idx` (`usuario_made_ID` ASC),
-  INDEX `fk_LOG_usuario2_idx` (`usuario_affected_ID1` ASC),
-  CONSTRAINT `fk_LOG_Acoes1`
-    FOREIGN KEY (`Acoes_idAcoes`)
-    REFERENCES `scorpius`.`Acoes` (`idAcoes`)
+  `usuario_affected_ID` INT UNSIGNED NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_log_Acoes1_idx` (`acoes_ID` ASC),
+  INDEX `fk_log_usuario1_idx` (`usuario_made_ID` ASC),
+  INDEX `fk_log_usuario2_idx` (`usuario_affected_ID` ASC),
+  CONSTRAINT `fk_log_acoes1`
+    FOREIGN KEY (`acoes_ID`)
+    REFERENCES `scorpius`.`acoes` (`ID`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `fk_LOG_usuario1`
+  CONSTRAINT `fk_log_usuario1`
     FOREIGN KEY (`usuario_made_ID`)
     REFERENCES `scorpius`.`usuario` (`ID`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `fk_LOG_usuario2`
-    FOREIGN KEY (`usuario_affected_ID1`)
+  CONSTRAINT `fk_log_usuario2`
+    FOREIGN KEY (`usuario_affected_ID`)
     REFERENCES `scorpius`.`usuario` (`ID`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `scorpius`.`Notificacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scorpius`.`Notificacao` (
+CREATE TABLE IF NOT EXISTS `scorpius`.`notificacao` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Gerada_em` DATETIME NOT NULL,
-  `Mensagem` VARCHAR(100) NOT NULL,
+  `gerada_em` DATETIME NOT NULL,
+  `mensagem` VARCHAR(100) NOT NULL,
   `usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_Notificacao_usuario1_idx` (`usuario_ID` ASC),
@@ -446,7 +509,6 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`Notificacao` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

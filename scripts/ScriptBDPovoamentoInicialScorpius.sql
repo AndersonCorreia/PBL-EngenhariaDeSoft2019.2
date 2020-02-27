@@ -99,14 +99,14 @@ INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-23','manhã');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-24','tarde');
 
 -- INSERT DOS Agentamentos de Usuário --
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(1, 1, '2020-02-10 14:00:00', 'pendente', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(1, 1, '2020-02-10 14:00:00', 'confirmado', 601);
 INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(2, 3, '2020-03-10 14:00:00', 'confirmado', 601);
 INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(3, 5, '2020-03-11 14:00:00', 'cancelado pelo funcionario', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(4, 7, '2020-03-13 14:00:00', 'pendente', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(4, 7, '2020-03-13 14:00:00', 'confirmado', 601);
 INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(5, 9, '2020-03-15 08:00:00', 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(6, 11, '2020-03-17 08:00:00', 'pendente', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(6, 11, '2020-03-17 08:00:00', 'confirmado', 601);
 INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(7, 13, '2020-03-19 14:00:00', 'cancelado pelo usuario', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(8, 15, '2020-03-20 18:00:00', 'pendente', 601);
+INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(8, 15, '2020-03-20 18:00:00', 'confirmado', 601);
 
 -- INSERT das turmas --
 INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(1, 'A', '6º ano', 'Ensino Fundamental', 701);
@@ -140,9 +140,9 @@ INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, tur
 INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
 (1, '2020-03-21 15:00:00', 'A visita do dia 21/03/2020 foi cancelada por causa da chuva', 701);
 INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
-(2, '2020-02-12 13:00:00', 'Venha conferir a nossa nova exposição: \'Dinossauros\'', 701);
+(2, '2020-02-12 13:00:00', "Venha conferir a nossa nova exposição: 'Dinossauros'", 701);
 INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
-(3, '2020-02-12 13:00:00', 'Venha conferir a nossa nova exposição: \'Dinossauros\'', 601);
+(3, '2020-02-12 13:00:00', "Venha conferir a nossa nova exposição: 'Dinossauros'", 601);
 INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
 (4, '2020-03-15 10:00:00', 'Visita do dia 17/03/2020 cancelada. Entre em contato para mais informações.', 601);
 INSERT INTO Notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
