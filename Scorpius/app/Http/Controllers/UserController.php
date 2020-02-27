@@ -59,23 +59,6 @@ class UserController extends Controller{
     }
     
     /**
-     * Função para realizar o login do usuario, preencher a sessão com o ID e nome;
-     *
-     * @param [type] $request
-     * @return void
-     */
-    public function loginADM(Request $request){
-        $user = $request["usuario"];
-        $senha = $request["senha"];
-        $DAO = new PessoaDAO();
-        $usuario = $DAO->UserLogin($user, $senha);//lança uma exception se as informações estiverem incorretas
-
-        $request->session()->regenerate();//a documentação falava que era para previnir um ataque chamado "session fixation"
-        session(["ID" => $usuario["ID"], "nome" => $usuario["nome"] ]);
-
-        return redirect()->route("dashboard");
-    }
-    /**
      * faz o logout do usuario apagando todos os dados da sessão
      *
      * @param [type] $request

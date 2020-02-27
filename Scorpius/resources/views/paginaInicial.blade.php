@@ -892,12 +892,6 @@
                         All Rights Reserved.
                     </p>
                 </div>
-                {{-- Botao de login administrativo --}}
-                <div class="col-md-6 mt-2">
-                    <a class="text-white" href="{{ route('loginAdm') }}">
-                        <p class="h6 float-right">ADM</p>
-                    </a>
-                </div>
             </footer>
         </div>
         {{-- MOBILE --}}
@@ -951,10 +945,6 @@
 
                     </p>
                 </div>
-                {{-- Botao de login administrativo - MOBILE  --}}
-                <a class="text-white" href="{{ route('loginAdm') }}">
-                    <p class="h6">ADM</p>
-                </a>
                 {{-- Copyright - MOBILE --}}
                 <p class="h6 mb-0 pb-0">
                     <span style="font-family: stark;">Scorpius</span>

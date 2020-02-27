@@ -46,8 +46,6 @@ Route::resource('/cadastrar', 'CadastroController');
 Route::get('/entrar', ['uses'=>'InicialController@telaEntrar'])->name('entrar');
 Route::post('/entrar','UserController@login')->name('login');
 Route::get("/logout", 'UserController@logout')->name('logout');
-Route::get('/login-administrativo', ['uses' => 'InicialController@loginAdm'])->name('loginAdm');
-Route::post('/login-administrativo','UserController@loginADM')->name('loginAdm.post');
 
 // Testes. PAGINA TEMPORARIA
 Route::resource('enviar-eventos', 'enviarEventosController');
