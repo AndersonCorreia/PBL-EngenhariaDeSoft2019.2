@@ -17,27 +17,8 @@ require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class UserController extends Controller{   
 
     function getDashboard(){
-        //para testes
-        $visitas= [];
-        $agen = new AgendamentoInstitucional();
-        $visitas[] = new Visita( new \DateTime("26-01-2020"), "tarde", "realizada");
-        $visitas[] = new Visita( new \DateTime("25-01-2020"), "tarde", "realizada");
-        $visitas[] = new Visita( new \DateTime("27-01-2020"), "manha", "realizada");
-        $visitas[] = new Visita( new \DateTime("27-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new Visita( new \DateTime("29-01-2020"), "tarde", "realizada");
-        $visitas[] = new Visita( new \DateTime("30-01-2020"), "manha", "realizada");
-        $visitas[] = new Visita( new \DateTime("31-01-2020"), "noite", "realizada", $agen);
-        $visitas[] = new Visita( new \DateTime("03-02-2020"), "manha", "realizada");
-        $visitas[] = new Visita( new \DateTime("04-02-2020"), "noite", "realizada", $agen);
-        $visitas[] = new Visita( new \DateTime("05-02-2020"), "tarde", "realizada");
-        $visitas[] = new Visita( new \DateTime("06-02-2020"), "manha", "realizada");
-        $visitas[] = new Visita( new \DateTime("07-02-2020"), "noite", "realizada", $agen);
-        $array = [];
-
-        foreach ($visitas as $v) {
-            $v->preencherArrayForCalendario($array);
-        }
-        //fim da parte para testes
+        
+        $array = $this->getVisitas("diurno", "now", "anterior");
         $id_user = session('ID');
         $agendamento = Visita::listarAgendamentos($id_user);
         $notificacao = Visita::listarNotificacao($id_user);
@@ -74,7 +55,7 @@ class UserController extends Controller{
         $request->session()->regenerate();//a documentação falava que era para previnir um ataque chamado "session fixation"
         session(["ID" => $usuario["ID"], "nome" => $usuario["nome"], "tipo" => $usuario["tipo"]]);
 
-        return redirect()->route("dashboard.show");
+        return redirect()->route("dashboard");
     }
     
     /**
@@ -92,7 +73,7 @@ class UserController extends Controller{
         $request->session()->regenerate();//a documentação falava que era para previnir um ataque chamado "session fixation"
         session(["ID" => $usuario["ID"], "nome" => $usuario["nome"] ]);
 
-        return redirect()->route("dashboard.adm");
+        return redirect()->route("dashboard");
     }
     /**
      * faz o logout do usuario apagando todos os dados da sessão
@@ -104,5 +85,31 @@ class UserController extends Controller{
 
         $request->session()->flush();
         return redirect()->route("paginaInicial");
+    }
+
+    public function getVisitas($turno, $data, $sentido){
+
+        $DAO = new VisitaDAO();
+        $dataFim = now();
+        $dataFim = $dataFim->add(new \DateInterval("P2M"));
+        if($sentido=="anterior"){
+            $dataAtual = now();  
+        }
+        else {
+            $dataAtual = $data;
+        }
+        $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim, ($turno=="diurno"), 20);
+        $array = [];
+        foreach ($visitas as $v) {
+            if(count($array)<12){
+                $v->preencherArrayForCalendario($array, "btn-danger");
+            }
+        }
+        $dataFinalReal= new \DateTime($array["datas"]["dataLimite"]);
+        if ( count($array)>11 ){
+            $dataFinalReal->sub(new \DateInterval("P1D"));
+        }
+        $array["datas"]["dataLimite"] = $dataFinalReal->format("Y-m-d");
+        return $array;
     }
 }

@@ -97,7 +97,7 @@ class VisitaDAO extends DataAccessObject{
 
         $arrayObjects = array_map(function ($elemento){
 
-            if($elemento['agendamento_ID'] == null){
+            if($elemento['agendamento_institucional_ID'] == null){
                 $agendamentoInst= null;
             }else {
                 //$agendamentoInst = terminar depois

@@ -60,13 +60,10 @@
                                 <h4 class="card-title">Seus Agendamentos</h4>
                             </div>
                             <div class = "card-body scroll">                        
-                                @if(intdiv(session('ID'),100)==6)  <!-- PEGA O RESTO DA DIVISAO DO ID(6XX) POR 100 -->
-                                    @include('Dashboard_visitante._includes.agendamentos')
+                                @if(session('tipo') == 'institucional')
+                                    @include('Dashboard_visitante._includes.agendamentosInstitucional')
                                 @endif
-                                @if(intdiv(session('ID'),100)==7)  <!-- PEGA O RESTO DA DIVISAO DO ID(7XX) POR 100 -->
-                                    {{--dd($agenda_institucional)--}}
-                                    @include('Dashboard_visitante._includes.agendamentosInstitucional')                                
-                                @endif   
+                                @include('Dashboard_visitante._includes.agendamentos') 
                             </div>
                         </div>
                     </div>
