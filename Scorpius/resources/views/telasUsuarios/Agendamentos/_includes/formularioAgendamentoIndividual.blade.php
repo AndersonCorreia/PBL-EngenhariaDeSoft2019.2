@@ -33,16 +33,16 @@
         <div id="dados-visitantes-campos">
             <div class="row box mb-2">
                 <div class="col-md-7 nome-visitante">
-                    <input id="visitante" class="form-control" type="text" maxlength="40" name="visitante1"
-                        placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                    <input id="visitante" class="form-control" type="text" maxlength="40" name="visitante"
+                        placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú]+$$" required>
                 </div>
                 <div class="col-md-3 rg-visitante">
-                    <input id="RG" class="form-control" type="text" maxlength="15" name="rg1"
-                        placeholder="xxxxxxxxxxxxxxxxx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                    <input id="RG" class="form-control" type="text" maxlength="15" name="rg"
+                        placeholder="xxxxxxxxxxxxxxxxx" required>
                 </div>
                 <div class="col-md-1 idade-visitante">
-                    <input id="idade" class="form-control" type="text" maxlength="3" name="idade1" placeholder="xxx"
-                        pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                    <input id="idade" class="form-control" type="number" max=120 name="idade" placeholder="xx"
+                        pattern="[a-zA-ZÀ-Úà-ú]+$$" required>
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn btn-danger btn-remover">
@@ -59,7 +59,7 @@
         </div>
     </div>
     <div id="observacoes" class="mt-3">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Observações"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlenght=100 placeholder="Observações"></textarea>
     </div>
     <div class="adicionar-cancelar mt-2 text-right">
         <button id="submit" type="submit" class="btn mr-2 btn-primary">

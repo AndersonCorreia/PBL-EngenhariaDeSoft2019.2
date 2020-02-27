@@ -51,11 +51,11 @@
             <div id="dados-responsavel-campos">
                 <div class="row box mt-1">
                     <div class="col-md-7 nome-responsavel">
-                        <input class="form-control nome" type="text" maxlength="40" name="responsavel1"
+                        <input class="form-control nome" type="text" maxlength="40" name="responsavel"
                             placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-4 cargo-responsavel">
-                        <input class="form-control cargo" type="text" maxlength="40" name="cargo1" placeholder="Cargo"
+                        <input class="form-control cargo" type="text" maxlength="40" name="cargo" placeholder="Cargo"
                             pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-1">
@@ -72,7 +72,7 @@
                 </button>
             </div>
             <div id="observacoes" class="mt-3">
-                <textarea name="observacoes" class="form-control" rows="3" placeholder="Observações"></textarea>
+                <textarea name="observacoes" class="form-control" rows="3" maxlenght=100 placeholder="Observações"></textarea>
             </div>
         </div>
     </div>

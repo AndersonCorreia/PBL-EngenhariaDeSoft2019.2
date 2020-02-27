@@ -149,19 +149,11 @@ class AgendamentoController extends Controller{
      * inserir no banco de dados
      * @return void
      */
-    public function agendarInstituicao(){
-        //ID	Visita	Data_Agendamento	Status	turma_ID	instituicao_ID
-        //não terminado
-        $dados = [
-            //'visita' => $id_visita,
-            'dataAgendamento' => $_POST['data'],
-            'status' => 1,
-            'turmaID' => $id_turma,
-            'instituicaoID' => $id_instituicao
-        ];
-        $agendamento = new Agendamento();
-        $agendamento->novoAgendamento($dados);
-        return redirect()->route('AgendarDiurnoInstituição.show');
+    public function agendarInstituicao(Request $request){
+        
+        $id_user = session('ID');
+        
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -171,17 +163,9 @@ class AgendamentoController extends Controller{
      * @return void
      */
     public function agendarContaIndividual() {
-        //dados da tabela	ID	Visita	Data_Agendamento	Status	usuario_ID
-        //não terminado
+        
         $id_user = session('ID');
-        $dados = [
-            //'visita' => $id_visita,
-            'dataAgendamento' => $_POST['data'],
-            'status' => 1,
-            'usuario_ID' => $id_user 
-        ];
-        $agendamento = new Agendamento();
-        $agendamento->novoAgendamento($dados);
+
         return redirect()->route('AgendarDiurnoVisitante.show');
     }
 }
