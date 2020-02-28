@@ -7,7 +7,7 @@
 
 <div class="form-group row col-12">
     <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
-     <div class="col-9">
+     <div class="col-11">
         <input id="nomeInst" class="form-control" type="text" name="instituicao" placeholder="Insira o Nome ou Cidade da Instituição" list="instList" required autofocus>
         <datalist id="instList">            
         </datalist>
@@ -19,7 +19,7 @@
 
 <form method="get" action="#">
 <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
-    <table class="table-borderless">
+    <table class="table-borderless col-12">
         
         <thead>
             <tr class="table-secondary">
@@ -89,11 +89,11 @@
 
 <form method="get" action="#">
 <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
-    <table class="table-borderless">
+    <table class="table-borderless col-12">
         
         <thead>
             <tr class="table-secondary">
-                <th>Instituição:</th> <td>Colégio Estadual Santo Antônio</td>
+                <th>Instituição:</th> <td>Colégio Municipal Odorico Tavares</td>
                 <th>Cidade:</th> <td>Feira de Santana</td>
             </tr>
         </thead>
@@ -172,11 +172,14 @@
         
     }
     [borda]{
-        width: 850px;
+        width: 1050px;
         height: 230px;
     }
 
     [expand]{
+        margin-top: 5px;
+        margin-left: 20px; 
+        margin-right: 15px;
         width: 90px;
         height: 40px;
     }
