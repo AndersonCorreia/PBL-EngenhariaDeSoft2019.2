@@ -12,6 +12,7 @@
             Essa parte receberá do controller uma array $lista_espera com as informações
             do agendamento: nome da instituicao, data do agendamento
             -->
+            <li class="list-group-item">Colegio Helyos - 23/03/2020 - Matutino</li>
             @if(($lista_espera ?? false))
             @foreach($lista_espera as $agendamento)
                 <li class="list-group-item">{{$agendamento['nome']}} - {{$agendamento['data']}}</li>
@@ -57,18 +58,26 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <!-- colocar resto das coisas aqui -->
-                                        <div class="">
+                                        <div class="modal-body">
+                                            <!-- colocar resto das coisas aqui -->
+                                            <div class="custom-control custom-radio col-md-12">
+                                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio1">Colegio Helyos  - 23/03/2020</label>
+                                            </div>
                                             @if(($lista_espera_dia_turno ?? false))
                                             @foreach($lista_espera_dia_turno as $agendamento_dia_turno)
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio1">Colegio Helyos  - 22/03/2020</label>
+                                                <label class="custom-control-label" for="customRadio1">{{$agendamento_dia_turno['nome']}} - {{$agendamento_dia_turno['data']}}</label>
                                             </div>
                                             @endforeach
                                             @else
                                                 <p>Não possui nenhum agendamento na lista de espera para este dia e turno.</p>
                                             @endif
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary">Confirmar</button>
                                         </div>
                                     </div>
                                 </div>
