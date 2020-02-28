@@ -24,6 +24,15 @@
     </div>
     <div class="form-group col-sm-7 d-block">
         <h4 class="col-sm-12">Cronograma de Visitas Programadas</h4>
+        <div class="col p-0 pt-2 text-dark font-weight-bold" calendario>
+                <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('diurno')" disabled="">
+                    <i class="fas fa-angle-left" aria-hidden="true"></i>
+                </button>
+                <span id="calendarDatas">10 de Março a 20 de Março</span>
+                <button id="setaRight" type="button" class=" btn btn-default" onclick="proximosDias('diurno')">
+                    <i class="fas fa-angle-right" aria-hidden="true"></i>
+                </button>
+            </div>
         <table class="table table-hover col-sm-12 col-form-label">
             <thead>
             <tr class="table-primary">
@@ -216,6 +225,13 @@
     [lista]{
         width: 170px;
         height: 40px;
+    }
+
+    [calendario]{
+        margin-top: 5px;
+        margin-left: 380px; 
+        margin-right: 15px;
+    
     }
 
     table {
