@@ -78,12 +78,64 @@
                     <td id="tercaManha"></td>
                     <td id="quartaManha"></td>
                     <td id="quintaManha"></td>
-                    <td id="sextaManha"></td>
+                    <td id="sextaManha">
+                    <p>Escola Dois de Julho</p>
+                        <div class="btn-group" role="group">
+                            <button type="submit" class="btn btn-primary" btnconf>Confirmar</button>
+                            <button type="submit" class="btn btn-danger"btncanc>Cancelar</button>
+                        </div>
+                        <div id="lista-espera">
+                            <button type="submit" class="btn btn-secondary"data-toggle="modal"
+                            data-target=".modal-lista-espera" lista>Lista de Espera
+                            </button>
+                            <!-- modal da lista espera -->
+                            <div class="modal fade modal-lista-espera" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-secondary text-white">
+                                            <h5 class="modal-title" id="modal-cadastrar-turmaTitle">Lista de Espera</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <!-- colocar resto das coisas aqui -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row" class="table-secondary">Tarde</th>
                     <td id="segundaTarde"></td>
-                    <td id="tercaTarde"></td>
+                    <td id="tercaTarde">
+                    <p>Colégio Santo Antônio</p>
+                        <div class="btn-group" role="group">
+                            <button type="submit" class="btn btn-primary" btnconf>Confirmar</button>
+                            <button type="submit" class="btn btn-danger"btncanc>Cancelar</button>
+                        </div>
+                        <div id="lista-espera">
+                            <button type="submit" class="btn btn-secondary"data-toggle="modal"
+                            data-target=".modal-lista-espera" lista>Lista de Espera
+                            </button>
+                            <!-- modal da lista espera -->
+                            <div class="modal fade modal-lista-espera" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-secondary text-white">
+                                            <h5 class="modal-title" id="modal-cadastrar-turmaTitle">Lista de Espera</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <!-- colocar resto das coisas aqui -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </td>
+                    
                     <td id="quartaTarde"></td>
                     <td id="quintaTarde"></td>
                     <td id="sextaTarde"></td>
@@ -93,7 +145,32 @@
                     <td id="segundaNoite"></td>
                     <td id="tercaNoite"></td>
                     <td id="quartaNoite"></td>
-                    <td id="quintaNoite"></td>
+                    <td id="quintaNoite">
+                    <p>Colégio Anchieta</p>
+                        <div class="btn-group" role="group">
+                            <button type="submit" class="btn btn-primary" btnconf>Confirmar</button>
+                            <button type="submit" class="btn btn-danger"btncanc>Cancelar</button>
+                        </div>
+                        <div id="lista-espera">
+                            <button type="submit" class="btn btn-secondary"data-toggle="modal"
+                            data-target=".modal-lista-espera" lista>Lista de Espera
+                            </button>
+                            <!-- modal da lista espera -->
+                            <div class="modal fade modal-lista-espera" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-secondary text-white">
+                                            <h5 class="modal-title" id="modal-cadastrar-turmaTitle">Lista de Espera</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <!-- colocar resto das coisas aqui -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                     <td id="sextaNoite"></td>
                 </tr>
             </tbody>
@@ -141,7 +218,7 @@
     /*Organização das linhas da tabela*/
     td {
         border-left-width: 0;
-        min-width: 185px;
+        min-width: 120px;
         height: 100px;
     }
 
