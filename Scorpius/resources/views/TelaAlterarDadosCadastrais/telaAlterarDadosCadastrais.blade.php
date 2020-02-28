@@ -1,52 +1,152 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Alterar Dados Pessoais')
+@section('title', 'Alterar dados')
 
 @section('conteudo')
-    <style>
-        .user_input_forms{
-            text-align: center;
+<div class="scorpius-border p-4">
+    <div class="scorpius-border-shadow-sm p-3" onmousemove="verificaCamposPessoais()">
+        <p class="h3">Dados pessoais</p>
+        <form action="AlterarDadosPessoais" method="POST">
+            <div class="form-row">
+                <div class="col-md-6 form-group">
+                    <label for="nomeUsuario">Nome</label>
+                    <input class="form-control" name="nome" id="nomeUsuario" placeholder="Nome" minlength="3"
+                        maxlength="10" type="text" required>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="sobrenomeUsuario">Sobrenome</label>
+                    <input class="form-control" name="sobrenome" id="sobrenomeUsuario" placeholder="Sobrenome"
+                        minlength="3" maxlength="10" type="text" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 form-group">
+                    <label for="emailUsuario">Email</label>
+                    <input class="form-control" name="email" id="emailUsuario" placeholder="exemplo@exemplo.com"
+                        type="email" required>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="telefoneUsuario">Telefone</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">+55</div>
+                        </div>
+                        <input required maxlength="16" minlength="16" type="text" name="telefone" id="telefoneUsuario"
+                            class="form-control" placeholder="(00) 0 0000-0000">
+                    </div>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="cpfUsuario">CPF</label>
+                    <input onkeydown="javascript: fMasc( this, mCPF );" minlength="14" maxlength="14" type="text" name="cpf" id="cpfUsuario"
+                        class="form-control cpf-mask" placeholder="000.000.000-00" required>
+                <small hidden id="feedback-cpf" class="text-danger">CPF inválido!</small>
+
+                </div>
+            </div>
+            <div class="mb-5">
+                <button type="submit" class="btn btn-secondary float-right">
+                    Alterar dados
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="mt-3 scorpius-border-shadow-sm p-4" onmousemove="verificaCamposSenha()">
+        <p class="h3">Alterar senha</p>
+        <form action="" method="post">
+            <div class="form-group pl-5 pr-5">
+                <label for="senhaAtual">Senha atual</label>
+                <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" class="form-control" name="senha_antiga" id="senhaAtual" type="password" required>
+            </div>
+            <div class="form-group pl-5 pr-5">
+                <label for="novaSenha">Nova senha</label>
+                <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" class="form-control" name="senha_antiga" id="novaSenha" type="password" required>
+            </div>
+            <div class="form-group pl-5 pr-5">
+                <label for="novaSenhaR">Nova senha</label>
+                <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" class="form-control" id="novaSenhaR" type="password" required>
+                <small hidden id="feedback-senha" class="text-danger">As senhas devem ser iguais!</small>
+            </div>
+            <div class="mb-5">
+                <button onmousewheel="verificaCamposSenha()" hidden id="alterarSenha" type="submit" class="btn btn-secondary float-right">
+                    Alterar senha
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+<script>
+//     $('#cpfUsuario').mask('000.000.000-00', {
+//     reverse: true
+// });
+$('#telefoneUsuario').mask('00 0 0000-0000', {
+    reverse: true
+});
+function verificaCamposPessoais(){
+    if($('#cpfUsuario').val() != ""){
+        if(ValidaCPF()){
+            $('#feedback-senha').removeAttr("hidden");
+            $('#cpfUsuario').removeClass('is-valid');
+            $('#cpfUsuario').addClass('is-invalid');
+        }else{
+            $('#feedback-senha').attr("hidden", '');
+            $('#cpfUsuario').removeClass('is-invalid');
+            $('#cpfUsuario').addClass('is-valid');
         }
-        .submit_button{
-            background-color: cornflowerblue;
-            color: white;
-            border: 5px;
-            border-radius: 5px;
-            padding: 5px; 
+    }
+}
+function verificaCamposSenha(){
+    trava = 0;
+    if($('#novaSenha').val() != "" || $('#novaSenhaR').val() != ""){
+        if ($('#novaSenha').val() != $('#novaSenhaR').val()) {
+            $('#novaSenhaR').removeClass('is-valid');
+            $('#novaSenha').removeClass('is-valid');
+            $('#novaSenhaR').addClass('is-invalid');
+            $('#novaSenha').addClass('is-invalid');
+            $('#feedback-senha').removeAttr("hidden");
+            trava++;
+        } else {
+            $('#novaSenha').removeClass('is-invalid');
+            $('#novaSenha').addClass('is-valid');
+            $('#novaSenhaR').removeClass('is-invalid');
+            $('#novaSenhaR').addClass('is-valid');
+            $('#feedback-senha').attr("hidden", '');
         }
-    </style>
-    <h1>Alterar Dados Pessoais</h1>
-    <br>
-        <div class="user_input_forms">
-            <form action="AlterarDadosUsuario " method="POST">
-            {{csrf_field()}}
-                <label> <b>Email:</b> </label> <br>
-                <input type="text" name="email" placeholder="Meu e-mail">   <!--Caixa de texto p/ atualziar email-->
-                <br><br><br>
-            
-                <label> <b>Nome Completo:</b> </label> <br>
-                <input type="text" name="nome" placeholder="Meu nome completo">      <!--Caixa de texto p/ atualizar nome-->
-                <br><br><br>
+    }
+    
+    if (trava == 0) {
+        $('#alterarSenha').removeAttr("hidden");
+    } else {
+        $('#alterarSenha').attr("hidden", '');
+    }
+}
+function ValidaCPF(){	
+	var RegraValida=document.getElementById("cpfUsuario").value; 
+	var cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/;	 
+    if (cpfValido.test(RegraValida) == true)	{ 
+        return false;	
+    } else	{	 
+        return true	
+    }
+}
+function fMasc(objeto,mascara) {
+    obj=objeto
+    masc=mascara
+    setTimeout("fMascEx()",1)
+}
 
-                <label> <b>Telefone:</b> </label> <br>
-                <input type="text" name="telefone" placeholder="Meu telefone">       <!--Caixa de texto p/ atualziar telefone-->
-                <br><br><br>
-                <input type="submit" value="Atualizar Dados" name="atualizar" class="submit_button">  <!--botao p/ confirmar os novos dados-->
-            </form>    
-        </div> <br><br>
-        <div class="user_input_forms">
-            <h1><b>Alterar Senha</b></h1>
-            <form action="AlterarDadosUsuario" method="POST">
-            {{csrf_field()}}
-                <label><b>Digite sua senha atual:</b></label> <br>  
-                <input type="password" name ="senha_antiga">  <!--Caixa de texto p/ senha atual-->
-                <br><br><br>
+function fMascEx() {
+    obj.value=masc(obj.value)
+}
 
-                <label><b>Digite sua nova senha*:</b></label> <br>   
-                <input type="password" name ="senha_nova"> <br>  <!--Caixa de texto p/ nova senha-->
-
-                <h5>*Mínimo 8 dígitos</h5>   <br>
-                <input type="submit" value="Alterar senha" name="alterar_senha" class="submit_button">  <!--botao p/ confirmar os novos dados-->
-            </form>
-        </div>
+function mCPF(cpf){
+    cpf=cpf.replace(/\D/g,"")
+    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+    cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+    return cpf
+}
+</script>
 @endsection
