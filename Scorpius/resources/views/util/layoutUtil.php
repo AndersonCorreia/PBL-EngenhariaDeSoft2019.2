@@ -21,7 +21,7 @@ function getMenuLinksAll(){
         'designar horários para estagiarios'=>  ['link'=>route('telaGerenciamentoDehorarios.show') , 'texto'=>'Horários dos Estagiários' ],
         'gerenciamento de visitas'=>            ['link'=>'#' , 'texto'=>'Gerenciamento de Visitas' ],
         'relatorio dos agendamentos'=>          ['link'=>'#' , 'texto'=>'Relatórios de Agendamentos' ],
-        'cadastrar e modificar atividades'=>    ['link'=>'#' , 'texto'=>'Gerenciamento de Eventos' ],
+        'cadastrar e modificar atividades'=>    ['link'=>route("telaGerenciamentoDeEventos.show") , 'texto'=>'Gerenciamento de Eventos' ],
         'criar usuarios'=>                      ['link'=>route("CadastroUsuario.show") , 'texto'=>'Cadastrar Usuário' ],
         'gerenciar usuarios'=>                  ['link'=>'#' , 'texto'=>'Gerenciar Usuários' ],
         'ver confiabilidade das instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],

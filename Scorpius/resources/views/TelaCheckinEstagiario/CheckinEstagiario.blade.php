@@ -3,88 +3,114 @@
 @section('title', 'Check-in visitas do Estagiário')
 
 @section('conteudo')
-
-<div class="m-1 p-3">
-
-    <div class="row mt-3 mx-0 p-1 scorpius-border-shadow border-top border-shadow">
-        <div class= "col-8 col-5 col-md-3">
-            <div class="col-12 p-0 my-1 font-weight-bold"><h3>Próxima Visitação</h3></div>
-        </div>
-        <div class= "col-8 col-md-3">
-            <div class="col-12 p-0 my-1 font-weight-bold text-right"><h3>Turno</h3></div>
-        </div>
-        <div class= "col-8 col-md-3">
-            <div class="col-12 p-0 my-1 font-weight-bold text-right"><h3>dd/mm/aa</h3></div>
-        </div>
-    </div>
-
-    <div class="row mt-3 mx-0 p-1 scorpius-border-shadow ">
-        <div class= "col-8 col-5 col-md-3">
-            <div class="col-12 p-0 my-1 font-weight-bold"><h5>Nome do colégio</h5></div>
-        </div>
-        <div class= "col-8 col-md-3">
-            <div class="col-12 p-0 my-1 font-weight-bold"><h5>Professor Responsável</h5></div>
-        </div>
-        <div class= "col-8 col-md-3 text-right">
-            <div class="col-12 p-0 my-1 my-md-0 font-weight-bold"><h5>00|00</h5></div>
+<div class="scorpius-border">
+    <div class="container-fluid bg-white shadow-sm p-2"
+        style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+        <div class="row ml-3 mr-3">
+            <div class="col-md-5">
+                <p class="h3 float-left">Próxima visitação</p>
+            </div>
+            <div class="col-md-2">
+                <p class="h3">{Turno}</p>
+            </div>
+            <div class="col-md-5">
+                <p class="h3 float-right">{dd/mm/aaaa}</p>
+            </div>
         </div>
     </div>
- 
-    <div class= "row mt-0 mx-0 p-1 scorpius-border-shadow border-top border-shadow">
-        <div class="row col-12 col-md-11 my-1" >
-            <div class="row col-12">
-                <div class= "col-8 col-5 col-md-3">
-                    <div class="col-12 p-0 my-1 font-weight-bold">Ordem</div>
-                   <div class="col-12 p-0">01</div> 
+    <div class="p-4">
+        <div id="escola">
+            <div class="container-fluid bg-secondary p-2 text-white border-all-50">
+                <div class="row">
+                    <div class="col-md-7">
+                        <p class="h5">{nome_instituicao}</p>
+                    </div>
+                    <div class="cold-md-4">
+                        <p class="h5">{nome_usuario}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="h5 float-right">{checados} | {total}</p>
+                    </div>
                 </div>
-                <div class= "col-4 col-md-3">
-                    <div class="col-12 p-0 my-1 font-weight-bold">Nome</div>
-                    <div class="col-12 p-0">Esdras Abreu Disney</div>
+            </div>
+            {{-- FOREACH --}}
+            <div class="p-3">
+                <div class="scorpius-border-shadow border-all-50 p-2">
+                    <div class="row text-center">
+                        <div class="col-md-1">
+                            <p class="h5">
+                                {n°}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="h5">
+                                {nome_aluno}
+                            </p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="h5">{idade_aluno}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <form name="checkin" method="POST">
+                                <input type="hidden" value="{ID}">
+                                <button class="btn btn-outline-secondary" aria-pressed="false">
+                                    Presente
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class= "col-8 col-md-4">
-                    <div class="col-12 p-0 my-1 font-weight-bold">Documento</div>
-                    <div class="col-12 p-0">000.000.000-00</div>
+            </div>
+        </div>
+        <div id="visitantesComuns" class="mt-3">
+            <div class="container-fluid bg-secondary p-2 text-white border-all-50">
+                <div class="row mr-3">
+                    <div class="col-md-9 text-center">
+                        <p class="h5">Demais visitantes</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="h5 float-right">{checados} | {total}</p>
+                    </div>
                 </div>
-                <div class= "col-11 col-md-1 my-1 text-right" >
-                    <div class="col-12 p-0 my-1 my-md-0 font-weight-bold">Status</div>
-                    <button id="qua-noite" type="button" class="btn-outline-secondary btn"
-                            data-toggle="button" aria-pressed="false">Presente</button>
+            </div>
+            <div class="p-3">
+                <div class="scorpius-border-shadow border-all-50 p-2">
+                    <div class="row text-center">
+                        <div class="col-md-1">
+                            <p class="h5">
+                                {n°}
+                            </p>
+                        </div>
+                        <div class="col-md-5">
+                            <p class="h5">
+                                {nome_visitante}
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="h5">{cpf_visitante}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <form name="checkinVisitante" method="POST">
+                                <input type="hidden" value="{ID}">
+                                <button class="btn btn-outline-secondary" aria-pressed="false">
+                                    Presente
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<div class="m-1 p-3">
-
-    <div class="form-group col-12 m-0 p-0">
-        <h5>Demais Visitação</h5>
-    </div>
- 
-    <div class= "row mt-0 mx-0 p-1 scorpius-border-shadow border-top border-shadow">
-        <div class="row col-12 col-md-11 my-1" >
-            <div class="row col-12">
-                <div class= "col-8 col-5 col-md-3">
-                    <div class="col-12 p-0 my-1 font-weight-bold">Ordem</div>
-                   <div class="col-12 p-0">01</div> 
-                </div>
-                <div class= "col-4 col-md-3">
-                    <div class="col-12 p-0 my-1 font-weight-bold">Nome</div>
-                    <div class="col-12 p-0">Esdras Abreu Disney</div>
-                </div>
-                <div class= "col-8 col-md-4">
-                    <div class="col-12 p-0 my-1 font-weight-bold">Documento</div>
-                    <div class="col-12 p-0">000.000.000-00</div>
-                </div>
-                <div class= "col-11 col-md-1 my-1 text-right" >
-                    <div class="col-12 p-0 my-1 my-md-0 font-weight-bold">Status</div>
-                    <button id="qua-noite" type="button" class="btn-outline-secondary btn"
-                            data-toggle="button" aria-pressed="false">Presente</button>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+@endsection
+@section('js')
+<script>
+    $('form[name="checkinAluno"]').submit(function(e){
+        e.preventDefault();
+    });
+    $('form[name="checkinVisitante"]').submit(function(e){
+        e.preventDefault();
+    });
+</script>
 @endsection
