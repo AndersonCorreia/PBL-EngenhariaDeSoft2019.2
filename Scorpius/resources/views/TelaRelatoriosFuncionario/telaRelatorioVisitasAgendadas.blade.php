@@ -18,7 +18,7 @@
 
 
 <form method="get" action="#">
-    <div class="instituicoes" >
+<div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
     <table class="table-borderless">
         
         <thead>
@@ -48,13 +48,14 @@
                     <th>Ano Escolar:</th> <td>1º Ano</td>
                 </tr>
             </thead>
-   
-            <thead>
+            
+            <!--<thead>
                 <tr class="table-primary">
-                    <th colspan="2">Nome do Aluno:</th> 
+                    <th colspan="4">Lista de Alunos:</th> 
                     <th colspan="2">Idade:</th>
                     
                 </tr>
+           
             </thead>
             <tbody>
                 <tr>
@@ -79,10 +80,83 @@
                     <td colspan="2">Juceline Arraes Mato</td> 
                     <td colspan="2">15 anos</td>
                 </tr>
-            </tbody>
+            </tbody> -->
 
         </table>
-</form>
+    </form>
+    <button type="button" class="btn btn-secondary float-left" expand> Expandir </button>
+</div>
+
+<form method="get" action="#">
+<div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
+    <table class="table-borderless">
+        
+        <thead>
+            <tr class="table-secondary">
+                <th>Instituição:</th> <td>Colégio Estadual Santo Antônio</td>
+                <th>Cidade:</th> <td>Feira de Santana</td>
+            </tr>
+        </thead>
+
+
+        <thead>
+            <tr>
+                <th>Data da Visita:</th> <td>14/11/2020</td>
+                <th>Status:</th> <td>Não Realizada</td>
+            </tr>
+        </thead>
+
+            <thead>
+                <tr>
+                    <th>Total de Alunos:</th> <td>20</td>
+                    <th>Titular Responsável:</th> <td>Mário Luiz</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th>Turno:</th> <td>Tarde</td>
+                    <th>Ano Escolar:</th> <td>3º Ano</td>
+                </tr>
+            </thead>
+            
+            <!--<thead>
+                <tr class="table-primary">
+                    <th colspan="4">Lista de Alunos:</th> 
+                    <th colspan="2">Idade:</th>
+                    
+                </tr>
+           
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">Henrique Dias Oliveira </td> 
+                    <td colspan="2">14 anos</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td colspan="2">Marcos Luís Barreto</td> 
+                    <td colspan="2">13 anos</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td colspan="2">João Bento Souza</td> 
+                    <td colspan="2">14 anos</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td colspan="2">Juceline Arraes Mato</td> 
+                    <td colspan="2">15 anos</td>
+                </tr>
+            </tbody> -->
+
+        </table>
+    </form>
+    <button type="button" class="btn btn-secondary float-left" expand> Expandir </button>
+</div>
+
 
 <style>
 
@@ -96,6 +170,15 @@
         flex-direction:column;
         align-items: center;
         
+    }
+    [borda]{
+        width: 850px;
+        height: 230px;
+    }
+
+    [expand]{
+        width: 90px;
+        height: 40px;
     }
 
     h2{
