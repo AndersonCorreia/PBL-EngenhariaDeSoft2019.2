@@ -58,6 +58,18 @@
                                             </button>
                                         </div>
                                         <!-- colocar resto das coisas aqui -->
+                                        <div class="">
+                                            @if(($lista_espera_dia_turno ?? false))
+                                            @foreach($lista_espera_dia_turno as $agendamento_dia_turno)
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio1">Colegio Helyos  - 22/03/2020</label>
+                                            </div>
+                                            @endforeach
+                                            @else
+                                                <p>Não possui nenhum agendamento na lista de espera para este dia e turno.</p>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
