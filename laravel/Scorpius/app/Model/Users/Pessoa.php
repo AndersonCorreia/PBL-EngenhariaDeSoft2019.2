@@ -8,7 +8,17 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
     protected $telefone;
     protected $email;
 	protected $senha;
-	protected $tipo;
+	protected $tipo_usuario;
+
+	public function __Construct(string $nome, string $senha, string $tipo_usuario, string $cpf, string $telefone, string $email){
+		$this->ID = null;
+		$this->nome = $nome;
+        $this->senha = $senha;
+		$this->tipo_usuario = $tipo_usuario;
+		$this->cpf = $cpf;
+		$this->telefone = $telefone;
+		$this->email = $email;
+	}
 
 	/**
 	 * Metodo de login do usuario do sistema. 
@@ -75,7 +85,12 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	}
 
 	public function getTipo() {
-		return $this->tipo;
+		return $this->tipo_usuario;
+	}
+
+	public static function buscar(int $id){
+		$result = (new PessoaDAO)->SELECTbyID($id);
+		return $result;
 	}
 
 	/**
@@ -86,10 +101,22 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	 * @throws Exception caso seja setado o tipo incorreto;
 	 * @return void
 	 */
+<<<<<<< Updated upstream
 	public function setTipo(string $tipo) {
 		$this->setAlterado();
 		$this->tipo_usuario = $tipo;
     }
+=======
+<<<<<<< Updated upstream
+	public abstract function setTipo(string $tipo);
+
+=======
+	public function setTipo(string $tipo_usuario) {
+		$this->setAlterado();
+		$this->tipo_usuario = $tipo_usuario;
+    }
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 	protected function save(){
 		(new \app\DB\PessoaDAO)->UPDATE($this);
 	}
