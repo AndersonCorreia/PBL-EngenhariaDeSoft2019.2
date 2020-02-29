@@ -43,7 +43,7 @@ abstract class DataAccessObject {
     }
 
     public function SELECTbyID(int $id){
-        $sql = "SELECT * FROM $this->table WHERE id = ?";
+        $sql = "SELECT * FROM $this->table WHERE ID = ?";
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -91,7 +91,7 @@ abstract class DataAccessObject {
      * @return boolean true caso operação ocorra com sucesso, caso contrário retorna false;
      */
     public function DELETEbyID(int $id){
-        $sql = "DELETE FROM $this->table WHERE id = ?";
+        $sql = "DELETE FROM $this->table WHERE ID = ?";
         $stmt = $this->dataBase->prepare($sql);
         $result = $stmt->bind_param("i",$id);
         return $stmt->execute();

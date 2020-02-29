@@ -41,7 +41,7 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
         $sql = "UPDATE exposicao
         SET titulo = $exposicao->titulo, tipo_evento = $exposicao->tipo_evento, tema = $exposicao->tema, descricao = $exposicao->descricao,
         quantidade_inscritos = $exposicao->quantidade, data_inicial = $exposicao->data_inicial, data_final = $exposicao->data_final
-        WHERE id = $exposicao->id";
+        WHERE ID = $exposicao->id";
 
         $resultado = $this->dataBase->query($sql);
         return $resultado;
