@@ -47,20 +47,22 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
         return $resultado;
     }
 
-    function SELECTbyID($id): array
-    {
+    public function SELECT_ALL_AtividadePermanente(string $turno = "diurno"){
 
-        $sql = "SELECT * FROM exposicao WHERE id=$id";
-        $resultado = $this->dataBase->query($sql);
+        $hoje =  now();
+        $where = "tipo_evento = 'atividade permanente' AND turno = ?
+                    AND ( data_final >= ? OR data_final IS NULL ) AND data_inicial <= ? ";
 
-        $registros = [];
+        $sql = "SELECT ID, titulo, tema_evento, descricao FROM $this->table WHERE $where";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("sss",$turno ,$hoje, $hoje);
+        $stmt->execute();
+        $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-        if ($resultado->num_rows > 0) {
-            while ($row = $resultado->fetch_assoc()) {
-                $registros[] = $row;
-            }
+        if($ArrayResult==[]){
+            throw new \Exception("Nenhum registro foi encontrado");
         }
 
-        return $registros;
+        return $ArrayResult;
     }
 }

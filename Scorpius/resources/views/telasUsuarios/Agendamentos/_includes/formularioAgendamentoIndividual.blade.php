@@ -58,9 +58,11 @@
             </button>
         </div>
     </div>
-    <div id="observacoes" class="mt-3">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlenght=100 placeholder="Observações"></textarea>
-    </div>
+    @if(($turno ?? "diurno")==="noturno") 
+        <div id="observacoes" class="mt-3">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlenght=100 placeholder="Observações"></textarea>
+        </div>
+    @endif
     <div class="adicionar-cancelar mt-2 text-right">
         <button id="submit" type="submit" class="btn mr-2 btn-primary">
             <i class="fas fa-receipt"></i>

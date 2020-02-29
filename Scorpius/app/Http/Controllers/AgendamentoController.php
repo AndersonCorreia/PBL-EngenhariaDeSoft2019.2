@@ -9,6 +9,7 @@ use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
 use App\DB\Professor_InstituicaoDAO;
 use App\DB\VisitaDAO;
+use App\DB\ExposicaoDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
 
@@ -62,10 +63,8 @@ class AgendamentoController extends Controller{
     public function agendamento(){
 
         $array = $this->getVisitas("diurno", "now", "anterior");
-        $exposicoes = [];
-        for($i=0 ; $i<6 ; $i++){
-            $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
-        }
+        $DAO = new ExposicaoDAO();
+        $exposicoes = $DAO->SELECT_ALL_AtividadePermanente();
         $tipoAtividade ="exposições";
         $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID(session("ID"));
         $turmas = (new TurmaDAO)->SELECTbyProfessorID(session("ID"));
@@ -88,20 +87,13 @@ class AgendamentoController extends Controller{
     public function agendamentoIndividual(){
 
         $array = $this->getVisitas("diurno", "now", "anterior");
-        $exposicoes = [];
-        for($i=0 ; $i<6 ; $i++){
-            $exposicoes[]= ["titulo"=> "exposicao$i", "descrição" => "exp do TEMA: Y"];
-        }
-        $tipoAtividade ="exposições";
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
-            'tipoUserLegenda'=> $visitante,
-            'tipoAtividade' => $tipoAtividade,
-            $tipoAtividade => $exposicoes
+            'tipoUserLegenda'=> $visitante
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
@@ -109,25 +101,20 @@ class AgendamentoController extends Controller{
 
     public function agendamentoAtividadeDiferenciada(){
 
-        $tipoAtividade ="atividade-diferenciada";
         $variaveis = [
             'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Agendar Visita",
-            'tipoAtividade' => $tipoAtividade,
+            'paginaAtual' => "Agendar Visita"
         ];
 
-        return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
+        return view('telasUsuarios.Agendamentos.agendamentoAtividade', $variaveis);
     }
+
     public function agendamentoNoturno(){
         
         Visita::setCorIndisponivel('btn-danger');
         $array = $this->getVisitas("noturno", "now", "anterior");
 
-        $atividades = [];
-        for($i=0 ; $i<1 ; $i++){
-            $atividades[]= ["titulo"=> "Telescopio", "descrição" => "Observação do céu noturno"];
-        }
-
+        $atividades = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente("noturno");
         $tipoAtividade = 'atividade';
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Indisponivel", "tipo" => "visitante"];
         $variaveis = [
