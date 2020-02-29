@@ -58,6 +58,14 @@ class Handler extends ExceptionHandler
             
             return redirect()->route('loginError.show');
         }
+        elseif($exception instanceof NenhumaVisitaEncontradaException){
+            
+            return redirect()->route('Visita.error');
+        }
+        elseif($exception instanceof NenhumaAtividadeEncontradaException){
+            
+            return redirect()->route('Atividade.error');
+        }
         else {
             return parent::render($request, $exception);
         }

@@ -14,6 +14,10 @@
  //Rotas para agendamento de uma individual para atividades diferenciadas
  Route::get('/agendamento/atividades', 'AgendamentoController@agendamentoAtividadeDiferenciada')->name('AgendarAtividade.show');
  Route::post('/agendamento/atividades', 'AgendamentoController@agendarContaIndividual')->name('AgendarAtividade.post');
+ 
+ Route::get('/agendamento/atividades/error', 'AgendamentoController@atividadeError')->name('Atividade.error');
+
+ Route::get('/agendamento/visitas/error', 'AgendamentoController@visitaError')->name('Visita.error');
 
 /**
  * rota para retornar o JSON com os dados das visitas para o calendario.

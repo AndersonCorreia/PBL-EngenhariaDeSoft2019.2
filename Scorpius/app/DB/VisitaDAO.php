@@ -85,7 +85,7 @@ class VisitaDAO extends DataAccessObject{
         $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
         if($ArrayResult==[]){
-            throw new \Exception("Nenhuma Visita encontrada no intervalo especificado", 1);
+            throw new \App\Exceptions\NenhumaVisitaEncontradaException();
         }
         
         return $ArrayResult;

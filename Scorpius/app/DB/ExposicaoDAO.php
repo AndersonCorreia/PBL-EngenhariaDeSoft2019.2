@@ -60,7 +60,7 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
         $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
         if($ArrayResult==[]){
-            throw new \Exception("Nenhum registro foi encontrado");
+            throw new \App\Exceptions\NenhumaAtividadeEncontradaException();
         }
 
         return $ArrayResult;

@@ -155,4 +155,24 @@ class AgendamentoController extends Controller{
 
         return redirect()->route('AgendarDiurnoVisitante.show');
     }
+
+    public function atividadeError(){
+
+        $variaveis = [
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Agendar Visita"
+        ];
+
+        return view('telasUsuarios.Agendamentos.errorNenhumaAtividade',$variaveis);
+    }
+
+    public function visitaError(){
+
+        $variaveis = [
+            'itensMenu' => getMenuLinks(),
+            'paginaAtual' => "Agendar Visita"
+        ];
+
+        return view('telasUsuarios.Agendamentos.errorNenhumaVisita',$variaveis);
+    }
 }
