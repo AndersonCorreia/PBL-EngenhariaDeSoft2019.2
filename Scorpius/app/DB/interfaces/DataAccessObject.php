@@ -87,7 +87,7 @@ abstract class DataAccessObject {
     
     /**
      * Deletar um registro do banco com base no ID
-     * @param integer $id ID da instiuicao;
+     * @param integer $id ID do registro na tabela;
      * @return boolean true caso operação ocorra com sucesso, caso contrário retorna false;
      */
     public function DELETEbyID(int $id){

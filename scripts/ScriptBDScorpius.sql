@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `data_visita` DATE NOT NULL,
   `turno` ENUM('manhã', 'tarde', 'noite') NOT NULL,
-  `status` ENUM('realizada', 'não realizada', 'instituição ausente') NOT NULL DEFAULT 'não realizada',
+  `status` ENUM('realizada', 'não realizada', 'instituição ausente', 'atividade diferenciada') NOT NULL DEFAULT 'não realizada',
   `agendamento_institucional_ID` INT UNSIGNED DEFAULT NULL,
   `acompanhante_ID` INT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`ID`),

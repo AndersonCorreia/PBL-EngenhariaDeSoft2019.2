@@ -42,9 +42,4 @@ class InicialController extends Controller
     {
         return view('telaEntrar.index');
     }
-    
-    public function loginAdm()
-    {
-        return view('loginAdministrativo.index');
-    }
 }
