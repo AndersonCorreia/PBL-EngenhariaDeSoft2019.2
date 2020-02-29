@@ -47,12 +47,18 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {   
         if($exception instanceof NenhumaInstCadastradaException){
-            return redirect()->route('errorNenhumaInstituicao.show');
-
-        }elseif($exception instanceof NenhumaTurmaCadastradaException){
-            return redirect()->route('errorNenhumaTurma.show');
             
-        }else {
+            return redirect()->route('errorNenhumaInstituicao.show');
+        }
+        elseif($exception instanceof NenhumaTurmaCadastradaException){
+            
+            return redirect()->route('errorNenhumaTurma.show');   
+        }
+        elseif($exception instanceof UsuarioNaoEncontradoException){
+            
+            return redirect()->route('loginError.show');
+        }
+        else {
             return parent::render($request, $exception);
         }
     }

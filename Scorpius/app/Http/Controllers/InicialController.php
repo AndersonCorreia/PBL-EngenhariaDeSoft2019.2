@@ -40,6 +40,11 @@ class InicialController extends Controller
     //retorna a tela de entrar
     public function telaEntrar()
     {
-        return view('telaEntrar.index');
+        return view('telaEntrar.index', [ 'loginError' => false]);
+    }
+    //retorna a tela de entrar com o aviso de erro no login
+    public function telaEntrarError()
+    {
+        return view('telaEntrar.index', [ 'loginError' => true]);
     }
 }

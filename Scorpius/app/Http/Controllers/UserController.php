@@ -16,7 +16,7 @@ require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class UserController extends Controller{   
 
-    function getDashboard(){
+    public function getDashboard(){
         
         $array = $this->getVisitas("diurno", "now", "anterior");
         $id_user = session('ID');

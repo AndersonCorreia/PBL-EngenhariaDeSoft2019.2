@@ -43,7 +43,8 @@ Route::get("/dashboard", function (){
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
 Route::resource('/cadastrar', 'CadastroController');
 // Chama o metódo do Inicialcontroller que retorna a página de entrar (login).
-Route::get('/entrar', ['uses'=>'InicialController@telaEntrar'])->name('entrar');
+Route::get('/entrar', 'InicialController@telaEntrar')->name('entrar');
+Route::get('/entrar/erro', 'InicialController@telaEntrarError')->name('loginError.show');
 Route::post('/entrar','UserController@login')->name('login');
 Route::get("/logout", 'UserController@logout')->name('logout');
 

@@ -7,7 +7,7 @@ namespace App\Exceptions;
  */
 class NenhumaTurmaCadastradaException extends \Exception {
 
-    public function __construct(int $cod=0){
+    public function __construct(int $cod=1){
         parent::__construct("Não ha nenhuma turma cadastrada pelo usuario",$cod);
     }
 }

@@ -11,25 +11,30 @@
         float: left;
         width: 100% !important;
     }
-    #lado_direito{
-        margin-top: 80px;
+    html,
+    body,
+    #container{
+        margin: 0%;
+        padding: 0%;
+        height: 100vh;
+        width: 100vw;
+    }
+    #lado_direito-topo{
+        padding-top: 7vh;
     }
     
     #nome-scorpius{
-        width: 45%;
-    }
-    #container{
-        margin-right: 0px;
+        width: 35%;
     }
 </style>
 
-<div id="container" class="row">
+<div id="container" class="row m-0 p-0 w-100 mh-100">
     <!-- Lado esquerdo da tela de Login -->
-    <div id="lado_esquerdo" class="col-md-6">
+    <div id="lado_esquerdo" class="col-md-6 h-100 m-0 p-0">
         @yield('img')
     </div>
     <!-- Lado direito da tela de Login -->
-    <div id="lado_direito" class="col-md-6 pr-0">
+    <div id="lado_direito" class="col-md-6 m-0 p-0 h-100 overflow-hidden">
         <!-- Parte do topo do lado direito -->
         <div id="lado_direito-topo" class="text-center">
             <a href="{{ route('paginaInicial') }}">
@@ -37,7 +42,7 @@
             </a>
         </div>
         <!-- Parte de baixo do lado direito -->
-        <div id="lado_direito-baixo"> @yield('conteudo')</div>
+        @yield('conteudo')
     </div>
 </div>
 

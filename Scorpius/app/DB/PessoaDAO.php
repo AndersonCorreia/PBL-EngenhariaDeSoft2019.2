@@ -16,8 +16,6 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 
     function INSERT($pessoa): bool
     {
-        //usa a variavel $dataBase para  fazer a query no banco
-        //$this->dataBase;
         $nome = $pessoa->getNome();
         $senha = $pessoa->getSenha();
         $tipo_usuario = $pessoa -> getTipo();
@@ -74,7 +72,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $row = $stmt->get_result()->fetch_assoc();
 
         if ($row == []) {
-            throw new \Exception("Usuario não encontrado ou senha errada");
+            throw new \Exception("Usuario não encontrado");
         }
         return $row;
     }
@@ -122,7 +120,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $row = $stmt->get_result()->fetch_assoc();
 
         if ($row == []) {
-            throw new \Exception("Usuario não encontrado ou senha errada");
+            throw new \App\Exceptions\UsuarioNaoEncontradoException();
         }
 
         return $row;
