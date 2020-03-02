@@ -18,11 +18,14 @@ class VisitaDAO extends DataAccessObject{
 
     }
 
-    public function confirmaAgendamento($id,$status){
-        $sql="UPDATE agendamento a SET a.Status=? WHERE a.ID=?";
+    public function confirmaAgendamento($nomeTabela,$status, $id){
+        $sql="UPDATE $nomeTabela a SET a.Status = ? WHERE a.ID=?";
+        //$this->dataBase->query($sql);
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss",$status,$id);
-        return $stmt->execute();
+        $stmt->execute();
+       
+        return $stmt->execute() ? "true":"false";
     }
 
     public function confirmaAgendamentoInstituicao($id,$status){
@@ -45,7 +48,7 @@ class VisitaDAO extends DataAccessObject{
     }
 
     public function SELECTbyNotificacaoID($id){
-        $sql = "SELECT Mensagem FROM Notificacao WHERE usuario_ID=?";
+        $sql = "SELECT Mensagem FROM notificacao WHERE usuario_ID=?";
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("s", $id);
         $stmt->execute();
@@ -94,7 +97,7 @@ class VisitaDAO extends DataAccessObject{
     public function getVistasObjectsByDateInicio_FIM(string $dateInicio, string $dateFim,bool $isDiurno, int $limite=20): array {
         
         $arrayVisitas = $this->SELECTbyDateInicio_FIM($dateInicio, $dateFim, $isDiurno, $limite);
-
+        
         $arrayObjects = array_map(function ($elemento){
 
             if($elemento['agendamento_institucional_ID'] == null){

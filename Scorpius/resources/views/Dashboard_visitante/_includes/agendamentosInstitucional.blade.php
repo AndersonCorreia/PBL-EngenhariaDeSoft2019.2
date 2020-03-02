@@ -1,5 +1,6 @@
 <form method="get" action="#">
     {{csrf_field()}}
+    {{dd($registros)}}
     @foreach($agenda_institucional as $agenda)
     <div class= "instBotoes">
         <div class="instituicoes card" >
@@ -85,3 +86,43 @@ $(document).ready(function() {
         text-align: center;
     }
 </style>
+
+<!--
+
+    <div class="botoes">
+            <a href="{{route('confirmaInstituicao',[$agenda['ID'],'confirmado'])}}"
+                class="btn col btn-primary status p-1" value="{{$agenda['Status']}}" confirmar>Confimar</a>
+            <a href="{{route('confirmaInstituicao', [$agenda['ID'],'cancelado pelo usuario'])}}"
+                class="btn col btn-danger status p-1" value="{{$agenda['Status']}}" cancelar>Cancelar</a>
+        </div>
+
+    @foreach($registros as $registro)
+    <div class="instBotoes">
+        <div class="instituicoes card">
+            <table class="table-borderless">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data>{{trim(substr($registro['Data_Agendamento'], 0, 11))}}</td>
+                        <td hora>{{trim(substr($registro['Data_Agendamento'], 11, 14))}}</td>
+                        <td status>{{trim($registro['Status'])}}</td>
+                    </tr>
+                </tbody>
+                <table class="table-borderless">
+                </table>
+        </div>
+
+        <div class="botoes">
+            <a href="{{route('confirma', [$registro['ID'],'cancelado pelo usuario'])}}"
+                class="btn col btn-danger status p-1"
+                value="{{['status'=>$registro['Status'],'agendamento_ID'=>$registro['ID']]}}" cancelar>Cancelar</a>
+        </div>
+    </div>
+    @endforeach
+    -->

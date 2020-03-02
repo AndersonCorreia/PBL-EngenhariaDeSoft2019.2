@@ -17,10 +17,10 @@ require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class AgendamentoController extends Controller{   
 
-    public function confirmacaoAgendamento($id,$status){
-      
-        $retorno=(new VisitaDAO())->confirmaAgendamento($id,$status);
-        return redirect()->route("dashboard.show");
+    public function confirmacaoAgendamento(Request $dados){
+       
+        $retorno=(new VisitaDAO())->confirmaAgendamento($dados->nomeTabela,$dados->status,$dados->ID);
+       return $retorno;
     }
 
     public function confirmaAgendamentoInstituicao($id,$status){

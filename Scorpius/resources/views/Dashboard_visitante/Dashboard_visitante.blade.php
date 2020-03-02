@@ -36,7 +36,8 @@
  
     <body>
     {{csrf_field()}}
-    <div class="container-fluid bg-white p-4" style="border-bottom-right-radius: 20px; 
+    {{ method_field('POST') }}
+    <div class="container-fluid bg-white p-4" method="POST" action="{{route('confirma.post')}}" style="border-bottom-right-radius: 20px; 
     border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-top-left-radius: 20px">
         <div class="col-12 m-0 p-0">
             <div class="container-fluid bg-white shadow p-3" style="border-bottom-right-radius: 20px; 
@@ -60,10 +61,7 @@
                                 <h4 class="card-title">Seus Agendamentos</h4>
                             </div>
                             <div class = "card-body scroll">                        
-                                @if(session('tipo') == 'institucional')
-                                    @include('Dashboard_visitante._includes.agendamentosInstitucional')
-                                @endif
-                                @include('Dashboard_visitante._includes.agendamentos') 
+                                @include('Dashboard_visitante._includes.agendamentos')
                             </div>
                         </div>
                     </div>
@@ -76,7 +74,7 @@
             <div class = "row calendario">
                 <div class = "col-md-10 coluna_calendario"></div>
                     <div id = "calendar">
-                        @include('telasUsuarios.Agendamentos._includes.calendar')
+                       {{-- @include('telasUsuarios.Agendamentos._includes.calendar') --}}
                     </div>
             </div>
             </div>

@@ -27,4 +27,4 @@ Route::get("/agendamento/dados/{turno}/{data}/{sentido}/", "AgendamentoControlle
 //Rota dashboard visitante
 Route::get('/visitante/dashboard', 'UserController@getDashboard')->name('dashboardVisitante.show');
 
-Route::get('/visitante/dashboard/confirmarcao/{id}/{status}', 'AgendamentoController@confirmacaoAgendamento')->name('confirma');
+Route::post('/visitante/dashboard/confirmacao', 'AgendamentoController@confirmacaoAgendamento')->name('confirma.post');

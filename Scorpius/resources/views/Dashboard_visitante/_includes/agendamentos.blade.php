@@ -1,8 +1,10 @@
-<form method="GET" action="#" enctype="multipart/form-data">
+<meta name="csrf-token" content="{{csrf_token()}}">
+<form method="POST" action="{{route('confirma.post')}}" enctype="multipart/form-data">
     {{csrf_field()}}
+    {{ method_field('POST') }}
     <!-- Modal -->
-    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" method="POST" action="{{route('confirma.post')}}" id="modalExemplo" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -21,79 +23,108 @@
             </div>
         </div>
     </div>
-
-    @foreach($registros as $registro)
-    <div class="instBotoes">
-        <div class="instituicoes card">
+    @foreach((session('tipo') == 'institucional' ? $registros['agendamento_institucional'] :
+    $registros['agendamento'])
+    as $agenda)
+    <div class="agendas">
+        <div class="instituicoes scorpius-border-shadow border-top border-shadow">
             <table class="table-borderless">
                 <thead>
                     <tr>
                         <th>Data</th>
                         <th>Hora</th>
                         <th>Status</th>
+                        @if(session('tipo') == 'institucional')
+                        <th>Turma</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td data>{{trim(substr($registro['Data_Agendamento'], 0, 11))}}</td>
-                        <td hora>{{trim(substr($registro['Data_Agendamento'], 11, 14))}}</td>
-                        <td status>{{trim($registro['Status'])}}</td>
+                        <td>{{trim(substr($agenda['Data_Agendamento'], 0, 11))}}</td>
+                        <td>{{trim(substr($agenda['Data_Agendamento'], 11, 14))}}</td>
+                        <td>{{trim($agenda['Status'])}}</td>
+                        @if(session('tipo') == 'institucional')
+                        <td>{{trim($agenda['ano_escolar'])}}</td>
+                        @endif
                     </tr>
                 </tbody>
             </table>
         </div>
-
         <div class="botoes">
-            <a href="{{route('confirma',[$registro['ID'],'confirmado'])}}" class="btn col btn-primary status p-1"
-                value="{{$registro['Status']}}" confirmar>Confimar</a>
-            <a href="{{route('confirma', [$registro['ID'],'cancelado pelo usuario'])}}"
-                class="btn col btn-danger status p-1" value="{{$registro['Status']}}" cancelar>Cancelar</a>
+            <a class="btn col btn-danger status p-1" value='' data-valores="{{json_encode($agenda)}}"
+                cancelar>Cancelar</a>
         </div>
     </div>
+
     @endforeach
 
 </form>
 @section('js')
 <script>
 $(document).ready(function() {
-    let statusConfirmado = $('[confirmar]')
+
     let statusCancelado = $('[cancelar]')
-    for (let i = 0; i < statusConfirmado.length; i++) {
-        let value1 = statusConfirmado[i].getAttribute("value");
-        let value2 = statusCancelado[i].getAttribute("value");
-        if (!value1.search("cancelado") || !value1.search("confirmado")) {
-            statusConfirmado[i].setAttribute("style",
-                "cursor: default; pointer-events: none;user-select:none; opacity: 0.3;");
-        }
-        if (!value2.search("cancelado")) {
+    for (let i = 0; i < statusCancelado.length; i++) {
+        let value2 = $(statusCancelado[i]).data('valores').Status.toString();
+        console.log(value2)
+        if (value2.search('cancelado') != -1) {
             statusCancelado[i].setAttribute("style",
                 "cursor: default; pointer-events: none;user-select:none; opacity: 0.3;");
         }
     }
 
-    $('#modalExemplo').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget) // Botão que acionou o modal
-        var recipient = button.data('whatever') // Extrai informação dos atributos data-*
-        // Se necessário, você pode iniciar uma requisição AJAX aqui e, então, fazer a atualização em um callback.
-        // Atualiza o conteúdo do modal. Nós vamos usar jQuery, aqui. No entanto, você poderia usar uma biblioteca de data binding ou outros métodos.
-        var modal = $(this)
-        modal.find('.modal-title').text('Nova mensagem para ' + recipient)
-        modal.find('.modal-body input').val(recipient)
-    })
-    $('[confirmar],[cancelar]').click(e => {
+
+    let valorAtual = null
+    $('[cancelar]').click(e => {
         e.preventDefault()
+        valorAtual = $(e.currentTarget).data('valores')
         $('#modalExemplo').modal('show')
     })
+
+    $('#modalExemplo [salvarMudanca]').click(e => {
+        e.preventDefault()
+        console.log(valorAtual)
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let nomeDaTabela =
+            "{{(session('tipo') == 'institucional' ? 'agendamento_institucional' : 'agendamento')}}"
+        if (valorAtual) {
+            $.ajax({
+                url: "{{route('confirma.post')}}",
+                method: 'POST',
+                data: {
+                    nomeTabela: nomeDaTabela,
+                    ID: valorAtual.ID,
+                    status: 'cancelado pelo usuario'
+                },
+                success(retorno) {
+                    //console.log(retorno)
+                    location.reload();
+                },
+                error(erro) {
+                    console.log(erro)
+                }
+
+            })
+        }
+    })
+
 })
 </script>
 @endsection
+
 <style>
 .instituicoes {
-    height: 75px;
+    height: 95px;
     width: 500px;
 }
 
-.instBotoes {
+.agendas {
+    padding:10px 0px 10px 0px;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -116,8 +147,8 @@ h2 {
 
 td,
 th {
-    padding: 0px 20px 0px 20px;
-    width: 100px;
+    padding: 0px 15px 0px 15px;
+    width: 50px;
     text-align: center;
 }
 </style>

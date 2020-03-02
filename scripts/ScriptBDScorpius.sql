@@ -464,6 +464,22 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`Acoes` (
   UNIQUE INDEX `atividade_UNIQUE` (`atividade` ASC))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `scorpius`.`Notificacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`notificacao` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `gerada_em` DATETIME NOT NULL,
+  `mensagem` VARCHAR(100) NOT NULL,
+  `usuario_ID` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_Notificacao_usuario1_idx` (`usuario_ID` ASC),
+  CONSTRAINT `fk_Notificacao_usuario1`
+    FOREIGN KEY (`usuario_ID`)
+    REFERENCES `scorpius`.`usuario` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `scorpius`.`log`
@@ -493,23 +509,6 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`log` (
     REFERENCES `scorpius`.`usuario` (`ID`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `scorpius`.`Notificacao`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scorpius`.`notificacao` (
-  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `gerada_em` DATETIME NOT NULL,
-  `mensagem` VARCHAR(100) NOT NULL,
-  `usuario_ID` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`ID`),
-  INDEX `fk_Notificacao_usuario1_idx` (`usuario_ID` ASC),
-  CONSTRAINT `fk_Notificacao_usuario1`
-    FOREIGN KEY (`usuario_ID`)
-    REFERENCES `scorpius`.`usuario` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;

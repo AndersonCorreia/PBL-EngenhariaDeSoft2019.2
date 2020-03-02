@@ -18,7 +18,7 @@ class UserController extends Controller{
 
     public function getDashboard(){
         
-        $array = $this->getVisitas("diurno", "now", "anterior");
+        //$array = $this->getVisitas("diurno", "now", "anterior");
         $id_user = session('ID');
         $tipo = session('tipo');
         $agendamento = Visita::listarAgendamentos($id_user);
@@ -29,10 +29,10 @@ class UserController extends Controller{
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
-            'registros' => $agendamento,
+            'registros' => ['agendamento'=>$agendamento,'agendamento_institucional'=>$agenda_institucional],
             'notificacoes' => $notificacao,
             'agenda_institucional' => $agenda_institucional,
-            'visitas' => $array,
+            //'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $$tipo
         ];
@@ -71,7 +71,7 @@ class UserController extends Controller{
     }
 
     public function getVisitas($turno, $data, $sentido){
-
+        
         $DAO = new VisitaDAO();
         $dataFim = now();
         $dataFim = $dataFim->add(new \DateInterval("P2M"));
