@@ -55,7 +55,6 @@ Route::group(
     'prefix'=>'estagiario',
     'namespace'=>'Estagiario'],
     function(){
-        Route::get('/checkinEstagiario', 'CheckinEstagiarioController@index')->name("demandaWeb.show");
         Route::get('/demandaWeb', 'horarioEstagiarioController@index')->name("demandaWeb.show");
         Route::post('/demandaWeb/enviar-horario', 'horarioEstagiarioController@cadastrarHorario')->name("demandaWeb.post");
     }

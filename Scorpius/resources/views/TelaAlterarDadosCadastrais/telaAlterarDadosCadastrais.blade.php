@@ -22,7 +22,7 @@
             <div class="form-row">
                 <div class="col-md-4 form-group">
                     <label for="emailUsuario">Email</label>
-                    <input class="form-control" name="email" id="emailUsuario" placeholder="exemplo@exemplo.com"
+                    <input disabled class="form-control" name="email" id="emailUsuario" placeholder="exemplo@exemplo.com"
                         type="email" required>
                 </div>
                 <div class="col-md-4 form-group">
@@ -62,7 +62,7 @@
                 <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" class="form-control" name="senha_antiga" id="novaSenha" type="password" required>
             </div>
             <div class="form-group pl-5 pr-5">
-                <label for="novaSenhaR">Nova senha</label>
+                <label for="novaSenhaR">Repetir nova senha</label>
                 <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" class="form-control" id="novaSenhaR" type="password" required>
                 <small hidden id="feedback-senha" class="text-danger">As senhas devem ser iguais!</small>
             </div>
@@ -125,7 +125,7 @@ function verificaCamposSenha(){
 function ValidaCPF(){	
 	var RegraValida=document.getElementById("cpfUsuario").value; 
 	var cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/;	 
-    if (cpfValido.test(RegraValida) == true)	{ 
+    if (cpfValido.test( ) == true)	{ 
         return false;	
     } else	{	 
         return true	
