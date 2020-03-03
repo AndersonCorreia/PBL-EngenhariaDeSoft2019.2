@@ -163,9 +163,9 @@ class AgendamentoController extends Controller{
             'data' => $data,
             'obs' => $_POST['observacoes'],
             'status' => 'confirmado', 
-            'turmaID' => $turmaID,
-            'professor_instituicao_ID' => $professor_instituicao['ID'],
+        
         ];
+        
         $agendamento = new AgendamentoIntitucional();
         $agendamento->novoAgendamento($dados);
         $agendamentoID = $agendamentoID->getID();
@@ -185,6 +185,25 @@ class AgendamentoController extends Controller{
     public function agendarContaIndividual() {
         
         $id_user = session('ID');
+        $data = $_POST['data'];
+        $turno = $_POST['turno'];
+            
+        $visitaDAO = new VisitaDAO();
+        $visita = $visitaDAO->SELECTbyData_Turno($data, $turno);
+    
+        $dados = [
+            'visita' => $visita['ID'],
+            'data' => $data,
+            'obs' => $_POST['observacoes'],
+            'status' => 'confirmado', 
+            'usuario_ID' => $professor_instituicao['ID'],
+            ];
+            $agendamento = new AgendamentoIntitucional();
+            $agendamento->novoAgendamento($dados);
+            $agendamentoID = $agendamentoID->getID();
+    
+            //após agendar, inserir ID do agendamento na visita (Fazer método) 
+            $visitaDAO->INSERTbyID($visita['ID'], $agendamentoID);
 
         return redirect()->route('AgendarDiurnoVisitante.show');
     }
