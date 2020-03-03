@@ -31,7 +31,7 @@
 
         <thead>
             <tr>
-                <th>Data da Visita:</th> <td>28/11/2019</td>
+                <th>Data da Visita:</th> <td>28/11/2019</td> <!-- Exemplo da estrutura -->
                 <th>Turno da Visita:</th> <td>Manhã</td>
             </tr>
         </thead>
@@ -45,7 +45,7 @@
 
             <thead>
                 <tr>
-                    <th>Total de Alunos da Turma:</th> <td>40</td>
+                    <th>Total de Alunos da Turma:</th> <td>5</td>
                     <th>Responsável pela Turma:</th> <td>Augusto Vicente</td>
                 </tr>
             </thead>
@@ -73,15 +73,14 @@
                 <div class="modal-body">
                 <!-- Somente exemplificando a estrutura -->
                     <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" bordaModal>
-                        <table class="table-borderless col-12">
-                                
+                        <table class="table-borderless col-12">        
                             <thead>
                                 <tr class="table-secondary">
                                     <th>Nome da Instituição:</th> <td>Colégio Estadual Odorico Tavares</td>
                                 </tr>
                                
                                 <tr>
-                                    <th>Cidade:</th> <td>Feira de Santana</td>
+                                    <th>Cidade:</th> <td>Feira de Santana</td> <!-- Exemplo da estrutura -->
                                 </tr>
 
                                 <tr>
