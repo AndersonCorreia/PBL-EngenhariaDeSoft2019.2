@@ -23,7 +23,7 @@
         </ul>
     </div>
     <div class="form-group col-sm-7 d-block">
-        <h4 class="col-sm-12">Cronograma de Visitas Programadas</h4>
+        <h4 class="col-sm-12">Cronograma de Visitas Agendadas</h4>
         <div class="col p-0 pt-2 text-dark font-weight-bold" calendario>
                 <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('diurno')" disabled="">
                     <i class="fas fa-angle-left" aria-hidden="true"></i>
