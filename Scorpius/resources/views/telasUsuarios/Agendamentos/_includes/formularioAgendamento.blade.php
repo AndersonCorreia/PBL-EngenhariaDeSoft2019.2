@@ -44,7 +44,7 @@
         <div id="dados-responsavel" class="mt-3">
             <p class="h5">Responsáveis pela turma durante a visitação</p>
             <div class="form-check mt-3 ml-4">
-                <input class="form-check-input" type="checkbox" value="" id="incluirResponsavel">
+                <input class="form-check-input" type="checkbox" value="" name="incluirResponsavel" maxlenght="100">
                 <label class="form-check-label" for="defaultCheck1">Sou um dos responsáveis</label>
             </div>
             <p class="h6 mt-3">Adicionar outros responsáveis</p>

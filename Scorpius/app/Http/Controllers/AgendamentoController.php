@@ -12,6 +12,7 @@ use App\DB\VisitaDAO;
 use App\DB\ExposicaoDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
+use App\Model\Turma;
 use App\DB\AgendamentoInstitucionalDAO;
 
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
@@ -151,7 +152,7 @@ class AgendamentoController extends Controller{
         $visita = $visitaDAO->SELECTbyData_Turno($data, $turno);
 
         //retorna o ID da turma
-        $turmaID = (new Turma())->verificaTurmaExistente($id_user, $nomeTurma);
+        $turmaID = (new Turma())->verificaTurmaExistente($userID, $nomeTurma);
         //retorna array da tupla da tabela
         $professor_instituicao = (new Professor_instituicaoDAO)->SELECTbyInstituicaoID_UserID($instituicaoID, $userID);
         
@@ -171,10 +172,10 @@ class AgendamentoController extends Controller{
         $visitaDAO->INSERTbyID($visita['ID'], $agendamentoID);
 
         $count = count($resp);
-        // fazer ResponsavelDAO e métodos 
-        for($i = 0; i < $count; $i++){
-            (new ResponsavelDAO)->INSERT($resp[$i], $cargo[$i], $agendamentoID);  
-        } 
+        // fazer ResponsavelDAO e método de INSERT
+        // for($i = 0; i < $count; $i++){
+        //     (new ResponsavelDAO)->INSERT($resp[$i], $cargo[$i], $agendamentoID);  
+        // } 
         
         return redirect()->route('dashboard');
     }

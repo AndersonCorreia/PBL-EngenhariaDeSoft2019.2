@@ -127,9 +127,9 @@ class VisitaDAO extends DataAccessObject{
      */
     public function SELECTbyData_Turno(string $dia, string $turno){
         //fazer abusca da visita com aquele dia e turno
-        $sql = "SELECT * FROM visita WHERE data_visita = $dia AND turno = $turno";
+        $sql = "SELECT * FROM visita WHERE data_visita = ? AND turno = ?";
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("ssi", $dia, $turno);
+        $stmt->bind_param("ss", $dia, $turno);
         $stmt->execute();
         $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
