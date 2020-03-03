@@ -8,7 +8,7 @@
         <select class="form-control" id="nome-instituicao" name="instituicao">
             @if (($instituicoes ?? false))
             @foreach ($instituicoes as $inst)
-                <option value="{{$inst['nome']}}"> {{$inst['nome']}} </option>
+                <option value="{{$inst['instituicao_ID']}}"> {{$inst['nome']}} </option>
             @endforeach
             @endif
         </select>
@@ -51,11 +51,11 @@
             <div id="dados-responsavel-campos">
                 <div class="row box mt-1">
                     <div class="col-md-7 nome-responsavel">
-                        <input class="form-control nome" type="text" maxlength="40" name="responsavel"
+                        <input class="form-control nome" type="text" maxlength="40" name="responsavel[]"
                             placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-4 cargo-responsavel">
-                        <input class="form-control cargo" type="text" maxlength="40" name="cargo" placeholder="Cargo"
+                        <input class="form-control cargo" type="text" maxlength="40" name="cargo[]" placeholder="Cargo"
                             pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                     </div>
                     <div class="col-md-1">

@@ -12,6 +12,7 @@ use App\DB\VisitaDAO;
 use App\DB\ExposicaoDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
+use App\DB\AgendamentoInstitucionalDAO;
 
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
@@ -137,9 +138,43 @@ class AgendamentoController extends Controller{
      * inserir no banco de dados
      * @return void
      */
-    public function agendarInstituicao(Request $request){
+    public function agendarInstituicao(Request $request){ 
+        $userID = session('ID');
+        $instituicaoID = $_POST['instituicao'];
+        $nomeTurma = $_POST['turma'];
+        $data = $_POST['data'];
+        $turno = $_POST['turno'];
+        $resp = $_POST['responsavel'];
+        $cargo = $_POST['cargo'];       
+
+        $visitaDAO = new VisitaDAO();
+        $visita = $visitaDAO->SELECTbyData_Turno($data, $turno);
+
+        //retorna o ID da turma
+        $turmaID = (new Turma())->verificaTurmaExistente($id_user, $nomeTurma);
+        //retorna array da tupla da tabela
+        $professor_instituicao = (new Professor_instituicaoDAO)->SELECTbyInstituicaoID_UserID($instituicaoID, $userID);
         
-        $id_user = session('ID');
+        $dados = [
+            'visita' => $visita['ID'],
+            'data' => $data,
+            'obs' => $_POST['observacoes'],
+            'status' => 'confirmado', 
+            'turmaID' => $turmaID,
+            'professor_instituicao_ID' => $professor_instituicao['ID'],
+        ];
+        $agendamento = new AgendamentoIntitucional();
+        $agendamento->novoAgendamento($dados);
+        $agendamentoID = $agendamentoID->getID();
+
+        //após agendar, inserir ID do agendamento na visita (Fazer método) 
+        $visitaDAO->INSERTbyID($visita['ID'], $agendamentoID);
+
+        $count = count($resp);
+        // fazer ResponsavelDAO e métodos 
+        for($i = 0; i < $count; $i++){
+            (new ResponsavelDAO)->INSERT($resp[$i], $cargo[$i], $agendamentoID);  
+        } 
         
         return redirect()->route('dashboard');
     }

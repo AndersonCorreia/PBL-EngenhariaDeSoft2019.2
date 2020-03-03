@@ -16,20 +16,20 @@ use App\Model\Agendamento;
 
     function INSERT($agendamento): bool
     {
-        $turma = $agendamento->getTurma(); 
         $visita = $agendamento->getVisita();
-        $dataAgendamento = $agendamento->getDataAgendamento();
-        $exposicao = $agendamento->getExposicao();
+        $dataAgendamento = $agendamento->getData();
+        $observacao = $agendamento->getObservacao();
         $statusAg = $agendamento->getStatusAg();
         $turmaID = $agendamento->getTurmaID(); 
-
-        $sql = "INSERT INTO agendamento_institucional (turma, visita, dataAgendamento, exposicao, statusAg, turmaID) VALUE (
-            '$turma',
+        $professorInstituicaoID = $agendamento->getProfessorInstituicaoID(); 
+        $sql = "INSERT INTO agendamento_institucional (visita, data_agendamento, observacao, status, turma_ID, professor_instituicao_ID) 
+        VALUE (
             '$visita',
             '$dataAgendamento',
-            '$exposicao',
+            '$observacao',
             '$statusAg',
-            '$turmaID'
+            '$turmaID',
+            '$professorInstituicaoID'           
         )";
         
         $resultado = $this->dataBase->query($sql);
@@ -40,9 +40,9 @@ use App\Model\Agendamento;
     function UPDATE($agendamento): bool
     {
         $sql = "UPDATE agendamento_institucional 
-        SET turma = '$agendamento->getTurma()', visita = $agendamento->getVisita(),
-            dataAgendamento = $agendamento->getDataAgendamento(), exposicao = $agendamento->getExposicao(),
-            statusAg = $agendamento->getStatusAg(), turmaID = $agendamento->getTurmaID()
+        SET visita = $agendamento->getVisita(),
+            data_agendamento = $agendamento->getData(), observacao = $agendamento->getObservacao(),
+            status = $agendamento->getStatusAg(), turmaID = $agendamento->getTurmaID(), professor_instituicao_ID = $agendamento->getProfessorInstituicaoID()
         WHERE ID = $agendamento->getID()";
         return $this->dataBase->query($sql);
     }

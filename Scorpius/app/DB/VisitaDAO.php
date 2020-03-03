@@ -17,6 +17,9 @@ class VisitaDAO extends DataAccessObject{
     public function UPDATE($Visita): bool{
 
     }
+    public function INSERTbyID(int $ID, $agendamentoID): bool{
+
+    }
 
     public function confirmaAgendamento($nomeTabela,$status, $id){
         $sql="UPDATE $nomeTabela a SET a.Status = ? WHERE a.ID=?";
@@ -112,6 +115,27 @@ class VisitaDAO extends DataAccessObject{
             throw new \App\Exceptions\NenhumaVisitaEncontradaException();
         }
         
+        return $ArrayResult;
+    }
+
+    /**
+     * Seleciona a visita com o dia e turno passados por parâmetro
+     *
+     * @param string $data da visita
+     * @param string $turno da visita
+     * @return array visita com o dia e turno especificado 
+     */
+    public function SELECTbyData_Turno(string $dia, string $turno){
+        //fazer abusca da visita com aquele dia e turno
+        $sql = "SELECT * FROM visita WHERE data_visita = $dia AND turno = $turno";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ssi", $dia, $turno);
+        $stmt->execute();
+        $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        if($ArrayResult==[]){
+            throw new \Exception("Nenhuma Visita encontrada no dia e turno especifico", 1);
+        }
         return $ArrayResult;
     }
 

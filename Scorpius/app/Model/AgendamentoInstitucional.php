@@ -7,12 +7,12 @@ use App\DB\AgendamentoInstitucionalDAO;
 class AgendamentoInstitucional extends \App\DB\interfaces\DataObject 
 {
 	private $visita;
-	private $data;
-	private $exposicao;
+    private $data;
+    private $observacao;
 	private $statusAg;
     private $turmaID;
-    private $instituicaoID;
-	private $agendamentoDAO;
+    private $professorInstituicaoID;
+    private $agendamentoDAO;
 
 	public function __Construct(){
 		$this->agendamentoDAO = new AgendamentoInstitucionalDAO();
@@ -22,9 +22,10 @@ class AgendamentoInstitucional extends \App\DB\interfaces\DataObject
     {
         $this->visita = $dados['visita'];
 		$this->data = $dados['data'];
-		$this->exposicao = $dados['exposicao'];
-        $this->statusAg = $dados['statusAg'];
+		$this->observacao = $dados['obs'];
+        $this->statusAg = $dados['status'];
         $this->turmaID = $dados['turmaID'];
+        $this->professorInstituicaoID = $dados['professor_instituicao_ID'];
 		$this->agendamentoDAO->INSERT($this);
         return $this;
 	}
@@ -74,14 +75,14 @@ class AgendamentoInstitucional extends \App\DB\interfaces\DataObject
         return $this->data;
 	}
 	
-	public function setExposicao($exposicao)
+	public function setObservacao($observacao)
     {
         $this->setAlterado();
-        $this->exposicao = $exposicao;
+        $this->observacao = $observacao;
     }
-    public function getExposicao()
+    public function getObservacao()
     {
-        return $this->exposicao;
+        return $this->observacao;
 	}
 	
 	public function setStatusAg($statusAg)
@@ -102,5 +103,15 @@ class AgendamentoInstitucional extends \App\DB\interfaces\DataObject
     public function getTurmaID()
     {
         return $this->turmaID;
+    }
+
+    public function setProfessorInstituicaoID($professorInstituicaoID)
+    {
+        $this->setAlterado();
+        $this->professorInstituicaoID = $professorInstituicaoID;
+    }
+    public function getProfessorInstituicaoID()
+    {
+        return $this->professorInstituicaoID;
     }
 }
