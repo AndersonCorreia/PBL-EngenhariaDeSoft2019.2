@@ -131,7 +131,7 @@ class VisitaDAO extends DataAccessObject{
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss", $dia, $turno);
         $stmt->execute();
-        $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $ArrayResult = $stmt->get_result()->fetch_assoc();
 
         if($ArrayResult==[]){
             throw new \Exception("Nenhuma Visita encontrada no dia e turno especifico", 1);

@@ -20,7 +20,7 @@ require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class AgendamentoController extends Controller{   
 
     public function confirmacaoAgendamento(Request $dados){
-       $DAO = new VisitaDAO();
+        $DAO = new VisitaDAO();
         $DAO->confirmaAgendamento($dados->nomeTabela,$dados->status,$dados->ID);
         $DAO->contAgendamento("cont_agendamento_cancelado", $dados->user_ID);
         if($dados->nomeTabela == "agendamento_institucional"){
@@ -142,17 +142,18 @@ class AgendamentoController extends Controller{
     public function agendarInstituicao(Request $request){ 
         $userID = session('ID');
         $instituicaoID = $_POST['instituicao'];
-        $nomeTurma = $_POST['turma'];
+        $TurmaID = $_POST['turma'];
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $resp = $_POST['responsavel'];
-        $cargo = $_POST['cargo'];       
+        $responsaveis = $this->getMatrizResponsaveis($_POST['responsavel'], $_POST['cargo']);
+
+        if( $_POST['incluirResponsavel'] == 'valor que fica no check que eu não sei'){//verificar depois
+            $responsaveis[] = ['nome' => session('nome'), 'cargo' => "usuario que fez o agendamento"];
+        }
 
         $visitaDAO = new VisitaDAO();
         $visita = $visitaDAO->SELECTbyData_Turno($data, $turno);
 
-        //retorna o ID da turma
-        $turmaID = (new Turma())->verificaTurmaExistente($userID, $nomeTurma);
         //retorna array da tupla da tabela
         $professor_instituicao = (new Professor_instituicaoDAO)->SELECTbyInstituicaoID_UserID($instituicaoID, $userID);
         
@@ -170,12 +171,6 @@ class AgendamentoController extends Controller{
 
         //após agendar, inserir ID do agendamento na visita (Fazer método) 
         $visitaDAO->INSERTbyID($visita['ID'], $agendamentoID);
-
-        $count = count($resp);
-        // fazer ResponsavelDAO e método de INSERT
-        // for($i = 0; i < $count; $i++){
-        //     (new ResponsavelDAO)->INSERT($resp[$i], $cargo[$i], $agendamentoID);  
-        // } 
         
         return redirect()->route('dashboard');
     }
@@ -211,5 +206,21 @@ class AgendamentoController extends Controller{
         ];
 
         return view('telasUsuarios.Agendamentos.errorNenhumaVisita',$variaveis);
+    }
+
+    /**
+     * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsvel
+     * no campo nome, e o cargo do ressponsavel no campo cargo;
+     *
+     * @return void
+     */
+    private function getMatrizResponsaveis($arrayResp , $arrayCargo){
+        $responsaveis = [];
+
+        for ($i=0; $i < count($arrayResp) ; $i++) { 
+            $responsaveis[$i] = [ 'nome' => $arrayResp[$i], 'cargo' => $arrayCargo];
+        }
+
+        return $responsaveis;
     }
 }

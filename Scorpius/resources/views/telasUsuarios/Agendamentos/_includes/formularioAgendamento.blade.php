@@ -18,7 +18,7 @@
                 <select id="turma" name="turma" class="form-control" required>
                     @if (($turmas ?? false))
                     @foreach ($turmas as $turma)
-                        <option value="{{$turma['nome']}}"> {{$turma['nome']}} </option>
+                        <option value="{{$turma['ID']}}"> {{$turma['nome']}} </option>
                     @endforeach
                     @endif
                 </select>
