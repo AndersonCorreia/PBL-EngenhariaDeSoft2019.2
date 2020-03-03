@@ -2,13 +2,14 @@
 <form method="POST" action="{{route('confirma.post')}}" enctype="multipart/form-data">
     {{csrf_field()}}
     {{ method_field('POST') }}
+
     <!-- Modal -->
     <div class="modal fade" method="POST" action="{{route('confirma.post')}}" id="modalExemplo" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Confirmar Horário Estagiário</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Cancelamento Agendamento</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -23,11 +24,19 @@
             </div>
         </div>
     </div>
+    
+    <?php
+    $flag=false; 
+    function mudarValor(&$e){ $e=true;} 
+    ?>
     @foreach((session('tipo') == 'institucional' ? $registros['agendamento_institucional'] :
     $registros['agendamento'])
     as $agenda)
+    @if(stripos($agenda['Status'], 'cancelado')===false)
+    {{ mudarValor($flag) }}
+
     <div class="agendas">
-        <div class="instituicoes scorpius-border-shadow border-top border-shadow">
+        <div class="agendamentos scorpius-border-shadow border-top border-shadow">
             <table class="table-borderless">
                 <thead>
                     <tr>
@@ -37,6 +46,8 @@
                         @if(session('tipo') == 'institucional')
                         <th>Turma</th>
                         @endif
+                        <th>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,18 +58,25 @@
                         @if(session('tipo') == 'institucional')
                         <td>{{trim($agenda['ano_escolar'])}}</td>
                         @endif
+                        <td>
+                            <div class="botoes">
+                                <a class="btn col btn-danger status p-1" value=''
+                                    data-valores="{{json_encode($agenda)}}" cancelar>Cancelar</a>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="botoes">
-            <a class="btn col btn-danger status p-1" value='' data-valores="{{json_encode($agenda)}}"
-                cancelar>Cancelar</a>
-        </div>
+
     </div>
-
+    @endif
     @endforeach
-
+    @if(!$flag)
+    <div class="alert alert-danger" role="alert">
+        <label>Não há nenhum agendamento no momento.</label><br>
+    </div>
+    @endif
 </form>
 @section('js')
 <script>
@@ -99,7 +117,8 @@ $(document).ready(function() {
                 data: {
                     nomeTabela: nomeDaTabela,
                     ID: valorAtual.ID,
-                    status: 'cancelado pelo usuario'
+                    status: 'cancelado pelo usuario',
+                    user_ID: "{{session('ID')}}"
                 },
                 success(retorno) {
                     //console.log(retorno)
@@ -118,13 +137,13 @@ $(document).ready(function() {
 @endsection
 
 <style>
-.instituicoes {
+.agendamentos {
     height: 95px;
-    width: 500px;
+    width: 550px;
 }
 
 .agendas {
-    padding:10px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -132,12 +151,12 @@ $(document).ready(function() {
 
 .botoes {
     display: flex;
-    flex-direction: column;
-    align-items: center border;
+    flex-direction: row;
+    align-items: top border;
 }
 
 .btn {
-    padding: 10px;
+    padding: 3px;
     margin: 5px;
 }
 
@@ -147,8 +166,8 @@ h2 {
 
 td,
 th {
-    padding: 0px 15px 0px 15px;
-    width: 50px;
+    padding: 0px 3px 0px 3px;
+    width: 300px;
     text-align: center;
 }
 </style>

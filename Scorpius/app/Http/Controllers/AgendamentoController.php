@@ -18,15 +18,16 @@ require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class AgendamentoController extends Controller{   
 
     public function confirmacaoAgendamento(Request $dados){
-       
-        $retorno=(new VisitaDAO())->confirmaAgendamento($dados->nomeTabela,$dados->status,$dados->ID);
-       return $retorno;
-    }
-
-    public function confirmaAgendamentoInstituicao($id,$status){
-      
-        $retorno=(new VisitaDAO())->confirmaAgendamentoInstituicao($id,$status);
-        return redirect()->route("dashboard.show");
+       $DAO = new VisitaDAO();
+        $DAO->confirmaAgendamento($dados->nomeTabela,$dados->status,$dados->ID);
+        $DAO->contAgendamento("cont_agendamento_cancelado", $dados->user_ID);
+        if($dados->nomeTabela == "agendamento_institucional"){
+            $DAO->delete_visitante("visitante_institucional","agendamento_institucional_ID",$dados->ID);    
+        }else{
+            $DAO->delete_visitante("visitante","agendamento_ID",$dados->ID); 
+        }
+        
+        return;
     }
 
     public function getVisitas($turno, $data, $sentido){

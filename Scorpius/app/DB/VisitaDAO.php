@@ -22,17 +22,38 @@ class VisitaDAO extends DataAccessObject{
         $sql="UPDATE $nomeTabela a SET a.Status = ? WHERE a.ID=?";
         //$this->dataBase->query($sql);
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("ss",$status,$id);
-        $stmt->execute();
-       
-        return $stmt->execute() ? "true":"false";
+        $stmt->bind_param("ss",$status,$id);       
+        return $stmt->execute();
     }
 
-    public function confirmaAgendamentoInstituicao($id,$status){
-        $sql="UPDATE agendamento_institucional a SET a.Status=? WHERE ID=?";
+    public function contAgendamento($tipoContAgendamento, $id_user){
+        $sql = "UPDATE  professor_instituicao set $tipoContAgendamento = $tipoContAgendamento+1 where usuario_ID=$id_user";
+        $stmt = $this->dataBase->query($sql);
+        return $stmt; 
+    }
+
+    public function delete_visitante($nomeTabela,$coluna, $id_Agendamento){
+        $result=$this->count_dados($nomeTabela, $coluna, "quant_agendamento");
+
+        if($result){
+            $sql= "DELETE FROM $nomeTabela where $coluna=?";
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("ss",$status,$id);
-        return $stmt->execute();
+        $result = $stmt->bind_param("s", $id_Agendamento);
+        if($stmt->execute()){
+            $stmt->close();
+            return true;
+        }else{
+            throw new \Exception("Erro ao deletar horário");
+        }
+        }
+        return;
+        
+    }
+
+    private function count_dados($tabela, $coluna, $apelido){
+        $sql = "SELECT COUNT($coluna) AS $apelido FROM $tabela";
+        $stmt = $this->dataBase->query($sql);
+        return $stmt;
     }
 
     public function SELECTbyAgendamentoID($id){
