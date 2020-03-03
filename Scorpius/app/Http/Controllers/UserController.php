@@ -21,9 +21,9 @@ class UserController extends Controller{
         //$array = $this->getVisitas("diurno", "now", "anterior");
         $id_user = session('ID');
         $tipo = session('tipo');
-        $agendamento = Visita::listarAgendamentos($id_user);
-        $notificacao = Visita::listarNotificacao($id_user);
-        $agenda_institucional = Visita::listarAgendamentosInstitucionais($id_user);
+        $agendamento = AgendamentoInstitucional::listarAgendamentos($id_user);
+        $notificacao = AgendamentoInstitucional::listarNotificacao($id_user);
+        $agenda_institucional = AgendamentoInstitucional::listarAgendamentosInstitucionais($id_user);
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Lista de Espera disponivel", "tipo" => "institucional"];
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [

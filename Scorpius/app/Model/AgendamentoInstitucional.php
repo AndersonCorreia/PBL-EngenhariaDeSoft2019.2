@@ -33,7 +33,21 @@ class AgendamentoInstitucional extends \App\DB\interfaces\DataObject
 	protected function save()
     {
         (new \app\DB\AgendamentoInstitucionalDAO)->UPDATE($this);
-	}
+    }
+    
+
+    public static function listarAgendamentos($id){
+		return (new AgendamentoInstitucionalDAO)->SELECTbyAgendamentoID($id);
+    }
+
+    public static function listarNotificacao($id){
+        return (new AgendamentoInstitucionalDAO)->SELECTbyNotificacaoID($id);
+    }
+    
+    public static function listarAgendamentosInstitucionais($id){
+        return (new AgendamentoInstitucionalDAO)->SELECTbyAgendamentoInstitucional($id);
+    }
+
 
 	public function setID($ID)
     {

@@ -126,7 +126,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
      * @return array array associativo com os dados;
      */
     function getNomeEnderecoALL(){
-        $sql = "SELECT nome,endereco FROM instituicao";
+        $sql = "SELECT ID,nome,endereco FROM instituicao";
         $result = $this->dataBase->query($sql);
         $array = $result->fetch_all(MYSQLI_ASSOC);
         return $array;

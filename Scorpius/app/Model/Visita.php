@@ -2,6 +2,7 @@
 namespace App\Model;
 use App\Model\Users\Empregado;
 use App\DB\VisitaDAO;
+use App\DB\AgendamentoInstitucionalDAO;
 
 class Visita extends \App\DB\interfaces\DataObject {
 
@@ -23,18 +24,6 @@ class Visita extends \App\DB\interfaces\DataObject {
         $this->Agendamento = $agend;
         $this->Acompanhante = $acomp;
         $this->ID = $id;
-    }
-
-    public static function listarAgendamentos($id){
-		return (new visitaDAO)->SELECTbyAgendamentoID($id);
-    }
-
-    public static function listarNotificacao($id){
-        return (new visitaDAO)->SELECTbyNotificacaoID($id);
-    }
-    
-    public static function listarAgendamentosInstitucionais($id){
-        return (new visitaDAO)->SELECTbyAgendamentoInstitucional($id);
     }
 
     /**

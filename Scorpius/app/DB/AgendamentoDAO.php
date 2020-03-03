@@ -49,7 +49,7 @@ abstract class AgendamentoDAO extends \App\DB\interfaces\DataAccessObject
             $stmt->close();
             return true;
         }else{
-            throw new \Exception("Erro ao deletar horário");
+            throw new \Exception("Erro ao deletar VISITANTE");
         }
         }
         return;
