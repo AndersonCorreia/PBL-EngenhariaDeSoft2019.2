@@ -8,7 +8,7 @@ use App\Model\Agendamento;
  * Classe para fornecer um Objeto de Acesso aos Dados ou Data Access Object(DAO) relacionados à classe Agendamento.
  */
 
- class AgendamentoInstitucionalDAO extends \App\DB\interfaces\DataAccessObject
+ class AgendamentoInstitucionalDAO extends AgendamentoDAO
  {
     public function __Construct(){
         parent::__Construct("agendamento_institucional");
@@ -35,14 +35,6 @@ use App\Model\Agendamento;
         $resultado = $this->dataBase->query($sql);
         $agendamento->setID($this);
         return $resultado;
-    }
-
-    function UPDATE($agendamento): bool
-    {
-        $sql = "UPDATE agendamento_institucional 
-        SET status = $agendamento->getStatusAg()
-        WHERE ID = $agendamento->getID()";
-        return $this->dataBase->query($sql);
     }
  }
 

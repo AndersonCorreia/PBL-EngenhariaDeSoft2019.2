@@ -14,13 +14,14 @@ use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
 use App\Model\Turma;
 use App\DB\AgendamentoInstitucionalDAO;
+use App\DB\AgendamentoDAO;
 
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class AgendamentoController extends Controller{   
 
     public function confirmacaoAgendamento(Request $dados){
-        $DAO = new VisitaDAO();
+        $DAO = new AgendamentoDAO();
         $DAO->confirmaAgendamento($dados->nomeTabela,$dados->status,$dados->ID);
         $DAO->contAgendamento("cont_agendamento_cancelado", $dados->user_ID);
         if($dados->nomeTabela == "agendamento_institucional"){
