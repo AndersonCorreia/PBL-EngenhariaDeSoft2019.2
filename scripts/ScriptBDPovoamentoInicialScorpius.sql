@@ -99,14 +99,14 @@ INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-23','manhã');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-24','tarde');
 
 -- INSERT DOS Agentamentos de Usuário --
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(1, 1, '2020-02-10 14:00:00', 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(2, 3, '2020-03-10 14:00:00', 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(3, 5, '2020-03-11 14:00:00', 'cancelado pelo funcionario', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(4, 7, '2020-03-13 14:00:00', 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(5, 9, '2020-03-15 08:00:00', 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(6, 11, '2020-03-17 08:00:00', 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(7, 13, '2020-03-19 14:00:00', 'cancelado pelo usuario', 601);
-INSERT INTO agendamento (ID, Visita, Data_Agendamento, Status, usuario_ID)VALUES(8, 15, '2020-03-20 18:00:00', 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(1, 1, 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(2, 3, 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(3, 5, 'cancelado pelo funcionario', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(4, 7, 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(5, 9, 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(6, 11, 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(7, 13, 'cancelado pelo usuario', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(8, 15, 'confirmado', 601);
 
 -- INSERT das turmas --
 INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(1, 'A', '6º ano', 'Ensino Fundamental', 701);
@@ -119,22 +119,22 @@ INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(7, 'A', '
 INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(8, 'B', '3º semestre', 'Ensino Superior', 701);
 
 -- INSERT dos Agendamentos de Instituições --
-INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, turma_ID, professor_instituicao_ID) VALUES
-(1, 2, '2020-02-11 14:00:00', 'confirmado', 1, 1);
-INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, turma_ID, professor_instituicao_ID) VALUES
-(2, 4, '2020-02-11 08:00:00', 'cancelado pelo funcionario', 2, 1);
-INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, turma_ID, professor_instituicao_ID) VALUES
-(3, 6, '2020-03-12 08:00:00', 'cancelado pelo usuario', 4, 1);
-INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, turma_ID, professor_instituicao_ID) VALUES
-(4, 8, '2020-03-14 08:00:00', 'confirmado', 3, 1);
-INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, turma_ID, professor_instituicao_ID) VALUES
-(5, 10, '2020-03-16 08:00:00', 'pendente', 3, 1);
-INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, turma_ID, professor_instituicao_ID) VALUES
-(6, 12, '2020-03-18 14:00:00', 'pendente', 7, 1);
-INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, turma_ID, professor_instituicao_ID) VALUES
-(7, 14, '2020-03-20 14:00:00', 'confirmado', 5, 1);
-INSERT INTO agendamento_institucional (ID, Visita, Data_Agendamento, Status, turma_ID, professor_instituicao_ID) VALUES
-(8, 16, '2020-03-21 18:00:00', 'cancelado pelo usuario', 8, 1);
+INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
+(1, 2, 'confirmado', 1, 1);
+INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
+(2, 4, 'cancelado pelo funcionario', 2, 1);
+INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
+(3, 6, 'cancelado pelo usuario', 4, 1);
+INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
+(4, 8, 'confirmado', 3, 1);
+INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
+(5, 10, 'pendente', 3, 1);
+INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
+(6, 12, 'pendente', 7, 1);
+INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
+(7, 14, 'confirmado', 5, 1);
+INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
+(8, 16,'cancelado pelo usuario', 8, 1);
 
 -- INSERT notificações --
 INSERT INTO notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
