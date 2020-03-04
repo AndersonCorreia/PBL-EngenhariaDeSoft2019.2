@@ -459,7 +459,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`Acoes` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `atividade` TINYTEXT NOT NULL,
+  `atividade` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `atividade_UNIQUE` (`atividade` ASC))
 ENGINE = InnoDB;
