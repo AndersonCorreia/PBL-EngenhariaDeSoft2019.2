@@ -34,7 +34,7 @@
         }
     </style>
  
-    <body>
+   
     {{csrf_field()}}
     {{ method_field('POST') }}
     <div class="container-fluid bg-white p-4" method="POST" action="{{route('confirma.post')}}" style="border-bottom-right-radius: 20px; 
@@ -74,10 +74,10 @@
             <div class = "row calendario">
                 <div class = "col-md-10 coluna_calendario"></div>
                     <div id = "calendar">
-                       {{-- @include('telasUsuarios.Agendamentos._includes.calendar') --}}
+                        @include('telasUsuarios.Agendamentos._includes.calendar')
                     </div>
             </div>
             </div>
             </div>
-    </body>
+    
 @endsection

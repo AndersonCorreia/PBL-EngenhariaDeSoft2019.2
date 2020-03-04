@@ -9,18 +9,20 @@ use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
 use App\DB\Professor_InstituicaoDAO;
 use App\DB\VisitaDAO;
+use App\DB\AlunoDAO;
 use App\DB\ExposicaoDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
 use App\Model\Turma;
 use App\DB\AgendamentoInstitucionalDAO;
+use App\DB\AgendamentoDAO;
 
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class AgendamentoController extends Controller{   
 
     public function confirmacaoAgendamento(Request $dados){
-       $DAO = new VisitaDAO();
+        $DAO = new AgendamentoInstitucionalDAO();
         $DAO->confirmaAgendamento($dados->nomeTabela,$dados->status,$dados->ID);
         $DAO->contAgendamento("cont_agendamento_cancelado", $dados->user_ID);
         if($dados->nomeTabela == "agendamento_institucional"){
@@ -142,40 +144,26 @@ class AgendamentoController extends Controller{
     public function agendarInstituicao(Request $request){ 
         $userID = session('ID');
         $instituicaoID = $_POST['instituicao'];
-        $nomeTurma = $_POST['turma'];
+        $TurmaID = $_POST['turma'];
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $resp = $_POST['responsavel'];
-        $cargo = $_POST['cargo'];       
+        $observacao = $_POST['observacoes'];
+        $exposicoes = isset( $_POST['exposicoes']) ? isset( $_POST['exposicoes']) : [];
+        $responsaveis = $this->getMatrizResponsaveis($_POST['responsavel'], $_POST['cargo']);
 
-        $visitaDAO = new VisitaDAO();
-        $visita = $visitaDAO->SELECTbyData_Turno($data, $turno);
-
-        //retorna o ID da turma
-        $turmaID = (new Turma())->verificaTurmaExistente($userID, $nomeTurma);
-        //retorna array da tupla da tabela
-        $professor_instituicao = (new Professor_instituicaoDAO)->SELECTbyInstituicaoID_UserID($instituicaoID, $userID);
+        if( isset($_POST['incluirResponsavel']) || $responsaveis===[] ){
+            $responsaveis[] = ['nome' => session('nome'), 'cargo' => "usuario que fez o agendamento"];
+        }
+        $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
+        $alunos = (new AlunoDAO())->SELECTbyTurma($TurmaID);
+        $professor_instituicaoID = (new Professor_instituicaoDAO())->SELECTbyInstituicaoID_UserID($instituicaoID, $userID)['ID'];
         
-        $dados = [
-            'visita' => $visita['ID'],
-            'data' => $data,
-            'obs' => $_POST['observacoes'],
-            'status' => 'confirmado', 
-            'turmaID' => $turmaID,
-            'professor_instituicao_ID' => $professor_instituicao['ID'],
-        ];
-        $agendamento = new AgendamentoIntitucional();
-        $agendamento->novoAgendamento($dados);
-        $agendamentoID = $agendamentoID->getID();
+        $agendamento = new AgendamentoInstitucional($observacao, $TurmaID, $professor_instituicaoID, $visita);
+        $agendamento->setAlunos($alunos);
+        $agendamento->setResponsaveis($responsaveis);
+        $agendamento->setExposicoes($exposicoes);
 
-        //após agendar, inserir ID do agendamento na visita (Fazer método) 
-        $visitaDAO->INSERTbyID($visita['ID'], $agendamentoID);
-
-        $count = count($resp);
-        // fazer ResponsavelDAO e método de INSERT
-        // for($i = 0; i < $count; $i++){
-        //     (new ResponsavelDAO)->INSERT($resp[$i], $cargo[$i], $agendamentoID);  
-        // } 
+        (new AgendamentoInstitucionalDAO)->INSERT($agendamento);
         
         return redirect()->route('dashboard');
     }
@@ -189,6 +177,25 @@ class AgendamentoController extends Controller{
     public function agendarContaIndividual() {
         
         $id_user = session('ID');
+        $data = $_POST['data'];
+        $turno = $_POST['turno'];
+            
+        $visitaDAO = new VisitaDAO();
+        $visita = $visitaDAO->SELECTbyData_Turno($data, $turno);
+    
+        $dados = [
+            'visita' => $visita['ID'],
+            'data' => $data,
+            'obs' => $_POST['observacoes'],
+            'status' => 'confirmado', 
+            'usuario_ID' => $professor_instituicao['ID'],
+            ];
+            $agendamento = new AgendamentoIntitucional();
+            $agendamento->novoAgendamento($dados);
+            $agendamentoID = $agendamentoID->getID();
+    
+            //após agendar, inserir ID do agendamento na visita (Fazer método) 
+            $visitaDAO->INSERTbyID($visita['ID'], $agendamentoID);
 
         return redirect()->route('AgendarDiurnoVisitante.show');
     }
@@ -211,5 +218,21 @@ class AgendamentoController extends Controller{
         ];
 
         return view('telasUsuarios.Agendamentos.errorNenhumaVisita',$variaveis);
+    }
+
+    /**
+     * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsvel
+     * no campo nome, e o cargo do ressponsavel no campo cargo;
+     *
+     * @return void
+     */
+    private function getMatrizResponsaveis($arrayResp , $arrayCargo){
+        $responsaveis = [];
+
+        for ($i=0; $i < count($arrayResp) ; $i++) { 
+            $responsaveis[$i] = [ 'nome' => $arrayResp[$i], 'cargo' => $arrayCargo];
+        }
+
+        return $responsaveis;
     }
 }

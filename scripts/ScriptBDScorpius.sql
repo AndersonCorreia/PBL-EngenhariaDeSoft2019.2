@@ -193,7 +193,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento_institucional` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `visita` INT UNSIGNED NOT NULL,
-  `data_agendamento` DATETIME NOT NULL,
   `observacao` VARCHAR(100) DEFAULT NULL,
   `status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado', 'lista de espera') NOT NULL,
   `turma_ID` INT UNSIGNED,
@@ -232,9 +231,8 @@ ADD CONSTRAINT `fk_visita_agendamento_institucional_ID1`
 CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `visita` INT UNSIGNED NOT NULL,
-  `data_agendamento` DATETIME NOT NULL,
   `observacao` VARCHAR(100) DEFAULT NULL,
-  `Status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado') NOT NULL,
+  `status` ENUM('pendente', 'cancelado pelo funcionario', 'cancelado pelo usuario', 'confirmado') NOT NULL,
   `usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_agendamento_usuario1_idx` (`usuario_ID` ASC),

@@ -115,7 +115,8 @@ class ControlerInstitucional extends Controller {
         $variaveis = [
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Ver Instituiçoes Cadastradas",
-            'registros' => instituicao::buscar($id)
+            'registros' => instituicao::buscar($id),
+            'instituicoes' => (new InstituicaoDAO)->getNomeEnderecoALL() 
         ];
         return view('TelaInstituicaoEnsino.dadosInstituicaoEnsino', $variaveis);
     }

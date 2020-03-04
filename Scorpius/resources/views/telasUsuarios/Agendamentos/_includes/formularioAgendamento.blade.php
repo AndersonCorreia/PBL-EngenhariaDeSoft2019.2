@@ -18,7 +18,7 @@
                 <select id="turma" name="turma" class="form-control" required>
                     @if (($turmas ?? false))
                     @foreach ($turmas as $turma)
-                        <option value="{{$turma['nome']}}"> {{$turma['nome']}} </option>
+                        <option value="{{$turma['ID']}}"> {{$turma['nome']}} </option>
                     @endforeach
                     @endif
                 </select>
@@ -44,7 +44,7 @@
         <div id="dados-responsavel" class="mt-3">
             <p class="h5">Responsáveis pela turma durante a visitação</p>
             <div class="form-check mt-3 ml-4">
-                <input class="form-check-input" type="checkbox" value="" name="incluirResponsavel" maxlenght="100">
+                <input class="form-check-input" type="checkbox" value="true" name="incluirResponsavel" maxlenght="100">
                 <label class="form-check-label" for="defaultCheck1">Sou um dos responsáveis</label>
             </div>
             <p class="h6 mt-3">Adicionar outros responsáveis</p>
@@ -52,11 +52,11 @@
                 <div class="row box mt-1">
                     <div class="col-md-7 nome-responsavel">
                         <input class="form-control nome" type="text" maxlength="40" name="responsavel[]"
-                            placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                            placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$">
                     </div>
                     <div class="col-md-4 cargo-responsavel">
                         <input class="form-control cargo" type="text" maxlength="40" name="cargo[]" placeholder="Cargo"
-                            pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                            pattern="[a-zA-ZÀ-Úà-ú ]+$$" >
                     </div>
                     <div class="col-md-1">
                         <button class="btn btn-danger btn-remover">

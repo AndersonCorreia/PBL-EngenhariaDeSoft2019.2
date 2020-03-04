@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    
+
     <?php
     $flag=false; 
     function mudarValor(&$e){ $e=true;} 
@@ -41,7 +41,7 @@
                 <thead>
                     <tr>
                         <th>Data</th>
-                        <th>Hora</th>
+                        <th>Turno</th>
                         <th>Status</th>
                         @if(session('tipo') == 'institucional')
                         <th>Turma</th>
@@ -52,8 +52,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{trim(substr($agenda['Data_Agendamento'], 0, 11))}}</td>
-                        <td>{{trim(substr($agenda['Data_Agendamento'], 11, 14))}}</td>
+                        <td>{{trim($agenda['data_visita'])}}</td>
+                        <td>{{trim($agenda['turno'])}}</td>
                         <td>{{trim($agenda['Status'])}}</td>
                         @if(session('tipo') == 'institucional')
                         <td>{{trim($agenda['ano_escolar'])}}</td>

@@ -18,21 +18,20 @@ class UserController extends Controller{
 
     public function getDashboard(){
         
-        //$array = $this->getVisitas("diurno", "now", "anterior");
+        $array = $this->getVisitas("diurno", "now", "anterior");
         $id_user = session('ID');
         $tipo = session('tipo');
-        $agendamento = Visita::listarAgendamentos($id_user);
-        $notificacao = Visita::listarNotificacao($id_user);
-        $agenda_institucional = Visita::listarAgendamentosInstitucionais($id_user);
+        $agendamento = AgendamentoInstitucional::listarAgendamentos($id_user);
+        $notificacao = AgendamentoInstitucional::listarNotificacao($id_user);
+        $agenda_institucional = AgendamentoInstitucional::listarAgendamentosInstitucionais($id_user);
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Lista de Espera disponivel", "tipo" => "institucional"];
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Agendar Visita",
             'registros' => ['agendamento'=>$agendamento,'agendamento_institucional'=>$agenda_institucional],
             'notificacoes' => $notificacao,
             'agenda_institucional' => $agenda_institucional,
-            //'visitas' => $array,
+            'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $$tipo
         ];
@@ -71,7 +70,7 @@ class UserController extends Controller{
     }
 
     public function getVisitas($turno, $data, $sentido){
-        
+
         $DAO = new VisitaDAO();
         $dataFim = now();
         $dataFim = $dataFim->add(new \DateInterval("P2M"));

@@ -2,6 +2,7 @@
 namespace App\Model;
 use App\Model\Users\Empregado;
 use App\DB\VisitaDAO;
+use App\DB\AgendamentoInstitucionalDAO;
 
 class Visita extends \App\DB\interfaces\DataObject {
 
@@ -23,18 +24,6 @@ class Visita extends \App\DB\interfaces\DataObject {
         $this->Agendamento = $agend;
         $this->Acompanhante = $acomp;
         $this->ID = $id;
-    }
-
-    public static function listarAgendamentos($id){
-		return (new visitaDAO)->SELECTbyAgendamentoID($id);
-    }
-
-    public static function listarNotificacao($id){
-        return (new visitaDAO)->SELECTbyNotificacaoID($id);
-    }
-    
-    public static function listarAgendamentosInstitucionais($id){
-        return (new visitaDAO)->SELECTbyAgendamentoInstitucional($id);
     }
 
     /**
@@ -123,17 +112,22 @@ class Visita extends \App\DB\interfaces\DataObject {
     }
 
     /**
-     * Set the value of Agendamento
+     * Set the value of Agendamento, se já existi um agendamento para esta visita o valor não é alterado
+     * e o status do agendamento é alterado para lista de espera;
      *
      * @return  self
      */ 
-    public function setAgendamento(Agendamento $Agendamento){
+    public function setAgendamento(AgendamentoInstitucional $Agendamento){
         
-        if ($Agendamento!=null){
-            $this->Agendamento = $Agendamento;
-            $Agendamento->setVisita($this);
+        if ($Agendamento!=null ){
+            if($this->Agendamento!=null){
+                $Agendamento->setStatus("lista de espera", false);
+            }
+            else {
+                $this->Agendamento = $Agendamento;
+                $this->setAlterado();
+            }
         }
-        $this->setAlterado();
 
         return $this;
     }

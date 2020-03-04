@@ -60,7 +60,7 @@
                                     <div id="data-turno" class="row">
                                         <div class="col-md-6">
                                             <label for="inputData">Data desejada</label>
-                                            <input class="form-control" type="date" id="data" name="data" required>
+                                            <input class="form-control" id="data" name="data" type="date" maxlength="10" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="selectTurno">Turno</label>
@@ -74,16 +74,16 @@
                                 <div id="dados-visitante" class="mt-4 dados-pessoais">
                                     <p class="h6">Dados do visitante</p>
                                     <div class="row">
-                                        <div class="col-md-7">Nome</div>
+                                        <div class="col-md-10">Nome</div>
                                         <div class="col-md-2">Idade</div>
                                     </div>
                                     <div id="dados-visitante-campos">
                                         <div class="row box mb-2">
-                                            <div class="col-md-7 nome-visitante">
+                                            <div class="col-md-10 nome-visitante">
                                                 <input id="visitante" class="form-control" type="text" maxlength="40" name="visitante1" placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                                             </div>
                                             <div class="col-md-2 idade-visitante">
-                                                <input id="idade" class="form-control" type="text" maxlength="3" name="idade1" placeholder="xxx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                                                <input id="idade" class="form-control" type="text" maxlength="3" name="idade1" placeholder="xx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                                             </div>
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <label for="idade">Idade </label>
-                                            <input id="idade" class="form-control" type="text" maxlength="3" name="idade[]" placeholder="xxx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                                            <input id="idade" class="form-control" type="text" maxlength="3" name="idade[]" placeholder="xx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                                         </div>
                                     </div>
                                 </div>

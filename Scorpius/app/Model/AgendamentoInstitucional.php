@@ -7,111 +7,102 @@ use App\DB\AgendamentoInstitucionalDAO;
 class AgendamentoInstitucional extends \App\DB\interfaces\DataObject 
 {
 	private $visita;
-    private $data;
     private $observacao;
-	private $statusAg;
+	private $status;
     private $turmaID;
     private $professorInstituicaoID;
-    private $agendamentoDAO;
+    private $Alunos;
+    private $Responsaveis;
+    private $Exposicoes;
 
-	public function __Construct(){
-		$this->agendamentoDAO = new AgendamentoInstitucionalDAO();
+    public function __Construct($observacao, $turmaID, $professorInstituicaoID, $visita,
+                    $status= "pendente", $ID = null){
+
+        $this->observacao = $observacao;
+        $this->turmaID = $turmaID;
+        $this->professorInstituicaoID = $professorInstituicaoID;
+        $this->status = $status;
+        $this->visita = $visita;
+        $this->visita->setAgendamento($this);
 	}
 
-	public function novoAgendamento($dados): Agendamento
-    {
-        $this->visita = $dados['visita'];
-		$this->data = $dados['data'];
-		$this->observacao = $dados['obs'];
-        $this->statusAg = $dados['status'];
-        $this->turmaID = $dados['turmaID'];
-        $this->professorInstituicaoID = $dados['professor_instituicao_ID'];
-		$this->agendamentoDAO->INSERT($this);
-        return $this;
-	}
 	
 	protected function save()
     {
         (new \app\DB\AgendamentoInstitucionalDAO)->UPDATE($this);
-	}
+    }
+    
 
-	public function setID($ID)
-    {
-        $this->setAlterado();
-        $this->ID = $ID;
+    public static function listarAgendamentos($id){
+		return (new AgendamentoInstitucionalDAO)->SELECTbyAgendamentoID($id);
     }
-    public function getID()
-    {
-        return $this->ID;
-	}
 
-	public function setTurma($turma)
-    {
-        $this->setAlterado();
-        $this->turma = $turma;
+    public static function listarNotificacao($id){
+        return (new AgendamentoInstitucionalDAO)->SELECTbyNotificacaoID($id);
     }
-    public function getTurma()
-    {
-        return $this->turma;
-	}
-	
-	public function setVisita($visita)
-    {
-        $this->setAlterado();
-        $this->visita = $visita;
+    
+    public static function listarAgendamentosInstitucionais($id){
+        return (new AgendamentoInstitucionalDAO)->SELECTbyAgendamentoInstitucional($id);
     }
+
     public function getVisita()
     {
         return $this->visita;
-	}
-	
-	public function setdata($data)
-    {
-        $this->setAlterado();
-        $this->data = $data;
     }
-    public function getdata()
-    {
-        return $this->data;
-	}
-	
-	public function setObservacao($observacao)
-    {
-        $this->setAlterado();
-        $this->observacao = $observacao;
-    }
+
     public function getObservacao()
     {
         return $this->observacao;
-	}
-	
-	public function setStatusAg($statusAg)
-    {
-        $this->setAlterado();
-        $this->statusAg = $statusAg;
     }
-    public function getStatusAg()
+    
+    public function getStatus()
     {
-        return $this->statusAg;
-	}
-	
-	public function setTurmaID($turmaID)
-    {
-        $this->setAlterado();
-        $this->turmaID = $turmaID;
+        return $this->status;
     }
+
+    public function setStatus($status, $alterar=true)
+    {   
+        $this->setAlterado($alterar);
+        $this->status = $status;
+    }
+
     public function getTurmaID()
     {
         return $this->turmaID;
     }
 
-    public function setProfessorInstituicaoID($professorInstituicaoID)
-    {
-        $this->setAlterado();
-        $this->professorInstituicaoID = $professorInstituicaoID;
-    }
     public function getProfessorInstituicaoID()
     {
         return $this->professorInstituicaoID;
+    }
+
+    public function getAlunos()
+    {
+        return $this->Alunos;
+    }
+
+    public function setAlunos(array $alunos)
+    {   
+        $this->Alunos = $alunos;
+    }
+
+    public function getExposicoes()
+    {
+        return $this->Exposicoes;
+    }
+
+    public function setExposicoes(array $Exposicoes)
+    {   
+        $this->Exposicoes = $Exposicoes;
+    }
+
+    public function getResponsaveis()
+    {
+        return $this->Responsaveis;
+    }
+
+    public function setResponsaveis(array $Responsaveis)
+    {   
+        $this->Responsaveis = $Responsaveis;
     }
 }

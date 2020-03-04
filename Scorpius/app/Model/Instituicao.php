@@ -32,6 +32,7 @@ class Instituicao extends \App\DB\interfaces\DataObject {
 		return $result;
 	}
 
+
 	public function getNome() {
 		return $this->nome;
 	}

@@ -106,4 +106,10 @@ abstract class DataAccessObject {
         return $this->dataBase->insert_id;
     }
     
+    function __destruct(){
+        //automaticamente cancelar qualquer transação que não foi commitada para o banco
+        //util quando alguma query lançar exception durante uma serie de commits com o autocommit = false;
+        $this->dataBase->rollback();
+    }
+    
 }

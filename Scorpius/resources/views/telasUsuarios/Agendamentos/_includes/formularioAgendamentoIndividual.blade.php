@@ -26,23 +26,23 @@
     <div id="dados-visitante" class="mt-4 dados-pessoais">
         <p class="h6">Dados dos visitantes</p>
         <div class="row">
-            <div class="col-md-7">Nome</div>
+            <div class="col-md-6">Nome</div>
             <div class="col-md-3">RG</div>
-            <div class="col-md-1">Idade</div>
+            <div class="col-md-2">Idade</div>
         </div>
         <div id="dados-visitantes-campos">
             <div class="row box mb-2">
-                <div class="col-md-7 nome-visitante">
+                <div class="col-md-6 nome-visitante">
                     <input id="visitante" class="form-control" type="text" maxlength="40" name="visitante"
-                        placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú]+$$" required>
+                        placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                 </div>
                 <div class="col-md-3 rg-visitante">
-                    <input id="RG" class="form-control" type="text" maxlength="15" name="rg"
+                    <input id="RG" class="form-control" type="text" minlength="14" maxlength="15" name="rg"
                         placeholder="xxxxxxxxxxxxxxxxx" required>
                 </div>
-                <div class="col-md-1 idade-visitante">
+                <div class="col-md-2 idade-visitante">
                     <input id="idade" class="form-control" type="number" max=120 name="idade" placeholder="xx"
-                        pattern="[a-zA-ZÀ-Úà-ú]+$$" required>
+                        pattern="[0-9{2,3}]+$$" required>
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn btn-danger btn-remover">
