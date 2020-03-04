@@ -16,25 +16,35 @@ use App\Model\Agendamento;
 
     function INSERT($agendamento): bool
     {
-        $visita = $agendamento->getVisita()->getID();
-        $dataAgendamento = $agendamento->getData();
+        $visitaID = $agendamento->getVisita()->getID();
         $observacao = $agendamento->getObservacao();
-        $statusAg = $agendamento->getStatusAg();
+        $statusAg = $agendamento->getStatus();
         $turmaID = $agendamento->getTurmaID(); 
         $professorInstituicaoID = $agendamento->getProfessorInstituicaoID(); 
-        $sql = "INSERT INTO agendamento_institucional (visita, data_agendamento, observacao, status, turma_ID, professor_instituicao_ID) 
-        VALUE (
-            '$visita',
-            '$dataAgendamento',
-            '$observacao',
-            '$statusAg',
-            '$turmaID',
-            '$professorInstituicaoID'           
-        )";
-        
+        $sql = "INSERT INTO agendamento_institucional (visita, observacao, status, turma_ID, professor_instituicao_ID) 
+                VALUE ( $visitaID, $observacao, $statusAg, $turmaID, $professorInstituicaoID)";
         $resultado = $this->dataBase->query($sql);
+
         $agendamento->setID($this);
+        $ID = $agendamento->getID();
+
+        $this->INSERT_Alunos( $agendamento->getAlunos(), $ID);
+        $this->INSERT_Responsaveis( $agendamento->getResponsaveis(), $ID);
+        $this->INSERT_Exposicoes( $agendamento->getExposicoes(), $ID);
+
         return $resultado;
+    }
+
+    private function INSERT_Alunos( array $Alunos, int $ID){
+
+    }
+
+    private function INSERT_Exposicoes( array $Exposicoes, int $ID){
+        
+    }
+
+    private function INSERT_Responsaveis( array $Responsaveis, int $ID){
+        
     }
  }
 

@@ -112,17 +112,22 @@ class Visita extends \App\DB\interfaces\DataObject {
     }
 
     /**
-     * Set the value of Agendamento
+     * Set the value of Agendamento, se já existi um agendamento para esta visita o valor não é alterado
+     * e o status do agendamento é alterado para lista de espera;
      *
      * @return  self
      */ 
-    public function setAgendamento(Agendamento $Agendamento){
+    public function setAgendamento(AgendamentoInstitucional $Agendamento){
         
-        if ($Agendamento!=null){
-            $this->Agendamento = $Agendamento;
-            $Agendamento->setVisita($this);
+        if ($Agendamento!=null ){
+            if($this->Agendamento!=null){
+                $Agendamento->setStatus("lista de espera", false);
+            }
+            else {
+                $this->Agendamento = $Agendamento;
+                $this->setAlterado();
+            }
         }
-        $this->setAlterado();
 
         return $this;
     }

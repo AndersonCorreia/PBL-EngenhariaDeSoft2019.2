@@ -26,7 +26,6 @@ abstract class AgendamentoDAO extends \App\DB\interfaces\DataAccessObject
 
     public function confirmaAgendamento($nomeTabela,$status, $id){
         $sql="UPDATE $nomeTabela a SET a.Status = ? WHERE a.ID=?";
-        //$this->dataBase->query($sql);
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss",$status,$id);       
         return $stmt->execute();
@@ -43,14 +42,14 @@ abstract class AgendamentoDAO extends \App\DB\interfaces\DataAccessObject
 
         if($result){
             $sql= "DELETE FROM $nomeTabela where $coluna=?";
-        $stmt = $this->dataBase->prepare($sql);
-        $result = $stmt->bind_param("s", $id_Agendamento);
-        if($stmt->execute()){
-            $stmt->close();
-            return true;
-        }else{
-            throw new \Exception("Erro ao deletar VISITANTE");
-        }
+            $stmt = $this->dataBase->prepare($sql);
+            $result = $stmt->bind_param("s", $id_Agendamento);
+            if($stmt->execute()){
+                $stmt->close();
+                return true;
+            }else{
+                throw new \Exception("Erro ao deletar VISITANTE");
+            }
         }
         return;
         

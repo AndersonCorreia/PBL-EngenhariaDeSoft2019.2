@@ -34,13 +34,13 @@ class VisitaDAO extends DataAccessObject{
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ssi",$dateInicio, $dateFim, $limite);
         $stmt->execute();
-        $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-        if($ArrayResult==[]){
+        if($result==[]){
             throw new \App\Exceptions\NenhumaVisitaEncontradaException();
         }
         
-        return $ArrayResult;
+        return $result;
     }
 
     /**
@@ -50,18 +50,26 @@ class VisitaDAO extends DataAccessObject{
      * @param string $turno da visita
      * @return array visita com o dia e turno especificado 
      */
-    public function SELECTbyData_Turno(string $dia, string $turno){
+    public function SELECTbyData_Turno(string $dia, string $turno, bool $asObject = false){
         //fazer abusca da visita com aquele dia e turno
         $sql = "SELECT * FROM visita WHERE data_visita = ? AND turno = ?";
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss", $dia, $turno);
         $stmt->execute();
-        $ArrayResult = $stmt->get_result()->fetch_assoc();
+        $result = $stmt->get_result()->fetch_assoc();
 
-        if($ArrayResult==[]){
+        if($result==[]){
             throw new \Exception("Nenhuma Visita encontrada no dia e turno especifico", 1);
         }
-        return $ArrayResult;
+
+        if($asObject){
+            $data = new \DateTime($result['data_visita']);
+            $agenID = $result["agendamento_institucional_ID"];
+            $agendamentoInst = (new AgendamentoInstitucionalDAO())->SELECTbyID($agenID);
+            return new Visita($data, $result['turno'], $result["status"],$agendamentoInst, $result["acompanhante_ID"], $result['ID']);
+        }
+
+        return $result;
     }
 
     public function getVistasObjectsByDateInicio_FIM(string $dateInicio, string $dateFim,bool $isDiurno, int $limite=20): array {

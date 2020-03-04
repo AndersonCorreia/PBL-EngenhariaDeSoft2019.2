@@ -44,7 +44,7 @@ class AlunoDAO extends \App\DB\interfaces\DataAccessObject{
     {
         $sql = "SELECT * FROM aluno WHERE turma_ID = $turma_ID";
         $resultado = $this->dataBase->query($sql);
-        return $resultado; 
+        return $resultado->fetch_all(MYSQLI_ASSOC); 
     }
 
     public function DELETEbyTurma($turma_ID){
