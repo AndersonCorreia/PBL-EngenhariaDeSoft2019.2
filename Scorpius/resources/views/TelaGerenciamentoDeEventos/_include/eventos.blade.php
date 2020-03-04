@@ -136,7 +136,7 @@ $(document).ready(function() {
 <style>
 .eventos {
     height: 95px;
-    width: 800px;
+    width: 1000px;
 }
 
 .geralEventos {
@@ -151,9 +151,10 @@ $(document).ready(function() {
     flex-direction: row;
     align-items: top border;
 }
-
-.btn {
-    padding: 3px;
+.botoes > .btn {
+    width:40px;
+    height:40px;
+    padding: 10px;
     margin: 5px;
 }
 
