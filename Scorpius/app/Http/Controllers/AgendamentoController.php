@@ -9,6 +9,7 @@ use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
 use App\DB\Professor_InstituicaoDAO;
 use App\DB\VisitaDAO;
+use App\DB\UsuarioDAO;
 use App\DB\AlunoDAO;
 use App\DB\ExposicaoDAO;
 use App\DB\TurmaDAO;
@@ -181,8 +182,9 @@ class AgendamentoController extends Controller{
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
+        $status = "confirmado";
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
-        $agendamento = new AgendamentoIndividual($id_user, $visita);
+        $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
 
         (new AgendamentoIndividualDAO)->INSERT($agendamento);
 

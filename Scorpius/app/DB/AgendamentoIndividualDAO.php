@@ -8,7 +8,7 @@ use App\Model\Agendamento;
 class AgendamentoIndividualDAO extends AgendamentoDAO {
 
     public function __Construct(){
-        parent::__Construct("agendamento_individual");
+        parent::__Construct("agendamento");
     }
 
 
@@ -17,11 +17,11 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         $visitaID = $agendamento->getVisita()->getID();
         $statusAg = $agendamento->getStatusAg();
         $usuario_ID = $agendamento->getUsuarioID();
+        
          
-        $sql = "INSERT INTO agendamento_individual (visita, data_agendamento, status, usuario_ID) 
+        $sql = "INSERT INTO agendamento (visita, status, usuario_ID) 
         VALUE (
-            '$visita',
-            '$dataAgendamento',
+            '$visitaID',
             '$statusAg',
             '$usuario_ID'           
         )";
