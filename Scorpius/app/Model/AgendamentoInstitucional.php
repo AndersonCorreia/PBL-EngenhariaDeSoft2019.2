@@ -23,7 +23,7 @@ class AgendamentoInstitucional extends \App\DB\interfaces\DataObject
         $this->professorInstituicaoID = $professorInstituicaoID;
         $this->status = $status;
         $this->visita = $visita;
-        $this->visita->setAgendamentoInst($this);
+        $this->visita->setAgendamento($this);
 	}
 
 	
