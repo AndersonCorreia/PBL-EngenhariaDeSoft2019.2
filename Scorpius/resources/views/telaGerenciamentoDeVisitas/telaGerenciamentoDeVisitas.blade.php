@@ -429,21 +429,20 @@
         margin: 5px;
         margin-top: -8px;
         background: #00a82d;
-        width: 90px;
+        width: 95px;
         height: 40px;
     }
     [btncanc]{
         padding: 7px; 
         margin: 5px;
         margin-top: -8px;
-        width: 90px;
+        width: 95px;
         height: 40px;
     }
 
     [lista]{
-        width: 40px;
+        width: 50px;
         height: 30px;
-        padding: 0px;
     }
 
     [calendario]{
