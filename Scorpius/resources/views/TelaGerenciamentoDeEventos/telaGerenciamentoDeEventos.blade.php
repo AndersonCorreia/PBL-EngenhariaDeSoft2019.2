@@ -79,7 +79,6 @@
                             <div class="form-group">
                                 <label for="descricao_campo" class="col-form-label">Descrição do Evento:</label>
                                 <textarea class="form-control" id="descricao_campo"></textarea>
-                            </div>
                         </div>
                     </div>
                     <div class="row col-12 p-3">
