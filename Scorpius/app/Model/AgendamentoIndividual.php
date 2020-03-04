@@ -11,11 +11,10 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
     private $usuario_ID;
     
 
-    public function Construct($usuario_ID, $visita, $status= "pendente", $ID = null){
+    public function __Construct($usuario_ID, $visita, $status){
         $this->usuario_ID = $usuario_ID;
         $this->visita = $visita;
-        $this->status = $statusAg;
-        $this->visita->setAgendamento($this);
+        $this->statusAg = $status;
     }
     
     protected function save()
@@ -40,22 +39,16 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
         return $this->visita;
     }
 
-	public function setID($ID)
+	public function setID($usuario_ID)
     {
-        $this->setAlterado();
-        $this->ID = $ID;
+        //$this->setAlterado();
+        $this->usuario_ID = $usuario_ID;
     }
     public function getID()
     {
-        return $this->ID;
+        return $this->usuario_ID;
 	}
 	
-	public function setVisita($visita)
-    {
-        $this->setAlterado();
-        $this->visita = $visita;
-    }
-    
 	public function setdata($data)
     {
         $this->setAlterado();
