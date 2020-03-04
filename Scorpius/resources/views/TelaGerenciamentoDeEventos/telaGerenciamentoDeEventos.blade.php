@@ -35,7 +35,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body"><!--4 rows-->
+                    <div class="modal-body"><!--6 rows-->
                         <form>
                             <div class="row col-12 p-3"><!--1-->
                                 <div class="col-md-8">
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12"><!--2-->
                                     <div class="form-group">
                                         <label for="temaEvento_campo" class="col-form-label">Tema do Evento:</label>
                                         <select class="form-control" id="temaEvento_campo">
@@ -64,7 +64,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            <div class="row col-12 p-3"><!--2-->
+                            <div class="row col-12 p-3"><!--3-->
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="descricao_campo" class="col-form-label">Descrição do Evento:</label>
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row col-12 p-3"><!--3-->
+                            <div class="row col-12 p-3"><!--4-->
                                 <div class="col-md-6">
                                     <label for="limiteVagas_campo" class="col-form-label">Limite de Vagas:</label>
                                     <input type="number" max="40"/>
@@ -85,12 +85,19 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row col-12 p-3"><!--4-->
+                            <div class="row col-12 p-3"><!--5-->
                                 <div class="col-md-6">
-                                    <label for="periodo_campo" class="col-form-label">Data Início</label>
+                                    <label for="periodo_inicio_campo" class="col-form-label">Data Início:</label>
                                     <input type="date"/>
                                 </div>
-                                div
+                                <div class="col-md-6">
+                                    <label for="periodo_termino_campo" class="col-form-label">Data Termino:</label>
+                                    <input type="date"/>
+                                </div>
+                            </div>
+                            <div class="row col-12 p-3"><!--6-->
+                                <label for="imagem_campo" class="col-form-label">Imagem da Atividade:</label>
+                                <input type="file" class="col-form-label" id="imagem_campo"/>
                             </div>
                         </form>
                     </div>
