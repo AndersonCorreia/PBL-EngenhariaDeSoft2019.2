@@ -65,4 +65,16 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
 
         return $ArrayResult;
     }
+
+    public function SELECT_Eventos($colums= '*'){
+        $sql="SELECT $colums FROM exposicao";
+        $stmt = $this->dataBase->query($sql);
+        $ArrayResult = $stmt->fetch_all(MYSQLI_ASSOC);
+
+        if($ArrayResult==[]){
+            throw new \App\Exceptions\NenhumaAtividadeEncontradaException();
+        }
+
+        return $ArrayResult;
+    }
 }

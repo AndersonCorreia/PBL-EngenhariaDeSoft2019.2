@@ -42,8 +42,12 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["demandaWeb.show" ] = 'demanda web';
         $this->RotasPermissoes["telaRelatorioVisitasAgendadas.show"] = 'relatorio dos agendamentos';
         $this->RotasPermissoes["telaGerenciamentoDeEventos.show"] = 'cadastrar e modificar atividades' ;
+        $this->RotasPermissoes["atualizarEvento"] = 'cadastrar e modificar atividades' ;
+        $this->RotasPermissoes["editarEvento"] = 'cadastrar e modificar atividades' ;
+        $this->RotasPermissoes["removeEvento"] = 'cadastrar e modificar atividades' ;
         $this->RotasPermissoes["CadastroUsuario.show" ] = 'criar usuarios';
         $this->RotasPermissoes["CadastroUsuario.post" ] = 'criar usuarios';
         //$this->RotasPermissoes["nome da rota" ] = 'permissão associada como ta escrito no banco';
     }
+    
 }

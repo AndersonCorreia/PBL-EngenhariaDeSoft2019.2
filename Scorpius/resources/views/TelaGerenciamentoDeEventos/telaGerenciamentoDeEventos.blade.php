@@ -16,7 +16,7 @@
                                 <h4 class = "card-title">Listagem de Eventos</h4>
                             </div>
                             <div class = "card-body" style = "max-height: 200px; overflow-y: auto;">
-                                <!--aqui dentro vão ficar as informações das atividades com botões de editar e excluir atividade ao lado-->
+                                    @include('TelaGerenciamentoDeEventos._include.eventos')
                             </div>
                                 <div class = "card-footer bg-transparetn border-0">
                                     <button type = "button" class = "btn btn-success">Cadastrar Novo Evento</button>
@@ -29,3 +29,7 @@
     </body>
 
 @endsection
+
+<style>
+
+</style>

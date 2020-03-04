@@ -10,17 +10,38 @@ namespace App\Http\Controllers\Funcionario;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use App\DB\ExposicaoDAO;
 require_once __DIR__."/../../../../resources/views/util/layoutUtil.php";
 
 class GerenciamentoDeEventosController extends Controller{
     public function getTelaGerenciamentoDeEventos(){
         //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
         $id_user = session('ID');
+        $exposicoes = (new ExposicaoDAO)->SELECT_Eventos('ID, titulo, tipo_evento, data_inicial, data_final');
         $variaveis = [
             'itensMenu' => getMenuLinks(), 
-            'paginaAtual' => "Gerenciamento de Eventos"   
+            'paginaAtual' => "Gerenciamento de Eventos",
+            'exposicoes' => $exposicoes
         ];
         return view('TelaGerenciamentoDeEventos.telaGerenciamentoDeEventos', $variaveis);
+    }
+
+    public function edit($id)
+    {
+        //
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    
+
+    public function destroy($id)
+    {
+        //
     }
 }
 ?>

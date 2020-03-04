@@ -93,6 +93,7 @@ class enviarEventosController extends Controller
         //
     }
 
+    
 
     public function destroy($id)
     {
