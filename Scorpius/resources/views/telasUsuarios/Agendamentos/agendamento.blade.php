@@ -4,8 +4,16 @@
 
 @section('conteudo')
 
-<div class="row col-12 ">
-    <div class="container-fluid scorpius-border-shadow p-4">
+<div class="row col-12">
+    <div class="container-fluid p-4">
+        @if(true){{-- isset($agendamentos) --}}
+        <div class="row col-12 mb-3 m-0 pb-2 scorpius-border-shadow">
+            <h4 class="text-primary ml-2">Seus Proximos Agendamentos </h4>
+            <small class="text-secondary ml-1 pt-2 m-0 p-0"> (Limite de 3 Agendamentos institucionais ativos no mesmo período )</small>
+            <hr class="bg-light col-11 linha rounded p-0 m-0">
+            @include('telasUsuarios.Agendamentos._includes.agendamentos')
+        </div>
+        @endif
         @if($tipoUserLegenda["tipo"] == "institucional")
         <div class="col-12 m-0 p-0">
             <div class="container-fluid bg-white scorpius-border-shadow p-3" >

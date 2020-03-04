@@ -12,7 +12,7 @@
 
 <div class="row col-12 m-0 p-0 font-weight-bold text-center" >
     <div class="row col-12 m-0 p-0">
-        <div id="calendario" class="col-12 pt-2 px-2 m-0 overflow-auto barra">
+        <div id="calendario" class="col-12 pt-2 px-2 m-0 overfloh-75 w-auto barra">
             <div class="col p-0 text-dark font-weight-bold">
                 <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('{{($turno ?? 'diurno')}}')" disabled>
                     <i class="fas fa-angle-left"></i>
@@ -82,15 +82,15 @@
                     <span> Legenda:</span>
                 </div>
                 <div class="col-7 col-lg-3 py-1">
-                    <a class="btn {{ $legendaCores["proprio"] }} w-auto" aria-disabled="true" disabled></a> 
+                    <a class="btn {{ $legendaCores["proprio"] }} h-75 w-auto" aria-disabled="true" disabled></a> 
                     <span> Seu agendamento</span>
                 </div>
                 <div class="col-5 col-lg-2 py-1">
-                    <a class="btn {{ $legendaCores["disponivel"] }} w-auto" aria-disabled="true" disabled></a>
+                    <a class="btn {{ $legendaCores["disponivel"] }} h-75 w-auto" aria-disabled="true" disabled></a>
                     <span> {{$tipoUserLegenda["leg.disponivel"]}}</span>
                 </div>
                 <div class="col-12 col-lg-5 py-1 ">
-                    <a class="btn {{ $legendaCores["indisponivel"] }} w-auto" aria-disabled="true" disabled></a>
+                    <a class="btn {{ $legendaCores["indisponivel"] }} h-75 w-auto" aria-disabled="true" disabled></a>
                     <span> {{$tipoUserLegenda["leg.indisponivel"]}}</span>
                 </div>
             </div>
