@@ -81,7 +81,8 @@ class VisitaDAO extends DataAccessObject{
             if($elemento['agendamento_institucional_ID'] == null){
                 $agendamentoInst= null;
             }else {
-                //$agendamentoInst = terminar depois
+                $agenID = $result["agendamento_institucional_ID"];
+                $agendamentoInst = (new AgendamentoInstitucionalDAO())->SELECTbyID($agenID);
             }
             $data = new \DateTime($elemento['data_visita']);
 
