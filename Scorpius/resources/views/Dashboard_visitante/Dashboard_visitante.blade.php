@@ -34,7 +34,7 @@
         }
     </style>
  
-    <body>
+   
     {{csrf_field()}}
     {{ method_field('POST') }}
     <div class="container-fluid bg-white p-4" method="POST" action="{{route('confirma.post')}}" style="border-bottom-right-radius: 20px; 
@@ -79,5 +79,5 @@
             </div>
             </div>
             </div>
-    </body>
+    
 @endsection
