@@ -96,8 +96,12 @@
                                 </div>
                             </div>
                             <div class="row col-12 p-3"><!--6-->
-                                <label for="imagem_campo" class="col-form-label">Imagem da Atividade:</label>
-                                <input type="file" class="col-form-label" id="imagem_campo"/>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="imagem_campo" class="col-form-label">Imagem da Atividade:</label>
+                                        <input type="file" class="col-form-label" id="imagem_campo"/>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
