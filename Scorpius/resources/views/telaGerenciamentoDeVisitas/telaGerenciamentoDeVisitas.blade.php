@@ -12,13 +12,36 @@
             Essa parte receberá do controller uma array $lista_espera com as informações
             do agendamento: nome da instituicao, data do agendamento
             -->
-            <li class="list-group-item">Colegio Helyos - 23/03/2020 - Matutino</li>
+            <li class="list-group-item">  
+            <div class= "row p-2 scorpius-border-shadow border-top border-shadow">
+                <div class="row col-12 col-md-11 my-1" >          
+                    <div class="row col-12">
+                        <div class= "col-8 col-5 col-md-4">
+                            <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
+                            <div class="col-12 p-0">Colégio Helyos</div> <!-- substituir por registro -->
+                        </div>
+                        <div class= "col-4 col-md-3">
+                            <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
+                            <div class="col-12 p-0">Particular</div>
+                        </div>
+                        <div class= "col-8 col-md-3">
+                            <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
+                            <div class="col-12 p-0">23/03/2020</div>
+                        </div>
+                        <div class= "col-4 col-md-2">
+                            <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
+                            <div class="col-12 p-0">Manhã</div>
+                        </div>
+                    </div> 
+                </div>
+            </div>                                        
+                </li>
             @if(($lista_espera ?? false))
             @foreach($lista_espera as $agendamento)
                 <li class="list-group-item">{{$agendamento['nome']}} - {{$agendamento['data']}}</li>
             @endforeach
             @else
-                <li class="list-group-item">Não possui nenhum agendamento na lista de espera.</li>
+                <li class="list-group-item"></li> <!-- caso não haja nada na lista de espera -->
             @endif
         </ul>
     </div>
@@ -289,7 +312,30 @@
                                             <!-- colocar resto das coisas aqui -->
                                             <div class="custom-control custom-radio col-md-12">
                                                 <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio1">Colegio Helyos  - 23/03/2020</label>
+                                                <label class="custom-control-label" for="customRadio1">
+                                                    <div class= "row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
+                                                        <div class="row col-12 col-md-11 my-1" >          
+                                                            <div class="row col-12">
+                                                                <div class= "col-8 col-5 col-md-4">
+                                                                    <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
+                                                                    <div class="col-12 p-0">Colégio Helyos</div> <!-- substituir por registro -->
+                                                                </div>
+                                                                <div class= "col-4 col-md-3">
+                                                                    <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
+                                                                    <div class="col-12 p-0">Particular</div>
+                                                                </div>
+                                                                <div class= "col-8 col-md-3">
+                                                                    <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
+                                                                    <div class="col-12 p-0">23/03/2020</div>
+                                                                </div>
+                                                                <div class= "col-4 col-md-2">
+                                                                    <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
+                                                                    <div class="col-12 p-0">Manhã</div>
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </label>
                                             </div>
                                             @if(($lista_espera_dia_turno ?? false))
                                             @foreach($lista_espera_dia_turno as $agendamento_dia_turno)
@@ -299,7 +345,7 @@
                                             </div>
                                             @endforeach
                                             @else
-                                                <p>Não possui nenhum agendamento na lista de espera para este dia e turno.</p>
+                                                <p></p> <!-- caso não haja nada na lista de espera -->
                                             @endif
                                         </div>
                                         <div class="modal-footer">
@@ -440,9 +486,19 @@
         height: 40px;
     }
 
+    [posicaoButton]{
+        margin-top: 100px;
+        margin: 50px;
+    }
+
     [lista]{
         width: 50px;
         height: 30px;
+    }
+
+    [larguraDiv]{
+        width: 700px;
+        height: 80px;
     }
 
     [calendario]{

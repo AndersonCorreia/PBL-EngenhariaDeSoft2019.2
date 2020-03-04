@@ -3,8 +3,8 @@
 //Rota dashboard estagiario
 Route::get('/estagiario/dashboard', 'UserController@getDashboard')->name('dashboardEstagiario.show');
 
-//Rota dashboard funcionario
-Route::get('/funcionario/dashboard', 'UserController@getDashboard')->name('dashboardFuncionario.show');
+//Rota Dashboard do Funcionário.
+//Route::get('/funcionario/dashboard', 'UserController@getTelaDashboardFuncionario')->name('telaDashboardFuncionario.show');
 
 //Rota dashboard adm
 Route::get('/adm/dashboard', 'UserController@getDashboard')->name('dashboardAdm.show');
@@ -17,6 +17,15 @@ Route::group(
     'namespace'=>'Funcionario'],
     function(){
         Route::get('/gerenciamentoDeVisitas', 'VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
+    }
+);
+
+Route::group(
+    ['midlleware'=>[], 
+    'prefix'=>'funcionario',
+    'namespace'=>'Funcionario'],
+    function(){
+        Route::get('/dashboard', 'DashboardController@getTelaDashboardFuncionario')->name("telaDashboardFuncionario.show");
     }
 );
 
@@ -51,7 +60,6 @@ Route::group(
         Route::get('/gerenciamentoDeEventos/remove/{id}','GerenciamentoDeEventosController@destroy')->name("removeEvento");
     }
 );
-
 
 Route::group(
     ['midlleware'=>[],

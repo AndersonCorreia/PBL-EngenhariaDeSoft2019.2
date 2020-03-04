@@ -166,18 +166,6 @@
 
 <style>
 
-    .instituicoes{
-        width: 850px;
-        height: 330px;
-        border: solid 5px #ccc;
-        padding: 12px;
-        margin: 10px;
-        display: flex;
-        flex-direction:column;
-        align-items: center;
-        
-    }
-
     [borda]{
         width: 1050px;
         height: 250px;
