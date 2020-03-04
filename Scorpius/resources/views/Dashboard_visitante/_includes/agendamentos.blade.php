@@ -40,7 +40,6 @@
             <table class="table-borderless">
                 <thead>
                     <tr>
-                        <th>Data</th>
                         <th>Status</th>
                         @if(session('tipo') == 'institucional')
                         <th>Turma</th>
@@ -51,7 +50,6 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{trim(substr($agenda['Data_Agendamento'], 0, 11))}}</td>
                         <td>{{trim($agenda['Status'])}}</td>
                         @if(session('tipo') == 'institucional')
                         <td>{{trim($agenda['ano_escolar'])}}</td>
