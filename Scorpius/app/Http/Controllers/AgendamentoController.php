@@ -13,8 +13,10 @@ use App\DB\AlunoDAO;
 use App\DB\ExposicaoDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
+use App\Model\AgendamentoIndividual;
 use App\Model\Turma;
 use App\DB\AgendamentoInstitucionalDAO;
+use App\DB\AgendamentoIndividualDAO;
 use App\DB\AgendamentoDAO;
 
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
@@ -179,23 +181,10 @@ class AgendamentoController extends Controller{
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-            
-        $visitaDAO = new VisitaDAO();
-        $visita = $visitaDAO->SELECTbyData_Turno($data, $turno);
-    
-        $dados = [
-            'visita' => $visita['ID'],
-            'data' => $data,
-            'obs' => $_POST['observacoes'],
-            'status' => 'confirmado', 
-            'usuario_ID' => $id_user['ID'],
-        ];
-            $agendamento = new AgendamentoIndividual();
-            $agendamento->novoAgendamento($dados);
-            $agendamentoID = $agendamentoID->getID();
-    
-            //após agendar, inserir ID do agendamento na visita (Fazer método) 
-            $visitaDAO->INSERTbyID($visita['ID'], $agendamentoID);
+        $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
+        $agendamento = new AgendamentoIndividual($id_user, $visita);
+
+        (new AgendamentoIndividualDAO)->INSERT($agendamento);
 
         return redirect()->route('AgendarDiurnoVisitante.show');
     }

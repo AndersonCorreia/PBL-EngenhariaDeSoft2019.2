@@ -14,22 +14,25 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
 
     function INSERT($agendamento): bool
     {
-        $visita = $agendamento->getVisita();
-        $dataAgendamento = $agendamento->getData();
-        $observacao = $agendamento->getObservacao();
+        $visitaID = $agendamento->getVisita()->getID();
         $statusAg = $agendamento->getStatusAg();
         $usuario_ID = $agendamento->getUsuarioID();
          
-        $sql = "INSERT INTO agendamento_individual (visita, data_agendamento, observacao, status, usuario_ID) 
+        $sql = "INSERT INTO agendamento_individual (visita, data_agendamento, status, usuario_ID) 
         VALUE (
             '$visita',
             '$dataAgendamento',
-            '$observacao',
             '$statusAg',
             '$usuario_ID'           
         )";
         
         $resultado = $this->dataBase->query($sql);
+
+        $agendamento->setID($this);
+        $ID = $agendamento->getID();
+        //Fazer insert para lista de pessoas em um agendamento
+
+        $this->dataBase->commit();
         // dd($resultado)
         return $resultado;
     }

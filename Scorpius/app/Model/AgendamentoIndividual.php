@@ -7,31 +7,38 @@ use App\DB\AgendamentoIndividualDAO;
 class AgendamentoIndividual extends \App\DB\interfaces\DataObject 
 {
 	private $visita;
-    private $data;
-    private $observacao;
     private $statusAg;
     private $usuario_ID;
-    private $agendamentoDAO;
+    
 
-    public function Construct(){
-        $this->agendamentoDAO = new AgendamentoIndividualDAO();
-    }
-
-    public function novoAgendamento($dados): Agendamento {
-
-        $this->visita = $dados['visita'];
-		$this->data = $dados['data'];
-		$this->observacao = $dados['obs'];
-        $this->statusAg = $dados['status'];
-        $this->usuario_ID = $dados['usuario_ID'];
-		$this->agendamentoDAO->INSERT($this);
-        return $this;
+    public function Construct($usuario_ID, $visita, $status= "pendente", $ID = null){
+        $this->usuario_ID = $usuario_ID;
+        $this->visita = $visita;
+        $this->status = $statusAg;
+        $this->visita->setAgendamento($this);
     }
     
     protected function save()
     {
         (new \app\DB\AgendamentoIndividualDAO)->UPDATE($this);
-	}
+    }
+
+    public static function listarAgendamentos($id){
+		return (new AgendamentoIndividualDAO)->SELECTbyAgendamentoID($id);
+    }
+
+    public static function listarNotificacao($id){
+        return (new AgendamentoIndividualDAO)->SELECTbyNotificacaoID($id);
+    }
+    
+    public static function listarAgendamentosInstitucionais($id){
+        return (new AgendamentoIndividualDAO)->SELECTbyAgendamentoIndividual($id);
+    }
+
+    public function getVisita()
+    {
+        return $this->visita;
+    }
 
 	public function setID($ID)
     {
@@ -48,11 +55,7 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
         $this->setAlterado();
         $this->visita = $visita;
     }
-    public function getVisita()
-    {
-        return $this->visita;
-	}
-	
+    
 	public function setdata($data)
     {
         $this->setAlterado();
@@ -61,16 +64,6 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
     public function getdata()
     {
         return $this->data;
-	}
-	
-	public function setObservacao($observacao)
-    {
-        $this->setAlterado();
-        $this->observacao = $observacao;
-    }
-    public function getObservacao()
-    {
-        return $this->observacao;
 	}
 	
 	public function setStatusAg($statusAg)
