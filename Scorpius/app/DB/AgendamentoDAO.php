@@ -84,9 +84,9 @@ abstract class AgendamentoDAO extends \App\DB\interfaces\DataAccessObject
     }
 
     public function SELECTbyAgendamentoInstitucional($id){
-        $sql="SELECT a.Data_Agendamento, a.Status, a.ID, a.professor_instituicao_ID, t.nome, t.ano_escolar
+        $sql="SELECT a.Data_Agendamento, a.Status, a.ID, a.instituicao_ID, t.nome, t.ano_escolar
               FROM agendamento_institucional a LEFT JOIN turma t ON a.turma_ID=t.ID 
-              LEFT JOIN instituicao i ON a.professor_instituicao_ID=i.ID
+              LEFT JOIN instituicao i ON a.instituicao_ID=i.ID
               WHERE t.professor_ID=?";
         $stmt=$this->dataBase->prepare($sql);
         $stmt->bind_param("i",$id);
