@@ -5,7 +5,7 @@ namespace App\DB;
 use App\Model\Agendamento;
 
 
-class AgendamentoIndividualDAO extends \App\DB\interfaces\DataAccessObject {
+class AgendamentoIndividualDAO extends AgendamentoDAO {
 
     public function __Construct(){
         parent::__Construct("agendamento_individual");
@@ -26,7 +26,7 @@ class AgendamentoIndividualDAO extends \App\DB\interfaces\DataAccessObject {
             '$dataAgendamento',
             '$observacao',
             '$statusAg',
-            '$usuarioID'           
+            '$usuario_ID'           
         )";
         
         $resultado = $this->dataBase->query($sql);

@@ -188,9 +188,9 @@ class AgendamentoController extends Controller{
             'data' => $data,
             'obs' => $_POST['observacoes'],
             'status' => 'confirmado', 
-            'usuario_ID' => $professor_instituicao['ID'],
-            ];
-            $agendamento = new AgendamentoIntitucional();
+            'usuario_ID' => $id_user['ID'],
+        ];
+            $agendamento = new AgendamentoIndividual();
             $agendamento->novoAgendamento($dados);
             $agendamentoID = $agendamentoID->getID();
     
