@@ -65,7 +65,11 @@ class VisitaDAO extends DataAccessObject{
         if($asObject){
             $data = new \DateTime($result['data_visita']);
             $agenID = $result["agendamento_institucional_ID"];
-            $agendamentoInst = (new AgendamentoInstitucionalDAO())->SELECTbyID($agenID);
+            if($agenID == null){
+                $agendamentoInst= null;
+            }else {
+                $agendamentoInst = (new AgendamentoInstitucionalDAO())->SELECTbyID($agenID);
+            }
             return new Visita($data, $result['turno'], $result["status"],$agendamentoInst, $result["acompanhante_ID"], $result['ID']);
         }
 
@@ -78,10 +82,10 @@ class VisitaDAO extends DataAccessObject{
         
         $arrayObjects = array_map(function ($elemento){
 
-            if($elemento['agendamento_institucional_ID'] == null){
-                $agendamentoInst= null;
+            $agenID = $elemento["agendamento_institucional_ID"];
+            if($agenID == null){
+                $agendamentoInst = null;
             }else {
-                $agenID = $result["agendamento_institucional_ID"];
                 $agendamentoInst = (new AgendamentoInstitucionalDAO())->SELECTbyID($agenID);
             }
             $data = new \DateTime($elemento['data_visita']);

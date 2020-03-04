@@ -24,7 +24,7 @@ use App\Model\Agendamento;
         $turmaID = $agendamento->getTurmaID(); 
         $professorInstituicaoID = $agendamento->getProfessorInstituicaoID(); 
         $sql = "INSERT INTO agendamento_institucional (visita, observacao, status, turma_ID, professor_instituicao_ID) 
-                VALUE ( $visitaID, $observacao, $statusAg, $turmaID, $professorInstituicaoID)";
+                VALUE ( '$visitaID', '$observacao', '$statusAg', '$turmaID', '$professorInstituicaoID')";
         $resultado = $this->dataBase->query($sql);
 
         $agendamento->setID($this);
@@ -35,7 +35,7 @@ use App\Model\Agendamento;
         $this->INSERT_Exposicoes( $agendamento->getExposicoes(), $ID);
 
         $this->dataBase->commit();
-        
+
         return $resultado;
     }
 

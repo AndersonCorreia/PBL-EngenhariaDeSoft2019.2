@@ -9,6 +9,7 @@ use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
 use App\DB\Professor_InstituicaoDAO;
 use App\DB\VisitaDAO;
+use App\DB\AlunoDAO;
 use App\DB\ExposicaoDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
@@ -147,17 +148,21 @@ class AgendamentoController extends Controller{
         $data = $_POST['data'];
         $turno = $_POST['turno'];
         $observacao = $_POST['observacoes'];
-        $exposicoes = $_POST['exposicoes'];
+        $exposicoes = isset( $_POST['exposicoes']) ? isset( $_POST['exposicoes']) : [];
         $responsaveis = $this->getMatrizResponsaveis($_POST['responsavel'], $_POST['cargo']);
 
         if( isset($_POST['incluirResponsavel']) || $responsaveis===[] ){
             $responsaveis[] = ['nome' => session('nome'), 'cargo' => "usuario que fez o agendamento"];
         }
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
-        $alunos = (new AlunoDAO())->SELECTbyTurma($turmaID);
-        $professor_instituicaoID = (new Professor_instituicaoDAO())->SELECTbyInstituicaoID_UserID($instituicaoID, $userID);
+        $alunos = (new AlunoDAO())->SELECTbyTurma($TurmaID);
+        $professor_instituicaoID = (new Professor_instituicaoDAO())->SELECTbyInstituicaoID_UserID($instituicaoID, $userID)['ID'];
         
         $agendamento = new AgendamentoInstitucional($observacao, $TurmaID, $professor_instituicaoID, $visita);
+        $agendamento->setAlunos($alunos);
+        $agendamento->setResponsaveis($responsaveis);
+        $agendamento->setExposicoes($exposicoes);
+
         (new AgendamentoInstitucionalDAO)->INSERT($agendamento);
         
         return redirect()->route('dashboard');

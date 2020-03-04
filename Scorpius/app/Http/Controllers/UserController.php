@@ -18,7 +18,7 @@ class UserController extends Controller{
 
     public function getDashboard(){
         
-        //$array = $this->getVisitas("diurno", "now", "anterior");
+        $array = $this->getVisitas("diurno", "now", "anterior");
         $id_user = session('ID');
         $tipo = session('tipo');
         $agendamento = AgendamentoInstitucional::listarAgendamentos($id_user);
@@ -28,11 +28,10 @@ class UserController extends Controller{
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Dashboard",
             'registros' => ['agendamento'=>$agendamento,'agendamento_institucional'=>$agenda_institucional],
             'notificacoes' => $notificacao,
             'agenda_institucional' => $agenda_institucional,
-            //'visitas' => $array,
+            'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $$tipo
         ];

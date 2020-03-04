@@ -74,7 +74,7 @@
             <div class = "row calendario">
                 <div class = "col-md-10 coluna_calendario"></div>
                     <div id = "calendar">
-                       {{-- @include('telasUsuarios.Agendamentos._includes.calendar') --}}
+                        @include('telasUsuarios.Agendamentos._includes.calendar')
                     </div>
             </div>
             </div>
