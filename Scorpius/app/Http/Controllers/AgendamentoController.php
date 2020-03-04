@@ -146,32 +146,19 @@ class AgendamentoController extends Controller{
         $TurmaID = $_POST['turma'];
         $data = $_POST['data'];
         $turno = $_POST['turno'];
+        $observacao = $_POST['observacoes'];
+        $exposicoes = $_POST['exposicoes'];
         $responsaveis = $this->getMatrizResponsaveis($_POST['responsavel'], $_POST['cargo']);
 
-        if( $_POST['incluirResponsavel'] == 'valor que fica no check que eu não sei'){//verificar depois
+        if( isset($_POST['incluirResponsavel']) || $responsaveis===[] ){
             $responsaveis[] = ['nome' => session('nome'), 'cargo' => "usuario que fez o agendamento"];
         }
-
-        $visitaDAO = new VisitaDAO();
-        $visita = $visitaDAO->SELECTbyData_Turno($data, $turno);
-
-        //retorna array da tupla da tabela
-        $professor_instituicao = (new Professor_instituicaoDAO)->SELECTbyInstituicaoID_UserID($instituicaoID, $userID);
+        $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
+        $alunos = (new AlunoDAO())->SELECTbyTurma($turmaID);
+        $professor_instituicaoID = (new Professor_instituicaoDAO())->SELECTbyInstituicaoID_UserID($instituicaoID, $userID);
         
-        $dados = [
-            'visita' => $visita['ID'],
-            'data' => $data,
-            'obs' => $_POST['observacoes'],
-            'status' => 'confirmado', 
-        
-        ];
-        
-        $agendamento = new AgendamentoIntitucional();
-        $agendamento->novoAgendamento($dados);
-        $agendamentoID = $agendamentoID->getID();
-
-        //após agendar, inserir ID do agendamento na visita (Fazer método) 
-        $visitaDAO->INSERTbyID($visita['ID'], $agendamentoID);
+        $agendamento = new AgendamentoInstitucional($observacao, $TurmaID, $professor_instituicaoID, $visita);
+        (new AgendamentoInstitucionalDAO)->INSERT($agendamento);
         
         return redirect()->route('dashboard');
     }

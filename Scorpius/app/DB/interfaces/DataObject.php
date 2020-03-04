@@ -37,7 +37,7 @@ abstract class DataObject{
      *
      * @return boolean informa se o objeto foi alterado ou não
      */
-    public function getAlterado(bool $alterado=true){
+    public function getAlterado(){
        return $this->alterado;
     }
     /**

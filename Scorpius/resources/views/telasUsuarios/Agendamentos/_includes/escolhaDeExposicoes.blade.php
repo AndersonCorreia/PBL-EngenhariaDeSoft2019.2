@@ -8,7 +8,7 @@
             @foreach ($$tipoAtividade as $exp)
             <div class="col-12 col-md-6 p-1">
                 <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" value="{{$exp["titulo"]}}" id="check{{$loop->index}}">
+                    <input class="custom-control-input" type="checkbox" value="{{$exp["ID"]}}" id="check{{$loop->index}}" name="exposicoes">
                     <label class="custom-control-label" for="check{{$loop->index}}">{{$exp["titulo"]}}: {{$exp["descricao"]}} </label>
                 </div>
             </div>

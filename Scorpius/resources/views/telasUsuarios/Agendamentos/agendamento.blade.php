@@ -18,7 +18,7 @@
                 @include('telasUsuarios.Agendamentos._includes.calendar')
             </div>
         </div>
-        <div id="formulario" class="col-12 mt-4">
+        <div id="formulario" class="col-12 mt-4 p-0">
             <div class="container-fluid scorpius-border-shadow p-4" >
                 @if($tipoUserLegenda["tipo"] == "institucional")
                     @include('telasUsuarios.Agendamentos._includes.formularioAgendamento')
