@@ -22,6 +22,224 @@
             @endif
         </ul>
     </div>
+    <div class="form-group col-sm-12 d-block">
+        <h4 class="col-sm-12">Cronograma de Visitas Programadas</h4>
+        <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('diurno')" disabled>
+            <i class="fas fa-angle-left"></i>
+        </button>
+        <span id="calendarDatas" class="text-dark font-weight-bold" style="text-align:center;">10 de Março a 20 de Março</span>
+        <button id="setaRight" type="button" class=" btn btn-default" onclick="proximosDias('diurno')">
+            <i class="fas fa-angle-right"></i>
+        </button>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Dia</th>
+                        <th scope="col">02/03 SEG</th>
+                        <th scope="col">03/03 TER</th>
+                        <th scope="col">05/03 QUI</th>
+                        <th scope="col">06/03 SEX</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Manhã</th>
+                        <td>
+                            {{-- se for de manhã. COLOCAR IF --}}
+                            <p>Colégio Helyos
+                                <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal"
+                                    data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                    <i class="fas fa-list-ol"></i>
+                                </button>
+                            </p>
+                            <div class="btn-group" role="group">
+                                <button type="submit" class="btn btn-primary" btnconf>Confirmar</button>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
+                                        btncanc>Cancelar
+                                </button>
+                                <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-secondary text-white">
+                                                <h5 class="modal-title">Motivo do cancelamento</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- colocar resto das coisas aqui -->
+                                                <div class="custom-control custom-radio col-md-12">
+                                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="customRadio1">Condições climáticas</label>
+                                                </div>
+                                                <div class="custom-control custom-radio col-md-12">
+                                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="customRadio2">Outro:
+                                                    <input type="text"></label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-primary">Confirmar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            {{-- se for de manhã. COLOCAR IF --}}
+                            <p>Escola Dois de Julho
+                                <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal"
+                                    data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                    <i class="fas fa-list-ol"></i>
+                                </button>
+                            </p>
+                            <div class="btn-group" role="group">
+                                <button type="submit" class="btn btn-primary" btnconf>Confirmar</button>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
+                                        btncanc>Cancelar
+                                </button>
+                                <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-secondary text-white">
+                                                <h5 class="modal-title">Motivo do cancelamento</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- colocar resto das coisas aqui -->
+                                                <div class="custom-control custom-radio col-md-12">
+                                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="customRadio1">Condições climáticas</label>
+                                                </div>
+                                                <div class="custom-control custom-radio col-md-12">
+                                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="customRadio2">Outro:
+                                                    <input type="text"></label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-primary">Confirmar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Tarde</th>
+                    <td></td>
+                    <td>
+                        {{-- se for de tarde. COLOCAR IF --}}
+                        <p>Colégio Santo Antônio
+                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal"
+                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                <i class="fas fa-list-ol"></i>
+                            </button>
+                        </p>
+                        <div class="btn-group" role="group">
+                            <button type="submit" class="btn btn-primary" btnconf>Confirmar</button>
+                            <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
+                                btncanc>Cancelar
+                            </button>
+                            <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
+                                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-secondary text-white">
+                                            <h5 class="modal-title">Motivo do cancelamento</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- colocar resto das coisas aqui -->
+                                            <div class="custom-control custom-radio col-md-12">
+                                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio1">Condições climáticas</label>
+                                            </div>
+                                            <div class="custom-control custom-radio col-md-12">
+                                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio2">Outro:
+                                                <input type="text"></label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary">Confirmar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Noite</th>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            {{-- se for de noite. COLOCAR IF --}}
+                            <p>Colégio Anchieta
+                                <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal"
+                                    data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                    <i class="fas fa-list-ol"></i>
+                                </button>
+                            </p>
+                            <div class="btn-group" role="group">
+                                <button type="submit" class="btn btn-primary" btnconf>Confirmar</button>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
+                                    btncanc>Cancelar
+                                </button>
+                                <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-secondary text-white">
+                                                <h5 class="modal-title">Motivo do cancelamento</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- colocar resto das coisas aqui -->
+                                                <div class="custom-control custom-radio col-md-12">
+                                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="customRadio1">Condições climáticas</label>
+                                                </div>
+                                                <div class="custom-control custom-radio col-md-12">
+                                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="customRadio2">Outro:
+                                                    <input type="text"></label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-primary">Confirmar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     <div class="form-group col-sm-7 d-block">
         <h4 class="col-sm-12">Cronograma de Visitas Agendadas</h4>
         <div class="col p-0 pt-2 text-dark font-weight-bold" calendario>
@@ -211,20 +429,20 @@
         margin: 5px;
         margin-top: -8px;
         background: #00a82d;
-        width: 85px;
+        width: 95px;
         height: 40px;
     }
     [btncanc]{
         padding: 7px; 
         margin: 5px;
         margin-top: -8px;
-        width: 85px;
+        width: 95px;
         height: 40px;
     }
 
     [lista]{
-        width: 170px;
-        height: 40px;
+        width: 50px;
+        height: 30px;
     }
 
     [calendario]{

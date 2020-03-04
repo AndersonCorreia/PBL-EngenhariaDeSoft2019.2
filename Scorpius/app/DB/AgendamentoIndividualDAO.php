@@ -5,7 +5,7 @@ namespace App\DB;
 use App\Model\Agendamento;
 
 
-class AgendamentoIndividualDAO extends \App\DB\interfaces\DataAccessObject {
+class AgendamentoIndividualDAO extends AgendamentoDAO {
 
     public function __Construct(){
         parent::__Construct("agendamento_individual");
@@ -14,22 +14,25 @@ class AgendamentoIndividualDAO extends \App\DB\interfaces\DataAccessObject {
 
     function INSERT($agendamento): bool
     {
-        $visita = $agendamento->getVisita();
-        $dataAgendamento = $agendamento->getData();
-        $observacao = $agendamento->getObservacao();
+        $visitaID = $agendamento->getVisita()->getID();
         $statusAg = $agendamento->getStatusAg();
         $usuario_ID = $agendamento->getUsuarioID();
          
-        $sql = "INSERT INTO agendamento_individual (visita, data_agendamento, observacao, status, usuario_ID) 
+        $sql = "INSERT INTO agendamento_individual (visita, data_agendamento, status, usuario_ID) 
         VALUE (
             '$visita',
             '$dataAgendamento',
-            '$observacao',
             '$statusAg',
-            '$usuarioID'           
+            '$usuario_ID'           
         )";
         
         $resultado = $this->dataBase->query($sql);
+
+        $agendamento->setID($this);
+        $ID = $agendamento->getID();
+        //Fazer insert para lista de pessoas em um agendamento
+
+        $this->dataBase->commit();
         // dd($resultado)
         return $resultado;
     }
