@@ -6,7 +6,7 @@
 <div class="scorpius-border p-4">
     <div class="scorpius-border-shadow-sm p-3" onmousemove="verificaCamposPessoais()">
         <p class="h3">Dados pessoais</p>
-        <form action="{{route('alterarDadosAlteracao')}}" method="POST">
+        <form action="{{route('alterarDadosAlteracao.post')}}" method="POST">
             {{csrf_field()}}
             <div class="form-row">
                 <div class="col-md-6 form-group">
@@ -58,7 +58,7 @@
     </div>
     <div class="mt-3 scorpius-border-shadow-sm p-4" onmousemove="verificaCamposSenha()">
         <p class="h3">Alterar senha</p>
-        <form action="{{route('alterarDadosAlteracao')}}" method="post">
+        <form action="{{route('alterarDadosAlteracao.post')}}" method="post">
             <div class="form-group pl-5 pr-5">
                 <label for="senhaAtual">Senha atual</label>
                 <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" value="{{isset($dadosUsuario['senha']) ? $dadosUsuario['senha'] : ''}}" 
