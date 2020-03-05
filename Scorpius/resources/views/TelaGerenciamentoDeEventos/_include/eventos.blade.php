@@ -3,7 +3,7 @@
     {{csrf_field()}}
     {{ method_field('POST') }}
 
-    <!-- Modal -->
+    <!-- Modal confirmar -->
     <div class="modal fade" method="POST" action="{{route('confirma.post')}}" id="modalExemplo" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -24,8 +24,10 @@
             </div>
         </div>
     </div>
-{{$valor=''}}
-@foreach($exposicoes as $exposicao)
+
+
+    {{$valor=''}}
+    @foreach($exposicoes as $exposicao)
     <div class="geralEventos">
         <div class="eventos scorpius-border-shadow border-top border-shadow">
             <table class="table-borderless">
@@ -51,14 +53,12 @@
                         @endif
                         <td>
                             <div class="botoes">
-                                <button type="button" class="btn btn-warning" data-toggle="modal"
-                                    data-target=".bd-example-modal-xl" id="btnVisualizar"
-                                    data-detalhe='<?=  json_encode($valor); ?>'>
+                                <button type="button" class="btn btn-warning" id="btnVisualizar"
+                                    data-detalhe='<?= json_encode($exposicao); ?>'>
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target=".bd-example-modal-xl" id="btnEditar"
-                                    data-detalhe='<?=json_encode($valor);?>'>
+                                <button type="button" class="btn btn-primary" id="btnEditar"
+                                    data-detalhe='<?=json_encode($exposicao);?>'>
                                     <i class="fas fa-pen"></i>
                                 </button>
                                 <button type="submit" class="btn btn-danger" name="user"
@@ -73,31 +73,150 @@
         </div>
 
     </div>
-@endforeach
+    @endforeach
 </form>
+
+
+<!-- modal cadastro -->
+<div class="modal fade" id="cadastrarModal" tabindex="-1" role="dialog" aria-labelledby="cadastrarModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cadastrarModalLabel">CADASTRO DE NOVO EVENTO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--6 rows-->
+                <form>
+                    <div class="row col-12 p-3">
+                        <!--1-->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="nome_campo" class="col-form-label">Nome:</label>
+                                <input type="text" class="form-control" id="nome_campo" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tipoEvento_campo" class="col-form-label">Tipo de Evento:</label>
+                                <select class="form-control" id="tipoEvento_campo">
+                                    <option>atividade diferenciada</option>
+                                    <option>atividade permanente</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--2-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="temaEvento_campo" class="col-form-label">Tema do Evento:</label>
+                                <select class="form-control" id="temaEvento_campo">
+                                    <option>Biologia</option>
+                                    <option>Astronomia</option>
+                                    <option>Evolução Humana</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-12 p-3">
+                        <!--3-->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="descricao_campo" class="col-form-label">Descrição do Evento:</label>
+                                <textarea class="form-control" id="descricao_campo"></textarea>
+                            </div>
+                        </div>
+                        <div class="row col-12 p-3">
+                            <!--4-->
+                            <div class="col-md-6">
+                                <label for="limiteVagas_campo" class="col-form-label">Limite de Vagas:</label>
+                                <input type="number" class="form-control" id="limiteVagas_campo" max="40" />
+                            </div>
+                            <div clas="col-md-6 align-right">
+                                <label for="turno_campo" class="col-form-label">Turno:</label>
+                                <select class="form-control" id="turno_campo">
+                                    <option value="diurno">diurno</option>
+                                    <option value="noturno">noturno</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row col-12 p-3">
+                            <!--5-->
+                            <div class="col-md-6">
+                                <label for="periodo_inicio_campo" class="col-form-label">Data Início:</label>
+                                <input type="date" class="form-control" id="periodo_inicio_campo"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="periodo_termino_campo" class="col-form-label">Data Termino:</label>
+                                <input type="date" class="form-control" id="periodo_termino_campo" />
+                            </div>
+                        </div>
+                        <div class="row col-12 p-3">
+                            <!--6-->
+                            <label for="imagem_campo" class="col-form-label">Imagem da Atividade:</label>
+                            <input type="file" class="form-control" id="imagem_campo" />
+                        </div>
+                        <div class="row col-12 p-3">
+                            <button type="button" class="btn btn-success" confirmar>Cadastrar</button>
+                            <button type="button" class="btn btn-danger" cancelar>Cancelar</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section('js')
 <script>
 $(document).ready(function() {
 
-    let statusCancelado = $('[cancelar]')
-    for (let i = 0; i < statusCancelado.length; i++) {
-        let value2 = $(statusCancelado[i]).data('valores').Status.toString();
-        console.log(value2)
-        if (value2.search('cancelado') != -1) {
-            statusCancelado[i].setAttribute("style",
-                "cursor: default; pointer-events: none;user-select:none; opacity: 0.3;");
-        }
-    }
-
-
     let valorAtual = null
-    $('[cancelar]').click(e => {
+    $('#btnVisualizar').click(e => {
         e.preventDefault()
-        valorAtual = $(e.currentTarget).data('valores')
-        $('#modalExemplo').modal('show')
+        valorAtual = $(e.currentTarget).data('detalhe')
+        console.log(valorAtual)
+        $('#nome_campo').val(valorAtual.titulo)
+        $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val());
+        if (valorAtual.tema_evento) {
+            $('#temaEvento_campo').val($(`option:contains(${valorAtual.tema_evento})`).val());
+        } else {
+            $('#temaEvento_campo').html("<option> Não possui</option>")
+        }
+        if (valorAtual.descricao) {
+            $('#descricao_campo').val(valorAtual.descricao)
+            console.log("veio")
+        } else {
+            $('#descricao_campo').val("Não possui.")
+        }
+        if (valorAtual.quantidadeEscritos) {
+            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos)
+        }else{
+            $('#limiteVagas_campo').prop('type', 'text');
+            $('#limiteVagas_campo').val("Não possui")
+        }
+        if(valorAtual.turno){
+            $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val());
+        }
+        if(valorAtual.data_inicial){
+            /*let valorData = valorAtual.data_inicial.split('-')
+           let myData = new Date(valorData[0], valorData[1]-1, valorData[2])*/
+           $('#periodo_inicio_campo').val(valorAtual.data_inicial)
+        }
+        if(valorAtual.data_final){
+            /*let valorData = valorAtual.data_inicial.split('-')
+           let myData = new Date(valorData[0], valorData[1]-1, valorData[2])*/
+           $('#periodo_termino_campo').val(valorAtual.data_final)
+        }
+
+        $('#cadastrarModal').modal('show')
     })
 
-    $('#modalExemplo [salvarMudanca]').click(e => {
+    $('#cadastrarModal [salvarMudanca]').click(e => {
         e.preventDefault()
         console.log(valorAtual)
         $.ajaxSetup({
@@ -151,9 +270,10 @@ $(document).ready(function() {
     flex-direction: row;
     align-items: top border;
 }
-.botoes > .btn {
-    width:40px;
-    height:40px;
+
+.botoes>.btn {
+    width: 40px;
+    height: 40px;
     padding: 10px;
     margin: 5px;
 }
@@ -168,7 +288,8 @@ th {
     width: 300px;
     text-align: center;
 }
-th{
+
+th {
     padding: 6px 0px 6px 0px;
 }
 </style>
