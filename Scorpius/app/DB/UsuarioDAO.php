@@ -36,6 +36,16 @@ class UsuarioDAO extends DataAccessObject{
         // dd($resultado);
         return $resultado;
     }
+    function SELECTbyNome($nome){
+        $sql = "SELECT * FROM usuario WHERE nome='$nome'";
+        $resultado = $this->dataBase->query($sql);
+        // $row = $resultado->fetch_assoc();
+        if($resultado->num_rows > 0){
+            return TRUE;
+        }
+        return FALSE;
+    }
+
     function SELECTbyEmail($email){
         $sql = "SELECT * FROM usuario WHERE email='$email'";
         $resultado = $this->dataBase->query($sql);
@@ -59,6 +69,17 @@ class UsuarioDAO extends DataAccessObject{
         $resultado = $this->dataBase->query($sql);
         $row = $resultado->fetch_assoc();
         return $row['ID'];
+    }
+    public function getDadosUsuario($id){
+        $sql = "SELECT nome,cpf,telefone,email,senha FROM usuario WHERE id = $id";
+        $resultado = $this->dataBase->query($sql);
+        return $resultado->fetch_assoc(); 
+    }
+    public static function alterarDados($nome,$cpf,$telefone,$senha){
+        $sql = "UPDATE usuario ('nome','CPF','telefone','senha')
+                VALUES($nome,$email,$cpf,$telefone,$senha)";
+        $resultado = $dataBase->query($sql);
+        return $resultado;
     }
     public function DELETEbyEmail($email)
     {
