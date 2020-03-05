@@ -75,17 +75,35 @@ class UsuarioDAO extends DataAccessObject{
         $resultado = $this->dataBase->query($sql);
         return $resultado->fetch_assoc(); 
     }
-    public static function alterarDados($nome,$cpf,$telefone,$senha){
+    public static function alterarDados($nome,$cpf,$telefone,$senha){       
         $sql = "UPDATE usuario ('nome','CPF','telefone','senha')
-                VALUES($nome,$email,$cpf,$telefone,$senha)";
+                VALUES($nome,$cpf,$telefone,$senha) WHERE id=$id";
+        $resultado = $dataBase->prepare($sql);
         $resultado = $dataBase->query($sql);
-        return $resultado;
+        return $resultado->execute();
     }
     public function DELETEbyEmail($email)
     {
         return $this->dataBase->query("DELETE FROM email_verificacao WHERE usuario_email = '$email'");;
     }
-    function UPDATE(object $object): bool{}
+    function UPDATE(Usuario $user): bool{
+        $params =[
+            $nome = $user->pesquisaNome(),
+            $email = $user->pesquisaEmail(),
+            $cpf = $user->pesquisaCpf(),
+            $tel = $user->tipoUsuario(),
+            $id= $user->getID()
+        ];
+
+        $set  ="nome = ?, email = ?, cpf = ?, tel = ?, id = ?";
+        $sql  = "UPDATE usuario i SET $set WHERE i.id = ?";
+
+        $stmt = $this->dataBase->prepare($sql);
+       
+        $stmt->bind_param("ssssssssi", ...$params);
+        
+        return $stmt->execute();
+    }
     
     function UPDATEATIVO($email): bool
     {

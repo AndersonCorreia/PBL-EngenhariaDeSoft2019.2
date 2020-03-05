@@ -20,6 +20,9 @@ class Usuario extends Pessoa{
         $this->usuario->INSERT($this);
         return $this;
     }
+    public function pesquisaNome($nome){
+        return $this->usuario->SELECTbyNome($nome);
+    }
     public function pesquisaEmail($email){
         return $this->usuario->SELECTbyEmail($email);
     }
@@ -38,7 +41,7 @@ class Usuario extends Pessoa{
     public function getDados($id){
         return (new UsuarioDAO)->getDadosUsuario($id);
     }
-    public function alterarDados($nome,$telefone,$cpf,$senha){
+    public function alterarDados($nome,$telefone,$cpf,$senha){     //POR SENHA NOS PARAMETROS
         return $usuario->alterarDados($nome,$cpf,$telefone,$senha);
     }    
     public function cancelarAgendamento($agendamento){}
