@@ -1,7 +1,9 @@
 <?php
 
  // chama tela de alterar dados cadastrais localizada no controller através do método index
- Route::resource('/alterar-dados', 'AlteraUsuarioController');
+ Route::get('/alterar-dados', 'AlteraUsuarioController@index')->name('alterarDados.show');
+ Route::post('/alterar-dados/alteracao', 'AlteraUsuarioController@store')->name('alterarDadosAlteracao.post');
+ Route::get('/alterar-dados/statusAlteracao', 'AlteraUsuarioController@store')->name('alterarDadosStatus.show');
     
  //Rotas para agendamento individual para as exposiçoes diurnas
  Route::get('/agendamento/exposicoes', 'AgendamentoController@agendamentoIndividual')->name('AgendarDiurnoVisitante.show');

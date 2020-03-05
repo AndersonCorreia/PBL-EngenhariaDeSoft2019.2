@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\DB\PessoaDAO;
 use App\Model\Users\Pessoa;
+use App\Model\Users\Usuario;
 use Illuminate\Http\Request;
 require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 
 class AlteraUsuarioController extends Controller
-{
+{   
     /**
      * Display a listing of the resource.
      *
@@ -16,12 +17,27 @@ class AlteraUsuarioController extends Controller
      */
     public function index()
     {
+        $id_user = session('ID');
+        $dadosUsuario =(new Usuario)->getDados($id_user);
+        $arrayNome = explode(' ',$dadosUsuario['nome']);
+        $primeiroNome = $arrayNome[0];
+        $surname = null;
+            for($i = 1; $i < count($arrayNome); $i++){
+                if($surname == null){ 
+                    $surname = $arrayNome[$i].'';
+                }
+                else{
+                    $surname = $surname." ".$arrayNome[$i];
+                }
+            }
+
         $variaveis = [
-            'itensMenu' => getMenuLinksAll()
+            'itensMenu' => getMenuLinksAll(),
+            'dadosUsuario' => ['sobrenome'=> $surname, 'nome' => $primeiroNome,'senha'=>$dadosUsuario['senha'],'cpf'=>$dadosUsuario['cpf'], 
+                'email'=>$dadosUsuario['email'], 'telefone'=>$dadosUsuario['telefone'] ]
         ];
         return view('TelaAlterarDadosCadastrais.telaAlterarDadosCadastrais',$variaveis);
     }
-
    
     public function create()
     {
@@ -35,37 +51,30 @@ class AlteraUsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {/*request são os dados do formulario
-        $email = $_POST['email'];
-        $nome = $_POST['nome'];
-        $telefone = $_POST['telefone'];
-        $senha_nova = $_POST['senha_nova'];
-        $senha_antiga = $_POST['senha_antiga'];
+    {   $nome = $_POST['nomeUsuario'];
+        $sobrenome =$_POST['sobrenomeUsuario'];
+        $telefone=$_POST['telefoneUsuario'];
+        $cpf=$_POST['cpfUsuario'];
+        $senhaAtual=$_POST['senhaAtual'];
+        $novaSenha=$_POST['novaSenha'];
+        $rptNovaSenha=$_POST['rptNovaSenha'];
+      
+        if($senhaAtual != $dadosUsuario['senha']){
+            die("Erro: Não foi possível atualizar os dados pessoais");
+            return view('TelaAlterarDadosCadastrais.telaErroAlterarDadosCadastrais',$dadosUsuario);
+        }
+        else if($senhaAtual == $dadosUsuario['senha'] && $novaSenha==$rptNovaSenha){
+            if( $novaSenha==null && $rptNovaSenha == null || ($rptNovaSenha==' ' && $novaSenha==' ')){
+                $novaSenha = $senhaAtual; $rptNovaSenha = $senhaAtual;
+            }
 
-        while(1){
-
-            $variavel = 
-            $variavel = 
-            $variavel = 
-
-        }*/
-
-//tem que fazer a condicional se a senha antiga estiver errada não poder fazer a alteração
-        //if($senha_antiga for diferente da senha do bd)
-            //retorna que não pode alterar dados
-        $variavel = $_POST['aria-pressed'] == true;
-        $usuario = new PessoaDAO();
-        $id_user = $usuario->SELECTbyName($nome);
-        $dadosUsuario = [
-            'email' => $email,
-            'nome' => $nome,
-            'telefone' => $telefone,
-            'senha' => $senha_nova,
-            'id' =>$id_user
-        ];
-            
-        $usuario->UPDATE($dadosUsuario);
-        return 'dados alterados com sucesso!';
+            $fullName = $nome." ".$sobrenome;
+            $sql = "UPDATE usuario('nome','telefone','CPF','senha') 
+                VALUES ($fullName,$telefone,$cpf,$novaSenha)";
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+        }
+        return view('TelaAlterarDadosCadastrais.telaConfirmaAlterarDadosCadastrais',$dadosUsuario);
     }
 
    

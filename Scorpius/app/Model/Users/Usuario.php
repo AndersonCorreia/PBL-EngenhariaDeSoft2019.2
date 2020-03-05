@@ -35,8 +35,12 @@ class Usuario extends Pessoa{
     public function deletarDesativo($email){
         return $this->usuario->DELETEbyEmail($email);
     }
-    public function alterarDados($nome, $email, $telefone){}
-    
+    public function getDados($id){
+        return (new UsuarioDAO)->getDadosUsuario($id);
+    }
+    public function alterarDados($nome,$telefone,$cpf,$senha){
+        return $usuario->alterarDados($nome,$cpf,$telefone,$senha);
+    }    
     public function cancelarAgendamento($agendamento){}
 
     public function notificaEmail($mensagem){}

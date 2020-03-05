@@ -6,8 +6,7 @@
 <div class="scorpius-border p-4">
     <div class="scorpius-border-shadow-sm p-3" onmousemove="verificaCamposPessoais()">
         <p class="h3">Dados pessoais</p>
-        <form action="{{route('alterarDadosAlteracao')}}" method="POST">
-            {{csrf_field()}}
+        <form action="{{}}" method="POST">
             <div class="form-row">
                 <div class="col-md-6 form-group">
                     <label for="nomeUsuario">Nome</label>
@@ -58,7 +57,7 @@
     </div>
     <div class="mt-3 scorpius-border-shadow-sm p-4" onmousemove="verificaCamposSenha()">
         <p class="h3">Alterar senha</p>
-        <form action="{{route('alterarDadosAlteracao')}}" method="post">
+        <form action="" method="post">
             <div class="form-group pl-5 pr-5">
                 <label for="senhaAtual">Senha atual</label>
                 <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" value="{{isset($dadosUsuario['senha']) ? $dadosUsuario['senha'] : ''}}" 
@@ -84,6 +83,17 @@
                 </button>
             </div>
         </form>
+    </div>
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="row cadastro">
+                    <p class="h3">Erro nas atualizações dos dados pessoais!</p>
+                    <a class="btn btn-primary" href="/dashboard"> Início</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
