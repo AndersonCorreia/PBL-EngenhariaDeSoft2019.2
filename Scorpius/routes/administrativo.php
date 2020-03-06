@@ -66,6 +66,7 @@ Route::group(
         Route::put('/gerenciamentoDeEventos/atualizar/{id}','GerenciamentoDeEventosController@update')->name("atualizarEvento");
         Route::get('/gerenciamentoDeEventos/editar/{id}','GerenciamentoDeEventosController@edit')->name("editarEvento");
         Route::get('/gerenciamentoDeEventos/remove/{id}','GerenciamentoDeEventosController@destroy')->name("removeEvento");
+        Route::post('/gerenciamentoDeEventos/cadastrar','GerenciamentoDeEventosController@cadastrar')->name("cadastroEvento.post");
     }
 );
 

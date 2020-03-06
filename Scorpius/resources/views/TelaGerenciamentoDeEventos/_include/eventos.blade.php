@@ -178,7 +178,7 @@
                                         <button type="button" class="btn btn-danger" cancelar >Cancelar</button>
                                     </div>
                                     <div class="col-md-4">
-                                        <button type="button" class="btn btn-success" confirmar>Cadastrar</button>
+                                        <button type="submit" class="btn btn-success" confirmar>Cadastrar</button>
                                     </div>
                                 </div>
                             </form>
@@ -304,6 +304,9 @@ $(document).ready(function() {
     
 
     $('[cadastro]').click(e => {
+
+        e.preventDefault()
+
         $('#cadastrarModal').modal('show')
 
         $('#nome_campo').prop('disabled', false).val('')
@@ -325,6 +328,11 @@ $(document).ready(function() {
         $('#imagem_campo').parent().show()
         $('[confirmar]').show().text("Cadastrar")
         $('[cancelar]').show()
+    })
+
+    $('[confirmar]').click(e=>{
+        e.preventDefault()
+        $('[confirmar]').unbind('click').click()
     })
 
     $('#cadastrarModal [salvarMudanca]').click(e => {
