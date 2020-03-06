@@ -5,54 +5,23 @@
 @section('conteudo')
 
 
-
 <form method="get" action="#"> <!--bloco começa aqui -->
 
-<div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
-    <table class="table-borderless col-12">
-        <thead>
-        <!-- Somente exemplificando a estrutura -->
-            <tr class="table-secondary">
-                <th>Nome da Instituição:</th> <td>Colégio Estadual Odorico Tavares</td>
-                <th>Cidade:</th> <td>Feira de Santana</td>
-            </tr>
-        </thead>
+    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
 
-        <thead>
-            <tr>
-                <th>Data da Visita:</th> <td>28/11/2019</td> <!-- Exemplo da estrutura -->
-                <th>Turno da Visita:</th> <td>Manhã</td>
-            </tr>
-        </thead>
+    </div>
 
-        <thead>
-            <tr>
-                <th>Status da Visita:</th> <td>Realizada</td>
-                <th>Telefone da Instituição:</th> <td>7531618000</td>
-            </tr>
-        </thead>
+    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
 
-            <thead>
-                <tr>
-                    <th>Total de Alunos da Turma:</th> <td>5</td>
-                    <th>Responsável pela Turma:</th> <td>Augusto Vicente</td>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th>Nível de Ensino da Turma:</th> <td> Ensino Médio</td>
-                    <th>Ano Escolar da Turma:</th> <td>1º Ano</td> 
-                </tr>
-            </thead>
-        </table>
-    </form>
-</div>
+    </div>
 
-</div>
+    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
 
+    </div>
+
+</form>
 
 <style>
-
     .instituicoes{
         width: 850px;
         height: 330px;
@@ -61,13 +30,12 @@
         margin: 10px;
         display: flex;
         flex-direction:column;
-        align-items: center;
-        
+        align-items: center;  
     }
 
     [borda]{
-        width: 1050px;
-        height: 250px;
+        width: 300px;
+        height: 400px;
     }
 
     [bordaModal]{

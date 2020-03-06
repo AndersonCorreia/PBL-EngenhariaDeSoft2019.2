@@ -25,7 +25,7 @@ require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
 class AgendamentoController extends Controller{   
 
     public function confirmacaoAgendamento(Request $dados){
-        $DAO = new AgendamentoDAO();
+        $DAO = new AgendamentoInstitucionalDAO();
         $DAO->confirmaAgendamento($dados->nomeTabela,$dados->status,$dados->ID);
         $DAO->contAgendamento("cont_agendamento_cancelado", $dados->user_ID);
         if($dados->nomeTabela == "agendamento_institucional"){
@@ -188,7 +188,7 @@ class AgendamentoController extends Controller{
 
         (new AgendamentoIndividualDAO)->INSERT($agendamento);
 
-        return redirect()->route('AgendarDiurnoVisitante.show');
+        return redirect()->route('dashboard');
     }
 
     public function atividadeError(){

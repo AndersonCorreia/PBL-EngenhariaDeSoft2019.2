@@ -3,7 +3,7 @@
     {{csrf_field()}}
     {{ method_field('POST') }}
 
-    <!-- Modal -->
+    <!-- Modal confirmar -->
     <div class="modal fade" method="POST" action="{{route('confirma.post')}}" id="modalExemplo" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -24,8 +24,10 @@
             </div>
         </div>
     </div>
-{{$valor=''}}
-@foreach($exposicoes as $exposicao)
+
+
+    {{$valor=''}}
+    @foreach($exposicoes as $exposicao)
     <div class="geralEventos">
         <div class="eventos scorpius-border-shadow border-top border-shadow">
             <table class="table-borderless">
@@ -51,14 +53,12 @@
                         @endif
                         <td>
                             <div class="botoes">
-                                <button type="button" class="btn btn-warning" data-toggle="modal"
-                                    data-target=".bd-example-modal-xl" id="btnVisualizar"
-                                    data-detalhe='<?=  json_encode($valor); ?>'>
+                                <button type="button" class="btn btn-warning" id="btnVisualizar"
+                                    data-detalhe='<?= json_encode($exposicao); ?>'>
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target=".bd-example-modal-xl" id="btnEditar"
-                                    data-detalhe='<?=json_encode($valor);?>'>
+                                <button type="button" class="btn btn-primary" id="btnEditar"
+                                    data-detalhe='<?=json_encode($exposicao);?>'>
                                     <i class="fas fa-pen"></i>
                                 </button>
                                 <button type="submit" class="btn btn-danger" name="user"
@@ -73,31 +73,269 @@
         </div>
 
     </div>
-@endforeach
+    @endforeach
 </form>
+
+
+<!-- modal cadastro -->
+<div class="modal fade" id="cadastrarModal" tabindex="-1" role="dialog" aria-labelledby="cadastrarModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cadastrarModalLabel">CADASTRO DE NOVO EVENTO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid bg-white p-3">
+                    <div class="col-12 m-0 p-0">
+                        <div class="container-fluid bg-white shadow p-3" style="border-bottom-right-radius: 20px;
+                        border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-top-left-radius: 20px; float: middle">
+                            <form>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="nome_campo" class="col-form-label ">Nome:</label>
+                                            <input type="text" class="form-control" id="nome_campo"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="tipoEvento_campo" class="col-form-label">Tipo de Evento:</label>
+                                            <select class="form-control" id="tipoEvento_campo">
+                                                <option selected></option>
+                                                <option>atividade diferenciada</option>
+                                                <option>atividade permanente</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="temaEvento_campo" class="col-form-label">Tema do Evento:</label>
+                                            <select class="form-control" id="temaEvento_campo">
+                                                <option selected></option>
+                                                <option>Biologia</option>
+                                                <option>Astronomia</option>
+                                                <option>Evolução Humana</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="descricao_campo" class="col-form-label">Descrição do Evento:</label>
+                                            <textarea class="form-control" id="descricao_campo"></textarea>
+                                        </div>
+                                    </div>
+                                
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="limiteVagas_campo" class="col-form-label">Limite de Vagas:</label>
+                                            <input type="number" class="form-control" id="limiteVagas_campo" max="40" min="0" />
+                                        </div>
+                                    </div>
+                                    <div clas="col-md-6">
+                                        <div class="form-group" style="padding-left: 15px; width: 155px;">
+                                            <label for="turno_campo" class="col-form-label">Turno:</label>
+                                            <select class="form-control" id="turno_campo">
+                                                <option selected></option>
+                                                <option value="diurno">diurno</option>
+                                                <option value="noturno">noturno</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="periodo_inicio_campo" class="col-form-label">Data Início:</label>
+                                            <input type="date" class="form-control" id="periodo_inicio_campo"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="periodo_termino_campo" class="col-form-label">Data Termino:</label>
+                                            <input type="date" class="form-control" id="periodo_termino_campo" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="imagem_campo" class="col-form-label">Imagem da Atividade:</label>
+                                            <input type="file" class="form-control" id="imagem_campo" style="width: 320px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-8" style="padding-left: 60px">
+                                        <button type="button" class="btn btn-danger" cancelar >Cancelar</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-success" confirmar>Cadastrar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section('js')
 <script>
 $(document).ready(function() {
-
-    let statusCancelado = $('[cancelar]')
-    for (let i = 0; i < statusCancelado.length; i++) {
-        let value2 = $(statusCancelado[i]).data('valores').Status.toString();
-        console.log(value2)
-        if (value2.search('cancelado') != -1) {
-            statusCancelado[i].setAttribute("style",
-                "cursor: default; pointer-events: none;user-select:none; opacity: 0.3;");
-        }
-    }
-
-
     let valorAtual = null
-    $('[cancelar]').click(e => {
+    $('.botoes #btnVisualizar').click(e => {
         e.preventDefault()
-        valorAtual = $(e.currentTarget).data('valores')
-        $('#modalExemplo').modal('show')
+        $('#cadastrarModal').modal('show')
+        valorAtual = $(e.currentTarget).data('detalhe')
+        console.log(valorAtual)
+        if (valorAtual.titulo) {
+            $('#nome_campo').val(valorAtual.titulo).prop('disabled', true);
+        }else{
+            $('#nome_campo').val('').prop('disabled', true);
+        }
+        if (valorAtual.tipo_evento) {
+            $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val()).prop(
+                'disabled', true);
+        }else{
+            $('#tipoEvento_campo').prop('disabled', true).val($(`option:selected`).val())
+        }
+        if (valorAtual.tema_evento) {
+            $('#temaEvento_campo').val($(`option:contains(${valorAtual.tema_evento})`).val()).prop(
+                'disabled', true);
+        } else {
+            $('#temaEvento_campo').val($(`option:selected`).val()).prop('disabled',
+                true);
+        }
+        if (valorAtual.descricao) {
+            $('#descricao_campo').val(valorAtual.descricao).prop('disabled', true);
+        } else {
+            $('#descricao_campo').val('').prop('disabled', true);
+        }
+        if (valorAtual.quantidadeEscritos) {
+            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos).prop('disabled', true);
+        } else {
+            $('#limiteVagas_campo').val(0).prop('disabled', true);
+        }
+        if (valorAtual.turno) {
+            $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val()).prop('disabled',
+                true);
+        }else{
+            $("#turno_campo").prop('disabled', true).val($(`option:selected`).val())
+        }
+        if (valorAtual.data_inicial) {
+            $('#periodo_inicio_campo').val(valorAtual.data_inicial).prop('disabled', true);
+        }else{
+            $('#periodo_inicio_campo').prop('disabled', true).val('dd-mm-aaaa')
+        }
+        if (valorAtual.data_final) {
+            $('#periodo_termino_campo').val(valorAtual.data_final).prop('disabled', true);
+        }else{
+            $('#periodo_termino_campo').prop('disabled', true).val('dd-mm-aaaa')
+        }
+        $('#imagem_campo').parent().hide()
+        $('[confirmar]').hide()
+        $('[cancelar]').hide()
+    })
+    $('.botoes #btnEditar').click(e => {
+        e.preventDefault()
+        $('#cadastrarModal').modal('show')
+        valorAtual = $(e.currentTarget).data('detalhe')
+        console.log(valorAtual)
+        if (valorAtual.titulo) {
+            $('#nome_campo').val(valorAtual.titulo).prop('disabled', false);
+        }else{
+            $('#nome_campo').val('').prop('disabled', false);
+        }
+        if (valorAtual.tipo_evento) {
+            $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val()).prop(
+                'disabled', false);
+        }else{
+            $('#tipoEvento_campo').prop('disabled', false).val($(`option:selected`).val())
+        }
+        if (valorAtual.tema_evento) {
+            $('#temaEvento_campo').val($(`option:contains(${valorAtual.tema_evento})`).val()).prop(
+                'disabled', false);
+        } else {
+            $('#temaEvento_campo').val($(`option:selected`).val()).prop('disabled',
+                false);
+        }
+        if (valorAtual.descricao) {
+            $('#descricao_campo').val(valorAtual.descricao).prop('disabled', false);
+        } else {
+            $('#descricao_campo').val('').prop('disabled', false);
+        }
+        if (valorAtual.quantidadeEscritos) {
+            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos).prop('disabled', false);
+        } else {
+            $('#limiteVagas_campo').val(0).prop('disabled', false);
+        }
+        if (valorAtual.turno) {
+            $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val()).prop('disabled',
+                false);
+        }else{
+            $("#turno_campo").prop('disabled', false).val($(`option:selected`).val())
+        }
+        if (valorAtual.data_inicial) {
+            $('#periodo_inicio_campo').val(valorAtual.data_inicial).prop('disabled', false);
+        }else{
+            $('#periodo_inicio_campo').prop('disabled', false).val('dd-mm-aaaa')
+        }
+        if (valorAtual.data_final) {
+            $('#periodo_termino_campo').val(valorAtual.data_final).prop('disabled', false);
+        }else{
+            $('#periodo_termino_campo').prop('disabled', false).val('dd-mm-aaaa')
+        }
+        $('#imagem_campo').parent().show()
+        $('[confirmar]').show().text("Atualizar")
+        $('[cancelar]').show()
+    })
+    
+
+    $('[cadastro]').click(e => {
+
+        e.preventDefault()
+
+        $('#cadastrarModal').modal('show')
+
+        $('#nome_campo').prop('disabled', false).val('')
+
+        $('#tipoEvento_campo').prop('disabled', false).val($(`option:selected`).val())
+
+        $('#temaEvento_campo').prop('disabled', false).val($(`option:selected`).val())
+
+        $('#descricao_campo').prop('disabled', false).val('')
+
+        $('#limiteVagas_campo').prop('disabled', false).val(0)
+
+        $("#turno_campo").prop('disabled', false).val($(`option:selected`).val())
+
+        $('#periodo_inicio_campo').prop('disabled', false).val('dd-mm-aaaa')
+
+        $('#periodo_termino_campo').prop('disabled', false).val('dd-mm-aaaa')
+
+        $('#imagem_campo').parent().show()
+        $('[confirmar]').show().text("Cadastrar")
+        $('[cancelar]').show()
     })
 
-    $('#modalExemplo [salvarMudanca]').click(e => {
+    $('[confirmar]').click(e=>{
+        e.preventDefault()
+        $('[confirmar]').unbind('click').click()
+    })
+
+    $('#cadastrarModal [salvarMudanca]').click(e => {
         e.preventDefault()
         console.log(valorAtual)
         $.ajaxSetup({
@@ -151,9 +389,10 @@ $(document).ready(function() {
     flex-direction: row;
     align-items: top border;
 }
-.botoes > .btn {
-    width:40px;
-    height:40px;
+
+.botoes>.btn {
+    width: 40px;
+    height: 40px;
     padding: 10px;
     margin: 5px;
 }
@@ -168,7 +407,8 @@ th {
     width: 300px;
     text-align: center;
 }
-th{
+
+th {
     padding: 6px 0px 6px 0px;
 }
 </style>
