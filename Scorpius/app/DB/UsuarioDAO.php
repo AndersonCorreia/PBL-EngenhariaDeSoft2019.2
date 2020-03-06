@@ -71,38 +71,23 @@ class UsuarioDAO extends DataAccessObject{
         return $row['ID'];
     }
     public function getDadosUsuario($id){
-        $sql = "SELECT nome,cpf,telefone,email,senha FROM usuario WHERE id = $id";
+        $sql = "SELECT nome,cpf,telefone,email,senha,id FROM usuario WHERE id = $id";
         $resultado = $this->dataBase->query($sql);
         return $resultado->fetch_assoc(); 
     }
-    public static function alterarDados($nome,$cpf,$telefone,$senha){       
-        $sql = "UPDATE usuario ('nome','CPF','telefone','senha')
-                VALUES($nome,$cpf,$telefone,$senha) WHERE id=$id";
-        $resultado = $dataBase->prepare($sql);
-        $resultado = $dataBase->query($sql);
-        return $resultado->execute();
+    public function alterarDadosUsuario($nome,$cpf,$telefone,$senha,$id){       
+        $sql = "UPDATE usuario SET `nome`='$nome',`senha`='$senha',`CPF`='$cpf',
+                      `telefone`='$telefone' WHERE ID=$id";
+        $stmt = $this->dataBase->prepare($sql);
+        //$stmt->bind_param("sssii",$nome,$senha,$cpf,$telefone,$id);
+        return $stmt->execute();
     }
     public function DELETEbyEmail($email)
     {
         return $this->dataBase->query("DELETE FROM email_verificacao WHERE usuario_email = '$email'");;
     }
-    function UPDATE(Usuario $user): bool{
-        $params =[
-            $nome = $user->pesquisaNome(),
-            $email = $user->pesquisaEmail(),
-            $cpf = $user->pesquisaCpf(),
-            $tel = $user->tipoUsuario(),
-            $id= $user->getID()
-        ];
-
-        $set  ="nome = ?, email = ?, cpf = ?, tel = ?, id = ?";
-        $sql  = "UPDATE usuario i SET $set WHERE i.id = ?";
-
-        $stmt = $this->dataBase->prepare($sql);
-       
-        $stmt->bind_param("ssssssssi", ...$params);
+    function UPDATE(object $obj): bool{
         
-        return $stmt->execute();
     }
     
     function UPDATEATIVO($email): bool

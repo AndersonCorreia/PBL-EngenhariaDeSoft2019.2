@@ -4,7 +4,7 @@
 
 @section('conteudo')
 <div class="scorpius-border p-4">
-    <div class="scorpius-border-shadow-sm p-3" onmousemove="verificaCamposPessoais()">
+    <div class="scorpius-border-shadow-sm p-3" content>
         <p class="h3">Dados pessoais</p>
         <form action="{{route('alterarDadosAlteracao.post')}}" method="POST">
             {{csrf_field()}}
@@ -46,19 +46,16 @@
             </div>
             <div class="mb-5">
                 <div class="aside">
-                    <button id="btnCancelar1" type="submit" class="btn btn-secondary float-right" href="Dashboard_visitante.blade.php" style="margin: 0px 0px 0px 5px">
+                    <a id="btnCancelar1" type="submit" class="btn btn-secondary float-right" href="{{route('dashboardVisitante.show')}}" style="margin: 0px 0px 0px 5px">
                         Cancelar
-                    </button>
+                    </a>
                 </div>
-                <button type="submit" class="btn btn-secondary float-right" action="{{route('alterarDadosAlteracao.post')}}" onmousewheel="verificaCamposPessoais()">
+                <button type="submit" id="btnAlterar" class="btn btn-secondary float-right" action="{{route('alterarDadosAlteracao.post')}}" onmousewheel="verificaCamposPessoais()">
                     Alterar dados
                 </button>
             </div>
-        </form>
-    </div>
-    <div class="mt-3 scorpius-border-shadow-sm p-4" onmousemove="verificaCamposSenha()">
-        <p class="h3">Alterar senha</p>
-        <form action="{{route('alterarDadosAlteracao.post')}}" method="POST">
+            <hr>
+            <p class="h3">Alterar senha</p>
             <div class="form-group pl-5 pr-5">
                 <label for="senhaAtual">Senha atual</label>
                 <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" value="{{isset($dadosUsuario['senha']) ? $dadosUsuario['senha'] : ''}}" 
@@ -75,21 +72,17 @@
             </div>
             <div class="mb-5">
                     <div class="aside">
-                        <button id="btnCancelar2" type="submit" class="btn btn-secondary float-right" href="{{route('dashboardVisitante.show')}}" style="margin: 0px 0px 0px 5px">
+                        <a id="btnCancelar2" type="submit" class="btn btn-secondary float-right" href="{{route('dashboardVisitante.show')}}" style="margin: 0px 0px 0px 5px">
                             Cancelar
-                        </button>
+                        </a>
                     </div>
-                <button onmousewheel="verificaCamposSenha()" hidden id="alterarSenha" type="submit" class="btn btn-secondary float-right">
+                <button onmousewheel="verificaCamposSenha()" hidden id="alterarSenha" type="submit" action="{{route('alterarDadosAlteracao.post')}}" class="btn btn-secondary float-right">
                     Alterar senha
                 </button>
             </div>
         </form>
     </div>
 </div>
-
-<?php
-
-?>
 
 @endsection
 @section('js')
@@ -98,21 +91,25 @@
 //     $('#cpfUsuario').mask('000.000.000-00', {
 //     reverse: true
 // });
+$('[content]').mousemove(verificaCamposPessoais())
+$(document).click(e=>{
+    verificaCamposPessoais()
+})
+
 $('#telefoneUsuario').mask('00 0 0000-0000', {
     reverse: true
 });
 function verificaCamposPessoais(){
-    if($('#cpfUsuario').val() != ""){
+    console.log("veio")
         if(ValidaCPF()){
             $('#feedback-senha').removeAttr("hidden");
-            $('#cpfUsuario').removeClass('is-valid');
-            $('#cpfUsuario').addClass('is-invalid');
-        }else{
-            $('#feedback-senha').attr("hidden", '');
             $('#cpfUsuario').removeClass('is-invalid');
             $('#cpfUsuario').addClass('is-valid');
+        }else{
+            $('#feedback-senha').attr("hidden", '');
+            $('#cpfUsuario').removeClass('is-valid');
+            $('#cpfUsuario').addClass('is-invalid');
         }
-    }
 }
 function verificaCamposSenha(){
     trava = 0;
@@ -140,7 +137,8 @@ function verificaCamposSenha(){
     }
 }
 function ValidaCPF(){	
-	var RegraValida=document.getElementById("cpfUsuario").value; 
+	let RegraValida=$('#cpfUsuario').val(); 
+    console.log(RegraValida)
 	var cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/;	 
     if (cpfValido.test( ) == true)	{ 
         return false;	

@@ -41,8 +41,8 @@ class Usuario extends Pessoa{
     public function getDados($id){
         return (new UsuarioDAO)->getDadosUsuario($id);
     }
-    public function alterarDados($nome,$telefone,$cpf,$senha){     //POR SENHA NOS PARAMETROS
-        return $usuario->alterarDados($nome,$cpf,$telefone,$senha);
+    public function alterarDados($nome,$telefone,$cpf,$senha,$id){     
+        return (new UsuarioDAO)->alterarDadosUsuario($nome,$cpf,$telefone,$senha,$id);
     }    
     public function cancelarAgendamento($agendamento){}
 
