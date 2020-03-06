@@ -22,14 +22,10 @@ class AuthorizeAdministrativo{
         $nameRota = \Route::currentRouteName();
         $permissao = $this->RotasPermissoes[$nameRota];
         $DAO = new PessoaDAO();
-        $user = $DAO->SELECTbyID(session("ID",901));
-        session(['tipo' => $user['tipo'] ]);
 
-        if($permissao == $user['tipo'] || $DAO->asPermissao($user["tipo"], $permissao) ){
+        if($permissao == session('tipo') || $DAO->asPermissao(session('tipo'), $permissao) ){
             return $next($request);
         }
-        print_r("Este usuário não tem permissão para acessar esta página!");
-        return $next($request);//temporariamente retorna a tela normalmente
         return redirect()->route('paginaInicial');
     }
 

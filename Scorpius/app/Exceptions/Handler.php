@@ -48,11 +48,11 @@ class Handler extends ExceptionHandler
     {   
         if($exception instanceof NenhumaInstCadastradaException){
 
-            return redirect()->route('vErros')->with('errorInstituicaao',true);
+            return redirect()->route('vErros')->with('viewErro','TelaInstituicaoEnsino.errorNenhumaInstituicao');
         }
         elseif($exception instanceof NenhumaTurmaCadastradaException){
             
-            return redirect()->route('vErros')->with('errorTurma',true);
+            return redirect()->route('vErros')->with('viewErro','TelaInstituicaoEnsino.errorNenhumaTurma');
         }
         elseif($exception instanceof UsuarioNaoEncontradoException){
 
@@ -60,11 +60,11 @@ class Handler extends ExceptionHandler
         }
         elseif($exception instanceof NenhumaVisitaEncontradaException){
             
-            return redirect()->route('vErros')->with('errorVisita',true);
+            return redirect()->route('vErros')->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaVisita');
         }
         elseif($exception instanceof NenhumaAtividadeEncontradaException){
             
-            return redirect()->route('vErros')->with('errorAtividade',true);
+            return redirect()->route('vErros')->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaAtividade');
         }
         else {
 

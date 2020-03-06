@@ -8,9 +8,10 @@ class Erros extends Controller
 {
     public function visitante(){
 
-        if( session('errorVisita',false) ){
+        $viewError = session('viewErro',false);
+        if( $viewError ){
 
-            return view('telasUsuarios.Agendamentos.errorNenhumaVisita', ['paginaAtual' => 'Agendar Visita']);
+            return view($viewError, ['paginaAtual' => 'Agendar Visita']);
         }
         else if( session('errorAtividade',false) ){
 

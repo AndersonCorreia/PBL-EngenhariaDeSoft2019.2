@@ -185,6 +185,24 @@ class AgendamentoController extends Controller{
         return redirect()->route('dashboard');
     }
     /**
+     * Cadastrar novo agendamento para uma atividade diferenciada
+     * @return void
+     */
+    public function agendarAtividadeDiferenciada() {
+        
+        $id_user = session('ID');
+        $data = $_POST['data'];
+        $turno = $_POST['turno'];
+        $status = "confirmado";
+        $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
+        $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
+
+        (new AgendamentoIndividualDAO)->INSERT($agendamento);
+
+        return redirect()->route('dashboard');
+    }
+
+    /**
      * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsvel
      * no campo nome, e o cargo do ressponsavel no campo cargo;
      *
