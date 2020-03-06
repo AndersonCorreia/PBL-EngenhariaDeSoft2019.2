@@ -24,22 +24,21 @@
             </div>
         </div>
     </div>
-    
     <?php
     $flag=false; 
-    function mudarValor(&$e){ $e=true;} 
-    ?>
+    function mudarValor(&$e){ $e=true; }?>
     @foreach((session('tipo') == 'institucional' ? $registros['agendamento_institucional'] :
     $registros['agendamento'])
     as $agenda)
     @if(stripos($agenda['Status'], 'cancelado')===false)
     {{ mudarValor($flag) }}
-
     <div class="agendas">
         <div class="agendamentos scorpius-border-shadow border-top border-shadow">
             <table class="table-borderless">
                 <thead>
                     <tr>
+                        <th>Data</th>
+                        <th>Turno</th>
                         <th>Status</th>
                         @if(session('tipo') == 'institucional')
                         <th>Turma</th>
@@ -50,6 +49,8 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td>{{trim($agenda['data_visita'])}}</td>
+                        <td>{{trim($agenda['turno'])}}</td>
                         <td>{{trim($agenda['Status'])}}</td>
                         @if(session('tipo') == 'institucional')
                         <td>{{trim($agenda['ano_escolar'])}}</td>

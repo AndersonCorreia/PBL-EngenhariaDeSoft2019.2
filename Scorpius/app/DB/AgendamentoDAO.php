@@ -63,8 +63,8 @@ abstract class AgendamentoDAO extends \App\DB\interfaces\DataAccessObject
 
     public function SELECTbyAgendamentoID($id){
         
-        $sql="SELECT a.ID,a.Status FROM agendamento a WHERE usuario_ID=?";
-        $stmt = $this->dataBase->prepare($sql);
+        $sql="SELECT a.ID, a.Status , v.data_visita, v.turno FROM agendamento a inner join visita v on a.visita = v.ID WHERE usuario_ID=?";
+        $stmt=$this->dataBase->prepare($sql);
         $stmt->bind_param("s",$id);
         $stmt->execute();
         $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -83,15 +83,15 @@ abstract class AgendamentoDAO extends \App\DB\interfaces\DataAccessObject
     }
 
     public function SELECTbyAgendamentoInstitucional($id){
-        $sql="SELECT a.Status, a.ID, a.professor_instituicao_ID, t.nome, t.ano_escolar
-              FROM agendamento_institucional a LEFT JOIN turma t ON a.turma_ID=t.ID 
-              LEFT JOIN instituicao i ON a.professor_instituicao_ID=i.ID
-              WHERE t.professor_ID=?";
+        $sql="SELECT a.Status, a.ID, a.professor_instituicao_ID, t.nome, t.ano_escolar, v.data_visita, v.turno 
+        FROM agendamento_institucional a LEFT JOIN turma t ON a.turma_ID=t.ID
+        LEFT JOIN instituicao i ON a.professor_instituicao_ID=i.ID
+        LEFT JOIN visita v ON a.visita = v.ID 
+        WHERE t.professor_ID=?";
         $stmt=$this->dataBase->prepare($sql);
         $stmt->bind_param("i",$id);
         $stmt->execute();
         $ArrayResult=$stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        //dd($ArrayResult);
        return $ArrayResult;  
     }
  }

@@ -6,18 +6,17 @@
 <div class="scorpius-border p-4">
     <div class="scorpius-border-shadow-sm p-3" onmousemove="verificaCamposPessoais()">
         <p class="h3">Dados pessoais</p>
-        <form action="{{route('alterarDadosAlteracao.post')}}" method="POST">
-            {{csrf_field()}}
+        <form action="{{}}" method="POST">
             <div class="form-row">
                 <div class="col-md-6 form-group">
                     <label for="nomeUsuario">Nome</label>
                     <input class="form-control" name="nome" id="nomeUsuario" placeholder="Nome" minlength="3"
-                        maxlength="12" type="text" value ="{{isset($dadosUsuario['nome']) ? $dadosUsuario['nome'] : ''}}" required>
+                        maxlength="10" type="text" value ="{{isset($dadosUsuario['nome']) ? $dadosUsuario['nome'] : ''}}" required>
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="sobrenomeUsuario">Sobrenome</label>
                     <input class="form-control" name="sobrenome" id="sobrenomeUsuario" value="{{isset($dadosUsuario['sobrenome']) ? $dadosUsuario['sobrenome'] : ''}}"
-                            placeholder="Sobrenome" minlength="3" maxlength="20" type="text" required>
+                            placeholder="Sobrenome" minlength="3" maxlength="10" type="text" required>
                 </div>
             </div>
             <div class="form-row">
@@ -50,7 +49,7 @@
                         Cancelar
                     </button>
                 </div>
-                <button type="submit" class="btn btn-secondary float-right" action="{{route('alterarDadosAlteracao.post')}}" onmousewheel="verificaCamposPessoais()">
+                <button type="submit" class="btn btn-secondary float-right" onmousewheel="verificaCamposPessoais()">
                     Alterar dados
                 </button>
             </div>
@@ -58,19 +57,19 @@
     </div>
     <div class="mt-3 scorpius-border-shadow-sm p-4" onmousemove="verificaCamposSenha()">
         <p class="h3">Alterar senha</p>
-        <form action="{{route('alterarDadosAlteracao.post')}}" method="POST">
+        <form action="" method="post">
             <div class="form-group pl-5 pr-5">
                 <label for="senhaAtual">Senha atual</label>
                 <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" value="{{isset($dadosUsuario['senha']) ? $dadosUsuario['senha'] : ''}}" 
-                    class="form-control" name="senhaAtual" id="senhaAtual" type="password" required>
+                    class="form-control" name="senha_atual" id="senhaAtual" type="password" required>
             </div>
             <div class="form-group pl-5 pr-5">
                 <label for="novaSenha">Nova senha</label>
-                <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" class="form-control" name="novaSenha" id="novaSenha" type="password">
+                <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" class="form-control" name="nova_Senha" id="novaSenha" type="password">
             </div>
             <div class="form-group pl-5 pr-5">
-                <label for="rptNovaSenha">Repetir nova senha</label>
-                <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" class="form-control" name="rptNovaSenha" id="rptNovaSenha" type="password">
+                <label for="novaSenhaR">Repetir nova senha</label>
+                <input onchange="verificaCamposSenha()" minlength="6" maxlength="8" class="form-control" id="rptNovaSenha" type="password">
                 <small hidden id="feedback-senha" class="text-danger">As senhas devem ser iguais!</small>
             </div>
             <div class="mb-5">
@@ -84,6 +83,17 @@
                 </button>
             </div>
         </form>
+    </div>
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="row cadastro">
+                    <p class="h3">Erro nas atualizações dos dados pessoais!</p>
+                    <a class="btn btn-primary" href="/dashboard"> Início</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
