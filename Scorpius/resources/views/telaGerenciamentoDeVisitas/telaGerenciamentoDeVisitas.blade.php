@@ -12,13 +12,13 @@
             do agendamento: nome da instituicao, data do agendamento
             -->
             <li class="list-group-item">
-                <div class="row p-2 scorpius-border-shadow border-top border-shadow">
+                <div class=" p-2 scorpius-border-shadow border-top border-shadow">
                     <div class="row col-12 col-md-11 my-1">
                         <div class="row col-12">
-                            <h5 class="col-sm-12">Lista de Espera</h5>
-                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                            <h5 class="col-sm-12">Lista de Espera Completa</h5>
+                            <button type="submit" class="btn mx-3 btn-secondary" id="lista-espera" data-toggle="modal" 
                                 data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista-total>
-                                <i class="fas fa-list-ol"></i>   Lista de Espera
+                                <i class="fas fa-list-ol"></i>   Consultar
                             </button>
                         </div>
                     </div>
