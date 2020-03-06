@@ -172,8 +172,8 @@ class AgendamentoController extends Controller{
     }
 
     /**
-     * Cadastrar novo agendamento de uma conta usuário visitante normal
-     * inserir dados do agendamento pelo POST na classe agendamento, que chama o método de
+     * Cadastrar novo agendamento de uma conta individual
+     * Inserir dados do agendamento pelo POST na classe agendamento, que chama o método de
      * inserir no banco de dados
      * @return void
      */
@@ -182,7 +182,7 @@ class AgendamentoController extends Controller{
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $status = "confirmado";
+        $status = "Confirmado";
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
         $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
 
