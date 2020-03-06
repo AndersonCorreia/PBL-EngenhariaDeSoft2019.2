@@ -63,5 +63,5 @@ use App\Model\Agendamento;
         }
         return $resultado;
     }
- }
+}
 
