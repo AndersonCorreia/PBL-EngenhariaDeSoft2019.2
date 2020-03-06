@@ -42,7 +42,8 @@ use App\Model\Agendamento;
     private function INSERT_Alunos( array $Alunos, int $ID){
         $count = count($Alunos);
         for($i = 0; i < $count; $i++){
-            $sql = "INSERT INTO aluno (nome, idade) VALUE ('$Alunos[$i]['nome']', '$Alunos[$i]['idade']')";
+            $sql = "INSERT INTO visitante_institucional (nome, idade, agendamento_institucional_ID) VALUE 
+                ('$Alunos[$i]['nome']', '$Alunos[$i]['idade']', '&ID')";
             $resultado[] = $this->dataBase->query($sql);
         }
         return $resultado;
@@ -56,11 +57,11 @@ use App\Model\Agendamento;
     private function INSERT_Responsaveis( array $Responsaveis, int $ID){
         $count = count($Responsaveis);
         for($i = 0; i < $count; $i++){
-            $sql = "INSERT INTO Responsavel (nome, cargo,agendamento_institucional_ID) VALUE 
+            $sql = "INSERT INTO Responsavel (nome, cargo, agendamento_institucional_ID) VALUE 
                 ('$Responsaveis[$i]['nome']', '$Responsaveis[$i]['cargo']', '$ID')";
             $resultado[] = $this->dataBase->query($sql);
         }
         return $resultado;
     }
- }
+}
 
