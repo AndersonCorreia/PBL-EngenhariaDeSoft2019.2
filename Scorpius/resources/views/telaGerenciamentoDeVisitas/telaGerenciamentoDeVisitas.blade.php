@@ -56,7 +56,7 @@
                         <td>
                             {{-- se for de manhã. COLOCAR IF --}}
                             <p>Colégio Helyos</p>
-                            <p style="margin-top: -8px;">Status: pendente</p>
+                            <p style="margin-top: -8px;">Status: Pendente</p>
                             <div class="btn-group" role="group">
                                 <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
                                 data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
@@ -108,7 +108,7 @@
                         <td>
                             {{-- se for de manhã. COLOCAR IF --}}
                             <p>Escola Dois de Julho</p>
-                            <p style="margin-top: -8px;">Status: cancelado pelo usuario</p>
+                            <p style="margin-top: -8px;">Status: Cancelado pelo Usuário</p>
                             <div class="btn-group" role="group">
                                 <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
                                     data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
@@ -162,7 +162,7 @@
                         <td>
                             {{-- se for de tarde. COLOCAR IF --}}
                             <p>Colégio Santo Antônio</p>
-                            <p style="margin-top: -8px;">Status: pendente</p>
+                            <p style="margin-top: -8px;">Status: Pendente</p>
                             <div class="btn-group" role="group">
                                 <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
                                     data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
@@ -219,7 +219,7 @@
                         <td>
                             {{-- se for de noite. COLOCAR IF --}}
                             <p>Colégio Anchieta</p>
-                            <p style="margin-top: -8px;">Status: pendente</p>
+                            <p style="margin-top: -8px;">Status: Pendente</p>
                             <div class="btn-group" role="group">
                                 <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
                                     data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
