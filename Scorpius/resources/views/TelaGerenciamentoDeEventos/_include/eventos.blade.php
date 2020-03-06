@@ -89,82 +89,99 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!--6 rows-->
-                <form>
-                    <div class="row col-12 p-3">
-                        <!--1-->
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="nome_campo" class="col-form-label">Nome:</label>
-                                <input type="text" class="form-control" id="nome_campo" />
-                            </div>
+                <div class="container-fluid bg-white p-3">
+                    <div class="col-12 m-0 p-0">
+                        <div class="container-fluid bg-white shadow p-3" style="border-bottom-right-radius: 20px;
+                        border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-top-left-radius: 20px; float: middle">
+                            <form>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="nome_campo" class="col-form-label ">Nome:</label>
+                                            <input type="text" class="form-control" id="nome_campo"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="tipoEvento_campo" class="col-form-label">Tipo de Evento:</label>
+                                            <select class="form-control" id="tipoEvento_campo">
+                                                <option>atividade diferenciada</option>
+                                                <option>atividade permanente</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="temaEvento_campo" class="col-form-label">Tema do Evento:</label>
+                                            <select class="form-control" id="temaEvento_campo">
+                                                <option>Biologia</option>
+                                                <option>Astronomia</option>
+                                                <option>Evolução Humana</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="descricao_campo" class="col-form-label">Descrição do Evento:</label>
+                                            <textarea class="form-control" id="descricao_campo"></textarea>
+                                        </div>
+                                    </div>
+                                
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="limiteVagas_campo" class="col-form-label">Limite de Vagas:</label>
+                                            <input type="number" class="form-control" id="limiteVagas_campo" max="40" min="0" />
+                                        </div>
+                                    </div>
+                                    <div clas="col-md-6">
+                                        <div class="form-group" style="padding-left: 15px; width: 155px;">
+                                            <label for="turno_campo" class="col-form-label">Turno:</label>
+                                            <select class="form-control" id="turno_campo">
+                                                <option value="diurno">diurno</option>
+                                                <option value="noturno">noturno</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="periodo_inicio_campo" class="col-form-label">Data Início:</label>
+                                            <input type="date" class="form-control" id="periodo_inicio_campo"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="periodo_termino_campo" class="col-form-label">Data Termino:</label>
+                                            <input type="date" class="form-control" id="periodo_termino_campo" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <label for="imagem_campo" class="col-form-label">Imagem da Atividade:</label>
+                                            <input type="file" class="form-control" id="imagem_campo" style="width: 320px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 p-3">
+                                    <div class="col-md-8" style="padding-left: 60px">
+                                        <button type="button" class="btn btn-danger" cancelar >Cancelar</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-success" confirmar>Cadastrar</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="row col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="tipoEvento_campo" class="col-form-label">Tipo de Evento:</label>
-                                <select class="form-control" id="tipoEvento_campo">
-                                    <option>atividade diferenciada</option>
-                                    <option>atividade permanente</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!--2-->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="temaEvento_campo" class="col-form-label">Tema do Evento:</label>
-                                <select class="form-control" id="temaEvento_campo">
-                                    <option>Biologia</option>
-                                    <option>Astronomia</option>
-                                    <option>Evolução Humana</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row col-12 p-3">
-                        <!--3-->
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="descricao_campo" class="col-form-label">Descrição do Evento:</label>
-                                <textarea class="form-control" id="descricao_campo"></textarea>
-                            </div>
-                        </div>
-                        <div class="row col-12 p-3">
-                            <!--4-->
-                            <div class="col-md-6">
-                                <label for="limiteVagas_campo" class="col-form-label">Limite de Vagas:</label>
-                                <input type="number" class="form-control" id="limiteVagas_campo" max="40" />
-                            </div>
-                            <div clas="col-md-6 align-right">
-                                <label for="turno_campo" class="col-form-label">Turno:</label>
-                                <select class="form-control" id="turno_campo">
-                                    <option value="diurno">diurno</option>
-                                    <option value="noturno">noturno</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row col-12 p-3">
-                            <!--5-->
-                            <div class="col-md-6">
-                                <label for="periodo_inicio_campo" class="col-form-label">Data Início:</label>
-                                <input type="date" class="form-control" id="periodo_inicio_campo"/>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="periodo_termino_campo" class="col-form-label">Data Termino:</label>
-                                <input type="date" class="form-control" id="periodo_termino_campo" />
-                            </div>
-                        </div>
-                        <div class="row col-12 p-3">
-                            <!--6-->
-                            <label for="imagem_campo" class="col-form-label">Imagem da Atividade:</label>
-                            <input type="file" class="form-control" id="imagem_campo" />
-                        </div>
-                        <div class="row col-12 p-3">
-                            <button type="button" class="btn btn-success" confirmar>Cadastrar</button>
-                            <button type="button" class="btn btn-danger" cancelar>Cancelar</button>
-                        </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
