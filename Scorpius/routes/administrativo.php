@@ -25,7 +25,7 @@ Route::group(
     'prefix'=>'funcionario',
     'namespace'=>'Funcionario'],
     function(){
-        Route::get('/dashboard', 'DashboardController@getTelaDashboardFuncionario')->name("telaDashboardFuncionario.show");
+        Route::get('/dashboardFuncionario', 'DashboardController@getTelaDashboardFuncionario')->name("dashboardFuncionario.show");
     }
 );
 
