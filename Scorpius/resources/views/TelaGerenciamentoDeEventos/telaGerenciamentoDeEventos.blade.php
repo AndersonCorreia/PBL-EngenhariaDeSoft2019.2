@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-footer bg-transparent border-0">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#cadastrarModal"
-                            style="float: right">Cadastrar Novo Evento</button>
+                            style="float: right" cadastro>Cadastrar Novo Evento</button>
                     </div>
                 </div>
             </div>

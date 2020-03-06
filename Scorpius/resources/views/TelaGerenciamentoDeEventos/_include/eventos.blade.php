@@ -105,6 +105,7 @@
                             <div class="form-group">
                                 <label for="tipoEvento_campo" class="col-form-label">Tipo de Evento:</label>
                                 <select class="form-control" id="tipoEvento_campo">
+                                    <option selected></option>
                                     <option>atividade diferenciada</option>
                                     <option>atividade permanente</option>
                                 </select>
@@ -115,6 +116,7 @@
                             <div class="form-group">
                                 <label for="temaEvento_campo" class="col-form-label">Tema do Evento:</label>
                                 <select class="form-control" id="temaEvento_campo">
+                                    <option selected></option>
                                     <option>Biologia</option>
                                     <option>Astronomia</option>
                                     <option>Evolução Humana</option>
@@ -139,6 +141,7 @@
                             <div clas="col-md-6 align-right">
                                 <label for="turno_campo" class="col-form-label">Turno:</label>
                                 <select class="form-control" id="turno_campo">
+                                    <option selected></option>
                                     <option value="diurno">diurno</option>
                                     <option value="noturno">noturno</option>
                                 </select>
@@ -148,7 +151,7 @@
                             <!--5-->
                             <div class="col-md-6">
                                 <label for="periodo_inicio_campo" class="col-form-label">Data Início:</label>
-                                <input type="date" class="form-control" id="periodo_inicio_campo"/>
+                                <input type="date" class="form-control" id="periodo_inicio_campo" />
                             </div>
                             <div class="col-md-6">
                                 <label for="periodo_termino_campo" class="col-form-label">Data Termino:</label>
@@ -174,46 +177,137 @@
 @section('js')
 <script>
 $(document).ready(function() {
-
     let valorAtual = null
-    $('#btnVisualizar').click(e => {
+    $('.botoes #btnVisualizar').click(e => {
         e.preventDefault()
+        $('#cadastrarModal').modal('show')
         valorAtual = $(e.currentTarget).data('detalhe')
         console.log(valorAtual)
-        $('#nome_campo').val(valorAtual.titulo)
-        $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val());
+        if (valorAtual.titulo) {
+            $('#nome_campo').val(valorAtual.titulo).prop('disabled', true);
+        }else{
+            $('#nome_campo').val('').prop('disabled', true);
+        }
+        if (valorAtual.tipo_evento) {
+            $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val()).prop(
+                'disabled', true);
+        }else{
+            $('#tipoEvento_campo').prop('disabled', true).val($(`option:selected`).val())
+        }
         if (valorAtual.tema_evento) {
-            $('#temaEvento_campo').val($(`option:contains(${valorAtual.tema_evento})`).val());
+            $('#temaEvento_campo').val($(`option:contains(${valorAtual.tema_evento})`).val()).prop(
+                'disabled', true);
         } else {
-            $('#temaEvento_campo').html("<option> Não possui</option>")
+            $('#temaEvento_campo').val($(`option:selected`).val()).prop('disabled',
+                true);
         }
         if (valorAtual.descricao) {
-            $('#descricao_campo').val(valorAtual.descricao)
-            console.log("veio")
+            $('#descricao_campo').val(valorAtual.descricao).prop('disabled', true);
         } else {
-            $('#descricao_campo').val("Não possui.")
+            $('#descricao_campo').val('').prop('disabled', true);
         }
         if (valorAtual.quantidadeEscritos) {
-            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos)
+            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos).prop('disabled', true);
+        } else {
+            $('#limiteVagas_campo').val(0).prop('disabled', true);
+        }
+        if (valorAtual.turno) {
+            $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val()).prop('disabled',
+                true);
         }else{
-            $('#limiteVagas_campo').prop('type', 'text');
-            $('#limiteVagas_campo').val("Não possui")
+            $("#turno_campo").prop('disabled', true).val($(`option:selected`).val())
         }
-        if(valorAtual.turno){
-            $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val());
+        if (valorAtual.data_inicial) {
+            $('#periodo_inicio_campo').val(valorAtual.data_inicial).prop('disabled', true);
+        }else{
+            $('#periodo_inicio_campo').prop('disabled', true).val('dd-mm-aaaa')
         }
-        if(valorAtual.data_inicial){
-            /*let valorData = valorAtual.data_inicial.split('-')
-           let myData = new Date(valorData[0], valorData[1]-1, valorData[2])*/
-           $('#periodo_inicio_campo').val(valorAtual.data_inicial)
+        if (valorAtual.data_final) {
+            $('#periodo_termino_campo').val(valorAtual.data_final).prop('disabled', true);
+        }else{
+            $('#periodo_termino_campo').prop('disabled', true).val('dd-mm-aaaa')
         }
-        if(valorAtual.data_final){
-            /*let valorData = valorAtual.data_inicial.split('-')
-           let myData = new Date(valorData[0], valorData[1]-1, valorData[2])*/
-           $('#periodo_termino_campo').val(valorAtual.data_final)
-        }
-
+        $('#imagem_campo').parent().hide()
+        $('[confirmar]').hide()
+        $('[cancelar]').hide()
+    })
+    $('.botoes #btnEditar').click(e => {
+        e.preventDefault()
         $('#cadastrarModal').modal('show')
+        valorAtual = $(e.currentTarget).data('detalhe')
+        console.log(valorAtual)
+        if (valorAtual.titulo) {
+            $('#nome_campo').val(valorAtual.titulo).prop('disabled', false);
+        }else{
+            $('#nome_campo').val('').prop('disabled', false);
+        }
+        if (valorAtual.tipo_evento) {
+            $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val()).prop(
+                'disabled', false);
+        }else{
+            $('#tipoEvento_campo').prop('disabled', false).val($(`option:selected`).val())
+        }
+        if (valorAtual.tema_evento) {
+            $('#temaEvento_campo').val($(`option:contains(${valorAtual.tema_evento})`).val()).prop(
+                'disabled', false);
+        } else {
+            $('#temaEvento_campo').val($(`option:selected`).val()).prop('disabled',
+                false);
+        }
+        if (valorAtual.descricao) {
+            $('#descricao_campo').val(valorAtual.descricao).prop('disabled', false);
+        } else {
+            $('#descricao_campo').val('').prop('disabled', false);
+        }
+        if (valorAtual.quantidadeEscritos) {
+            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos).prop('disabled', false);
+        } else {
+            $('#limiteVagas_campo').val(0).prop('disabled', false);
+        }
+        if (valorAtual.turno) {
+            $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val()).prop('disabled',
+                false);
+        }else{
+            $("#turno_campo").prop('disabled', false).val($(`option:selected`).val())
+        }
+        if (valorAtual.data_inicial) {
+            $('#periodo_inicio_campo').val(valorAtual.data_inicial).prop('disabled', false);
+        }else{
+            $('#periodo_inicio_campo').prop('disabled', false).val('dd-mm-aaaa')
+        }
+        if (valorAtual.data_final) {
+            $('#periodo_termino_campo').val(valorAtual.data_final).prop('disabled', false);
+        }else{
+            $('#periodo_termino_campo').prop('disabled', false).val('dd-mm-aaaa')
+        }
+        $('#imagem_campo').parent().show()
+        $('[confirmar]').show().text("Atualizar")
+        $('[cancelar]').show()
+    })
+    
+
+    $('[cadastro]').click(e => {
+        $('#cadastrarModal').modal('show')
+
+        $('#nome_campo').prop('disabled', false).val('')
+
+        $('#tipoEvento_campo').prop('disabled', false).val($(`option:selected`).val())
+
+        $('#temaEvento_campo').prop('disabled', false).val($(`option:selected`).val())
+
+        $('#descricao_campo').prop('disabled', false).val('')
+
+        $('#limiteVagas_campo').prop('disabled', false).val(0)
+
+        $("#turno_campo").prop('disabled', false).val($(`option:selected`).val())
+
+        $('#periodo_inicio_campo').prop('disabled', false).val('dd-mm-aaaa')
+
+        $('#periodo_termino_campo').prop('disabled', false).val('dd-mm-aaaa')
+
+        $('#imagem_campo').parent().show()
+        $('[confirmar]').show().text("Cadastrar")
+        $('[cancelar]').show()
     })
 
     $('#cadastrarModal [salvarMudanca]').click(e => {
