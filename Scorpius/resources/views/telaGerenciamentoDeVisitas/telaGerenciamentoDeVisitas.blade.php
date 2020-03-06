@@ -5,32 +5,29 @@
 @section('conteudo')
 
 <div class="form-row col-msm">
-    <div class="form-group col-sm-7 d-block" id="listaEspera">
+    <div class="form-group d-block" id="listaEspera">
         <ul class="list-group list-group-flush">
             <!-- (Ainda nao implementado)
             Essa parte receberá do controller uma array $lista_espera com as informações
             do agendamento: nome da instituicao, data do agendamento
             -->
             <li class="list-group-item">
-                <div class="row col-12 col-md-11 my-1">
-                    <div class="row col-12">
-                        <h4 class="col-sm-12">Cronograma de Visitas Agendadas</h4>
-                        <button type="submit" class="btn mx-3 btn-secondary" id="lista-espera" data-toggle="modal" 
-                            data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera-total" lista-total>
-                            <i class="fas fa-list-ol"></i>   Lista de Espera Completa
-                        </button>
-                    </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 >Cronograma de Visitas Agendadas</h4>
                 </div>
+
+                <div class="col-md-6 float-right p-0 m-0">    
+                    <button type="submit" class="btn btn-secondary float-right" id="lista-espera" data-toggle="modal" 
+                        data-toggle="tooltip" title="Lista de Espera Completa" data-target=".modal-lista-espera-total" lista-total>
+                        <i class="fas fa-list-ol"></i> Consultar Lista de Espera
+                    </button>
+                </div>
+            </div>
             </li>
         </ul>
     </div>
     <div class="form-group col-sm-12 d-block">
-        <div class="col-sm-6">
-            <button type="submit" class="btn mx-3 btn-secondary" id="lista-espera" data-toggle="modal" 
-                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera-total" lista-total>
-                <i class="fas fa-list-ol"></i>   Lista de Espera Completa
-            </button>
-        </div>
         <div style="text-align:center;">
             <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('diurno')" disabled>
                 <i class="fas fa-angle-left"></i>
@@ -399,6 +396,12 @@
 
         
         <style>
+            #listaEspera{
+                padding: 0px;
+                margin: 0px;
+                width:100%;
+                align:right
+            }
             h5 {
                 display: block;
                 margin: 10px 0px 10px 5px;
