@@ -12,22 +12,25 @@
             do agendamento: nome da instituicao, data do agendamento
             -->
             <li class="list-group-item">
-                <div class=" p-2 scorpius-border-shadow border-top border-shadow">
-                    <div class="row col-12 col-md-11 my-1">
-                        <div class="row col-12">
-                            <h5 class="col-sm-12">Lista de Espera Completa</h5>
-                            <button type="submit" class="btn mx-3 btn-secondary" id="lista-espera" data-toggle="modal" 
-                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista-total>
-                                <i class="fas fa-list-ol"></i>   Consultar
-                            </button>
-                        </div>
+                <div class="row col-12 col-md-11 my-1">
+                    <div class="row col-12">
+                        <h4 class="col-sm-12">Cronograma de Visitas Agendadas</h4>
+                        <button type="submit" class="btn mx-3 btn-secondary" id="lista-espera" data-toggle="modal" 
+                            data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera-total" lista-total>
+                            <i class="fas fa-list-ol"></i>   Lista de Espera Completa
+                        </button>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
     <div class="form-group col-sm-12 d-block">
-        <h4 class="col-sm-12">Cronograma de Visitas Agendadas</h4>
+        <div class="col-sm-6">
+            <button type="submit" class="btn mx-3 btn-secondary" id="lista-espera" data-toggle="modal" 
+                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera-total" lista-total>
+                <i class="fas fa-list-ol"></i>   Lista de Espera Completa
+            </button>
+        </div>
         <div style="text-align:center;">
             <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('diurno')" disabled>
                 <i class="fas fa-angle-left"></i>
@@ -336,10 +339,10 @@
 
 
         <!-- CÓDIGO DA LISTA DE ESPERA TOTAL -->
-        <div id="lista-espera-total">
+        <div id="lista-espera">
 
             <!-- modal da lista espera -->
-            <div class="modal fade modal-lista-espera" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
+            <div class="modal fade modal-lista-espera-total" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
                 aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -351,23 +354,18 @@
                         </div>
                         <div class="modal-body">
                             <!-- colocar resto das coisas aqui -->
-                            <div class="custom-control custom-radio col-md-12">
-                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio1">
+                            <div class="custom-control col-md-12">
+                                    <div class="font-weight-bold">Data: 23/03/2020</div>
                                     <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
                                         <div class="row col-12 col-md-11 my-1">
                                             <div class="row col-12">
-                                                <div class="col-8 col-5 col-md-4">
+                                                <div class="col-8 col-5 col-md-7">
                                                     <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
                                                     <div class="col-12 p-0">Colégio Helyos</div> <!-- substituir por registro -->
                                                 </div>
                                                 <div class="col-4 col-md-3">
                                                     <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
                                                     <div class="col-12 p-0">Particular</div>
-                                                </div>
-                                                <div class="col-8 col-md-3">
-                                                    <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
-                                                    <div class="col-12 p-0">23/03/2020</div>
                                                 </div>
                                                 <div class="col-4 col-md-2">
                                                     <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
@@ -376,12 +374,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </label>
                             </div>
                             @if(($lista_espera_dia_turno ?? false))
                             @foreach($lista_espera_dia_turno as $agendamento_dia_turno)
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
                                 <label class="custom-control-label" for="customRadio1">
                                     {{$agendamento_dia_turno['nome']}} - {{$agendamento_dia_turno['data']}}
                                 </label>
@@ -421,7 +417,6 @@
                 padding: 7px;
                 margin: 5px;
                 margin-top: -8px;
-                /**border-radius: 0px 20px 20px 0px;*/
                 width: 50px;
                 height: 30px;
             }
@@ -442,7 +437,7 @@
             [lista-total] {
                 padding: 7px;
                 margin: 5px;
-                width: 150px;
+                width: 220px;
                 height: 50px;
             }
 
