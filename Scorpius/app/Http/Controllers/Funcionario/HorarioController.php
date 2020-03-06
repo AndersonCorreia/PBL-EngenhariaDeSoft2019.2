@@ -11,18 +11,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\DB\Proposta_horarioDAO;
-require_once __DIR__."/../../../../resources/views/util/layoutUtil.php";
-
 class HorarioController extends Controller{
 
 
     public function getTelaHorarioEstagiario(){
         $DAO = new Proposta_horarioDAO();
-        $variaveis=['itensMenu' => getMenuLinks()];
         try{
             $estagiarios = $DAO->buscaEstagiarioALL();
             $variaveis = [
-                'itensMenu' => getMenuLinks(),
                 'estagiarios'=> $estagiarios
             ];
         }catch(\Exception $e){

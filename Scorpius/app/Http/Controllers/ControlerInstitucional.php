@@ -11,8 +11,6 @@ use App\DB\PessoaDAO;
 use App\Http\Requests\StoreUpdadeInstituicao;
 use Symfony\Component\Mime\Message;
 
-require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
-
 class ControlerInstitucional extends Controller {   
     /**
      * Retorna tela de instiuição
@@ -26,7 +24,6 @@ class ControlerInstitucional extends Controller {
         $registro = Professor_instituicao::listarInstituicoes($id_user);
 
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Ver Instituiçoes Cadastradas",
             'registros' => $registro, 
             'erros' => $erro
@@ -34,24 +31,6 @@ class ControlerInstitucional extends Controller {
 
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
-
-    public function nenhumaInstituicao(){
-        $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Ver Instituiçoes Cadastradas",
-        ];
-
-        return view('TelaInstituicaoEnsino.errorNenhumaInstituicao', $variaveis);
-    }
-    public function nenhumaTurma(){
-        $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Turma",
-        ];
-
-        return view('telaTurma.errorNenhumaTurma', $variaveis);
-    }
-
     /**
      * retornar a tela de cadastro de instituições para o usuario
      *
@@ -60,7 +39,6 @@ class ControlerInstitucional extends Controller {
     public function telaCadastroInstituicao() {
         
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Cadastrar Instituição"   
         ];
         try{
@@ -113,7 +91,6 @@ class ControlerInstitucional extends Controller {
     public function editarInstituicao($id) {
 
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Ver Instituiçoes Cadastradas",
             'registros' => instituicao::buscar($id),
             'instituicoes' => (new InstituicaoDAO)->getNomeEnderecoALL() 

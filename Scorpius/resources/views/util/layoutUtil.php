@@ -13,7 +13,7 @@ function getMenuLinksAll(){
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
         'institucional2'=>  ['link'=>route('turma.index'), 'texto'=>'Turmas' ],
         'visitante0'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
-        'visitante1'=>      ['link'=>'/alterar-dados' , 'texto'=>'Alterar Meus Dados' ],
+        'visitante1'=>      ['link'=>route('alterarDados.show') , 'texto'=>'Alterar Meus Dados' ],
         'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
         'estagiario1'=>     ['link'=>'#' , 'texto'=>'Resumo da Semana' ],
         'demanda web'=>     ['link'=>route('demandaWeb.show') , 'texto'=>'Demanda WEB' ],

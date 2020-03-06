@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\DB\CheckinDAO;
 
-require_once __DIR__ . "/../../../resources/views/util/layoutUtil.php";
-
 class CheckinVisitasController extends Controller
 {
     public function index()
     {
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'alunos' => $this->selectAlunos()
         ];
         if (session('tipo') == 'estagiario') {

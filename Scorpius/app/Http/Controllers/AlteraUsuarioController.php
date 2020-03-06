@@ -7,8 +7,6 @@ use App\Model\Users\Pessoa;
 use App\DB\UsuarioDAO;
 use App\Model\Users\Usuario;
 use Illuminate\Http\Request;
-require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
-
 class AlteraUsuarioController extends Controller
 {   
     /**
@@ -33,7 +31,6 @@ class AlteraUsuarioController extends Controller
             }
 
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'dadosUsuario' => ['sobrenome'=> $surname, 'nome' => $primeiroNome,'senha'=>$dadosUsuario['senha'],'cpf'=>$dadosUsuario['cpf'], 
                 'email'=>$dadosUsuario['email'], 'telefone'=>$dadosUsuario['telefone']]
         ];

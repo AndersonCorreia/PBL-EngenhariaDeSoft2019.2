@@ -10,7 +10,7 @@ class UsuarioDAO extends DataAccessObject{
         parent::__Construct("usuario");
     }
 
-    function INSERT($usuario): bool
+    function INSERT(Object $usuario): bool
     {
         $nome = $usuario->getNome();
         $email = $usuario->getEmail();
@@ -86,7 +86,21 @@ class UsuarioDAO extends DataAccessObject{
     {
         return $this->dataBase->query("DELETE FROM email_verificacao WHERE usuario_email = '$email'");;
     }
-    function UPDATE(object $obj): bool{
+    function UPDATE(Object $user): bool{
+        $params =[
+            $nome = $user->pesquisaNome(),
+            $email = $user->pesquisaEmail(),
+            $cpf = $user->pesquisaCpf(),
+            $tel = $user->tipoUsuario(),
+            $id= $user->getID()
+        ];
+
+        $set  ="nome = ?, email = ?, cpf = ?, tel = ?, id = ?";
+        $sql  = "UPDATE usuario i SET $set WHERE i.id = ?";
+
+        $stmt = $this->dataBase->prepare($sql);
+       
+        $stmt->bind_param("ssssssssi", ...$params);
         
     }
     

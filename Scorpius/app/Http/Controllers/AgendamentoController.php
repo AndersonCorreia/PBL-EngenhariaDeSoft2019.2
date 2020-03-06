@@ -20,8 +20,6 @@ use App\DB\AgendamentoInstitucionalDAO;
 use App\DB\AgendamentoIndividualDAO;
 use App\DB\AgendamentoDAO;
 
-require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
-
 class AgendamentoController extends Controller{   
 
     public function confirmacaoAgendamento(Request $dados){
@@ -69,7 +67,7 @@ class AgendamentoController extends Controller{
      * @return void
      */
     public function agendamento(){
-
+        
         $array = $this->getVisitas("diurno", "now", "anterior");
         $DAO = new ExposicaoDAO();
         $exposicoes = $DAO->SELECT_ALL_AtividadePermanente();
@@ -78,7 +76,6 @@ class AgendamentoController extends Controller{
         $turmas = (new TurmaDAO)->SELECTbyProfessorID(session("ID"));
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
@@ -97,7 +94,6 @@ class AgendamentoController extends Controller{
         $array = $this->getVisitas("diurno", "now", "anterior");
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
@@ -110,7 +106,6 @@ class AgendamentoController extends Controller{
     public function agendamentoAtividadeDiferenciada(){
 
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita"
         ];
 
@@ -126,7 +121,6 @@ class AgendamentoController extends Controller{
         $tipoAtividade = 'atividade';
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Indisponivel", "tipo" => "visitante"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
@@ -190,27 +184,6 @@ class AgendamentoController extends Controller{
 
         return redirect()->route('dashboard');
     }
-
-    public function atividadeError(){
-
-        $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Agendar Visita"
-        ];
-
-        return view('telasUsuarios.Agendamentos.errorNenhumaAtividade',$variaveis);
-    }
-
-    public function visitaError(){
-
-        $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Agendar Visita"
-        ];
-
-        return view('telasUsuarios.Agendamentos.errorNenhumaVisita',$variaveis);
-    }
-
     /**
      * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsvel
      * no campo nome, e o cargo do ressponsavel no campo cargo;
