@@ -188,7 +188,7 @@ class AgendamentoController extends Controller{
 
         (new AgendamentoIndividualDAO)->INSERT($agendamento);
 
-        return redirect()->route('AgendarDiurnoVisitante.show');
+        return redirect()->route('dashboard');
     }
 
     public function atividadeError(){
