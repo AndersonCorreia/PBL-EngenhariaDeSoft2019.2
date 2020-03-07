@@ -263,6 +263,12 @@ INNER JOIN usuario u ON u.ID = pi.usuario_ID
 INNER JOIN instituicao i ON i.ID = pi.instituicao_ID
 INNER JOIN cidade_uf cuf ON cuf.ID = i.cidade_UF_ID;
 
+CREATE VIEW IF NOT EXISTS visita_individual
+AS SELECT v.ID AS visitaID, v.data_visita AS data, turno, v.status AS visitaStatus,
+a.ID AS agendamentoID, observacao, a.status AS agendamentoStatus,
+u.ID AS usuarioID, u.nome AS usuario, u.telefone AS usuarioTelefone
+FROM visita v INNER JOIN agendamento a ON v.ID = a.visita
+INNER JOIN usuario u ON a.usuario_ID = u.ID;
 -- -----------------------------------------------------
 -- Table `scorpius`.`permissao`
 -- -----------------------------------------------------
