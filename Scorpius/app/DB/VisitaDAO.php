@@ -59,7 +59,7 @@ class VisitaDAO extends DataAccessObject{
         $result = $stmt->get_result()->fetch_assoc();
 
         if($result==[]){
-            throw new \Exception("Nenhuma Visita encontrada no dia e turno especifico", 1);
+            throw new \App\Exceptions\NenhumaVisitaEncontradaException(2);
         }
 
         if($asObject){

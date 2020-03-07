@@ -59,6 +59,10 @@ class Handler extends ExceptionHandler
             return redirect()->back()->with(['loginErro' => true, 'login' => $_POST['e-mail'] ]);
         }
         elseif($exception instanceof NenhumaVisitaEncontradaException){
+
+            if( $exception->getCode() == 2 ){
+                return back()->with(['erroDataTurno' => true]);
+            }
             
             return redirect()->route('vErros')->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaVisita');
         }
