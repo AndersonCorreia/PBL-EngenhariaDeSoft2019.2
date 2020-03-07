@@ -22,7 +22,6 @@ class GerenciamentoDeEventosController extends Controller{
         $id_user = session('ID');
         $exposicoes = (new ExposicaoDAO)->SELECT_Eventos('ID, titulo, tipo_evento, tema_evento, turno, descricao, quantidade_inscritos, data_inicial, data_final');
         $variaveis = [
-            'itensMenu' => getMenuLinks(), 
             'paginaAtual' => "Gerenciamento de Eventos",
             'exposicoes' => $exposicoes,
             'try' => 'ND', 

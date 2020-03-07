@@ -6,19 +6,20 @@
         <div id="data-turno" class="row">
             <div class="col-md-6">
                 <label for="inputData">Data desejada</label>
-                <input class="form-control" type="date" id="data" min="{{$visitas["datas"]['data0']}}"
-                    max="{{$visitas["datas"]['dataLimite']}}" name="data" required>
+                <input class="form-control" type="date" id="data" min="{{$visitas['datas']['data0']}}"
+                    max="{{$visitas['datas']['dataLimite']}}" name="data" required>
             </div>
             <div class="col-md-6">
             @if(($turno ?? "diurno")==="diurno") 
                 <label for="selectTurno">Turno</label>
-                <select id="turno" name="turno" id="turno" class="custom-select" placeholder="turno" required>
+                <select id="turno" name="turno" class="custom-select" placeholder="turno" required>
                     <option value="manhã">Manhã</option>
                     <option value="tarde">Tarde</option>
                 </select>
             @else
-                <label for="selectTurno">Turno</label>
+                <label for="turno">Turno</label>
                 <input class="form-control" type="text" placeholder="Noturno" readonly>
+                <input type='hidden' name="turno" value= "noite">
             @endif
             </div>
         </div>
@@ -38,7 +39,7 @@
                 </div>
                 <div class="col-md-3 rg-visitante">
                     <input id="RG" class="form-control" type="text" minlength="14" maxlength="15" name="rg"
-                        placeholder="xxxxxxxxxxxxxxxxx" required>
+                        placeholder="XXXXXXXXXX" required>
                 </div>
                 <div class="col-md-2 idade-visitante">
                     <input id="idade" class="form-control" type="number" max=120 name="idade" placeholder="xx"
@@ -66,7 +67,7 @@
     <div class="adicionar-cancelar mt-2 text-right">
         <button id="submit" type="submit" class="btn mr-2 btn-primary">
             <i class="fas fa-receipt"></i>
-            Solicitar agendamento</button>
+            Agendar</button>
         <a href="" class="btn btn-secondary">
             <i class="fa fa-times" aria-hidden="true"></i>
             Cancelar</a>

@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Model\Turma;
 use App\Model\Aluno;
 
-require_once __DIR__ . "/../../../resources/views/util/layoutUtil.php";
-
 class TurmaController extends Controller
 {
     public function index($variaveis = null)
@@ -17,7 +15,6 @@ class TurmaController extends Controller
         $turmas = $turma->todasTurmas($professor_ID);
         $variaveis = [
             'professor_ID' => $professor_ID,
-            'itensMenu' => getMenuLinks(),
             'turmas' => $turmas
         ];
         return view('telaTurma.index', $variaveis);

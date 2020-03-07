@@ -83,7 +83,7 @@
                                                 <input id="visitante" class="form-control" type="text" maxlength="40" name="visitante1" placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                                             </div>
                                             <div class="col-md-2 idade-visitante">
-                                                <input id="idade" class="form-control" type="text" maxlength="3" name="idade1" placeholder="xx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                                                <input id="idade" class="form-control" type="text" maxlength="3" name="idade1" placeholder="xx" pattern="[0-9]+$$" required>
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
                                 <div class="adicionar-cancelar mt-2 float-right">
                                     <button id="submit" type="submit" class="btn mr-2 btn-primary">
                                         <i class="fas fa-receipt    "></i>
-                                        Solicitar agendamento</button>
+                                        Agendar</button>
                                     <a href="" class="btn btn-secondary">
                                         <i class="fa fa-times" aria-hidden="true"></i>
                                         Cancelar</a>
@@ -130,7 +130,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <label for="idade">Idade </label>
-                                            <input id="idade" class="form-control" type="text" maxlength="3" name="idade[]" placeholder="xx" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                                            <input id="idade" class="form-control" type="text" maxlength="3" name="idade[]" placeholder="xx" pattern="[0-9]+$$" required>
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +138,7 @@
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Observações"></textarea>
                                 </div>
                                 <div class="btn-lg btn-block">
-                                    <button id="submit" type="submit" class="btn mr-2 btn-primary">Solicitar agendamento</button>
+                                    <button id="submit" type="submit" class="btn mr-2 btn-primary">Agendar</button>
                                     <a href="#"><button type="button" class="btn btn-danger">Cancelar</button></a>
                                 </div>
                                 </fieldset> --}}

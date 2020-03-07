@@ -6,10 +6,10 @@
 
 <div class="row col-12">
     <div class="container-fluid p-4">
-        @if(true){{-- isset($agendamentos) --}}
+        @if($agendamentos != [] )
         <div class="row col-12 mb-3 m-0 pb-2 scorpius-border-shadow">
-            <h4 class="text-primary ml-2">Seus Proximos Agendamentos </h4>
-            <small class="text-secondary ml-1 pt-2 m-0 p-0"> (Limite de 3 Agendamentos institucionais ativos no mesmo período )</small>
+            <h4 class="text-primary ml-1 p-0 m-0 col-12">Seus Proximos Agendamentos </h4>
+            <small class="text-secondary ml-1 m-0 p-0">(Limite de 3 Agendamentos institucionais ativos no mesmo período )</small>
             <hr class="bg-light col-11 linha rounded p-0 m-0">
             @include('telasUsuarios.Agendamentos._includes.agendamentos')
         </div>

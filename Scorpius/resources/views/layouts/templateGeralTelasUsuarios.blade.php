@@ -1,5 +1,9 @@
-@include('layouts._includes.top')
+@php
+    require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
+    $itensMenu = getMenuLinks();
+@endphp
 
+@include('layouts._includes.top')
 <div class= "tela  bg-light">
     <div id="menuLateral" class= "bg-dark border-right border-dark">
         <img id="logo" class = "px-md-3 px-2 pt-3 mb-3" src="{{ asset("img/scorpius-whited.png")}}" height=auto  width=100%> 

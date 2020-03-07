@@ -62,9 +62,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'authInstitucional' => \App\Http\Middleware\AuthorizeInstitucional::class,
         'authVisitante' => \App\Http\Middleware\AuthorizeVisitante::class,
-        'authAdministrativo' => \App\Http\Middleware\AuthorizeAdministrativo::class
+        'authAdministrativo' => \App\Http\Middleware\AuthorizeAdministrativo::class,
     ];
-
     /**
      * The priority-sorted list of middleware.
      *
@@ -82,6 +81,6 @@ class Kernel extends HttpKernel
         \Illuminate\Auth\Middleware\Authorize::class,
         \App\Http\Middleware\AuthorizeAdministrativo::class,
         \App\Http\Middleware\AuthorizeVisitante::class,
-        \App\Http\Middleware\AuthorizeInstitucional::class
+        \App\Http\Middleware\AuthorizeInstitucional::class,
     ];
 }

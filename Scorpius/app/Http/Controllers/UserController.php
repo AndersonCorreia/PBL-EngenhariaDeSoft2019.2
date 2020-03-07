@@ -12,8 +12,6 @@ use App\DB\VisitaDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
 
-require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
-
 class UserController extends Controller{   
 
     public function getDashboard(){
@@ -27,7 +25,6 @@ class UserController extends Controller{
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Lista de Espera disponivel", "tipo" => "institucional"];
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'registros' => ['agendamento'=>$agendamento,'agendamento_institucional'=>$agenda_institucional],
             'notificacoes' => $notificacao,
             'agenda_institucional' => $agenda_institucional,

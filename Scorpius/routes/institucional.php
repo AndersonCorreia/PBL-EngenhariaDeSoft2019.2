@@ -29,17 +29,6 @@ Route::post('/instituicao/cadastro', 'ControlerInstitucional@cadastrarInstituica
  * rota para retornar o JSON com os dados de uma instituição.
  */
 Route::get("/instituicao/dados/{nome}/{endereco}/", "ControlerInstitucional@getInstituicao");
-
-/**
- * Rota exibir erro, caso não exista instituições cadastradas.
- */
-Route::get('/instituicao/erro','ControlerInstitucional@nenhumaInstituicao')->name("errorNenhumaInstituicao.show");
-
-/**
- * Rota exibir erro, caso não existam turmas cadastradas.
- */
-Route::get('/turma/erro','ControlerInstitucional@nenhumaTurma')->name("errorNenhumaTurma.show");
-
 /**
  * Rota para editar instituicao.
  */
@@ -51,10 +40,6 @@ Route::get('/instituicao/deletar/{id}',['as'=>'user.instituicoes.deletar','uses'
 
 Route::put('/instituicao/atualizar/{id}',['as'=>'user.instituicoes.atualizar','uses'=>'ControlerInstitucional@atualizarInstituicao']);
 
-
 //Rotas para agendamento de uma instituicao
 Route::get('/instituicao/agendamento', 'AgendamentoController@agendamento')->name("AgendarDiurnoInstituição.show");
 Route::post('/instituicao/agendamento', 'AgendamentoController@agendarInstituicao')->name("AgendarDiurnoInstituicao.post");
-
-Route::get('instituicao/agendamento/dados/turmas', 'TurmaController@listarTurmas');
-Route::get('instituicao/agendamento/dados/instituicao', 'ControlerInstitucional@getInstituicoesProfessor');

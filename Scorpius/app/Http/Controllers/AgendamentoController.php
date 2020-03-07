@@ -20,8 +20,6 @@ use App\DB\AgendamentoInstitucionalDAO;
 use App\DB\AgendamentoIndividualDAO;
 use App\DB\AgendamentoDAO;
 
-require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
-
 class AgendamentoController extends Controller{   
 
     public function confirmacaoAgendamento(Request $dados){
@@ -69,16 +67,16 @@ class AgendamentoController extends Controller{
      * @return void
      */
     public function agendamento(){
-
+        
         $array = $this->getVisitas("diurno", "now", "anterior");
-        $DAO = new ExposicaoDAO();
-        $exposicoes = $DAO->SELECT_ALL_AtividadePermanente();
+        $userID = session("ID");
         $tipoAtividade ="exposições";
-        $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID(session("ID"));
-        $turmas = (new TurmaDAO)->SELECTbyProfessorID(session("ID"));
+        $exposicoes = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente();
+        $agendamentos = (new AgendamentoInstitucionalDAO)->SELECT_VisitaInstitucionalByUserID($userID);
+        $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID($userID);
+        $turmas = (new TurmaDAO)->SELECTbyProfessorID($userID);
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
@@ -86,6 +84,7 @@ class AgendamentoController extends Controller{
             'tipoAtividade' => $tipoAtividade,
             'instituicoes' => $instituicoes,
             'turmas' => $turmas,
+            'agendamentos' => $agendamentos,
             $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
         ];
 
@@ -95,13 +94,14 @@ class AgendamentoController extends Controller{
     public function agendamentoIndividual(){
 
         $array = $this->getVisitas("diurno", "now", "anterior");
+        $agendamentos = (new AgendamentoIndividualDAO)->SELECT_VisitaIndividualByUserID(session('ID'));
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
-            'tipoUserLegenda'=> $visitante
+            'tipoUserLegenda'=> $visitante,
+            'agendamentos' => $agendamentos
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
@@ -110,7 +110,6 @@ class AgendamentoController extends Controller{
     public function agendamentoAtividadeDiferenciada(){
 
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita"
         ];
 
@@ -126,7 +125,6 @@ class AgendamentoController extends Controller{
         $tipoAtividade = 'atividade';
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Indisponivel", "tipo" => "visitante"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
@@ -172,12 +170,29 @@ class AgendamentoController extends Controller{
     }
 
     /**
-     * Cadastrar novo agendamento de uma conta usuário visitante normal
-     * inserir dados do agendamento pelo POST na classe agendamento, que chama o método de
+     * Cadastrar novo agendamento de uma conta individual
+     * Inserir dados do agendamento pelo POST na classe agendamento, que chama o método de
      * inserir no banco de dados
      * @return void
      */
     public function agendarContaIndividual() {
+        
+        $id_user = session('ID');
+        $data = $_POST['data'];
+        $turno = $_POST['turno'];
+        $status = "Confirmado";
+        $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
+        $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
+
+        (new AgendamentoIndividualDAO)->INSERT($agendamento);
+
+        return redirect()->route('dashboard');
+    }
+    /**
+     * Cadastrar novo agendamento para uma atividade diferenciada
+     * @return void
+     */
+    public function agendarAtividadeDiferenciada() {
         
         $id_user = session('ID');
         $data = $_POST['data'];
@@ -191,26 +206,6 @@ class AgendamentoController extends Controller{
         return redirect()->route('dashboard');
     }
 
-    public function atividadeError(){
-
-        $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Agendar Visita"
-        ];
-
-        return view('telasUsuarios.Agendamentos.errorNenhumaAtividade',$variaveis);
-    }
-
-    public function visitaError(){
-
-        $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Agendar Visita"
-        ];
-
-        return view('telasUsuarios.Agendamentos.errorNenhumaVisita',$variaveis);
-    }
-
     /**
      * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsvel
      * no campo nome, e o cargo do ressponsavel no campo cargo;
@@ -221,7 +216,7 @@ class AgendamentoController extends Controller{
         $responsaveis = [];
 
         for ($i=0; $i < count($arrayResp) ; $i++) { 
-            $responsaveis[$i] = [ 'nome' => $arrayResp[$i], 'cargo' => $arrayCargo];
+            $responsaveis[$i] = [ 'nome' => $arrayResp[$i], 'cargo' => $arrayCargo[$i] ];
         }
 
         return $responsaveis;
