@@ -13,19 +13,8 @@ class Erros extends Controller
 
             return view($viewError, ['paginaAtual' => 'Agendar Visita']);
         }
-        else if( session('errorAtividade',false) ){
-
-            return view('telasUsuarios.Agendamentos.errorNenhumaAtividade', ['paginaAtual' => 'Agendar Visita']);
-        }
-        else if( session('errorInstituicao',false) ){
-
-            return view('TelaInstituicaoEnsino.errorNenhumaInstituicao', ['paginaAtual' => 'Agendar Visita']);
-        }
-        else if( session('errorTurma',false) ){
-
-            return view('TelaInstituicaoEnsino.errorNenhumaTurma', ['paginaAtual' => 'Agendar Visita']);
-        }
         else {
+            
             return redirect()->route('dashboard');
         }
     }

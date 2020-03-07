@@ -52,11 +52,11 @@ class Handler extends ExceptionHandler
         }
         elseif($exception instanceof NenhumaTurmaCadastradaException){
             
-            return redirect()->route('vErros')->with('viewErro','TelaInstituicaoEnsino.errorNenhumaTurma');
+            return redirect()->route('vErros')->with('viewErro','telaTurma.errorNenhumaTurma');
         }
         elseif($exception instanceof UsuarioNaoEncontradoException){
 
-            return redirect()->route('loginError.show');
+            return redirect()->back()->with(['loginErro' => true, 'login' => $_POST['e-mail'] ]);
         }
         elseif($exception instanceof NenhumaVisitaEncontradaException){
             

@@ -69,11 +69,12 @@ class AgendamentoController extends Controller{
     public function agendamento(){
         
         $array = $this->getVisitas("diurno", "now", "anterior");
-        $DAO = new ExposicaoDAO();
-        $exposicoes = $DAO->SELECT_ALL_AtividadePermanente();
+        $userID = session("ID");
         $tipoAtividade ="exposições";
-        $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID(session("ID"));
-        $turmas = (new TurmaDAO)->SELECTbyProfessorID(session("ID"));
+        $exposicoes = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente();
+        $agendamentos = (new AgendamentoInstitucionalDAO)->SELECT_VisitaInstitucionalByUserID($userID);
+        $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID($userID);
+        $turmas = (new TurmaDAO)->SELECTbyProfessorID($userID);
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
             'paginaAtual' => "Agendar Visita",
@@ -83,6 +84,7 @@ class AgendamentoController extends Controller{
             'tipoAtividade' => $tipoAtividade,
             'instituicoes' => $instituicoes,
             'turmas' => $turmas,
+            'agendamentos' => $agendamentos,
             $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
         ];
 
@@ -92,12 +94,14 @@ class AgendamentoController extends Controller{
     public function agendamentoIndividual(){
 
         $array = $this->getVisitas("diurno", "now", "anterior");
+        $agendamentos = (new AgendamentoIndividualDAO)->SELECT_VisitaIndividualByUserID(session('ID'));
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
-            'tipoUserLegenda'=> $visitante
+            'tipoUserLegenda'=> $visitante,
+            'agendamentos' => $agendamentos
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
@@ -212,7 +216,7 @@ class AgendamentoController extends Controller{
         $responsaveis = [];
 
         for ($i=0; $i < count($arrayResp) ; $i++) { 
-            $responsaveis[$i] = [ 'nome' => $arrayResp[$i], 'cargo' => $arrayCargo];
+            $responsaveis[$i] = [ 'nome' => $arrayResp[$i], 'cargo' => $arrayCargo[$i] ];
         }
 
         return $responsaveis;

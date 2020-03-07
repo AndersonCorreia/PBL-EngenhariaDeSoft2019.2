@@ -41,13 +41,13 @@ use App\Model\Agendamento;
 
     private function INSERT_Alunos( array $Alunos, int $ID){
         $count = count($Alunos);
-        for($i = 0; i < $count; $i++){
+        for($i = 0; $i < $count; $i++){
+            $nome = $Alunos[$i]['nome'];
+            $idade = $Alunos[$i]['idade'];
             $sql = "INSERT INTO visitante_institucional (nome, idade, agendamento_institucional_ID) VALUE 
-                ('$Alunos[$i]['nome']', '$Alunos[$i]['idade']', '&ID')";
-            $resultado[] = $this->dataBase->query($sql);
+                ('$nome', $idade, $ID)";
+            $this->dataBase->query($sql);
         }
-        return $resultado;
-        
     }
 
     private function INSERT_Exposicoes( array $Exposicoes, int $ID){
@@ -56,12 +56,21 @@ use App\Model\Agendamento;
 
     private function INSERT_Responsaveis( array $Responsaveis, int $ID){
         $count = count($Responsaveis);
-        for($i = 0; i < $count; $i++){
+        for($i = 0; $i < $count; $i++){
+            $nome = $Responsaveis[$i]['nome'];
+            $cargo = $Responsaveis[$i]['cargo'];
             $sql = "INSERT INTO Responsavel (nome, cargo, agendamento_institucional_ID) VALUE 
-                ('$Responsaveis[$i]['nome']', '$Responsaveis[$i]['cargo']', '$ID')";
-            $resultado[] = $this->dataBase->query($sql);
+                ('$nome', '$cargo', $ID)";
+            $this->dataBase->query($sql);
         }
-        return $resultado;
+    }
+
+    public function SELECT_VisitaInstitucionalByUserID(int $id){
+        $select = "SELECT instituicao, turma, data, turno, agendamentoStatus";
+        $sql = "$select FROM visita_institucional WHERE usuarioID = $id";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
 

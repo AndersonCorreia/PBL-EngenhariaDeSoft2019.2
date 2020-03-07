@@ -44,4 +44,12 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         WHERE ID = $agendamento->getID()";
         return $this->dataBase->query($sql);
     }
+
+    public function SELECT_VisitaIndividualByUserID(int $id){
+        $select = "SELECT data, turno, agendamentoStatus";
+        $sql = "$select FROM visita_individual WHERE usuarioID = $id";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }

@@ -249,6 +249,20 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`agendamento` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+CREATE VIEW IF NOT EXISTS visita_institucional
+AS SELECT v.ID AS visitaID, v.data_visita AS data, turno, v.status AS visitaStatus,
+ai.ID AS agendamentoID, observacao, ai.status AS agendamentoStatus,
+t.ID AS turmaID, t.nome AS turma, ano_escolar, ensino,
+i.ID AS instituicaoID, endereco, i.nome AS instituicao, responsavel, numero, cep,
+tipo_instituicao, i.telefone AS instituicaoTelefone, cidade, UF,
+u.ID AS usuarioID, u.nome AS usuario, u.telefone AS usuarioTelefone
+FROM visita v INNER JOIN agendamento_institucional ai ON v.ID = ai.visita
+LEFT JOIN turma t ON ai.turma_ID = t.ID 
+INNER JOIN professor_instituicao pi ON ai.professor_instituicao_ID = pi.ID 
+INNER JOIN usuario u ON u.ID = pi.usuario_ID
+INNER JOIN instituicao i ON i.ID = pi.instituicao_ID
+INNER JOIN cidade_uf cuf ON cuf.ID = i.cidade_UF_ID;
+
 -- -----------------------------------------------------
 -- Table `scorpius`.`permissao`
 -- -----------------------------------------------------
