@@ -11,6 +11,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\DB\ExposicaoDAO;
+use App\Model\Exposicao;
+use Exception;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 require_once __DIR__."/../../../../resources/views/util/layoutUtil.php";
 
 class GerenciamentoDeEventosController extends Controller{
@@ -21,7 +24,9 @@ class GerenciamentoDeEventosController extends Controller{
         $variaveis = [
             'itensMenu' => getMenuLinks(), 
             'paginaAtual' => "Gerenciamento de Eventos",
-            'exposicoes' => $exposicoes
+            'exposicoes' => $exposicoes,
+            'try' => 'ND', 
+            'log' => 'ND'
         ];
         return view('TelaGerenciamentoDeEventos.telaGerenciamentoDeEventos', $variaveis);
     }
@@ -51,6 +56,7 @@ class GerenciamentoDeEventosController extends Controller{
         $tema = $request->tema;
         $descricao = $request->descricao;
         $quantidade = $request->quantidade;
+        $turno = $request->turno;
         $data_inicial = $request->data_inicial;
         $data_final = $request->data_final;
         $token = $request->_token;
@@ -73,6 +79,7 @@ class GerenciamentoDeEventosController extends Controller{
                 'titulo' => $titulo,
                 'tipo' => $tipoEvento,
                 'tema' => $tema,
+                'turno'=>$turno,
                 'descricao' => $descricao,
                 'quantidade' => $quantidade,
                 'data_inicial' => $data_inicial,
@@ -91,11 +98,11 @@ class GerenciamentoDeEventosController extends Controller{
             $log = $e->getMessage();
             $try = 'FALSE';
         }
-        $dados = [
+        $variaveis = [
             'try' => $try,
             'log' => $log
         ];
-        redirect('telaGerenciamentoDeEventos.show', $dados);
+        return redirect()->route('telaGerenciamentoDeEventos.show');
     }
 }
 ?>

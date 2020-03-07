@@ -14,6 +14,7 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
         $titulo = $exposicao->getTitulo();
         $tipo_evento = $exposicao->getTipo_evento();
         $tema = $exposicao->getTema();
+        $turno = $exposicao->getTurno();
         $descricao = $exposicao->getDescricao();
         $quantidade = $exposicao->getQuantidade();
         $data_inicial = $exposicao->getData_Inicial();
@@ -21,11 +22,12 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
         $imagem = $exposicao->getImage();
 
         $sql = "INSERT INTO exposicao
-        (titulo, tipo_evento, tema_evento, descricao, quantidade_inscritos, data_inicial, data_final, imagem)
+        (titulo, tipo_evento, tema_evento, turno, descricao, quantidade_inscritos, data_inicial, data_final, imagem)
         VALUES (
             '$titulo', 
             '$tipo_evento',
             '$tema',
+            '$turno',
             '$descricao',
             '$quantidade' ,
             '$data_inicial', 

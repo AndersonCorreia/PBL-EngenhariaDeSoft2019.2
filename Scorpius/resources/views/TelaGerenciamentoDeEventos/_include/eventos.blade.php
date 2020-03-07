@@ -78,8 +78,9 @@
 
 
 <!-- modal cadastro -->
-<div class="modal fade" id="cadastrarModal" tabindex="-1" role="dialog" aria-labelledby="cadastrarModalLabel"
-    aria-hidden="true">
+
+<div class="modal fade" method="POST" action="{{route('cadastroEvento')}}" id="cadastrarModal" tabindex="-1"
+    role="dialog" aria-labelledby="cadastrarModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -91,14 +92,18 @@
             <div class="modal-body">
                 <div class="container-fluid bg-white p-3">
                     <div class="col-12 m-0 p-0">
-                        <div class="container-fluid bg-white shadow p-3" style="border-bottom-right-radius: 20px;
+                        <div class="container-fluid bg-white shadow p-3"
+                            style="border-bottom-right-radius: 20px;
                         border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-top-left-radius: 20px; float: middle">
-                            <form>
+                            <form method="POST" action="{{route('cadastroEvento')}}" enctype="multipart/form-data">
+                                <meta name="csrf-token" content="{{csrf_token()}}">
+                                {{csrf_field()}}
+                                {{ method_field('POST') }}
                                 <div class="row col-12 p-3">
                                     <div class="col-md-12">
                                         <div class="form-group" style="padding-left: 20px;">
                                             <label for="nome_campo" class="col-form-label ">Nome:</label>
-                                            <input type="text" class="form-control" id="nome_campo"/>
+                                            <input type="text" class="form-control" name="titulo" id="nome_campo" />
                                         </div>
                                     </div>
                                 </div>
@@ -106,21 +111,21 @@
                                     <div class="col-md-6">
                                         <div class="form-group" style="padding-left: 20px;">
                                             <label for="tipoEvento_campo" class="col-form-label">Tipo de Evento:</label>
-                                            <select class="form-control" id="tipoEvento_campo">
+                                            <select class="form-control" id="tipoEvento_campo" name="evento">
                                                 <option selected></option>
-                                                <option>atividade diferenciada</option>
-                                                <option>atividade permanente</option>
+                                                <option value="atividade diferenciada">atividade diferenciada</option>
+                                                <option value="atividade permanente">atividade permanente</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group" style="padding-left: 20px;">
                                             <label for="temaEvento_campo" class="col-form-label">Tema do Evento:</label>
-                                            <select class="form-control" id="temaEvento_campo">
+                                            <select class="form-control" id="temaEvento_campo" name="tema">
                                                 <option selected></option>
-                                                <option>Biologia</option>
-                                                <option>Astronomia</option>
-                                                <option>Evolução Humana</option>
+                                                <option value="biodiversidade">Biodiversidade</option>
+                                                <option value="astronomia">Astronomia</option>
+                                                <option value="origem do humano">Evolução Humana</option>
                                             </select>
                                         </div>
                                     </div>
@@ -128,59 +133,66 @@
                                 <div class="row col-12 p-3">
                                     <div class="col-md-12">
                                         <div class="form-group" style="padding-left: 20px;">
-                                            <label for="descricao_campo" class="col-form-label">Descrição do Evento:</label>
-                                            <textarea class="form-control" id="descricao_campo"></textarea>
+                                            <label for="descricao_campo" class="col-form-label">Descrição do
+                                                Evento:</label>
+                                            <textarea class="form-control" id="descricao_campo" name="descricao"></textarea>
                                         </div>
                                     </div>
-                                
-                                <div class="row col-12 p-3">
-                                    <div class="col-md-6">
-                                        <div class="form-group" style="padding-left: 20px;">
-                                            <label for="limiteVagas_campo" class="col-form-label">Limite de Vagas:</label>
-                                            <input type="number" class="form-control" id="limiteVagas_campo" max="40" min="0" />
+                                 
+                                    <div class="row col-12 p-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group" style="padding-left: 20px;">
+                                                <label for="limiteVagas_campo" class="col-form-label">Limite de
+                                                    Vagas:</label>
+                                                <input type="number" class="form-control" name="quantidade" id="limiteVagas_campo"
+                                                    max="40" min="0" />
+                                            </div>
+                                        </div>
+                                        <div clas="col-md-6">
+                                            <div class="form-group" style="padding-left: 15px; width: 155px;">
+                                                <label for="turno_campo" class="col-form-label">Turno:</label>
+                                                <select class="form-control" id="turno_campo" name="turno">
+                                                    <option selected></option>
+                                                    <option value="diurno">diurno</option>
+                                                    <option value="noturno">noturno</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div clas="col-md-6">
-                                        <div class="form-group" style="padding-left: 15px; width: 155px;">
-                                            <label for="turno_campo" class="col-form-label">Turno:</label>
-                                            <select class="form-control" id="turno_campo">
-                                                <option selected></option>
-                                                <option value="diurno">diurno</option>
-                                                <option value="noturno">noturno</option>
-                                            </select>
+                                    <div class="row col-12 p-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group" style="padding-left: 20px;">
+                                                <label for="periodo_inicio_campo" class="col-form-label">Data
+                                                    Início:</label>
+                                                <input type="date" class="form-control" name="data_inicial" id="periodo_inicio_campo" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="periodo_termino_campo" class="col-form-label">Data
+                                                    Termino:</label>
+                                                <input type="date" class="form-control" name="data_final" id="periodo_termino_campo" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-12 p-3">
-                                    <div class="col-md-6">
-                                        <div class="form-group" style="padding-left: 20px;">
-                                            <label for="periodo_inicio_campo" class="col-form-label">Data Início:</label>
-                                            <input type="date" class="form-control" id="periodo_inicio_campo"/>
+                                    <div class="row col-12 p-3">
+                                        <div class="col-md-12">
+                                            <div class="form-group" style="padding-left: 20px;">
+                                                <label for="imagem_campo" class="col-form-label">Imagem da
+                                                    Atividade:</label>
+                                                <input type="file" name="imagem" class="form-control" id="imagem_campo"
+                                                    style="width: 320px;" />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="periodo_termino_campo" class="col-form-label">Data Termino:</label>
-                                            <input type="date" class="form-control" id="periodo_termino_campo" />
+                                    <div class="row col-12 p-3">
+                                        <div class="col-md-8" style="padding-left: 60px">
+                                            <button type="button" class="btn btn-danger" cancelar>Cancelar</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-success" confirmar>Cadastrar</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-12 p-3">
-                                    <div class="col-md-12">
-                                        <div class="form-group" style="padding-left: 20px;">
-                                            <label for="imagem_campo" class="col-form-label">Imagem da Atividade:</label>
-                                            <input type="file" class="form-control" id="imagem_campo" style="width: 320px;" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row col-12 p-3">
-                                    <div class="col-md-8" style="padding-left: 60px">
-                                        <button type="button" class="btn btn-danger" cancelar >Cancelar</button>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-success" confirmar>Cadastrar</button>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                     </div>
@@ -190,7 +202,7 @@
     </div>
 </div>
 
-
+@include('layouts._includes.footer')
 @section('js')
 <script>
 $(document).ready(function() {
@@ -202,13 +214,13 @@ $(document).ready(function() {
         console.log(valorAtual)
         if (valorAtual.titulo) {
             $('#nome_campo').val(valorAtual.titulo).prop('disabled', true);
-        }else{
+        } else {
             $('#nome_campo').val('').prop('disabled', true);
         }
         if (valorAtual.tipo_evento) {
             $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val()).prop(
                 'disabled', true);
-        }else{
+        } else {
             $('#tipoEvento_campo').prop('disabled', true).val($(`option:selected`).val())
         }
         if (valorAtual.tema_evento) {
@@ -231,17 +243,17 @@ $(document).ready(function() {
         if (valorAtual.turno) {
             $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val()).prop('disabled',
                 true);
-        }else{
+        } else {
             $("#turno_campo").prop('disabled', true).val($(`option:selected`).val())
         }
         if (valorAtual.data_inicial) {
             $('#periodo_inicio_campo').val(valorAtual.data_inicial).prop('disabled', true);
-        }else{
+        } else {
             $('#periodo_inicio_campo').prop('disabled', true).val('dd-mm-aaaa')
         }
         if (valorAtual.data_final) {
             $('#periodo_termino_campo').val(valorAtual.data_final).prop('disabled', true);
-        }else{
+        } else {
             $('#periodo_termino_campo').prop('disabled', true).val('dd-mm-aaaa')
         }
         $('#imagem_campo').parent().hide()
@@ -255,13 +267,13 @@ $(document).ready(function() {
         console.log(valorAtual)
         if (valorAtual.titulo) {
             $('#nome_campo').val(valorAtual.titulo).prop('disabled', false);
-        }else{
+        } else {
             $('#nome_campo').val('').prop('disabled', false);
         }
         if (valorAtual.tipo_evento) {
             $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val()).prop(
                 'disabled', false);
-        }else{
+        } else {
             $('#tipoEvento_campo').prop('disabled', false).val($(`option:selected`).val())
         }
         if (valorAtual.tema_evento) {
@@ -284,24 +296,39 @@ $(document).ready(function() {
         if (valorAtual.turno) {
             $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val()).prop('disabled',
                 false);
-        }else{
+        } else {
             $("#turno_campo").prop('disabled', false).val($(`option:selected`).val())
         }
         if (valorAtual.data_inicial) {
             $('#periodo_inicio_campo').val(valorAtual.data_inicial).prop('disabled', false);
-        }else{
+        } else {
             $('#periodo_inicio_campo').prop('disabled', false).val('dd-mm-aaaa')
         }
         if (valorAtual.data_final) {
             $('#periodo_termino_campo').val(valorAtual.data_final).prop('disabled', false);
-        }else{
+        } else {
             $('#periodo_termino_campo').prop('disabled', false).val('dd-mm-aaaa')
         }
         $('#imagem_campo').parent().show()
         $('[confirmar]').show().text("Atualizar")
         $('[cancelar]').show()
     })
-    
+
+    $('[confirmar]').click(e=>{
+        e.preventDefault()
+        let textButton = $(e.target).text()
+        if(textButton == 'Cadastrar'){
+
+        }else{
+            $.ajax({
+                type:,
+                data:,
+                
+            })            
+        }
+
+    })
+
 
     $('[cadastro]').click(e => {
 
@@ -330,10 +357,7 @@ $(document).ready(function() {
         $('[cancelar]').show()
     })
 
-    $('[confirmar]').click(e=>{
-        e.preventDefault()
-        $('[confirmar]').unbind('click').click()
-    })
+
 
     $('#cadastrarModal [salvarMudanca]').click(e => {
         e.preventDefault()
