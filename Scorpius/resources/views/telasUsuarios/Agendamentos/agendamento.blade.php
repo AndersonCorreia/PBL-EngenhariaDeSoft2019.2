@@ -22,7 +22,7 @@
         </div>
         @endif
         <div class="col-12 mt-4 p-0">
-            <div class="container-fluid scorpius-border-shadow p-4" >
+            <div class="col scorpius-border-shadow p-0" >
                 @include('telasUsuarios.Agendamentos._includes.calendar')
             </div>
         </div>

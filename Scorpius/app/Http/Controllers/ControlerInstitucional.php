@@ -81,7 +81,7 @@ class ControlerInstitucional extends Controller {
         try{
             $pro_instDAO->INSERTbyID($_POST['ID'], $id_user);
         }
-        catch(\MysqliException $e){
+        catch(\RuntimeException $e){
             $pro_instDAO->ativarbyID($_POST['ID'], $id_user);
         }   
 

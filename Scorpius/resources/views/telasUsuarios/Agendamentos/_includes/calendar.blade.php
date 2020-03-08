@@ -12,7 +12,7 @@
 
 <div class="row col-12 m-0 p-0 font-weight-bold text-center" >
     <div class="row col-12 m-0 p-0">
-        <div id="calendario" class="col-12 pt-2 px-2 m-0 overfloh-75 w-auto barra">
+        <div id="calendario" class="col-12 pt-2 px-md-2 px-0 m-0 overflow-75 w-auto barra">
             <div class="col p-0 text-dark font-weight-bold">
                 <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('{{($turno ?? 'diurno')}}')" disabled>
                     <i class="fas fa-angle-left"></i>
@@ -34,13 +34,15 @@
                             <div class="col col-lg-12 p-0 mt-lg-4 m-1">Noite</div>
                         @endif
                     </div>
-                    <div class="col-lg-11 p-0 m-0 col row">
+                    <div class="col-lg-11 p-0 m-0 col-12 row">
                     @foreach ($visitas as $dia => $v)
                         @if ($loop->index>0 && $loop->index<11 )
-                        <div id="dia{{$loop->index}}" class="row col-md m-md-0 mx-md-1 p-0 border"> 
-                            <div id="data{{$loop->index}}" class="col-4 col-lg-12 p-2">{{ $v["data"] ?? "27/01 SEG" }}</div>
+                        <div id="dia{{$loop->index}}" class="row col-12 col-md m-0 mx-md-1 p-0 border"> 
+                            <div id="data{{$loop->index}}" class="col-4 col-lg-12 p-2">
+                                {{ $v["data"] }}
+                            </div>
                             @if(($turno ?? "diurno")==="diurno") 
-                                <div class="col col-lg-12 py-1 p-0">
+                                <div class="col col-lg-12 py-1 p-0 m-0">
                                 @if( isset($v["manhã.btn"]) )
                                     <button id="manhã{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','manhã')"
                                         class="btn w-50 h-100 border border-secondary {{$v["manhã.btn"]}}"></button>
@@ -49,7 +51,7 @@
                                         class="btn w-50 h-100 border border-secondary btn-default" disabled></button>
                                 @endif
                                 </div>
-                                <div class="col col-lg-12 py-1 p-0">
+                                <div class="col col-lg-12 py-1 p-0 m-0">
                                 @if( isset($v["tarde.btn"]) )
                                     <button id="tarde{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','manhã')"
                                         class="btn w-50 h-100 border border-secondary {{$v["tarde.btn"]}}"></button>
@@ -59,7 +61,7 @@
                                 @endif
                                 </div>
                             @else
-                                <div class="col col-lg-12 py-1 p-0">
+                                <div class="col col-lg-12 py-1 p-0 m-0">
                                 @if( isset($v["noite.btn"]) )
                                     <button id="noite{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','manhã')"
                                         class="btn w-50 h-100 border border-secondary {{$v["noite.btn"]}}"></button>
@@ -77,19 +79,19 @@
                 </div>
             </div>
             <hr class="my-1 m-0 p-0 linha rounded bg-light col-12">
-            <div class="row col-12 mb-1 m-0 p-0 pt-1 text-left">
+            <div class="row col-12 mb-1 m-0 py-0 px-auto pt-1 text-left">
                 <div class="col-12 col-lg-2 py-1 text-center d-none d-lg-block">
                     <span> Legenda:</span>
                 </div>
-                <div class="col-7 col-lg-3 py-1">
+                <div class="col-7 col-lg-3 py-1 p-0 m-0">
                     <a class="btn {{ $legendaCores["proprio"] }} h-75 w-auto" aria-disabled="true" disabled></a> 
                     <span> Seu agendamento</span>
                 </div>
-                <div class="col-5 col-lg-2 py-1">
+                <div class="col-5 col-lg-2 py-1 p-0 m-0">
                     <a class="btn {{ $legendaCores["disponivel"] }} h-75 w-auto" aria-disabled="true" disabled></a>
                     <span> {{$tipoUserLegenda["leg.disponivel"]}}</span>
                 </div>
-                <div class="col-12 col-lg-5 py-1 ">
+                <div class="col-12 col-lg-5 py-1 p-0 m-0">
                     <a class="btn {{ $legendaCores["indisponivel"] }} h-75 w-auto" aria-disabled="true" disabled></a>
                     <span> {{$tipoUserLegenda["leg.indisponivel"]}}</span>
                 </div>
