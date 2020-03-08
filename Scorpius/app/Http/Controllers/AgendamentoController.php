@@ -122,6 +122,7 @@ class AgendamentoController extends Controller{
         $array = $this->getVisitas("noturno", "now", "anterior");
 
         $atividades = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente("noturno");
+        $agendamentos = (new AgendamentoIndividualDAO)->SELECT_VisitaIndividualByUserID(session('ID'));
         $tipoAtividade = 'atividade';
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Indisponivel", "tipo" => "visitante"];
         $variaveis = [
@@ -130,6 +131,7 @@ class AgendamentoController extends Controller{
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $visitante,
             'tipoAtividade' => $tipoAtividade,
+            'agendamentos' => $agendamentos,
             'turno' => 'noturno',
             $tipoAtividade => $atividades
         ];
@@ -180,24 +182,55 @@ class AgendamentoController extends Controller{
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $status = "Confirmado";
+        $exposicao = $_POST['exposicao'];
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
+        $visitantes = $this->getMatrizvisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
+        
         $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
+        $agendamento->setVisitantes($visitantes);        
+        $agendamento->setExposicaoID($exposicao);
 
         (new AgendamentoIndividualDAO)->INSERT($agendamento);
 
         return redirect()->route('dashboard');
+    }
+
+    public function agendarNoturno() {
+        
+        $id_user = session('ID');
+        $data = $_POST['data'];
+        $turno = $_POST['turno'];
+        $exposicao = $_POST['exposicao'];
+        $visitaDAO = new VisitaDAO();
+        $visita = $visitaDAO->SELECTbyData_Turno($data, $turno, true);
+        $visitantes = $this->getMatrizvisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
+        $qtdVistante = $visitaDAO->getQtdVisitantesIndividual($visita);//falta implementar
+        $limiteVagas = (new ExposicaoDAO())->SELECTbyID($exposicao)['quantidade_inscritos'];
+        
+        if( ($qtdVistante + \count($visitantes)) <= $limiteVagas){
+            
+            $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
+            $agendamento->setVisitantes($visitantes);        
+            $agendamento->setExposicaoID($exposicao);
+
+            (new AgendamentoIndividualDAO)->INSERT($agendamento);
+    
+            return redirect()->route('dashboard');
+        }
+        else {
+            ///informa de alguma forma que não foi possivel fazer o agendamento por conta das vagas
+            //possivelmente algum aviso na tela que só mostra com alguma variavel na session
+        }
     }
     /**
      * Cadastrar novo agendamento para uma atividade diferenciada
      * @return void
      */
     public function agendarAtividadeDiferenciada() {
-        
+        //falta terminar
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $status = "confirmado";
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
         $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
 
@@ -207,8 +240,8 @@ class AgendamentoController extends Controller{
     }
 
     /**
-     * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsvel
-     * no campo nome, e o cargo do ressponsavel no campo cargo;
+     * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsavel
+     * no campo nome, e o cargo do responsavel no campo cargo;
      *
      * @return void
      */
@@ -220,5 +253,21 @@ class AgendamentoController extends Controller{
         }
 
         return $responsaveis;
+    }
+
+    /**
+     * Criar uma matriz dos visitantes a partir de dois arryas. Em cada linha tera o nome do visitante
+     * no campo nome, o RG do visitante no campo RG e a idade do visitante no campo visitante;
+     *
+     * @return void
+     */
+    private function getMatrizVisitantes($arrayVis , $arrayIdade, $arrayRG){
+        $visitantes = [];
+
+        for ($i=0; $i < count($arrayResp) ; $i++) { 
+            $visitantes[$i] = [ 'nome' => $arrayVis[$i], 'RG' => $arrayRG[$i], 'idade' => $arrayIdade[$i] ];
+        }
+
+        return $visitantes;
     }
 }

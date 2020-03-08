@@ -1,11 +1,10 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Agendamento')
+@section('title', 'Agendamento Noturno')
 
 @section('conteudo')
-<link rel="stylesheet" href="{{ asset('css/scorpius.css') }}">
-
 <div class="row col-12 scorpius-border p-3">
+    @include('telasUsuarios.Agendamentos._includes.agendamentos')
     <div class="col-12 m-0 p-0 scorpius-border-shadow p-3 ">
         @include('telasUsuarios.Agendamentos._includes.escolhaDeExposicoes')
     </div>

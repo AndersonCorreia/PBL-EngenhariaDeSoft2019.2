@@ -9,9 +9,10 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
 	private $visita;
     private $statusAg;
     private $usuario_ID;
-    
+    private $exposicaoID;
+    private $visitantes;
 
-    public function __Construct($usuario_ID, $visita, $status){
+    public function __Construct($usuario_ID, $visita, $status = 'confirmado'){
         $this->usuario_ID = $usuario_ID;
         $this->visita = $visita;
         $this->statusAg = $status;
@@ -39,26 +40,6 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
         return $this->visita;
     }
 
-	public function setID($usuario_ID)
-    {
-        //$this->setAlterado();
-        $this->usuario_ID = $usuario_ID;
-    }
-    public function getID()
-    {
-        return $this->usuario_ID;
-	}
-	
-	public function setdata($data)
-    {
-        $this->setAlterado();
-        $this->data = $data;
-    }
-    public function getdata()
-    {
-        return $this->data;
-	}
-	
 	public function setStatusAg($statusAg)
     {
         $this->setAlterado();
@@ -67,16 +48,28 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
     public function getStatusAg()
     {
         return $this->statusAg;
-	}
-	
-
-    public function setUsuarioID($usuario_ID)
-    {
-        $this->setAlterado();
-        $this->usuario_ID = $usuario_ID;
     }
+    
+	public function setExposicaoID(int $exposicaoID){
+        $this->exposicaoID = $exposicaoID;
+    }
+    public function getExposicaoID()
+    {
+        return $this->exposicaoID;
+    }
+    
     public function getUsuarioID()
     {
         return $this->usuario_ID;
+    }
+    
+    public function getVisitantes()
+    {
+        return $this->visitantes;
+    }
+
+    public function setVisitantes(array $visitantes)
+    {   
+        $this->visitantes = $visitantes;
     }
 }

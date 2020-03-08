@@ -1,5 +1,7 @@
 <form id="form.agendamento" class="container-fluid m-0 p-2" method="POST"
-    action="{{route('AgendarDiurnoVisitante.post')}}">
+    action="{{ ($turno ?? "diurno") == 'diurno' ?
+                route('AgendarDiurnoVisitante.post') : route('AgendarNoturno.post')}}">
+
     {{csrf_field()}}
     <div id="dados-agendamento">
         <p class="h5">Dados para o agendamento</p>
@@ -38,7 +40,7 @@
                         placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
                 </div>
                 <div class="col-md-3 rg-visitante">
-                    <input id="RG" class="form-control" type="text" minlength="14" maxlength="15" name="rg"
+                    <input id="RG" class="form-control" type="text" minlength="14" maxlength="15" name="RG"
                         placeholder="XXXXXXXXXX" required>
                 </div>
                 <div class="col-md-2 idade-visitante">

@@ -16,7 +16,7 @@ use App\Model\Agendamento;
 
     function INSERT($agendamento): bool
     {
-        $this->dataBase->autocommit(FALSE); //desativando modificações automaticas no banco
+        $this->dataBase->autocommit(false); //desativando modificações automaticas no banco
 
         $visitaID = $agendamento->getVisita()->getID();
         $observacao = $agendamento->getObservacao();
