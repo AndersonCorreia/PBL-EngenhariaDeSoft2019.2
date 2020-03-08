@@ -65,9 +65,11 @@ use App\Model\Agendamento;
         }
     }
 
-    public function SELECT_VisitaInstitucionalByUserID(int $id){
+    public function SELECT_VisitaInstitucionalByUserID(int $id, string $data = null){
+        
+        $data = $data ? $data : now() ;
         $select = "SELECT instituicao, turma, data, turno, agendamentoStatus";
-        $sql = "$select FROM visita_institucional WHERE usuarioID = $id";
+        $sql = "$select FROM visita_institucional WHERE usuarioID = $id AND data >= '$data'";
         $result = $this->dataBase->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);

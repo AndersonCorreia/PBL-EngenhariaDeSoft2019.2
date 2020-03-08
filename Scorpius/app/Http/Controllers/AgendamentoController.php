@@ -73,6 +73,7 @@ class AgendamentoController extends Controller{
         $tipoAtividade ="exposições";
         $exposicoes = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente();
         $agendamentos = (new AgendamentoInstitucionalDAO)->SELECT_VisitaInstitucionalByUserID($userID);
+        $legenda = "(Limite de 3 Agendamentos Institucionais ativos no mesmo período )";
         $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID($userID);
         $turmas = (new TurmaDAO)->SELECTbyProfessorID($userID);
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
@@ -82,6 +83,7 @@ class AgendamentoController extends Controller{
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
             'tipoAtividade' => $tipoAtividade,
+            'legenda' => $legenda,
             'instituicoes' => $instituicoes,
             'turmas' => $turmas,
             'agendamentos' => $agendamentos,
@@ -94,14 +96,12 @@ class AgendamentoController extends Controller{
     public function agendamentoIndividual(){
 
         $array = $this->getVisitas("diurno", "now", "anterior");
-        $agendamentos = (new AgendamentoIndividualDAO)->SELECT_VisitaIndividualByUserID(session('ID'));
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $visitante,
-            'agendamentos' => $agendamentos
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
@@ -123,6 +123,7 @@ class AgendamentoController extends Controller{
 
         $atividades = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente("noturno");
         $agendamentos = (new AgendamentoIndividualDAO)->SELECT_VisitaIndividualByUserID(session('ID'));
+        $legenda = "(Limite de 3 Agendamentos noturnos ativos no mesmo período )";
         $tipoAtividade = 'atividade';
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Indisponivel", "tipo" => "visitante"];
         $variaveis = [
@@ -132,6 +133,7 @@ class AgendamentoController extends Controller{
             'tipoUserLegenda'=> $visitante,
             'tipoAtividade' => $tipoAtividade,
             'agendamentos' => $agendamentos,
+            'legenda' => $legenda,
             'turno' => 'noturno',
             $tipoAtividade => $atividades
         ];

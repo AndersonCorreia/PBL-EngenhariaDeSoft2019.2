@@ -35,10 +35,17 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         return $resultado;
     }
 
-    public function SELECT_VisitaIndividualByUserID(int $id){
+    public function SELECT_VisitaIndividualByUserID(int $id, string $data = null, string $turno = 'noite'){
+        
+        $data = $data ? $data : now() ;
         $select = "SELECT data, turno, agendamentoStatus";
-        $sql = "$select FROM visita_individual WHERE usuarioID = $id";
+        $sql = "$select FROM visita_individual WHERE usuarioID = $id AND data >= '$data' AND turno = '$turno'";
         $result = $this->dataBase->query($sql);
+
+        if($result->num_rows > 2){
+            throw new \Exception("Limite de agendamentos alcançado", 1);
+            
+        }
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
