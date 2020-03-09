@@ -9,6 +9,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
     private $titulo;
     private $tipo_evento;
     private $tema;
+    private $turno;
     private $descricao;
     private $quantidade_inscritos;
     private $data_inicial;
@@ -22,15 +23,16 @@ class Exposicao extends \App\DB\interfaces\DataObject
     }
     public function novaExposicao($dados): Exposicao
     {
+       
         $this->titulo = $dados['titulo'];
         $this->tipo_evento = $dados['tipo'];
         $this->tema = $dados['tema'];
+        $this->turno = $dados['turno'];
         $this->descricao = $dados['descricao'];
         $this->quantidade_inscritos = $dados['quantidade'];
         $this->data_inicial = $dados['data_inicial'];
         $this->data_final = $dados['data_final'];
         $this->imagem = $dados['imagem'];
-
         $this->exposicao->INSERT($this);
         return $this;
     }
@@ -48,6 +50,15 @@ class Exposicao extends \App\DB\interfaces\DataObject
     public function getTitulo()
     {
         return $this->titulo;
+    }
+
+    public function getTurno(){
+        return $this->turno;
+    }
+
+    public function setTurno($turno){
+        $this->setAlterado();
+        $this->turno = $turno;
     }
 
     public function setTipo_evento($tipo_evento)
@@ -78,6 +89,7 @@ class Exposicao extends \App\DB\interfaces\DataObject
     {
         return $this->descricao;
     }
+
 
     public function setQuantidade($quantidade_inscritos)
     {

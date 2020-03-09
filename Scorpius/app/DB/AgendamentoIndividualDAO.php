@@ -8,40 +8,45 @@ use App\Model\Agendamento;
 class AgendamentoIndividualDAO extends AgendamentoDAO {
 
     public function __Construct(){
-        parent::__Construct("agendamento_individual");
+        parent::__Construct("agendamento");
     }
 
 
-    function INSERT($agendamento): bool
-    {
+    function INSERT($agendamento): bool {
+
+        $this->dataBase->autocommit(false); //desativando modificações automaticas no banco
+
         $visitaID = $agendamento->getVisita()->getID();
         $statusAg = $agendamento->getStatusAg();
         $usuario_ID = $agendamento->getUsuarioID();
+        
          
-        $sql = "INSERT INTO agendamento_individual (visita, data_agendamento, status, usuario_ID) 
-        VALUE (
-            '$visita',
-            '$dataAgendamento',
-            '$statusAg',
-            '$usuario_ID'           
-        )";
+        $sql = "INSERT INTO agendamento (visita, status, usuario_ID) 
+        VALUE ( '$visitaID', '$statusAg', '$usuario_ID')";
         
         $resultado = $this->dataBase->query($sql);
 
         $agendamento->setID($this);
         $ID = $agendamento->getID();
-        //Fazer insert para lista de pessoas em um agendamento
+        //Fazer insert para lista de pessoas em um agendamento, usar getVisitantes
+        //Inseri a exposição escolhida tambem, vai servi pra atividade diferenciada e o noturno tb.
 
         $this->dataBase->commit();
-        // dd($resultado)
         return $resultado;
     }
 
-    function UPDATE($agendamento): bool
-    {
-        $sql = "UPDATE agendamento_individual 
-        SET status = $agendamento->getStatusAg()
-        WHERE ID = $agendamento->getID()";
-        return $this->dataBase->query($sql);
+    public function SELECT_VisitaIndividualByUserID(int $id, string $data = null, string $turno = 'noite'){
+        
+        $data = $data ? $data : now() ;
+        $select = "SELECT data, turno, agendamentoStatus";
+        $sql = "$select FROM visita_individual WHERE usuarioID = $id AND data >= '$data' AND turno = '$turno'";
+        $result = $this->dataBase->query($sql);
+
+        if($result->num_rows > 2){
+            throw new \Exception("Limite de agendamentos alcançado", 1);
+            
+        }
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }

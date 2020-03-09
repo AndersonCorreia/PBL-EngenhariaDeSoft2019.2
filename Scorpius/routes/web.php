@@ -39,23 +39,14 @@ Route::get("/dashboard", function (){
 
     return redirect()->route($rota);
 
-})->name("dashboard");//depois fazer o metodo
+})->name("dashboard");
 
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
 Route::resource('/cadastrar', 'CadastroController');
 // Chama o metódo do Inicialcontroller que retorna a página de entrar (login).
 Route::get('/entrar', 'InicialController@telaEntrar')->name('entrar');
-Route::get('/entrar/erro', 'InicialController@telaEntrarError')->name('loginError.show');
 Route::post('/entrar','UserController@login')->name('login');
 Route::get("/logout", 'UserController@logout')->name('logout');
-
-// Testes. PAGINA TEMPORARIA
-Route::resource('enviar-eventos', 'enviarEventosController');
-
-//rota para visualizar corbetura dos testes
-Route::get('/testes', function(){
-    return redirect("/build/coverage/index.html",307);
-});
 
 /**
  * Acionado quando o usuário apertar o botão "cadastre-se". Chamará o metódo do CadastroController que

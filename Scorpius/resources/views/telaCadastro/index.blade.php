@@ -104,12 +104,12 @@
     <!-- Senha -->
     <div class="form-group col-12 my-1">
         <label for="senha1">Senha</label>
-        <input minlength="4" maxlength="8" type="password" class="form-control" id="senha1" required>
+        <input minlength="4" maxlength="20" type="password" class="form-control" id="senha1" required>
     </div>
     <!-- Repitir senha -->
     <div class="form-group col-12 my-0">
         <label for="senha2">Repita a senha</label>
-        <input name="senha" minlength="4" maxlength="8" onkeyup="confirmarSenha()" aria-describedby="senhaHelp" type="password" class="form-control" id="senha2" required>
+        <input name="senha" minlength="4" maxlength="20" onkeyup="confirmarSenha()" aria-describedby="senhaHelp" type="password" class="form-control" id="senha2" required>
         <small id="senhaHelp" class="form-text text-danger"></small>
     </div>
 

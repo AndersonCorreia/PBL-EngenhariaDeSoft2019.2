@@ -20,6 +20,9 @@ class Usuario extends Pessoa{
         $this->usuario->INSERT($this);
         return $this;
     }
+    public function pesquisaNome($nome){
+        return $this->usuario->SELECTbyNome($nome);
+    }
     public function pesquisaEmail($email){
         return $this->usuario->SELECTbyEmail($email);
     }
@@ -35,8 +38,12 @@ class Usuario extends Pessoa{
     public function deletarDesativo($email){
         return $this->usuario->DELETEbyEmail($email);
     }
-    public function alterarDados($nome, $email, $telefone){}
-    
+    public function getDados($id){
+        return (new UsuarioDAO)->getDadosUsuario($id);
+    }
+    public function alterarDados($nome,$telefone,$cpf,$senha,$id){     
+        return (new UsuarioDAO)->alterarDadosUsuario($nome,$cpf,$telefone,$senha,$id);
+    }    
     public function cancelarAgendamento($agendamento){}
 
     public function notificaEmail($mensagem){}

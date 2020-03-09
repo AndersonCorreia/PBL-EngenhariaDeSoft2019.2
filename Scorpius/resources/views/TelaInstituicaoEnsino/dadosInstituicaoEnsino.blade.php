@@ -30,10 +30,6 @@
                         </datalist>
                     </div>
 
-                    <div class="col-sm-2 col-xl-1 col-8 my-1 mx-sm-2 my-sm-0 p-0 d-block">
-                        <button type="button" class="btn btn-primary float-right" onclick="getDados()"
-                            buscar>Buscar</button>
-                    </div>
                     <div class="col-sm-2 col-xl-1 col-4 my-1 m-sm-0 p-0 d-block">
                         <button type="button" class="btn btn-danger float-right"
                             limpar>Limpar</button>

@@ -25,20 +25,15 @@
             </div>
             <div class="col-md-4">
                 <label for="data">Data</label>
-                <input class="form-control" type="date" id="data" min="{{$visitas["datas"]['data0']}}"
-                    max="{{$visitas["datas"]['dataLimite']}}" name="data" required>
+                <input class="form-control" type="date" id="data" min="{{$visitas['datas']['data0']}}"
+                    max="{{$visitas['datas']['dataLimite']}}" name="data" required>
             </div>
-            <div class="col-md-4">
-            @if(($turno ?? "diurno")==="diurno") 
+            <div class="col-md-4"> 
                 <label for="turno">Turno</label>
                 <select id="turno" name="turno" class="custom-select" placeholder="turno" required>
                     <option value="manhã">Manhã</option>
                     <option value="tarde">Tarde</option>
                 </select>
-            @else
-                <label for="selectTurno">Turno</label>
-                <input class="form-control" type="text" placeholder="Noturno" readonly>
-            @endif
             </div>
         </div>
         <div id="dados-responsavel" class="mt-3">

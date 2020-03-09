@@ -16,7 +16,7 @@ use App\Model\Agendamento;
 
     function INSERT($agendamento): bool
     {
-        $this->dataBase->autocommit(FALSE); //desativando modificações automaticas no banco
+        $this->dataBase->autocommit(false); //desativando modificações automaticas no banco
 
         $visitaID = $agendamento->getVisita()->getID();
         $observacao = $agendamento->getObservacao();
@@ -40,7 +40,14 @@ use App\Model\Agendamento;
     }
 
     private function INSERT_Alunos( array $Alunos, int $ID){
-
+        $count = count($Alunos);
+        for($i = 0; $i < $count; $i++){
+            $nome = $Alunos[$i]['nome'];
+            $idade = $Alunos[$i]['idade'];
+            $sql = "INSERT INTO visitante_institucional (nome, idade, agendamento_institucional_ID) VALUE 
+                ('$nome', $idade, $ID)";
+            $this->dataBase->query($sql);
+        }
     }
 
     private function INSERT_Exposicoes( array $Exposicoes, int $ID){
@@ -48,7 +55,24 @@ use App\Model\Agendamento;
     }
 
     private function INSERT_Responsaveis( array $Responsaveis, int $ID){
-        
+        $count = count($Responsaveis);
+        for($i = 0; $i < $count; $i++){
+            $nome = $Responsaveis[$i]['nome'];
+            $cargo = $Responsaveis[$i]['cargo'];
+            $sql = "INSERT INTO Responsavel (nome, cargo, agendamento_institucional_ID) VALUE 
+                ('$nome', '$cargo', $ID)";
+            $this->dataBase->query($sql);
+        }
     }
- }
+
+    public function SELECT_VisitaInstitucionalByUserID(int $id, string $data = null){
+        
+        $data = $data ? $data : now() ;
+        $select = "SELECT instituicao, turma, data, turno, agendamentoStatus";
+        $sql = "$select FROM visita_institucional WHERE usuarioID = $id AND data >= '$data'";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+}
 

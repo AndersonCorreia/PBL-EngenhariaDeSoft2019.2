@@ -3,7 +3,8 @@
 namespace App\Exceptions;
 
 /**
- * Exception costumizada para erro de um usuario que não cadastrou nenhuma instituição
+ * Exception costumizada para erro quando nenhuma visita é encontrada para os dados informados
+ * Para Cod = 2 , significa que a buscar por uma visita especifica não obteve resultados.
  */
 class NenhumaVisitaEncontradaException extends \Exception {
 

@@ -10,7 +10,7 @@ class UsuarioDAO extends DataAccessObject{
         parent::__Construct("usuario");
     }
 
-    function INSERT($usuario): bool
+    function INSERT(Object $usuario): bool
     {
         $nome = $usuario->getNome();
         $email = $usuario->getEmail();
@@ -36,6 +36,16 @@ class UsuarioDAO extends DataAccessObject{
         // dd($resultado);
         return $resultado;
     }
+    function SELECTbyNome($nome){
+        $sql = "SELECT * FROM usuario WHERE nome='$nome'";
+        $resultado = $this->dataBase->query($sql);
+        // $row = $resultado->fetch_assoc();
+        if($resultado->num_rows > 0){
+            return TRUE;
+        }
+        return FALSE;
+    }
+
     function SELECTbyEmail($email){
         $sql = "SELECT * FROM usuario WHERE email='$email'";
         $resultado = $this->dataBase->query($sql);
@@ -60,11 +70,39 @@ class UsuarioDAO extends DataAccessObject{
         $row = $resultado->fetch_assoc();
         return $row['ID'];
     }
+    public function getDadosUsuario($id){
+        $sql = "SELECT nome,cpf,telefone,email,senha,id FROM usuario WHERE id = $id";
+        $resultado = $this->dataBase->query($sql);
+        return $resultado->fetch_assoc(); 
+    }
+    public function alterarDadosUsuario($nome,$cpf,$telefone,$senha,$id){       
+        $sql = "UPDATE usuario SET `nome`='$nome',`senha`='$senha',`CPF`='$cpf',
+                      `telefone`='$telefone' WHERE ID=$id";
+        $stmt = $this->dataBase->prepare($sql);
+        //$stmt->bind_param("sssii",$nome,$senha,$cpf,$telefone,$id);
+        return $stmt->execute();
+    }
     public function DELETEbyEmail($email)
     {
         return $this->dataBase->query("DELETE FROM email_verificacao WHERE usuario_email = '$email'");;
     }
-    function UPDATE(object $object): bool{}
+    function UPDATE(Object $user): bool{
+        $params =[
+            $nome = $user->pesquisaNome(),
+            $email = $user->pesquisaEmail(),
+            $cpf = $user->pesquisaCpf(),
+            $tel = $user->tipoUsuario(),
+            $id= $user->getID()
+        ];
+
+        $set  ="nome = ?, email = ?, cpf = ?, tel = ?, id = ?";
+        $sql  = "UPDATE usuario i SET $set WHERE i.id = ?";
+
+        $stmt = $this->dataBase->prepare($sql);
+       
+        $stmt->bind_param("ssssssssi", ...$params);
+        
+    }
     
     function UPDATEATIVO($email): bool
     {

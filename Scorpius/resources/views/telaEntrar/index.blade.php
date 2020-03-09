@@ -54,7 +54,7 @@
 <form class="form-group mt-5 mx-auto col col-md-10" action={{ route("login") }} method="POST">
     {{csrf_field()}}
 
-    @if( $loginError )
+    @if( session('loginErro',false) )
     <div class="alert alert-danger font-weight-bold text-center" role="alert">
         <span>Credenciais incorretas: usuario não existe ou senha incorreta.</span>
     </div>
@@ -64,12 +64,12 @@
     <div class="form-group">
         <label for="emailCadastro">E-mail ou CPF</label>
         <input class="form-control" placeholder="exemplo@exemplo.com" id="emailCadastro" name="e-mail" type="text"
-            aria-describedby="emailHelp" required>
+            aria-describedby="emailHelp" value="{{session('login','')}}" required>
     </div>
     <!-- Senha -->
     <div class="form-group">
         <label for="senha">Senha</label>
-        <input minlength="4" maxlength="8" type="password" class="form-control" id="senha" name="senha" required>
+        <input minlength="4" maxlength="20" type="password" class="form-control" id="senha" name="senha" required>
     </div>
 
     <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Entrar</button>

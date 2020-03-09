@@ -9,6 +9,7 @@ use App\Model\Professor_instituicao;
 use App\DB\PessoaDAO;
 use App\DB\Professor_InstituicaoDAO;
 use App\DB\VisitaDAO;
+use App\DB\UsuarioDAO;
 use App\DB\AlunoDAO;
 use App\DB\ExposicaoDAO;
 use App\DB\TurmaDAO;
@@ -19,12 +20,10 @@ use App\DB\AgendamentoInstitucionalDAO;
 use App\DB\AgendamentoIndividualDAO;
 use App\DB\AgendamentoDAO;
 
-require_once __DIR__."/../../../resources/views/util/layoutUtil.php";
-
 class AgendamentoController extends Controller{   
 
     public function confirmacaoAgendamento(Request $dados){
-        $DAO = new AgendamentoDAO();
+        $DAO = new AgendamentoInstitucionalDAO();
         $DAO->confirmaAgendamento($dados->nomeTabela,$dados->status,$dados->ID);
         $DAO->contAgendamento("cont_agendamento_cancelado", $dados->user_ID);
         if($dados->nomeTabela == "agendamento_institucional"){
@@ -68,23 +67,26 @@ class AgendamentoController extends Controller{
      * @return void
      */
     public function agendamento(){
-
+        
         $array = $this->getVisitas("diurno", "now", "anterior");
-        $DAO = new ExposicaoDAO();
-        $exposicoes = $DAO->SELECT_ALL_AtividadePermanente();
+        $userID = session("ID");
         $tipoAtividade ="exposições";
-        $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID(session("ID"));
-        $turmas = (new TurmaDAO)->SELECTbyProfessorID(session("ID"));
+        $exposicoes = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente();
+        $agendamentos = (new AgendamentoInstitucionalDAO)->SELECT_VisitaInstitucionalByUserID($userID);
+        $legenda = "(Limite de 3 Agendamentos Institucionais ativos no mesmo período )";
+        $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID($userID);
+        $turmas = (new TurmaDAO)->SELECTbyProfessorID($userID);
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Entrar na Lista de Espera", "tipo" => "institucional"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $institucional,
             'tipoAtividade' => $tipoAtividade,
+            'legenda' => $legenda,
             'instituicoes' => $instituicoes,
             'turmas' => $turmas,
+            'agendamentos' => $agendamentos,
             $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
         ];
 
@@ -96,11 +98,10 @@ class AgendamentoController extends Controller{
         $array = $this->getVisitas("diurno", "now", "anterior");
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
-            'tipoUserLegenda'=> $visitante
+            'tipoUserLegenda'=> $visitante,
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
@@ -109,7 +110,6 @@ class AgendamentoController extends Controller{
     public function agendamentoAtividadeDiferenciada(){
 
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita"
         ];
 
@@ -122,15 +122,18 @@ class AgendamentoController extends Controller{
         $array = $this->getVisitas("noturno", "now", "anterior");
 
         $atividades = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente("noturno");
+        $agendamentos = (new AgendamentoIndividualDAO)->SELECT_VisitaIndividualByUserID(session('ID'));
+        $legenda = "(Limite de 3 Agendamentos noturnos ativos no mesmo período )";
         $tipoAtividade = 'atividade';
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Indisponivel", "tipo" => "visitante"];
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $visitante,
             'tipoAtividade' => $tipoAtividade,
+            'agendamentos' => $agendamentos,
+            'legenda' => $legenda,
             'turno' => 'noturno',
             $tipoAtividade => $atividades
         ];
@@ -171,8 +174,8 @@ class AgendamentoController extends Controller{
     }
 
     /**
-     * Cadastrar novo agendamento de uma conta usuário visitante normal
-     * inserir dados do agendamento pelo POST na classe agendamento, que chama o método de
+     * Cadastrar novo agendamento de uma conta individual
+     * Inserir dados do agendamento pelo POST na classe agendamento, que chama o método de
      * inserir no banco de dados
      * @return void
      */
@@ -181,37 +184,66 @@ class AgendamentoController extends Controller{
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
+        $exposicao = $_POST['exposicao'];
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
-        $agendamento = new AgendamentoIndividual($id_user, $visita);
+        $visitantes = $this->getMatrizvisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
+        
+        $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
+        $agendamento->setVisitantes($visitantes);        
+        $agendamento->setExposicaoID($exposicao);
 
         (new AgendamentoIndividualDAO)->INSERT($agendamento);
 
-        return redirect()->route('AgendarDiurnoVisitante.show');
+        return redirect()->route('dashboard');
     }
 
-    public function atividadeError(){
+    public function agendarNoturno() {
+        
+        $id_user = session('ID');
+        $data = $_POST['data'];
+        $turno = $_POST['turno'];
+        $exposicao = $_POST['exposicao'];
+        $visitaDAO = new VisitaDAO();
+        $visita = $visitaDAO->SELECTbyData_Turno($data, $turno, true);
+        $visitantes = $this->getMatrizvisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
+        $qtdVistante = $visitaDAO->getQtdVisitantesIndividual($visita);//falta implementar
+        $limiteVagas = (new ExposicaoDAO())->SELECTbyID($exposicao)['quantidade_inscritos'];
+        
+        if( ($qtdVistante + \count($visitantes)) <= $limiteVagas){
+            
+            $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
+            $agendamento->setVisitantes($visitantes);        
+            $agendamento->setExposicaoID($exposicao);
 
-        $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Agendar Visita"
-        ];
-
-        return view('telasUsuarios.Agendamentos.errorNenhumaAtividade',$variaveis);
+            (new AgendamentoIndividualDAO)->INSERT($agendamento);
+    
+            return redirect()->route('dashboard');
+        }
+        else {
+            ///informa de alguma forma que não foi possivel fazer o agendamento por conta das vagas
+            //possivelmente algum aviso na tela que só mostra com alguma variavel na session
+        }
     }
+    /**
+     * Cadastrar novo agendamento para uma atividade diferenciada
+     * @return void
+     */
+    public function agendarAtividadeDiferenciada() {
+        //falta terminar
+        $id_user = session('ID');
+        $data = $_POST['data'];
+        $turno = $_POST['turno'];
+        $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
+        $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
 
-    public function visitaError(){
+        (new AgendamentoIndividualDAO)->INSERT($agendamento);
 
-        $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Agendar Visita"
-        ];
-
-        return view('telasUsuarios.Agendamentos.errorNenhumaVisita',$variaveis);
+        return redirect()->route('dashboard');
     }
 
     /**
-     * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsvel
-     * no campo nome, e o cargo do ressponsavel no campo cargo;
+     * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsavel
+     * no campo nome, e o cargo do responsavel no campo cargo;
      *
      * @return void
      */
@@ -219,9 +251,25 @@ class AgendamentoController extends Controller{
         $responsaveis = [];
 
         for ($i=0; $i < count($arrayResp) ; $i++) { 
-            $responsaveis[$i] = [ 'nome' => $arrayResp[$i], 'cargo' => $arrayCargo];
+            $responsaveis[$i] = [ 'nome' => $arrayResp[$i], 'cargo' => $arrayCargo[$i] ];
         }
 
         return $responsaveis;
+    }
+
+    /**
+     * Criar uma matriz dos visitantes a partir de dois arryas. Em cada linha tera o nome do visitante
+     * no campo nome, o RG do visitante no campo RG e a idade do visitante no campo visitante;
+     *
+     * @return void
+     */
+    private function getMatrizVisitantes($arrayVis , $arrayIdade, $arrayRG){
+        $visitantes = [];
+
+        for ($i=0; $i < count($arrayResp) ; $i++) { 
+            $visitantes[$i] = [ 'nome' => $arrayVis[$i], 'RG' => $arrayRG[$i], 'idade' => $arrayIdade[$i] ];
+        }
+
+        return $visitantes;
     }
 }

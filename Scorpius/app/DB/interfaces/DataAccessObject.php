@@ -37,8 +37,10 @@ abstract class DataAccessObject {
      * @param string $table tabela onde será executada a query
      * @return mysqli_result|bool
      */
-    public function SELECT_ALL(){
-        $result = $this->dataBase->query(" SELECT * FROM ".$this->table);
+    public function SELECT_ALL($table = false){
+        
+        $table = $table ? $table : $this->table;
+        $result = $this->dataBase->query(" SELECT * FROM ".$table);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -106,9 +108,11 @@ abstract class DataAccessObject {
         return $this->dataBase->insert_id;
     }
     
+    /**
+     * Automaticamente cancelar qualquer transação que não foi commitada para o banco
+     * util quando alguma query lançar exception durante uma serie de commits com o autocommit = false;
+     */
     function __destruct(){
-        //automaticamente cancelar qualquer transação que não foi commitada para o banco
-        //util quando alguma query lançar exception durante uma serie de commits com o autocommit = false;
         $this->dataBase->rollback();
     }
     

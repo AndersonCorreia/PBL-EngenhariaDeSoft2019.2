@@ -4,16 +4,16 @@
 
 @section('conteudo')
 
-<div class="row col-12">
-    <div class="container-fluid p-4">
-        @if(true){{-- isset($agendamentos) --}}
-        <div class="row col-12 mb-3 m-0 pb-2 scorpius-border-shadow">
-            <h4 class="text-primary ml-2">Seus Proximos Agendamentos </h4>
-            <small class="text-secondary ml-1 pt-2 m-0 p-0"> (Limite de 3 Agendamentos institucionais ativos no mesmo período )</small>
-            <hr class="bg-light col-11 linha rounded p-0 m-0">
-            @include('telasUsuarios.Agendamentos._includes.agendamentos')
-        </div>
-        @endif
+@if( session('erroDataTurno')) 
+<div class="alert alert-danger mx-auto col-10" role="alert">
+    <p>Não foi possivel realizar o agendamento com a data e o turno informado. <br>
+       Os dias disponiveis estão visiveis no calendario, selecione uma data clicando na data desejada no calendário. 
+    </p>
+</div>
+@endif
+<div class="row col-12 m-0 p-0">
+    <div class="container-fluid px-4">
+        @include('telasUsuarios.Agendamentos._includes.agendamentos')
         @if($tipoUserLegenda["tipo"] == "institucional")
         <div class="col-12 m-0 p-0">
             <div class="container-fluid bg-white scorpius-border-shadow p-3" >
@@ -22,7 +22,7 @@
         </div>
         @endif
         <div class="col-12 mt-4 p-0">
-            <div class="container-fluid scorpius-border-shadow p-4" >
+            <div class="col scorpius-border-shadow p-0" >
                 @include('telasUsuarios.Agendamentos._includes.calendar')
             </div>
         </div>

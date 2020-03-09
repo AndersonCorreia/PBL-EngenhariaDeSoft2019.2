@@ -47,26 +47,31 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {   
         if($exception instanceof NenhumaInstCadastradaException){
-            
-            return redirect()->route('errorNenhumaInstituicao.show');
+
+            return redirect()->route('vErros')->with('viewErro','TelaInstituicaoEnsino.errorNenhumaInstituicao');
         }
         elseif($exception instanceof NenhumaTurmaCadastradaException){
             
-            return redirect()->route('errorNenhumaTurma.show');   
+            return redirect()->route('vErros')->with('viewErro','telaTurma.errorNenhumaTurma');
         }
         elseif($exception instanceof UsuarioNaoEncontradoException){
-            
-            return redirect()->route('loginError.show');
+
+            return redirect()->back()->with(['loginErro' => true, 'login' => $_POST['e-mail'] ]);
         }
         elseif($exception instanceof NenhumaVisitaEncontradaException){
+
+            if( $exception->getCode() == 2 ){
+                return back()->with(['erroDataTurno' => true]);
+            }
             
-            return redirect()->route('Visita.error');
+            return redirect()->route('vErros')->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaVisita');
         }
         elseif($exception instanceof NenhumaAtividadeEncontradaException){
             
-            return redirect()->route('Atividade.error');
+            return redirect()->route('vErros')->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaAtividade');
         }
         else {
+
             return parent::render($request, $exception);
         }
     }

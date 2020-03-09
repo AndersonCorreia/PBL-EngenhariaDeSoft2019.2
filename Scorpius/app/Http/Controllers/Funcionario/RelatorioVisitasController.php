@@ -10,11 +10,9 @@ namespace App\Http\Controllers\Funcionario;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-require_once __DIR__."/../../../../resources/views/util/layoutUtil.php";
 
 class RelatorioVisitasController extends Controller{
     public function getTelaRelatorioVisitas(){
-        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
         $id_user = 601;
         $variaveis = ['itensMenu' => getMenuLinks()];
         return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $variaveis);

@@ -3,8 +3,8 @@
 //Rota dashboard estagiario
 Route::get('/estagiario/dashboard', 'UserController@getDashboard')->name('dashboardEstagiario.show');
 
-//Rota dashboard funcionario
-Route::get('/funcionario/dashboard', 'UserController@getDashboard')->name('dashboardFuncionario.show');
+//Rota Dashboard do Funcionário.
+//Route::get('/funcionario/dashboard', 'UserController@getTelaDashboardFuncionario')->name('telaDashboardFuncionario.show');
 
 //Rota dashboard adm
 Route::get('/adm/dashboard', 'UserController@getDashboard')->name('dashboardAdm.show');
@@ -44,14 +44,23 @@ Route::group(
     'namespace'=>'Funcionario'],
     function(){
         Route::get('/relatorioVisitasAgendadas', 'RelatorioVisitasController@getTelaRelatorioVisitas')->name("telaRelatorioVisitasAgendadas.show");
+    }
+);
+
+Route::group(
+    ['midlleware'=>[], 
+    'prefix'=>'funcionario',
+    'namespace'=>'Funcionario'],
+    function(){
         Route::get('/gerenciamentoDeEventos','GerenciamentoDeEventosController@getTelaGerenciamentoDeEventos')->name("telaGerenciamentoDeEventos.show");
         Route::put('/gerenciamentoDeEventos/atualizar/{id}','GerenciamentoDeEventosController@update')->name("atualizarEvento");
         Route::get('/gerenciamentoDeEventos/editar/{id}','GerenciamentoDeEventosController@edit')->name("editarEvento");
         Route::get('/gerenciamentoDeEventos/remove/{id}','GerenciamentoDeEventosController@destroy')->name("removeEvento");
+        Route::post('/gerenciamentoDeEventos','GerenciamentoDeEventosController@cadastrar')->name("cadastroEvento");
     }
 );
 
-
+Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");
 Route::group(
     ['midlleware'=>[],
     'prefix'=>'estagiario',
@@ -62,3 +71,4 @@ Route::group(
     }
 );
 
+?>

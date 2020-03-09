@@ -10,15 +10,14 @@ namespace App\Http\Controllers\Funcionario;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-
-class VisitaController extends Controller{
-    public function getTelaVisita(){
+class DashboardController extends Controller{
+    public function getTelaDashboardFuncionario(){
         //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
-        $id_user = 601;
+        $id_user = session('ID');
         $variaveis = [
-            'paginaAtual' => "Gerenciamento de Visitas"   
+            'paginaAtual' => "Painel de Controle do Funcionário"   
         ];
-        return view('telaGerenciamentoDeVisitas.telaGerenciamentoDeVisitas', $variaveis);
+        return view('TelaDashboardFuncionario.telaDashboardFuncionario', $variaveis);
     }
 }
 ?>

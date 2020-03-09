@@ -1,6 +1,6 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Agendamento')
+@section('title', 'Agendamento de Atividades Diferenciadas')
 
 @section('conteudo')
 
