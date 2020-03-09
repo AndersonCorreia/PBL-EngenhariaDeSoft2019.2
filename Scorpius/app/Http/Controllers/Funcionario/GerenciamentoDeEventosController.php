@@ -20,12 +20,10 @@ class GerenciamentoDeEventosController extends Controller{
     public function getTelaGerenciamentoDeEventos(){
         //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
         $id_user = session('ID');
-        $exposicoes = (new ExposicaoDAO)->SELECT_Eventos('ID, titulo, tipo_evento, tema_evento, turno, descricao, quantidade_inscritos, data_inicial, data_final');
+        $exposicoes = (new ExposicaoDAO)->SELECT_Eventos('ID, titulo, tipo_evento, tema_evento, turno, descricao, quantidade_inscritos, data_inicial, data_final, imagem');
         $variaveis = [
             'paginaAtual' => "Gerenciamento de Eventos",
-            'exposicoes' => $exposicoes,
-            'try' => 'ND', 
-            'log' => 'ND'
+            'exposicoes' => $exposicoes
         ];
         return view('TelaGerenciamentoDeEventos.telaGerenciamentoDeEventos', $variaveis);
     }
@@ -36,11 +34,51 @@ class GerenciamentoDeEventosController extends Controller{
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
-    }
+        $titulo = $req->titulo;
+        $tipoEvento = $req->evento;
+        $tema = $req->tema;
+        $descricao = $req->descricao;
+        $quantidade = $req->quantidade;
+        $turno = $req->turno;
+        $data_inicial = $req->data_inicial;
+        $data_final = $req->data_final;
+        $token = $req->_token;
+        
+        try {
 
+            $imagem = $_FILES['imagem']['tmp_name'];
+            $tamanho = $_FILES['imagem']['size'];
+            $conteudo=null;
+            if ($tamanho >0) {
+                $fp = fopen($imagem, "rb");
+                $conteudo = fread($fp, $tamanho);
+                $conteudo = addslashes($conteudo);
+                fclose($fp);
+            }
+
+            $dadosEvent = (object)array(
+                'id' => $id,
+                'titulo' => $titulo,
+                'tipo' => $tipoEvento,
+                'tema' => $tema,
+                'turno'=>$turno,
+                'descricao' => $descricao,
+                'quantidade' => $quantidade,
+                'data_inicial' => $data_inicial,
+                'data_final' => $data_final,
+                'imagem' => $conteudo
+            );
+            
+        (new ExposicaoDAO)->UPDATE($dadosEvent);
+        } catch (Exception $e) {
+            $log = $e->getMessage();
+            dd($log);
+        }
+        return redirect()->route('telaGerenciamentoDeEventos.show');
+    }
+       
     
 
     public function destroy($id)
