@@ -45,8 +45,10 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["atualizarEvento"] = 'cadastrar e modificar atividades' ;
         $this->RotasPermissoes["editarEvento"] = 'cadastrar e modificar atividades' ;
         $this->RotasPermissoes["removeEvento"] = 'cadastrar e modificar atividades' ;
-        $this->RotasPermissoes["CadastroUsuario.show" ] = 'criar usuarios';
-        $this->RotasPermissoes["CadastroUsuario.post" ] = 'criar usuarios';
+       // $this->RotasPermissoes["CadastroUsuario.show" ] = 'criar usuarios';
+        //$this->RotasPermissoes["CadastroUsuario.post" ] = 'criar usuarios';
+        $this->RotasPermissoes["cadastroAdm"] = 'criar usuario';
+
         //$this->RotasPermissoes["nome da rota" ] = 'permissão associada como ta escrito no banco';
     }
     

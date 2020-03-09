@@ -10,6 +10,7 @@
 |
 */
 
+
 Route::get('/', ['uses'=>'InicialController@inicio'])->name('paginaInicial');
 Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");
 Route::get("/dashboard", function (){

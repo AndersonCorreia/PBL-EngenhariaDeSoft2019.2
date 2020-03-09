@@ -16,7 +16,7 @@ Senha
 Confirmacao
 Tel de contato
 tipo de usuario --}}
-<form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="{{route('CadastroUsuario.post')}}">
+<form class="col-lg-10 col-xl-9 col-12 mx-sm-auto mt-sm-4" method="POST" action="">
     {{csrf_field()}}
     <div class="form-group">
         <label for="Nome">Nome</label>
@@ -70,5 +70,4 @@ tipo de usuario --}}
 
 @section('js')
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
-{{-- <script src="{{ asset("/js/cadastroInstituicao.js")}}" ></script> --}}
 @endsection
