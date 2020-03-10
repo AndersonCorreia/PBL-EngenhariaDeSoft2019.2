@@ -4,14 +4,7 @@
 Route::get('/estagiario/dashboard', 'UserController@getDashboard')->name('dashboardEstagiario.show');
 
 //Rota Dashboard do Funcionário.
-Route::group(
-    ['midlleware'=>[], 
-    'prefix'=>'funcionario',
-    'namespace'=>'Funcionario'],
-    function(){
-        Route::get('/dashboardFuncionario', 'DashboardController@getTelaDashboardFuncionario')->name("dashboardFuncionario.show");
-    }
-);
+//Route::get('/funcionario/dashboard', 'UserController@getTelaDashboardFuncionario')->name('telaDashboardFuncionario.show');
 
 //Rota dashboard adm
 Route::get('/adm/dashboard', 'UserController@getDashboard')->name('dashboardAdm.show');
@@ -24,6 +17,15 @@ Route::group(
     'namespace'=>'Funcionario'],
     function(){
         Route::get('/gerenciamentoDeVisitas', 'VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
+    }
+);
+
+Route::group(
+    ['midlleware'=>[], 
+    'prefix'=>'funcionario',
+    'namespace'=>'Funcionario'],
+    function(){
+        Route::get('/dashboardFuncionario', 'DashboardController@getTelaDashboardFuncionario')->name("dashboardFuncionario.show");
     }
 );
 
