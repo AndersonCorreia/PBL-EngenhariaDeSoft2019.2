@@ -35,11 +35,21 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         return $resultado;
     }
 
-    public function SELECT_VisitaIndividualByUserID(int $id, string $data = null, string $turno = 'noite'){
+    /**
+     * Função para retornar os dados basicos de um agendamento individual.
+     *
+     * @param integer $id id do usuario
+     * @param string $data data da pesquisa dos registro, combinada com o parametro op pode servir como
+     *  uma data inicial, final ou a data exata procurada
+     * @param string $op operação realizada no campo da data
+     * @param string $turno turno do agendamento procurado
+     * @return array com data, turno e agendamentoStatus do agendamento.
+     */
+    public function SELECT_VisitaIndividualByUserID(int $id, string $data = null, string $op ='>=', string $turno = 'noite'){
         
         $data = $data ? $data : now() ;
         $select = "SELECT data, turno, agendamentoStatus";
-        $sql = "$select FROM visita_individual WHERE usuarioID = $id AND data >= '$data' AND turno = '$turno'";
+        $sql = "$select FROM visita_individual WHERE usuarioID = $id AND data $op '$data' AND turno = '$turno'";
         $result = $this->dataBase->query($sql);
 
         if($result->num_rows > 2){

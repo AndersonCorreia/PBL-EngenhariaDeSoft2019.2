@@ -81,7 +81,7 @@ class UserController extends Controller{
         $array = [];
         foreach ($visitas as $v) {
             if(count($array)<12){
-                $v->preencherArrayForCalendario($array, "btn-danger");
+                $v->preencherArrayForCalendario($array);
             }
         }
         $dataFinalReal= new \DateTime($array["datas"]["dataLimite"]);

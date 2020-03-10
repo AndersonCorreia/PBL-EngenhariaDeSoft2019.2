@@ -65,11 +65,20 @@ use App\Model\Agendamento;
         }
     }
 
-    public function SELECT_VisitaInstitucionalByUserID(int $id, string $data = null){
+    /**
+     * Função para retornar os dados basicos de um agendamento institucional.
+     *
+     * @param integer $id id do usuario
+     * @param string $data data da pesquisa dos registro, combinada com o parametro op pode servir como
+     *  uma data inicial, final ou a data exata procurada
+     * @param string $op operação realizada no campo da data
+     * @return array com data, turno e agendamento status do agendamento.
+     */
+    public function SELECT_VisitaInstitucionalByUserID(int $id, string $data = null, string $op = '>='): array{
         
         $data = $data ? $data : now() ;
         $select = "SELECT instituicao, turma, data, turno, agendamentoStatus";
-        $sql = "$select FROM visita_institucional WHERE usuarioID = $id AND data >= '$data'";
+        $sql = "$select FROM visita_institucional WHERE usuarioID = $id AND data $op '$data'";
         $result = $this->dataBase->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);

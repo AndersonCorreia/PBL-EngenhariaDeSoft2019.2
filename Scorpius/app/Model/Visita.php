@@ -3,6 +3,7 @@ namespace App\Model;
 use App\Model\Users\Empregado;
 use App\DB\VisitaDAO;
 use App\DB\AgendamentoInstitucionalDAO;
+use App\DB\AgendamentoIndividualDAO;
 
 class Visita extends \App\DB\interfaces\DataObject {
 
@@ -33,13 +34,13 @@ class Visita extends \App\DB\interfaces\DataObject {
      * @param array $array a ser prenchido
      * @return void
      */
-    public function preencherArrayForCalendario(array &$array){
+    public function preencherArrayForCalendario(array &$array, string $tipo = 'institucional'){
         $dm = $this->Data->format("d/m");
         $dma=$this->Data->format("Y-m-d");
         $d = $this->Data->format("d");
         $day = self::$abrevDia[$this->Data->format("w")];
         $mes = self::$mes[$this->Data->format("m")-1];
-        $btn = $this->verificarDisponibilidade();
+        $btn = $this->verificarDisponibilidade($tipo);
         
         if( !isset($array["datas"]["dataInicio"]) ){
             $array["datas"]["dataInicio"] = "$d de $mes";
@@ -51,21 +52,36 @@ class Visita extends \App\DB\interfaces\DataObject {
         $array[$dma]["$this->Turno.btn"] = $btn;
     }
 
-    private function verificarDisponibilidade(){
+    private function verificarDisponibilidade($tipo){
         
-        if($this->Agendamento != null){
-            return self::$btnClasses["indisponivel"];
-        }
-        elseif( $this->isAgendamentoDoUsuarioLogado() ){
-            return self::$btnClasses["proprio"];
+        if($this->Agendamento != null ){
+            if( $this->isAgendamentoDoUsuarioLogado($tipo) ){
+                return self::$btnClasses["proprio"];
+            }
+            else {
+                return self::$btnClasses["indisponivel"];
+            }
         }
         else {
             return self::$btnClasses["disponivel"];
         }
     }
 
-    private function isAgendamentoDoUsuarioLogado(){
-        return false; //concluir despois da sessão esta funcionando e classe de agendamento completa
+    private function isAgendamentoDoUsuarioLogado($tipo){
+        $ID = session('ID');
+        $data = $this->Data->format('Y-m-d');
+        if ($tipo == 'institucional'){
+            $result = (new AgendamentoInstitucionalDAO())
+                        ->SELECT_VisitaInstitucionalByUserID($ID, $data, '=');
+            
+            return ($result !== []);
+        }
+        else {
+            $result = (new AgendamentoIndividualDAO())
+                        ->SELECT_VisitaIndividualByUserID($ID, $data, '=', $this->Turno);
+            
+            return ($result !== []);
+        }
     }
 
     public static function setCorIndisponivel($btnCor){
