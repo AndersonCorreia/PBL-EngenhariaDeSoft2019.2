@@ -4,14 +4,17 @@
 Route::get('/estagiario/dashboard', 'UserController@getDashboard')->name('dashboardEstagiario.show');
 
 //Rota Dashboard do Funcionário.
-//Route::get('/funcionario/dashboard', 'UserController@getTelaDashboardFuncionario')->name('telaDashboardFuncionario.show');
+Route::group(
+    ['midlleware'=>[], 
+    'prefix'=>'funcionario',
+    'namespace'=>'Funcionario'],
+    function(){
+        Route::get('/dashboardFuncionario', 'DashboardController@getTelaDashboardFuncionario')->name("dashboardFuncionario.show");
+    }
+);
 
 //Rota dashboard adm
 Route::get('/adm/dashboard', 'UserController@getDashboard')->name('dashboardAdm.show');
-
-//Rota de Cadastro de usuarios administrativos do sistema
-Route::get('/adm/cadastro', 'AdminCadastroController@index')->name('cadastroAdm');
-// Route::post('/adm/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.post");
 
 //Rota para retornar a tela de Gerenciamento de Visitas.
 
@@ -23,6 +26,11 @@ Route::group(
         Route::get('/gerenciamentoDeVisitas', 'VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
     }
 );
+
+//Rota de Cadastro de usuarios administrativos do sistema
+Route::get('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.show");
+
+Route::post('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.post");
 
 
 Route::group(
@@ -61,7 +69,6 @@ Route::group(
 );
 
 Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");
-Route::post('/checkin-visitas/checkin', 'CheckinVisitasController@checkinAluno')->name("checkinAluno");
 Route::group(
     ['midlleware'=>[],
     'prefix'=>'estagiario',
