@@ -61,11 +61,9 @@ class AlteraUsuarioController extends Controller
         $u = (new Usuario)->getDados(session('ID'));
         $variaveis = [
             'arrayDados'=>$u,
-            'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Ver Instituiçoes Cadastradas"
         ];
         if($senhaAtual != $u['senha']){
-            //die("Erro: Não foi possível atualizar os dados pessoais");
            return view('TelaAlterarDadosCadastrais.telaErroAlterarDadosCadastrais',$variaveis);
         }
         else if($senhaAtual == $u['senha'] && $novaSenha==$rptNovaSenha){
