@@ -153,7 +153,7 @@ class AgendamentoController extends Controller{
         $data = $_POST['data'];
         $turno = $_POST['turno'];
         $observacao = $_POST['observacoes'];
-        $exposicoes = isset( $_POST['exposicoes']) ? isset( $_POST['exposicoes']) : [];
+        $exposicoes = isset( $_POST['exposicoes']) ? $_POST['exposicoes'] : [];
         $responsaveis = $this->getMatrizResponsaveis($_POST['responsavel'], $_POST['cargo']);
 
         if( isset($_POST['incluirResponsavel']) || $responsaveis===[] ){

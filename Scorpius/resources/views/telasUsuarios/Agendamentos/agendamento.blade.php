@@ -12,7 +12,8 @@
 </div>
 @endif
 <div class="row col-12 m-0 p-0">
-    <div class="container-fluid px-4">
+    <form id="form.agendamento" class="container-fluid px-4" method="POST">
+        {{csrf_field()}}
         @include('telasUsuarios.Agendamentos._includes.agendamentos')
         @if($tipoUserLegenda["tipo"] == "institucional")
         <div class="col-12 m-0 p-0">
@@ -27,7 +28,7 @@
             </div>
         </div>
         <div id="formulario" class="col-12 mt-4 p-0">
-            <div class="container-fluid scorpius-border-shadow p-4" >
+            <div class="container-fluid scorpius-border-shadow m-0 p-5" >
                 @if($tipoUserLegenda["tipo"] == "institucional")
                     @include('telasUsuarios.Agendamentos._includes.formularioAgendamento')
                 @else
@@ -35,7 +36,7 @@
                 @endif
             </div>
         </div>
-    </div>
+    </form>
 </div>
 @endsection
 

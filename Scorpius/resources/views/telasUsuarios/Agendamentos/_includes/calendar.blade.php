@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col col-lg-12 py-1 p-0 m-0">
                                 @if( isset($v["tarde.btn"]) )
-                                    <button id="tarde{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','manhã')"
+                                    <button id="tarde{{$loop->index}}" type="button" onclick="setDataTurno(this, '{{$dia}}','tarde')"
                                         class="btn w-50 h-100 border border-secondary {{$v["tarde.btn"]}}"></button>
                                 @else
                                     <button id="tarde{{$loop->index}}" type="button" aria-disabled="true"

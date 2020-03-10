@@ -51,7 +51,13 @@ use App\Model\Agendamento;
     }
 
     private function INSERT_Exposicoes( array $Exposicoes, int $ID){
-        
+        $count = count($Exposicoes);
+        for($i = 0; $i < $count; $i++){
+            $expID = $Exposicoes[$i];
+            $sql = "INSERT INTO exposicao_agendamento_institucional (exposicao_ID, agendamento_institucional_ID) VALUE 
+                ( $expID, $ID)";
+            $this->dataBase->query($sql);
+        }
     }
 
     private function INSERT_Responsaveis( array $Responsaveis, int $ID){
