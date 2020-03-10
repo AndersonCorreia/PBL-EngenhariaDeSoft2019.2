@@ -61,6 +61,7 @@ Route::group(
 );
 
 Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");
+Route::post('/checkin-visitas/checkin', 'CheckinVisitasController@checkinAluno')->name("checkinAluno");
 Route::group(
     ['midlleware'=>[],
     'prefix'=>'estagiario',

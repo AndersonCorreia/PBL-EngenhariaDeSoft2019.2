@@ -64,13 +64,16 @@
                             {{$aluno[3]}} anos
                         </p>
                     </div>
-                    <div class="col-md-2">
-                        <form name="checkin" method="POST">
+                    <div class="col-md-2 btn-presente">
+                        {{-- <form name="checkinAluno" method="POST"> --}}
+                            {{csrf_field()}}
+                            <meta name="csrf-token" content="{{csrf_token()}}">
+                            
                             <input id="aluno{{$i}}" type="hidden" value="{{$aluno[0]}}">
-                            <button class="btn btn-outline-secondary" value="aluno{{$i}}" aria-pressed="false">
+                            <button class="btn btn-outline-secondary" type="submit" value="aluno{{$i}}" aria-pressed="false" presente>
                                 Presente
                             </button>
-                        </form>
+                        {{-- </form> --}}
                     </div>
                 </div>
             </div>
@@ -94,7 +97,8 @@
             <div class="scorpius-border-shadow border-all-50 p-2 mt-1">
                 {{-- {{dd($visitantes)}} --}}
                 @for($j = 1; $j < count($visitantes['visitantes']); $j++)
-                    {{-- {{dd($visitantes['visitantes'][1]['usuario'])}} --}} <input type="hidden" value="{{$i = 0}}">
+                    {{-- {{dd($visitantes['visitantes'][1]['usuario'])}} --}} 
+                    <input type="hidden" value="{{$i = 0}}">
                     <div class="row text-center">
                         <div class="col-md-1">
                             <p class="h5 mt-1">

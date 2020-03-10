@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Request;
+
 use App\DB\CheckinDAO;
 
 require_once __DIR__ . "/../../../resources/views/util/layoutUtil.php";
@@ -147,6 +150,24 @@ class CheckinVisitasController extends Controller
             ];
         }
         return $listaFinal;
+    }
+    public function checkinAluno(Request $req)
+    {
+        //var_dump($req);
+        $alunos = new CheckinDAO();
+        $msg = [
+            'msg' => 'eu'
+            //,'log' => $req->status//$alunos->UPDATE_STATUS_ALUNO($ID, $status)
+        ];
+        // echo json_encode($msg);
+        // $json =  json_encode($msg);
+        // return response()->json($json);
+        return Response::json($msg);
+    }
+    public function checkinUsuario($ID, $status)
+    {
+        $alunos = new CheckinDAO();
+        echo json_encode($alunos->UPDATE_STATUS_USUARIO($ID, $status));
     }
 
 }
