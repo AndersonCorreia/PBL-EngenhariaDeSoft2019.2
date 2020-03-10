@@ -15,7 +15,7 @@ class AgendamentoInstitucional extends \App\DB\interfaces\DataObject
     private $Responsaveis;
     private $Exposicoes;
 
-    public function __Construct($observacao, $turmaID, $professorInstituicaoID, $visita,
+    public function __Construct($observacao, $turmaID, $professorInstituicaoID, $visita = null,
                     $status= "pendente", $ID = null){
 
         $this->observacao = $observacao;
@@ -23,7 +23,9 @@ class AgendamentoInstitucional extends \App\DB\interfaces\DataObject
         $this->professorInstituicaoID = $professorInstituicaoID;
         $this->status = $status;
         $this->visita = $visita;
-        $this->visita->setAgendamento($this);
+        if ( $visita ){
+            $this->visita->setAgendamento($this);
+        }
 	}
 
 	

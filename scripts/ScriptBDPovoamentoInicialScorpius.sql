@@ -92,8 +92,8 @@ INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancela
 -- INSERT de visitas --
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-02-10','tarde');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-02-11','tarde');
-INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-10','tarde');
-INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-11','manhã');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-9','tarde');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-10','manhã');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-11','tarde');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-12','manhã');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-13','tarde');

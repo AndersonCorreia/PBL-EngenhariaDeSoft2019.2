@@ -170,6 +170,7 @@ class AgendamentoController extends Controller{
 
         (new AgendamentoInstitucionalDAO)->INSERT($agendamento);
         
+        (new VisitaDAO())->UPDATE($visita);
         return redirect()->route('dashboard');
     }
 

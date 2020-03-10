@@ -19,7 +19,8 @@ abstract class AgendamentoDAO extends \App\DB\interfaces\DataAccessObject
 
     function UPDATE($agendamento): bool{
 
-        $sql = "UPDATE $table SET status = $agendamento->getStatusAg()
+        $status = $agendamento->getStatusAg();
+        $sql = "UPDATE $this->table SET status = $status
                 WHERE ID = $agendamento->getID()";
         return $this->dataBase->query($sql);
     }

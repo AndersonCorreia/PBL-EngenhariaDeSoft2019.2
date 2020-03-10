@@ -2,6 +2,7 @@
 
 namespace App\DB;
 use App\Model\Visita;
+use App\Model\AgendamentoInstitucional;
 use \App\DB\interfaces\DataAccessObject;
 
 class VisitaDAO extends DataAccessObject{ 
@@ -16,6 +17,15 @@ class VisitaDAO extends DataAccessObject{
 
     public function UPDATE($Visita): bool{
 
+        $agID = null;
+        $agendamento = $Visita->getAgendamento();
+        if ( $agendamento != null) {
+            $agID = $agendamento->getID();
+        }
+        $status = $Visita->getStatus();
+        $sql = "UPDATE $this->table SET status = '$status' , agendamento_institucional_ID = $agID
+                WHERE ID =".$Visita->getID();
+        return $this->dataBase->query($sql);
     }
 
     /**
@@ -68,7 +78,11 @@ class VisitaDAO extends DataAccessObject{
             if($agenID == null){
                 $agendamentoInst= null;
             }else {
-                $agendamentoInst = (new AgendamentoInstitucionalDAO())->SELECTbyID($agenID);
+                $array = (new AgendamentoInstitucionalDAO())->SELECTbyID($agenID);
+                $agendamentoInst = new AgendamentoInstitucional(
+                            $array['observacao'], $array['turma_ID'], $array['professor_instituicao_ID'], 
+                            null, $array['status'], $array["ID"] 
+                        );
             }
             return new Visita($data, $result['turno'], $result["status"],$agendamentoInst, $result["acompanhante_ID"], $result['ID']);
         }
@@ -86,7 +100,11 @@ class VisitaDAO extends DataAccessObject{
             if($agenID == null){
                 $agendamentoInst = null;
             }else {
-                $agendamentoInst = (new AgendamentoInstitucionalDAO())->SELECTbyID($agenID);
+                $array = (new AgendamentoInstitucionalDAO())->SELECTbyID($agenID);
+                $agendamentoInst = new AgendamentoInstitucional(
+                            $array['observacao'], $array['turma_ID'], $array['professor_instituicao_ID'], 
+                            null, $array['status'], $array["ID"] 
+                        );
             }
             $data = new \DateTime($elemento['data_visita']);
 

@@ -388,7 +388,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`visitante_institucional` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
-  `status_Checkin` ENUM('compareceu', 'não compareceu') NOT NULL,
+  `status_Checkin` ENUM('compareceu', 'não compareceu') DEFAULT 'não compareceu' NOT NULL,
   `idade` INT NOT NULL,
   `agendamento_institucional_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
