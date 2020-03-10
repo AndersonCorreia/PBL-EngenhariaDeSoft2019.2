@@ -82,41 +82,41 @@
                 <tr class="manha">
                     <th scope="row" class="table-secondary">Manhã</th>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="segundaManha" segunda></button></td>
+                            value="segunda" segunda></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="tercaManha" terca></button></td>
+                            value="terca" terca></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="quartaManha" quarta></button></td>
+                            value="quarta" quarta></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="quintaManha" quinta></button></td>
+                            value="quinta" quinta></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="sextaManha" sexta></button></td>
+                            value="sexta" sexta></button></td>
                 </tr>
                 <tr class="tarde">
                     <th scope="row" class="table-secondary">Tarde</th>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="segundaTarde" segunda></button></td>
+                            value="segunda" segunda></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="tercaTarde" terca></button></td>
+                            value="terca" terca></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="quartaTarde" quarta></button></td>
+                            value="quarta" quarta></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="quintaTarde" quinta></button></td>
+                            value="quinta" quinta></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="sextaTarde" sexta></button></td>
+                            value="sexta" sexta></button></td>
                 </tr>
                 <tr class="noite">
                     <th scope="row" class="table-secondary">Noite</th>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="segundaTarde" segunda></button></td>
+                            value="segunda" segunda></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="tercaTared" terca></button></td>
+                            value="terca" terca></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="quartaTarde" quarta></button></td>
+                            value="quarta" quarta></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="quintaTarde" quinta></button></td>
+                            value="quinta" quinta></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="sextaTarde" sexta></button></td>
+                            value="sexta" sexta></button></td>
                 </tr>
             </tbody>
         </table>
@@ -211,12 +211,14 @@
             let buttonTrash = $(e.target)
             buttonTrash.toggleClass('btn btn-success')
             let dias = buttonTrash[0].value
+            console.log(dias)
             let quantTrash = buttonTrash.parent().parent()
             let turnos = quantTrash[0].className
             let obj = new Object({
                 turno: turnos,
                 dia: dias
             })
+            
             if (buttonTrash.hasClass("btn-success")) {
                 horarios.set(`${obj.turno}+${obj.dia}`, obj)
             } else {
