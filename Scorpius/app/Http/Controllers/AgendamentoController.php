@@ -194,11 +194,11 @@ class AgendamentoController extends Controller{
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $exposicao = $_POST['exposicao'];
+        $exposicao = isset( $_POST['exposicoes']) ? $_POST['exposicoes'] : null;
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
         $visitantes = $this->getMatrizvisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
         
-        $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
+        $agendamento = new AgendamentoIndividual($id_user, $visita);
         $agendamento->setVisitantes($visitantes);        
         $agendamento->setExposicaoID($exposicao);
 
@@ -212,7 +212,7 @@ class AgendamentoController extends Controller{
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $exposicao = $_POST['exposicao'];
+        $exposicao = isset( $_POST['exposicoes']) ? $_POST['exposicoes'] : null;
         $visitaDAO = new VisitaDAO();
         $visita = $visitaDAO->SELECTbyData_Turno($data, $turno, true);
         $visitantes = $this->getMatrizvisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
@@ -221,7 +221,7 @@ class AgendamentoController extends Controller{
         
         if( ($qtdVistante + \count($visitantes)) <= $limiteVagas){
             
-            $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
+            $agendamento = new AgendamentoIndividual($id_user, $visita);
             $agendamento->setVisitantes($visitantes);        
             $agendamento->setExposicaoID($exposicao);
 
@@ -276,7 +276,7 @@ class AgendamentoController extends Controller{
     private function getMatrizVisitantes($arrayVis , $arrayIdade, $arrayRG){
         $visitantes = [];
 
-        for ($i=0; $i < count($arrayResp) ; $i++) { 
+        for ($i=0; $i < count($arrayVis) ; $i++) { 
             $visitantes[$i] = [ 'nome' => $arrayVis[$i], 'RG' => $arrayRG[$i], 'idade' => $arrayIdade[$i] ];
         }
 

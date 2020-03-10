@@ -82,6 +82,8 @@
     }
 </style>
 
+@endsection
+
 <script>
 $('#form_agendamento')
     .attr('action',{{ ($turno ?? "diurno") == 'diurno' ?

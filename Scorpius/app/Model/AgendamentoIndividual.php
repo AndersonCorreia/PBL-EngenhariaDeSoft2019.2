@@ -50,7 +50,7 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
         return $this->statusAg;
     }
     
-	public function setExposicaoID(int $exposicaoID){
+	public function setExposicaoID(int $exposicaoID=null){
         $this->exposicaoID = $exposicaoID;
     }
     public function getExposicaoID()
