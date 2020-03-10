@@ -66,7 +66,7 @@ function getMenuLinks(){
         $DAO = new App\DB\PessoaDAO;
         $permissoes = $DAO->getPermissoes($tipoUsuario);
         foreach ($permissoes as $value) {
-  //          $links[]=$menuLinks[$value["permissao"]];
+            $links[]=$menuLinks[$value["permissao"]];
         }
     }
     

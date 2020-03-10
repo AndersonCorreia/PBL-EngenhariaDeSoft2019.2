@@ -22,6 +22,11 @@ class AuthorizeAdministrativo{
         $nameRota = \Route::currentRouteName();
         $permissao = $this->RotasPermissoes[$nameRota];
         $DAO = new PessoaDAO();
+        $tipo = session('tipo');
+
+        if( $tipo != 'funcionario' && $nameRota == "dashboardFuncionario.show"){
+            $tipo = 'funcionario'; //padronizando o dashboard de funcionario como padrão para os novos tipos
+        }
 
         if($permissao == session('tipo') || $DAO->asPermissao(session('tipo'), $permissao) ){
             return $next($request);
@@ -42,12 +47,12 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["atualizarEvento"] = 'cadastrar e modificar atividades' ;
         $this->RotasPermissoes["editarEvento"] = 'cadastrar e modificar atividades' ;
         $this->RotasPermissoes["removeEvento"] = 'cadastrar e modificar atividades' ;
-        $this->RotasPermissoes["cadastroAdm"] = 'criar usuario';
-
+        $this->RotasPermissoes["cadastroAdm"] = 'criar usuarios';
         $this->RotasPermissoes["cadastroEvento"] = 'cadastrar e modificar atividades' ;
-        //$this->RotasPermissoes["CadastroUsuario.show" ] = 'criar usuarios';
         //$this->RotasPermissoes["CadastroUsuario.post" ] = 'criar usuarios';
         $this->RotasPermissoes["dashboardFuncionario.show" ] = 'funcionario';
+        $this->RotasPermissoes["dashboardEstagiario.show" ] = 'estagiario';
+        $this->RotasPermissoes["dashboardAdm.show" ] = 'adm';
         
         //$this->RotasPermissoes["nome da rota" ] = 'permissão associada como ta escrito no banco';
     }

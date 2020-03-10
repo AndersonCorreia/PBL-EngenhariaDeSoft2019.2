@@ -17,7 +17,7 @@ INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
 INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
 ('Moises Hugo', 'funcionario@scorpius.com', 'funcionario', '06515391504', 1, 9);
 INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
-('Alana Hugo', 'adm@scorpius.com', 'adm', '06515391505', 1, 10);
+('Alana Hugo', 'adm@scorpius.com', 'administrador', '06515391505', 1, 10);
 
 -- Insert dos usuarios --
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
@@ -42,7 +42,7 @@ INSERT INTO permissao (permissao, ID) VALUES ('relatorio dos agendamentos',5);
 INSERT INTO permissao (permissao, ID) VALUES ('cadastrar e modificar atividades',6);
 INSERT INTO permissao (permissao, ID) VALUES ('criar usuarios',7);
 INSERT INTO permissao (permissao, ID) VALUES ('gerenciar usuarios',8);
-INSERT INTO permissao (permissao, ID) VALUES ('ver confiabilidade das Instituições',9);
+INSERT INTO permissao (permissao, ID) VALUES ('ver confiabilidade das instituições',9);
 INSERT INTO permissao (permissao, ID) VALUES ('ver log de atividade',10);
 INSERT INTO permissao (permissao, ID) VALUES ('realizar backup',11);
 INSERT INTO permissao (permissao, ID) VALUES ('gerenciar permissões',12);
@@ -76,7 +76,7 @@ INSERT INTO cidade_UF (ID, cidade, UF) VALUES (10,'Tiquaruçu', 'BA');
 
 -- INSERT das Instituições --
 INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
-(201, 'Universidade Estadual de Feira de Santana','João De Souza','Av. Transnordestina', 's/n', '44036-900', '7531618000', 'Estadual', 1);
+(201, 'Universidade Estadual de Feira de Santana','Evandro','Av. Transnordestina', 's/n', '44036-900', '7531618000', 'Estadual', 2);
 INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
 (202, 'Colégio Modelo Luis Eduardo Magalhães','Maria Das Dores','Rua Vasco Filho', '15', '44003-246', '7532237666', 'Estadual', 2);
 INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone, tipo_Instituicao, cidade_UF_ID) VALUES
