@@ -4,7 +4,7 @@
 
 @section('conteudo')
 <div class="row col-12 m-0 p-3">
-    <form id="form.agendamento" class="container-fluid px-4" method="POST">
+    <form id="form.agendamento" class="container-fluid px-4 m-0" method="POST">
         {{csrf_field()}}
         @include('telasUsuarios.Agendamentos._includes.agendamentos')
         <div class="col-12 m-0 p-0 scorpius-border-shadow p-3 ">

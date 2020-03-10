@@ -1,4 +1,4 @@
-<div id="exposicoes" class="col-12 text-left font-weight-bold overflow-auto">
+<div id="exposicoes" class="col-12 m-0 text-left font-weight-bold overflow-auto">
     <div class="col-12 p-2">
         <span> Selecione as {{$tipoAtividade}} a serem visitadas: <span>
     </div>

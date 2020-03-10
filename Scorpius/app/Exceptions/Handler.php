@@ -48,15 +48,18 @@ class Handler extends ExceptionHandler
     {   
         if($exception instanceof NenhumaInstCadastradaException){
 
-            return redirect()->route('vErros')->with('viewErro','TelaInstituicaoEnsino.errorNenhumaInstituicao');
+            return redirect()->route('vErros')
+                ->with('viewErro','TelaInstituicaoEnsino.error.NenhumaInstituicao');
         }
         elseif($exception instanceof NenhumaTurmaCadastradaException){
             
-            return redirect()->route('vErros')->with('viewErro','telaTurma.errorNenhumaTurma');
+            return redirect()->route('vErros')
+                ->with('viewErro','telaTurma.errorNenhumaTurma');
         }
         elseif($exception instanceof UsuarioNaoEncontradoException){
 
-            return redirect()->back()->with(['loginErro' => true, 'login' => $_POST['e-mail'] ]);
+            return redirect()->back()
+                ->with(['loginErro' => true, 'login' => $_POST['e-mail'] ]);
         }
         elseif($exception instanceof NenhumaVisitaEncontradaException){
 
@@ -64,11 +67,18 @@ class Handler extends ExceptionHandler
                 return back()->with(['erroDataTurno' => true]);
             }
             
-            return redirect()->route('vErros')->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaVisita');
+            return redirect()->route('vErros')
+                ->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaVisita');
         }
         elseif($exception instanceof NenhumaAtividadeEncontradaException){
             
-            return redirect()->route('vErros')->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaAtividade');
+            return redirect()->route('vErros')
+                ->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaAtividade');
+        }
+        elseif($exception instanceof LimiteAgendamentosException){
+            
+            return redirect()->route('vErros')
+                ->with('viewErro','telasUsuarios.Agendamentos.errorLimiteAgendamentos');
         }
         else {
 

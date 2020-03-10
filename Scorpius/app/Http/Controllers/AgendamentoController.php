@@ -22,6 +22,8 @@ use App\DB\AgendamentoDAO;
 
 class AgendamentoController extends Controller{   
 
+    private $limiteAgendamento = 2;
+
     public function confirmacaoAgendamento(Request $dados){
         $DAO = new AgendamentoInstitucionalDAO();
         $DAO->confirmaAgendamento($dados->nomeTabela,$dados->status,$dados->ID);
@@ -68,11 +70,15 @@ class AgendamentoController extends Controller{
      */
     public function agendamento(){
         
-        $array = $this->getVisitas("diurno", "now", "anterior");
         $userID = session("ID");
+        $agendamentos = (new AgendamentoInstitucionalDAO)->SELECT_VisitaInstitucionalByUserID($userID);
+        if ( count($agendamentos) > $this->limiteAgendamento){
+            throw new \App\Exceptions\LimiteAgendamentosException();
+        }
+
+        $array = $this->getVisitas("diurno", "now", "anterior");
         $tipoAtividade ="exposições";
         $exposicoes = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente();
-        $agendamentos = (new AgendamentoInstitucionalDAO)->SELECT_VisitaInstitucionalByUserID($userID);
         $legenda = "(Limite de 3 Agendamentos Institucionais ativos no mesmo período )";
         $instituicoes = (new Professor_InstituicaoDAO)->SELECTbyUsuario_ID($userID);
         $turmas = (new TurmaDAO)->SELECTbyProfessorID($userID);
@@ -118,11 +124,15 @@ class AgendamentoController extends Controller{
 
     public function agendamentoNoturno(){
         
+        $userID = session("ID");
+        $agendamentos = (new AgendamentoInstitucionalDAO)->SELECT_VisitaIndividualByUserID($userID);
+        if ( count($agendamentos) > $this->limiteAgendamento){
+            throw new \App\Exceptions\LimiteAgendamentosException();
+        }
         Visita::setCorIndisponivel('btn-danger');
         $array = $this->getVisitas("noturno", "now", "anterior");
 
         $atividades = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente("noturno");
-        $agendamentos = (new AgendamentoIndividualDAO)->SELECT_VisitaIndividualByUserID(session('ID'));
         $legenda = "(Limite de 3 Agendamentos noturnos ativos no mesmo período )";
         $tipoAtividade = 'atividade';
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Indisponivel", "tipo" => "visitante"];

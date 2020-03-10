@@ -1,4 +1,4 @@
-<div id="dados-agendamento">
+<div id="dados-agendamento" class="col m-0">
     <p class="h5">Dados para o agendamento</p>
     <label class="mt-2" for="nome-instituicao">Selecione a instituição</label>
     <select class="form-control" id="nome-instituicao" name="instituicao">
@@ -66,18 +66,17 @@
             <textarea name="observacoes" class="form-control" rows="3" maxlenght=100 placeholder="Observações"></textarea>
         </div>
     </div>
+    <div class="mt-3 text-right" id="btns-finais">
+        <button id="submit" type="submit" class="btn mr-2 btn-primary">
+            <i class="fas fa-receipt    "></i>
+            Agendar
+        </button>
+        <a href="#" class="btn btn-secondary">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            Cancelar
+        </a>
+    </div>
 </div>
-<div class="mt-3 text-right" id="btns-finais">
-    <button id="submit" type="submit" class="btn mr-2 btn-primary">
-        <i class="fas fa-receipt    "></i>
-        Agendar
-    </button>
-    <a href="#" class="btn btn-secondary">
-        <i class="fa fa-times" aria-hidden="true"></i>
-        Cancelar
-    </a>
-</div>
-
 @section('css')
 <style type="text/css">
     form .dados-pessoais {
