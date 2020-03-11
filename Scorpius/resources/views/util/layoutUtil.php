@@ -22,7 +22,7 @@ function getMenuLinksAll(){
         'gerenciamento de visitas'=>            ['link'=>'#' , 'texto'=>'Gerenciamento de Visitas' ],
         'relatorio dos agendamentos'=>          ['link'=>'#' , 'texto'=>'Relatórios de Agendamentos' ],
         'cadastrar e modificar atividades'=>    ['link'=>route("telaGerenciamentoDeEventos.show") , 'texto'=>'Gerenciamento de Eventos' ],
-        'criar usuarios'=>                      ['link'=>route("cadastroAdm") , 'texto'=>'Cadastrar Usuário' ],
+        'criar usuarios'=>                      ['link'=>route("CadastroUsuario.show") , 'texto'=>'Cadastrar Usuário' ],
         'gerenciar usuarios'=>                  ['link'=>'#' , 'texto'=>'Gerenciar Usuários' ],
         'ver confiabilidade das instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],
         'ver log de atividade'=>                ['link'=>'#' , 'texto'=>'Histórico de Atividades' ],
