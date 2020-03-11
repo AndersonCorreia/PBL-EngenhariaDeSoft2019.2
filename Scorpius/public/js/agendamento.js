@@ -27,7 +27,7 @@ function adicionarInd(){
         return alert('Quantidade máx. de visitantes atingida');
     }
     element.children('.nome-visitante').children('input').attr('name', 'visitante[]');
-    element.children('.rg-visitante').children('input').attr('name', 'rg[]');
+    element.children('.rg-visitante').children('input').attr('name', 'RG[]');
     element.children('.idade-visitante').children('input').attr('name', 'idade[]');
     element.children('.nome-visitante').children('input').val('');
     element.children('.rg-visitante').children('input').val('');

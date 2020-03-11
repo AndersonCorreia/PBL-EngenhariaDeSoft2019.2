@@ -28,6 +28,8 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
 
         $agendamento->setID($this);
         $ID = $agendamento->getID();
+
+        $this->INSERT_Visitantes( $agendamento->getVisitantes(), $ID);
         //Fazer insert para lista de pessoas em um agendamento, usar getVisitantes
         //Inseri a exposição escolhida tambem, vai servi pra atividade diferenciada e o noturno tb.
 
@@ -58,5 +60,17 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         }
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    private function INSERT_Visitantes( array $visitantes, int $ID){
+        $count = count($visitantes);
+        for($i = 0; $i < $count; $i++){
+            $nome = $visitantes[$i]['nome'];
+            $rg = $visitantes[$i]['RG'];
+            $idade = $visitantes[$i]['idade'];
+            $sql = "INSERT INTO visitante (nome, idade, RG, agendamento_ID) VALUE 
+                ('$nome', $idade, $rg, $ID)";
+            $this->dataBase->query($sql);
+        }
     }
 }

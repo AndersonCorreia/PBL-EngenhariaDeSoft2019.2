@@ -190,13 +190,12 @@ class AgendamentoController extends Controller{
      * @return void
      */
     public function agendarContaIndividual() {
-        
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
         $exposicao = isset( $_POST['exposicoes']) ? $_POST['exposicoes'] : null;
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
-        $visitantes = $this->getMatrizvisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
+        $visitantes = $this->getMatrizVisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
         
         $agendamento = new AgendamentoIndividual($id_user, $visita);
         $agendamento->setVisitantes($visitantes);        
@@ -215,7 +214,7 @@ class AgendamentoController extends Controller{
         $exposicao = isset( $_POST['exposicoes']) ? $_POST['exposicoes'] : null;
         $visitaDAO = new VisitaDAO();
         $visita = $visitaDAO->SELECTbyData_Turno($data, $turno, true);
-        $visitantes = $this->getMatrizvisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
+        $visitantes = $this->getMatrizVisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
         $qtdVistante = $visitaDAO->getQtdVisitantesIndividual($visita);//falta implementar
         $limiteVagas = (new ExposicaoDAO())->SELECTbyID($exposicao)['quantidade_inscritos'];
         
@@ -252,7 +251,7 @@ class AgendamentoController extends Controller{
     }
 
     /**
-     * Criar uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsavel
+     * Cria uma matriz dos responsaveis a partir de dois arryas. Em cada linha tera o nome do responsavel
      * no campo nome, e o cargo do responsavel no campo cargo;
      *
      * @return void
@@ -268,18 +267,19 @@ class AgendamentoController extends Controller{
     }
 
     /**
-     * Criar uma matriz dos visitantes a partir de dois arryas. Em cada linha tera o nome do visitante
-     * no campo nome, o RG do visitante no campo RG e a idade do visitante no campo visitante;
+     * Cria uma matriz dos visitantes a partir de dois arryas. Em cada linha tera o nome do visitante
+     * no campo nome, o RG do visitante no campo RG e a idade do visitante no campo idade;
      *
      * @return void
      */
     private function getMatrizVisitantes($arrayVis , $arrayIdade, $arrayRG){
         $visitantes = [];
-
-        for ($i=0; $i < count($arrayVis) ; $i++) { 
-            $visitantes[$i] = [ 'nome' => $arrayVis[$i], 'RG' => $arrayRG[$i], 'idade' => $arrayIdade[$i] ];
+        
+        for ($i=0; $i <count($arrayVis) ; $i++) { 
+            $visitantes[$i] = [ 'nome' => $arrayVis[$i], 'idade' => $arrayIdade[$i], 'RG' => $arrayRG[$i] ];
+            
         }
-
+        
         return $visitantes;
     }
 }

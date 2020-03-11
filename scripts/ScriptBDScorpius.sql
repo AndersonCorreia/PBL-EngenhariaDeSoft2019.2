@@ -408,7 +408,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`visitante` (
   `nome` VARCHAR(50) NOT NULL,
   `status_Checkin` ENUM('compareceu', 'não compareceu') NOT NULL,
   `idade` INT NOT NULL,
-  `rg` VARCHAR(15) NOT NULL,
+  `RG` VARCHAR(15) NOT NULL,
   `agendamento_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_visitante_agendamento1_idx` (`agendamento_ID` ASC),
