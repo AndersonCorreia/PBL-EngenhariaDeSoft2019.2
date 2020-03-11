@@ -4,7 +4,14 @@
 Route::get('/estagiario/dashboard', 'UserController@getDashboard')->name('dashboardEstagiario.show');
 
 //Rota Dashboard do Funcionário.
-//Route::get('/funcionario/dashboard', 'UserController@getTelaDashboardFuncionario')->name('telaDashboardFuncionario.show');
+Route::group(
+    ['midlleware'=>[], 
+    'prefix'=>'funcionario',
+    'namespace'=>'Funcionario'],
+    function(){
+        Route::get('/dashboardFuncionario', 'DashboardController@getTelaDashboardFuncionario')->name("dashboardFuncionario.show");
+    }
+);
 
 //Rota dashboard adm
 Route::get('/adm/dashboard', 'UserController@getDashboard')->name('dashboardAdm.show');
@@ -20,14 +27,6 @@ Route::group(
     }
 );
 
-Route::group(
-    ['midlleware'=>[], 
-    'prefix'=>'funcionario',
-    'namespace'=>'Funcionario'],
-    function(){
-        Route::get('/dashboardFuncionario', 'DashboardController@getTelaDashboardFuncionario')->name("dashboardFuncionario.show");
-    }
-);
 
 //Rota de Cadastro de usuarios administrativos do sistema
 Route::get('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.show");
