@@ -158,4 +158,10 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 
         return false;
     }
+    public function listarUsuario($id){
+        $result = $this->dataBase->query("SELECT nome,telefone,tipo_usuario_ID FROM usuario WHERE ID <> $id");
+        $usuarios = $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    
 }
