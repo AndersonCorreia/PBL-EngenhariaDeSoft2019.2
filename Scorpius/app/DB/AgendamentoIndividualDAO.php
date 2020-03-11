@@ -30,7 +30,6 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         $ID = $agendamento->getID();
 
         $this->INSERT_Visitantes( $agendamento->getVisitantes(), $ID);
-        //Fazer insert para lista de pessoas em um agendamento, usar getVisitantes
         //Inseri a exposição escolhida tambem, vai servi pra atividade diferenciada e o noturno tb.
 
         $this->dataBase->commit();
@@ -44,20 +43,21 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
      * @param string $data data da pesquisa dos registro, combinada com o parametro op pode servir como
      *  uma data inicial, final ou a data exata procurada
      * @param string $op operação realizada no campo da data
+     * @param string $opTurno operação realizada no campo do turno
      * @param string $turno turno do agendamento procurado
      * @return array com data, turno e agendamentoStatus do agendamento.
      */
-    public function SELECT_VisitaIndividualByUserID(int $id, string $data = null, string $op ='>=', string $turno = 'noite'){
+    public function SELECT_VisitaIndividualByUserID(int $id, string $op ='>=', string $opTurno = '=',
+        string $data = null, string $turno = 'noite', bool $incluirStatusCancelado = false): array{
         
         $data = $data ? $data : now() ;
-        $select = "SELECT data, turno, agendamentoStatus";
-        $sql = "$select FROM visita_individual WHERE usuarioID = $id AND data $op '$data' AND turno = '$turno'";
-        $result = $this->dataBase->query($sql);
+        $status = $incluirStatusCancelado ? "" : "AND ( agendamentoStatus != 'cancelado pelo usuario' 
+            AND agendamentoStatus != 'cancelado pelo funcionario' )";
 
-        if($result->num_rows > 2){
-            throw new \Exception("Limite de agendamentos alcançado", 1);
-            
-        }
+        $select = "SELECT data, turno, agendamentoStatus";
+        $where = "usuarioID = $id AND data $op '$data' AND turno $opTurno '$turno' $status";
+        $sql = "$select FROM visita_individual WHERE $where";
+        $result = $this->dataBase->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -69,7 +69,7 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
             $rg = $visitantes[$i]['RG'];
             $idade = $visitantes[$i]['idade'];
             $sql = "INSERT INTO visitante (nome, idade, RG, agendamento_ID) VALUE 
-                ('$nome', $idade, $rg, $ID)";
+                ('$nome', $idade, '$rg', $ID)";
             $this->dataBase->query($sql);
         }
     }

@@ -37,7 +37,7 @@ class AgendamentoController extends Controller{
         return;
     }
 
-    public function getVisitas($turno, $data, $sentido){
+    public function getVisitas($turno, $data, $sentido, $tipo = 'institucional'){
 
         $DAO = new VisitaDAO();
         $dataFim = now();
@@ -52,7 +52,7 @@ class AgendamentoController extends Controller{
         $array = [];
         foreach ($visitas as $v) {
             if(count($array)<12){
-                $v->preencherArrayForCalendario($array);
+                $v->preencherArrayForCalendario($array, $tipo);
             }
         }
         $dataFinalReal= new \DateTime($array["datas"]["dataLimite"]);
@@ -101,13 +101,20 @@ class AgendamentoController extends Controller{
 
     public function agendamentoIndividual(){
 
-        $array = $this->getVisitas("diurno", "now", "anterior");
+        $userID = session("ID");
+        $agendamentos = (new AgendamentoIndividualDAO)->SELECT_VisitaIndividualByUserID($userID, '>=', '!=');
+        if ( count($agendamentos) > $this->limiteAgendamento){
+            throw new \App\Exceptions\LimiteAgendamentosException();
+        }
+
+        $array = $this->getVisitas("diurno", "now", "anterior", "visitante");
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $visitante,
+            'agendamentos' => $agendamentos,
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
@@ -125,12 +132,13 @@ class AgendamentoController extends Controller{
     public function agendamentoNoturno(){
         
         $userID = session("ID");
-        $agendamentos = (new AgendamentoInstitucionalDAO)->SELECT_VisitaIndividualByUserID($userID);
+        $agendamentos = (new AgendamentoIndividualDAO)->SELECT_VisitaIndividualByUserID($userID);
         if ( count($agendamentos) > $this->limiteAgendamento){
             throw new \App\Exceptions\LimiteAgendamentosException();
         }
+
         Visita::setCorIndisponivel('btn-danger');
-        $array = $this->getVisitas("noturno", "now", "anterior");
+        $array = $this->getVisitas("noturno", "now", "anterior", "visitante");
 
         $atividades = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente("noturno");
         $legenda = "(Limite de 3 Agendamentos noturnos ativos no mesmo período )";

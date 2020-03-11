@@ -16,7 +16,7 @@ class UserController extends Controller{
 
     public function getDashboard(){
         
-        $array = $this->getVisitas("diurno", "now", "anterior");
+        $array = $this->getVisitas("diurno", "now", "anterior", session("tipo"));
         $id_user = session('ID');
         $tipo = session('tipo');
         $agendamento = AgendamentoInstitucional::listarAgendamentos($id_user);
@@ -66,7 +66,7 @@ class UserController extends Controller{
         return redirect()->route("paginaInicial");
     }
 
-    public function getVisitas($turno, $data, $sentido){
+    public function getVisitas($turno, $data, $sentido, $tipo){
 
         $DAO = new VisitaDAO();
         $dataFim = now();
@@ -81,7 +81,7 @@ class UserController extends Controller{
         $array = [];
         foreach ($visitas as $v) {
             if(count($array)<12){
-                $v->preencherArrayForCalendario($array);
+                $v->preencherArrayForCalendario($array, $tipo);
             }
         }
         $dataFinalReal= new \DateTime($array["datas"]["dataLimite"]);

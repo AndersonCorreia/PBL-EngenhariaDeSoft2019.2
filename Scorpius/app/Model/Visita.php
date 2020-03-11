@@ -34,7 +34,7 @@ class Visita extends \App\DB\interfaces\DataObject {
      * @param array $array a ser prenchido
      * @return void
      */
-    public function preencherArrayForCalendario(array &$array, string $tipo = 'institucional'){
+    public function preencherArrayForCalendario(array &$array, string $tipo){
         $dm = $this->Data->format("d/m");
         $dma=$this->Data->format("Y-m-d");
         $d = $this->Data->format("d");
@@ -54,7 +54,7 @@ class Visita extends \App\DB\interfaces\DataObject {
 
     private function verificarDisponibilidade($tipo){
         
-        if($this->Agendamento != null ){
+        if($this->Agendamento != null && \strpos($this->Agendamento->getStatus(),"cancelado") === false ){
             if( $this->isAgendamentoDoUsuarioLogado($tipo) ){
                 return self::$btnClasses["proprio"];
             }

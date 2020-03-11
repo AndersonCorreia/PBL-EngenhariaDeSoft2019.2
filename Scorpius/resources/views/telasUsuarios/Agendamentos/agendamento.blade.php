@@ -12,7 +12,7 @@
 </div>
 @endif
 <div class="row col-12 m-0 p-0">
-    <form id="form.agendamento" class="col m-0 px-4" method="POST">
+    <form id="form.agendamento" class="col m-0 p-4" method="POST">
         {{csrf_field()}}
         @include('telasUsuarios.Agendamentos._includes.agendamentos')
         @if($tipoUserLegenda["tipo"] == "institucional")

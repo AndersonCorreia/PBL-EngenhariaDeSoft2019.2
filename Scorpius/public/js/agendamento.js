@@ -3,7 +3,8 @@ function setDataTurno(e, data, turno) {
     $('#turno').val(turno);
 
     if( $(e).hasClass("btn-warning") ){
-        alert("qualquer coisa")
+        alert("Como existe uma visita escolar programada para este dia, "+
+            "durante a visita você ira acompanhar a escola no seu trajeto.")
     }
 }
 

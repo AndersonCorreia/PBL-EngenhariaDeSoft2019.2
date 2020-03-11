@@ -9,7 +9,7 @@
         de confirmado, pendente ou lista de espera. <br>
         Tente realizar um novo agendamento após uma visita, ou cancele algum agendamento futuro desta categoria.
         <br>Para cancelar um agendamento veja a area de agendamentos na 
-        <a  href="{{route('paginaInicial')}}"  class="alert-link">pagina inicial.</a>
+        <a  href="{{route('dashboard')}}"  class="alert-link">pagina inicial.</a>
     </p>
 </div>
 <div class="alert alert-info mx-4 mb-2 m-0 p-2" role="alert">

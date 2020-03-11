@@ -31,7 +31,8 @@
             <div class="row box mb-2">
                 <div class="col-md-6 nome-visitante">
                     <input id="visitante" class="form-control" type="text" maxlength="40" name="visitante[]"
-                        placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$" required>
+                        placeholder="Nome completo do visitante" pattern="[a-zA-ZÀ-Úà-ú ]+$$"
+                        value = {{session("nome")}} required>
                 </div>
                 <div class="col-md-3 rg-visitante">
                     <input id="RG" class="form-control" type="text" minlength="14" maxlength="15" name="RG[]"
