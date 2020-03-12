@@ -20,7 +20,9 @@ class GerenciamentoDeEventosController extends Controller{
     public function getTelaGerenciamentoDeEventos(){
         //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
         $id_user = session('ID');
+        //dd($id_user);
         $exposicoes = (new ExposicaoDAO)->SELECT_Eventos('ID, titulo, tipo_evento, tema_evento, turno, descricao, quantidade_inscritos, data_inicial, data_final, imagem');
+        
         $variaveis = [
             'paginaAtual' => "Gerenciamento de Eventos",
             'exposicoes' => $exposicoes
@@ -70,8 +72,10 @@ class GerenciamentoDeEventosController extends Controller{
                 'data_final' => $data_final,
                 'imagem' => $conteudo
             );
+           
+
             
-        (new ExposicaoDAO)->UPDATE($dadosEvent);
+        $result = (new ExposicaoDAO)->UPDATE($dadosEvent);
         } catch (Exception $e) {
             $log = $e->getMessage();
             dd($log);
@@ -83,7 +87,8 @@ class GerenciamentoDeEventosController extends Controller{
 
     public function destroy($id)
     {
-        //
+        $result=(new ExposicaoDAO)->DELETEbyID_expsicao($id);
+        return redirect()->route('telaGerenciamentoDeEventos.show');
     }
 
     public function cadastrar(Request $request)
@@ -133,6 +138,7 @@ class GerenciamentoDeEventosController extends Controller{
 
         } catch (Exception $e) {
             $log = $e->getMessage();
+            dd($log );
             $try = 'FALSE';
         }
         $variaveis = [

@@ -308,7 +308,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento_institucional` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `exposicao_ID` INT UNSIGNED NOT NULL,
+  `exposicao_ID` INT UNSIGNED,
   `agendamento_institucional_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_exposicao_agendamento_institucional_exposicao1_idx` (`exposicao_ID` ASC),
@@ -316,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento_institucional` (
   CONSTRAINT `fk_exposicao_agendamento_institucional_exposicao1`
     FOREIGN KEY (`exposicao_ID`)
     REFERENCES `scorpius`.`exposicao` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE SET NULL
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_exposicao_agendamento_institucional_agendamento1`
     FOREIGN KEY (`agendamento_institucional_ID`)
@@ -330,7 +330,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `exposicao_ID` INT UNSIGNED NOT NULL,
+  `exposicao_ID` INT UNSIGNED,
   `agendamento_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_exposicao_agendamento_exposicao1_idx` (`exposicao_ID` ASC),
@@ -338,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao_agendamento` (
   CONSTRAINT `fk_exposicao_agendamento_exposicao1`
     FOREIGN KEY (`exposicao_ID`)
     REFERENCES `scorpius`.`exposicao` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE SET NULL
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_exposicao_agendamento_agendamento1`
     FOREIGN KEY (`agendamento_ID`)

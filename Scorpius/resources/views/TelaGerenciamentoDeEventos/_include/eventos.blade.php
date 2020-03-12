@@ -1,6 +1,4 @@
-<form method="POST" action="{{route('confirma.post')}}" enctype="multipart/form-data">
-    {{csrf_field()}}
-    {{ method_field('POST') }}
+
 
     <!-- Modal confirmar -->
     <div class="modal fade" method="POST" action="{{route('confirma.post')}}" id="modalExemplo" tabindex="-1"
@@ -24,7 +22,11 @@
         </div>
     </div>
 
-    {{$valor=''}}
+    @if($exposicoes)
+
+    <form method="POST" action="{{route('confirma.post')}}" enctype="multipart/form-data">
+    {{csrf_field()}}
+    {{ method_field('POST') }}
     @foreach($exposicoes as $exposicao)
     <div class="geralEventos">
         <div class="eventos scorpius-border-shadow border-top border-shadow">
@@ -59,8 +61,7 @@
                                     data-detalhe='<?=json_encode($exposicao);?>'>
                                     <i class="fas fa-pen"></i>
                                 </button>
-                                <button type="submit" class="btn btn-danger" name="user"
-                                    value='<?=json_encode($valor);?>'>
+                                <button type="button" class="btn btn-danger" value="{{$exposicao['ID']}}" deletar>
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -72,6 +73,9 @@
 
     </div>
     @endforeach
+    @else
+    <div class="alert alert-secondary" role="alert">Não há eventos cadastrados.</div>
+    @endif
 </form>
 <meta name="csrf-token" content="{{csrf_token()}}">
 
@@ -187,9 +191,9 @@
                                     <div class="row col-12 p-3">
                                         <div class="col-md-12">
                                             <div class="form-group" style="padding-left: 20px;">
-                                                <label for="imagem_campo" class="col-form-label">Imagem da
+                                                <label for="imagem" class="col-form-label">Imagem da
                                                     Atividade:</label>
-                                                <input type="file" name="imagem" class="form-control" id="imagem_campo"
+                                                <input type="file" name="imagem" class="form-control" id="imagem"
                                                     style="width: 320px;" />
                                             </div>
                                         </div>
@@ -213,60 +217,60 @@
 @include('layouts._includes.footer')
 @section('js')
 <script>
-$(document).ready(function() {
+jQuery(document).ready(function() {
     let valorAtual = null
 
     //evento do botão visualizar
     $('.botoes #btnVisualizar').click(e => {
         e.preventDefault()
+        $('[formModal]').find('input, select, textarea').removeClass('is-valid').removeClass(
+            'is-invalid').prop('disabled', true);
         $('#cadastrarModal').modal('show')
         valorAtual = $(e.currentTarget).data('detalhe')
         if (valorAtual.titulo) {
-            $('#nome_campo').val(valorAtual.titulo).prop('disabled', true);
+            $('#nome_campo').val(valorAtual.titulo)
         } else {
-            $('#nome_campo').val('').prop('disabled', true);
+            $('#nome_campo').val('');
         }
         if (valorAtual.tipo_evento) {
-            $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val()).prop(
-                'disabled', true);
+            $('#tipoEvento_campo').val($(`option:contains(${valorAtual.tipo_evento})`).val())
         } else {
-            $('#tipoEvento_campo').prop('disabled', true).val($(`option:selected`).val())
+            $('#tipoEvento_campo').val($(`option:selected`).val())
         }
         if (valorAtual.tema_evento) {
             $(`#temaEvento_campo option[value='${valorAtual.tema_evento}']`).prop("selected", true);
-            $('#temaEvento_campo').prop('disabled', true);
         } else {
-            $('#temaEvento_campo').val($(`option:selected`).val()).prop('disabled',
-                true);
+            $('#temaEvento_campo').val($(`option:selected`).val())
         }
         if (valorAtual.descricao) {
-            $('#descricao_campo').val(valorAtual.descricao).prop('disabled', true);
+            $('#descricao_campo').val(valorAtual.descricao);
         } else {
-            $('#descricao_campo').val('').prop('disabled', true);
+            $('#descricao_campo').val('');
         }
         if (valorAtual.quantidadeEscritos) {
-            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos).prop('disabled', true);
+            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos);
         } else {
-            $('#limiteVagas_campo').val(0).prop('disabled', true);
+            $('#limiteVagas_campo').val(0);
         }
         if (valorAtual.turno) {
-            $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val()).prop('disabled',
-                true);
+            $("#turno_campo").val($(`option:contains(${valorAtual.turno})`).val())
         } else {
-            $("#turno_campo").prop('disabled', true).val($(`option:selected`).val())
+            $("#turno_campo").val($(`option:selected`).val())
         }
         if (valorAtual.data_inicial) {
-            $('#periodo_inicio_campo').val(valorAtual.data_inicial).prop('disabled', true);
+            $('#periodo_inicio_campo').val(valorAtual.data_inicial);
         } else {
-            $('#periodo_inicio_campo').prop('disabled', true).val('dd-mm-aaaa')
+            $('#periodo_inicio_campo').val('aaaa-mm-dd')
         }
         if (valorAtual.data_final) {
-            $('#periodo_termino_campo').val(valorAtual.data_final).prop('disabled', true);
+            $('#periodo_termino_campo').val(valorAtual.data_final);
         } else {
-            $('#periodo_termino_campo').prop('disabled', true).val('dd-mm-aaaa')
+            $('#periodo_termino_campo').val('aaaa-mm-dd')
         }
-        $('#imagem_campo').parent().hide()
-        $('[mostraImagem]').html(`<label>Imagem:<br></label> <img src="data:image/jpeg;base64,${valorAtual.imagem}"  width="320" height="205"/>`)
+        $('#imagem').parent().hide()
+        $('[mostraImagem]').html(
+            `<label>Imagem:<br></label> <img src="data:image/jpeg;base64,${valorAtual.imagem}"  width="320" height="205"/>`
+        )
         $('[confirmar]').hide()
         $('[cancelar]').hide()
     })
@@ -274,6 +278,9 @@ $(document).ready(function() {
     //evento do botão editar
     $('.botoes #btnEditar').click(e => {
         e.preventDefault()
+        $('[formModal]').find('input, select, textarea').removeClass('is-valid').removeClass(
+            'is-invalid').prop('disabled', false);
+        validar()
         $('#cadastrarModal').modal('show')
         valorAtual = $(e.currentTarget).data('detalhe')
         console.log(valorAtual)
@@ -314,14 +321,15 @@ $(document).ready(function() {
         if (valorAtual.data_inicial) {
             $('#periodo_inicio_campo').val(valorAtual.data_inicial).prop('disabled', false);
         } else {
-            $('#periodo_inicio_campo').prop('disabled', false).val('dd-mm-aaaa')
+            $('#periodo_inicio_campo').prop('disabled', false).val('aaaa-mm-dd')
         }
         if (valorAtual.data_final) {
             $('#periodo_termino_campo').val(valorAtual.data_final).prop('disabled', false);
         } else {
-            $('#periodo_termino_campo').prop('disabled', false).val('dd-mm-aaaa')
+            $('#periodo_termino_campo').prop('disabled', false).val('aaaa-mm-dd')
         }
-        $('#imagem_campo').parent().show()
+        $('#imagem').prop('disabled', false)
+        $('#imagem').parent().show()
         $('[confirmar]').show().text("Atualizar")
         $('[cancelar]').show()
     })
@@ -334,14 +342,24 @@ $(document).ready(function() {
             $('[confirmar]').unbind('click').click()
         } else {
             $('[formModal]').append('<input type="hidden" name="_method" value="PUT">')
-            console.log(valorAtual.id)
+            //console.log(valorAtual.id)
             let url =
                 "{{ route('atualizarEvento', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
             url = url.replace(":id", valorAtual
                 .ID); // isso vai corrigir a string gerada com o id correto.
             $('[formModal]').attr('action', url)
             $('[confirmar]').unbind('click').click()
+            $('[confirmar]').submit()
         }
+    })
+
+    $('[deletar]').click(e => {
+        e.preventDefault()
+        let value = e.currentTarget.value
+        let url =
+            "{{ route('removeEvento', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
+        url = url.replace(":id", value); // isso vai corrigir a string gerada com o id correto.
+        window.location.href = url
 
     })
 
@@ -349,6 +367,9 @@ $(document).ready(function() {
     $('[cadastro]').click(e => {
 
         e.preventDefault()
+        $('[formModal]').find('input, select, textarea').removeClass('is-valid').removeClass(
+            'is-invalid');
+        validar()
 
         $('#cadastrarModal').modal('show')
 
@@ -364,156 +385,196 @@ $(document).ready(function() {
 
         $("#turno_campo").prop('disabled', false).val($(`option:selected`).val())
 
-        $('#periodo_inicio_campo').prop('disabled', false).val('dd-mm-aaaa')
+        $('#periodo_inicio_campo').prop('disabled', false).val(null)
 
-        $('#periodo_termino_campo').prop('disabled', false).val('dd-mm-aaaa')
-
-        $('#imagem_campo').parent().show()
+        $('#periodo_termino_campo').prop('disabled', false).val(null)
+        $('#imagem').prop('disabled', false)
+        $('#imagem').parent().show()
         $('[mostraImagem]').html(``)
         $('[confirmar]').show().text("Cadastrar")
         $('[cancelar]').show()
     })
 
-    $.validator.addMethod(
-        "limite_minimo",
-        function(elementValue, element, param) {
-            if (elementValue < param) {
-                return false;
-            } else {
-                return true;
+    function validar() {
+        $.validator.addMethod(
+            "limite_minimo",
+            function(elementValue, element, param) {
+                if (elementValue < param) {
+                    return false;
+                } else {
+                    return true;
+                }
             }
-        }
-    );
+        );
 
-    $.validator.addMethod(
-        "limite_maximo",
-        function(elementValue, element, param) {
-            if (elementValue > param) {
-                return false;
-            } else {
-                return true;
+        $.validator.addMethod(
+            "tamanho_imagem",
+            function(elementValue, element, param) {
+                if ($(element)[0].files[0]) {
+                    if ($(element)[0].files[0].size < param) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
             }
-        }
-    );
+        );
 
-    $.validator.addMethod("minDate", function(value, element) {
-        var curDate = new Date();
-        var inputDate = new Date(value);
-        if (inputDate > curDate)
+        $.validator.addMethod(
+            "limite_maximo",
+            function(elementValue, element, param) {
+                if (elementValue > param) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        );
+
+        $.validator.addMethod("minDate", function(value, element) {
+            var curDate = new Date();
+            var inputDate = new Date(value);
+            if (inputDate > curDate || value == '')
+                return true;
+            return false;
+        });
+
+        $.validator.addMethod("menorDataFinal", function(value, element, param) {
+            let dataFim = $('#periodo_termino_campo').val()
+            if (dataFim != "") {
+                let endDate = new Date(dataFim);
+                let inputDate = new Date(value);
+                if (inputDate > endDate)
+                    return false;
+            }
             return true;
-        return false;
-    });
 
-    $.validator.addMethod("menorDataFinal", function(value, element, param) {
-        let dataFim = $('#periodo_termino_campo').val()
-        console.log(dataFim)
-        if (dataFim != "") {
-            let endDate = new Date(dataFim);
-            let inputDate = new Date(value);
-            if (inputDate > endDate)
-                return false;
-        }
-        return true;
+        });
 
-    });
-
-    $.validator.addMethod("maiorDataInicial", function(value, element) {
-        let dataInicio = $('#periodo_inicio_campo').val()
-        if (dataInicio != "") {
-            let endDate = new Date(dataInicio);
-            let inputDate = new Date(value);
-            if (inputDate < endDate)
-                return false;
-        }
-        return true;
-
-    });
-
-    jQuery.validator.setDefaults({
-        debug: true
-    });
-
-    $('[formModal]').validate({
-        onfocusin: function(e) {
-            this.element(e);
-        },
-        onfocusout: function(e) {
-            this.element(e);
-        },
-        highlight: function(element, errorClass, validClass) {
-            $(element).addClass('is-invalid').removeClass('is-valid');
-            $(element.form).find("input[for=" + element.id + "]").addClass('is-invalid');
-        },
-        unhighlight: function(element, errorClass, validClass) {
-            $(element).removeClass('is-invalid').addClass('is-valid');
-            $(element.form).find("input[for=" + element.id + "]").removeClass('is-invalid');
-        },
-        onkeyup: true,
-        showErrors: function(errorMap, errorList) {
-            this.defaultShowErrors();
-        },
-        rules: {
-            titulo: {
-                required: true,
-                minlength: 3
-            },
-            evento: {
-                required: true
-            },
-            tema: {
-                required: true
-            },
-            descricao: {
-                maxlength: 200
-            },
-            quantidade: {
-                limite_minimo: '0',
-                limite_maximo: '40'
-            },
-            turno: {
-                required: true
-            },
-            data_inicial: {
-                minDate: '',
-                menorDataFinal: ''
-            },
-            data_final: {
-                minDate: '',
-                maiorDataInicial: ''
+        $.validator.addMethod("maiorDataInicial", function(value, element) {
+            let dataInicio = $('#periodo_inicio_campo').val()
+            if (dataInicio != "") {
+                let endDate = new Date(dataInicio);
+                let inputDate = new Date(value);
+                if (inputDate < endDate)
+                    return false;
             }
+            return true;
+        });
 
-        },
-        messages: {
-            titulo: {
-                required: "Por favor, informe um nome",
-                minlength: "O nome deve ter pelo menos 3 caracteres"
+
+
+        $('[formModal]').validate({
+            submitHandler: function(form) {
+                form.submit()
             },
-            evento: {
-                required: "Por favor, informe um evento"
+            onfocusin: function(e) {
+                this.element(e);
             },
-            tema: {
-                required: "Por favor, informe um tema"
+            onfocusout: function(e) {
+                this.element(e);
             },
-            descricao: {
-                maxlength: "Máximo de 200 caracteres"
+            onclick: function(element) {
+                this.element(element);
             },
-            quantidade: {
-                limite_minimo: "Quantidade deve ser maior que zero",
-                limite_maximo: "Quantidade máxima deve ser menor que quarenta"
+            onkeyup: function(element) {
+                this.element(element);
             },
-            turno: {
-                required: "Por favor, informe um turno"
+            onfocus: function(element) {
+                this.element(element);
             },
-            data_inicial: {
-                minDate: "Insira uma data válida",
-                menorDataFinal: "Data inicial deve ser menor que a final"
+
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid').removeClass('is-valid');
+                $(element.form).find("input[for=" + element.id + "]").addClass('is-invalid');
             },
-            data_final: {
-                minDate: "Insira uma data válida",
-                maiorDataInicial: "Data final deve ser maior que inicial"
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+                $(element.form).find("input[for=" + element.id + "]").removeClass('is-invalid');
+            },
+            showErrors: function(errorMap, errorList) {
+                this.defaultShowErrors();
+            },
+            rules: {
+                titulo: {
+                    required: true,
+                    minlength: 3
+                },
+                evento: {
+                    required: true
+                },
+                tema: {
+                    required: true
+                },
+                descricao: {
+                    maxlength: 200
+                },
+                quantidade: {
+                    limite_minimo: '0',
+                    limite_maximo: '40'
+                },
+                turno: {
+                    required: true
+                },
+                data_inicial: {
+                    required:true,
+                    minDate: '',
+                    menorDataFinal: ''
+                },
+                data_final: {
+                    minDate: '',
+                    maiorDataInicial: ''
+                },
+                imagem: {
+                    required: true,
+                    accept: "image/*",
+                    tamanho_imagem: 2097152
+                }
+
+            },
+            messages: {
+                titulo: {
+                    required: "Por favor, informe um nome",
+                    minlength: "O nome deve ter pelo menos 3 caracteres"
+                },
+                evento: {
+                    required: "Por favor, informe um evento"
+                },
+                tema: {
+                    required: "Por favor, informe um tema"
+                },
+                descricao: {
+                    maxlength: "Máximo de 200 caracteres"
+                },
+                quantidade: {
+                    limite_minimo: "Quantidade deve ser maior que zero",
+                    limite_maximo: "Quantidade máxima deve ser menor que quarenta"
+                },
+                turno: {
+                    required: "Por favor, informe um turno"
+                },
+                data_inicial: {
+                    required:"Insira uma data inicial",
+                    minDate: "Insira uma data válida",
+                    menorDataFinal: "Data inicial deve ser menor que a final"
+                },
+                data_final: {
+                    minDate: "Insira uma data válida",
+                    maiorDataInicial: "Data final deve ser maior que inicial"
+                },
+                imagem: {
+                    required:"Anexe uma imagem referente ao evento",
+                    accept: "Permitido arquivos do tipo imagem",
+                    tamanho_imagem: "Quantidade máxima deve ser menor que 2MB"
+                }
             }
-        }
-    })
+        })
+
+    }
+
+
 
 
     $('#cadastrarModal [salvarMudanca]').click(e => {

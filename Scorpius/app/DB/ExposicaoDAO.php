@@ -19,8 +19,9 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
         $quantidade = $exposicao->getQuantidade();
         $data_inicial = $exposicao->getData_Inicial();
         $data_final = $exposicao->getData_Final();
+        $data_final= !$data_final ? 'NULL' : "'".$data_final."'";
+    
         $imagem = $exposicao->getImage();
-
         $sql = "INSERT INTO exposicao
         (titulo, tipo_evento, tema_evento, turno, descricao, quantidade_inscritos, data_inicial, data_final, imagem)
         VALUES (
@@ -31,11 +32,13 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
             '$descricao',
             '$quantidade' ,
             '$data_inicial', 
-            '$data_final', 
+            $data_final, 
             '$imagem'
         )";
-
+        //dd($sql);
         $resultado = $this->dataBase->query($sql);
+       // dd( $resultado);
+
         return $resultado;
     }
     public function UPDATE($exposicao): bool
@@ -47,17 +50,24 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
         $exposicao->data_final, $exposicao->id);
         $result1 = $stmt->execute();
         
-        
         $result2 = true;
-        if($exposicao->imagem != null){
-            $sql = "UPDATE exposicao
-            SET imagem = ? 
-            WHERE ID = ?";
-            $stmt->bind_param("b", $exposicao->imagem);
-            $result2 = $stmt->execute();
+        if($exposicao->imagem != null){     
+            $sql2 = "UPDATE exposicao
+            SET imagem = '$exposicao->imagem' 
+            WHERE ID = '$exposicao->id'";
+            $result2=$this->dataBase->query($sql2);
+            $result2 ? true: false;
         }
         
         return $result1 && $result2;
+
+    }
+
+    public function DELETEbyID_expsicao($id){
+        $sql = "DELETE FROM exposicao WHERE ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $result = $stmt->bind_param("i",$id);
+        return $stmt->execute();
     }
 
     public function SELECT_ALL_AtividadePermanente(string $turno = "diurno"){
@@ -87,7 +97,7 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
             $ArrayResult[$key]['imagem']= base64_encode($ArrayResult[$key]['imagem']);
         }
         if($ArrayResult==[]){
-            throw new \App\Exceptions\NenhumaAtividadeEncontradaException();
+            //throw new \App\Exceptions\NenhumaAtividadeEncontradaException();
         }
 
         return $ArrayResult;
