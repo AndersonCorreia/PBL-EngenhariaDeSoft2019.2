@@ -1,12 +1,6 @@
-@extends('layouts.templateGeralTelasUsuarios')
-
-@section('title', 'Dados Alterados com SUCESSO!')
-
-@section('conteudo')
-<div class="scorpius-border p-4">
-    <div class="scorpius-border-shadow-sm p-3">
-        
-    </div>
+<div class="alert alert-sucess alert-dismissible fade show" role="alert">
+    <strong>Seus Dados Foram Alterados com SUCESSO!!!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
 </div>
-
-@endsection

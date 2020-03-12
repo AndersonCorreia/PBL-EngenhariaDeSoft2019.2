@@ -57,14 +57,17 @@ class AlteraUsuarioController extends Controller
         $novaSenha =$_POST['novaSenha'];             echo($novaSenha." ");
         $rptNovaSenha =$_POST['rptNovaSenha'];       echo($rptNovaSenha." ");
       
-        
+        $isDadosAlterados=null;
         $u = (new Usuario)->getDados(session('ID'));
         $variaveis = [
             'arrayDados'=>$u,
-            'paginaAtual' => "Ver Instituiçoes Cadastradas"
+            'isDadosAlterados' => $isDadosAlterados,
+            'paginaAtual' => "Alterar Meus Dados"
         ];
+        echo($senhaAtual." "); echo($u['senha']);
         if($senhaAtual != $u['senha']){
-           return view('TelaAlterarDadosCadastrais.telaErroAlterarDadosCadastrais',$variaveis);
+            $variaveis['isDadosAlterados'] = false;
+            return view('TelaAlterarDadosCadastrais.telaErroAlterarDadosCadastrais',$variaveis);    //erro
         }
         else if($senhaAtual == $u['senha'] && $novaSenha==$rptNovaSenha){
             if( $novaSenha==null && $rptNovaSenha == null || ($rptNovaSenha==' ' && $novaSenha==' ')){
@@ -74,9 +77,9 @@ class AlteraUsuarioController extends Controller
             $fullName = $nome." ".$sobrenome;
             $idx = $u['id'];
             (new Usuario)->alterarDados($fullName,$telefone,$cpf,$novaSenha,$idx);
-            return redirect()->route('alterarDados.show');
+            $variaveis['isDadosAlterados'] = true;
+            return redirect()->route('alterarDados.show');          //sucesso
         }
-        return view('TelaAlterarDadosCadastrais.telaErroAlterarDadosCadastrais',$variaveis);
     }
 
    
