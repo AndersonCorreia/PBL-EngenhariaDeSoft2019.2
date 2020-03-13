@@ -80,6 +80,11 @@ class Handler extends ExceptionHandler
             return redirect()->route('vErros')
                 ->with('viewErro','telasUsuarios.Agendamentos.errorLimiteAgendamentos');
         }
+        elseif($exception instanceof LimiteDeVagasExcedidoException){
+            
+            return redirect()->route('vErros')
+                ->with('viewErro','telasUsuarios.Agendamentos.errorLimiteDeVagas');
+        }
         else {
 
             return parent::render($request, $exception);

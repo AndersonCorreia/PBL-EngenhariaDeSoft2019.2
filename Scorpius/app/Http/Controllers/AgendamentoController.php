@@ -223,10 +223,10 @@ class AgendamentoController extends Controller{
         $visitaDAO = new VisitaDAO();
         $visita = $visitaDAO->SELECTbyData_Turno($data, $turno, true);
         $visitantes = $this->getMatrizVisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
-        $qtdVistante = $visitaDAO->getQtdVisitantesIndividual($visita);//falta implementar
+        $qtdVistante = $this->getQtdVisitantesIndividual();
         $limiteVagas = (new ExposicaoDAO())->SELECTbyID($exposicao)['quantidade_inscritos'];
         
-        if( ($qtdVistante + \count($visitantes)) <= $limiteVagas){
+        if( ((int)$qtdVistante + count($visitantes)) <= $limiteVagas){
             
             $agendamento = new AgendamentoIndividual($id_user, $visita);
             $agendamento->setVisitantes($visitantes);        
@@ -237,8 +237,7 @@ class AgendamentoController extends Controller{
             return redirect()->route('dashboard');
         }
         else {
-            ///informa de alguma forma que não foi possivel fazer o agendamento por conta das vagas
-            //possivelmente algum aviso na tela que só mostra com alguma variavel na session
+            throw new \App\Exceptions\LimiteDeVagasExcedidoException();
         }
     }
     /**
@@ -289,5 +288,12 @@ class AgendamentoController extends Controller{
         }
         
         return $visitantes;
+    }
+
+    public function getQtdVisitantesIndividual(){
+
+        return "SELECT COUNT (*) 
+        FROM visitantes join visita_individual WHERE visita_individual.agendamentoID = visitantes.agendamentoID)";
+    
     }
 }
