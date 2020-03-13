@@ -44,6 +44,7 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["checkinVisitas" ] = 'realizar check-in';
         $this->RotasPermissoes["checkinUsuario" ] = 'realizar check-in';
         $this->RotasPermissoes["checkinAluno" ] = 'realizar check-in';
+        $this->RotasPermissoes["concluirVisita" ] = 'realizar check-in';
         $this->RotasPermissoes["telaRelatorioVisitasAgendadas.show"] = 'relatorio dos agendamentos';
         $this->RotasPermissoes["telaGerenciamentoDeEventos.show"] = 'cadastrar e modificar atividades' ;
         $this->RotasPermissoes["atualizarEvento"] = 'cadastrar e modificar atividades' ;

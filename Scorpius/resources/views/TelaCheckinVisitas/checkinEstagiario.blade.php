@@ -16,10 +16,14 @@
             <p class="h3 text-center">{{$visitantes['dia']['data']}}</p>
         </div>
         <div class="col-md-2">
-            <button class="btn btn-warning float-right">
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                Concluir visita
-            </button>
+            <form name="concluirVisita" method="post">
+                @csrf
+                <input type="hidden" value="{{ $visitantes['visita_ID'] }}">
+                <button class="btn btn-warning float-right">
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                    Concluir visita
+                </button>
+            </form>
         </div>
     </div>
 </div>

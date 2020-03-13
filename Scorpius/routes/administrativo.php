@@ -69,6 +69,7 @@ Route::group(
     }
 );
 
+Route::post('/checkin-visitas/concluir-visita', 'CheckinVisitasController@concluirVisita')->name("concluirVisita");
 Route::post('/checkin-visitas/realizar-checkin-usuario', 'CheckinVisitasController@checkinUsuario')->name("checkinUsuario");
 Route::post('/checkin-visitas/realizar-checkin-aluno', 'CheckinVisitasController@checkinAluno')->name("checkinAluno");
 Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");

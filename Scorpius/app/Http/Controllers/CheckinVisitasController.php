@@ -115,6 +115,7 @@ class CheckinVisitasController extends Controller
     {
         $dataChecadas = array();
         $listaFinal = array();
+        // dd($alunos, $usuarios);
 
         foreach($alunos as $aluno){
             if(!in_array(['data' => $aluno['data'], 'turno' => $aluno['turno']], $dataChecadas)){
@@ -144,11 +145,18 @@ class CheckinVisitasController extends Controller
                     $dataVisitantes[] = $usuario;
                 }
             }
+            if(!empty($alunos)){
+                $visita_ID = $alunos[0]['visita_ID'];
+            }else{
+                $visita_ID = $usuarios[0]['visita_ID'];
+            }
             $listaFinal[] = [
                 'dia' => $dataTurno,
-                'visitantes' => $dataVisitantes
+                'visitantes' => $dataVisitantes,
+                'visita_ID' => $visita_ID
             ];
         }
+        // dd($listaFinal);
         return $listaFinal;
     }
     public function checkinAluno(Request $req)
@@ -172,6 +180,18 @@ class CheckinVisitasController extends Controller
             'data' => $resultado,
             'success' => 'Usuário editado com sucesso',
             'erro' => 'Não foi possível editar o usuário'
+        ];
+        return Response::json($msg);
+    }
+
+    public function concluirVisita(Request $req)
+    {
+        $visita = new CheckinDAO();
+        $resultado = $visita->UPDATE_VISITA($req->ID, $req->status);
+        $msg = [
+            'data' => $resultado,
+            'success' => 'Visita editada com sucesso',
+            'erro' => 'Não foi possível editar a visita'
         ];
         return Response::json($msg);
     }
