@@ -51,6 +51,7 @@ INSERT INTO permissao (permissao, ID) VALUES ('gerenciar permissões',12);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (1,8);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (2,8);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (1,9);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (1,10);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (3,9);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (4,9);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (5,9);

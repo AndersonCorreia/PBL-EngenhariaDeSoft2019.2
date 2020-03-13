@@ -69,6 +69,8 @@ Route::group(
     }
 );
 
+Route::post('/checkin-visitas/realizar-checkin-usuario', 'CheckinVisitasController@checkinUsuario')->name("checkinUsuario");
+Route::post('/checkin-visitas/realizar-checkin-aluno', 'CheckinVisitasController@checkinAluno')->name("checkinAluno");
 Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");
 Route::group(
     ['midlleware'=>[],

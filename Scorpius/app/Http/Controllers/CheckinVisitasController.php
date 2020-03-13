@@ -153,21 +153,27 @@ class CheckinVisitasController extends Controller
     }
     public function checkinAluno(Request $req)
     {
-        //var_dump($req);
         $alunos = new CheckinDAO();
+        $resultado = $alunos->UPDATE_STATUS_ALUNO($req->ID, $req->status);   
         $msg = [
-            'msg' => 'eu'
-            //,'log' => $req->status//$alunos->UPDATE_STATUS_ALUNO($ID, $status)
+            'data' => $resultado,
+            'dados' => [$req->ID, $req->status],
+            'success' => 'Aluno editado com sucesso',
+            'erro' => 'Não foi possível editar o aluno'
         ];
-        // echo json_encode($msg);
-        // $json =  json_encode($msg);
-        // return response()->json($json);
+        
         return Response::json($msg);
     }
-    public function checkinUsuario($ID, $status)
+    public function checkinUsuario(Request $req)
     {
-        $alunos = new CheckinDAO();
-        echo json_encode($alunos->UPDATE_STATUS_USUARIO($ID, $status));
+        $usuarios = new CheckinDAO();
+        $resultado = $usuarios->UPDATE_STATUS_USUARIO($req->ID, $req->status);
+        $msg = [
+            'data' => $resultado,
+            'success' => 'Usuário editado com sucesso',
+            'erro' => 'Não foi possível editar o usuário'
+        ];
+        return Response::json($msg);
     }
 
 }

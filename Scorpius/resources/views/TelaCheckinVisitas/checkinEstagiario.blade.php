@@ -65,15 +65,23 @@
                         </p>
                     </div>
                     <div class="col-md-2 btn-presente">
-                        {{-- <form name="checkinAluno" method="POST"> --}}
+                        <form name="checkinAluno" method="POST">
                             {{csrf_field()}}
                             <meta name="csrf-token" content="{{csrf_token()}}">
-                            
-                            <input id="aluno{{$i}}" type="hidden" value="{{$aluno[0]}}">
-                            <button class="btn btn-outline-secondary" type="submit" value="aluno{{$i}}" aria-pressed="false" presente>
-                                Presente
-                            </button>
-                        {{-- </form> --}}
+
+                            <input type="hidden" value="{{$aluno[0]}}">
+                            @if ($aluno[2] == 'compareceu')
+                            <button type="submit" class="btn-outline-success btn" data-toggle="button"
+                            aria-pressed="true" id="aluno{{$i}}">Presente</button>
+                            @else
+                            <button type="submit" class="btn-outline-secondary btn" data-toggle="button"
+                            aria-pressed="false" id="aluno{{$i}}">Presente</button>
+                            @endif
+                            {{-- <button class="btn btn-outline-secondary" id="aluno{{$i}}" type="submit"
+                            value="aluno{{$i}}" aria-pressed="false">
+                            Presente
+                            </button> --}}
+                        </form>
                     </div>
                 </div>
             </div>
@@ -89,7 +97,7 @@
                     <p class="h5">Demais visitantes</p>
                 </div>
                 {{-- <div class="col-md-3">
-                <p class="h5 float-right">{checados} | {total}</p>
+                <p class="h5 float-right">{checados} | {total}</p> presente
             </div> --}}
             </div>
         </div>
@@ -97,8 +105,7 @@
             <div class="scorpius-border-shadow border-all-50 p-2 mt-1">
                 {{-- {{dd($visitantes)}} --}}
                 @for($j = 1; $j < count($visitantes['visitantes']); $j++)
-                    {{-- {{dd($visitantes['visitantes'][1]['usuario'])}} --}} 
-                    <input type="hidden" value="{{$i = 0}}">
+                    {{-- {{dd($visitantes['visitantes'][1]['usuario'])}} --}} <input type="hidden" value="{{$i = 0}}">
                     <div class="row text-center">
                         <div class="col-md-1">
                             <p class="h5 mt-1">
@@ -118,11 +125,19 @@
                         </div>
                         <div class="col-md-2">
                             <form name="checkinVisitante" method="POST">
-                                <input id="usuario{{$i}}" type="hidden"
-                                    value="{{$visitantes['visitantes'][$j]['usuario'][0]}}">
-                                <button class="btn btn-outline-secondary" value="usuario{{$i}}" aria-pressed="false">
+                                @csrf
+                                <input type="hidden" value="{{$visitantes['visitantes'][$j]['usuario'][0]}}">
+                                @if ($visitantes['visitantes'][$j]['usuario'][2] == 'compareceu')
+                                <button type="submit" class="btn-outline-success btn" data-toggle="button"
+                                    aria-pressed="true" id="usuario{{$i}}">
                                     Presente
                                 </button>
+                                @else
+                                <button type="submit" class="btn-outline-secondary btn" data-toggle="button"
+                                aria-pressed="false" id="usuario{{$i}}">
+                                    Presente
+                                </button>
+                                @endif
                             </form>
                         </div>
                     </div>

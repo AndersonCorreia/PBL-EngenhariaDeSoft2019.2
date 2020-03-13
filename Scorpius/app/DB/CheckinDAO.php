@@ -98,11 +98,13 @@ class CheckinDAO extends \App\DB\interfaces\DataAccessObject{
 
     public function UPDATE_STATUS_ALUNO($ID, $status)
     {
-        return $this->dataBase->query("UPDATE visitante_institucional SET status_Checkin = $status WHERE ID = $ID");
+        $visiID = intval($ID);
+        return $this->dataBase->query("UPDATE visitante_institucional SET status_Checkin = '$status' WHERE ID = $visiID");
     }
     public function UPDATE_STATUS_USUARIO($ID, $status)
     {
-        return $this->dataBase->query("UPDATE visitante SET status_Checkin = $status WHERE ID = $ID");
+        $visiID = intval($ID);
+        return $this->dataBase->query("UPDATE visitante SET status_Checkin = '$status' WHERE ID = $visiID");
     }
 
     public function INSERT(object $object): bool{
