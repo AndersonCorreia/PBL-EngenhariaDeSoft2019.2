@@ -7,11 +7,6 @@
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 </head>
 <div class="scorpius-border p-4">
-            @if( $variaveis['isDadosAlterados'] ?? '' == true )
-                @include('TelaAlterarDadosCadastrais.telaConfirmaAlterarDadosCadastrais')
-            @elseif( $variaveis['isDadosAlterados'] ?? '' == false )
-                @include('TelaAlterarDadosCadastrais.telaErroAlterarDadosCadastrais')
-            @endif
     <div class="scorpius-border-shadow-sm p-3"  onmousemove="verificaCamposPessoais()">
         <p class="h3">Dados pessoais</p>
         <form action="{{route('alterarDadosAlteracao.post')}}" method="POST">

@@ -49,24 +49,21 @@ class AlteraUsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   $nome = $_POST['nome'];                     echo($nome." ");
-        $sobrenome =$_POST['sobrenome'];            echo($sobrenome." ");
-        $telefone =$_POST['telefone'];               echo($telefone." ");
-        $cpf =$_POST['cpf'];                         echo($cpf." ");
-        $senhaAtual =$_POST['senhaAtual'];           echo($senhaAtual." ");
-        $novaSenha =$_POST['novaSenha'];             echo($novaSenha." ");
-        $rptNovaSenha =$_POST['rptNovaSenha'];       echo($rptNovaSenha." ");
+    {   $nome = $_POST['nome'];                      //echo($nome." ");
+        $sobrenome =$_POST['sobrenome'];             //echo($sobrenome." ");
+        $telefone =$_POST['telefone'];               //echo($telefone." ");
+        $cpf =$_POST['cpf'];                         //echo($cpf." ");
+        $senhaAtual =$_POST['senhaAtual'];           //echo($senhaAtual." ");
+        $novaSenha =$_POST['novaSenha'];             //echo($novaSenha." ");
+        $rptNovaSenha =$_POST['rptNovaSenha'];       //echo($rptNovaSenha." ");
       
-        $isDadosAlterados=null;
         $u = (new Usuario)->getDados(session('ID'));
         $variaveis = [
             'arrayDados'=>$u,
-            'isDadosAlterados' => $isDadosAlterados,
             'paginaAtual' => "Alterar Meus Dados"
         ];
-        echo($senhaAtual." "); echo($u['senha']);
+
         if($senhaAtual != $u['senha']){
-            $variaveis['isDadosAlterados'] = false;
             return view('TelaAlterarDadosCadastrais.telaErroAlterarDadosCadastrais',$variaveis);    //erro
         }
         else if($senhaAtual == $u['senha'] && $novaSenha==$rptNovaSenha){
@@ -78,7 +75,8 @@ class AlteraUsuarioController extends Controller
             $idx = $u['id'];
             (new Usuario)->alterarDados($fullName,$telefone,$cpf,$novaSenha,$idx);
             $variaveis['isDadosAlterados'] = true;
-            return redirect()->route('alterarDados.show');          //sucesso
+            //return redirect()->route('alterarDados.show');          //sucesso
+            return view('TelaAlterarDadosCadastrais.telaConfirmaAlterarDadosCadastrais',$variaveis);
         }
     }
 
