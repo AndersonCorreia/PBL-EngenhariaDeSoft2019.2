@@ -88,7 +88,7 @@ use App\Model\Agendamento;
         $status = $incluirStatusCancelado ? "" : "AND ( agendamentoStatus != 'cancelado pelo usuario' 
             AND agendamentoStatus != 'cancelado pelo funcionario' )";
 
-        $select = "SELECT instituicao, turma, data, turno, agendamentoStatus";
+        $select = "SELECT *";
         $where = "usuarioID = $id AND data $op '$data' $status";
         $sql = "$select FROM visita_institucional WHERE $where";
         $result = $this->dataBase->query($sql);

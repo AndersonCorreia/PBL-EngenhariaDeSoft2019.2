@@ -29,7 +29,7 @@ Route::group(
 
 
 //Rota de Cadastro de usuarios administrativos do sistema
-Route::get('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.show");
+Route::get('/admin/cadastro', 'AdminCadastroController@index')->name("CadastroUsuario.show");
 
 Route::post('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.post");
 

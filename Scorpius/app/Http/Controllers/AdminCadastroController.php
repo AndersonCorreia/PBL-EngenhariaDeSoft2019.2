@@ -25,11 +25,9 @@ class AdminCadastroController extends Controller
     public function index()
     {
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Criar Usuário"
+            'paginaAtual' => "Cadastrar Usuário"
         ];
         return view('TelaAdmin.cadastroUsuario',$variaveis);
-        dd('Qualquer coisa');
     }
 
     /**

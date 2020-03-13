@@ -61,7 +61,7 @@ class VisitaDAO extends DataAccessObject{
      * @return array visita com o dia e turno especificado 
      */
     public function SELECTbyData_Turno(string $dia, string $turno, bool $asObject = false){
-        //fazer abusca da visita com aquele dia e turno
+        
         $sql = "SELECT * FROM visita WHERE data_visita = ? AND turno = ?";
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ss", $dia, $turno);

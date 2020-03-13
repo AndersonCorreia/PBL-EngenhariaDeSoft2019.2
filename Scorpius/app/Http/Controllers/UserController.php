@@ -68,6 +68,9 @@ class UserController extends Controller{
 
     public function historicoDeVisitas(){
 
+        $idUser = session('ID');
+        $DAO = new AgendamentoInstitucionalDAO();
+        $agendamentos = $DAO->SELECT_VisitaInstitucionalByUserID($idUser, now(), '<', true);
         $variaveis = [
             'pagina atual' => "Histórico de Visitas"
         ];
