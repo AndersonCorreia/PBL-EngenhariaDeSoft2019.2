@@ -219,7 +219,7 @@ class AgendamentoController extends Controller{
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $exposicao = isset( $_POST['exposicoes']) ? $_POST['exposicoes'] : null;
+        $exposicao = isset( $_POST['exposicao']) ? $_POST['exposicao'] : null;
         $visitaDAO = new VisitaDAO();
         $visita = $visitaDAO->SELECTbyData_Turno($data, $turno, true);
         $visitantes = $this->getMatrizVisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);

@@ -12,7 +12,7 @@ function getMenuLinksAll(){
         'institucional0'=>  ['link'=>route('instituição.show') , 'texto'=>'Ver Instituições Vínculadas' ],
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
         'institucional2'=>  ['link'=>route('turma.index'), 'texto'=>'Turmas' ],
-        'visitante0'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
+        'visitante0'=>      ['link'=>route('HistoricoDeVisitas.show'), 'texto'=>'Histórico de Visitas' ],
         'visitante1'=>      ['link'=>route('alterarDados.show') , 'texto'=>'Alterar Meus Dados' ],
         'demanda web'=>     ['link'=>route('demandaWeb.show') , 'texto'=>'Demanda WEB' ],
         'realizar check-in'=>                   ['link'=>route('checkinVisitas') , 'texto'=>'Check-in' ],

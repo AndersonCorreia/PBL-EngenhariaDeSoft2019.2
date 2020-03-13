@@ -66,6 +66,15 @@ class UserController extends Controller{
         return redirect()->route("paginaInicial");
     }
 
+    public function historicoDeVisitas(){
+
+        $variaveis = [
+            'pagina atual' => "Histórico de Visitas"
+        ];
+
+        return \view('telasUsuarios.HistoricoDeVisitas.institucional', $variaveis);
+    }
+
     public function getVisitas($turno, $data, $sentido, $tipo){
 
         $DAO = new VisitaDAO();
