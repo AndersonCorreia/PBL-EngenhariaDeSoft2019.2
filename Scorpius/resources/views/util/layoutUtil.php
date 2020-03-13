@@ -14,13 +14,11 @@ function getMenuLinksAll(){
         'institucional2'=>  ['link'=>route('turma.index'), 'texto'=>'Turmas' ],
         'visitante0'=>      ['link'=>'#', 'texto'=>'Histórico de Visitas' ],
         'visitante1'=>      ['link'=>route('alterarDados.show') , 'texto'=>'Alterar Meus Dados' ],
-        'estagiario0'=>     ['link'=>'#' , 'texto'=>'Lista de Visitantes' ],
-        'estagiario1'=>     ['link'=>'#' , 'texto'=>'Resumo da Semana' ],
         'demanda web'=>     ['link'=>route('demandaWeb.show') , 'texto'=>'Demanda WEB' ],
-        'realizar check-in'=>                   ['link'=>'#' , 'texto'=>'Check-in' ],
+        'realizar check-in'=>                   ['link'=>route('checkinVisitas') , 'texto'=>'Check-in' ],
         'designar horários para estagiarios'=>  ['link'=>route('telaGerenciamentoDehorarios.show') , 'texto'=>'Horários dos Estagiários' ],
-        'gerenciamento de visitas'=>            ['link'=>'#' , 'texto'=>'Gerenciamento de Visitas' ],
-        'relatorio dos agendamentos'=>          ['link'=>'#' , 'texto'=>'Relatórios de Agendamentos' ],
+        'gerenciamento de visitas'=>            ['link'=>route("telaGerenciamentoDeVisitas.show") , 'texto'=>'Gerenciamento de Visitas' ],
+        'relatorio dos agendamentos'=>          ['link'=>route("telaRelatorioVisitasAgendadas.show") , 'texto'=>'Relatórios de Agendamentos' ],
         'cadastrar e modificar atividades'=>    ['link'=>route("telaGerenciamentoDeEventos.show") , 'texto'=>'Gerenciamento de Eventos' ],
         'criar usuarios'=>                      ['link'=>route("CadastroUsuario.show") , 'texto'=>'Cadastrar Usuário' ],
         'gerenciar usuarios'=>                  ['link'=>'#' , 'texto'=>'Gerenciar Usuários' ],
@@ -59,10 +57,6 @@ function getMenuLinks(){
         $links[]=$menuLinks['visitante1'];
     }
     else {
-        if($tipoUsuario=="estagiario"){
-            $links[]=$menuLinks["estagiario0"];
-            $links[]=$menuLinks["estagiario1"];
-        }
         $DAO = new App\DB\PessoaDAO;
         $permissoes = $DAO->getPermissoes($tipoUsuario);
         foreach ($permissoes as $value) {

@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Response;
 
 class RelatorioVisitasController extends Controller{
     public function getTelaRelatorioVisitas(){
-        $id_user = 601;
-        $variaveis = ['itensMenu' => getMenuLinks()];
-        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $variaveis);
+        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas');
     }
 }
 ?>
