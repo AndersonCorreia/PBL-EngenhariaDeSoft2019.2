@@ -12,7 +12,6 @@
 
 
 Route::get('/', ['uses'=>'InicialController@inicio'])->name('paginaInicial');
-// Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");
 Route::get("/dashboard", function (){
     
     $tipo = session("tipo");
@@ -41,6 +40,13 @@ Route::get("/dashboard", function (){
 
 })->name("dashboard");
 
+Route::middleware('auth')->group(
+    function(){
+        Route::get('/alterar-dados', 'AlteraUsuarioController@index')->name('alterarDados.show');
+        Route::post('/alterar-dados/alteracao', 'AlteraUsuarioController@store')->name('alterarDadosAlteracao.post');
+        Route::get('/alterar-dados/statusAlteracao', 'AlteraUsuarioController@store')->name('alterarDadosStatus.show');
+    }
+);
 // Chama o metódo do Inicialcontroller que retorna a página de cadastro.
 Route::resource('/cadastrar', 'CadastroController');
 // Chama o metódo do Inicialcontroller que retorna a página de entrar (login).
