@@ -27,7 +27,7 @@
             </li>
         </ul>
     </div>
-    <div class="form-group col-sm-12 d-block">
+    <div class="form-group col-sm-12 d-block p-0">
         <div style="text-align:center;">
             <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('diurno')" disabled>
                 <i class="fas fa-angle-left"></i>
@@ -39,7 +39,7 @@
                 <i class="fas fa-angle-right"></i>
             </button>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive p-4">
             <table class="table">
                 <thead>
                     <tr class="thead-dark">
@@ -311,18 +311,23 @@
                                                     <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
                                                     <div class="col-12 p-0">Manhã</div>
                                                 </div>
+                                                @if(($lista_espera_dia_turno ?? false))
+                                                    @foreach($lista_espera_dia_turno as $agendamento_dia_turno)
+                                                        <div class="custom-control custom-radio">
+                                                            <label class="custom-control-label" for="customRadio1">
+                                                                {{$agendamento_dia_turno['nome']}} - {{$agendamento_dia_turno['data']}}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    <p></p> <!-- caso não haja nada na lista de espera -->
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </label>
                             </div>
-                            @if(($lista_espera ?? false))
-                            @foreach($lista_espera as $agendamento)
-                            <li class="list-group-item">{{$agendamento['nome']}} - {{$agendamento['data']}}</li>
-                            @endforeach
-                            @else
-                            <li class="list-group-item"></li> <!-- caso não haja nada na lista de espera -->
-                            @endif
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -350,45 +355,40 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <!-- colocar resto das coisas aqui -->
                             <div class="custom-control col-md-12">
-                                    <div class="font-weight-bold">Data: 23/03/2020</div>
-                                    <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
-                                        <div class="row col-12 col-md-11 my-1">
-                                            <div class="row col-12">
-                                                <div class="col-8 col-5 col-md-7">
-                                                    <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
-                                                    <div class="col-12 p-0">Colégio Helyos</div> <!-- substituir por registro -->
-                                                </div>
-                                                <div class="col-4 col-md-3">
-                                                    <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
-                                                    <div class="col-12 p-0">Particular</div>
-                                                </div>
-                                                <div class="col-4 col-md-2">
-                                                    <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
-                                                    <div class="col-12 p-0">Manhã</div>
+                                @if(($lista_espera ?? false))   
+                                    @foreach($lista_espera as $agendamento)
+                                            <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
+                                                <div class="row col-md-12 my-1">
+                                                    <div class="row col-12">
+                                                        <div class="col-md-5">
+                                                            <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
+                                                            <div class="col-12 p-0">{{$agendamento['instituicao']}}</div> 
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
+                                                            <div class="col-12 p-0">{{$agendamento['tipo_instituicao']}}</div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
+                                                            <div class="col-12 p-0">{{$agendamento['turno']}}</div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
+                                                            <div class="col-12 p-0">{{$agendamento['data']}}</div>
+                                                        </div> 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    @endforeach
+                                @else
+                                    <div class="col-md-12">
+                                        <div class="col-12 p-0 my-1 font-weight-bold"><p>Não existe nenhuma instituição na lista de espera.</p></div>
                                     </div>
+                                @endif
                             </div>
-                            @if(($lista_espera_dia_turno ?? false))
-                            @foreach($lista_espera_dia_turno as $agendamento_dia_turno)
-                            <div class="custom-control custom-radio">
-                                <label class="custom-control-label" for="customRadio1">
-                                    {{$agendamento_dia_turno['nome']}} - {{$agendamento_dia_turno['data']}}
-                                </label>
-                            </div>
-                            @endforeach
-                            @else
-                            <p></p> <!-- caso não haja nada na lista de espera -->
-                            @endif
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Confirmar</button>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -445,8 +445,8 @@
             }
 
             [larguraDiv] {
-                width: 700px;
-                height: 80px;
+                width: 100%;
+                height: 100%;
             }
 
             [calendario] {

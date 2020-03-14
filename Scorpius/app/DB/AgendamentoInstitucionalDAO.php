@@ -127,5 +127,23 @@ use App\Model\Agendamento;
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+    
+    /**
+     * Função que retorna os dados de um agendamento institucional, visita e instituicao
+     * de acordo com o status do agendamento.
+     * Serve para consultar os agendamentos com um determinado status, como por exemplo a lista de espera
+     * 
+     * @param string $status do agendamento 
+     * @return array com dados selecionados de uma visita institucional com o status passado por parâmetro.  
+     */
+    public function SELECT_VisitaInstitucionalByStatus(string $status): array{
+        $select = "SELECT instituicao, turma, ano_escolar, data, turno, tipo_instituicao, ensino";
+        $where = "agendamentoStatus = 'lista de espera' ";
+        $sql = "$select FROM visita_institucional WHERE $where ORDER BY data";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+
+    }
 }
 
