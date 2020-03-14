@@ -95,5 +95,37 @@ use App\Model\Agendamento;
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getExposicoesByAgendamentoID(int $id){
+
+        $select = "titulo, descricao";
+        $join = "exposicao_agendamento_institucional ea LEFT JOIN exposicao e ON ea.exposicao_ID = e.ID";
+        $sql = "SELECT $select FROM $join WHERE agendamento_institucional_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getVisitantesByAgendamentoID(int $id){
+
+        $select = "nome, idade";
+        $sql = "SELECT $select FROM visitante_institucional WHERE agendamento_institucional_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getResponsaveisByAgendamentoID(int $id){
+
+        $select = "nome, cargo";
+        $sql = "SELECT $select FROM responsavel WHERE agendamento_institucional_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
 }
 

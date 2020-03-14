@@ -11,6 +11,9 @@ use App\DB\Professor_InstituicaoDAO;
 use App\DB\VisitaDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
+use App\DB\AgendamentoInstitucionalDAO;
+use App\DB\AgendamentoIndividualDAO;
+use App\DB\interfaces\DataAccessObject;
 
 class UserController extends Controller{   
 
@@ -69,13 +72,37 @@ class UserController extends Controller{
     public function historicoDeVisitas(){
 
         $idUser = session('ID');
-        $DAO = new AgendamentoInstitucionalDAO();
-        $agendamentos = $DAO->SELECT_VisitaInstitucionalByUserID($idUser, now(), '<', true);
+        
+        if (session('tipo') == 'institucional'){
+            $DAO = new AgendamentoInstitucionalDAO();
+            $agendamentosI = $DAO->SELECT_VisitaInstitucionalByUserID($idUser, now(), '<', true);
+            $this->completarDadosAgend($agendamentosI, $DAO);
+        }
+        else {
+            $agendamentosI = false;
+        }
+
+        $DAO = new AgendamentoIndividualDAO();
+        $agendamentos = $DAO->SELECT_VisitaIndividualByUserID($idUser, '<', '!=', now(), 'qualquer', true);
+        $this->completarDadosAgend($agendamentos, $DAO);
+
         $variaveis = [
-            'pagina atual' => "Histórico de Visitas"
+            'pagina atual' => "Histórico de Visitas",
+            'agendamentosInstitucionais' => $agendamentosI,
+            'agendamentos' => $agendamentos,
         ];
 
-        return \view('telasUsuarios.HistoricoDeVisitas.institucional', $variaveis);
+        return \view('telasUsuarios.HistoricoDeVisitas.index', $variaveis);
+    }
+
+    private function completarDadosAgend(array &$agendamentos, DataAccessObject $DAO){
+
+        foreach ($agendamentos as $key => $value) {
+            $agendamentos[$key]['exposicoes'] = $DAO->getExposicoesByAgendamentoID($value['agendamentoID']);
+            $agendamentos[$key]['visitantes'] = $DAO->getVisitantesByAgendamentoID($value['agendamentoID']);
+            $agendamentos[$key]['totalVisitantes'] = count($agendamentos[$key]['visitantes']);
+            $agendamentos[$key]['responsaveis'] = $DAO->getResponsaveisByAgendamentoID($value['agendamentoID']);
+        }
     }
 
     public function getVisitas($turno, $data, $sentido, $tipo){

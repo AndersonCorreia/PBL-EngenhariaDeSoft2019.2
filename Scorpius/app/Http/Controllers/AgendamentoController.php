@@ -266,7 +266,7 @@ class AgendamentoController extends Controller{
     private function getMatrizResponsaveis($arrayResp , $arrayCargo){
         $responsaveis = [];
 
-        for ($i=0; $i < count($arrayResp) ; $i++) { 
+        for ($i=0; $i < count($arrayResp) && $arrayResp[$i] != "" ; $i++) { 
             $responsaveis[$i] = [ 'nome' => $arrayResp[$i], 'cargo' => $arrayCargo[$i] ];
         }
 
