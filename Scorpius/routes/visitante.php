@@ -23,7 +23,8 @@ Route::get('/v/erros', 'Erros@visitante')->name('vErros');
  */
 Route::get("/agendamento/dados/{turno}/{data}/{sentido}/", "AgendamentoController@getVisitas");
 
-Route::get("/historico", "UserController@historicoDeVisitas")->name("HistoricoDeVisitas.show");
+Route::get("/visitante/historico", "UserController@historicoDeVisitas")->name("HistoricoDeVisitas.show");
+Route::get("/visitante/detalhamento", "UserController@detalhamentoDeVisitas")->name("DetalhamentoDeVisitas.show");
 
 //Rota dashboard visitante
 Route::get('/visitante/dashboard', 'UserController@getDashboard')->name('dashboardVisitante.show');

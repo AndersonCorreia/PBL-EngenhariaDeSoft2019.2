@@ -87,12 +87,38 @@ class UserController extends Controller{
         $this->completarDadosAgend($agendamentos, $DAO);
 
         $variaveis = [
-            'pagina atual' => "Histórico de Visitas",
+            'paginaAtual' => "Histórico de Visitas",
             'agendamentosInstitucionais' => $agendamentosI,
             'agendamentos' => $agendamentos,
         ];
 
         return \view('telasUsuarios.HistoricoDeVisitas.index', $variaveis);
+    }
+
+    public function detalhamentoDeVisitas(){
+
+        $idUser = session('ID');
+        
+        if (session('tipo') == 'institucional'){
+            $DAO = new AgendamentoInstitucionalDAO();
+            $agendamentosI = $DAO->SELECT_VisitaInstitucionalByUserID($idUser, now(), '>=', true);
+            $this->completarDadosAgend($agendamentosI, $DAO);
+        }
+        else {
+            $agendamentosI = false;
+        }
+
+        $DAO = new AgendamentoIndividualDAO();
+        $agendamentos = $DAO->SELECT_VisitaIndividualByUserID($idUser, '>=', '!=', now(), 'qualquer', true);
+        $this->completarDadosAgend($agendamentos, $DAO);
+
+        $variaveis = [
+            'paginaAtual' => "Detalhamento Das Proximas Visitas",
+            'agendamentosInstitucionais' => $agendamentosI,
+            'agendamentos' => $agendamentos,
+        ];
+
+        return \view('telasUsuarios.HistoricoDeVisitas.visitasFuturas', $variaveis);
     }
 
     private function completarDadosAgend(array &$agendamentos, DataAccessObject $DAO){
