@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
         if($exception instanceof NenhumaInstCadastradaException){
 
             return redirect()->route('vErros')
-                ->with('viewErro','TelaInstituicaoEnsino.error.NenhumaInstituicao');
+                ->with('viewErro','TelaInstituicaoEnsino.errorNenhumaInstituicao');
         }
         elseif($exception instanceof NenhumaTurmaCadastradaException){
             
