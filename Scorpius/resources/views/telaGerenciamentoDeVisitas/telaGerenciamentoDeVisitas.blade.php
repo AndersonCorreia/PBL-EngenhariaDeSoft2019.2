@@ -7,10 +7,6 @@
 <div class="form-row col-msm">
     <div class="form-group d-block" id="listaEspera">
         <ul class="list-group list-group-flush">
-            <!-- (Ainda nao implementado)
-            Essa parte receberá do controller uma array $lista_espera com as informações
-            do agendamento: nome da instituicao, data do agendamento
-            -->
             <li class="list-group-item">
             <div class="row">
                 <div class="col-md-6">
@@ -53,220 +49,207 @@
                 <tbody>
                     <tr>
                         <th class="table-secondary" scope="row">Manhã</th>
-                        <td>
-                            {{-- se for de manhã. COLOCAR IF --}}
-                            <p>Colégio Helyos</p>
-                            <p style="margin-top: -8px;">Status: Pendente</p>
-                            <div class="btn-group" role="group">
-                                <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                    <i class="fas fa-list-ol"></i>
-                                </button>
-                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                    btnconf>
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
-                                    data-toggle="tooltip" title="Cancelar" btncanc>
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
-                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-secondary text-white">
-                                                <h5 class="modal-title">Motivo do Cancelamento</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- colocar resto das coisas aqui -->
-                                                <div class="custom-control custom-radio col-md-12">
-                                                    <input type="radio" id="customRadio1" name="customRadio" 
-                                                    class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
+                        @for($data=0; $data<4; $data++) {{-- mudar para percorrer os dias do calendario --}}
+                            <td>
+                                {{-- trocar pelos dias do calendario --}}
+                                {{-- Linha da Manhã --}}
+                                @forelse ($agendamentos_pendentes as $agendamento)
+                                    @if(($agendamento['turno'] == "manhã" and $agendamento['data'] = strtotime($data) )) 
+                                    <p>{{$agendamento['instituicao']}}</p>
+                                    <p style="margin-top: -8px;"> Status: Pendente</p>
+                                    <div class="btn-group" role="group">
+                                        <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                        data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                            <i class="fas fa-list-ol"></i>
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                            btnconf>
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
+                                            data-toggle="tooltip" title="Cancelar" btncanc>
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
+                                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-secondary text-white">
+                                                        <h5 class="modal-title">Motivo do Cancelamento</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- colocar resto das coisas aqui -->
+                                                        <div class="custom-control custom-radio col-md-12">
+                                                            <input type="radio" id="customRadio1" name="customRadio" 
+                                                            class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
+                                                        </div>
+                                                        <div class="custom-control custom-radio col-md-12">
+                                                            <input type="radio" id="customRadio2" name="customRadio" 
+                                                            class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadio2">Outro:
+                                                                <input type="text"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-primary">Confirmar</button>
+                                                    </div>
                                                 </div>
-                                                <div class="custom-control custom-radio col-md-12">
-                                                    <input type="radio" id="customRadio2" name="customRadio" 
-                                                    class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio2">Outro:
-                                                        <input type="text"></label>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary">Confirmar</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            {{-- se for de manhã. COLOCAR IF --}}
-                            <p>Escola Dois de Julho</p>
-                            <p style="margin-top: -8px;">Status: Cancelado pelo Usuário</p>
-                            <div class="btn-group" role="group">
-                                <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                    data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                    <i class="fas fa-list-ol"></i>
-                                </button>
-                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                    btnconf>
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
-                                    data-toggle="tooltip" title="Cancelar" btncanc>
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
-                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-secondary text-white">
-                                                <h5 class="modal-title">Motivo do cancelamento</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- colocar resto das coisas aqui -->
-                                                <div class="custom-control custom-radio col-md-12">
-                                                    <input type="radio" id="customRadio1" name="customRadio" 
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio1">Condições climáticas</label>
-                                                </div>
-                                                <div class="custom-control custom-radio col-md-12">
-                                                    <input type="radio" id="customRadio2" name="customRadio" 
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio2">Outro:
-                                                        <input type="text"></label>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary">Confirmar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
+                                    @endif
+                                @empty
+                                @endforelse
+
+                                @forelse ($agendamentos_confirmados as $agendamento)
+                                    @if(($agendamento['turno'] == "manhã" &&  $agendamento['data'] = strtotime($data) ))
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Confirmado</p>
+                                    @endif
+                                @empty
+                                @endforelse
+                                
+                            </td>
+                        @endfor
                     </tr>
-                    <tr>
+                    <tr> {{-- Linha da Tarde --}}
                         <th class="table-secondary" scope="row">Tarde</th>
-                        <td></td>
-                        <td>
-                            {{-- se for de tarde. COLOCAR IF --}}
-                            <p>Colégio Santo Antônio</p>
-                            <p style="margin-top: -8px;">Status: Pendente</p>
-                            <div class="btn-group" role="group">
-                                <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                    data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                    <i class="fas fa-list-ol"></i>
-                                </button>
-                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                    btnconf>
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
-                                    data-toggle="tooltip" title="Cancelar" btncanc>
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
-                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-secondary text-white">
-                                                <h5 class="modal-title">Motivo do Cancelamento</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- colocar resto das coisas aqui -->
-                                                <div class="custom-control custom-radio col-md-12">
-                                                    <input type="radio" id="customRadio1" name="customRadio"
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio1">Condições climáticas</label>
+                        @for($data=0; $data<4; $data++) {{-- mudar para percorrer os dias do calendario --}}
+                            <td>
+                                @forelse ($agendamentos_pendentes as $agendamento)
+                                    @if(($agendamento['turno'] == "tarde" and $agendamento['data'] = strtotime($data) )) 
+                                    <p>{{$agendamento['instituicao']}}</p>
+                                    <p style="margin-top: -8px;"> Status: Pendente</p>
+                                    <div class="btn-group" role="group">
+                                        <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                        data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                            <i class="fas fa-list-ol"></i>
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                            btnconf>
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
+                                            data-toggle="tooltip" title="Cancelar" btncanc>
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
+                                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-secondary text-white">
+                                                        <h5 class="modal-title">Motivo do Cancelamento</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- colocar resto das coisas aqui -->
+                                                        <div class="custom-control custom-radio col-md-12">
+                                                            <input type="radio" id="customRadio1" name="customRadio" 
+                                                            class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
+                                                        </div>
+                                                        <div class="custom-control custom-radio col-md-12">
+                                                            <input type="radio" id="customRadio2" name="customRadio" 
+                                                            class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadio2">Outro:
+                                                                <input type="text"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-primary">Confirmar</button>
+                                                    </div>
                                                 </div>
-                                                <div class="custom-control custom-radio col-md-12">
-                                                    <input type="radio" id="customRadio2" name="customRadio" 
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio2">Outro:
-                                                        <input type="text"></label>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary">Confirmar</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
+                                    @endif
+                                @empty
+                                @endforelse
+
+                                @forelse ($agendamentos_confirmados as $agendamento)
+                                    @if(($agendamento['turno'] == "tarde" &&  $agendamento['data'] = strtotime($data) ))
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Confirmado</p>
+                                    @endif
+                                @empty
+                                @endforelse
+                            </td>
+                        @endfor
                     </tr>
                     <tr>
                         <th class="table-secondary" scope="row">Noite</th>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            {{-- se for de noite. COLOCAR IF --}}
-                            <p>Colégio Anchieta</p>
-                            <p style="margin-top: -8px;">Status: Pendente</p>
-                            <div class="btn-group" role="group">
-                                <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                    data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                    <i class="fas fa-list-ol"></i>
-                                </button>
-                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                    btnconf>
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
-                                    data-toggle="tooltip" title="Cancelar" btncanc>
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
-                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-secondary text-white">
-                                                <h5 class="modal-title">Motivo do cancelamento</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- colocar resto das coisas aqui -->
-                                                <div class="custom-control custom-radio col-md-12">
-                                                    <input type="radio" id="customRadio1" name="customRadio" 
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio1">Condições climáticas</label>
+                        @for($data=0; $data<4; $data++) {{-- mudar para percorrer os dias do calendario --}}
+                            <td>
+                                @forelse ($agendamentos_pendentes as $agendamento)
+                                    @if(($agendamento['turno'] == "noite" and $agendamento['data'] = strtotime($data) )) 
+                                    <p>{{$agendamento['instituicao']}}</p>
+                                    <p style="margin-top: -8px;"> Status: Pendente</p>
+                                    <div class="btn-group" role="group">
+                                        <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                        data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                            <i class="fas fa-list-ol"></i>
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                            btnconf>
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
+                                            data-toggle="tooltip" title="Cancelar" btncanc>
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
+                                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-secondary text-white">
+                                                        <h5 class="modal-title">Motivo do Cancelamento</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- colocar resto das coisas aqui -->
+                                                        <div class="custom-control custom-radio col-md-12">
+                                                            <input type="radio" id="customRadio1" name="customRadio" 
+                                                            class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
+                                                        </div>
+                                                        <div class="custom-control custom-radio col-md-12">
+                                                            <input type="radio" id="customRadio2" name="customRadio" 
+                                                            class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadio2">Outro:
+                                                                <input type="text"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-primary">Confirmar</button>
+                                                    </div>
                                                 </div>
-                                                <div class="custom-control custom-radio col-md-12">
-                                                    <input type="radio" id="customRadio2" name="customRadio" 
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio2">Outro:
-                                                        <input type="text"></label>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary">Confirmar</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
+                                    @endif
+                                @empty
+                                @endforelse
+
+                                @forelse ($agendamentos_confirmados as $agendamento)
+                                    @if(($agendamento['turno'] == "noite" &&  $agendamento['data'] = strtotime($data) ))
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Confirmado</p>
+                                    @endif
+                                @empty
+                                @endforelse
+                            </td>
+                        @endfor
                     </tr>
                 </tbody>
             </table>
@@ -375,7 +358,8 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
-                                                            <div class="col-12 p-0">{{$agendamento['data']}}</div>
+                                                            
+                                                            <div class="col-12 p-0">{{date("d/m/Y", strtotime($agendamento['data'])) }}</div>
                                                         </div> 
                                                     </div>
                                                 </div>
@@ -428,7 +412,7 @@
                 margin-top: 100px;
                 margin: 50px;
             }
-
+            /* btn do modal  */
             [lista] {
                 padding: 7px;
                 margin: 5px;
