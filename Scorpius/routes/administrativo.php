@@ -83,4 +83,6 @@ Route::group(
     }
 );
 
+Route::post('/realizarBackup',/** AQUI VAI O METODO DO CONTROLLER */)->name('realizarBackup');
+
 ?>
