@@ -54,7 +54,7 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         $status = $incluirStatusCancelado ? "" : "AND ( agendamentoStatus != 'cancelado pelo usuario' 
             AND agendamentoStatus != 'cancelado pelo funcionario' )";
 
-        $select = "SELECT data, turno, agendamentoStatus";
+        $select = "SELECT data, turno, agendamentoStatus, visitaStatus, agendamentoID";
         $where = "usuarioID = $id AND data $op '$data' AND turno $opTurno '$turno' $status";
         $sql = "$select FROM visita_individual WHERE $where";
         $result = $this->dataBase->query($sql);
@@ -72,5 +72,31 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
                 ('$nome', $idade, '$rg', $ID)";
             $this->dataBase->query($sql);
         }
+    }
+    public function getExposicoesByAgendamentoID(int $id){
+
+        $select = "titulo, descricao";
+        $join = "exposicao_agendamento ea LEFT JOIN exposicao e ON ea.exposicao_ID = e.ID";
+        $sql = "SELECT $select FROM $join WHERE agendamento_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getVisitantesByAgendamentoID(int $id){
+
+        $select = "nome, idade, rg";
+        $sql = "SELECT $select FROM visitante WHERE agendamento_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getResponsaveisByAgendamentoID(int $id){
+        //esse metodo só existe para compatibilidade com uma função do user controller
+        return [];
     }
 }

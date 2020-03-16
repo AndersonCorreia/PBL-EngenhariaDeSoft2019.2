@@ -88,12 +88,62 @@ use App\Model\Agendamento;
         $status = $incluirStatusCancelado ? "" : "AND ( agendamentoStatus != 'cancelado pelo usuario' 
             AND agendamentoStatus != 'cancelado pelo funcionario' )";
 
-        $select = "SELECT instituicao, turma, data, turno, agendamentoStatus";
+        $select = "SELECT *";
         $where = "usuarioID = $id AND data $op '$data' $status";
         $sql = "$select FROM visita_institucional WHERE $where";
         $result = $this->dataBase->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getExposicoesByAgendamentoID(int $id){
+
+        $select = "titulo, descricao";
+        $join = "exposicao_agendamento_institucional ea LEFT JOIN exposicao e ON ea.exposicao_ID = e.ID";
+        $sql = "SELECT $select FROM $join WHERE agendamento_institucional_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getVisitantesByAgendamentoID(int $id){
+
+        $select = "nome, idade";
+        $sql = "SELECT $select FROM visitante_institucional WHERE agendamento_institucional_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getResponsaveisByAgendamentoID(int $id){
+
+        $select = "nome, cargo";
+        $sql = "SELECT $select FROM responsavel WHERE agendamento_institucional_ID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /**
+     * Função que retorna os dados de um agendamento institucional, visita e instituicao
+     * de acordo com o status do agendamento.
+     * Serve para consultar os agendamentos com um determinado status, como por exemplo a lista de espera
+     * 
+     * @param string $status do agendamento 
+     * @return array com dados selecionados de uma visita institucional com o status passado por parâmetro.  
+     */
+    public function SELECT_VisitaInstitucionalByStatus(string $status): array{
+        $select = "SELECT instituicao, turma, ano_escolar, data, turno, tipo_instituicao, ensino";
+        $where = "agendamentoStatus = '$status'";
+        $sql = "$select FROM visita_institucional WHERE $where ORDER BY data";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+
     }
 }
 

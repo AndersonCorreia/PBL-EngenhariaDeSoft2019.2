@@ -7,11 +7,6 @@
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 </head>
 <div class="scorpius-border p-4">
-            @if( $variaveis['isDadosAlterados'] ?? '' == true )
-                @include('TelaAlterarDadosCadastrais.telaConfirmaAlterarDadosCadastrais')
-            @elseif( $variaveis['isDadosAlterados'] ?? '' == false )
-                @include('TelaAlterarDadosCadastrais.telaErroAlterarDadosCadastrais')
-            @endif
     <div class="scorpius-border-shadow-sm p-3"  onmousemove="verificaCamposPessoais()">
         <p class="h3">Dados pessoais</p>
         <form action="{{route('alterarDadosAlteracao.post')}}" method="POST">
@@ -40,7 +35,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">+55</div>
                         </div>
-                        <input required maxlength="16" minlength="16" type="text" value="{{isset($dadosUsuario['telefone']) ? $dadosUsuario['telefone'] : ''}}" name="telefone" id="telefoneUsuario"
+                        <input required maxlength="14" minlength="14" type="text" value="{{isset($dadosUsuario['telefone']) ? $dadosUsuario['telefone'] : ''}}" name="telefone" id="telefoneUsuario"
                             class="form-control" placeholder="(00) 0 0000-0000">
                     </div>
                 </div>

@@ -13,7 +13,8 @@ function getMenuLinksAll(){
         'institucional1'=>  ['link'=>route('CadastroIntituição.show') , 'texto'=>'Cadastrar Instituição' ],
         'institucional2'=>  ['link'=>route('turma.index'), 'texto'=>'Turmas' ],
         'visitante0'=>      ['link'=>route('HistoricoDeVisitas.show'), 'texto'=>'Histórico de Visitas' ],
-        'visitante1'=>      ['link'=>route('alterarDados.show') , 'texto'=>'Alterar Meus Dados' ],
+        'visitante1'=>      ['link'=>route('DetalhamentoDeVisitas.show'), 'texto'=>'Detalhamento Das Proximas Visitas' ],
+        'alterarDados'=>    ['link'=>route('alterarDados.show') , 'texto'=>'Alterar Meus Dados' ],
         'demanda web'=>     ['link'=>route('demandaWeb.show') , 'texto'=>'Demanda WEB' ],
         'realizar check-in'=>                   ['link'=>route('checkinVisitas') , 'texto'=>'Check-in' ],
         'designar horários para estagiarios'=>  ['link'=>route('telaGerenciamentoDehorarios.show') , 'texto'=>'Horários dos Estagiários' ],
@@ -63,6 +64,7 @@ function getMenuLinks(){
         //     $links[]=$menuLinks[$value["permissao"]];
         // }
     }
+    $links[]=$menuLinks['alterarDados'];
     
     return $links;
 };

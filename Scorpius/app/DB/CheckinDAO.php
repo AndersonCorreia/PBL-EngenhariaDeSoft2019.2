@@ -26,11 +26,12 @@ class CheckinDAO extends \App\DB\interfaces\DataAccessObject{
                 $row = $result->fetch_assoc();
                 $idVisita = $row['visita'];
                 $idProfessorInstituicao = $row['professor_instituicao_ID'];
-                $result = $this->dataBase->query("SELECT data_visita, turno FROM visita WHERE ID = {$idVisita} AND status = 'não realizada'");
+                $result = $this->dataBase->query("SELECT data_visita, turno, ID FROM visita WHERE ID = {$idVisita} AND status = 'não realizada'");
                 if($result->num_rows > 0){
                     $row = $result->fetch_assoc();
                     $dataVisita = $row['data_visita'];
                     $turno = $row['turno'];
+                    $visita_ID = $row['ID'];
                     $alunos = array();
                     foreach($visitanteInst as $aluno){
                         if($aluno[4] == $idAgendamento){
@@ -54,7 +55,8 @@ class CheckinDAO extends \App\DB\interfaces\DataAccessObject{
                         'turno' => $turno,
                         'professor' => ['ID'=> $IDprofessor, 'nome'=> $professor],
                         'instituicao' => ['ID'=> $IDinstituicao, 'nome'=> $instituicao],
-                        'aluno' => $alunos
+                        'aluno' => $alunos,
+                        'visita_ID' => $visita_ID
                     ];
                 }
             }
@@ -76,18 +78,20 @@ class CheckinDAO extends \App\DB\interfaces\DataAccessObject{
                 $result = $this->dataBase->query("SELECT visita FROM agendamento WHERE ID = {$idAgendamento} AND status = 'confirmado'");
                 $row = $result->fetch_assoc();
                 $idVisita = $row['visita'];
-                $result = $this->dataBase->query("SELECT data_visita, turno FROM visita WHERE ID = {$idVisita} AND status = 'não realizada'");
+                $result = $this->dataBase->query("SELECT data_visita, turno, ID FROM visita WHERE ID = {$idVisita} AND status = 'não realizada'");
                 if($result->num_rows > 0){
                     $row = $result->fetch_assoc();
                     // dd($row);
                     $dataVisita = $row['data_visita'];
                     $turno = $row['turno'];
+                    $visita_ID = $row['ID'];
                     $usuario = $visitante;
                     $visitanteInstFinal[] = [
                         'agendamento_ID' => $idAgendamento,
                         'data' => $dataVisita,
                         'turno' => $turno,
-                        'usuario' => $usuario
+                        'usuario' => $usuario,
+                        'visita_ID' => $visita_ID
                     ];
                 // }
             }
@@ -105,6 +109,12 @@ class CheckinDAO extends \App\DB\interfaces\DataAccessObject{
     {
         $visiID = intval($ID);
         return $this->dataBase->query("UPDATE visitante SET status_Checkin = '$status' WHERE ID = $visiID");
+    }
+
+    public function UPDATE_VISITA($ID, $status)
+    {   
+        $visiID = intval($ID);
+        return $this->dataBase->query("UPDATE visita SET status = '$status' WHERE ID = $visiID");
     }
 
     public function INSERT(object $object): bool{

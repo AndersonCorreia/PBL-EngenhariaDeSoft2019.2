@@ -78,7 +78,7 @@ class Visita extends \App\DB\interfaces\DataObject {
         }
         else {
             $result = (new AgendamentoIndividualDAO())
-                        ->SELECT_VisitaIndividualByUserID($ID, $data, '=', $this->Turno);
+                        ->SELECT_VisitaIndividualByUserID($ID, '=', '=', $data, $this->Turno);
             
             return ($result !== []);
         }

@@ -29,7 +29,7 @@ Route::group(
 
 
 //Rota de Cadastro de usuarios administrativos do sistema
-Route::get('/admin/cadastro', 'AdminCadastroController@index')->name("cadastroAdm");
+Route::get('/admin/cadastro', 'AdminCadastroController@index')->name("CadastroUsuario.show");
 
 //Route::post('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.post");
 
@@ -69,6 +69,7 @@ Route::group(
     }
 );
 
+Route::post('/checkin-visitas/concluir-visita', 'CheckinVisitasController@concluirVisita')->name("concluirVisita");
 Route::post('/checkin-visitas/realizar-checkin-usuario', 'CheckinVisitasController@checkinUsuario')->name("checkinUsuario");
 Route::post('/checkin-visitas/realizar-checkin-aluno', 'CheckinVisitasController@checkinAluno')->name("checkinAluno");
 Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");
@@ -81,5 +82,7 @@ Route::group(
         Route::post('/demandaWeb/enviar-horario', 'horarioEstagiarioController@cadastrarHorario')->name("demandaWeb.post");
     }
 );
+
+Route::post('/realizarBackup',/** AQUI VAI O METODO DO CONTROLLER */)->name('realizarBackup');
 
 ?>

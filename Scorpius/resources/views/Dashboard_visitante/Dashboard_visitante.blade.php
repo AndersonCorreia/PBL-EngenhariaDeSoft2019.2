@@ -5,9 +5,6 @@
 @section('conteudo')
         
     <style>
-        .notificacoes_agendamentos{
-            padding: 10px ;
-        }
         .scroll{
             max-height: 300px;
             overflow-y: auto;
@@ -19,17 +16,10 @@
         .card{
             height: 300px;
         }
-        .coluna_calendario{        
-            float: middle;
-        }
-        .container-fluid{
-            border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;
-            border-top-right-radius: 20px;border-top-left-radius: 20px;
-        }
     </style>
-<div class="col overflow-auto scorpius-border-shadow-sm  mb-3 p-md-3 p-1" >
-    <div class = "row col notificacoes_agendamentos">
-        <div class = "col-md-5 col notificacoes">   <!-- DIV DAS NOTIFICAÇOES  -->
+<div class="row col-12 overflow-auto m-0 p-3" >
+    <div class = "row col-12 m-0 mb-5 p-4 scorpius-border-shadow ">
+        <div class = "col-md-5 col-12 m-0 pr-2 p-0 ">   <!-- DIV DAS NOTIFICAÇOES  -->
             <div class = "card">
                 <div class = "card-header text-white bg-primary">
                     <h4 class="card-title">Suas Notificações</h4>
@@ -41,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class = "col-md-7 col agendamentos">   <!-- DIV DOS AGENDAMENTOS  -->
+        <div class = "col-md-7 col-12 pl-2 m-0 p-0 agendamentos">   <!-- DIV DOS AGENDAMENTOS  -->
             <div class = "card">
                 <div class = "card-header text-white bg-primary">
                     <h4 class="card-title">Seus Agendamentos</h4>
@@ -52,10 +42,9 @@
             </div>
         </div>
     </div>
-</div>
-<div class="scorpius-border-shadow-sm p-4">
-    <div class = "row">
-            @include('telasUsuarios.Agendamentos._includes.calendar')  
+    <div class=" col-12 scorpius-border-shadow border-top border-shadow p-4">
+        @include('telasUsuarios.Agendamentos._includes.calendar')  
     </div>
 </div>
+
 @endsection

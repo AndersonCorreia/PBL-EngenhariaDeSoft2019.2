@@ -1,9 +1,4 @@
 <?php
-
-// chama tela de alterar dados cadastrais localizada no controller através do método index
-Route::get('/alterar-dados', 'AlteraUsuarioController@index')->name('alterarDados.show');
-Route::post('/alterar-dados/alteracao', 'AlteraUsuarioController@store')->name('alterarDadosAlteracao.post');
-Route::get('/alterar-dados/statusAlteracao', 'AlteraUsuarioController@store')->name('alterarDadosStatus.show');
     
 //Rotas para agendamento individual para as exposiçoes diurnas
 Route::get('/agendamento/exposicoes', 'AgendamentoController@agendamentoIndividual')->name('AgendarDiurnoVisitante.show');
@@ -23,7 +18,8 @@ Route::get('/v/erros', 'Erros@visitante')->name('vErros');
  */
 Route::get("/agendamento/dados/{turno}/{data}/{sentido}/", "AgendamentoController@getVisitas");
 
-Route::get("/historico", "UserController@historicoDeVisitas")->name("HistoricoDeVisitas.show");
+Route::get("/visitante/historico", "UserController@historicoDeVisitas")->name("HistoricoDeVisitas.show");
+Route::get("/visitante/detalhamento", "UserController@detalhamentoDeVisitas")->name("DetalhamentoDeVisitas.show");
 
 //Rota dashboard visitante
 Route::get('/visitante/dashboard', 'UserController@getDashboard')->name('dashboardVisitante.show');
