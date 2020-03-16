@@ -21,11 +21,15 @@ class VisitaController extends Controller{
         $lista_espera = $DAO->SELECT_VisitaInstitucionalByStatus("lista de espera");
         $agendamentos_pendentes = $DAO->SELECT_VisitaInstitucionalByStatus("pendente");
         $agendamentos_confirmados = $DAO->SELECT_VisitaInstitucionalByStatus("confirmado");
+        $agendamentos_cancelados_usuario = $DAO->SELECT_VisitaInstitucionalByStatus("cancelado pelo usuario");
+        $agendamentos_cancelados_funcionario = $DAO->SELECT_VisitaInstitucionalByStatus("cancelado pelo funcionario");
         $variaveis = [
             'paginaAtual' => "Gerenciamento de Visitas",
             'lista_espera' => $lista_espera,
             'agendamentos_pendentes' => $agendamentos_pendentes,
-            'agendamentos_confirmados' => $agendamentos_confirmados
+            'agendamentos_confirmados' => $agendamentos_confirmados,
+            'agendamentos_cancelados_usuario' => $agendamentos_cancelados_usuario,
+            'agendamentos_cancelados_funcionario' => $agendamentos_cancelados_funcionario
         ];
         return view('telaGerenciamentoDeVisitas.telaGerenciamentoDeVisitas', $variaveis);
     }
