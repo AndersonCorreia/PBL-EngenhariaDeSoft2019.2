@@ -11,7 +11,7 @@ use App\Model\Users\Usuario;
 class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 {
     public function __Construct(){
-        parent::__Construct("usuario");
+        parent::__Construct("pessoa");
     }
 
     function INSERT($pessoa): bool
@@ -45,6 +45,14 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 
         $resultado = $this->dataBase->query($sql);
         return $resultado;
+    }
+
+    function desativarByID(int $ID){
+        $sql = "UPDATE usuario us SET us.ativo=0 WHERE us.ID = ? ";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i",$ID);
+        
+        return $stmt->execute();
     }
 
     /**

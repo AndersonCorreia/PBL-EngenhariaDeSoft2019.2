@@ -10,6 +10,16 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	protected $senha;
 	protected $tipo;
 
+	public function __Construct($nome, $senha, $tipo_usuario, $cpf, $telefone, $email)
+    {
+        $this->nome = $nome;
+		$this->senha = $senha;
+		$this->tipo_usuario = $tipo_usuario;
+		$this->cpf = $cpf;
+		$this->telefone = $telefone;
+		$this->email = $email;
+    }
+
 	/**
 	 * Metodo de login do usuario do sistema. 
 	 *
@@ -77,6 +87,13 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	public function getTipo() {
 		return $this->tipo;
 	}
+
+	public static function desativarByID(int $ID){
+		$result = (new \app\DB\PessoaDAO)->desativarByID($ID);
+		return $result;
+	}
+
+
 
 	/**
 	 * função abstrata, para que a implementação em usuario verifique se o tipo é correto.

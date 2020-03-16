@@ -28,8 +28,9 @@ class AdminCadastroController extends Controller
             'itensMenu' => getMenuLinks(),
             'paginaAtual' => "Criar Usuário"
         ];
+        
         return view('TelaAdmin.cadastroUsuario',$variaveis);
-        dd('Qualquer coisa');
+        
     }
 
     /**

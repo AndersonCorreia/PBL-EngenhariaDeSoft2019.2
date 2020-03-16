@@ -14,7 +14,7 @@ Route::group(
 );
 
 //Rota dashboard adm
-Route::get('/adm/dashboard', 'UserController@getDashboard')->name('dashboardAdm.show');
+Route::get('/adm/dashboard', 'UserController@getDashboardAdm')->name('dashboardAdm.show');
 
 //Rota para retornar a tela de Gerenciamento de Visitas.
 
@@ -29,9 +29,9 @@ Route::group(
 
 
 //Rota de Cadastro de usuarios administrativos do sistema
-Route::get('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.show");
+Route::get('/admin/cadastro', 'AdminCadastroController@index')->name("cadastroAdm");
 
-Route::post('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.post");
+//Route::post('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.post");
 
 
 Route::group(

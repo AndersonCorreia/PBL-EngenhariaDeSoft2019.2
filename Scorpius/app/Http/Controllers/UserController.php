@@ -12,10 +12,12 @@ use App\DB\VisitaDAO;
 use App\DB\TurmaDAO;
 use App\Model\AgendamentoInstitucional;
 
-class UserController extends Controller{   
+class UserController extends Controller
+{
 
-    public function getDashboard(){
-        
+    public function getDashboard()
+    {
+
         $array = $this->getVisitas("diurno", "now", "anterior", session("tipo"));
         $id_user = session('ID');
         $tipo = session('tipo');
@@ -25,15 +27,33 @@ class UserController extends Controller{
         $institucional = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Ocupado: Lista de Espera disponivel", "tipo" => "institucional"];
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
-            'registros' => ['agendamento'=>$agendamento,'agendamento_institucional'=>$agenda_institucional],
+            'registros' => ['agendamento' => $agendamento, 'agendamento_institucional' => $agenda_institucional],
             'notificacoes' => $notificacao,
             'agenda_institucional' => $agenda_institucional,
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
-            'tipoUserLegenda'=> $$tipo
+            'tipoUserLegenda' => $$tipo
         ];
 
-        return view("Dashboard_visitante.Dashboard_visitante",$variaveis);
+        return view("Dashboard_visitante.Dashboard_visitante", $variaveis);
+    }
+
+    public function getDashboardAdm()
+    {
+        $id_user = session('ID');
+       // $tipo = session('tipo');
+        //$notificacao = AgendamentoInstitucional::listarNotificacao($id_user);
+        
+        $variaveis = [
+            // 'registros' => ['agendamento' => $agendamento, 'agendamento_institucional' => $agenda_institucional],
+            // 'notificacoes' => $notificacao,
+            // 'agenda_institucional' => $agenda_institucional,
+            // 'visitas' => $array,
+            // 'legendaCores' => Visita::getBtnClasses(),
+            //'tipoUserLegenda' => $$tipo
+        ];
+
+        return view("Dashboard_Adm.Dashboard_Adm", $variaveis);
     }
 
     /**
@@ -42,13 +62,14 @@ class UserController extends Controller{
      * @param [type] $request
      * @return void
      */
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $user = $request["e-mail"];
         $senha = $request["senha"];
         $DAO = new PessoaDAO();
-        $usuario = $DAO->UserLogin($user, $senha);//lança uma exception se as informações estiverem incorretas
+        $usuario = $DAO->UserLogin($user, $senha); //lança uma exception se as informações estiverem incorretas
 
-        $request->session()->regenerate();//a documentação falava que era para previnir um ataque chamado "session fixation"
+        $request->session()->regenerate(); //a documentação falava que era para previnir um ataque chamado "session fixation"
         session(["ID" => $usuario["ID"], "nome" => $usuario["nome"], "tipo" => $usuario["tipo"]]);
 
         return redirect()->route("dashboard");
@@ -60,13 +81,15 @@ class UserController extends Controller{
      * @param [type] $request
      * @return void
      */
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
 
         $request->session()->flush();
         return redirect()->route("paginaInicial");
     }
 
-    public function historicoDeVisitas(){
+    public function historicoDeVisitas()
+    {
 
         $variaveis = [
             'pagina atual' => "Histórico de Visitas"
@@ -75,26 +98,26 @@ class UserController extends Controller{
         return \view('telasUsuarios.HistoricoDeVisitas.institucional', $variaveis);
     }
 
-    public function getVisitas($turno, $data, $sentido, $tipo){
+    public function getVisitas($turno, $data, $sentido, $tipo)
+    {
 
         $DAO = new VisitaDAO();
         $dataFim = now();
         $dataFim = $dataFim->add(new \DateInterval("P2M"));
-        if($sentido=="anterior"){
-            $dataAtual = now();  
-        }
-        else {
+        if ($sentido == "anterior") {
+            $dataAtual = now();
+        } else {
             $dataAtual = $data;
         }
-        $visitas= $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim, ($turno=="diurno"), 20);
+        $visitas = $DAO->getVistasObjectsByDateInicio_FIM($dataAtual, $dataFim, ($turno == "diurno"), 20);
         $array = [];
         foreach ($visitas as $v) {
-            if(count($array)<12){
+            if (count($array) < 12) {
                 $v->preencherArrayForCalendario($array, $tipo);
             }
         }
-        $dataFinalReal= new \DateTime($array["datas"]["dataLimite"]);
-        if ( count($array)>11 ){
+        $dataFinalReal = new \DateTime($array["datas"]["dataLimite"]);
+        if (count($array) > 11) {
             $dataFinalReal->sub(new \DateInterval("P1D"));
         }
         $array["datas"]["dataLimite"] = $dataFinalReal->format("Y-m-d");
