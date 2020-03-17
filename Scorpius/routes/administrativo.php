@@ -83,6 +83,14 @@ Route::group(
     }
 );
 
-Route::post('/realizarBackup',/** AQUI VAI O METODO DO CONTROLLER */)->name('realizarBackup');
+Route::group(
+    ['midlleware'=>[],
+    'prefix'=>'adm',
+    'namespace'=>'Admin'],
+    function(){
+        Route::get('/backup', 'BackupController@index')->name('backup');
+    }
+);
+
 
 ?>

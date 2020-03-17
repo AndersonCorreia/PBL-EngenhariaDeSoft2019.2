@@ -56,6 +56,7 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["dashboardFuncionario.show" ] = 'funcionario';
         $this->RotasPermissoes["dashboardEstagiario.show" ] = 'estagiario';
         $this->RotasPermissoes["dashboardAdm.show" ] = 'adm';
+        $this->RotasPermissoes["backup" ] = 'realizar backup';
         
         //$this->RotasPermissoes["nome da rota" ] = 'permissão associada como ta escrito no banco';
     }
