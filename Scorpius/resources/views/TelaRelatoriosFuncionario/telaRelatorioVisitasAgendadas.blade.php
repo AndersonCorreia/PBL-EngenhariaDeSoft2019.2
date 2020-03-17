@@ -168,7 +168,7 @@
 
     [borda]{
         width: 1050px;
-        height: 250px;
+        height: 270px;
     }
 
     [bordaModal]{
