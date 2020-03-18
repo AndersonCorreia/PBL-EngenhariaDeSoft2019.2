@@ -153,7 +153,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(10) NOT NULL,
+  `nome` VARCHAR(20) NOT NULL,
   `ano_escolar` VARCHAR(12) NOT NULL,
   `ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
   `professor_ID` INT UNSIGNED NOT NULL,

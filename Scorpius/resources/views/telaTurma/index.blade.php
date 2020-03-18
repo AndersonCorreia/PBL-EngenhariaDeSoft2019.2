@@ -85,7 +85,7 @@
                                                 <span>Sobre turma:</span>
                                             </div>
                                             <div id="col-nome-turma" class="col-md-3">
-                                                <input maxlength="10" minlength="1" placeholder="Nome da turma"
+                                                <input maxlength="20" minlength="1" placeholder="Nome da turma"
                                                     type="text" class="form-control" id="cadastrar-turma-nome-turma"
                                                     name="nomeTurma" required>
                                             </div>
@@ -135,8 +135,8 @@
                                                         </div>
                                                         <div class="col-md-2">
                                                             <input onclick="verificaTurma()" id="idadeAluno1"
-                                                                placeholder="Idade" type="number"
-                                                                class="form-control btn-block" class="adcIdadeAluno"
+                                                                placeholder="Idade" type="number" max="99"
+                                                                class="form-control btn-block adcIdadeAluno"
                                                                 name="idadeAluno1" required>
                                                         </div>
                                                         <div class="col-md-1">
