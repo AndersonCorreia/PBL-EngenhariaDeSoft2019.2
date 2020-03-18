@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`usuario` (
   `nome` VARCHAR(50) NOT NULL,
   `email` VARCHAR(40) NOT NULL,
   `senha` VARCHAR(20) NOT NULL,
-  `CPF` CHAR(14) NOT NULL,
+  `CPF` CHAR(11) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
   `ativo` TINYINT(1) DEFAULT  0, 
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
