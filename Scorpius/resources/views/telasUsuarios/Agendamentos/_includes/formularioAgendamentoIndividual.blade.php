@@ -57,17 +57,19 @@
         </div>
     </div>
     @if(($turno ?? "diurno")==="noturno") 
-        <div id="observacoes" class="mt-3">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlenght=100 placeholder="Observações"></textarea>
-        </div>
+    <div id="observacoes" class="mt-3">
+        <textarea class="form-control" name="observacao" rows="3" maxlenght=100 placeholder="Observações"></textarea>
+    </div>
     @endif
     <div class="adicionar-cancelar mt-2 text-right">
         <button id="submit" type="submit" class="btn mr-2 btn-primary">
             <i class="fas fa-receipt"></i>
-            Agendar</button>
-        <a href="" class="btn btn-secondary">
+            Agendar
+        </button>
+        <a href={{route('dashboard')}} class="btn btn-secondary">
             <i class="fa fa-times" aria-hidden="true"></i>
-            Cancelar</a>
+            Cancelar
+        </a>
     </div>
 </div>
 @section('css')

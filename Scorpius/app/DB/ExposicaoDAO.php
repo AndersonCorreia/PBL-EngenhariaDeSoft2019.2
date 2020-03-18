@@ -102,4 +102,26 @@ class ExposicaoDAO extends \App\DB\interfaces\DataAccessObject
 
         return $ArrayResult;
     }
+
+    public function SELECT_ALL_AtividadeDiferenciadaHasImg(){
+
+        $hoje =  now();
+        $where = "tipo_evento = 'atividade diferenciada' AND ( data_final >= ? OR data_final IS NULL ) ";
+
+        $sql = "SELECT * FROM $this->table WHERE $where";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("s", $hoje);
+        $stmt->execute();
+        $ArrayResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        if($ArrayResult==[]){
+            throw new \App\Exceptions\NenhumaAtividadeEncontradaException();
+        }
+
+        foreach($ArrayResult as $key=>$value){
+            $ArrayResult[$key]['imagem']= base64_encode($ArrayResult[$key]['imagem']);
+        }
+
+        return $ArrayResult;
+    }
 }
