@@ -3,18 +3,7 @@
 @section('title', 'Cadastrar Instituição de Ensino')
 
 @section('conteudo')
-
-@if($errors->any())
-    <ul>
-        @foreach($errors->all() as $eror)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
-
-<div class="form-group col-12 pt-3">
-<h5>Insira os Dados da Instituição</h5>
-</div>
+<div class="col-12 m-0 p-0 pt-1 scorpius-border-shadow-sm">
 
 <form class="col-lg-12 col-12 mx-sm-auto mt-sm-1" method="POST" action="{{route('CadastroInstituição.post')}}">
     {{csrf_field()}}
@@ -22,6 +11,7 @@
     <input id="id" type="hidden" name="ID">{{-- prenchido pelo js caso o usuario clique em "buscar" --}}
     <fieldset>
         <div class="form-row col-12">
+            <h5>Insira os Dados da Instituição</h5>
             <div class="form-group row m-auto col-md-12 col-12">
                 <span class="col-12 p-0">Instituição de Ensino</span>
                 <div class="col-12 row m-0 p-0">
@@ -113,19 +103,7 @@
         </div>
     </fieldset>
 </form>
-@endsection
-
-@section('css')
-<style type="text/css">
-
-    form .form-group{
-        padding:0.5%;
-    }
-    form span{
-        color: black;
-        text-decoration: none;   
-    }
-</style>
+</div>
 @endsection
 
 @section('js')

@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`usuario` (
   `nome` VARCHAR(50) NOT NULL,
   `email` VARCHAR(40) NOT NULL,
   `senha` VARCHAR(20) NOT NULL,
-  `CPF` CHAR(14) NOT NULL,
+  `CPF` CHAR(11) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
   `ativo` TINYINT(1) DEFAULT  0, 
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
@@ -153,7 +153,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(10) NOT NULL,
+  `nome` VARCHAR(20) NOT NULL,
   `ano_escolar` VARCHAR(12) NOT NULL,
   `ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
   `professor_ID` INT UNSIGNED NOT NULL,
