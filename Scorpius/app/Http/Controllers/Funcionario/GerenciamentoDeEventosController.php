@@ -136,7 +136,6 @@ class GerenciamentoDeEventosController extends Controller{
 
         } catch (Exception $e) {
             $log = $e->getMessage();
-            dd($log );
             $try = 'FALSE';
         }
         $variaveis = [

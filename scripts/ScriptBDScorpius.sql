@@ -13,7 +13,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 DROP DATABASE IF EXISTS `scorpius`;-- apagando o banco para inserir novamente
 CREATE SCHEMA IF NOT EXISTS `scorpius` DEFAULT CHARACTER SET utf8 ;
 USE `scorpius` ;
-
+SET GLOBAL max_allowed_packet=8388608;
 -- -----------------------------------------------------
 -- Table `scorpius`.`exposicao`
 -- era bom saber se uma atividade diferenciada pode ocorrer em apenas 1 turno
