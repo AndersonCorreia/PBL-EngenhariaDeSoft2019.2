@@ -35,6 +35,7 @@
     <div class="scorpius-border-shadow-sm p-3">
         <p class="h3">Opções:</p>
         <form>
+        <meta name="csrf-token" content="{{csrf_token()}}">
             <div class="row col-12 m-0 p-4"><!--campo radio buttons e seleção datas-->
                 <div class="col-4 p-3 pt-4" >
                     <fieldset class="form-group pl-5">
@@ -87,15 +88,15 @@
             <div class="row col-12 m-0 p-0 pl-5"><!--campo caminho do backup-->
                 <div class="col-10 p-3">
                     <div class="form-group p-4">
-                        <label for="inlineFormInputName">Diretório de backup</label>
-                        <input type="text" class="form-control" id="inlineFormInputName" placeholder="">
+                        <label for="diretorio">Diretório de backup</label>
+                        <input type="text" class="form-control" id="diretorio" placeholder="">
                     </div>
                 </div>
             </div>
             <div class="row m-0 p-5" style="border:1px solid black"><!--campo botões-->
                 <div class="col-3">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success col-sm-8" value="backup" data-toggle="modal"
+                        <button type="button" class="btn btn-success col-sm-8" value="backup" data-toggle="modal"
                                 data-target="#modalExemplo" backup>Backup<i class="fa fa-send"></i>
                         </button>
                     </div>
@@ -146,6 +147,7 @@ $(document).ready(function() {
     $('[salvarMudanca]').click(e=>{
         e.preventDefault()
         let dir = $('#diretorio').val()
+        console.log(dir)
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
