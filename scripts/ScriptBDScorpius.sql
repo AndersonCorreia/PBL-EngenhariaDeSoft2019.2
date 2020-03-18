@@ -261,7 +261,7 @@ LEFT JOIN turma t ON ai.turma_ID = t.ID
 INNER JOIN professor_instituicao pi ON ai.professor_instituicao_ID = pi.ID 
 INNER JOIN usuario u ON u.ID = pi.usuario_ID
 INNER JOIN instituicao i ON i.ID = pi.instituicao_ID
-INNER JOIN cidade_uf cuf ON cuf.ID = i.cidade_UF_ID;
+INNER JOIN cidade_UF cuf ON cuf.ID = i.cidade_UF_ID;
 
 CREATE VIEW IF NOT EXISTS visita_individual
 AS SELECT v.ID AS visitaID, v.data_visita AS data, turno, v.status AS visitaStatus,
