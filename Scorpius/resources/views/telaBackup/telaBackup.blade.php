@@ -3,17 +3,44 @@
 @section('title', 'Realizar Backup')
 
 @section('conteudo')
+{{csrf_field()}}
+{{ method_field('POST') }}
+<!-- Modal -->
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmar Backup</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja confirmar o backup?
+                <div class="alert alert-danger" role="alert" style='display:none'>Diretório Incorreto.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" salvarMudanca>Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 
 <div class="scorpius-border p-4">
     <div class="scorpius-border-shadow-sm p-3">
         <p class="h3">Realizar Backup</p>
         <fieldset class="form-group">
+        <meta name="csrf-token" content="{{csrf_token()}}">
             <div class="col">
                 <legend class="col-form-label col-sm-2 pt-0">Opções:</legend>
                 <div class="col-auto form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="diariamente"
-                        checked>
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                        value="diariamente" checked>
                     <label class="form-check-label" for="exampleRadios1">
                         Diariamente
                     </label>
@@ -63,8 +90,8 @@
                 <div class="row col-12 p-3">
                     <div class="col-md-12">
                         <div class="col-sm-3 my-1">
-                            <label for="inlineFormInputName">Diretório de backup</label>
-                            <input type="text" class="form-control" id="inlineFormInputName" placeholder="">
+                            <label for="diretorio">Diretório de backup</label>
+                            <input type="text" class="form-control" id="diretorio" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -92,26 +119,57 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 $(document).ready(function() {
-    $('input[type=radio]').click(e=>{
-        if(e.currentTarget.value == "diariamente"){
+    $('input[type=radio]').click(e => {
+        if (e.currentTarget.value == "diariamente") {
             $('#horario').parent().show()
             $('select#dia').parent().hide()
             $('#data').parent().hide()
-        }else if(e.currentTarget.value == "semanalmente"){
+        } else if (e.currentTarget.value == "semanalmente") {
             $('select#dia').parent().show()
             $('#data').parent().hide()
             $('#horario').parent().hide()
-        }else if(e.currentTarget.value == "mensalmente"){
+        } else if (e.currentTarget.value == "mensalmente") {
             $('select#dia').parent().hide()
             $('#data').parent().show()
             $('#horario').parent().hide()
         }
     })
+
+    $('[backup]').click(e=>{
+        $('.alert').hide()
+    })
+
+    $('[salvarMudanca]').click(e=>{
+        e.preventDefault()
+        let dir = $('#diretorio').val()
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+            $.ajax({
+                url: "{{route('realizarBackup')}}",
+                method: 'POST',
+                data: {
+                    diretorio:dir
+                },
+                success(retorno) {
+                    console.log(retorno)
+                    location.reload();
+                },
+                error(erro) {
+                    console.log(erro)
+                    $('.alert').show()
+                }
+
+            })
+    })
+
+
 })
 </script>
 
 @endsection
-
 
 <style>
 button[type=submit] {

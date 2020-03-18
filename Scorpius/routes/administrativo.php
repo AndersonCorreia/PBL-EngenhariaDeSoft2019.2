@@ -89,6 +89,7 @@ Route::group(
     'namespace'=>'Admin'],
     function(){
         Route::get('/backup', 'BackupController@index')->name('backup');
+        Route::post('/realizarBackup', 'BackupController@realizaBackup')->name('realizarBackup');
     }
 );
 
