@@ -12,8 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 class DashboardController extends Controller{
     public function getTelaDashboardFuncionario(){
-        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
-        $id_user = session('ID');
+        
         $variaveis = [
             'paginaAtual' => "Painel de Controle do Funcionário"   
         ];

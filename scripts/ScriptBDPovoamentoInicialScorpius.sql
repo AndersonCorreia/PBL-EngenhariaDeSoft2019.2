@@ -1,6 +1,7 @@
 USE `scorpius`;
 
 -- INSERT do tipos de usuarios --
+INSERT INTO tipo_usuario (ID, tipo) VALUES (99, 'scorpius');
 INSERT INTO tipo_usuario (ID, tipo) VALUES (10, 'adm');
 INSERT INTO tipo_usuario (ID, tipo) VALUES (8, 'estagiario');
 INSERT INTO tipo_usuario (ID, tipo) VALUES (9, 'funcionario');
@@ -18,6 +19,8 @@ INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
 ('Moises Hugo', 'funcionario@scorpius.com', 'funcionario', '06515391504', 1, 9);
 INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
 ('Alana Hugo', 'adm@scorpius.com', 'administrador', '06515391505', 1, 10);
+INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
+('Alana Scorpius', 'scorpius@scorpius.com', 'scorpius', '06515391506', 1, 99);
 
 -- Insert dos usuarios --
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
@@ -45,7 +48,6 @@ INSERT INTO permissao (permissao, ID) VALUES ('gerenciar usuarios',8);
 INSERT INTO permissao (permissao, ID) VALUES ('ver confiabilidade das instituições',9);
 INSERT INTO permissao (permissao, ID) VALUES ('ver log de atividade',10);
 INSERT INTO permissao (permissao, ID) VALUES ('realizar backup',11);
-INSERT INTO permissao (permissao, ID) VALUES ('gerenciar permissões',12);
 
 -- INSERT das permissões padrões dos  tipos de usuario --
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (1,8);
@@ -61,7 +63,17 @@ INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (8,10);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (9,10);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (10,10);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (11,10);
-INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (12,10);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (1,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (2,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (3,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (4,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (5,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (6,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (7,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (8,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (9,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (10,99);
+INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (11,99);
 
 -- INSERT das cidades --
 INSERT INTO cidade_UF (ID, cidade, UF) VALUES (1, 'Salvador', 'BA');

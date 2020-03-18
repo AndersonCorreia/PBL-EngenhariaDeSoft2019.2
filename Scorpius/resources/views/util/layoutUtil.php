@@ -41,10 +41,10 @@ function getMenuLinks(){
     $tipoUsuario = session('tipo');
 
     $links=[$menuLinks['inicio']];//adcionando o inicio que vale para todos
-    if($tipoUsuario=="visitante" || $tipoUsuario=="institucional"){
+    if($tipoUsuario=="visitante" || $tipoUsuario=="institucional" || $tipoUsuario=="scorpius"){
 
         $links['collapseAgend']=$menuLinks['collapseAgend'];
-        if( $tipoUsuario=="institucional" ){
+        if( $tipoUsuario=="institucional" || $tipoUsuario=="scorpius" ){
             $links[]=$menuLinks["institucional0"];
             $links[]=$menuLinks["institucional1"];
             $links[]=$menuLinks["institucional2"];
@@ -64,6 +64,15 @@ function getMenuLinks(){
             $links[]=$menuLinks[$value["permissao"]];
         }
     }
+
+    if( $tipoUsuario=="scorpius"){
+        $DAO = new App\DB\PessoaDAO;
+        $permissoes = $DAO->getPermissoes($tipoUsuario);
+        foreach ($permissoes as $value) {
+            $links[]=$menuLinks[$value["permissao"]];
+        }
+    }
+    
     $links[]=$menuLinks['alterarDados'];
     
     return $links;

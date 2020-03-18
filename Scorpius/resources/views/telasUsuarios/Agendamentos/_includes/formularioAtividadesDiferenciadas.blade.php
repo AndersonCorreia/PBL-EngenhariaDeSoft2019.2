@@ -4,13 +4,13 @@
     </div>    
     <div class="col-12 p-0 px-3 py-1 m-0">    
         <button type="button" class="btn btn-primary w-100" data-toggle="modal"
-                data-target="#modal-atividade-diferenciada">
+                data-target="#modal-atividade-diferenciada{{$atividade['ID']}}">
                 <b>{{$atividade['titulo']}}</b>
         </button>
     </div>
 </div>
 <!--Modal Agendamento-->
-<div class="modal fade" id ="modal-atividade-diferenciada" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade" id ="modal-atividade-diferenciada{{$atividade['ID']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">

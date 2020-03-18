@@ -28,7 +28,7 @@ class AuthorizeAdministrativo{
             $tipo = 'funcionario'; //padronizando o dashboard de funcionario como padrão para os novos tipos
         }
 
-        if($permissao == session('tipo') || $DAO->asPermissao(session('tipo'), $permissao) ){
+        if($permissao == $tipo || $DAO->asPermissao($tipo, $permissao) ){
             return $next($request);
         }
         return redirect()->route('paginaInicial');

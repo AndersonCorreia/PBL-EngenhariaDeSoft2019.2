@@ -14,7 +14,8 @@ class AuthorizeInstitucional{
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next){   
         
-        if($request->session()->get('tipo') == 'institucional'){
+        $tipo = session('tipo');
+        if($tipo == 'institucional' || $tipo == 'scorpius'){
             return $next($request);
         }
         return redirect()->route('dashboard');
