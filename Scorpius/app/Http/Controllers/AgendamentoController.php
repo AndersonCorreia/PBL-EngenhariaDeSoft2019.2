@@ -123,7 +123,8 @@ class AgendamentoController extends Controller{
     public function agendamentoAtividadeDiferenciada(){
 
         $variaveis = [
-            'paginaAtual' => "Agendar Visita"
+            'paginaAtual' => "Agendar Visita",
+            'atividades'  => (new ExposicaoDAO())->SELECT_ALL_AtividadeDiferenciadaHasImg()
         ];
 
         return view('telasUsuarios.Agendamentos.agendamentoAtividade', $variaveis);
