@@ -40,15 +40,15 @@
                 <div class="col-4 p-3 pt-4" >
                     <fieldset class="form-group pl-5">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="diariamente" checked>
                             <label class="form-check-label" for="gridRadios1">Diariamente</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="semanalmente">
                             <label class="form-check-label" for="gridRadios2">Semanalmente</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="mensalmente">
                             <label class="form-check-label" for="gridRadios3">Mensalmente</label>
                         </div>
                         
@@ -88,27 +88,27 @@
             <div class="row col-12 m-0 p-0 pl-5"><!--campo caminho do backup-->
                 <div class="col-10 p-3">
                     <div class="form-group p-4">
-                        <label for="diretorio">Diretório de backup</label>
-                        <input type="text" class="form-control" id="diretorio" placeholder="">
+                        <label for="diretorio_backup" class="col-form-label">Escolha um arquivo para armazenar o bakcup:</label>
+                        <input type="file" name="diretorio_bakcup" class="form-control" id="diretorio_backup" style="width: " />
                     </div>
                 </div>
             </div>
-            <div class="row m-0 p-5" style="border:1px solid black"><!--campo botões-->
-                <div class="col-3">
+            <div class="row m-0 align-items-center"><!--campo botões-->
+                <div class="col-4">
                     <div class="form-group">
                         <button type="button" class="btn btn-success col-sm-8" value="backup" data-toggle="modal"
                                 data-target="#modalExemplo" backup>Backup<i class="fa fa-send"></i>
                         </button>
                     </div>
-                </div>
-                <div class="col-3 ">
+                </div>    
+                <div class="col-4">
                     <div class="form-group">
                         <button type="submit" value="alterar" name="salvar" class="btn btn-primary col-sm-8"
                                 salvar>Salvar
                         </button>
                     </div>
-                </div>
-                <div class="col-3 ">
+                </div>   
+                <div class="col-4">
                     <div class="form-group">
                         <button type="submit" value="cancelar" name="cancelar" class="btn btn-danger col-sm-8"
                                 cancelar>Cancelar</button>
@@ -124,6 +124,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 $(document).ready(function() {
+
+    $('#horario').parent().show()
+    $('select#dia').parent().hide()
+    $('#data').parent().hide()
+
     $('input[type=radio]').click(e => {
         if (e.currentTarget.value == "diariamente") {
             $('#horario').parent().show()
