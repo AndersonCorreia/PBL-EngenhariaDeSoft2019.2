@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`exposicao` (
   `titulo` VARCHAR(50) NOT NULL,
   `tipo_evento` ENUM('atividade diferenciada', 'atividade permanente') NOT NULL,
   `tema_evento` ENUM('astronomia', 'biodiversidade', 'origem do humano') DEFAULT NULL,
-  `turno` ENUM('manhã', 'tarde', 'diurno', 'noturno') DEFAULT "diurno",
+  `turno` ENUM('diurno', 'noturno') DEFAULT "diurno",
   `descricao` VARCHAR(300) NOT NULL,
   `quantidade_inscritos` INT  DEFAULT NULL,
   `data_inicial` DATE NOT NULL,

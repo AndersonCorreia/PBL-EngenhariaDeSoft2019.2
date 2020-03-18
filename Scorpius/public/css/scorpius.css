@@ -104,6 +104,30 @@
     border-top-left-radius: 10px;
 }
 
+.vh-50 {
+    height: 50vh;
+}
+
+.vh-75 {
+    height: 75vh;
+}
+
+.vh-25 {
+    height: 25vh;
+}
+
+.vw-50 {
+    width: 50vh;
+}
+
+.vw-75 {
+    height: 75vh;
+}
+
+.vw-25 {
+    height: 25vh;
+}
+
 [disabled] {
     cursor:default !important ;
 }
