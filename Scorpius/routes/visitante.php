@@ -12,16 +12,15 @@ Route::post('/agendamento/noturno', 'AgendamentoController@agendarNoturno')->nam
 Route::get('/agendamento/atividades', 'AgendamentoController@agendamentoAtividadeDiferenciada')->name('AgendarAtividade.show');
 Route::post('/agendamento/atividades', 'AgendamentoController@agendarContaIndividual')->name('AgendarAtividade.post');
 
-Route::get('/v/erros', 'Erros@visitante')->name('vErros');
 /**
  * rota para retornar o JSON com os dados das visitas para o calendario.
  */
-Route::get("/agendamento/dados/{turno}/{data}/{sentido}/", "AgendamentoController@getVisitas");
+Route::get("/agendamento/dados/{turno}/{data}/{sentido}/", "AgendamentoController@getVisitas")->name("GetVisitas");
 
-Route::get("/visitante/historico", "UserController@historicoDeVisitas")->name("HistoricoDeVisitas.show");
-Route::get("/visitante/detalhamento", "UserController@detalhamentoDeVisitas")->name("DetalhamentoDeVisitas.show");
+Route::get("/historico", "UserController@historicoDeVisitas")->name("HistoricoDeVisitas.show");
+Route::get("/detalhamento", "UserController@detalhamentoDeVisitas")->name("DetalhamentoDeVisitas.show");
 
 //Rota dashboard visitante
-Route::get('/visitante/dashboard', 'UserController@getDashboard')->name('dashboardVisitante.show');
+Route::get('/dashboard', 'UserController@getDashboard')->name('dashboardVisitante.show');
 
-Route::post('/visitante/dashboard/confirmacao', 'AgendamentoController@confirmacaoAgendamento')->name('confirma.post');
+Route::post('/dashboard/confirmacao', 'AgendamentoController@confirmacaoAgendamento')->name('confirma.post');

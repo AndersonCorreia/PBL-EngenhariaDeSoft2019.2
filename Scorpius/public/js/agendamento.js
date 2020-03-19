@@ -52,7 +52,7 @@ function proximosDias(turno){
     Turno = turno;
     if( posCalendar<1 ){
         var datafinal = $("#data").attr("max");
-        $.getJSON("/agendamento/dados/"+ Turno + "/" + datafinal+ "/proximo/", preencherCalendar);
+        $.getJSON("visitante/agendamento/dados/"+ Turno + "/" + datafinal+ "/proximo/", preencherCalendar);
     }
     $("#setaLeft").removeAttr("disabled");
     $("#setaRight").attr("disabled", "");

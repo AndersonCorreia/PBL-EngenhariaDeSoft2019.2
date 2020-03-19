@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Visitante;
+
+use App\Http\Controllers\Controller;
 
 use App\Model\Instituicao;
 use App\Model\Professor_instituicao;

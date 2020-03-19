@@ -1,7 +1,7 @@
 <?php
 
 //Rota dashboard estagiario
-Route::get('/estagiario/dashboard', 'UserController@getDashboard')->name('dashboardEstagiario.show');
+Route::get('/estagiario/dashboard', 'Visitante.UserController@getDashboard')->name('dashboardEstagiario.show');
 
 //Rota Dashboard do Funcionário.
 Route::group(
@@ -13,11 +13,6 @@ Route::group(
     }
 );
 
-//Rota dashboard adm
-Route::get('/adm/dashboard', 'UserController@getDashboardAdm')->name('dashboardAdm.show');
-
-//Rota para retornar a tela de Gerenciamento de Visitas.
-
 Route::group(
     ['midlleware'=>[], 
     'prefix'=>'funcionario',
@@ -26,13 +21,6 @@ Route::group(
         Route::get('/gerenciamentoDeVisitas', 'VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
     }
 );
-
-
-//Rota de Cadastro de usuarios administrativos do sistema
-Route::get('/admin/cadastro', 'AdminCadastroController@index')->name("cadastroAdm");
-
-Route::post('/admin/cadastro', 'AdminCadastroController@store')->name("store.post");
-
 
 Route::group(
     ['midlleware'=>[], 
@@ -53,6 +41,12 @@ Route::group(
     'namespace'=>'Funcionario'],
     function(){
         Route::get('/relatorioVisitasAgendadas', 'RelatorioVisitasController@getTelaRelatorioVisitas')->name("telaRelatorioVisitasAgendadas.show");
+    
+        //Rotas de checkin
+        Route::post('/checkin-visitas/concluir-visita', 'CheckinVisitasController@concluirVisita')->name("concluirVisita");
+        Route::post('/checkin-visitas/realizar-checkin-usuario', 'CheckinVisitasController@checkinUsuario')->name("checkinUsuario");
+        Route::post('/checkin-visitas/realizar-checkin-aluno', 'CheckinVisitasController@checkinAluno')->name("checkinAluno");
+        Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");
     }
 );
 
@@ -69,10 +63,6 @@ Route::group(
     }
 );
 
-Route::post('/checkin-visitas/concluir-visita', 'CheckinVisitasController@concluirVisita')->name("concluirVisita");
-Route::post('/checkin-visitas/realizar-checkin-usuario', 'CheckinVisitasController@checkinUsuario')->name("checkinUsuario");
-Route::post('/checkin-visitas/realizar-checkin-aluno', 'CheckinVisitasController@checkinAluno')->name("checkinAluno");
-Route::get('/checkin-visitas', 'CheckinVisitasController@index')->name("checkinVisitas");
 Route::group(
     ['midlleware'=>[],
     'prefix'=>'estagiario',
@@ -90,8 +80,14 @@ Route::group(
     function(){
         Route::get('/backup', 'BackupController@index')->name('backup');
         Route::post('/realizarBackup', 'BackupController@realizaBackup')->name('realizarBackup');
+        
+        //Rota de Cadastro de usuarios administrativos do sistema
+        Route::get('/admin/cadastro', 'AdminCadastroController@index')->name("cadastroAdm");
+        Route::post('/admin/cadastro', 'AdminCadastroController@store')->name("store.post");
+        //Rota dashboard adm
+        Route::get('/adm/dashboard', 'Admin@getDashboardAdm')->name('dashboardAdm.show');
+
     }
 );
-
 
 ?>

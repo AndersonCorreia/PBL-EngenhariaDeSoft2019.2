@@ -54,13 +54,11 @@ class Visita extends \App\DB\interfaces\DataObject {
 
     private function verificarDisponibilidade($tipo){
         
-        if($this->Agendamento != null && \strpos($this->Agendamento->getStatus(),"cancelado") === false ){
-            if( $this->isAgendamentoDoUsuarioLogado($tipo) ){
-                return self::$btnClasses["proprio"];
-            }
-            else {
-                return self::$btnClasses["indisponivel"];
-            }
+        if( $this->isAgendamentoDoUsuarioLogado($tipo) ){
+            return self::$btnClasses["proprio"];
+        }
+        else if ($this->Agendamento != null) {
+            return self::$btnClasses["indisponivel"];
         }
         else {
             return self::$btnClasses["disponivel"];

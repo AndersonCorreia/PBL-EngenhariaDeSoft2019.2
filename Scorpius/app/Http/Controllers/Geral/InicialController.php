@@ -1,9 +1,10 @@
 <?php
 // Controller das telas iniciais
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Geral;
 
 use App\Model\Exposicao;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\DB\ExposicaoDAO;
 
 class InicialController extends Controller
