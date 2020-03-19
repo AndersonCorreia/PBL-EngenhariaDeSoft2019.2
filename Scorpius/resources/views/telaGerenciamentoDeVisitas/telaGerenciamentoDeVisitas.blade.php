@@ -33,8 +33,7 @@
                     $agendamentos_cancelados_usuario as $agendamento || $agendamentos_cancelados_funcionario as $agendamento)
                     @if ($i == 0)
                         $data_inicio = $agendamento['data'];
-                    @endif
-                    @if ($i == 4)
+                    @elseif ($i == 3)
                         $data_fim = $agendamento['data'];
                     @endif
                 @endforelse
@@ -64,8 +63,6 @@
                         <th class="table-secondary" scope="row">Manhã</th>
                         @for($data=0; $data<4; $data++) {{-- mudar para percorrer os dias do calendario --}}
                             <td>
-                                {{-- trocar pelos dias do calendario --}}
-                                {{-- Linha da Manhã --}}
                                 @forelse ($agendamentos_pendentes as $agendamento)
                                     @if(($agendamento['turno'] == "manhã" and $agendamento['data'] = strtotime($data) )) 
                                         <p>{{$agendamento['instituicao']}}</p>
@@ -353,7 +350,7 @@
         </div>
 
 
-        <!-- CÓDIGO DA LISTA DE ESPERA -->
+        <!-- CÓDIGO DA LISTA DE ESPERA PARA UM DIA E TURNO ESPECIFICO-->
         <div id="lista-espera">
 
             <!-- modal da lista espera -->
@@ -375,68 +372,38 @@
                                     <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
                                         <div class="row col-12 col-md-11 my-1">
                                             <div class="row col-12">
-                                                <div class="col-8 col-5 col-md-4">
-                                                    <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
-                                                    <div class="col-12 p-0">Colégio Helyos</div> <!-- substituir por registro -->
-                                                </div>
-                                                <div class="col-4 col-md-3">
-                                                    <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
-                                                    <div class="col-12 p-0">Particular</div>
-                                                </div>
-                                                <div class="col-8 col-md-3">
-                                                    <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
-                                                    <div class="col-12 p-0">23/03/2020</div>
-                                                </div>
-                                                <div class="col-4 col-md-2">
-                                                    <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
-                                                    <div class="col-12 p-0">Manhã</div>
-                                                </div>
-                                                @if(($lista_espera ?? false))   
-                                                    @foreach($lista_espera as $agendamento)
-                                                        <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
-                                                            <div class="row col-md-12 my-1">
-                                                                <div class="row col-12">
-                                                                    <div class="col-md-5">
-                                                                        <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
-                                                                        <div class="col-12 p-0">
-                                                                            {{$agendamento['instituicao']}}
+                                                @forelse($lista_espera_dia_turno as $agendamento_dia_turno)
+                                                    <div class="custom-control custom-radio">
+                                                        <div class="col-md-5">
+                                                            <label class="custom-control-label" for="customRadio1">
+                                                                {{$agendamento_dia_turno['instituicao']}}
+                                                            </label>
+                                                        </div>
                                                                         </div> 
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
-                                                                        <div class="col-12 p-0">
-                                                                            {{$agendamento['tipo_instituicao']}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
-                                                                        <div class="col-12 p-0">{{$agendamento['turno']}}</div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
-                                                                        <div class="col-12 p-0">
-                                                                            {{date("d/m/Y", strtotime($agendamento['data'])) }}
-                                                                        </div>
-                                                                    </div> 
-                                                                </div>
-                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="custom-control-label" for="customRadio1">
+                                                                {{$agendamento_dia_turno['tipo_instituicao']}}   
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="custom-control-label" for="customRadio1">
+                                                                {{$agendamento_dia_turno['ano_escolar']}} - {{$agendamento_dia_turno['turma']}}    
+                                                            </label>
                                                         </div>
                                                     </div>
-                                                    @endforeach
-                                                @else
+                                                @empty
                                                     <div class="col-md-12">
                                                         <div class="col-12 p-0 my-1 font-weight-bold">
-                                                            <p>Não existe nenhuma instituição na lista de espera.</p> 
-                                                            <!-- caso não haja nada na lista de espera -->
+                                                            <p>Não existe nenhuma instituição na lista de espera para esse dia e turno.</p>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                @endforelse
                                             </div>
                                         </div>
                                     </div>
                                 </label>
                             </div>
-                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -465,21 +432,46 @@
                         </div>
                         <div class="modal-body">
                             <div class="custom-control col-md-12">
-                            @if(($lista_espera_dia_turno ?? false))
-                                @foreach($lista_espera_dia_turno as $agendamento_dia_turno)
-                                    <div class="custom-control custom-radio">
-                                        <label class="custom-control-label" for="customRadio1">
-                                            {{$agendamento_dia_turno['nome']}} - {{$agendamento_dia_turno['data']}}
-                                        </label>
-                                    </div>
-                                @endforeach
-                                @else
-                                    <div class="col-md-12">
-                                        <div class="col-12 p-0 my-1 font-weight-bold">
-                                            <p>Não existe nenhuma instituição na lista de espera.</p>
+                                @forelse($lista_espera as $agendamento)
+                                    <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
+                                        <div class="row col-md-12 my-1">
+                                            <div class="row col-12">
+                                                <div class="col-md-5">
+                                                    <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
+                                                        <div class="col-12 p-0">
+                                                            {{$agendamento['instituicao']}}
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
+                                                        <div class="col-12 p-0">
+                                                            {{$agendamento['tipo_instituicao']}}            
+                                                        </div>                
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
+                                                        <div class="col-12 p-0">{{$agendamento['turno']}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
+                                                        <div class="col-12 p-0">
+                                                            {{date("d/m/Y", strtotime($agendamento['data'])) }}
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                @endif
+                                @empty
+                                    <div class="col-md-12">
+                                        <div class="col-12 p-0 my-1 font-weight-bold">
+                                            <p>Não existe nenhuma instituição na lista de espera.</p> 
+                                        </div>
+                                    </div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
