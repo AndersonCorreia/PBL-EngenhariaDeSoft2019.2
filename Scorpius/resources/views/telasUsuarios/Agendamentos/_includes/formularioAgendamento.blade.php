@@ -71,7 +71,7 @@
             <i class="fas fa-receipt    "></i>
             Agendar
         </button>
-        <a href="#" class="btn btn-secondary">
+        <a href={{route('dashboard')}} class="btn btn-secondary">
             <i class="fa fa-times" aria-hidden="true"></i>
             Cancelar
         </a>

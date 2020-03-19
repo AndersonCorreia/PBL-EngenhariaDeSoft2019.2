@@ -28,8 +28,19 @@
             <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('diurno')" disabled>
                 <i class="fas fa-angle-left"></i>
             </button>
+            @for($i=0; $i<4; $i++) {{-- mudar para percorrer os dias do calendario --}}
+                @forelse ($agendamentos_pendentes as $agendamento || $agendamentos_confirmados as $agendamento ||
+                    $agendamentos_cancelados_usuario as $agendamento || $agendamentos_cancelados_funcionario as $agendamento)
+                    @if ($i == 0)
+                        $data_inicio = $agendamento['data'];
+                    @endif
+                    @if ($i == 4)
+                        $data_fim = $agendamento['data'];
+                    @endif
+                @endforelse
+            @endfor
             <span id="calendarDatas" class="text-dark font-weight-bold">
-                10 de Março a 20 de Março
+                $data_inicio a $data_fim
             </span>
             <button id="setaRight" type="button" class=" btn btn-default" onclick="proximosDias('diurno')">
                 <i class="fas fa-angle-right"></i>
@@ -40,10 +51,12 @@
                 <thead>
                     <tr class="thead-dark">
                         <th scope="col">Dia</th>
-                        <th scope="col">02/03 SEG</th>
-                        <th scope="col">03/03 TER</th>
-                        <th scope="col">05/03 QUI</th>
-                        <th scope="col">06/03 SEX</th>
+                        @for($i=0; $i<4; $i++) {{-- mudar para percorrer os dias do calendario --}}
+                            @forelse ($agendamentos_pendentes as $agendamento || $agendamentos_confirmados as $agendamento ||
+                            $agendamentos_cancelados_usuario as $agendamento || $agendamentos_cancelados_funcionario as $agendamento)
+                                <th scope="col">$agendamento['data']</th>
+                            @endforelse
+                        @endfor
                     </tr>
                 </thead>
                 <tbody>
@@ -55,65 +68,93 @@
                                 {{-- Linha da Manhã --}}
                                 @forelse ($agendamentos_pendentes as $agendamento)
                                     @if(($agendamento['turno'] == "manhã" and $agendamento['data'] = strtotime($data) )) 
-                                    <p>{{$agendamento['instituicao']}}</p>
-                                    <p style="margin-top: -8px;"> Status: Pendente</p>
-                                    <div class="btn-group" role="group">
-                                        <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                        data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                            <i class="fas fa-list-ol"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                            btnconf>
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
-                                            data-toggle="tooltip" title="Cancelar" btncanc>
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                        <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
-                                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-secondary text-white">
-                                                        <h5 class="modal-title">Motivo do Cancelamento</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- colocar resto das coisas aqui -->
-                                                        <div class="custom-control custom-radio col-md-12">
-                                                            <input type="radio" id="customRadio1" name="customRadio" 
-                                                            class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
-                                                        </div>
-                                                        <div class="custom-control custom-radio col-md-12">
-                                                            <input type="radio" id="customRadio2" name="customRadio" 
-                                                            class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadio2">Outro:
-                                                                <input type="text"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                        <button type="button" class="btn btn-primary">Confirmar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Pendente</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
                                         </div>
-                                    </div>
                                     @endif
                                 @empty
                                 @endforelse
 
                                 @forelse ($agendamentos_confirmados as $agendamento)
+
                                     @if(($agendamento['turno'] == "manhã" &&  $agendamento['data'] = strtotime($data) ))
                                         <p>{{$agendamento['instituicao']}}</p>
                                         <p style="margin-top: -8px;"> Status: Confirmado</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
                                     @endif
                                 @empty
                                 @endforelse
-                                
+
+                                @forelse ($agendamentos_cancelados_usuario as $agendamento)
+                                    @if(($agendamento['turno'] == "manhã" &&  $agendamento['data'] = strtotime($data) ))
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                @empty
+                                @endforelse
+
+                                @forelse ($agendamentos_cancelados_funcionario as $agendamento)
+                                    @if(($agendamento['turno'] == "manhã" &&  $agendamento['data'] = strtotime($data) ))
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                @empty
+                                @endforelse
+
                             </td>
                         @endfor
                     </tr>
@@ -123,53 +164,22 @@
                             <td>
                                 @forelse ($agendamentos_pendentes as $agendamento)
                                     @if(($agendamento['turno'] == "tarde" and $agendamento['data'] = strtotime($data) )) 
-                                    <p>{{$agendamento['instituicao']}}</p>
-                                    <p style="margin-top: -8px;"> Status: Pendente</p>
-                                    <div class="btn-group" role="group">
-                                        <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                        data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                            <i class="fas fa-list-ol"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                            btnconf>
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
-                                            data-toggle="tooltip" title="Cancelar" btncanc>
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                        <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
-                                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-secondary text-white">
-                                                        <h5 class="modal-title">Motivo do Cancelamento</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- colocar resto das coisas aqui -->
-                                                        <div class="custom-control custom-radio col-md-12">
-                                                            <input type="radio" id="customRadio1" name="customRadio" 
-                                                            class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
-                                                        </div>
-                                                        <div class="custom-control custom-radio col-md-12">
-                                                            <input type="radio" id="customRadio2" name="customRadio" 
-                                                            class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadio2">Outro:
-                                                                <input type="text"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                        <button type="button" class="btn btn-primary">Confirmar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Pendente</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
                                         </div>
-                                    </div>
                                     @endif
                                 @empty
                                 @endforelse
@@ -178,9 +188,68 @@
                                     @if(($agendamento['turno'] == "tarde" &&  $agendamento['data'] = strtotime($data) ))
                                         <p>{{$agendamento['instituicao']}}</p>
                                         <p style="margin-top: -8px;"> Status: Confirmado</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
                                     @endif
                                 @empty
                                 @endforelse
+
+                                @forelse ($agendamentos_cancelados_usuario as $agendamento)
+                                    @if(($agendamento['turno'] == "tarde" &&  $agendamento['data'] = strtotime($data) ))
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                @empty
+                                @endforelse
+
+                                @forelse ($agendamentos_cancelados_funcionario as $agendamento)
+                                    @if(($agendamento['turno'] == "tarde" &&  $agendamento['data'] = strtotime($data) ))
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                @empty
+                                @endforelse
+                                
                             </td>
                         @endfor
                     </tr>
@@ -190,53 +259,22 @@
                             <td>
                                 @forelse ($agendamentos_pendentes as $agendamento)
                                     @if(($agendamento['turno'] == "noite" and $agendamento['data'] = strtotime($data) )) 
-                                    <p>{{$agendamento['instituicao']}}</p>
-                                    <p style="margin-top: -8px;"> Status: Pendente</p>
-                                    <div class="btn-group" role="group">
-                                        <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                        data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                            <i class="fas fa-list-ol"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                            btnconf>
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=".modal-cancelamento"
-                                            data-toggle="tooltip" title="Cancelar" btncanc>
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                        <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
-                                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-secondary text-white">
-                                                        <h5 class="modal-title">Motivo do Cancelamento</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- colocar resto das coisas aqui -->
-                                                        <div class="custom-control custom-radio col-md-12">
-                                                            <input type="radio" id="customRadio1" name="customRadio" 
-                                                            class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
-                                                        </div>
-                                                        <div class="custom-control custom-radio col-md-12">
-                                                            <input type="radio" id="customRadio2" name="customRadio" 
-                                                            class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadio2">Outro:
-                                                                <input type="text"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                        <button type="button" class="btn btn-primary">Confirmar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Pendente</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
                                         </div>
-                                    </div>
                                     @endif
                                 @empty
                                 @endforelse
@@ -245,9 +283,68 @@
                                     @if(($agendamento['turno'] == "noite" &&  $agendamento['data'] = strtotime($data) ))
                                         <p>{{$agendamento['instituicao']}}</p>
                                         <p style="margin-top: -8px;"> Status: Confirmado</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
                                     @endif
                                 @empty
                                 @endforelse
+
+                                @forelse ($agendamentos_cancelados_usuario as $agendamento)
+                                    @if(($agendamento['turno'] == "noite" &&  $agendamento['data'] = strtotime($data) ))
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                @empty
+                                @endforelse
+
+                                @forelse ($agendamentos_cancelados_funcionario as $agendamento)
+                                    @if(($agendamento['turno'] == "noite" &&  $agendamento['data'] = strtotime($data) ))
+                                        <p>{{$agendamento['instituicao']}}</p>
+                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                <i class="fas fa-list-ol"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
+                                                btnconf>
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
+                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                @empty
+                                @endforelse 
+
                             </td>
                         @endfor
                     </tr>
@@ -294,16 +391,45 @@
                                                     <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
                                                     <div class="col-12 p-0">Manhã</div>
                                                 </div>
-                                                @if(($lista_espera_dia_turno ?? false))
-                                                    @foreach($lista_espera_dia_turno as $agendamento_dia_turno)
-                                                        <div class="custom-control custom-radio">
-                                                            <label class="custom-control-label" for="customRadio1">
-                                                                {{$agendamento_dia_turno['nome']}} - {{$agendamento_dia_turno['data']}}
-                                                            </label>
+                                                @if(($lista_espera ?? false))   
+                                                    @foreach($lista_espera as $agendamento)
+                                                        <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
+                                                            <div class="row col-md-12 my-1">
+                                                                <div class="row col-12">
+                                                                    <div class="col-md-5">
+                                                                        <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
+                                                                        <div class="col-12 p-0">
+                                                                            {{$agendamento['instituicao']}}
+                                                                        </div> 
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
+                                                                        <div class="col-12 p-0">
+                                                                            {{$agendamento['tipo_instituicao']}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
+                                                                        <div class="col-12 p-0">{{$agendamento['turno']}}</div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
+                                                                        <div class="col-12 p-0">
+                                                                            {{date("d/m/Y", strtotime($agendamento['data'])) }}
+                                                                        </div>
+                                                                    </div> 
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                    </div>
                                                     @endforeach
                                                 @else
-                                                    <p></p> <!-- caso não haja nada na lista de espera -->
+                                                    <div class="col-md-12">
+                                                        <div class="col-12 p-0 my-1 font-weight-bold">
+                                                            <p>Não existe nenhuma instituição na lista de espera.</p> 
+                                                            <!-- caso não haja nada na lista de espera -->
+                                                        </div>
+                                                    </div>
                                                 @endif
                                             </div>
                                         </div>
@@ -339,39 +465,58 @@
                         </div>
                         <div class="modal-body">
                             <div class="custom-control col-md-12">
-                                @if(($lista_espera ?? false))   
-                                    @foreach($lista_espera as $agendamento)
-                                            <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
-                                                <div class="row col-md-12 my-1">
-                                                    <div class="row col-12">
-                                                        <div class="col-md-5">
-                                                            <div class="col-12 p-0 my-1 font-weight-bold">Instituição:</div>
-                                                            <div class="col-12 p-0">{{$agendamento['instituicao']}}</div> 
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="col-12 p-0 my-1 font-weight-bold">Tipo:</div>
-                                                            <div class="col-12 p-0">{{$agendamento['tipo_instituicao']}}</div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="col-12 p-0 my-1 font-weight-bold">Turno:</div>
-                                                            <div class="col-12 p-0">{{$agendamento['turno']}}</div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="col-12 p-0 my-1 font-weight-bold">Data:</div>
-                                                            
-                                                            <div class="col-12 p-0">{{date("d/m/Y", strtotime($agendamento['data'])) }}</div>
-                                                        </div> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
+                            @if(($lista_espera_dia_turno ?? false))
+                                @foreach($lista_espera_dia_turno as $agendamento_dia_turno)
+                                    <div class="custom-control custom-radio">
+                                        <label class="custom-control-label" for="customRadio1">
+                                            {{$agendamento_dia_turno['nome']}} - {{$agendamento_dia_turno['data']}}
+                                        </label>
+                                    </div>
+                                @endforeach
                                 @else
                                     <div class="col-md-12">
-                                        <div class="col-12 p-0 my-1 font-weight-bold"><p>Não existe nenhuma instituição na lista de espera.</p></div>
+                                        <div class="col-12 p-0 my-1 font-weight-bold">
+                                            <p>Não existe nenhuma instituição na lista de espera.</p>
+                                        </div>
                                     </div>
                                 @endif
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- CÓDIGO DO MOTIVO DO CANCELAMENTO -->
+        <div id="cancelamento">
+
+            <!-- modal do motivo do cancelamento -->
+            <div class="modal fade modal-cancelamento" tabindex="-1" role="dialog" 
+                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-secondary text-white">
+                            <h5 class="modal-title">Motivo do Cancelamento</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- colocar resto das coisas aqui -->
+                            <div class="custom-control custom-radio col-md-12">
+                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
+                            </div>
+                            <div class="custom-control custom-radio col-md-12">
+                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio2">Outro:
+                                <input type="text"></label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Confirmar</button>
                         </div>
                     </div>
                 </div>

@@ -28,7 +28,7 @@ class AuthorizeAdministrativo{
             $tipo = 'funcionario'; //padronizando o dashboard de funcionario como padrão para os novos tipos
         }
 
-        if($permissao == session('tipo') || $DAO->asPermissao(session('tipo'), $permissao) ){
+        if($permissao == $tipo || $DAO->asPermissao($tipo, $permissao) ){
             return $next($request);
         }
         return redirect()->route('paginaInicial');
@@ -57,7 +57,8 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["dashboardFuncionario.show" ] = 'funcionario';
         $this->RotasPermissoes["dashboardEstagiario.show" ] = 'estagiario';
         $this->RotasPermissoes["dashboardAdm.show" ] = 'adm';
-        
+        $this->RotasPermissoes["backup" ] = 'realizar backup';
+        $this->RotasPermissoes["realizarBackup" ] = 'realizar backup';
         //$this->RotasPermissoes["nome da rota" ] = 'permissão associada como ta escrito no banco';
     }
     

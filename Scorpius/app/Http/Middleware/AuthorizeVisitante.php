@@ -16,7 +16,7 @@ class AuthorizeVisitante
     public function handle($request, Closure $next){
         
         $tipo = session("tipo");
-        if( $tipo == 'visitante' || $tipo == 'institucional'){
+        if( $tipo == 'visitante' || $tipo == 'institucional' || $tipo == 'scorpius'){
             return $next($request);
         }
         return redirect()->route('dashboard');

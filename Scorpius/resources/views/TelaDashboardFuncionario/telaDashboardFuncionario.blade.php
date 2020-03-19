@@ -176,7 +176,7 @@
 
     [proxVisita]{
         width: 300px;
-        height: 350px;
+        height: 370px;
     }
 
     [conteudoProxVisita]{
@@ -186,12 +186,12 @@
 
     [clima]{
         width: 370px;
-        height: 350px;
+        height: 370px;
     }
 
     [escolas]{
         width: 300px; 
-        height: 350px;
+        height: 370px;
     }
 
     [checkInst]{

@@ -21,11 +21,11 @@ function getMenuLinksAll(){
         'gerenciamento de visitas'=>            ['link'=>route("telaGerenciamentoDeVisitas.show") , 'texto'=>'Gerenciamento de Visitas' ],
         'relatorio dos agendamentos'=>          ['link'=>route("telaRelatorioVisitasAgendadas.show") , 'texto'=>'Relatórios de Agendamentos' ],
         'cadastrar e modificar atividades'=>    ['link'=>route("telaGerenciamentoDeEventos.show") , 'texto'=>'Gerenciamento de Eventos' ],
-        'criar usuarios'=>                      ['link'=>route("cadastroAdm") , 'texto'=>'Cadastrar Usuário' ],
+        'criar usuarios'=>                      ['link'=>'#' , 'texto'=>'Cadastrar Usuário' ],
         'gerenciar usuarios'=>                  ['link'=>'#' , 'texto'=>'Gerenciar Usuários' ],
         'ver confiabilidade das instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],
         'ver log de atividade'=>                ['link'=>'#' , 'texto'=>'Histórico de Atividades' ],
-        'realizar backup'=>                     ['link'=>'#' , 'texto'=>'Realizar Backup' ],
+        'realizar backup'=>                     ['link'=>route('backup') , 'texto'=>'Realizar Backup' ],
         'gerenciar permissões'=>                ['link'=>'#' , 'texto'=>'Gerenciar Permissões' ]//creio que seria melhor ser permissão apenas para o adm
     ];
 }
@@ -41,10 +41,10 @@ function getMenuLinks(){
     $tipoUsuario = session('tipo');
 
     $links=[$menuLinks['inicio']];//adcionando o inicio que vale para todos
-    if($tipoUsuario=="visitante" || $tipoUsuario=="institucional"){
+    if($tipoUsuario=="visitante" || $tipoUsuario=="institucional" || $tipoUsuario=="scorpius"){
 
         $links['collapseAgend']=$menuLinks['collapseAgend'];
-        if( $tipoUsuario=="institucional" ){
+        if( $tipoUsuario=="institucional" || $tipoUsuario=="scorpius" ){
             $links[]=$menuLinks["institucional0"];
             $links[]=$menuLinks["institucional1"];
             $links[]=$menuLinks["institucional2"];
@@ -60,10 +60,19 @@ function getMenuLinks(){
     else {
         $DAO = new App\DB\PessoaDAO;
         $permissoes = $DAO->getPermissoes($tipoUsuario);
-        // foreach ($permissoes as $value) {
-        //     $links[]=$menuLinks[$value["permissao"]];
-        // }
+        foreach ($permissoes as $value) {
+            $links[]=$menuLinks[$value["permissao"]];
+        }
     }
+
+    if( $tipoUsuario=="scorpius"){
+        $DAO = new App\DB\PessoaDAO;
+        $permissoes = $DAO->getPermissoes($tipoUsuario);
+        foreach ($permissoes as $value) {
+            $links[]=$menuLinks[$value["permissao"]];
+        }
+    }
+    
     $links[]=$menuLinks['alterarDados'];
     
     return $links;

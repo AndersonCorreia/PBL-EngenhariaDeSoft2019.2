@@ -14,8 +14,6 @@ use App\DB\ExposicaoDAO;
 use App\Model\Exposicao;
 use Exception;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-require_once __DIR__."/../../../../resources/views/util/layoutUtil.php";
-
 class GerenciamentoDeEventosController extends Controller{
     public function getTelaGerenciamentoDeEventos(){
         //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
@@ -138,7 +136,6 @@ class GerenciamentoDeEventosController extends Controller{
 
         } catch (Exception $e) {
             $log = $e->getMessage();
-            dd($log );
             $try = 'FALSE';
         }
         $variaveis = [
