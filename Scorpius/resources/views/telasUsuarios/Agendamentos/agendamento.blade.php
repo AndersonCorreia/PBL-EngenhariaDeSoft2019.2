@@ -15,13 +15,11 @@
     <form id="form.agendamento" class="col m-0 p-4" method="POST">
         {{csrf_field()}}
         @include('telasUsuarios.Agendamentos._includes.agendamentos')
-        @if($tipoUserLegenda["tipo"] == "institucional")
         <div class="col-12 m-0 p-0">
             <div class="container-fluid bg-white scorpius-border-shadow p-3" >
                 @include('telasUsuarios.Agendamentos._includes.escolhaDeExposicoes')
             </div>
         </div>
-        @endif
         <div class="col-12 mt-4 p-0">
             <div class="col scorpius-border-shadow p-0" >
                 @include('telasUsuarios.Agendamentos._includes.calendar')

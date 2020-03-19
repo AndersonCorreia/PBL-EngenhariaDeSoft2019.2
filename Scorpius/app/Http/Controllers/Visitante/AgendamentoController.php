@@ -109,13 +109,17 @@ class AgendamentoController extends Controller{
         }
 
         $array = $this->getVisitas("diurno", "now", "anterior", "visitante");
+        $tipoAtividade ="exposições";
+        $exposicoes = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente();
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $visitante,
+            'tipoAtividade' => $tipoAtividade,
             'agendamentos' => $agendamentos,
+            $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
@@ -199,17 +203,17 @@ class AgendamentoController extends Controller{
      * inserir no banco de dados
      * @return void
      */
-    public function agendarContaIndividual() {
+    public function agendarContaIndividual(Request $request) {
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $exposicao = isset( $_POST['exposicoes']) ? $_POST['exposicoes'] : null;
+        $exposicoes = isset( $_POST['exposicoes']) ? $_POST['exposicoes'] : null;
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
         $visitantes = $this->getMatrizVisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
         
         $agendamento = new AgendamentoIndividual($id_user, $visita);
         $agendamento->setVisitantes($visitantes);        
-        $agendamento->setExposicaoID($exposicao);
+        $agendamento->setExposicoes($exposicoes);
 
         (new AgendamentoIndividualDAO)->INSERT($agendamento);
 
