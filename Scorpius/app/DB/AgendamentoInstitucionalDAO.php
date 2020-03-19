@@ -65,7 +65,7 @@ use App\Model\Agendamento;
         for($i = 0; $i < $count; $i++){
             $nome = $Responsaveis[$i]['nome'];
             $cargo = $Responsaveis[$i]['cargo'];
-            $sql = "INSERT INTO Responsavel (nome, cargo, agendamento_institucional_ID) VALUE 
+            $sql = "INSERT INTO responsavel (nome, cargo, agendamento_institucional_ID) VALUE 
                 ('$nome', '$cargo', $ID)";
             $this->dataBase->query($sql);
         }
