@@ -101,13 +101,13 @@
                         @endforeach
                         <hr class="bg-light col-12 linha rounded p-0 m-0">
                     </div>
-                    <div class="row col-12 m-0 my-1 p-0">
+                    <div class="row col-12 m-0 my-1 p-0 overflow-auto ">
                         <span class="col-12 m-0 p-0 font-weight-bold">Lista dos Alunos</span>
                         <hr class="bg-light col-12 linha rounded p-0 m-0">
-                        <div class="col-8 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
+                        <div class="col-8 m-0 my-1 p-0 pl-md-4 pl-1 border-right border-bottom">
                             <small><b>NOME:</small></b>
                         </div>
-                        <div class="col-4 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
+                        <div class="col-4 m-0 my-1 p-0 pl-md-4 pl-1 border-right border-bottom">
                             <small><b>IDADE:</small></b>
                         </div>
                         @foreach ($agend['visitantes'] as $item)

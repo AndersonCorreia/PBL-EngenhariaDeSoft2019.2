@@ -24,7 +24,7 @@ class ControlerInstitucional extends Controller {
         $registro = Professor_instituicao::listarInstituicoes($id_user);
 
         $variaveis = [
-            'paginaAtual' => "Ver Instituiçoes Cadastradas",
+            'paginaAtual' => "Ver Instituições Vínculadas",
             'registros' => $registro, 
             'erros' => $erro
         ];

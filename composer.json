@@ -4,7 +4,7 @@
     },
     "scripts": {
         "serve": "php Scorpius/artisan serve",
-        "serveHost": "php Scorpius/artisan serve --host=192.168.1.104",
+        "serveHost": "php Scorpius/artisan serve --host=192.168.1.105",
         "testes": "Scorpius\\vendor\\bin\\phpunit -c Scorpius/phpunit.xml --testdox --color=auto",
         "testesUnit": "Scorpiu\\vendor\\bin\\phpunit -c Scorpius/phpunit.xml --testdox --testsuite Unit --color=always",
         "testesFeature": "Scorpius\\vendor\\bin\\phpunit -c Scorpius/phpunit.xml --testdox --testsuite Feature --color=always",

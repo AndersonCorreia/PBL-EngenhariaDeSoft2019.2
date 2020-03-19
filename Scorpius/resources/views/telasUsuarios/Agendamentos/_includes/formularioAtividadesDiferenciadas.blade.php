@@ -1,5 +1,5 @@
 <div class="col-12 m-0 p-0 ">
-    <div class="col-12 p-2 m-0 vh-75 text-center ">
+    <div class="col-12 p-2 m-0 vh-75 text-center overflow-auto">
         <img src="data:image/jpeg;base64,{{$atividade['imagem']}}"  class="h-100 w-auto">
     </div>    
     <div class="col-12 p-0 px-3 py-1 m-0">    
