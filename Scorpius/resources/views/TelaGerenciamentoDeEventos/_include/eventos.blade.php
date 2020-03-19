@@ -83,7 +83,7 @@
 
 <div class="modal fade" id="cadastrarModal" tabindex="-1" role="dialog" aria-labelledby="cadastrarModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="cadastrarModalLabel">CADASTRO DE NOVO EVENTO</h5>
@@ -363,6 +363,10 @@ jQuery(document).ready(function() {
 
     })
 
+    $('[cancelar]').click(e=>{
+        $('#cadastrarModal').modal('hide')
+    })
+
     //evento do botão cadastrar
     $('[cadastro]').click(e => {
 
@@ -464,6 +468,16 @@ jQuery(document).ready(function() {
             return true;
         });
 
+        $.validator.addMethod("requireImagem", function(value, element) {
+            if($('[confirmar]').text() == "Atualizar"){
+                return true;
+            }
+            if ($(element)[0].files[0]) {
+                return true;
+            }   
+            return false; 
+        });
+
 
 
         $('[formModal]').validate({
@@ -528,7 +542,7 @@ jQuery(document).ready(function() {
                     maiorDataInicial: ''
                 },
                 imagem: {
-                    required: true,
+                    requireImagem: '',
                     accept: "image/*",
                     tamanho_imagem: 2097152
                 }
@@ -565,7 +579,7 @@ jQuery(document).ready(function() {
                     maiorDataInicial: "Data final deve ser maior que inicial"
                 },
                 imagem: {
-                    required:"Anexe uma imagem referente ao evento",
+                    requireImagem:"Anexe uma imagem referente ao evento",
                     accept: "Permitido arquivos do tipo imagem",
                     tamanho_imagem: "Quantidade máxima deve ser menor que 2MB"
                 }

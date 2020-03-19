@@ -13,7 +13,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 DROP DATABASE IF EXISTS `scorpius`;-- apagando o banco para inserir novamente
 CREATE SCHEMA IF NOT EXISTS `scorpius` DEFAULT CHARACTER SET utf8 ;
 USE `scorpius` ;
-
+SET GLOBAL max_allowed_packet=8388608;
 -- -----------------------------------------------------
 -- Table `scorpius`.`exposicao`
 -- era bom saber se uma atividade diferenciada pode ocorrer em apenas 1 turno
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`usuario` (
   `nome` VARCHAR(50) NOT NULL,
   `email` VARCHAR(40) NOT NULL,
   `senha` VARCHAR(20) NOT NULL,
-  `CPF` CHAR(14) NOT NULL,
+  `CPF` CHAR(11) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
   `ativo` TINYINT(1) DEFAULT  0, 
   `tipo_usuario_ID` INT UNSIGNED NOT NULL,
@@ -153,7 +153,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(10) NOT NULL,
+  `nome` VARCHAR(20) NOT NULL,
   `ano_escolar` VARCHAR(12) NOT NULL,
   `ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
   `professor_ID` INT UNSIGNED NOT NULL,
@@ -261,7 +261,7 @@ LEFT JOIN turma t ON ai.turma_ID = t.ID
 INNER JOIN professor_instituicao pi ON ai.professor_instituicao_ID = pi.ID 
 INNER JOIN usuario u ON u.ID = pi.usuario_ID
 INNER JOIN instituicao i ON i.ID = pi.instituicao_ID
-INNER JOIN cidade_uf cuf ON cuf.ID = i.cidade_UF_ID;
+INNER JOIN cidade_UF cuf ON cuf.ID = i.cidade_UF_ID;
 
 CREATE VIEW IF NOT EXISTS visita_individual
 AS SELECT v.ID AS visitaID, v.data_visita AS data, turno, v.status AS visitaStatus,

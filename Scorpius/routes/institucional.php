@@ -28,7 +28,7 @@ Route::post('/instituicao/cadastro', 'ControlerInstitucional@cadastrarInstituica
 /**
  * rota para retornar o JSON com os dados de uma instituição.
  */
-Route::get("/instituicao/dados/{nome}/{endereco}/", "ControlerInstitucional@getInstituicao");
+Route::get("/instituicao/dados/{nome}/{endereco}/", "ControlerInstitucional@getInstituicao")->name("GetInstituição");
 /**
  * Rota para editar instituicao.
  */

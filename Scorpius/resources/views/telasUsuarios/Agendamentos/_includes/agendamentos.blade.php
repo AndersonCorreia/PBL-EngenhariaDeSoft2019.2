@@ -1,6 +1,6 @@
 @if( ($agendamentos ?? [] ) != [] )
 <div class="row col-12 mb-3 m-0 pb-2 scorpius-border-shadow">
-    <h4 class="ml-1 p-0 m-0 col-12">Seus Proximos Agendamentos </h4>
+    <h4 class="ml-1 p-0 m-0 mb-2 col-12">Seus Proximos Agendamentos </h4>
     <small class="text-secondary ml-1 m-0 p-0">{{$legenda ?? ''}}</small>
     <hr class="bg-light col-11 linha rounded p-0 m-0">
     @if($tipoUserLegenda["tipo"] == "institucional")

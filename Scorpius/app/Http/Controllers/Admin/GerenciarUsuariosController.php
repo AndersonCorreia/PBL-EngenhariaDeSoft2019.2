@@ -1,20 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\DB\PessoaDAO;
-
-require_once __DIR__ . "/../../../resources/views/util/layoutUtil.php";
 
 class GerenciarUsuariosController extends Controller
 {
     public function index()
     {
         
-        $variaveis = [
-            'itensMenu' => getMenuLinks()
-            
+        $variaveis = [           
         ];
         
         return view('telaGerenciamentoUsuarios.index', $variaveis);

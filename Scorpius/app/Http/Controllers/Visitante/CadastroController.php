@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Visitante;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Model\Users\Usuario;
@@ -9,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\email;
 use App\DB\PessoaDAO;
 use App\Model\EmailVerificacao;
+
 class CadastroController extends Controller
 {
     private $nome;
@@ -149,27 +152,6 @@ class CadastroController extends Controller
         //
     }
 
-    public function CadastroUsuario() {
-        //codigo para cadastrar a Pessoa no User ADM
-        $pessoaDAO = new PessoaDAO();
-        
-        $nome = $_POST['Nome'];
-        $senha = $_POST['Senha'];
-        $telefone = $_POST['Telefone'];
-        $cpf = $_POST['cpf'];
-        $email = $_POST['email'];
-        $tipo_usuario = $_POST['tipo_usuario'];
-        
-
-        //armazena na classe
-        $pessoa = new Pessoa($nome, $senha, $tipo_usuario, $cpf, $telefone, $email);
-        //armazena no banco
-        $pessoaDAO->INSERT($pessoa);
-        $_POST["ID"] = $pessoa->getID();
-    
-        
-        return redirect()->route('pessoa.show');
-    }
 
 
 

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Geral;
 
+use App\Http\Controllers\Controller;
 use App\DB\PessoaDAO;
 use App\Model\Users\Pessoa;
 use App\DB\UsuarioDAO;
