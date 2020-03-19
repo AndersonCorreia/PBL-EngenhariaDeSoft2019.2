@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Geral;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\DB\PessoaDAO;
 
 class AuthController extends Controller
 {
