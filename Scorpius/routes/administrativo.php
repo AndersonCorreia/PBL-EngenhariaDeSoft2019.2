@@ -29,9 +29,9 @@ Route::group(
 
 
 //Rota de Cadastro de usuarios administrativos do sistema
-Route::get('/admin/cadastro', 'AdminCadastroController@index')->name("CadastroUsuario.show");
+Route::get('/admin/cadastro', 'AdminCadastroController@index')->name("cadastroAdm");
 
-//Route::post('/admin/cadastro', 'CadastroController@cadastroUsuario')->name("CadastroUsuario.post");
+Route::post('/admin/cadastro', 'AdminCadastroController@store')->name("store.post");
 
 
 Route::group(
