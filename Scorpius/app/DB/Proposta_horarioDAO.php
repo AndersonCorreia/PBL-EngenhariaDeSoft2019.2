@@ -19,6 +19,11 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
 
    }
 
+    /**
+     * Função que busca e retorna todos os estagiários registrados no BD.
+     * @return array retorna dados dos estagiarios;
+     * @return object retorna dados dos estagiarios;
+     */
     function buscaEstagiarioALL( ){
         $sql = 'SELECT a.nome, a.ID  from estagiario e join usuario a on a.ID = e.usuario_ID';
         $resultado = $this->dataBase->query($sql);
@@ -32,6 +37,11 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         throw new \Exception("Nenhum estagiario encontrado");
     }
 
+    /**
+     * Função busca horário de estagiários presentes na proposta de horário.
+     * @param integer id identificação de estagiario.
+     * @return array proposta de horário.
+     */
     function buscaHorarioEstagiario($id){
         $sql = 'SELECT p.dia_semana, p.turno FROM proposta_horario p WHERE estagiario_usuario_ID=?';
         $stmt = $this->dataBase->prepare($sql);
@@ -47,6 +57,11 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         throw new \Exception("Nenhum estagiario encontrado");
     }
 
+    /**
+     * Função que busca as observações direcionadas ao estagiario;
+     * @param integer id identificador de usuário.
+     * @return array registros de observações.
+     */
     function buscaObservacaoEstagiario($id){
         $sql = 'SELECT e.observacao FROM estagiario e WHERE usuario_ID=?';
         $stmt = $this->dataBase->prepare($sql);
@@ -81,6 +96,13 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         }
     }
 
+
+    /**
+     * Função que salva os horários dos estagiários.
+     * @param integer id identificador de usuario.
+     * @param string dia dia da semana que estágiario irá trabalhar.
+     * @param string turno turno na qual usuário irá trabalhar.
+     */
     function salvaHorarioEstagiario($id, $dia, $turno){
             $sql = "INSERT IGNORE INTO horario_estagiario(dia_semana, turno, estagiario_usuario_ID) VALUES (?, ?, ?)";
             $stmt = $this->dataBase->prepare($sql);

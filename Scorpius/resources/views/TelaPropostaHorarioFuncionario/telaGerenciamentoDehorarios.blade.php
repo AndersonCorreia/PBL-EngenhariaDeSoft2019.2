@@ -28,10 +28,10 @@
 </div>
 
 
-<div class="matricula">
+<div class="matricula"> 
     <div class="form-row">
         <div class="col-6  float-right">
-            <div class="form-group row">
+            <div class="form-group row"> <!-- DIV seleção de estagiário -->
                 <label class="col-sm-12 col-form-label pt-3" nomeEstagiario>Nome do Estagiário</label>
                 <div class="col-9">
                     <input id="nomeInst" class="form-control" type="text" name="estagiario"
@@ -45,7 +45,7 @@
 
         </div>
 
-        <div class="col-4">
+        <div class="col-4"> <!-- DIV de download da Proposta de horário -->
             <div class="input-group-append">
                 <label class="pt-3">Comprovante de Matrícula</label>
                 <button type="button" class="btn btn-secondary" download>Download</button>
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <div class="row mb-1">
+    <div class="row mb-1"> <!-- DIV de Observações -->
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div class="calendario">
+    <div class="calendario"> <!-- DIV calendario de horário -->
         <h5>Cronograma Semanal do Semestre</h5>
         <table class="table table-hover">
             <thead>
@@ -122,7 +122,7 @@
         </table>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"> <!-- Grupo de botões -->
         <button type="submit" class="btn btn-success col-2" value="enviar" data-toggle="modal"
             data-target="#modalExemplo" enviar>
             Enviar
@@ -142,9 +142,9 @@
     $(document).ready(function() {
         let horarios = new Map()
         let horario_original = new Map()
-        let estagiarios = @json($estagiarios);
+        let estagiarios = @json($estagiarios); 
 
-        carregaNome(estagiarios);
+        carregaNome(estagiarios); //lista o nome dos estágiarios no campo de busca.
         
         //botões presentes na view 
         let botoesHorarios = $('tbody td').find('button')
@@ -161,12 +161,15 @@
 
         jQuery('[buscar]').click(e => {
             e.preventDefault() //evita ação de botão
+
             horarios = new Map()
             horario_original = new Map()
+
             botoesHorarios.removeClass('btn btn-success').addClass('btn btn-outline')
             botoesSubmit.prop("disabled", false);
             botaoCancelar.prop("disabled", true);
-            estID = getID(estagiarios, inputNome.val())
+            estID = getID(estagiarios, inputNome.val()) //retorna id de estagiario selecionado
+
             if (estID) {
                 let url ="{{ route('retornaProposta', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
                 url = url.replace(":id", estID); // isso vai corrigir a string gerada com o id correto.
@@ -176,6 +179,10 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+                /**
+                    Requisição ajax para retornar horarios de estagiários, 
+                    como resultado pinta os horários na tela. 
+                */
                 $.get(url, function(estagiarios) {
                     for (let estagiario of estagiarios["horario"]) {
                         let dias = estagiario.dia_semana
@@ -186,8 +193,9 @@
                         }
                         horarios.set(`${obj.turno}+${obj.dia}`, obj)
                         horario_original.set(`${obj.turno}+${obj.dia}`, obj)
-                        pinta(dias, turnos)
+                        pinta(dias, turnos) 
                     }
+                    //adiciona observações feitas a estágiario.
                     for(let estagiarioObservacao of estagiarios["observacao"]){
                         $('.card-text').html(estagiarioObservacao.observacao);
                     }
@@ -199,6 +207,7 @@
             }
         })
 
+        
         jQuery('[alterar]').click(e => {
             e.preventDefault() //evita ação de botão
             botoesHorarios.prop("disabled", false);
@@ -206,6 +215,9 @@
             botaoCancelar.prop("disabled", false);
         })
 
+        /**
+            Adiciona os horários selecionados a uma estrutura map.
+        */
         $('tbody td').find('button').click(e => {
             e.preventDefault() //evita ação de botão
             let buttonTrash = $(e.target)
@@ -226,6 +238,9 @@
             }
         })
 
+        /**
+            Ao clicar em cancelar carrega na tela a proposta de horário original.
+        */
         jQuery('[cancelar]').click(e => {
             e.preventDefault() //evita ação de botão
             botoesHorarios.removeClass('btn btn-success').addClass('btn btn-outline')
@@ -238,6 +253,9 @@
             botaoCancelar.prop("disabled", true);
         })
 
+        /**
+            Envia para o servidor o horários do estagiário. 
+         */
         jQuery('[salvarMudanca]').click(e => {
             e.preventDefault()
             console.log(strMapToObj(horarios))
@@ -259,12 +277,18 @@
         })
     })
 
+    /**
+        Carrega os nomes dos estagiários no campo de busca.
+     */
     const carregaNome = (e) => {
         for (let i = 0; i < e.length; i++) {
             $('#instList').append(`<option class="opList" value="${e[i].nome}">`)
         }
     }
 
+    /**
+        Retorna Id de estagiário.
+     */
     function getID(estagiarios, nome) {
         const filterID = estagiario => estagiario.nome == nome
         let result = estagiarios.filter(filterID)
@@ -274,7 +298,9 @@
         return false;
 
     }
-
+    /**
+        Converte uma estrutura map em um objeto.
+     */
     function strMapToObj(strMap) {
         let obj = Object.create(null);
         let i = 0;
@@ -284,6 +310,9 @@
         return obj;
     }
 
+    /**
+        Pinta os horários dos estágiarios na tabela de horários.
+     */
     function pinta(dias, turnos) {
         switch (dias) {
             case 'segunda':

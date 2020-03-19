@@ -71,6 +71,12 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         return $stmt->execute();
     }
 
+    /**
+     * Função para retornar os dados de uma insituição a partir do seu ID.
+     *
+     * @param integer $id id da instituição
+     * @param boolean $asArray seleciona se retorno é do tipo objeto ou array.
+     */
     function SELECTbyID(int $id, bool $asArray=true){
         $select = "i.ID, nome, responsavel, endereco, numero, cep, telefone, tipo_instituicao, cidade, UF";
         $join = "instituicao i LEFT JOIN cidade_UF c ON i.cidade_UF_ID = c.ID";
