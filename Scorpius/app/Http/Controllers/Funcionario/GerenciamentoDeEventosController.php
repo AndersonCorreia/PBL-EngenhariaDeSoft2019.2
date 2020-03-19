@@ -16,9 +16,8 @@ use Exception;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class GerenciamentoDeEventosController extends Controller{
     public function getTelaGerenciamentoDeEventos(){
-        //$id_user = $_SESSION["ID"]; //supondo que vai existir essa variavel
+        
         $id_user = session('ID');
-        //dd($id_user);
         $exposicoes = (new ExposicaoDAO)->SELECT_Eventos('ID, titulo, tipo_evento, tema_evento, turno, descricao, quantidade_inscritos, data_inicial, data_final, imagem');
         
         $variaveis = [

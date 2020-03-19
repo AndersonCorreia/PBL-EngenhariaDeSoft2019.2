@@ -529,6 +529,40 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`log` (
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `scorpius`.`backup`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`backup` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_usuario` INT UNSIGNED NOT NULL,
+  `frequencia` ENUM('diario', 'semanal', 'mensal') NOT NULL,
+  `diretorio` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),
+  INDEX `id_usuario_idx` (`id_usuario` ASC),
+  CONSTRAINT `id_usuario`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `scorpius`.`usuario` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `scorpius`.`freq_backup`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `scorpius`.`freq_backup` (
+  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_backup` INT UNSIGNED NOT NULL,
+  `valor` DATETIME NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `id_backup_idx` (`id_backup` ASC),
+  CONSTRAINT `id_backup`
+    FOREIGN KEY (`id_backup`)
+    REFERENCES `scorpius`.`backup` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
+ENGINE = InnoDB;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

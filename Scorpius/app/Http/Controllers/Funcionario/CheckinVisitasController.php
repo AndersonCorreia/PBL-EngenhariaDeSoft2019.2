@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Funcionario;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 
 use App\DB\CheckinDAO;
-
-require_once __DIR__ . "/../../../resources/views/util/layoutUtil.php";
 
 class CheckinVisitasController extends Controller
 {
@@ -21,7 +19,6 @@ class CheckinVisitasController extends Controller
             $visitantes = $this->listaGeralVisitantes();
         }
         $variaveis = [
-            'itensMenu' => getMenuLinks(),
             'visitantes' => $visitantes
         ];
         // dd($variaveis['visitantes']);

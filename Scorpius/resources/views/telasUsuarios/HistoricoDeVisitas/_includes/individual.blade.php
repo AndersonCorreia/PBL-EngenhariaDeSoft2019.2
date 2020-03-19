@@ -58,23 +58,23 @@
                     <div class="row col-12 m-0 my-1 p-0">
                         <span class="col-12 m-0 p-0 font-weight-bold">Lista dos Alunos</span>
                         <hr class="bg-light col-12 linha rounded p-0 m-0">
-                        <div class="col-6 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
+                        <div class="col-5 col-md-6 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
                             <small><b>NOME:</small></b>
                         </div>
-                        <div class="col-4 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
+                        <div class="col-5 col-md-4 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
                             <small><b>RG:</small></b>
                         </div>
-                        <div class="col-2 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
+                        <div class="col-2 m-0 my-1 p-0 pl-md-4 pl-md-3 pl-1 border-right border-bottom">
                             <small><b>IDADE:</small></b>
                         </div>
                         @foreach ($agend['visitantes'] as $item)
-                        <div class="col-6 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
+                        <div class="col-5 col-md-6 m-0 my-1 p-0 pl-md-4 overflow border-right border-bottom">
                             {{$item['nome']}}
                         </div>
-                        <div class="col-4 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
+                        <div class="col-5 col-md-4 m-0 my-1 p-0 pl-md-4 border-right border-bottom">
                             {{$item['rg']}}
                         </div>
-                        <div class="col-2 m-0 my-1 p-0 pl-md-4 pl-3 border-right border-bottom">
+                        <div class="col-2 m-0 my-1 p-0 pl-md-4 pl-md-3 border-right border-bottom">
                             {{$item['idade']}}
                         </div>
                         @endforeach

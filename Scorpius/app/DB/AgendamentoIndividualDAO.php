@@ -30,7 +30,7 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         $ID = $agendamento->getID();
 
         $this->INSERT_Visitantes( $agendamento->getVisitantes(), $ID);
-        //Inseri a exposição escolhida tambem, vai servi pra atividade diferenciada e o noturno tb.
+        $this->INSERT_Exposicoes( $agendamento->getExposicoes(), $ID);//Inseri a exposição escolhida tambem, vai servi pra atividade diferenciada e o noturno tb.
 
         $this->dataBase->commit();
         return $resultado;
@@ -60,6 +60,16 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         $result = $this->dataBase->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    private function INSERT_Exposicoes( array $Exposicoes, int $ID){
+        $count = count($Exposicoes);
+        for($i = 0; $i < $count; $i++){
+            $expID = $Exposicoes[$i];
+            $sql = "INSERT INTO exposicao_agendamento (exposicao_ID, agendamento_ID) VALUE 
+                ( $expID, $ID)";
+            $this->dataBase->query($sql);
+        }
     }
 
     private function INSERT_Visitantes( array $visitantes, int $ID){
@@ -99,4 +109,5 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         //esse metodo só existe para compatibilidade com uma função do user controller
         return [];
     }
+
 }
