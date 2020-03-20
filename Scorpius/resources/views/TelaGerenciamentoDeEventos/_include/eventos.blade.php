@@ -1,30 +1,28 @@
-
-
-    <!-- Modal confirmar -->
-    <div class="modal fade" method="POST" action="{{route('confirma.post')}}" id="modalExemplo" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cancelamento Agendamento</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Tem certeza que deseja confirmar as alterações?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" salvarMudanca>Salvar mudanças</button>
-                </div>
+<!-- Modal confirmar -->
+<div class="modal fade" method="POST" action="{{route('confirma.post')}}" id="modalExemplo" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cancelamento Agendamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja confirmar as alterações?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" salvarMudanca>Salvar mudanças</button>
             </div>
         </div>
     </div>
+</div>
 
-    @if($exposicoes)
+@if($exposicoes)
 
-    <form method="POST" action="{{route('confirma.post')}}" enctype="multipart/form-data">
+<form method="POST" action="{{route('confirma.post')}}" enctype="multipart/form-data">
     {{csrf_field()}}
     {{ method_field('POST') }}
     @foreach($exposicoes as $exposicao)
@@ -220,13 +218,17 @@
 jQuery(document).ready(function() {
     let valorAtual = null
 
-    //evento do botão visualizar
+    /*evento do botão visualizar, carrega os valores presentes 
+    no atributo data-detalhe para os campos e desativa os campos
+    para permitir apenas a visualização*/
     $('.botoes #btnVisualizar').click(e => {
         e.preventDefault()
+
         $('[formModal]').find('input, select, textarea').removeClass('is-valid').removeClass(
             'is-invalid').prop('disabled', true);
         $('#cadastrarModal').modal('show')
         valorAtual = $(e.currentTarget).data('detalhe')
+
         if (valorAtual.titulo) {
             $('#nome_campo').val(valorAtual.titulo)
         } else {
@@ -275,7 +277,8 @@ jQuery(document).ready(function() {
         $('[cancelar]').hide()
     })
 
-    //evento do botão editar
+    /*evento do botão editar, carrega os dados nos campos,
+    ativa-os caso estejam desativados permitindo sua alteração*/
     $('.botoes #btnEditar').click(e => {
         e.preventDefault()
         $('[formModal]').find('input, select, textarea').removeClass('is-valid').removeClass(
@@ -334,11 +337,11 @@ jQuery(document).ready(function() {
         $('[cancelar]').show()
     })
 
-    //evento do botão confirmar
+    /*evento do botão confirmar, faz envio de formulário por meio de uma requisição POST.*/
     $('[confirmar]').click(e => {
         e.preventDefault()
         let textButton = $(e.target).text()
-        if (textButton == 'Cadastrar') {
+        if (textButton == 'Cadastrar') { 
             $('[confirmar]').unbind('click').click()
         } else {
             $('[formModal]').append('<input type="hidden" name="_method" value="PUT">')
@@ -352,7 +355,7 @@ jQuery(document).ready(function() {
             $('[confirmar]').submit()
         }
     })
-
+    //evento do botão deletar. 
     $('[deletar]').click(e => {
         e.preventDefault()
         let value = e.currentTarget.value
@@ -363,11 +366,13 @@ jQuery(document).ready(function() {
 
     })
 
-    $('[cancelar]').click(e=>{
+    //evento do botão cancelar
+    $('[cancelar]').click(e => {
         $('#cadastrarModal').modal('hide')
     })
 
-    //evento do botão cadastrar
+    /*evento do botão cadastrar, ativa os campos caso estejam destivados 
+    e seta os campos para vazio permitindo o cadastro.*/
     $('[cadastro]').click(e => {
 
         e.preventDefault()
@@ -398,8 +403,11 @@ jQuery(document).ready(function() {
         $('[confirmar]').show().text("Cadastrar")
         $('[cancelar]').show()
     })
-
+    
     function validar() {
+        /**
+            Método que valida o limite minimo de visitantes presentes em um exposicao.
+        */
         $.validator.addMethod(
             "limite_minimo",
             function(elementValue, element, param) {
@@ -410,7 +418,9 @@ jQuery(document).ready(function() {
                 }
             }
         );
-
+        /**
+            Método que valida o tamanho da imagem a ser anexada.
+        */
         $.validator.addMethod(
             "tamanho_imagem",
             function(elementValue, element, param) {
@@ -425,7 +435,9 @@ jQuery(document).ready(function() {
                 }
             }
         );
-
+        /**
+            Método que valida o limite máximo de visitante presentes em uma exposição
+        */
         $.validator.addMethod(
             "limite_maximo",
             function(elementValue, element, param) {
@@ -436,7 +448,9 @@ jQuery(document).ready(function() {
                 }
             }
         );
-
+        /**
+            Método que valída a se a data inserida é maior que a data atual.
+        */
         $.validator.addMethod("minDate", function(value, element) {
             var curDate = new Date();
             var inputDate = new Date(value);
@@ -444,7 +458,9 @@ jQuery(document).ready(function() {
                 return true;
             return false;
         });
-
+        /**
+            Método que valída se a data de inicio da exposição é maior que a final. 
+        */
         $.validator.addMethod("menorDataFinal", function(value, element, param) {
             let dataFim = $('#periodo_termino_campo').val()
             if (dataFim != "") {
@@ -457,6 +473,9 @@ jQuery(document).ready(function() {
 
         });
 
+    /**
+        Método que verifica se data final inserida é maior que data inicial.
+     */
         $.validator.addMethod("maiorDataInicial", function(value, element) {
             let dataInicio = $('#periodo_inicio_campo').val()
             if (dataInicio != "") {
@@ -468,18 +487,22 @@ jQuery(document).ready(function() {
             return true;
         });
 
+        /**
+            Método que valída se imagem foi inserida.
+        */
         $.validator.addMethod("requireImagem", function(value, element) {
-            if($('[confirmar]').text() == "Atualizar"){
+            if ($('[confirmar]').text() == "Atualizar") {
                 return true;
             }
             if ($(element)[0].files[0]) {
                 return true;
-            }   
-            return false; 
+            }
+            return false;
         });
-
-
-
+    
+        /**
+            Validação de formulário.
+        */
         $('[formModal]').validate({
             submitHandler: function(form) {
                 form.submit()
@@ -533,7 +556,7 @@ jQuery(document).ready(function() {
                     required: true
                 },
                 data_inicial: {
-                    required:true,
+                    required: true,
                     minDate: '',
                     menorDataFinal: ''
                 },
@@ -570,7 +593,7 @@ jQuery(document).ready(function() {
                     required: "Por favor, informe um turno"
                 },
                 data_inicial: {
-                    required:"Insira uma data inicial",
+                    required: "Insira uma data inicial",
                     minDate: "Insira uma data válida",
                     menorDataFinal: "Data inicial deve ser menor que a final"
                 },
@@ -579,7 +602,7 @@ jQuery(document).ready(function() {
                     maiorDataInicial: "Data final deve ser maior que inicial"
                 },
                 imagem: {
-                    requireImagem:"Anexe uma imagem referente ao evento",
+                    requireImagem: "Anexe uma imagem referente ao evento",
                     accept: "Permitido arquivos do tipo imagem",
                     tamanho_imagem: "Quantidade máxima deve ser menor que 2MB"
                 }
@@ -589,7 +612,9 @@ jQuery(document).ready(function() {
     }
 
 
-
+    /**
+        Faz envio de alteração de formulario para o banco de dados.
+     */
 
     $('#cadastrarModal [salvarMudanca]').click(e => {
         e.preventDefault()

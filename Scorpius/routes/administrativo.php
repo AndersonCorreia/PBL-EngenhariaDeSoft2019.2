@@ -85,7 +85,7 @@ Route::group(
         Route::get('/admin/cadastro', 'AdminCadastroController@index')->name("cadastroAdm");
         Route::post('/admin/cadastro', 'AdminCadastroController@store')->name("store.post");
         //Rota dashboard adm
-        Route::get('/adm/dashboard', 'Admin@getDashboardAdm')->name('dashboardAdm.show');
+        Route::get('/adm/dashboard', 'AdminController@getDashboardAdm')->name('dashboardAdm.show');
 
     }
 );

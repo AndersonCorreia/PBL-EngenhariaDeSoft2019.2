@@ -5,7 +5,7 @@
 @section('conteudo')
 <div class="col-12 m-0 p-3 h-100">
     @if($agendamentosInstitucionais)
-    <div class="row col-12 mb-3 m-0 px-2 p-0 scorpius-border-shadow h-50 d-table">
+    <div class="row col-12 mb-3 m-0 px-2 p-0 scorpius-border-shadow hw-50 d-table">
         <h4 class="ml-1 p-1 m-1 mb-2 col-12">Histórico de Agendamentos Institucionais</h4>
         <hr class="bg-light col-12 linha rounded p-0 m-0">
         <div class="overflow-auto h-75 col-12 m-0 p-1">
@@ -16,7 +16,7 @@
     </div>
     @endif
     @if($agendamentos != [])
-    <div class="row col-12 m-0 p-2 scorpius-border-shadow h-50 d-table">
+    <div class="row col-12 m-0 p-2 scorpius-border-shadow hw-50 d-table">
         <h4 class="ml-1 p-1 m-1 mb-2 col-12">Histórico de Agendamentos Individuais</h4>
         <hr class="bg-light col-12 linha rounded p-0 m-0">
         <div class="overflow-auto h-75 row col-12 m-0 p-2">

@@ -60,7 +60,9 @@ class ControlerInstitucional extends Controller {
         //codigo para cadastrar a instituição
         $instituicaoDAO = new InstituicaoDAO();
         $pro_instDAO = new Professor_InstituicaoDAO();
-        if($_POST["onlyLink"]==false){
+        
+        $instituicaoID = $_POST['ID'];
+        if($_POST["onlyLink"]=='false'){
             $responsavel = $_POST['Responsavel'];
             $nome = $_POST['Instituicao'];
             $telefone = $_POST['Telefone'];
@@ -72,19 +74,19 @@ class ControlerInstitucional extends Controller {
             $tipo = $_POST['Tipo'];
 
             //armazena na classe
-            $instituicao = new Instituicao($nome, $responsavel, $telefone, $endereco, $numero,
-                        $cep, $cidade, $estado, $tipo);
+            $instituicao = new Instituicao($nome, $responsavel, $endereco, $numero, $cidade, 
+                                $estado, $cep, $telefone, $tipo);
             //armazena no banco
             $instituicaoDAO->INSERT($instituicao);
-            $_POST["ID"] = $instituicao->getID();
+            $instituicaoID = $instituicao->getID();
         }
         //Vincula a instituicao ao representante, inserindo a relação na tabela professor_instituicao 
         $id_user = session('ID');//temporario para evitar o erro na tela
         try{
-            $pro_instDAO->INSERTbyID($_POST['ID'], $id_user);
+            $pro_instDAO->INSERTbyID($instituicaoID, $id_user);
         }
         catch(\RuntimeException $e){
-            $pro_instDAO->ativarbyID($_POST['ID'], $id_user);
+            $pro_instDAO->ativarbyID($instituicaoID, $id_user);
         }   
 
         return redirect()->route('instituição.show');
