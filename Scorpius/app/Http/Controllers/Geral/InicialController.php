@@ -48,4 +48,9 @@ class InicialController extends Controller
     {
         return view('telaEntrar.index', [ 'loginError' => true]);
     }
+
+    public function esqueciMinhaSenha()
+    {
+        return view('telaEntrar.esqueciMinhaSenha');
+    }
 }

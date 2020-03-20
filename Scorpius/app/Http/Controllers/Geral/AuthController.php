@@ -42,4 +42,11 @@ class AuthController extends Controller
         return redirect()->route("paginaInicial");
     }
 
+    /**
+     * Envia código de reconfiguração de senha para o email do usuário
+     */
+    public function changePassword(){
+        //fazer
+    }
+
 }

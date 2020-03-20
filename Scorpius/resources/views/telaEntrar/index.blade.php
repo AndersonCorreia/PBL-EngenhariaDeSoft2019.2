@@ -75,7 +75,7 @@
     <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Entrar</button>
     <h1></h1>
     <h6 class="float-right">
-        Esqueceu a sua senha? <a target="_blank" href="">Ajuda</a>.
+        Esqueceu a sua senha? <a target="_blank" href="/esqueciMinhaSenha">Ajuda</a>.
     </h6>
 </form>
 
