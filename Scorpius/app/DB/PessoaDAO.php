@@ -11,7 +11,7 @@ use App\Model\Users\Usuario;
 class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 {
     public function __Construct(){
-        parent::__Construct("pessoa");
+        parent::__Construct("usuario");
     }
 
     function INSERT($pessoa): bool
@@ -171,5 +171,34 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $usuarios = $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getTipos(){
+
+        $sql = "SELECT * FROM tipo_usuario WHERE tipo != 'visitante' AND tipo != 'institucional'";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    /**
+     * Retorna todas as permissões do sistema;
+     *
+     * @return Array com todas as permissoes do sistema
+     */
+    function getPermissoesAll(): array
+    {
+        $result = $this->dataBase->query("SELECT * FROM permissao");
+        $array = $result->fetch_all(MYSQLI_ASSOC);
+        return $array;
+    }
     
+    /**
+     * Retorna todas as permissões dos sistema relacionadas com o tipo de usuario;
+     *
+     * @return Array
+     */
+    function getPermissoes_tipoAll(): array
+    {
+        $result = $this->dataBase->query("SELECT * FROM permissao_tipo");
+        $array = $result->fetch_all(MYSQLI_ASSOC);
+        return $array;
+    }
 }

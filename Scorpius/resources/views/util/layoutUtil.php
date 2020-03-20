@@ -26,7 +26,7 @@ function getMenuLinksAll(){
         'ver confiabilidade das instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],
         'ver log de atividade'=>                ['link'=>'#' , 'texto'=>'Histórico de Atividades' ],
         'realizar backup'=>                     ['link'=>route('backup') , 'texto'=>'Realizar Backup' ],
-        'gerenciar permissões'=>                ['link'=>'#' , 'texto'=>'Gerenciar Permissões' ]//creio que seria melhor ser permissão apenas para o adm
+        'gerenciar permissões'=>                ['link'=>route('permissoes.show') , 'texto'=>'Gerenciar Permissões' ]//creio que seria melhor ser permissão apenas para o adm
     ];
 }
 /**
@@ -71,6 +71,7 @@ function getMenuLinks(){
         foreach ($permissoes as $value) {
             $links[]=$menuLinks[$value["permissao"]];
         }
+        $links[]=$menuLinks['gerenciar permissões'];
     }
     
     $links[]=$menuLinks['alterarDados'];

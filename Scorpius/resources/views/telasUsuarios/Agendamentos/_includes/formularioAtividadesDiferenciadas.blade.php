@@ -1,13 +1,12 @@
-<div class="col-12 m-0 p-0 ">
-    <div class="col-12 p-2 m-0 vh-75 text-center overflow-auto">
-        <img src="data:image/jpeg;base64,{{$atividade['imagem']}}"  class="h-100 w-auto">
-    </div>    
-    <div class="col-12 p-0 px-3 py-1 m-0">    
-        <button type="button" class="btn btn-primary w-100" data-toggle="modal"
-                data-target="#modal-atividade-diferenciada{{$atividade['ID']}}">
-                <b>{{$atividade['titulo']}}</b>
-        </button>
-    </div>
+
+<div class="col-12 p-2 m-0 vh-75 text-center overflow-auto">
+    <img src="data:image/jpeg;base64,{{$atividade['imagem']}}"  class="h-100 w-auto">
+</div>    
+<div class="col-12 p-0 px-3 py-1 m-0">    
+    <button type="button" class="btn btn-primary w-100" data-toggle="modal"
+            data-target="#modal-atividade-diferenciada{{$atividade['ID']}}">
+            <b>{{$atividade['titulo']}}</b>
+    </button>
 </div>
 <!--Modal Agendamento-->
 <div class="modal fade" id ="modal-atividade-diferenciada{{$atividade['ID']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -63,6 +62,7 @@
                         <input id="idade" class="form-control" type="text" maxlength="3" name="idade[]"
                             placeholder="xx" pattern="[0-9]+$$" required>
                     </div>
+                </div>
                 <div class=" mt-2 float-right">
                     <button id="submit" type="submit" class="btn mr-2 btn-primary">
                         <i class="fas fa-receipt    "></i>

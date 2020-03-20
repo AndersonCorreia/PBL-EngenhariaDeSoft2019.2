@@ -86,6 +86,8 @@ Route::group(
         Route::post('/admin/cadastro', 'AdminCadastroController@store')->name("store.post");
         //Rota dashboard adm
         Route::get('/adm/dashboard', 'AdminController@getDashboardAdm')->name('dashboardAdm.show');
+        
+        Route::get('/gerenciamento/permissoes', 'PermissoesController@index')->name('permissoes.show');
 
     }
 );
