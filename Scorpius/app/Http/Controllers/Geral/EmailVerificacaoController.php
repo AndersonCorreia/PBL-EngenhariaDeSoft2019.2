@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Visitante;
+namespace App\Http\Controllers\Geral;
 
 use App\Http\Controllers\Controller;
 
