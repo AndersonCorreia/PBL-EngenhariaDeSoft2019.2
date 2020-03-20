@@ -1,6 +1,6 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Gerencimanto De Eventos')
+@section('title', 'Gerenciamento De Eventos')
 
 @section('conteudo')
 <div class="col-12 col-md-11 bg-white m-auto p-0 pt-4" style="border-bottom-right-radius: 20px; 
