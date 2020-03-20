@@ -55,7 +55,7 @@
                 </ul>
         </div>
         {{--<hr class="m-0 bg-primary">--}}
-        <div class="p-md-4 p-0 m-0 pt-4 bg-light container">
+        <div class="px-md-4 p-0 m-0 pt-4 container">
            <div class="scorpius-border m-0 p-0 ">
                 @yield('conteudo')
            </div>
