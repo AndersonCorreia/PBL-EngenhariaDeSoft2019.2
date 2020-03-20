@@ -36,7 +36,7 @@
 @endsection
 @section('conteudo')
 <div class="text-center mx-auto col col-md-10">
-    <label><h5>Redefina sua senha</h5</label>
+    <h5>Redefina sua senha</h5>
 </div>
 <form class="form-group mt-5 mx-auto col col-md-10" action={{route("senhaRedefinicao")}} method="POST">
     {{csrf_field()}}
@@ -44,7 +44,7 @@
     <div class='container'>
         <div class="form-group">
             <label for="emailCadastro">Insira o e-mail que está vinculado a sua conta</label>
-            <input class="form-control" placeholder="exemplo@exemplo.com" id="emailCadastro" name="e-mail" type="text"
+            <input class="form-control" placeholder="exemplo@exemplo.com" id="emailCadastro" name="e-mail" type="email"
                 aria-describedby="emailHelp">
         </div>
         <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Enviar</button>
