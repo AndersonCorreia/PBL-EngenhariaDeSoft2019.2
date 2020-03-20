@@ -175,14 +175,13 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`visita` (
   `turno` ENUM('manhã', 'tarde', 'noite') NOT NULL,
   `status` ENUM('realizada', 'não realizada', 'instituição ausente', 'atividade diferenciada') NOT NULL DEFAULT 'não realizada',
   `agendamento_institucional_ID` INT UNSIGNED DEFAULT NULL,
-  `acompanhante_ID` INT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_visita_agendamento_institucional_ID1_idx` (`agendamento_institucional_ID` ASC),
   INDEX `fk_visita_usuario1_idx` (`acompanhante_ID`),
   UNIQUE INDEX `Data_Turno_UNIQUE` (`data_visita` , `turno`),
-  CONSTRAINT `fk_visita_acompanhante_ID1`
-    FOREIGN KEY (`acompanhante_ID`)
-    REFERENCES `scorpius`.`usuario` (`ID`)
+  CONSTRAINT `fk_visita_agendamento_institucional_ID1`
+    FOREIGN KEY (`agendamento_institucional_ID`)
+    REFERENCES `scorpius`.`agendamento_institucional` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

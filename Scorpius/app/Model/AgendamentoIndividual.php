@@ -11,8 +11,7 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
     private $usuario_ID;
     private $exposicaoID;
     private $visitantes;
-    private $Exposicoes;
-
+    
     public function __Construct($usuario_ID, $visita, $status = 'confirmado'){
         $this->usuario_ID = $usuario_ID;
         $this->visita = $visita;
@@ -72,15 +71,5 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
     public function setVisitantes(array $visitantes)
     {   
         $this->visitantes = $visitantes;
-    }
-
-    public function setExposicoes(array $Exposicoes)
-    {   
-        $this->Exposicoes = $Exposicoes;
-    }
-
-    public function getExposicoes()
-    {
-        return $this->Exposicoes;
     }
 }

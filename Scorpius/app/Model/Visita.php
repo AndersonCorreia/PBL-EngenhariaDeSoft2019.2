@@ -18,12 +18,11 @@ class Visita extends \App\DB\interfaces\DataObject {
     private static $mes = ["Janeiro", "Fevereiro", "Março", "Abril","Maio", "Junho", "Julho",
                             "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                     
-    public function __Construct(\DateTime $data, string $turno, string $status, AgendamentoInstitucional $agend=null, Empregado $acomp=null, int $id=null){
+    public function __Construct(\DateTime $data, string $turno, string $status, AgendamentoInstitucional $agend=null, int $id=null){
         $this->Data = $data;
         $this->Turno = $turno;
         $this->Status = $status;
         $this->Agendamento = $agend;
-        $this->Acompanhante = $acomp;
         $this->ID = $id;
     }
 
@@ -142,26 +141,6 @@ class Visita extends \App\DB\interfaces\DataObject {
                 $this->setAlterado();
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * Get the value of acompanhante
-     */ 
-    public function getAcompanhante(){
-        return $this->Acompanhante;
-    }
-
-    /**
-     * Set the value of acompanhante
-     *
-     * @return  self
-     */ 
-    public function setAcompanhante(Empregado $acompanhante){
-
-        $this->Acompanhante = $acompanhante;
-        $this->setAlterado();
 
         return $this;
     }

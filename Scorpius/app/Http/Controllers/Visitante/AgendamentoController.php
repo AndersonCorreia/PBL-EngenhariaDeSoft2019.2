@@ -109,17 +109,13 @@ class AgendamentoController extends Controller{
         }
 
         $array = $this->getVisitas("diurno", "now", "anterior", "visitante");
-        $tipoAtividade ="exposições";
-        $exposicoes = (new ExposicaoDAO())->SELECT_ALL_AtividadePermanente();
         $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
         $variaveis = [
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,
             'legendaCores' => Visita::getBtnClasses(),
             'tipoUserLegenda'=> $visitante,
-            'tipoAtividade' => $tipoAtividade,
             'agendamentos' => $agendamentos,
-            $tipoAtividade => $exposicoes//a tela de escolha das atividades espera um valor dinamico mesmo.
         ];
 
         return view('telasUsuarios.Agendamentos.agendamento', $variaveis);
@@ -207,13 +203,11 @@ class AgendamentoController extends Controller{
         $id_user = session('ID');
         $data = $_POST['data'];
         $turno = $_POST['turno'];
-        $exposicoes = isset( $_POST['exposicoes']) ? $_POST['exposicoes'] : [];
         $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
         $visitantes = $this->getMatrizVisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
         
         $agendamento = new AgendamentoIndividual($id_user, $visita);
-        $agendamento->setVisitantes($visitantes);        
-        $agendamento->setExposicoes($exposicoes);
+        $agendamento->setVisitantes($visitantes);
 
         (new AgendamentoIndividualDAO)->INSERT($agendamento);
 
@@ -229,10 +223,10 @@ class AgendamentoController extends Controller{
         $visitaDAO = new VisitaDAO();
         $visita = $visitaDAO->SELECTbyData_Turno($data, $turno, true);
         $visitantes = $this->getMatrizVisitantes($_POST['visitante'], $_POST['idade'], $_POST['RG']);
-        $qtdVistante = $this->getQtdVisitantesIndividual();
+        $qtdVistante = $visitaDAO->getQtdVisitantesIndividual($visita->getID() );
         $limiteVagas = (new ExposicaoDAO())->SELECTbyID($exposicao)['quantidade_inscritos'];
         
-        if( ((int)$qtdVistante + count($visitantes)) <= $limiteVagas){
+        if( ($qtdVistante + count($visitantes)) <= $limiteVagas){
             
             $agendamento = new AgendamentoIndividual($id_user, $visita);
             $agendamento->setVisitantes($visitantes);        
@@ -251,16 +245,12 @@ class AgendamentoController extends Controller{
      * @return void
      */
     public function agendarAtividadeDiferenciada() {
-        //falta terminar
-        $id_user = session('ID');
-        $data = $_POST['data'];
-        $turno = $_POST['turno'];
-        $visita = (new VisitaDAO())->SELECTbyData_Turno($data, $turno, true);
-        $agendamento = new AgendamentoIndividual($id_user, $visita, $status);
-
-        (new AgendamentoIndividualDAO)->INSERT($agendamento);
-
-        return redirect()->route('dashboard');
+        
+        $data = new \DateTime($_POST['data']);
+        (new VisitaDAO())->INSERT( new visita($data, $_POST['turno'], 'atividade diferenciada'));
+        $_POST['RG'] = [0 => ''];// para compatibilidade com o resto do codigo
+        
+        return $this->agendarNoturno();//reaproveitando codigo
     }
 
     /**
@@ -294,12 +284,5 @@ class AgendamentoController extends Controller{
         }
         
         return $visitantes;
-    }
-
-    public function getQtdVisitantesIndividual(){
-
-        return "SELECT COUNT (*) 
-        FROM visitantes join visita_individual WHERE visita_individual.agendamentoID = visitantes.agendamentoID)";
-    
     }
 }

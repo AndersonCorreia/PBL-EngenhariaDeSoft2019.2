@@ -10,7 +10,7 @@ Route::post('/agendamento/noturno', 'AgendamentoController@agendarNoturno')->nam
 
 //Rotas para agendamento de uma individual para atividades diferenciadas
 Route::get('/agendamento/atividades', 'AgendamentoController@agendamentoAtividadeDiferenciada')->name('AgendarAtividade.show');
-Route::post('/agendamento/atividades', 'AgendamentoController@agendarContaIndividual')->name('AgendarAtividade.post');
+Route::post('/agendamento/atividades', 'AgendamentoController@agendarAtividadeDiferenciada')->name('AgendarAtividade.post');
 
 /**
  * rota para retornar o JSON com os dados das visitas para o calendario.

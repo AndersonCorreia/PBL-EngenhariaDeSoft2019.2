@@ -106,26 +106,32 @@
 
 .vh-50 {
     height: 50vh;
+    max-height: 50vh;
 }
 
 .vh-75 {
     height: 75vh;
+    max-height: 75vh;
 }
 
 .vh-25 {
     height: 25vh;
+    max-height: 25vh;
 }
 
 .vw-50 {
-    width: 50vh;
+    width: 50vw;
+    max-width: 50vw;
 }
 
 .vw-75 {
-    height: 75vh;
+    width: 75vw;
+    max-width: 75vw;
 }
 
 .vw-25 {
-    height: 25vh;
+    width: 25vw;
+    max-width: 25vw;
 }
 
 [disabled] {

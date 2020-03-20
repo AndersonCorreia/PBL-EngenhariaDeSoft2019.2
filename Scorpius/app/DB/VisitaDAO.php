@@ -11,8 +11,19 @@ class VisitaDAO extends DataAccessObject{
         parent::__Construct("visita");
     }
     
-    public function INSERT($Visita): bool{
+    public function INSERT($visita): bool{
 
+        $data = $visita->getData()->format('Y-m-d');
+        $turno = $visita->getTurno();
+        $status = $visita->getStatus();
+        
+        $sql = "INSERT IGNORE INTO visita (data_visita, turno, status) 
+            VALUE ( '$data', '$turno', '$status')";
+
+        $resultado = $this->dataBase->query($sql);
+        $visita->setID($this);
+
+        return true;
     }
 
     public function UPDATE($Visita): bool{
@@ -84,7 +95,7 @@ class VisitaDAO extends DataAccessObject{
                             null, $array['status'], $array["ID"] 
                         );
             }
-            return new Visita($data, $result['turno'], $result["status"],$agendamentoInst, $result["acompanhante_ID"], $result['ID']);
+            return new Visita($data, $result['turno'], $result["status"],$agendamentoInst, $result['ID']);
         }
 
         return $result;
@@ -113,5 +124,16 @@ class VisitaDAO extends DataAccessObject{
         }, $arrayVisitas);
 
         return $arrayObjects;
+    }
+    
+
+    public function getQtdVisitantesIndividual(int $visitaID){
+
+        $sql = "SELECT COUNT(*) as qtd FROM visitante as v INNER JOIN visita_individual vi
+        ON v.agendamento_ID = vi.agendamentoID WHERE visitaID = $visitaID";
+
+        $result = $this->dataBase->query($sql);
+        
+        return $result->fetch_assoc()['qtd'];
     }
 }
