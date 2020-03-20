@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Geral;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\email;
 use App\DB\PessoaDAO;
+use App\Model\Users\Usuario;
+use App\Model\EmailRedefinicaoSenha;
 
 class AuthController extends Controller
 {
@@ -42,11 +46,38 @@ class AuthController extends Controller
         return redirect()->route("paginaInicial");
     }
 
-    /**
-     * Envia código de reconfiguração de senha para o email do usuário
-     */
     public function changePassword(){
         //fazer
     }
 
+    public function enviarEmailRedefinicaoSenha($usuario_email, $token)
+    {
+        $dados = [
+            'token'=> $token,
+            'usuario_email'=> $usuario_email,
+        ];
+         // Enviando o e-mail
+        Mail::send('emails.emailRedefinicaoSenha', $dados, function($message){
+            $message->from('scorpiusuefs@gmail.com', 'Scorpius - Redefinição de Senha');
+            $message->to($this->usuario_email);
+            $message->subject('Código para Redefinição de Senha');
+        });
+
+        return view('telaEntrar.prosseguirRedefinicao');
+    }
+
+    public function senhaRedefinicao(Request $request)
+    {
+
+        $this->email = $request['email'];
+
+        $token = $request['_token'];
+        $dados = [
+            'usuario_email' => $this->email,
+            'token' => $token
+        ];
+    
+        $this->enviarEmailRedefinicaoSenha($this->email, $token);
+        return view('telaEntrar.prosseguirRedefinicao');
+    }
 }

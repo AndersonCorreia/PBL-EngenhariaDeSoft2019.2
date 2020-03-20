@@ -38,7 +38,7 @@
 <div class="text-center mx-auto col col-md-10">
     <label><h5>Redefina sua senha</h5</label>
 </div>
-<form class="form-group mt-5 mx-auto col col-md-10" action={{ route("changePassword")}} method="POST">
+<form class="form-group mt-5 mx-auto col col-md-10" action={{route("senhaRedefinicao")}} method="POST">
     {{csrf_field()}}
     <!-- E-mail -->
     <div class='container'>
@@ -50,4 +50,5 @@
         <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Enviar</button>
     </div>
 </form>
+    
 @endsection

@@ -56,7 +56,7 @@ Route::post('/entrar','AuthController@login')->name('login');
 Route::get("/logout", 'AuthController@logout')->name('logout');
 Route::get('/verificacao-email/{email}/{token}', 'EmailVerificacaoController@index');
 Route::get('/esqueciMinhaSenha', 'InicialController@esqueciMinhaSenha')->name('reconfigurarSenha');
-Route::post('/esqueciMinhaSenha','AuthController@changePassword')->name('changePassword');
+Route::post('/esqueciMinhaSenha','AuthController@senhaRedefinicao')->name('senhaRedefinicao');
 
 //rota para visualizar corbetura dos testes
 Route::get('/testes', function(){
