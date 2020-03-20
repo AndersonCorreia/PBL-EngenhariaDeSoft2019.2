@@ -32,8 +32,9 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("sssssssss", $nome, $resp, $endereco, $numero, $cep, $tel, $tipo, $cidade, $UF);
         $resultado = $stmt->execute();
+        
         $instituicao->setID($this);//adcionando ID no objeto que acabou de ser inserido
-
+        
         return $resultado;
     }
     

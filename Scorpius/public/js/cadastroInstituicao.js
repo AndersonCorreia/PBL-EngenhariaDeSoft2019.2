@@ -19,7 +19,7 @@ const preencherForm = function(data, status) {
             $("#tipo").val(data.tipo_instituicao).attr("disabled", "");
             $("#id").val(data.ID);
             $("#submit").html("Vincular instituição");
-            $("#onlyV").val("true");
+            $("#onlyLink").val("true");
         }
 }
 

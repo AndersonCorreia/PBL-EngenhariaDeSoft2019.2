@@ -19,8 +19,8 @@
                         <input type="hidden" name="_method" value="put">
                         <input id="nomeInst" class="form-control" type="text" name="Instituicao"
                             placeholder="Nome da instituição"
-                            value="{{isset($registros['nome']) ? $registros['nome'] : ''}}" list="instList" required
-                            autofocus>
+                            value="{{isset($registros['nome']) ? $registros['nome'] : ''}}" list="instList" 
+                            required autofocus>
                         <datalist id="instList">
                             @if (($instituicoes ?? false))
                             @foreach ($instituicoes as $inst)
