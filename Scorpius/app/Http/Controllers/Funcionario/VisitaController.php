@@ -33,6 +33,13 @@ class VisitaController extends Controller{
         ];
         return view('telaGerenciamentoDeVisitas.telaGerenciamentoDeVisitas', $variaveis);
     }
-    
+    public function getListaEsperaDiaTurno($lista_espera){
+        foreach($lista_espera as $agendamento){
+            if($agendamento[data] == $data and $agendamento['turno'] == $turno){
+                
+            }
+        }
+
+    }
 }
 ?>

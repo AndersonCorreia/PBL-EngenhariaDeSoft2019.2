@@ -68,9 +68,9 @@
                                         <p>{{$agendamento['instituicao']}}</p>
                                         <p style="margin-top: -8px;"> Status: Pendente</p>
                                         <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                                <i class="fas fa-list-ol"></i>
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip" 
+                                            title="Lista de Espera" data-target=".modal-lista-espera" lista disabled>
+                                                    <i class="fas fa-list-ol"></i>
                                             </button>
                                             <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
                                                 btnconf>
@@ -92,12 +92,8 @@
                                         <p style="margin-top: -8px;"> Status: Confirmado</p>
                                         <div class="btn-group" role="group">
                                             <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista disabled>
                                                 <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
                                             </button>
                                             <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
                                                 data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
@@ -113,17 +109,9 @@
                                         <p>{{$agendamento['instituicao']}}</p>
                                         <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
                                         <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip" 
+                                            title="Lista de Espera" data-target=".modal-lista-espera" data-day="$agendamento['data']" data-turn="$agendamento['turno']" lista>
                                                 <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
                                             </button>
                                         </div>
                                     @endif
@@ -135,17 +123,9 @@
                                         <p>{{$agendamento['instituicao']}}</p>
                                         <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
                                         <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
+                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip" title="Lista de Espera"
+                                                data-target=".modal-lista-espera" data-day="$agendamento['data']" data-turn="$agendamento['turno']" lista>
                                                 <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
                                             </button>
                                         </div>
                                     @endif
@@ -372,26 +352,25 @@
                                     <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
                                         <div class="row col-12 col-md-11 my-1">
                                             <div class="row col-12">
-                                                @forelse($lista_espera_dia_turno as $agendamento_dia_turno)
-                                                    <div class="custom-control custom-radio">
-                                                        <div class="col-md-5">
-                                                            <label class="custom-control-label" for="customRadio1">
-                                                                {{$agendamento_dia_turno['instituicao']}}
-                                                            </label>
+                                                @forelse($lista_espera as $agendamento)
+                                                    @if($agendamento[data] == $data)  
+                                                        <div class="custom-control custom-radio">
+                                                            <div class="col-md-5">
+                                                                <label class="custom-control-label" for="customRadio1">
+                                                                    {{$agendamento['instituicao']}}
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="custom-control-label" for="customRadio1">
+                                                                    {{$agendamento['tipo_instituicao']}}   
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <label class="custom-control-label" for="customRadio1">
+                                                                    {{$agendamento['ano_escolar']}} - {{$agendamento['turma']}}    
+                                                                </label>
+                                                            </div>
                                                         </div>
-                                                                        </div> 
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="custom-control-label" for="customRadio1">
-                                                                {{$agendamento_dia_turno['tipo_instituicao']}}   
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label class="custom-control-label" for="customRadio1">
-                                                                {{$agendamento_dia_turno['ano_escolar']}} - {{$agendamento_dia_turno['turma']}}    
-                                                            </label>
-                                                        </div>
-                                                    </div>
                                                 @empty
                                                     <div class="col-md-12">
                                                         <div class="col-12 p-0 my-1 font-weight-bold">
@@ -409,7 +388,6 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="button" class="btn btn-primary">Confirmar</button>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -432,7 +410,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="custom-control col-md-12">
-                                @forelse($lista_espera as $agendamento)
+                                @forelse($lista_espera as $agendamento) {{--funcionando--}}
                                     <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
                                         <div class="row col-md-12 my-1">
                                             <div class="row col-12">
