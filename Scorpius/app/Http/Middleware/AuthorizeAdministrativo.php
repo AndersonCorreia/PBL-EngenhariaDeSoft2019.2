@@ -65,6 +65,8 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["backup" ] = 'realizar backup';
         $this->RotasPermissoes["realizarBackup" ] = 'realizar backup';
         $this->RotasPermissoes["permissoes.show" ] = 'adm';
+        $this->RotasPermissoes["permissoes.post" ] = 'adm';
+        $this->RotasPermissoes["permissoes.default" ] = 'adm';
         //$this->RotasPermissoes["nome da rota" ] = 'permissão associada como ta escrito no banco';
     }
     

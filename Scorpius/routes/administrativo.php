@@ -88,6 +88,8 @@ Route::group(
         Route::get('/adm/dashboard', 'AdminController@getDashboardAdm')->name('dashboardAdm.show');
         
         Route::get('/gerenciamento/permissoes', 'PermissoesController@index')->name('permissoes.show');
+        Route::post('/gerenciamento/permissoes', 'PermissoesController@alterarPermissoes')->name('permissoes.post');
+        Route::get('/gerenciamento/permissoes/default', 'PermissoesController@defaultPermissoes')->name('permissoes.default');
 
     }
 );

@@ -183,7 +183,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
      *
      * @return Array com todas as permissoes do sistema
      */
-    function getPermissoesAll(): array
+    public function getPermissoesAll(): array
     {
         $result = $this->dataBase->query("SELECT * FROM permissao");
         $array = $result->fetch_all(MYSQLI_ASSOC);
@@ -195,10 +195,31 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
      *
      * @return Array
      */
-    function getPermissoes_tipoAll(): array
+    public function getPermissoes_tipoAll(): array
     {
         $result = $this->dataBase->query("SELECT * FROM permissao_tipo");
         $array = $result->fetch_all(MYSQLI_ASSOC);
         return $array;
+    }
+    /**
+     * Deletar todas as permissões anteriores e adcionar as novas permissões vindas de um array.
+     *
+     * @param array $permissoesTipo permissoes atuais que seram inseridas no sistema
+     * @return void
+     */
+    public function setPermissoes( array $permissoesTipo){
+
+        $this->dataBase->autocommit(false);
+
+        $this->dataBase->query("DELETE FROM permissao_tipo");
+
+        foreach($permissoesTipo as $pt){
+            $sql = "INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (?, ?)";
+            $stmt = $this->dataBase->prepare($sql);
+            $stmt->bind_param("ii", $pt['permissao_ID'], $pt['tipo_ID']);
+            $stmt->execute();
+        }
+
+        $this->dataBase->commit();
     }
 }

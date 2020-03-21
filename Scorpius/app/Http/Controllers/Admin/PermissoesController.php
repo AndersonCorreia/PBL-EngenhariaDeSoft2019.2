@@ -43,4 +43,59 @@ class PermissoesController extends Controller
 
         return $permissaoTipo;
     }
+
+    public function alterarPermissoes(Request $request){
+
+        $DAO = new PessoaDAO();
+        $permissaoTipo = $this->preencherMatrizPermissaoTipo($request->get('p_t',[]));
+        $DAO->setPermissoes($permissaoTipo);
+
+        return redirect()->back();
+    }
+    
+    public function defaultPermissoes(Request $request){
+
+        $DAO = new PessoaDAO();
+        $permissaoTipo = $this->getDefaultPermissaoTipo();
+        $DAO->setPermissoes($permissaoTipo);
+
+        return redirect()->back();
+    }
+
+    public function preencherMatrizPermissaoTipo($p_t ){
+
+        $permissaoTipo = [];
+
+        foreach ($p_t as $value) {
+            $pt = \explode("|", $value);
+
+            $permissaoTipo[] = ['permissao_ID' => $pt[0], 'tipo_ID' => $pt[1]];
+        }
+        
+        return $permissaoTipo;
+    }
+
+    /**
+     * retornar um array com a relação padrão de permissoes do sistema
+     *
+     * @return void
+     */
+    public function getDefaultPermissaoTipo(){
+
+        return [   
+                    [ 'permissao_ID' => 1, 'tipo_ID' => 10 ],
+                    [ 'permissao_ID' => 1, 'tipo_ID' => 8 ],
+                    [ 'permissao_ID' => 1,'tipo_ID' => 9 ],
+                    [ 'permissao_ID' => 2, 'tipo_ID' => 8 ],
+                    [ 'permissao_ID' => 3, 'tipo_ID' => 9 ],
+                    [ 'permissao_ID' => 4, 'tipo_ID' => 9 ],
+                    [ 'permissao_ID' => 5, 'tipo_ID' => 9 ],
+                    [ 'permissao_ID' => 6, 'tipo_ID' => 9 ],
+                    [ 'permissao_ID' => 7, 'tipo_ID' => 10 ],
+                    [ 'permissao_ID' => 8, 'tipo_ID' => 10 ],
+                    [ 'permissao_ID' => 9, 'tipo_ID' => 10 ],
+                    [ 'permissao_ID' => 10, 'tipo_ID' => 10 ],
+                    [ 'permissao_ID' => 11, 'tipo_ID' => 10 ],
+        ];
+    }
 }
