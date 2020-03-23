@@ -125,7 +125,7 @@ INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-24','tarde');
 
 -- INSERT DOS Agentamentos de Usuário --
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(1, 1, 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(2, 3, 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(2, 2, 'confirmado', 601);
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(3, 5, 'cancelado pelo funcionario', 601);
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(4, 7, 'confirmado', 601);
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(5, 9, 'confirmado', 601);
@@ -134,14 +134,14 @@ INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(7, 13, 'cancelado
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(8, 15, 'confirmado', 601);
 
 -- INSERT das turmas --
-INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(1, 'A', '6º ano', 'Ensino Fundamental', 701);
-INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(2, 'B', '6º ano', 'Ensino Fundamental', 701);
-INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(3, 'A', '5º semestre', 'Ensino Superior', 701);
-INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(4, 'C', '2º ano', 'Ensino Médio', 701);
-INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(5, 'C', '5º ano', 'Ensino Fundamental', 701);
-INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(6, 'B', '3º ano', 'Ensino Médio', 701);
-INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(7, 'A', '4º semestre', 'Ensino Técnico', 701);
-INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES(8, 'B', '3º semestre', 'Ensino Superior', 701);
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (1, 'A', '6º ano', 'Ensino Fundamental', 701);
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (2, 'B', '6º ano', 'Ensino Fundamental', 701);
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (3, 'A', '5º semestre', 'Ensino Superior', 701);
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (4, 'C', '2º ano', 'Ensino Médio', 701);
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (5, 'C', '5º ano', 'Ensino Fundamental', 701);
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (6, 'B', '3º ano', 'Ensino Médio', 701);
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (7, 'A', '4º semestre', 'Ensino Técnico', 701);
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (8, 'B', '3º semestre', 'Ensino Superior', 701);
 
 -- INSERT dos Agendamentos de Instituições --
 INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
@@ -192,3 +192,19 @@ INSERT INTO exposicao (ID, titulo, turno, tipo_evento, tema_evento, descricao, q
 
 -- INSERT das propostas de horarios --
 INSERT INTO proposta_horario(dia_semana, turno, estagiario_usuario_ID) VALUES ('segunda', 'manhã', 802),('terça', 'tarde', 801),('quarta','tarde',801);
+
+INSERT INTO `visitante` (`ID`, `nome`, `status_Checkin`, `idade`, `rg`, `agendamento_ID`) VALUES
+(1, 'Cleberson Silva Souza', '', 19, '153728456382', 2),
+(2, 'Kevin Gomes', '', 20, '536478264538', 4),
+(4, 'Claudio Sergio', '', 22, '536478264538', 4),
+(5, 'Servulo Junior', '', 40, '536478264538', 4),
+(3, 'Esdras Abreu', '', 20, '263547586974', 8);
+
+INSERT INTO `visitante_institucional` (`ID`, `nome`, `status_Checkin`, `idade`, `agendamento_institucional_ID`) VALUES
+(1, 'Esther', '', 19, 1),
+(2, 'Anderson', '', 12, 1),
+(3, 'Pedro', '', 12, 7),
+(4, 'Cleiton', '', 12, 7),
+(5, 'Cebrer', '', 12, 7),
+(6, 'Juliana', '', 12, 1),
+(7, 'Keila', '', 12, 1);
