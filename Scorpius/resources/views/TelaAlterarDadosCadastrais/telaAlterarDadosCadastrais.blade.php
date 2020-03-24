@@ -99,6 +99,7 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="http://unpkg.com/vanilla-masker@1.1.1/lib/vanilla-masker.js"></script>
 <script>
 
 $(".val").on("input", function() {
@@ -143,9 +144,25 @@ jQuery(document).ready(function($) {
     });
 });
 
-    $('#telefoneUsuario').mask('00 0 0000-0000', {
-        reverse: true
-    });    
+function inputHandler(masks, max, event) {
+    let c = event.target;
+    let v = c.value.replace(/\D/g, '');
+    let m = c.value.length > max ? 1 : 0;
+    VMasker(c).unMask();
+    VMasker(c).maskPattern(masks[m]);
+    c.value = VMasker.toPattern(v, masks[m]);
+}
+
+let telMask = ['99 9 9999-9999'];
+let tel = document.querySelector('#telefoneUsuario');
+VMasker(tel).maskPattern(telMask[0]);
+tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);  
+
+let cpfMask = ['999.999.999-99'];
+let cpf = document.querySelector('#cpfUsuario');
+VMasker(cpf).maskPattern(cpfMask[0]);
+cpf.addEventListener('input', inputHandler.bind(undefined, cpfMask, 14), false); 
+
 
 function verificaCamposPessoais(){
     if($('#cpfUsuario').val() != ""){
@@ -203,24 +220,6 @@ function validaTel(){
     } else	{	 
         return true	
     }
-}
-
-function fMasc(objeto,mascara) {
-    obj=objeto
-    masc=mascara
-    setTimeout("fMascEx()",1)
-}
-
-function fMascEx() {
-    obj.value=masc(obj.value)
-}
-
-function mCPF(cpf){
-    cpf=cpf.replace(/\D/g,"")
-    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
-    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
-    cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
-    return cpf
 }
 </script>
 @endsection

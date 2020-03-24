@@ -39,18 +39,23 @@ class AdminCadastroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $pessoaDAO = new PessoaDAO();
+    {   $pessoaDAO = new PessoaDAO();
         
-        $nome = $_POST['Nome'];
-        $senha = $_POST['Senha'];
-        $telefone = $_POST['Telefone'];
+        $nome = $_POST['nome'];                
+        $sobrenome = $_POST['sobrenome'];
+        $fullname = $nome." ".$sobrenome;
+        $senha = $_POST['senha'];
+        $rptSenha = $_POST['rptSenha'];
+        $telefone = $_POST['telefone'];
         $cpf = $_POST['cpf'];
         $email = $_POST['email'];
         $tipo_usuario = $_POST['tipo_usuario'];
-        
+
+        echo($nome." "); echo($sobrenome." "); echo($fullname." ");  echo($senha." ");  echo($rptSenha." ");  echo($telefone." ");  echo($cpf." "); 
+        echo($email." ");  echo($tipo_usuario." ");
+
         //armazena na classe
-        $pessoa = new Pessoa($nome, $senha, $tipo_usuario, $cpf, $telefone, $email);
+        $pessoa = new Pessoa($fullname, $senha, $tipo_usuario, $cpf, $telefone, $email);
         //armazena no banco
         $pessoaDAO->INSERT($pessoa);
         $_POST["ID"] = $pessoa->getID();
