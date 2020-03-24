@@ -43,7 +43,7 @@
   </div>
   <div class="modal fade bd-example-modal-lg" id="visita{{$quant}}" tabindex="-1" role="dialog"
     aria-labelledby="visita{{$quant}}Title" aria-hidden="true">
-    <div class="modal-dialog  modal-lg modals" role="document">
+    <div class="modal-dialog  modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header row">
           {{-- <h5 class="modal-title" id="visita{{$quant}}Title">Modal title</h5> --}}
@@ -155,7 +155,7 @@
                   {{-- {{dd($visita)}} --}}
                   @for($j = 1; $j < count($visita['visitantes']); $j++) {{-- {{dd($visita['visitantes'][1]['usuario'])}}
                     --}} <input type="hidden" value="{{$i = 0}}">
-                    <div class="row text-center">
+                    <div class="row text-center mt-2">
                       <div class="col-md-1">
                         <p class="h5 mt-1">
                           {{$i++}}

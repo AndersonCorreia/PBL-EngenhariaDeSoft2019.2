@@ -1,4 +1,11 @@
 @extends('TelaCheckinVisitas.checkinVisitas')
+@section('css')
+<style>
+    .nome-instituicao {
+        text-align: center !important;
+    }
+</style>
+@endsection
 @section('checkinEstagiario')
 <div class="container-fluid bg-white shadow-sm p-2"
     style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
@@ -30,22 +37,20 @@
 <div class="p-4">
     @if(isset($visitantes['visitantes'][0]['aluno']))
     <div id="escola">
-        <div class="container-fluid bg-secondary p-2 text-white border-all-50">
-            <div class="row">
-                <div class="col-md-5">
-                    <input type="hidden" value="{{$visitantes['visitantes'][0]['instituicao']['ID']}}">
-                    <p class="h5 ml-1 mt-1">{{$visitantes['visitantes'][0]['instituicao']['nome']}}</p>
-                </div>
-                <div class="cold-md-5">
-                    <input type="hidden" value="{{$visitantes['visitantes'][0]['professor']['ID']}}">
-                    <p class="h5 mt-1 ml-2">{{$visitantes['visitantes'][0]['professor']['nome']}}</p>
-                </div>
-                <div class="col-md-4">
-                    <p class="h5 float-right mt-1">
-                        Quantidade: {{count($visitantes['visitantes'][0]['aluno'])}}
-                    </p>
-                </div>
+        <div class="bg-secondary p-2 text-white border-all-50 row nome-instituicao">
+
+            <div class="col-md-5">
+                <input type="hidden" value="{{$visitantes['visitantes'][0]['instituicao']['ID']}}">
+                <label class="h5">{{$visitantes['visitantes'][0]['instituicao']['nome']}}</label>
             </div>
+            <div class="col-md-5">
+                <input type="hidden" value="{{$visitantes['visitantes'][0]['professor']['ID']}}">
+                <label class="h5">{{$visitantes['visitantes'][0]['professor']['nome']}}</label>
+            </div>
+            <div class="col-md-2">
+                <label class="h5">Quantidade: {{count($visitantes['visitantes'][0]['aluno'])}}</label>
+            </div>
+
         </div>
         {{-- FOREACH --}}
         <div class="pl-3 pr-3 pt-1">
@@ -110,7 +115,7 @@
                 {{-- {{dd($visitantes)}} --}}
                 @for($j = 1; $j < count($visitantes['visitantes']); $j++)
                     {{-- {{dd($visitantes['visitantes'][1]['usuario'])}} --}} <input type="hidden" value="{{$i = 0}}">
-                    <div class="row text-center">
+                    <div class="row text-center mt-2">
                         <div class="col-md-1">
                             <p class="h5 mt-1">
                                 {{$i++}}
