@@ -28,10 +28,11 @@
 </div>
 
 
-<div class="matricula"> 
+<div class="matricula">
     <div class="form-row">
         <div class="col-6  float-right">
-            <div class="form-group row"> <!-- DIV seleção de estagiário -->
+            <div class="form-group row">
+                <!-- DIV seleção de estagiário -->
                 <label class="col-sm-12 col-form-label pt-3" nomeEstagiario>Nome do Estagiário</label>
                 <div class="col-9">
                     <input id="nomeInst" class="form-control" type="text" name="estagiario"
@@ -40,12 +41,15 @@
 
                     </datalist>
                 </div>
+                
                 <button type="button" class="btn btn-primary float-left " buscar> Buscar </button>
+                
             </div>
 
         </div>
 
-        <div class="col-4"> <!-- DIV de download da Proposta de horário -->
+        <div class="col-4">
+            <!-- DIV de download da Proposta de horário -->
             <div class="input-group-append">
                 <label class="pt-3">Comprovante de Matrícula</label>
                 <button type="button" class="btn btn-secondary" download>Download</button>
@@ -53,7 +57,8 @@
         </div>
     </div>
 
-    <div class="row mb-1"> <!-- DIV de Observações -->
+    <div class="row mb-1">
+        <!-- DIV de Observações -->
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -64,7 +69,8 @@
         </div>
     </div>
 
-    <div class="calendario"> <!-- DIV calendario de horário -->
+    <div class="calendario">
+        <!-- DIV calendario de horário -->
         <h5>Cronograma Semanal do Semestre</h5>
         <table class="table table-hover">
             <thead>
@@ -122,7 +128,8 @@
         </table>
     </div>
 
-    <div class="form-group"> <!-- Grupo de botões -->
+    <div class="form-group">
+        <!-- Grupo de botões -->
         <button type="submit" class="btn btn-success col-2" value="enviar" data-toggle="modal"
             data-target="#modalExemplo" enviar>
             Enviar
@@ -142,22 +149,35 @@
     $(document).ready(function() {
         let horarios = new Map()
         let horario_original = new Map()
-        let estagiarios = @json($estagiarios); 
-
+        let estagiarios = @json($estagiarios);
+        let estID = null;
         carregaNome(estagiarios); //lista o nome dos estágiarios no campo de busca.
-        
+
         //botões presentes na view 
         let botoesHorarios = $('tbody td').find('button')
         let botaoCancelar = $('button[cancelar]')
         let botoesSubmit = $('button[type=submit]')
         let botaoAlterar = $('button[alterar]')
+        let download = $('[download]')
 
 
         botoesHorarios.prop("disabled", true)
         botoesSubmit.prop("disabled", true);
+        download.prop("disabled",true);
 
 
         let inputNome = $("input[name=estagiario]")
+
+        $('[download]').click(e => {
+            let link =
+                "{{ route('downloadGuia', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
+            link = link.replace(":id", estID); // isso vai corrigir a string gerada com o id correto.
+            var a = document.createElement('a');
+            a.href = link;
+            a.download = 'myfile.pdf';
+            document.body.append(a);
+            a.click();
+        })
 
         jQuery('[buscar]').click(e => {
             e.preventDefault() //evita ação de botão
@@ -168,12 +188,14 @@
             botoesHorarios.removeClass('btn btn-success').addClass('btn btn-outline')
             botoesSubmit.prop("disabled", false);
             botaoCancelar.prop("disabled", true);
+            download.prop("disabled",false);
             estID = getID(estagiarios, inputNome.val()) //retorna id de estagiario selecionado
 
             if (estID) {
-                let url ="{{ route('retornaProposta', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
+                let url =
+                    "{{ route('retornaProposta', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
                 url = url.replace(":id", estID); // isso vai corrigir a string gerada com o id correto.
-                
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -193,21 +215,22 @@
                         }
                         horarios.set(`${obj.turno}+${obj.dia}`, obj)
                         horario_original.set(`${obj.turno}+${obj.dia}`, obj)
-                        pinta(dias, turnos) 
+                        pinta(dias, turnos)
                     }
                     //adiciona observações feitas a estágiario.
-                    for(let estagiarioObservacao of estagiarios["observacao"]){
+                    for (let estagiarioObservacao of estagiarios["observacao"]) {
                         $('.card-text').html(estagiarioObservacao.observacao);
                     }
-                    
+
                 })
             } else {
+                download.prop("disabled",true);
                 botoesHorarios.prop("disabled", true);
                 botoesSubmit.prop("disabled", true);
             }
         })
 
-        
+
         jQuery('[alterar]').click(e => {
             e.preventDefault() //evita ação de botão
             botoesHorarios.prop("disabled", false);
@@ -230,7 +253,7 @@
                 turno: turnos,
                 dia: dias
             })
-            
+
             if (buttonTrash.hasClass("btn-success")) {
                 horarios.set(`${obj.turno}+${obj.dia}`, obj)
             } else {

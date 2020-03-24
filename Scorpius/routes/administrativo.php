@@ -31,6 +31,7 @@ Route::group(
         Route::get('/confirmacaoHorario/{id}', 'HorarioController@getProposta')->name("retornaProposta");
         Route::get('/confirmacaoHorario/erro','HorarioController@nenhumaProposta')->name("errorNenhumaProposta.show");
         Route::post('/confirmacaoHorario', 'HorarioController@enviaHorario')->name("enviaHorario");
+        Route::get('/confirmacaoHorario/downloadGuiaMatricula/{id}', 'HorarioController@download')->name("downloadGuia");
         //Rota para retornar a tela da Proposta de Horário do Estagiário.
     }
 );

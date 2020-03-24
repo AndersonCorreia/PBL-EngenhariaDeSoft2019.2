@@ -116,6 +116,14 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         
     }
 
+    function downloadGuiaMatricula($id){
+        $sql="SELECT guia_matricula FROM estagiario e WHERE e.usuario_ID = $id";
+        $stmt = $this->dataBase->query($sql);
+        $ArrayResult = $stmt->fetch_all(MYSQLI_ASSOC);
+        return $ArrayResult[0]['guia_matricula'];
+       
+    }
+
 
 
 }

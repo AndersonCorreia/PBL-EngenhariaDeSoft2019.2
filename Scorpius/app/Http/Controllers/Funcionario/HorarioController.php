@@ -66,4 +66,10 @@ class HorarioController extends Controller{
         } 
         
     }
+
+    public function download($id){
+        $DAO = new Proposta_horarioDAO();
+        $guia = $DAO->downloadGuiaMatricula($id);
+        return $guia;
+    }
 }
