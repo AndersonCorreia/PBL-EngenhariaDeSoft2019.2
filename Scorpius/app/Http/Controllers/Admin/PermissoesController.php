@@ -65,7 +65,7 @@ class PermissoesController extends Controller
     public function preencherMatrizPermissaoTipo($p_t, &$msg ){
 
         $permissaoTipo = [];
-        $msg = "Alteração das permissões do sistema. Estado atual das permissões:";
+        $msg = "--- Alteração das permissões do sistema. --- Estado atual das permissões:";
 
         foreach ($p_t as $value) {
             $pt = \explode("|", $value);
