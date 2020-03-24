@@ -7,6 +7,8 @@ use \App\DB\interfaces\DataAccessObject;
 
 class VisitaDAO extends DataAccessObject{ 
     
+    private static $abrevDia = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sabado"];
+
     public function __Construct(){
         parent::__Construct("visita");
     }
@@ -18,7 +20,7 @@ class VisitaDAO extends DataAccessObject{
         $status = $visita->getStatus();
         
         $sql = "INSERT IGNORE INTO visita (data_visita, turno, status) 
-            VALUE ( '$data', '$turno', '$status')";
+            VALUES ( '$data', '$turno', '$status')";
 
         $resultado = $this->dataBase->query($sql);
         $visita->setID($this);
@@ -135,5 +137,54 @@ class VisitaDAO extends DataAccessObject{
         $result = $this->dataBase->query($sql);
         
         return $result->fetch_assoc()['qtd'];
+    }
+    /**
+     * Apaga todas as visitas a partir da data inicial que não tenham agendamento,
+     * e insere novas visitas de acordo a tabela de horarios dos estagiarios.
+     *
+     * @param string $dataInicial data inicial do novo periodo de visitações
+     * @param string $dataFinal ultimo dia do novo periodo de visitações
+     * @return void
+     */
+    public function INSERT_periodoVisitas(string $dataInicial, string $dataFinal){
+
+        $this->dataBase->autocommit(false);
+
+        $this->dataBase->query("DELETE IGNORE FROM visita WHERE data_visita >= '$dataInicial'");
+        $diasTurnos = $this->getDiasTurnosPermitidos();
+        $turnos = ['manhã', 'tarde', 'noite'];
+        $dataI = DateTime($dataInicial);
+        $dataF = DateTime($dataFinal);
+        $dataRange = new DatePeriod($dataI, new DateInterval('P1D'), $dataF);
+        
+        foreach($dataRange as $data){
+            $day = self::$abrevDia[$data->format("w")];
+            
+            foreach($turnos as $turno){
+                if( isset($diasTurnos[$day][$turno])){
+                    $this->dataBase->query("INSERT IGNORE INTO visita (data_visita, turno) 
+                        VALUES ( '$data', '$turno')");
+                }
+            }
+        }
+
+        $this->dataBase->commit();
+    }
+    /**
+     * Retornar um array com os dias e turnos abertos a visitação. 
+     * De acordo a tabela de horarios dos estagiarios.
+     *
+     * @return array com os dias nas linhas e turnos nas colunas
+     */
+    private function getDiasTurnosPermitidos(): array{
+
+        $diasTurno = $this->dataBase->query("SELECT * FROM horario_estagiario")->fetch_all(MYSQLI_ASSOC);
+        $diasTurnoPermitidos = [];
+
+        foreach($diasTurno as $dt){
+            $diasTurnoPermitidos[$dt['dia_semana']][$dt['turno']]=true;
+        }
+
+        return $diasTurnoPermitidos;
     }
 }
