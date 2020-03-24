@@ -30,6 +30,8 @@ abstract class DataAccessObject {
             $ini["DB_PASSWORD"],
             $ini["DB_DATABASE"],
             $ini["DB_PORT"]         );
+
+        date_default_timezone_set('America/Bahia');
     }
     /**
      * Realiza uma query SELECT retornando todos os dados de uma tabela em especifca

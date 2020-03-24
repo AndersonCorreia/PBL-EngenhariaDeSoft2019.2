@@ -468,9 +468,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `scorpius`.`Acoes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scorpius`.`Acoes` (
+CREATE TABLE IF NOT EXISTS `scorpius`.`acoes` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `atividade` VARCHAR(200) NOT NULL,
+  `atividade` VARCHAR(2000) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `atividade_UNIQUE` (`atividade` ASC))
 ENGINE = InnoDB;
@@ -500,7 +500,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`log` (
   `datahora` DATETIME NOT NULL,
   `acoes_ID` INT UNSIGNED NOT NULL,
   `usuario_made_ID` INT UNSIGNED NOT NULL,
-  `usuario_affected_ID` INT UNSIGNED NULL,
+  `usuario_affected_ID` INT UNSIGNED,
   PRIMARY KEY (`ID`),
   INDEX `fk_log_Acoes1_idx` (`acoes_ID` ASC),
   INDEX `fk_log_usuario1_idx` (`usuario_made_ID` ASC),

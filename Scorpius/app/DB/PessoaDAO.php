@@ -256,7 +256,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
      * @param array $permissoesTipo permissoes atuais que seram inseridas no sistema
      * @return void
      */
-    public function setPermissoes( array $permissoesTipo){
+    public function setPermissoes( array $permissoesTipo, string $msg){
 
         $this->dataBase->autocommit(false);
 
@@ -268,7 +268,21 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
             $stmt->bind_param("ii", $pt['permissao_ID'], $pt['tipo_ID']);
             $stmt->execute();
         }
+        $this->INSERT_log($msg);
 
         $this->dataBase->commit();
+    }
+
+    private function INSERT_log(string $msg, int $userAfetado=null){
+
+        $this->dataBase->query("INSERT IGNORE INTO acoes (atividade) VALUES ('$msg')");
+
+        $campos = "(datahora, acoes_ID, usuario_made_ID,usuario_affected_ID)";
+        $now = now();
+        $user = session("ID");
+        $userAfetado = $userAfetado ?? $user;//por causa da chave estrangeira não consigo inserir valor nulo
+        $select = " SELECT '$now', ID, '$user', '$userAfetado' FROM acoes WHERE atividade = '$msg'";
+        $this->dataBase->query("INSERT INTO log $campos $select");
+
     }
 }

@@ -47,8 +47,8 @@ class PermissoesController extends Controller
     public function alterarPermissoes(Request $request){
 
         $DAO = new PessoaDAO();
-        $permissaoTipo = $this->preencherMatrizPermissaoTipo($request->get('p_t',[]));
-        $DAO->setPermissoes($permissaoTipo);
+        $permissaoTipo = $this->preencherMatrizPermissaoTipo($request->get('p_t',[]), $msg);
+        $DAO->setPermissoes($permissaoTipo, $msg);
 
         return redirect()->back();
     }
@@ -57,19 +57,21 @@ class PermissoesController extends Controller
 
         $DAO = new PessoaDAO();
         $permissaoTipo = $this->getDefaultPermissaoTipo();
-        $DAO->setPermissoes($permissaoTipo);
+        $DAO->setPermissoes($permissaoTipo, "as permissões do sistema voltaram ao padrão");
 
         return redirect()->back();
     }
 
-    public function preencherMatrizPermissaoTipo($p_t ){
+    public function preencherMatrizPermissaoTipo($p_t, &$msg ){
 
         $permissaoTipo = [];
+        $msg = "Alteração das permissões do sistema. Estado atual das permissões:";
 
         foreach ($p_t as $value) {
             $pt = \explode("|", $value);
-
+            $msg .= " $pt[3] tem acesso à $pt[2];";
             $permissaoTipo[] = ['permissao_ID' => $pt[0], 'tipo_ID' => $pt[1]];
+
         }
         
         return $permissaoTipo;
