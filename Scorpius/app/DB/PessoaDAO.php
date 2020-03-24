@@ -192,7 +192,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $ID_usuario = intval(session('ID'));
         $nome_modificador = $this->dataBase->query("SELECT nome FROM usuario WHERE ID = $ID_usuario")->fetch_assoc()['nome'];  
         $nome_alterado = $this->dataBase->query("SELECT nome FROM usuario WHERE ID = $usuario_alterado_ID")->fetch_assoc()['nome'];
-        $msg = $nome_modificador.' alterou o tipo de usuario de '.$nome_alterado.' para '.$tipo_nome;
+        $msg = /*$nome_modificador.*/'Alterou o tipo de usuario de "' .$nome_alterado. '" para '.$tipo_nome;
         $result = $this->dataBase->query("SELECT ID FROM acoes WHERE atividade = '$msg'");
         if($result->num_rows < 1){
             $this->dataBase->query("INSERT INTO acoes (atividade) VALUES ('$msg')");
@@ -211,6 +211,21 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
             $usuario_alterado_ID
         )");
         return $resultTipo;
+    }
+    public function logSistema(){
+        $sql = "SELECT log.*, usuario.nome FROM log, usuario WHERE usuario.ID = usuario_made_ID";
+        $logs = $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
+        $sql = "SELECT * FROM acoes";
+        $acoes = $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
+        $logSistema = [
+            'log' => $logs,
+            'acoes' => $acoes
+        ];
+        return $logSistema;
+    }
+    public function getNomeUsuario($ID){
+        $sql = "SELECT nome FROM usuario WHERE ID = $ID";
+        return $this->dataBase->query($sql)->fetch_assoc()['nome'];
     }
     /**
      * Retorna todas as permissões do sistema;

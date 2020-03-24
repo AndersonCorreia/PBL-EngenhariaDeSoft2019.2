@@ -5,6 +5,7 @@
 @section('conteudo')
 
 <div class="scorpius-border pl-5 pr-5 pb-5 pt-3">
+  <p class="h2">Usuários: </p>
   @if (empty($usuarios))
   <div class="alert alert-secondary" role="alert">Não há usuários administrativos.</div>
   @else

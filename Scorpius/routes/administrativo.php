@@ -101,6 +101,7 @@ Route::group(
     function(){
         Route::get('/gerenciar-usuarios', 'GerenciarUsuariosController@index')->name('gerenciarUsuarios.show');
         Route::post('/gerenciar-usuarios/alterar-tipo', 'GerenciarUsuariosController@mudarUsuario')->name('gerenciarUsuarios.mudarUsuario');
+        Route::get('/log', 'LogController@index')->name('logSistema.show');
     }
 );
 
