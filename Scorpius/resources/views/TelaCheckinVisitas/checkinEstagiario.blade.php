@@ -51,7 +51,7 @@
         <div class="pl-3 pr-3 pt-1">
             <input type="hidden" value="{{$i = 0}}">
             @foreach ($visitantes['visitantes'][0]['aluno'] as $aluno)
-            <div class="scorpius-border-shadow border-all-50 p-2 mt-1">
+            <div class="scorpius-border-shadow-sm border-all-50 p-2 mt-1">
                 <div class="row text-center">
                     <div class="col-md-1">
                         <p class="h5 mt-1">
@@ -76,10 +76,10 @@
                             <input type="hidden" value="{{$aluno[0]}}">
                             @if ($aluno[2] == 'compareceu')
                             <button type="submit" class="btn-outline-success btn" data-toggle="button"
-                            aria-pressed="true" id="aluno{{$i}}">Presente</button>
+                                aria-pressed="true" id="aluno{{$i}}">Presente</button>
                             @else
                             <button type="submit" class="btn-outline-secondary btn" data-toggle="button"
-                            aria-pressed="false" id="aluno{{$i}}">Presente</button>
+                                aria-pressed="false" id="aluno{{$i}}">Presente</button>
                             @endif
                             {{-- <button class="btn btn-outline-secondary" id="aluno{{$i}}" type="submit"
                             value="aluno{{$i}}" aria-pressed="false">
@@ -138,7 +138,7 @@
                                 </button>
                                 @else
                                 <button type="submit" class="btn-outline-secondary btn" data-toggle="button"
-                                aria-pressed="false" id="usuario{{$i}}">
+                                    aria-pressed="false" id="usuario{{$i}}">
                                     Presente
                                 </button>
                                 @endif

@@ -19,6 +19,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
+    function erroChekin(msg){
+        Swal.fire(
+            'ERRO',
+            msg,
+            'erro'
+        );
+    }
     $(function() {
     $.ajaxSetup({
             headers: {
@@ -39,13 +46,14 @@
             dataType: 'json',
             success: function(data) {
                 console.log(data);
+                $(btn).removeClass('btn-outline-success');
+                $(btn).addClass('btn-outline-secondary');
             },
             error: function(data) {
                 console.log(data);
+                erroChekin('Não foi possível atualizar este usuário...');
             }
         });
-            $(btn).removeClass('btn-outline-success');
-            $(btn).addClass('btn-outline-secondary');
         }else{
             $.ajax({
                 url: "{{ route('checkinAluno') }}",
@@ -57,13 +65,14 @@
                 dataType: 'json',
                 success: function(data) {
                     console.log(data);
+                    $(btn).removeClass('btn-outline-secondary');
+                    $(btn).addClass('btn-outline-success');
                 },
                 error: function(data) {
                     console.log(data);
+                    erroChekin('Não foi possível atualizar este usuário...');
                 }
             });
-            $(btn).removeClass('btn-outline-secondary');
-            $(btn).addClass('btn-outline-success');
         }
         
     });
@@ -86,6 +95,7 @@
             },
             error: function(data) {
                 console.log(data);
+                erroChekin('Não foi possível atualizar este usuário...');
             }
         });
         }else{
@@ -104,6 +114,7 @@
                 },
                 error: function(data) {
                     console.log(data);
+                    erroChekin('Não foi possível atualizar este usuário...');
                 }
             });
         }
@@ -118,7 +129,7 @@
             showCancelButton: true,
             confirmButtonColor: '#FFC107',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Sim, conlcuir visita!'
+            confirmButtonText: 'Sim, concluir visita!'
         }).then((result) => {
             if (result.value) {
                 $.ajax({
