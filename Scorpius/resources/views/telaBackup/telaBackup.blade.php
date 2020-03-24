@@ -57,7 +57,7 @@
                 <div class="col-6 p-3">
                     <div class="form-group pl-5">
                         <label for="data" class="col-form-label">Data</label>
-                        <input type="date" class="form-control" name="data" id="data"/>
+                        <input type="date" class="form-control" name="data" id="data">
                     </div>
                     <div class="form-group pl-5">
                         <label for="dia">Dia da Semana</label>
@@ -89,7 +89,8 @@
                 <div class="col-10 p-3">
                     <div class="form-group p-4">
                         <label for="diretorio_backup" class="col-form-label">Escolha um arquivo para armazenar o bakcup:</label>
-                        <input type="file" name="diretorio_bakcup" class="form-control" id="diretorio_backup" style="width: " />
+                        <input type="file" onchange="getFolder(e);" webkitdirectory mozdirectory msdirectory odirectory directory multiple 
+                                name="diretorio_backup" class="form-control" id="diretorio_backup" style="width: ">
                     </div>
                 </div>
             </div>
@@ -97,7 +98,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <button type="button" class="btn btn-success col-sm-8" value="backup" data-toggle="modal"
-                                data-target="#modalExemplo" backup>Backup<i class="fa fa-send"></i>
+                                data-target="#modalExemplo" backup>Fazer Backup Agora <i class="fa fa-send"></i>
                         </button>
                     </div>
                 </div>    
@@ -178,6 +179,13 @@ $(document).ready(function() {
 
 
 })
+
+function getFolder(e) {
+    let arquivos = e.target.files;
+    let caminho = arquivos[0].webkitRelativePath;
+    let pasta = caminho.split("/");
+  }
+
 </script>
 
 @endsection

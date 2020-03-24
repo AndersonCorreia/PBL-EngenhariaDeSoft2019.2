@@ -62,7 +62,7 @@ class Backup
               $this->clearOldFiles();
  
             }else{
-                throw new \Exception('Diretorio incorreto');
+                throw new \Exception('Diretorio Inválido.');
             } 
     }
 
