@@ -94,4 +94,14 @@ Route::group(
     }
 );
 
+Route::group(
+    ['midlleware'=>[],
+    'prefix'=>'adm',
+    'namespace'=>'Admin'],
+    function(){
+        Route::get('/gerenciar-usuarios', 'GerenciarUsuariosController@index')->name('gerenciarUsuarios.show');
+        Route::post('/gerenciar-usuarios/alterar-tipo', 'GerenciarUsuariosController@mudarUsuario')->name('gerenciarUsuarios.mudarUsuario');
+    }
+);
+
 ?>

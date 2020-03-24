@@ -167,8 +167,8 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         return false;
     }
     public function listarUsuario($id){
-        $result = $this->dataBase->query("SELECT nome,telefone,tipo_usuario_ID FROM usuario WHERE ID <> $id");
-        $usuarios = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $this->dataBase->query("SELECT * FROM usuario WHERE ID <> $id AND tipo_usuario_ID <> 6 AND tipo_usuario_ID <> 7");
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getTipos(){
@@ -177,6 +177,40 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $result = $this->dataBase->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    public function getNomeTipo($tipo_ID)
+    {
+        $sql = "SELECT tipo FROM tipo_usuario WHERE ID = $tipo_ID";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_assoc()['tipo'];
+    }
+    public function setTipo($usuario_alterado_ID, $tipo_ID, $tipo_nome)
+    {
+        $sql = "UPDATE usuario SET tipo_usuario_ID = $tipo_ID WHERE ID = $usuario_alterado_ID";
+        $resultTipo = $this->dataBase->query($sql);
+        $ID_usuario = intval(session('ID'));
+        $nome_modificador = $this->dataBase->query("SELECT nome FROM usuario WHERE ID = $ID_usuario")->fetch_assoc()['nome'];  
+        $nome_alterado = $this->dataBase->query("SELECT nome FROM usuario WHERE ID = $usuario_alterado_ID")->fetch_assoc()['nome'];
+        $msg = $nome_modificador.' alterou o tipo de usuario de '.$nome_alterado.' para '.$tipo_nome;
+        $result = $this->dataBase->query("SELECT ID FROM acoes WHERE atividade = '$msg'");
+        if($result->num_rows < 1){
+            $this->dataBase->query("INSERT INTO acoes (atividade) VALUES ('$msg')");
+            $acoes_ID = intval($this->getLastID());
+        }else{
+            $acoes_ID = $result->fetch_assoc()['ID'];
+        }
+        date_default_timezone_set('America/Bahia');
+        $data = date('Y-m-d');
+        $hora = date('H:i:s');
+        $datahora = $data.' '. $hora;
+        $this->dataBase->query("INSERT INTO log (datahora, acoes_ID, usuario_made_ID, usuario_affected_ID) VALUES (
+            '$datahora',
+            $acoes_ID,
+            $ID_usuario,
+            $usuario_alterado_ID
+        )");
+        return $resultTipo;
     }
     /**
      * Retorna todas as permissões do sistema;
