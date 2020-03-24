@@ -52,33 +52,37 @@
           </div>
         </div>
 
-      <div class="form-group">
-        <label for="senhaAtual">Senha <b>*</b></label>
-        <div class="form-row">
-            <input onchange="verificaCamposSenha()" minlength="6" maxlength="20" class="form-control col-7" name="senha" id="senha" type="password">
-            <button type="button" style="margin-left:5px" class="btn btn-warning" id="btnRevelaS" name="btnRevelaS" aria-hidden="false"><i class="fas fa-eye-slash" name ="iconS" id="iconS"></i> </button>
-        </div>
-          <label for="senhaAtual">Confirmação de Senha <b>*</b></label>
+      <div class="form-row">
+        <div class="form-group col-8">
+          <label for="senhaAtual">Senha <b>*</b></label>
           <div class="form-row">
-              <input onchange="verificaCamposSenha()" minlength="6" maxlength="20" class="form-control col-7" name="rptSenha" id="rptSenha" type="password">
-              <button type="button" style="margin-left:5px" class="btn btn-warning" id="btnRevelaS" name="btnRevelaS" aria-hidden="false"><i class="fas fa-eye-slash" name ="iconS2" id="iconS2"></i> </button>
-          </div>   
-          <small id="feedback-senha" class="text-danger"><b>*</b> As senhas devem ser iguais!</small>  
+              <input onchange="verificaCamposSenha()" minlength="6" maxlength="20" class="form-control col-7" name="senha" id="senha" type="password">
+              <button type="button" style="margin-left:5px" class="btn btn-warning" id="btnRevelaS" name="btnRevelaS" aria-hidden="false"><i class="fas fa-eye-slash" name ="iconS" id="iconS"></i> </button>
+          </div>
+            <label for="senhaAtual">Confirmação de Senha <b>*</b></label>
+            <div class="form-row">
+                <input onchange="verificaCamposSenha()" minlength="6" maxlength="20" class="form-control col-7" name="rptSenha" id="rptSenha" type="password">
+                <button type="button" style="margin-left:5px" class="btn btn-warning" id="btnRevelaS" name="btnRevelaS" aria-hidden="false"><i class="fas fa-eye-slash" name ="iconS2" id="iconS2"></i> </button>
+            </div>   
+            <small id="feedback-senha" class="text-danger"><b>*</b> As senhas devem ser iguais!</small>  
+        </div>
       </div>
 
-      <div class=" col-md-4 form-group">
-        <label for="tipo_usuario">Tipo de Usuário</label>
-          <select name="tipo_usuario" id="tipo_usuario" class="custom-select form-control" required>
-            <option selected>Selecione um tipo:</option>
-            <option value="10">Administrador</option>
-            <option value="9">Funcionário</option>
-            <option value="8">Estagiário</option>
-          </select>
-      </div>
+      <div class="form-row">
+        <div class="col-md-4 form-group">
+          <label for="tipo_usuario">Tipo de Usuário</label>
+            <select name="tipo_usuario" id="tipo_usuario" class="custom-select form-control" required>
+              <option disabled selected>Selecione um tipo:</option>
+              <option value="10">Administrador</option>
+              <option value="9">Funcionário</option>
+              <option value="8">Estagiário</option>
+            </select>
+        </div>
+      </div>  
 
       <div class="form-group">
         <button type="reset" id="btnLimpar" class="btn btn-outline-secondary float-right">Limpar</button>
-        <button type="submit" id="btnCadastrar" class="btn btn-primary float-right" style="margin-right:3px">Cadastrar</button>
+        <button type="submit" id="btnCadastrar" class="btn btn-primary float-right" style="margin-right:5px">Cadastrar</button>
       </div>
     </form>
   </div>
