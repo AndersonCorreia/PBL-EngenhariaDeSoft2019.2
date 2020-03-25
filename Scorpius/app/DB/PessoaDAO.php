@@ -24,12 +24,11 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $telefone = $pessoa -> getTelefone();
 
 
-        $campos = "(nome, senha, tipo_usuario_ID, email, cpf, telefone)";
-        $select = "SELECT ?, ?, ?, ?, ?, ? FROM usuario";
-        $sql = "INSERT INTO usuario $campos $select";
+        $campos = "(nome, senha, tipo_usuario_ID, email, cpf, telefone, ativo)";
+        $values = "('$nome', '$senha', '$tipo_usuario', '$email', '$cpf', '$telefone', '1')";
+        $sql = "INSERT INTO usuario $campos VALUES $values";
 
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("ssssss", $nome, $senha, $tipo_usuario, $email, $cpf, $telefone);
         $resultado = $stmt->execute();
         $pessoa->setID($this);//adcionando ID no objeto que acabou de ser inserido
 
@@ -170,6 +169,8 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $result = $this->dataBase->query("SELECT * FROM usuario WHERE ID <> $id AND tipo_usuario_ID <> 6 AND tipo_usuario_ID <> 7");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+
 
     public function getTipos(){
 

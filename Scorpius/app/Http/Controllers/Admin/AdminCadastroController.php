@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Model\Users\Usuario;
-use App\Model\Users\Pessoa;
-use App\DB\PessoaDAO;
+use App\Model\Users\Empregado;
+use App\DB\EmpregadoDAO;
 
 class AdminCadastroController extends Controller
 {
@@ -39,7 +38,7 @@ class AdminCadastroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   $pessoaDAO = new PessoaDAO();
+    {   $empregadoDAO = new EmpregadoDAO();
         
         $nome = $_POST['nome'];                
         $sobrenome = $_POST['sobrenome'];
@@ -51,13 +50,10 @@ class AdminCadastroController extends Controller
         $email = $_POST['email'];
         $tipo_usuario = $_POST['tipo_usuario'];
 
-        echo($nome." "); echo($sobrenome." "); echo($fullname." ");  echo($senha." ");  echo($rptSenha." ");  echo($telefone." ");  echo($cpf." "); 
-        echo($email." ");  echo($tipo_usuario." ");
-
         //armazena na classe
-        $pessoa = new Pessoa($fullname, $senha, $tipo_usuario, $cpf, $telefone, $email);
+        $pessoa = new Empregado($fullname, $senha, $tipo_usuario, $cpf, $telefone, $email);
         //armazena no banco
-        $pessoaDAO->INSERT($pessoa);
+        $empregadoDAO->INSERT($pessoa);
         $_POST["ID"] = $pessoa->getID();
     }
 

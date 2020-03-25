@@ -8,7 +8,7 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
     protected $telefone;
     protected $email;
 	protected $senha;
-	protected $tipo;
+	protected $tipo_usuario;
 
 	public function __Construct($nome, $senha, $tipo_usuario, $cpf, $telefone, $email)
     {
@@ -85,7 +85,7 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	}
 
 	public function getTipo() {
-		return $this->tipo;
+		return $this->tipo_usuario;
 	}
 
 	public static function desativarByID(int $ID){
@@ -103,7 +103,7 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 	 * @throws Exception caso seja setado o tipo incorreto;
 	 * @return void
 	 */
-	public abstract function setTipo(string $tipo);
+	public abstract function setTipo(string $tipo_usuario);
 
 	protected function save(){
 		(new \app\DB\PessoaDAO)->UPDATE($this);
