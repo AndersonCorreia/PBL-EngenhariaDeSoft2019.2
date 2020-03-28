@@ -5,14 +5,40 @@
 @section('conteudo')
 
 
-<div class="form-group row col-12">
+<div class="form-group row col-12">    
     <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
-     <div class="col-11">
+     <div class="col-9">
         <input id="nomeInst" class="form-control" type="text" name="instituicao" placeholder="Insira o Nome ou Cidade da Instituição" list="instList" required autofocus>
         <datalist id="instList">            
         </datalist>
     </div>     
     <button type="button" class="btn btn-primary float-left" buscar> Buscar </button>
+    <button type="button" class="btn btn-danger float-left" data-toggle="modal"
+    data-target=".modal-relatorio-estatistico" relatorio> Relatório Estatístico </button>
+    <!-- modal do relatório estatístico -->
+    <div class="modal fade modal-relatorio-estatistico" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="modal-cadastrar-turmaTitle">Relatório Estatístico</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <!-- Somente exemplificando a estrutura -->
+                    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" style="overflow-y: auto;" bordaModal>
+                        
+                        <!-- Espaço da tabela -->
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Voltar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -61,6 +87,7 @@
     data-target=".modal-dados-completos" expand>Dados Completos</button>
     
     <!-- modal dos dados completos -->
+    
     <div class="modal fade modal-dados-completos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -72,7 +99,7 @@
                 </div>
                 <div class="modal-body">
                 <!-- Somente exemplificando a estrutura -->
-                    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" bordaModal>
+                    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" style="overflow-y: auto;" bordaModal>
                         <table class="table-borderless col-12">        
                             <thead>
                                 <tr class="table-secondary">
@@ -159,6 +186,7 @@
             </div>
         </div>
     </div>
+    </div>
 </div>
 
 </div>
@@ -182,6 +210,11 @@
         margin-right: 15px;
         width: 155px;
         height: 40px;
+    }
+
+    [relatorio]{
+        margin-left: 10px; 
+        margin-right: 10px;
     }
 
     h2{
