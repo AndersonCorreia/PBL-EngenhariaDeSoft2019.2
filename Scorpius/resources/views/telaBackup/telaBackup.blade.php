@@ -88,9 +88,8 @@
             <div class="row col-12 m-0 p-0 pl-5"><!--campo caminho do backup-->
                 <div class="col-10 p-3">
                     <div class="form-group p-4">
-                        <label for="diretorio_backup" class="col-form-label">Escolha um arquivo para armazenar o bakcup:</label>
-                        <input type="file" onchange="getFolder(e);" webkitdirectory mozdirectory msdirectory odirectory directory multiple 
-                                name="diretorio_backup" class="form-control" id="diretorio_backup" style="width: ">
+                        <label  for = "diretorio" > Diretório de backup </label >
+                        <input  type = "text"  class = "controle de formulário"  id = "diretorio"  placeholder =" " >
                     </div>
                 </div>
             </div>
