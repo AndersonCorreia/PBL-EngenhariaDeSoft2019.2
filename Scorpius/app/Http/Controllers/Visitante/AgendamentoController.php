@@ -109,7 +109,7 @@ class AgendamentoController extends Controller{
         }
 
         $array = $this->getVisitas("diurno", "now", "anterior", "visitante");
-        $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: (havera visita escolar)", "tipo" => "visitante"];
+        $visitante = ["leg.disponivel" => "Disponível", "leg.indisponivel" => "Disponível: Haverá visita escolar", "tipo" => "visitante"];
         $variaveis = [
             'paginaAtual' => "Agendar Visita",
             'visitas' => $array,

@@ -28,16 +28,6 @@
             <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('diurno')" disabled>
                 <i class="fas fa-angle-left"></i>
             </button>
-            @for($i=0; $i<4; $i++) {{-- mudar para percorrer os dias do calendario --}}
-                @forelse ($agendamentos_pendentes as $agendamento || $agendamentos_confirmados as $agendamento ||
-                    $agendamentos_cancelados_usuario as $agendamento || $agendamentos_cancelados_funcionario as $agendamento)
-                    @if ($i == 0)
-                        $data_inicio = $agendamento['data'];
-                    @elseif ($i == 3)
-                        $data_fim = $agendamento['data'];
-                    @endif
-                @endforelse
-            @endfor
             <span id="calendarDatas" class="text-dark font-weight-bold">
                 $data_inicio a $data_fim
             </span>
@@ -50,12 +40,6 @@
                 <thead>
                     <tr class="thead-dark">
                         <th scope="col">Dia</th>
-                        @for($i=0; $i<4; $i++) {{-- mudar para percorrer os dias do calendario --}}
-                            @forelse ($agendamentos_pendentes as $agendamento || $agendamentos_confirmados as $agendamento ||
-                            $agendamentos_cancelados_usuario as $agendamento || $agendamentos_cancelados_funcionario as $agendamento)
-                                <th scope="col">$agendamento['data']</th>
-                            @endforelse
-                        @endfor
                     </tr>
                 </thead>
                 <tbody>
