@@ -170,8 +170,6 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-
-
     public function getTipos(){
 
         $sql = "SELECT * FROM tipo_usuario WHERE tipo != 'visitante' AND tipo != 'institucional'";
@@ -290,5 +288,10 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $select = " SELECT '$now', ID, '$user', '$userAfetado' FROM acoes WHERE atividade = '$msg'";
         $this->dataBase->query("INSERT INTO log $campos $select");
 
+    }
+    public function getHorarioEstagiario($ID)
+    {
+        $sql = "SELECT * FROM horario_estagiario WHERE estagiario_usuario_ID = $ID";
+        return $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
     }
 }

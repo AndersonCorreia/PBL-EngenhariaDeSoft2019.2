@@ -1,7 +1,6 @@
 <?php
 
 //Rota dashboard estagiario
-Route::get('/estagiario/dashboard', 'Visitante.UserController@getDashboard')->name('dashboardEstagiario.show');
 
 //Rota Dashboard do Funcionário.
 Route::group(
@@ -69,6 +68,7 @@ Route::group(
     'prefix'=>'estagiario',
     'namespace'=>'Estagiario'],
     function(){
+        Route::get('/dashboard', 'GeralController@index')->name('dashboardEstagiario.show');
         Route::get('/demandaWeb', 'horarioEstagiarioController@index')->name("demandaWeb.show");
         Route::post('/demandaWeb/enviar-horario', 'horarioEstagiarioController@cadastrarHorario')->name("demandaWeb.post");
     }
