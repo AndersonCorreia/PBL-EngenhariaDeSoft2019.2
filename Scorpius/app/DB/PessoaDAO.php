@@ -166,7 +166,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         return false;
     }
     public function listarUsuario($id){
-        $result = $this->dataBase->query("SELECT * FROM usuario WHERE ID <> $id AND tipo_usuario_ID <> 6 AND tipo_usuario_ID <> 7");
+        $result = $this->dataBase->query("SELECT * FROM usuario WHERE ID <> $id AND tipo_usuario_ID <> 6 AND tipo_usuario_ID <> 7 AND ativo = 1");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -212,6 +212,11 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
             $usuario_alterado_ID
         )");
         return $resultTipo;
+    }
+    public function deletarUsuario($user_ID)
+    {
+        $sql = "UPDATE usuario SET ativo = 0 WHERE ID = $user_ID";
+        return $this->dataBase->query($sql);
     }
     public function logSistema(){
         $sql = "SELECT log.*, usuario.nome FROM log, usuario WHERE usuario.ID = usuario_made_ID";

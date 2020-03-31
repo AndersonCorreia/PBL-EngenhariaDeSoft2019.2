@@ -29,7 +29,13 @@ class GerenciarUsuariosController extends Controller
         $usuario = new PessoaDAO();
         $tipo_nome = $usuario->getNomeTipo($tipo_ID);
         $usuario->setTipo(intval($ID), $tipo_ID, $tipo_nome);
-        return redirect()->route('gerenciarUsuarios.show')->with('success', 'Usuário editado com sucessp!');
+        return redirect()->route('gerenciarUsuarios.show')->with('success', 'Usuário editado com sucesso!');
+    }
+    public function excluirUsuario(){
+        $ID = intval($_POST['usuario']);
+        $usuario = new PessoaDAO();
+        $usuario->deletarUsuario($ID);
+        return redirect()->route('gerenciarUsuarios.show')->with('success', 'Usuário excluído com sucesso!');
     }
     public function getTipos()
     {
