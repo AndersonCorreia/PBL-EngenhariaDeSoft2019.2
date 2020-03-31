@@ -40,15 +40,15 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">+55</div>
                     </div>
-                    <input required maxlength="14" minlength="14" type="text" name="telefone" id="telefone" class="form-control val" placeholder="(00) 0 0000-0000">
+                    <input required maxlength="14" minlength="14" type="text" name="telefone" id="telefone" 
+                           class="form-control val" placeholder="(00) 0 0000-0000">
                 </div>
             </div>
 
           <div class="col-md-4 form-group">
               <label for="cpf">CPF</label>
-              <input onkeydown="javascript: fMasc( this, mCPF );" minlength="14" maxlength="14" type="text" name="cpf" id="cpf"
+              <input minlength="14" maxlength="14" type="text" name="cpf" id="cpf"
                      class="form-control val" placeholder="000.000.000-00" required>
-              <small hidden id="feedback-cpf" class="text-danger">CPF inválido!</small>
           </div>
         </div>
 
@@ -68,7 +68,7 @@
         </div>
       </div>
 
-      <div class="form-row">
+      <div class="form-row" onmousemove="verificaTipoUsuario();">
         <div class="col-md-4 form-group">
           <label for="tipo_usuario">Tipo de Usuário</label>
             <select name="tipo_usuario" id="tipo_usuario" class="custom-select form-control" required>
@@ -77,6 +77,7 @@
               <option value="9">Funcionário</option>
               <option value="8">Estagiário</option>
             </select>
+            <small hidden id="feedback-tipo" class="text-danger">Escolha um tipo de usuário</small>
         </div>
       </div>  
 
@@ -134,6 +135,7 @@ jQuery(document).ready(function($) {
 });
 
 function verificaCamposPessoais(){
+    trava =0;
     if($('#cpf').val() != ""){
         if(ValidaCPF()){
             $('#cpf').removeClass('is-valid');
@@ -143,6 +145,12 @@ function verificaCamposPessoais(){
             $('#cpf').removeClass('is-invalid');
             $('#cpf').addClass('is-valid');
         }
+    }
+
+    if (trava == 0) {
+        $('#btnCadastrar').removeAttr("hidden");
+    } else {
+        $('#btnCadastrar').attr("hidden", '');
     }
 }
 function verificaCamposSenha(){
@@ -169,6 +177,20 @@ function verificaCamposSenha(){
     }
 }
 
+function verificaTipoUsuario(){
+    let cpf = $('#tipo_usuario').val();
+
+    if(cpf != 10 || cpf != 9 || cpf != 8){
+        $('#btnCadastrar').attr("hidden",'');
+        $('#feedback-tipo').removeAttr("hidden");
+    }
+    if(cpf == 10 || cpf == 9 || cpf ==8) {
+        $('#btnCadastrar').removeAttr("hidden");
+        $('#feedback-tipo').attr("hidden", '');
+    }
+}
+
+
 $(".val").on("input", function() {
     var regexp = /[^0-9-.]/g;
     if (this.value.match(regexp)) {
@@ -183,7 +205,7 @@ $(".nome-text").on("input", function() {
     }
 });
 
-function inputHandler(masks, max, event) {
+function inputHandler(masks, max, event) {      //MASCARA PARA O TELEFONE E CPF
     let c = event.target;
     let v = c.value.replace(/\D/g, '');
     let m = c.value.length > max ? 1 : 0;
@@ -192,12 +214,12 @@ function inputHandler(masks, max, event) {
     c.value = VMasker.toPattern(v, masks[m]);
 }
 
-let telMask = ['99 9 9999-9999'];
+let telMask = ['99 9 9999-9999'];       //MASCARA PARA O TELEFONE 
 let tel = document.querySelector('#telefone');
 VMasker(tel).maskPattern(telMask[0]);
 tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);
 
-let cpfMask = ['999.999.999-99'];
+let cpfMask = ['999.999.999-99'];       //MASCARA PARA O CPF
 let cpf = document.querySelector('#cpf');
 VMasker(cpf).maskPattern(cpfMask[0]);
 cpf.addEventListener('input', inputHandler.bind(undefined, cpfMask, 14), false); 

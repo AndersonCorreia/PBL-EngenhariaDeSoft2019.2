@@ -62,7 +62,7 @@
                     <div class="form-group pl-5">
                         <label for="dia">Dia da Semana</label>
                         <select class="custom-select mr-sm-2" id="dia">
-                            <option selected>Escolher...</option>
+                            <option disabled selected>Escolher...</option>
                             <option value="seg">Segunda</option>
                             <option value="ter">Terça</option>
                             <option value="quar">Quarta</option>
@@ -77,7 +77,7 @@
                     <div class="form-group pl-5">
                         <label for="horario">Horário</label>
                         <select class="custom-select mr-sm-2" id="horario">
-                            <option selected>Escolher...</option>
+                            <option disabled selected>Escolher...</option>
                             @foreach( $horario as $key=>$value)
                             <option value="{{$key+1}}"> {{$value}} </option>
                             @endforeach
@@ -88,8 +88,8 @@
             <div class="row col-12 m-0 p-0 pl-5"><!--campo caminho do backup-->
                 <div class="col-10 p-3">
                     <div class="form-group p-4">
-                        <label  for = "diretorio" > Diretório de backup </label >
-                        <input  type = "text"  class = "controle de formulário"  id = "diretorio"  placeholder =" " >
+                        <label for = "diretorio"> Diretório de Backup </label >
+                        <input type = "text" class = "controle de formulário" id = "diretorio" placeholder ="C:\Users\..." >
                     </div>
                 </div>
             </div>
@@ -178,13 +178,6 @@ $(document).ready(function() {
 
 
 })
-
-function getFolder(e) {
-    let arquivos = e.target.files;
-    let caminho = arquivos[0].webkitRelativePath;
-    let pasta = caminho.split("/");
-  }
-
 </script>
 
 @endsection
