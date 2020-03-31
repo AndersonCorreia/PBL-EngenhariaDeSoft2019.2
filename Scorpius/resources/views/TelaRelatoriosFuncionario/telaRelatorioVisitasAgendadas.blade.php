@@ -20,15 +20,14 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="modal-cadastrar-turmaTitle">Relatório Estatístico</h5>
+                    <h5 class="modal-title" id="modal-relatorio-estatistico">Relatório Estatístico</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                 <!-- Somente exemplificando a estrutura -->
-                    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" style="overflow-y: auto;" bordaModal>
-                        
+                    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" style="overflow-y: auto;" modalEstatistico>
                         <!-- Espaço da tabela -->
                         
                     </div>
@@ -202,6 +201,12 @@
     [bordaModal]{
         width: 750px;
         height: 620px;
+    }
+
+    [modalEstatistico]{
+        width: 750px;
+        height: 300px;
+        
     }
 
     [expand]{
