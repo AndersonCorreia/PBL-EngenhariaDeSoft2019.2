@@ -134,8 +134,10 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
     }
     public function INSERT_horario($id_estagiario, $demandaWeb)
     {
+        $operacao = "criada";
         if($this->hasDemanda($id_estagiario)){
             $this->dataBase->query("DELETE FROM horario_estagiario WHERE estagiario_usuario_ID = $id_estagiario");
+            $operacao = "atualizada";
         }
         $guia = $demandaWeb['guia'];
         $observacao = $demandaWeb['observacao'];
@@ -152,7 +154,11 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
                 $this->dataBase->query($sql);   
             }
         }
-        return $demanda;
+        $return = [
+            'resultado' => $demanda,
+            'operacao' => $operacao
+        ];
+        return $return;
     }
     public function hasDemanda($id)
     {
