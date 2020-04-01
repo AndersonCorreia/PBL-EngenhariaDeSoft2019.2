@@ -65,9 +65,11 @@ class TurmaController extends Controller
         $professor_ID = session('ID');
         $turma = new Turma();
         $aluno_ID = intval($_POST['aluno_ID']);
-
+        if(intval($_POST['quantidade_alunos']) < 2){
+            return redirect()->route('turma.index')->with('erro', 'A quantidade mínima de alunos numa turma é de 1.');
+        }
         $turma->excluirAluno($aluno_ID);
-        return redirect()->route('turma.index')->with('success', 'Aluno excluido com sucesso!');
+        return redirect()->route('turma.index')->with('success', 'Aluno excluído com sucesso!');
     }
     public function adicionarAluno()
     {
@@ -85,6 +87,7 @@ class TurmaController extends Controller
     }
     public function cadastrarTurma()
     {
+        // dd($_POST, isset($_POST['nomeAluno2']));
         $professor_ID = session('ID');
         $nomeTurma = $_POST['nomeTurma'];
         $ano = $_POST['anoEscolar'];
@@ -98,13 +101,15 @@ class TurmaController extends Controller
         }
 
         $alunos = array();
-        for ($i = 1; $i <= $_POST['quantidade_alunos']; $i++) {
-            $nome = $_POST['nomeAluno' . $i];
-            $idade = $_POST['idadeAluno' . $i];
-            if ($nome == "" || $idade == "") {
-                return redirect()->back()->with('erro', "Campos dos alunos incompletos, por favor preencha todos os campos!");
-            }
-            $alunos[] = new Aluno($nome, $idade);    
+        for ($i = 1; $i <= 50; $i++) {
+            if(isset($_POST['nomeAluno' . $i]) && isset($_POST['idadeAluno' . $i])){
+                $nome = $_POST['nomeAluno' . $i];
+                $idade = $_POST['idadeAluno' . $i];
+                if ($nome == "" || $idade == "") {
+                    return redirect()->back()->with('erro', "Campos dos alunos incompletos, por favor preencha todos os campos!");
+                }
+                $alunos[] = new Aluno($nome, $idade);
+            }    
         }
         
         

@@ -38,7 +38,6 @@
                     </div>
                 </li>
                 @foreach ($horarios as $horario)
-                {{-- {{dd($horarios)}} --}}
                 <li class="list-group-item btn-block text-uppercase border-all-100">
                     <div class="row text-center">
                         <div class="col-md-6">

@@ -118,10 +118,10 @@
                                                             id="quantidade-alunos-turma">Quantidade: 1</span>
                                                     </div>
                                                 </div>
-                                                <small id="helper" class="form-text text-muted">ATENÇÃO
+                                                {{-- <small id="helper" class="form-text text-muted">ATENÇÃO
                                                     <li>São no máx. 50 alunos e no min. 5.</li>
                                                     <li>Certifique-se de que preencheu todos os campos corretamente</li>
-                                                </small>
+                                                </small> --}}
 
                                             </div>
                                             <ul class="list-group" id="lista-inputs-alunos">
@@ -201,6 +201,20 @@
                 @if($turmas['turmas']->num_rows == NULL)
                 <div class="alert alert-secondary" role="alert">Não há turmas cadastradas.</div>
                 @endif
+                <div class="row">
+                    <div class="col-sm-10 div-btn-turma">
+                    
+                        <button disabled class="btn btn-white btn-block" style="padding-top: 8px; padding-bottom: 8px;padding-left: 16px; padding-right: 16px;">
+                            <div class="row text-center">
+                                <div class="col-md-4">NOME</div>
+                                <div class="col-md-3">ANO ESCOLAR</div>
+                                <div class="col-md-3">ENSINO</div>
+                                <div class="col-md-2">ALUNOS</div>
+                        </div>
+                        </button>
+                    </div>
+                    
+                </div>
                 @foreach($turmas['turmas'] as $turma)
 
                 {{--  Botões Editar/Excluir turma --}}
@@ -209,10 +223,23 @@
                     {{-- Botão da turma --}}
                     <div class="col-sm-10 div-btn-turma">
                         <input type="hidden" name="professor_ID" value="{{$professor_ID}}">
-                        <button id="btn-turma" type="button" class="btn btn-secondary btn-turma btn-lg btn-block"
+                        <input type="hidden" value="{{$quantidade_alunos_1 = 0}}">
+                        @foreach ($turmas['alunos'] as $aluno)
+                        @if($aluno['turma_ID'] == $turma['ID'])
+                        <input type="hidden" value="{{$quantidade_alunos_1++}}">
+                        @endif
+                        @endforeach
+                        <button id="btn-turma" type="button" class="btn btn-outline-secondary btn-turma btn-lg btn-block"
                             data-toggle="modal" data-target="#turma{{$turma['ID']}}">
-                            {{$turma['nome']}}
-
+                            <div class="row text-center">
+                                <div class="col-md-4">{{$turma['nome']}}</div>
+                                <div class="col-md-3">{{$turma['ano_escolar']}}</div>
+                                <div class="col-md-3">{{$turma['ensino']}}</div>
+                                <div class="col-md-2">
+                                    <span class="badge badge-secondary badge-pill">{{$quantidade_alunos_1}}</span>
+                                </div>
+                            </div>
+                            
                         </button>
                     </div>
 
@@ -357,7 +384,7 @@
                                             <input type="hidden" name="turma_ID" value="{{$turma['ID']}}">
                                             <div class="form-row align-items-center">
                                                 {{-- Nome do aluno --}}
-                                                <div class="col-auto">
+                                                <div class="col-md-5">
                                                     <div>
                                                         <input placeholder="Nome do aluno" type="text"
                                                             class="form-control" id="adcNomeAluno{{$turma['ID']}}"
@@ -365,14 +392,14 @@
                                                     </div>
                                                 </div>
                                                 {{-- Idade do aluno --}}
-                                                <div class="col-auto">
+                                                <div class="col-md-5">
                                                     <div>
                                                         <input placeholder="Idade" type="number" class="form-control"
                                                             id="adcIdadeAluno{{$turma['ID']}}" name="idadeAluno" required>
                                                     </div>
                                                 </div>
                                                 {{-- Submit do formulario --}}
-                                                <div class="col-auto">
+                                                <div class="col-md-2 text-center">
                                                     <button type="submit" class="btn btn-success">
                                                         <i class="fas fa-plus-circle    "></i>
                                                     </button>
@@ -403,11 +430,14 @@
                                                             <p class="h5 float-right">{{$aluno['idade']}} anos</p>
                                                             @endif
                                                     </div>
+                                                    @if($quantidade_alunos > 1)
                                                     <div class="col-md-4 mx-auto">
+                                                        <input type="hidden" name="quantidade_alunos" value="{{$quantidade_alunos}}">
                                                         <button type="submit" class="btn btn-danger float-right">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </div>
+                                                    @endif
                                                 </div>
                                             </form>
                                         </li>
@@ -437,9 +467,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/normalize.css"></script>
     <script>
         $(document).ready(function(){
-            for(var i = 1; i < 5; i++){
-                adicionar();
-            }
+        //     // for(var i = 1; i == 1; i++){
+        //         // adicionar();
+        //     // }
             return;
         });
         function verificaTurma(){
@@ -521,7 +551,7 @@
 
         $('form').on('click', '.btn-remove', function(e){
             e.preventDefault();
-            if ($('.inputs-alunos').length > 5){
+            if ($('.inputs-alunos').length > 1){
                 $(this).parents('.form-row').parents('.inputs-alunos').remove();
                 var cont = $('#quantidade-alunos-turma').text().replace('Quantidade: ', '');
                 $('#quantidade-alunos').val(--cont);
