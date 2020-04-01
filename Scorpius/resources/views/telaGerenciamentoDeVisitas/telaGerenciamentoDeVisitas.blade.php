@@ -337,7 +337,7 @@
                                         <div class="row col-12 col-md-11 my-1">
                                             <div class="row col-12">
                                                 @forelse($lista_espera as $agendamento)
-                                                    @if($agendamento[data] == $data)  
+                                                     
                                                         <div class="custom-control custom-radio">
                                                             <div class="col-md-5">
                                                                 <label class="custom-control-label" for="customRadio1">
@@ -355,6 +355,7 @@
                                                                 </label>
                                                             </div>
                                                         </div>
+                                                    
                                                 @empty
                                                     <div class="col-md-12">
                                                         <div class="col-12 p-0 my-1 font-weight-bold">
@@ -394,7 +395,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="custom-control col-md-12">
-                                @forelse($lista_espera as $agendamento) {{--funcionando--}}
+                                @forelse($lista_espera as $agendamento) 
                                     <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
                                         <div class="row col-md-12 my-1">
                                             <div class="row col-12">
