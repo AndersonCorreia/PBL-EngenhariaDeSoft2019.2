@@ -156,6 +156,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`turma` (
   `nome` VARCHAR(20) NOT NULL,
   `ano_escolar` VARCHAR(12) NOT NULL,
   `ensino` ENUM('Ensino Fundamental', 'Ensino Médio', 'Ensino Técnico', 'Ensino Superior') NOT NULL,
+  `status` TINYINT(1) DEFAULT 1,
   `professor_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_turma_professor_idx` (`professor_ID` ASC),
