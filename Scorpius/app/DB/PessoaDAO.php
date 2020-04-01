@@ -136,7 +136,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
     {
         $operacao = "criada";
         if($this->hasDemanda($id_estagiario)){
-            $this->dataBase->query("DELETE FROM horario_estagiario WHERE estagiario_usuario_ID = $id_estagiario");
+            $this->dataBase->query("DELETE FROM proposta_horario WHERE estagiario_usuario_ID = $id_estagiario");
             $operacao = "atualizada";
         }
         $guia = $demandaWeb['guia'];
@@ -146,7 +146,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $demanda = $this->dataBase->query($sqlDemanda);
         if (!(empty($demandaWeb['horarios']))) {
             foreach ($demandaWeb['horarios'] as $horario) {
-                    $sql = "INSERT INTO horario_estagiario (dia_semana, turno, estagiario_usuario_ID) VALUES (
+                    $sql = "INSERT INTO proposta_horario (dia_semana, turno, estagiario_usuario_ID) VALUES (
                     '$horario[0]',
                     '$horario[1]',
                     '$id_estagiario'
