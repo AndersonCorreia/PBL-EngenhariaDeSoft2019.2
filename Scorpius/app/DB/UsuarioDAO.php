@@ -18,7 +18,6 @@ class UsuarioDAO extends DataAccessObject{
         $telefone = $usuario->getTelefone();
         $tipo = $usuario->getTipo();
         $senha = $usuario->getSenha();
-
         $sql = "INSERT INTO usuario
         (nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID)
         VALUES (

@@ -25,7 +25,7 @@
                     <p class="h5">Guia de Matrícula: </p>
                 </div>
                 <div class="col-md-9">
-                    <input id="guia" name="guia" type="file" class="form-control-anexo"/>
+                    <input required id="guia" name="guia" type="file" class="form-control-anexo"/>
                 </div>
             </div>
         </div>

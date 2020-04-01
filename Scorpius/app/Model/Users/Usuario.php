@@ -41,6 +41,10 @@ class Usuario extends Pessoa{
     public function getDados($id){
         return (new UsuarioDAO)->getDadosUsuario($id);
     }
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
     public function alterarDados($nome,$telefone,$cpf,$senha,$id){     
         return (new UsuarioDAO)->alterarDadosUsuario($nome,$cpf,$telefone,$senha,$id);
     }    
