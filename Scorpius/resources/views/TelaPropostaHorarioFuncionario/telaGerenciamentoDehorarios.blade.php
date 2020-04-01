@@ -3,9 +3,10 @@
 @section('title', 'Confirmar Horários dos Estagiários')
 
 @section('conteudo')
+
 {{csrf_field()}}
 <meta name="csrf-token" content="{{csrf_token()}}">
-<!-- Modal -->
+<!-- Modal confirmação -->
 <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -28,6 +29,111 @@
 </div>
 
 
+
+
+<!-- Modal horário estagiários -->
+<div class="modal fade" id="modalHorarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Horários Confirmados dos Estagiário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" fecharModal>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-6  float-left">
+                    <div class="form-group row">
+                        <!-- DIV seleção de estagiário -->
+                        <div class="alert alert-danger" role="alert" style='display:none'>Estagiário não possui horário
+                            Confirmado!</div>
+                        <label class="col-sm-12 col-form-label pt-3" nomeEstagiario>Nome do Estagiário</label>
+                        <div class="col-9">
+                            <input id="nomeEstagiario" class="form-control" type="text" name="nomeEstagiario"
+                                placeholder="Insira o Nome do Estagiário" list="instList" required autofocus>
+                            <datalist id="instList">
+
+                            </datalist>
+                        </div>
+                        <button type="button" class="btn btn-primary float-left " buscarHorarioConfirmado> Buscar
+                        </button>
+
+                    </div>
+
+                </div>
+                <div class="calendario">
+                    <!-- DIV calendario de horário -->
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="table-primary">
+
+                                <th scope="col">Turno/Dia</th>
+                                <th scope="col">Segunda</th>
+                                <th scope="col">Terça</th>
+                                <th scope="col">Quarta</th>
+                                <th scope="col">Quinta</th>
+                                <th scope="col">Sexta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="manhã">
+                                <th scope="row" class="table-secondary">Manhã</th>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="segunda" segunda></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="terça" terca></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="quarta" quarta></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="quinta" quinta></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="sexta" sexta></button></td>
+                            </tr>
+                            <tr class="tarde">
+                                <th scope="row" class="table-secondary">Tarde</th>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="segunda" segunda></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="terça" terca></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="quarta" quarta></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="quinta" quinta></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="sexta" sexta></button></td>
+                            </tr>
+                            <tr class="noite">
+                                <th scope="row" class="table-secondary">Noite</th>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="segunda" segunda></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="terça" terca></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="quarta" quarta></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="quinta" quinta></button></td>
+                                <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button"
+                                        aria-pressed="false" value="sexta" sexta></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" fecharModalHorario>Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
 <div class="matricula">
     <div class="form-row">
         <div class="col-6  float-right">
@@ -41,9 +147,9 @@
 
                     </datalist>
                 </div>
-                
+
                 <button type="button" class="btn btn-primary float-left " buscar> Buscar </button>
-                
+
             </div>
 
         </div>
@@ -54,6 +160,13 @@
                 <label class="pt-3">Comprovante de Matrícula</label>
                 <button type="button" class="btn btn-secondary" download>Download</button>
             </div>
+        </div>
+        <div class="col-2">
+            <label class="pt-3">Horários Confirmados</label>
+            <button type="button" class="btn btn-warning " id="btnVisualizar" data-detalhe='' data-toggle="modal"
+                data-target="#modalHorarios">
+                <i class="fas fa-eye"></i> Visualizar
+            </button>
         </div>
     </div>
 
@@ -85,12 +198,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="manha">
+                <tr class="manhã">
                     <th scope="row" class="table-secondary">Manhã</th>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
                             value="segunda" segunda></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="terca" terca></button></td>
+                            value="terça" terca></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
                             value="quarta" quarta></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
@@ -103,7 +216,7 @@
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
                             value="segunda" segunda></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="terca" terca></button></td>
+                            value="terça" terca></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
                             value="quarta" quarta></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
@@ -116,7 +229,7 @@
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
                             value="segunda" segunda></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
-                            value="terca" terca></button></td>
+                            value="terça" terca></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
                             value="quarta" quarta></button></td>
                     <td><button type="button" class="btn btn-outline btn-lg" data-toggle="button" aria-pressed="false"
@@ -143,6 +256,8 @@
     </div>
     @endsection
 
+
+
     @section('js')
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
@@ -163,7 +278,7 @@
 
         botoesHorarios.prop("disabled", true)
         botoesSubmit.prop("disabled", true);
-        download.prop("disabled",true);
+        download.prop("disabled", true);
 
 
         let inputNome = $("input[name=estagiario]")
@@ -179,6 +294,60 @@
             a.click();
         })
 
+        $('#btnVisualizar').click(e => {
+            botoesHorarios.removeClass('btn btn-success').addClass('btn btn-outline')
+            $('.alert').hide()
+        })
+        $('[fecharModalHorario]').click(e => {
+            botoesHorarios.removeClass('btn btn-success').addClass('btn btn-outline')
+            botoesHorarios.prop("disabled", true)
+            botoesSubmit.prop("disabled", true);
+            download.prop("disabled", true);
+        })
+        $('[buscarHorarioConfirmado]').click(e => {
+            e.preventDefault()
+            $('.alert').hide()
+            botoesHorarios.removeClass('btn btn-success').addClass('btn btn-outline')
+            let nomeEstagiario = $("input[name=nomeEstagiario]")
+            let ID = getID(estagiarios, nomeEstagiario.val()) //retorna id de estagiario selecionado
+            if (ID) {
+                let url =
+                    "{{ route('retornaHorarioConfirmado', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
+                url = url.replace(":id", ID); // isso vai corrigir a string gerada com o id correto.
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                /**
+                    Requisição ajax para retornar horarios de estagiários, 
+                    como resultado pinta os horários na tela. 
+                */
+                $.get(url, function(e) {
+                    for (let estagiario of e["horario"]) {
+                        let dias = estagiario.dia_semana
+                        let turnos = estagiario.turno
+                        let obj = {
+                            turno: turnos,
+                            dia: dias
+                        }
+                        pinta(dias, turnos)
+                    }
+                }).fail(function() {
+                    $('.alert').show()
+                })
+            }
+        })
+
+        $('[fecharModal]').click(e => {
+            botoesHorarios.removeClass('btn btn-success').addClass('btn btn-outline')
+            botoesHorarios.prop("disabled", true)
+            botoesSubmit.prop("disabled", true);
+            download.prop("disabled", true);
+        })
+
+
         jQuery('[buscar]').click(e => {
             e.preventDefault() //evita ação de botão
 
@@ -188,7 +357,7 @@
             botoesHorarios.removeClass('btn btn-success').addClass('btn btn-outline')
             botoesSubmit.prop("disabled", false);
             botaoCancelar.prop("disabled", true);
-            download.prop("disabled",false);
+            download.prop("disabled", false);
             estID = getID(estagiarios, inputNome.val()) //retorna id de estagiario selecionado
 
             if (estID) {
@@ -224,7 +393,7 @@
 
                 })
             } else {
-                download.prop("disabled",true);
+                download.prop("disabled", true);
                 botoesHorarios.prop("disabled", true);
                 botoesSubmit.prop("disabled", true);
             }
@@ -340,37 +509,47 @@
         switch (dias) {
             case 'segunda':
                 if (turnos == 'manhã') {
-                    $('.manha td').find('button[segunda]').toggleClass('btn btn-success')
+                    $('.manhã td').find('button[segunda]').toggleClass('btn btn-success')
                 } else if (turnos == 'tarde') {
                     $('.tarde td').find('button[segunda]').toggleClass('btn btn-success')
+                } else if(turnos == 'noite'){
+                    $('.noite td').find('button[segunda]').toggleClass('btn btn-success')
                 }
                 break
             case 'terça':
                 if (turnos == 'manhã') {
-                    $('.manha td').find('button[terca]').toggleClass('btn btn-success')
+                    $('.manhã td').find('button[terca]').toggleClass('btn btn-success')
                 } else if (turnos == 'tarde') {
                     $('.tarde td').find('button[terca]').toggleClass('btn btn-success')
+                } else if(turnos == 'noite'){
+                    $('.noite td').find('button[terca]').toggleClass('btn btn-success')
                 }
                 break
             case 'quarta':
                 if (turnos == 'manhã') {
-                    $('.manha td').find('button[quarta]').toggleClass('btn btn-success')
+                    $('.manhã td').find('button[quarta]').toggleClass('btn btn-success')
                 } else if (turnos == 'tarde') {
                     $('.tarde td').find('button[quarta]').toggleClass('btn btn-success')
+                } else if(turnos == 'noite'){
+                    $('.noite td').find('button[quarta]').toggleClass('btn btn-success')
                 }
                 break
             case 'quinta':
                 if (turnos == 'manhã') {
-                    $('.manha td').find('button[quinta]').toggleClass('btn btn-success')
+                    $('.manhã td').find('button[quinta]').toggleClass('btn btn-success')
                 } else if (turnos == 'tarde') {
                     $('.tarde td').find('button[quinta]').toggleClass('btn btn-success')
+                } else if(turnos == 'noite'){
+                    $('.noite td').find('button[quinta]').toggleClass('btn btn-success')
                 }
                 break
             case 'sexta':
                 if (turnos == 'manhã') {
-                    $('.manha td').find('button[sexta]').toggleClass('btn btn-success')
+                    $('.manhã td').find('button[sexta]').toggleClass('btn btn-success')
                 } else if (turnos == 'tarde') {
                     $('.tarde td').find('button[sexta]').toggleClass('btn btn-success')
+                } else if(turnos == 'noite'){
+                    $('.noite td').find('button[sexta]').toggleClass('btn btn-success')
                 }
                 break
             default:
@@ -385,7 +564,8 @@
         border: 1px solid rgb(93, 98, 105);
     }
 
-    button[type=submit] {
+    button[type=submit],
+    button[type=button] {
         border-bottom-right-radius: 20px;
         border-bottom-left-radius: 20px;
         border-top-right-radius: 20px;

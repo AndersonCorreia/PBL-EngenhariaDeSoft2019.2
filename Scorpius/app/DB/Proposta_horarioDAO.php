@@ -57,6 +57,21 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         throw new \Exception("Nenhum estagiario encontrado");
     }
 
+    function buscaHorarioConfirmadoEstagiario($id){
+        $sql = 'SELECT h.dia_semana, h.turno FROM horario_estagiario h WHERE estagiario_usuario_ID=?';
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        if($resultado->num_rows > 0) {
+            while($row = $resultado->fetch_assoc()) {
+                $registros[] = $row;
+            }  
+            return $registros;
+        }
+        throw new \Exception("Nenhum estagiario encontrado");
+    }
+
     /**
      * Função que busca as observações direcionadas ao estagiario;
      * @param integer id identificador de usuário.

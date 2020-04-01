@@ -28,6 +28,7 @@ Route::group(
     function(){
         Route::get('/confirmacaoHorario', 'HorarioController@getTelaHorarioEstagiario')->name("telaGerenciamentoDehorarios.show");
         Route::get('/confirmacaoHorario/{id}', 'HorarioController@getProposta')->name("retornaProposta");
+        Route::get('/confirmacaoHorario/horarioConfirmado/{id}', 'HorarioController@getHorarioConfirmado')->name("retornaHorarioConfirmado");
         Route::get('/confirmacaoHorario/erro','HorarioController@nenhumaProposta')->name("errorNenhumaProposta.show");
         Route::post('/confirmacaoHorario', 'HorarioController@enviaHorario')->name("enviaHorario");
         Route::get('/confirmacaoHorario/downloadGuiaMatricula/{id}', 'HorarioController@download')->name("downloadGuia");
