@@ -53,7 +53,7 @@ class VisitaDAO extends DataAccessObject{
     public function SELECTbyDateInicio_FIM(string $dateInicio, string $dateFim, bool $isDiurno, int $limite=20): array{
 
         $filtroTurno = $isDiurno ? " AND turno != 'noite'" : " AND turno = 'noite'";
-        $sql = "SELECT * FROM visita WHERE data_visita > ? AND data_visita <= ? $filtroTurno LIMIT ?";
+        $sql = "SELECT * FROM visita WHERE data_visita > ? AND data_visita <= ? AND status != 'atividade diferenciada' $filtroTurno LIMIT ?";
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ssi",$dateInicio, $dateFim, $limite);
         $stmt->execute();
