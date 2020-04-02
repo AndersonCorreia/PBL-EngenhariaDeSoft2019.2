@@ -68,10 +68,8 @@ class AuthController extends Controller
 
     public function senhaRedefinicao(Request $request)
     {
-
-        $this->email = $request['email'];
-
-        $token = $request['_token'];
+        $this->email = $request->email;
+        $token = $request->_token;
         $dados = [
             'usuario_email' => $this->email,
             'token' => $token
