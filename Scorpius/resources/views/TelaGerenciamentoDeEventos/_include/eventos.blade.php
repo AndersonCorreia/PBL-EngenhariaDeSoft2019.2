@@ -223,7 +223,6 @@ jQuery(document).ready(function() {
     para permitir apenas a visualização*/
     $('.botoes #btnVisualizar').click(e => {
         e.preventDefault()
-
         $('[formModal]').find('input, select, textarea').removeClass('is-valid').removeClass(
             'is-invalid').prop('disabled', true);
         $('#cadastrarModal').modal('show')
@@ -249,8 +248,8 @@ jQuery(document).ready(function() {
         } else {
             $('#descricao_campo').val('');
         }
-        if (valorAtual.quantidadeEscritos) {
-            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos);
+        if (valorAtual.quantidade_inscritos) {
+            $('#limiteVagas_campo').val(valorAtual.quantidade_inscritos);
         } else {
             $('#limiteVagas_campo').val(0);
         }
@@ -441,7 +440,8 @@ jQuery(document).ready(function() {
         $.validator.addMethod(
             "limite_maximo",
             function(elementValue, element, param) {
-                if (elementValue > param) {
+                if (Number(elementValue) > Number(param)) {
+                    console.log(typeof Number(elementValue), typeof Number(param))
                     return false;
                 } else {
                     return true;
@@ -557,7 +557,6 @@ jQuery(document).ready(function() {
                 },
                 data_inicial: {
                     required: true,
-                    minDate: '',
                     menorDataFinal: ''
                 },
                 data_final: {
