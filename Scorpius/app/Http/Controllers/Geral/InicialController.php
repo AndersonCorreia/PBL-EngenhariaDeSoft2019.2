@@ -53,4 +53,13 @@ class InicialController extends Controller
     {
         return view('telaEntrar.esqueciMinhaSenha');
     }
+
+    public function linkRedefinicaoSenha(){
+        return view('telaEntrar.prosseguirRedefinicao');
+    }
+    public function redefinirSenha($novaSenha){
+        $usuario = new Empregado();
+        $usuario->setSenha($novaSenha);
+        return view('telaEntrar.index');
+    }
 }
