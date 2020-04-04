@@ -33,6 +33,8 @@ class ControlerInstitucional extends Controller {
 
         return view('TelaInstituicaoEnsino.instituicaoEnsino', $variaveis);
     }
+
+
     /**
      * retornar a tela de cadastro de instituições para o usuario
      *

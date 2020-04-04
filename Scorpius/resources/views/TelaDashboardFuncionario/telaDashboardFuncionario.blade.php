@@ -14,6 +14,7 @@
             <div class= "row mt-3 mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-dark text-white" titleProxVisita>
                 <h5 class="col-sm-12" nomeEscola>PRÓXIMAS VISITAS</h5>
             </div>
+            
             <div class= "row mt-3 mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-dark" proxVisita>
                 
                 <div class= "row mt-1 mx-3 p-2 scorpius-border-shadow border-top border-shadow bg-secondary text-white" dataVisita>
@@ -33,6 +34,7 @@
                 </div>
             </div>
         </div>
+
 
         <div class="col-xl-4">
             <div class= "row mt-3 p-3 scorpius-border-shadow border-top border-shadow bg-dark text-white" titleClima>

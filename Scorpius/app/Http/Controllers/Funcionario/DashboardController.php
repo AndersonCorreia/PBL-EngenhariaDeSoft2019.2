@@ -10,14 +10,27 @@ namespace App\Http\Controllers\Funcionario;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use App\Model\Professor_instituicao;
+use App\Model\AgendamentoInstitucional;
+
 class DashboardController extends Controller{
     
+    /**
+    * Retorna Dashboard do Funcionário;
+    * @return dashboardFuncionario
+    */
     public function getTelaDashboardFuncionario(){
-        
+        /**$id_user = session('ID');
+        $erro=null;
+        $registro=null;
+        $registro = Professor_instituicao::listarInstituicoes($id_user);**/
         $variaveis = [
-            'paginaAtual' => "Painel de Controle do Funcionário"   
+            'paginaAtual' => "Painel de Controle do Funcionário",   
+            /**'registros' => $registro,
+            'erros' => $erro**/
         ];
         return view('TelaDashboardFuncionario.telaDashboardFuncionario', $variaveis);
     }
+
 }
 ?>
