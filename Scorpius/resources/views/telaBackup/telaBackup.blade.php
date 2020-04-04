@@ -33,87 +33,25 @@
 
 <div class="scorpius-border p-4">
     <div class="scorpius-border-shadow-sm p-3">
-        <p class="h3">Opções:</p>
         <form>
-        <meta name="csrf-token" content="{{csrf_token()}}">
-            <div class="row col-12 m-0 p-4"><!--campo radio buttons e seleção datas-->
-                <div class="col-4 p-3 pt-4" >
-                    <fieldset class="form-group pl-5">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="diariamente" checked>
-                            <label class="form-check-label" for="gridRadios1">Diariamente</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="semanalmente">
-                            <label class="form-check-label" for="gridRadios2">Semanalmente</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="mensalmente">
-                            <label class="form-check-label" for="gridRadios3">Mensalmente</label>
-                        </div>
-                        
-                    </fieldset>
-                </div>
-                <div class="col-6 p-3">
-                    <div class="form-group pl-5">
-                        <label for="data" class="col-form-label">Data</label>
-                        <input type="date" class="form-control" name="data" id="data">
+        <meta name="csrf-token" content="{{csrf_token()}}">  
+            <div class="row m-0"><!--campo botões-->
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group pl-4">
+                        <i class="fas fa-cloud-download-alt fa-10x pl-4" style="color: 008BF2;"></i>
                     </div>
-                    <div class="form-group pl-5">
-                        <label for="dia">Dia da Semana</label>
-                        <select class="custom-select mr-sm-2" id="dia">
-                            <option disabled selected>Escolher...</option>
-                            <option value="seg">Segunda</option>
-                            <option value="ter">Terça</option>
-                            <option value="quar">Quarta</option>
-                            <option value="quin">Quinta</option>
-                            <option value="sex">Sexta</option>
-                            <option value="sab">Sábado</option>
-                            <option value="dom">Domingo</option>
-                        </select>
-                    </div>
-
-                    <?php $horario = array('01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00'); ?>
-                    <div class="form-group pl-5">
-                        <label for="horario">Horário</label>
-                        <select class="custom-select mr-sm-2" id="horario">
-                            <option disabled selected>Escolher...</option>
-                            @foreach( $horario as $key=>$value)
-                            <option value="{{$key+1}}"> {{$value}} </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div><!--campo radio buttons e seleção datas-->
-            <div class="row col-12 m-0 p-0 pl-5"><!--campo caminho do backup-->
-                <div class="col-10 p-3">
-                    <div class="form-group p-4">
-                        <label for = "diretorio"> Diretório de Backup </label >
-                        <input type = "text" class = "controle de formulário" id = "diretorio" placeholder ="C:\Users\..." >
-                    </div>
-                </div>
-            </div>
-            <div class="row m-0 align-items-center"><!--campo botões-->
-                <div class="col-4">
-                    <div class="form-group">
-                        <button type="button" class="btn btn-success col-sm-8" value="backup" data-toggle="modal"
-                                data-target="#modalExemplo" backup>Fazer Backup Agora <i class="fa fa-send"></i>
+                    <div class="form-group pt-4">
+                        <button type="button" class="btn btn-success form-control" value="backup" data-toggle="modal"
+                                data-target="#modalExemplo" backup>Realizar Backup Agora <i class="fa fa-send"></i>
                         </button>
                     </div>
-                </div>    
-                <div class="col-4">
-                    <div class="form-group">
-                        <button type="submit" value="alterar" name="salvar" class="btn btn-primary col-sm-8"
-                                salvar>Salvar
+                    <div class="form-group pt-2">
+                        <button type="submit" value="cancelar" name="cancelar" class="btn btn-danger form-control" cancelar>Cancelar
                         </button>
                     </div>
-                </div>   
-                <div class="col-4">
-                    <div class="form-group">
-                        <button type="submit" value="cancelar" name="cancelar" class="btn btn-danger col-sm-8"
-                                cancelar>Cancelar</button>
-                    </div>
                 </div>
+                <div class="col-md-4"></div>       
             </div>
         </form>
     </div>
@@ -185,6 +123,6 @@ $(document).ready(function() {
 <style>
 button[type=submit] {
 
-    width: 300px;
+    
 }
 </style>
