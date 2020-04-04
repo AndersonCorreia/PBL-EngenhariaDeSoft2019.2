@@ -60,7 +60,7 @@ class AuthController extends Controller
         Mail::send('emails.emailRedefinicaoSenha', $dados, function($message){
             $message->from('scorpiusuefs@gmail.com', 'Scorpius - Redefinição de Senha');
             $message->to($this->email);
-            $message->subject('Código para Redefinição de Senha');
+            $message->subject('Link para Redefinição de Senha');
         });
     }
 

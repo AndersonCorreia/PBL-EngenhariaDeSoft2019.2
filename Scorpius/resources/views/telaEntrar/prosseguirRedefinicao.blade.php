@@ -38,7 +38,7 @@
 <div class="text-center mx-auto col col-md-10">
     <h5>Redefina sua senha</h5>
 </div>
-<form class="form-group mt-5 mx-auto col col-md-10" action={{route("senhaRedefinir")}} method="POST">
+<form class="form-group mt-5 mx-auto col col-md-10" action="{{route('redefinirSenha')}}" method="POST">
     {{csrf_field()}}
     <!-- E-mail -->
     <div class='container'>
