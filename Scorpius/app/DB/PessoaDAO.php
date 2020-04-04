@@ -300,4 +300,10 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $sql = "SELECT * FROM horario_estagiario WHERE estagiario_usuario_ID = $ID";
         return $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
     }
+    function SELECTbyEmail($email){
+        $sql = "SELECT email FROM usuario WHERE email='$email'";
+        $resultado = $this->dataBase->query($sql);
+
+        return $resultado;
+    }
 }

@@ -77,4 +77,18 @@ class AuthController extends Controller
         $this->enviarEmailRedefinicaoSenha($this->email, $token);
         return view('telaRedefinicaoSenha.avisoRedefinicao'); 
     }
+
+    /**terminar */
+    public function redefinirSenha(Request $request, $token){
+        $senha = $request->novaSenha;
+        /**Selecionar pelo token */
+        $usuario=(new PessoaDAO)->SELECTbyEmail($this->email);
+        $nome=$usuario->getNome();
+        $cpf=getCpf();
+        $telefone=getTelefone();
+        $tipo_usuario=getTipo();
+        $user = new Empregado($nome, $senha, $tipo_usuario, $cpf, $telefone, $email);
+        $user->setSenha($novaSenha);
+        return view('telaEntrar.index');
+    }
 }
