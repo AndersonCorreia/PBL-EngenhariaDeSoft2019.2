@@ -81,15 +81,15 @@ use App\Model\Agendamento;
      * @param bool $incluirStatusCancelado informa se os agendamentos cancelados devem ser incluidoss ou não
      * @return array com data, turno e agendamento status do agendamento.
      */
-    public function SELECT_VisitaInstitucionalByUserID(int $id, string $data = null, string $op = '>=',
-        bool $incluirStatusCancelado = false): array{
+    public function SELECT_VisitaInstitucionalByUserID(int $id, string $op ='>=', string $opTurno = '!=',
+        string $data = null, string $turno = 'noite', bool $incluirStatusCancelado = false): array{
         
         $data = $data ? $data : now() ;
         $status = $incluirStatusCancelado ? "" : "AND ( agendamentoStatus != 'cancelado pelo usuario' 
             AND agendamentoStatus != 'cancelado pelo funcionario' )";
 
         $select = "SELECT *";
-        $where = "usuarioID = $id AND data $op '$data' $status";
+        $where = "usuarioID = $id AND data $op '$data' AND turno $opTurno '$turno' $status";
         $sql = "$select FROM visita_institucional WHERE $where";
         $result = $this->dataBase->query($sql);
 

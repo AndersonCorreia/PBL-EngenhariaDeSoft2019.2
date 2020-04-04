@@ -47,7 +47,7 @@ class UserController extends Controller
         
         if (session('tipo') != 'visitante'){
             $DAO = new AgendamentoInstitucionalDAO();
-            $agendamentosI = $DAO->SELECT_VisitaInstitucionalByUserID($idUser, now(), '<', true);
+            $agendamentosI = $DAO->SELECT_VisitaInstitucionalByUserID($idUser, '<', '!=', now(), 'qualquer', true);
             $this->completarDadosAgend($agendamentosI, $DAO);
         }
         else {
@@ -73,7 +73,7 @@ class UserController extends Controller
         
         if (session('tipo') != 'visitante'){
             $DAO = new AgendamentoInstitucionalDAO();
-            $agendamentosI = $DAO->SELECT_VisitaInstitucionalByUserID($idUser, now(), '>=', true);
+            $agendamentosI = $DAO->SELECT_VisitaInstitucionalByUserID($idUser, '>=', '!=', now(), 'qualquer', true);
             $this->completarDadosAgend($agendamentosI, $DAO);
         }
         else {

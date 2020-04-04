@@ -69,7 +69,7 @@ class Visita extends \App\DB\interfaces\DataObject {
         $data = $this->Data->format('Y-m-d');
         if ($tipo == 'institucional'){
             $result = (new AgendamentoInstitucionalDAO())
-                        ->SELECT_VisitaInstitucionalByUserID($ID, $data, '=');
+                        ->SELECT_VisitaInstitucionalByUserID($ID, '=', '=', $data, $this->Turno);
             
             return ($result !== []);
         }
