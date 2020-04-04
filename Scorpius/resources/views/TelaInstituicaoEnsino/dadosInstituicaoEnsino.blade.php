@@ -45,9 +45,9 @@
 
                 <div class="form-group col-sm-4">
                     <span>Telefone da Instituição</span>
-                    <input class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999"
+                    <input class="form-control" type="text" maxlength="13" name="Telefone" placeholder="99-99999-9999" OnKeyUP="formatar('##-#####-####', this)"
                         value="{{isset($registros['telefone']) ? $registros['telefone'] : ''}}"
-                        pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" required>
+                        pattern="[0-9]{2}-[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                 </div>
 
                 <div class="form-group col-sm-8">
@@ -58,19 +58,19 @@
 
                 <div class="form-group col-sm-2">
                     <span>Número</span>
-                    <input class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx"
+                    <input class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                         value="{{isset($registros['numero']) ? $registros['numero'] : ''}}" required>
                 </div>
 
                 <div class="form-group col-sm-2">
                     <span>CEP</span>
-                    <input class="form-control" type="text" name="CEP" maxlength="9" placeholder="99999-999"
-                        value="{{isset($registros['cep']) ? $registros['cep'] : ''}}" required>
+                    <input class="form-control" type="text" name="CEP" maxlength="9" placeholder="99999-999" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                        value="{{isset($registros['cep']) ? $registros['cep'] : ''}}" OnKeyUP="formatar('#####-###', this)" pattern="[0-9]{5}-[0-9]{3}$" required>
                 </div>
 
                 <div class="form-group col-sm-4">
                     <span>Cidade</span>
-                    <input class="form-control" type="text" name="Cidade"
+                    <input class="form-control" type="text" name="Cidade" placeholder="Cidade da instituição"
                         value="{{isset($registros['cidade']) ? $registros['cidade'] : ''}}" required>
                 </div>
                 <?php
@@ -100,15 +100,33 @@
                 # Array com os dados de nossa combo
                 #
                 $estado = array(
-                    "BA" => "Bahia",
-                    "MA" => "Maranhão",
-                    "PI" => "Piauí",
+                    "AC" => "Acre",
+                    "AL" => "Alagoas", 
+                    "AP" => "Amapá", 
+                    "AM" => "Amazonas",
+                    "BA" => "Bahia", 
                     "CE" => "Ceará",
-                    "RN" => "Rio Grande do Norte",
-                    "PB" => "Paraíba",
+                    "DF" => "Distrito Federal",
+                    "ES" => "Espírito Santo",
+                    "GO" => "Goiás",
+                    "MA" => "Maranhão", 
+                    "MT" => "Mato Grosso",
+                    "MS" => "Mato Grosso do Sul",
+                    "MG" => "Minas Gerais", 
+                    "PA" => "Pará",
+                    "PB" => "Paraíba", 
+                    "PR" => "Paraná",
                     "PE" => "Pernambuco",
-                    "AL" => "Alagoas",
-                    "SE" => "Sergipe" 
+                    "PI" => "Piauí",
+                    "RJ" => "Rio de Janeiro",
+                    "RN" => "Rio Grande do Norte",
+                    "RS" => "Rio Grande do Sul",
+                    "RO" => "Rondônia",
+                    "RR" => "Roraima",
+                    "SC" => "Santa Catarina",
+                    "SP" => "São Paulo",
+                    "SE" => "Sergipe",
+                    "TO" => "Tocantins"
                 );
 
                 $valor_selecionado_instituicao = $registros['tipo_instituicao'];
@@ -190,4 +208,18 @@ form span {
     text-decoration: none;
 }
 </style>
+
+<script>
+    function formatar(mascara, documento){
+        var i = documento.value.length;
+        var saida = mascara.substring(0,1);
+        var texto = mascara.substring(i)
+        
+        if (texto.substring(0,1) != saida){
+                    documento.value += texto.substring(0,1);
+        }
+    
+    }
+</script>
+
 @endsection

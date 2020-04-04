@@ -43,8 +43,8 @@
 
             <div class="form-group col-sm-4">
                 <span>Telefone da Instituição</span>
-                <input id="tel" class="form-control" type="tel" maxlength="14" name="Telefone" placeholder="(99)99999-9999" 
-                pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD no formato (xx)xxxxx-xxxx" required>
+                <input class="form-control" class="form-control" type="text" maxlength="13" name="telefone" placeholder="99-99999-9999" OnKeyUP="formatar('##-#####-####', this)"
+                pattern="[0-9]{2}-[0-9]{4,6}-[0-9]{3,4}$" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{ $registro['telefone'] ?? '' }}" title="Numero de telefone com DD no formato xx-xxxxx-xxxx" required>
             </div> 
 
             <div class="form-group col-sm-8">
@@ -55,31 +55,50 @@
 
             <div class="form-group col-sm-2 col-4">    
                 <span>Número</span>
-                <input id="numero" class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx" required>
+                <input id="numero" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" type="text" name="Numero" maxlength="5" placeholder="xxx" required>
             </div>
 
             <div class="form-group col-sm-2 col-8">
                 <span>CEP</span>
-                <input id="CEP" class="form-control" type="text" name="CEP" maxlength="9" placeholder="99999-999" pattern="[0-9]{5}-[0-9]{3}$" required>
+                <input id="CEP" class="form-control" type="text" name="CEP" maxlength="9" placeholder="99999-999" pattern="[0-9]{5}-[0-9]{3}$" 
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57" OnKeyUP="formatar('#####-###', this)" required>
             </div>
 
             <div class="form-group col-sm-4">
                 <span>Cidade</span>
-                <input id="cidade" class="form-control"  type="text" name="Cidade" required>
+                <input id="cidade" class="form-control" placeholder="Cidade da instituição" type="text" name="Cidade" required>
             </div>
 
             <div class="form-group col-sm-3">
                 <span>Estado</span>    
                 <select id="estado" name="Estado"  class="custom-select" required>
-                    <option  value="BA" selected>Bahia</option> 
-                    <option  value="MA">Maranhão</option>
-                    <option  value="PI">Piauí</option>
-                    <option  value="CE">Ceará</option>
-                    <option  value="RN">Rio Grande do Norte</option>
-                    <option  value="PB">Paraíba</option>
-                    <option  value="PE">Pernambuco</option>
-                    <option  value="AL">Alagoas</option>
-                    <option  value="SE">Sergipe</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
                 </select>
             </div>
             
@@ -109,4 +128,17 @@
 @section('js')
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
 <script src="{{ asset("/js/cadastroInstituicao.js")}}" ></script>
+<script>
+function formatar(mascara, documento){
+  var i = documento.value.length;
+  var saida = mascara.substring(0,1);
+  var texto = mascara.substring(i)
+  
+  if (texto.substring(0,1) != saida){
+            documento.value += texto.substring(0,1);
+  }
+  
+}
+</script>
+
 @endsection

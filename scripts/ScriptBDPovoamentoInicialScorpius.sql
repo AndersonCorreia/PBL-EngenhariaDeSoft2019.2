@@ -122,6 +122,17 @@ INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-21','noite');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-22','tarde');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-23','manhã');
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-03-24','tarde');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-06','manhã');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-06','tarde');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-06','noite');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-07','manhã');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-08','manhã');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-08','tarde');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-08','noite');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-10','tarde');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-13','tarde');
+INSERT INTO visita (data_visita, turno ) VALUES ('2020-04-15','manhã');
+
 
 -- INSERT DOS Agentamentos de Usuário --
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(1, 1, 'confirmado', 601);
@@ -132,6 +143,11 @@ INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(5, 9, 'confirmado
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(6, 11, 'confirmado', 601);
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(7, 13, 'cancelado pelo usuario', 601);
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(8, 15, 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(9, 16, 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(10, 16, 'lista de espera', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(11, 20, 'confirmado', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(12, 20, 'lista de espera', 601);
+INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(13, 20, 'lista de espera', 601);
 
 -- INSERT das turmas --
 INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (1, 'A', '6º ano', 'Ensino Fundamental', 701);
