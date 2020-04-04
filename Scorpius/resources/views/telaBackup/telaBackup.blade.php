@@ -42,6 +42,10 @@
                         <i class="fas fa-cloud-download-alt fa-10x pl-4" style="color: 008BF2;"></i>
                     </div>
                     <div class="form-group pt-4">
+                        <label for = "diretorio"> Diretório de Backup </label>
+                        <input type = "text" class = "form-control" id = "diretorio" placeholder ="C:\Users\..." >
+                    </div>
+                    <div class="form-group pt-2">
                         <button type="button" class="btn btn-success form-control" value="backup" data-toggle="modal"
                                 data-target="#modalExemplo" backup>Realizar Backup Agora <i class="fa fa-send"></i>
                         </button>
@@ -49,7 +53,7 @@
                     <div class="form-group pt-2">
                         <button type="submit" value="cancelar" name="cancelar" class="btn btn-danger form-control" cancelar>Cancelar
                         </button>
-                    </div>
+                    </div>            
                 </div>
                 <div class="col-md-4"></div>       
             </div>
@@ -63,25 +67,6 @@
 <script>
 $(document).ready(function() {
 
-    $('#horario').parent().show()
-    $('select#dia').parent().hide()
-    $('#data').parent().hide()
-
-    $('input[type=radio]').click(e => {
-        if (e.currentTarget.value == "diariamente") {
-            $('#horario').parent().show()
-            $('select#dia').parent().hide()
-            $('#data').parent().hide()
-        } else if (e.currentTarget.value == "semanalmente") {
-            $('select#dia').parent().show()
-            $('#data').parent().hide()
-            $('#horario').parent().hide()
-        } else if (e.currentTarget.value == "mensalmente") {
-            $('select#dia').parent().hide()
-            $('#data').parent().show()
-            $('#horario').parent().hide()
-        }
-    })
 
     $('[backup]').click(e=>{
         $('.alert').hide()
@@ -123,6 +108,8 @@ $(document).ready(function() {
 <style>
 button[type=submit] {
 
-    
 }
 </style>
+
+
+
