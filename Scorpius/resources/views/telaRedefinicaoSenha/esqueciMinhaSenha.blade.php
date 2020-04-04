@@ -38,15 +38,17 @@
 <div class="text-center mx-auto col col-md-10">
     <h5>Redefina sua senha</h5>
 </div>
-<form class="form-group mt-5 mx-auto col col-md-10" action="{{route('redefinirSenha')}}" method="POST">
+<form class="form-group mt-5 mx-auto col col-md-10" action="{{route('senhaRedefinicao')}}" method="POST">
     {{csrf_field()}}
     <!-- E-mail -->
     <div class='container'>
         <div class="form-group">
-            <label for="emailCadastro">Insira sua nova senha</label>
-            <input class="form-control" name="novaSenha">
+            <label for="emailCadastro">Insira o e-mail que está vinculado a sua conta</label>
+            <input class="form-control" placeholder="exemplo@exemplo.com" id="emailCadastro" name="email" type="email"
+                aria-describedby="emailHelp">
         </div>
         <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Enviar</button>
     </div>
 </form>
+    
 @endsection

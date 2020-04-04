@@ -93,18 +93,6 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 		return $result;
 	}
 
-
-
-	/**
-	 * função abstrata, para que a implementação em usuario verifique se o tipo é correto.
-	 * os tipos corretos em usuario são visitante ou institucional
-	 *
-	 * @param string $tipo
-	 * @throws Exception caso seja setado o tipo incorreto;
-	 * @return void
-	 */
-	public abstract function setTipo(string $tipo_usuario);
-
 	protected function save(){
 		(new \app\DB\PessoaDAO)->UPDATE($this);
 	}

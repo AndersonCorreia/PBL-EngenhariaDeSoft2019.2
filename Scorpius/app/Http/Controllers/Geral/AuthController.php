@@ -62,6 +62,7 @@ class AuthController extends Controller
             $message->to($this->email);
             $message->subject('Link para Redefinição de Senha');
         });
+        
     }
 
     public function senhaRedefinicao(Request $request)
@@ -73,6 +74,7 @@ class AuthController extends Controller
             'token' => $token
         ];
     
-        $this->enviarEmailRedefinicaoSenha($this->email, $token);  
+        $this->enviarEmailRedefinicaoSenha($this->email, $token);
+        return view('telaRedefinicaoSenha.avisoRedefinicao'); 
     }
 }
