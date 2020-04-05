@@ -47,7 +47,7 @@ class PermissoesController extends Controller
     public function alterarPermissoes(Request $request){
 
         $DAO = new PessoaDAO();
-        $permissaoTipo = $this->preencherMatrizPermissaoTipo($request->get('p_t',[]), $msg);
+        $permissaoTipo = $this->preencherMatrizPermissaoTipo($request->get('p_t',[]), $msg, $request->alteracoes);
         $DAO->setPermissoes($permissaoTipo, $msg);
 
         return redirect()->back();
@@ -62,18 +62,27 @@ class PermissoesController extends Controller
         return redirect()->back();
     }
 
-    public function preencherMatrizPermissaoTipo($p_t, &$msg ){
+    public function preencherMatrizPermissaoTipo($p_t, &$msg, $alteracoes ){
 
         $permissaoTipo = [];
-        $msg = "--- Alteração das permissões do sistema. --- Estado atual das permissões:";
+        $msg = "--- Alteração das permissões do sistema: ";
 
         foreach ($p_t as $value) {
             $pt = \explode("|", $value);
-            $msg .= " $pt[3] tem acesso à $pt[2];";
             $permissaoTipo[] = ['permissao_ID' => $pt[0], 'tipo_ID' => $pt[1]];
-
         }
-        
+        $alterou = false;
+        foreach ($alteracoes as $value) {
+            $alt = \explode("|", $value);
+            if($alt[2] != "naoAlterado"){
+                $alterou = true;
+                $msg .= " $alt[2] acesso do $alt[1] à $alt[0];";
+            }
+        }
+        if($alterou){
+            $msg .= "Não houve nenhuma mudança nas permissões";
+        }
+
         return $permissaoTipo;
     }
 
