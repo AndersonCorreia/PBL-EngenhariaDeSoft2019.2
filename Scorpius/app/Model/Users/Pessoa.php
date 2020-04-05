@@ -3,12 +3,12 @@
 namespace app\Model\users;
 use App\DB\PessoaDAO;
 abstract class Pessoa extends \App\DB\interfaces\DataObject {
-    protected $nome;
-    protected $cpf;
-    protected $telefone;
-    protected $email;
-	protected $senha;
-	protected $tipo_usuario;
+    private $nome;
+    private $cpf;
+    private $telefone;
+    private $email;
+	private $senha;
+	private $tipo_usuario;
 
 	public function __Construct($nome, $senha, $tipo_usuario, $cpf, $telefone, $email)
     {

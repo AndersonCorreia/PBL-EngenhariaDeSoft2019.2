@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\email;
 use App\DB\PessoaDAO;
-use App\Model\Users\Usuario;
+use App\Model\Users\Empregado;
 use App\Model\EmailRedefinicaoSenha;
 
 class AuthController extends Controller
@@ -78,17 +78,16 @@ class AuthController extends Controller
         return view('telaRedefinicaoSenha.avisoRedefinicao'); 
     }
 
-    /**terminar */
-    public function redefinirSenha(Request $request, $token){
+    public function redefinirSenha(Request $request, $email){
         $senha = $request->novaSenha;
-        /**Selecionar pelo token */
-        $usuario=(new PessoaDAO)->SELECTbyEmail($this->email);
-        $nome=$usuario->getNome();
-        $cpf=getCpf();
-        $telefone=getTelefone();
-        $tipo_usuario=getTipo();
+        $ID=(new PessoaDAO)->SELECTbyEmail($email);
+        $usuario= (new PessoaDAO)->SELECTbyID($ID);
+        $nome=$usuario["nome"];
+        $cpf=$usuario["CPF"];
+        $telefone=$usuario["telefone"];
+        $tipo_usuario=$usuario["tipo"];
         $user = new Empregado($nome, $senha, $tipo_usuario, $cpf, $telefone, $email);
-        $user->setSenha($novaSenha);
+        $user->setSenha($senha);
         return view('telaEntrar.index');
     }
 }

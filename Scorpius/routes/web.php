@@ -55,7 +55,7 @@ Route::get('/entrar', 'InicialController@telaEntrar')->name('entrar');
 Route::post('/entrar','AuthController@login')->name('login');
 Route::get("/logout", 'AuthController@logout')->name('logout');
 Route::get('/verificacao-email/{email}/{token}', 'EmailVerificacaoController@index');
-Route::post('/alterar-senha/{usuario_email}/{token}', 'InicialController@redefinirSenha')->name('redefinirSenha');
+Route::post('/alterar-senha/{usuario_email}/{token}', 'AuthController@redefinirSenha')->name('redefinirSenha');
 Route::get('/alterar-senha/{usuario_email}/{token}', 'InicialController@linkRedefinicaoSenha');
 Route::get('/esqueciMinhaSenha', 'InicialController@esqueciMinhaSenha')->name('reconfigurarSenha');
 Route::post('/esqueciMinhaSenha','AuthController@senhaRedefinicao')->name('senhaRedefinicao');
