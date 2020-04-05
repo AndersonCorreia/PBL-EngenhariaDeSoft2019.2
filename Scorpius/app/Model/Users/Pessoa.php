@@ -3,12 +3,12 @@
 namespace app\Model\users;
 use App\DB\PessoaDAO;
 abstract class Pessoa extends \App\DB\interfaces\DataObject {
-    protected $nome;
-    protected $cpf;
-    protected $telefone;
-    protected $email;
-	protected $senha;
-	protected $tipo_usuario;
+    private $nome;
+    private $cpf;
+    private $telefone;
+    private $email;
+	private $senha;
+	private $tipo_usuario;
 
 	public function __Construct($nome, $senha, $tipo_usuario, $cpf, $telefone, $email)
     {
@@ -92,18 +92,6 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 		$result = (new \app\DB\PessoaDAO)->desativarByID($ID);
 		return $result;
 	}
-
-
-
-	/**
-	 * função abstrata, para que a implementação em usuario verifique se o tipo é correto.
-	 * os tipos corretos em usuario são visitante ou institucional
-	 *
-	 * @param string $tipo
-	 * @throws Exception caso seja setado o tipo incorreto;
-	 * @return void
-	 */
-	public abstract function setTipo(string $tipo_usuario);
 
 	protected function save(){
 		(new \app\DB\PessoaDAO)->UPDATE($this);

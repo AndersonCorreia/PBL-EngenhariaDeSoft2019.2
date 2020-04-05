@@ -70,7 +70,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
     function SELECTbyID(int $id, bool $filtrarAtivo = true)
     {
         $join = "usuario as u LEFT JOIN tipo_usuario as t ON u.tipo_usuario_ID = t.ID";
-        $select = "u.ID, u.nome, u.email, u.senha, u.telefone, t.tipo";
+        $select = "u.ID, u.nome, u.email, u.CPF, u.senha, u.telefone, t.tipo";
         $filtrar =  $filtrarAtivo ? "AND u.ativo = 1 " : "";
         $sql = "SELECT $select FROM $join WHERE u.ID = ? $filtrar";
         $stmt = $this->dataBase->prepare($sql);
@@ -299,5 +299,10 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
     {
         $sql = "SELECT * FROM horario_estagiario WHERE estagiario_usuario_ID = $ID";
         return $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
+    }
+    function SELECTbyEmail($email){
+        $sql = "SELECT ID FROM usuario WHERE email='$email'";
+        $resultado=$this->dataBase->query($sql)->fetch_assoc()['ID'];
+        return $resultado;
     }
 }

@@ -6,6 +6,8 @@ use App\Model\Exposicao;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DB\ExposicaoDAO;
+use App\DB\PessoaDAO;
+use App\Model\Users\Empregado;
 
 class InicialController extends Controller
 {
@@ -51,15 +53,16 @@ class InicialController extends Controller
 
     public function esqueciMinhaSenha()
     {
-        return view('telaEntrar.esqueciMinhaSenha');
+        return view('telaRedefinicaoSenha.esqueciMinhaSenha');
     }
 
-    public function linkRedefinicaoSenha(){
-        return view('telaEntrar.prosseguirRedefinicao');
+    public function linkRedefinicaoSenha(Request $request){
+
+        $variaveis = [
+            'email' => $request->usuario_email,
+            'token' => $request->token
+        ];
+        return view('telaRedefinicaoSenha.prosseguirRedefinicao', $variaveis);
     }
-    public function redefinirSenha($novaSenha){
-        $usuario = new Empregado();
-        $usuario->setSenha($novaSenha);
-        return view('telaEntrar.index');
-    }
+
 }

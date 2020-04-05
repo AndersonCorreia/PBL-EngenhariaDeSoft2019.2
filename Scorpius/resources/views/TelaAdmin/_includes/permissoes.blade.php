@@ -49,6 +49,8 @@
                                     value='{{"".$p['ID']."|".$t['ID']."|".$p['permissao']."|".$t['tipo']}}'
                                     name="p_t[]" >
                         @endif
+                        <input id="alteracao{{$p['ID']."_".$t['ID']}}" type="hidden" name=alteracoes[]
+                                    value='{{"".$p['permissao']."|".$t['tipo']."|"."naoAlterado"}}' >
                     </div>
                     @endforeach
                 </div>
@@ -63,12 +65,26 @@
 
     function preencher(obj){
 
-        $(obj).attr('onclick','esvaziar(this)').children("i").removeClass('far').addClass('fas');
+        label = $(obj).attr('onclick','esvaziar(this)');
+        label.children("i").removeClass('far').addClass('fas');
+        
+        alteracao = $("#alteracao"+label.attr("for").replace("|", "_"));
+        value = alteracao.val();
+        value = value.replace("naoAlterado","Adicionou");
+        value = value.replace("Removeu","naoAlterado");
+        alteracao.val(value);
     }
       
     function esvaziar(obj){
         
-        $(obj).attr('onclick','preencher(this)').children("i").removeClass('fas').addClass('far');
+        label = $(obj).attr('onclick','preencher(this)');
+        label.children("i").removeClass('fas').addClass('far');
+
+        alteracao = $("#alteracao"+label.attr("for").replace("|", "_"));
+        value = alteracao.val();
+        value = value.replace("naoAlterado","Removeu");
+        value = value.replace("Adicionou","naoAlterado");
+        alteracao.val(value);
     }
 
   </script>
