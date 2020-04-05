@@ -43,7 +43,9 @@
 
 
 <form method="get" action="#"> <!--bloco começa aqui -->
+foreach($agendamentos){
 
+}
 <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
     <table class="table-borderless col-12">
         <thead>

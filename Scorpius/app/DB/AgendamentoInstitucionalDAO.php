@@ -175,5 +175,15 @@ use App\Model\Agendamento;
         $responsavel_turma, $nivel_ensino, $ano_escolar];
         return $array;
     }
+
+    public function SELECT_AgendamentoInstitucionalByNomeInstituicao(string $nome){
+        $select1 = "SELECT ID FROM instituicao WHERE nome = '$nome'";
+        $result1 = mysqli_fetch_assoc($this->dataBase->query($select1));
+        $select2 = "SELECT ID FROM professor_instituicao WHERE instituicao_ID = '$result1[ID]'";
+        $result2 = mysqli_fetch_assoc($this->dataBase->query($select2));
+        $select3 = "SELECT ID FROM agendamento_institucional WHERE professor_instituicao_ID = '$result2[ID]'";
+        $result3 = mysqli_fetch_assoc($this->dataBase->query($select3));
+        return SELECT_AgendamentoInstitucionalById($result3[ID]);
+    }
 }
 

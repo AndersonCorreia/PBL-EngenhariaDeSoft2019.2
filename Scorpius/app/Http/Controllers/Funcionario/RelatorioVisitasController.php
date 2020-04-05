@@ -20,13 +20,13 @@ class RelatorioVisitasController extends Controller{
         $sql1 = "SELECT ID FROM agendamento_institucional";
         $result1 = $this->dataBase->query($sql1);
         $DAO = new AgendamentoInstitucionalDAO();
-        $array;
+        $agendamentos;
         $i = 0;
         while($row = mysqli_fetch_assoc($result1)){ 
-            $array[$i] = $DAO->SELECT_AgendamentoInstitucionalById($row[ID]);
+            $agendamentos[$i] = $DAO->SELECT_AgendamentoInstitucionalById($row[ID]);
             $i++;
         }
-        return $array;
+        return $agendamentos;
     }
 }
 ?>
