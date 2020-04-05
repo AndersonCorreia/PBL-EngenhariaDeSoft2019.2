@@ -56,8 +56,13 @@ class InicialController extends Controller
         return view('telaRedefinicaoSenha.esqueciMinhaSenha');
     }
 
-    public function linkRedefinicaoSenha(){
-        return view('telaRedefinicaoSenha.prosseguirRedefinicao');
+    public function linkRedefinicaoSenha(Request $request){
+
+        $variaveis = [
+            'email' => $request->usuario_email,
+            'token' => $request->token
+        ];
+        return view('telaRedefinicaoSenha.prosseguirRedefinicao', $variaveis);
     }
 
 }
