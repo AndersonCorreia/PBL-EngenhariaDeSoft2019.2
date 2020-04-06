@@ -20,6 +20,7 @@ class HorarioController extends Controller{
         try{
             $estagiarios = $DAO->buscaEstagiarioALL();
             $variaveis = [
+                'paginaAtual' => "Horários dos Estagiários",
                 'estagiarios'=> $estagiarios
             ];
         }catch(\Exception $e){
@@ -74,7 +75,7 @@ class HorarioController extends Controller{
     public function nenhumaProposta(){
         $variaveis = [
             'itensMenu' => getMenuLinks(),
-            'paginaAtual' => "Horarios estagiarios",
+            'paginaAtual' => "Horarios estagiarios"
         ];
 
         return view('TelaPropostaHorarioFuncionario.errorNenhumaProposta', $variaveis);
