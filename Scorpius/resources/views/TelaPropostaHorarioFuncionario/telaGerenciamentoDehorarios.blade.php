@@ -101,7 +101,7 @@
 <!-- Modal periodo de visita -->
 <div class="modal fade" id="modalPeridoVisita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog " role="document">
+    <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Período de visitação</h5>
@@ -128,7 +128,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="periodo_termino_campo" class="col-form-label">Data
-                                    Termino:</label>
+                                    Término:</label>
                                 <input type="date" class="form-control" name="data_final" id="periodo_termino_campo" />
                             </div>
                         </div>
