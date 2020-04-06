@@ -1,16 +1,14 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Check-in de Visitas')
+@section('title', 'Painel de Controle do Funcionário')
 
 @section('conteudo')
 {{csrf_field()}}
 <meta name="csrf-token" content="{{csrf_token()}}">
 <div class="scorpius-border">
     @if(session('tipo') == "estagiario")
-    @yield('checkinEstagiario')
+    @yield('telaDashboardFuncionario')
     @else
-    @yield('checkinFuncionario')
-    @endif
 </div>
 @endsection
 @section('js')
@@ -144,8 +142,8 @@
                     console.log(data);
                     
                     Swal.fire({
-                        title: 'Visita concluida!',
-                        text: "A visita foi concluida com sucesso.",
+                        title: 'Visita concluída!',
+                        text: "A visita foi concluída com sucesso.",
                         icon: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#28A745',

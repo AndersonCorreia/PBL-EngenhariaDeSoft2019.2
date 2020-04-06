@@ -1,5 +1,6 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
+
 @section('title', 'Painel de Controle do Funcionário')
 
 @section('conteudo')
@@ -12,26 +13,20 @@
     <div class="row">
         <div class="col-xl-4">
             <div class= "row mt-3 mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-dark text-white" titleProxVisita>
-                <h5 class="col-sm-12" nomeEscola>PRÓXIMAS VISITAS</h5>
+                <h6 class="col-sm-12" nomeEscola>PRÓXIMAS VISITAS INSTITUCIONAIS</h6>
             </div>
             
-            <div class= "row mt-3 mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-dark" proxVisita>
-                
-                <div class= "row mt-1 mx-3 p-2 scorpius-border-shadow border-top border-shadow bg-secondary text-white" dataVisita>
-                    <p class="h6 col-sm-12" nomeEscola>Hoje - 07/03/2020</p> <!--Substituir por acesso ao banco - data atual -->
-                </div>
-
-                <div class= "row mt-1 mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-white text-black" conteudoProxVisita>
-                    <p class="h6 col-sm-12" nomeEscola>Colégio Estadual Luís Eduardo Magalhães</p> <!--Substituir por acesso ao banco - nome da instituição -->
-                </div>
-
-                <div class= "row mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-white text-black" conteudoProxVisita>
-                    <p class="h6 col-sm-12" nomeEscola>Colégio Estadual Santo Antônio do Argoim</p>
-                </div>
-
-                <div class= "row mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-white text-black" conteudoProxVisita>
-                    <p class="h6 col-sm-12" nomeEscola>Colégio Estadual Ana Lúcia Magalhães</p>
-                </div>
+            
+            <div class= "row mt-3 mx-3 p-3 px-3 scorpius-border-shadow border-top border-shadow bg-dark" proxVisita>
+                @foreach($visitantes as $visita)
+                    @if(isset($visita['visitantes'][0]['aluno']))
+                    <div class= "row mt-1 mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-white text-black" conteudoProxVisita>
+                        <p class="h6 col-sm-12" nomeEscola>{{$visita['visitantes'][0]['instituicao']['nome']}}</p> <!--Substituir por acesso ao banco - nome da instituição -->
+                        <p class="h6 col-sm-12" dataVisita>Data: {{$visita['dia']['data']}}</p> 
+                        <p class="h6 col-sm-12" turnoVisita>Turno: {{strtoupper($visita['dia']['turno'])}}</p>
+                    </div>
+                    @endif
+                @endforeach
             </div>
         </div>
 
@@ -50,103 +45,29 @@
 
         <div class="col-xl-4">
             <div class= "row mt-3 mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-dark text-white" titleProxVisita>
-                <h5 class="col-sm-12" nomeEscola>CHECK-IN INSTITUIÇÕES</h5>
+                <h6 class="col-sm-12" nomeEscola>PRÓXIMAS VISITAS INDIVIDUAIS</h6>
             </div>
+
             <div class= "row mt-3 mx-3 p-1 px-3 scorpius-border-shadow border-top border-shadow bg-dark" escolas>
+                @foreach($visitantes as $visita)
+                @for($j = 1; $j < count($visita['visitantes']); $j++) {{-- {{dd($visita['visitantes'][1]['usuario'])}}
+                {{-- {{dd($visita)}} --}}
                 <div class="mt-1 mx-1 p-1">
-                    <div class="scorpius-border-shadow p-2" checkInst>
+                    <div class="scorpius-border-shadow p-1" checkInst>
                         <div class="row text-center">
-                            <div class="col-md-12">
-                                <p class="h6">
-                                    Colégio Estadual Luís Eduardo Magalhães <!--Substituir por acesso ao banco - nome da instituição --> 
-                                </p>
-                            </div>
-                            <div class="row mx-4">
-                                <div class="col-xl-4">
-                                    <form name="checkin" method="POST">
-                                        <input type="hidden" value="{ID}">
-                                        <button class="btn btn-outline-warning" aria-pressed="false" posBtn>
-                                            Presente <!--Dá efeito de "realizada" ao campo "status" da tabela "visita"-->
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="col-xl-4 mx-4">
-                                    <form name="cancelar" method="POST">
-                                        <input type="hidden" value="{ID}">
-                                        <button class="btn btn-outline-danger" aria-pressed="false" posBtn>
-                                            Ausente  <!--Dá efeito de "não realizada" ao campo "status" da tabela "visita"-->
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        
                             
-                    </div>
-                </div>
-                
-                <div class="p-1 mt-1 mx-1">
-                    <div class="scorpius-border-shadow p-2" checkInst>
-                        <div class="row text-center">
-                            <div class="col-md-12">
-                                <p class="h6">
-                                    Colégio Estadual Santo Antônio do Argoim
+                                <p class="h6 col-sm-12"nomeVisitante>
+                                    {{$visita['visitantes'][$j]['usuario'][1]}} <!--Substituir por acesso ao banco - nome da instituição --> 
                                 </p>
-                            </div>
-                            <div class="row mx-4">
-                                <div class="col-xl-4">
-                                    <form name="checkin" method="POST">
-                                        <input type="hidden" value="{ID}">
-                                        <button class="btn btn-outline-warning" aria-pressed="false" posBtn>
-                                            Presente
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="col-xl-4 mx-4">
-                                    <form name="cancelar" method="POST">
-                                        <input type="hidden" value="{ID}">
-                                        <button class="btn btn-outline-danger" aria-pressed="false" posBtn>
-                                            Ausente
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>   
+                                <p class="h6 col-sm-12" dataVisita>Data: {{$visita['dia']['data']}}</p> 
+                                <p class="h6 col-sm-12" turnoVisita>Turno: {{strtoupper($visita['dia']['turno'])}}</p>
+                            
+                        </div>    
+
                     </div>
                 </div>
-
-                                
-                <div class="p-1 mt-1 mx-1">
-                    <div class="scorpius-border-shadow p-2" checkInst>
-                        <div class="row text-center">
-                            <div class="col-md-12">
-                                <p class="h6">
-                                    Colégio Estadual Ana Lúcia Magalhães
-                                </p>
-                            </div>
-                            <div class="row mx-4">
-                                <div class="col-xl-4">
-                                    <form name="checkin" method="POST">
-                                        <input type="hidden" value="{ID}">
-                                        <button class="btn btn-outline-warning" aria-pressed="false" posBtn>
-                                            Presente
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="col-xl-4 mx-4">
-                                    <form name="cancelar" method="POST">
-                                        <input type="hidden" value="{ID}">
-                                        <button class="btn btn-outline-danger" aria-pressed="false" posBtn>
-                                            Ausente
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>
-                </div>
-
+                @endfor
+                @endforeach
             </div>
         </div>
     </div>
@@ -154,36 +75,50 @@
 </form>
 
 
-
-
 <style>
     [nomeEscola]{
         text-align: center;
+        word-wrap:break-word;
+      
+    }
+
+    [nomeVisitante]{
+        text-align: center;
+        word-wrap:break-word;
+       
+    }
+
+    [dataVisita]{
+        text-align: center;
+        color: red; 
+        word-wrap:break-word;
+       
+    }
+
+    [turnoVisita]{
+        text-align: center;
+        color: blue; 
+        word-wrap:break-word;
     }
 
     [titleProxVisita]{
         width: 300px;
-        height: 60px;
-    }
-
-    [dataVisita]{
-        width: 250px;
-        height: 40px;
+        height: 70px;
     }
 
     [titleClima]{
         width: 370px;
-        height: 60px;
+        height: 70px;
     }
 
     [proxVisita]{
         width: 300px;
-        height: 370px;
+        min-height: 370px;
     }
 
     [conteudoProxVisita]{
         width: 250px;
-        height: 80px;  
+        height: 130px; 
     }
 
     [clima]{
@@ -193,15 +128,12 @@
 
     [escolas]{
         width: 300px; 
-        height: 370px;
+        min-height: 370px;
     }
 
     [checkInst]{
         width: 250px;
-        height: 100px;
-    }
-    [posBtn]{
-
+        min-height: 80px;
     }
 
     [expand]{

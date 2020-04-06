@@ -6,7 +6,7 @@
 @endsection
 @section('checkinFuncionario')
 <div class="container-fluid bg-white scorpius-border p-4">
-  <p class="h3 mt-1">Próximas visitas</p>
+  <p class="h3 mt-1">Próximas Visitas</p>
   @if ($visitantes == NULL)
   <div class="alert alert-secondary" role="alert">Não há visitas marcadas.</div>
   @else
