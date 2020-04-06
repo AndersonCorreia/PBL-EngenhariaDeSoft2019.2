@@ -16,7 +16,7 @@ use App\Model\Agendamento;
 
     function INSERT($agendamento): bool
     {
-        $this->dataBase->autocommit(false); //desativando modificações automaticas no banco
+        $this->dataBase->autocommit(false); //desativando modificações automáticas no banco
 
         $visitaID = $agendamento->getVisita()->getID();
         $observacao = $agendamento->getObservacao();
@@ -24,15 +24,15 @@ use App\Model\Agendamento;
         $turmaID = $agendamento->getTurmaID(); 
         $professorInstituicaoID = $agendamento->getProfessorInstituicaoID(); 
         $sql = "INSERT INTO agendamento_institucional (visita, observacao, status, turma_ID, professor_instituicao_ID) 
-                VALUE ( '$visitaID', '$observacao', '$statusAg', '$turmaID', '$professorInstituicaoID')";
+                VALUE ('$visitaID', '$observacao', '$statusAg', '$turmaID', '$professorInstituicaoID')";
         $resultado = $this->dataBase->query($sql);
 
         $agendamento->setID($this);
         $ID = $agendamento->getID();
 
-        $this->INSERT_Alunos( $agendamento->getAlunos(), $ID);
-        $this->INSERT_Responsaveis( $agendamento->getResponsaveis(), $ID);
-        $this->INSERT_Exposicoes( $agendamento->getExposicoes(), $ID);
+        $this->INSERT_Alunos($agendamento->getAlunos(), $ID);
+        $this->INSERT_Responsaveis($agendamento->getResponsaveis(), $ID);
+        $this->INSERT_Exposicoes($agendamento->getExposicoes(), $ID);
 
         $this->dataBase->commit();
 
@@ -97,7 +97,6 @@ use App\Model\Agendamento;
     }
 
     public function getExposicoesByAgendamentoID(int $id){
-
         $select = "titulo, descricao";
         $join = "exposicao_agendamento_institucional ea LEFT JOIN exposicao e ON ea.exposicao_ID = e.ID";
         $sql = "SELECT $select FROM $join WHERE agendamento_institucional_ID = ?";
@@ -109,7 +108,6 @@ use App\Model\Agendamento;
     }
 
     public function getVisitantesByAgendamentoID(int $id){
-
         $select = "nome, idade";
         $sql = "SELECT $select FROM visitante_institucional WHERE agendamento_institucional_ID = ?";
         $stmt = $this->dataBase->prepare($sql);
@@ -119,7 +117,6 @@ use App\Model\Agendamento;
     }
 
     public function getResponsaveisByAgendamentoID(int $id){
-
         $select = "nome, cargo";
         $sql = "SELECT $select FROM responsavel WHERE agendamento_institucional_ID = ?";
         $stmt = $this->dataBase->prepare($sql);
@@ -146,6 +143,17 @@ use App\Model\Agendamento;
 
     }
 
+    /**
+     * Função que retorna, em um array, os dados de um agendamento institucional, da visita e da instituição em questão, 
+     * de acordo com o id do agendamento. Através de uma sequência de seleções diretas no banco de dados.
+     * Sendo, essas informações retornadas, o nome da instituição, o nome da cidade da instituição, a data da visita,
+     * o turno da visita, o status da visita, o telefone da instituição, o nome do responsável pela turma, o nível de ensino da
+     * turma e o ano escolar da turma.
+     * Serve para expor os agendamentos com um determinado id, como por exemplo na tela de gerenciamento de visitas.
+     * 
+     * @param string $id do agendamento.
+     * @return array com dados selecionados através do id passado por parâmetro.  
+     */
     public function SELECT_AgendamentoInstitucionalById(int $id): array{
         $sql1 = "SELECT visita, turma_ID, professor_instituicao_ID FROM agendamento_institucional WHERE ID = '$id'";
         $result1 = $this->dataBase->query($sql1);
@@ -176,6 +184,17 @@ use App\Model\Agendamento;
         return $array;
     }
 
+    /**
+     * Função que retorna, em um array, os dados de um agendamento institucional, da visita e da instituição em questão, 
+     * de acordo com o nome da instituição do agendamento. Através de uma sequência de seleções diretas no banco de dados.
+     * Sendo, essas informações retornadas, o nome da instituição, o nome da cidade da instituição, a data da visita,
+     * o turno da visita, o status da visita, o telefone da instituição, o nome do responsável pela turma, o nível de ensino da
+     * turma e o ano escolar da turma.
+     * Serve para expor os agendamentos de uma determinada instituição, como por exemplo na tela de gerenciamento de visitas.
+     * 
+     * @param string $nome da instituição que realizou o agendamento.
+     * @return array com dados selecionados através do nome passado por parâmetro.  
+     */
     public function SELECT_AgendamentoInstitucionalByNomeInstituicao(string $nome){
         $select1 = "SELECT ID FROM instituicao WHERE nome = '$nome'";
         $result1 = mysqli_fetch_assoc($this->dataBase->query($select1));
@@ -183,7 +202,7 @@ use App\Model\Agendamento;
         $result2 = mysqli_fetch_assoc($this->dataBase->query($select2));
         $select3 = "SELECT ID FROM agendamento_institucional WHERE professor_instituicao_ID = '$result2[ID]'";
         $result3 = mysqli_fetch_assoc($this->dataBase->query($select3));
-        return SELECT_AgendamentoInstitucionalById($result3[ID]);
+        return SELECT_AgendamentoInstitucionalById($result3['ID']);
     }
 }
 

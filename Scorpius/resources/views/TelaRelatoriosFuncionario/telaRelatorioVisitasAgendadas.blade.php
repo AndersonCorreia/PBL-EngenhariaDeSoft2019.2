@@ -43,7 +43,7 @@
 
 
 <form method="get" action="#"> <!--bloco começa aqui -->
-foreach($agendamentos){
+@foreach($agendamentos){
 
 }
 <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
@@ -51,35 +51,36 @@ foreach($agendamentos){
         <thead>
         <!-- Somente exemplificando a estrutura -->
             <tr class="table-secondary">
-                <th>Nome da Instituição:</th> <td>Colégio Estadual Odorico Tavares</td>
-                <th>Cidade:</th> <td>Feira de Santana</td>
+                <th>Nome da Instituição:</th> <td>$agendamentos[$i]['nome_instituicao']</td>
+                <th>Cidade:</th> <td>$agendamentos[$i]['cidade_instituicao']</td>
             </tr>
         </thead>
 
         <thead>
             <tr>
-                <th>Data da Visita:</th> <td>28/11/2019</td> <!-- Exemplo da estrutura -->
-                <th>Turno da Visita:</th> <td>Manhã</td>
+                <th>Data da Visita:</th> <td>$agendamentos[$i]['data_visita']</td> <!-- Exemplo da estrutura -->
+                <th>Turno da Visita:</th> <td>$agendamentos[$i]['turno_visita']</td>
             </tr>
         </thead>
 
         <thead>
             <tr>
-                <th>Status da Visita:</th> <td>Realizada</td>
-                <th>Telefone da Instituição:</th> <td>7531618000</td>
+                <th>Status da Visita:</th> <td>$agendamentos[$i]['status_visita']</td>
+                <th>Telefone da Instituição:</th> <td>$agendamentos[$i]['telefone_instituicao']</td>
             </tr>
         </thead>
 
             <thead>
                 <tr>
-                    <th>Total de Alunos da Turma:</th> <td>5</td>
-                    <th>Responsável pela Turma:</th> <td>Augusto Vicente</td>
+                    <th>Total de Alunos da Turma:</th> <td>$visitas[0]</td> <!--verificar se estar funcionando, 
+                    visto que $visitas so é usado mais para frente -->
+                    <th>Responsável pela Turma:</th> <td>$agendamentos[$i]['responsavel_turma']</td>
                 </tr>
             </thead>
             <thead>
                 <tr>
-                    <th>Nível de Ensino da Turma:</th> <td> Ensino Médio</td>
-                    <th>Ano Escolar da Turma:</th> <td>1º Ano</td> 
+                    <th>Nível de Ensino da Turma:</th> <td>$agendamentos[$i]['nivel_ensino']</td>
+                    <th>Ano Escolar da Turma:</th> <td>$agendamentos[$i]['ano_escolar']</td>
                 </tr>
             </thead>
         </table>
@@ -104,43 +105,44 @@ foreach($agendamentos){
                         <table class="table-borderless col-12">        
                             <thead>
                                 <tr class="table-secondary">
-                                    <th>Nome da Instituição:</th> <td>Colégio Estadual Odorico Tavares</td>
+                                    <th>Nome da Instituição:</th> <td>$agendamentos[$i]['nome_instituicao']</td>
                                 </tr>
                                
                                 <tr>
-                                    <th>Cidade:</th> <td>Feira de Santana</td> <!-- Exemplo da estrutura -->
+                                    <th>Cidade:</th> <td>$agendamentos[$i]['cidade_instituicao']</td>
                                 </tr>
 
                                 <tr>
-                                    <th>Data da Visita:</th> <td>28/11/2019</td>
+                                    <th>Data da Visita:</th> <td>$agendamentos[$i]['data_visita']</td>
                                 </tr>
 
                                 <tr>
-                                    <th>Turno da Visita:</th> <td>Manhã</td>
+                                    <th>Turno da Visita:</th> <td>$agendamentos[$i]['turno_visita']</td>
                                 </tr>
 
                                 <tr>
-                                    <th>Status da Visita:</th> <td>Realizada</td>
+                                    <th>Status da Visita:</th> <td>$agendamentos[$i]['status_visita']</td>
                                 </tr>
 
                                 <tr>
-                                    <th>Telefone da Instituição:</th> <td>7531618000</td>
+                                    <th>Telefone da Instituição:</th> <td>$agendamentos[$i]['telefone_instituicao'] ?></td>
                                 </tr>
 
                                 <tr>
-                                    <th>Total de Alunos da Turma:</th> <td>40</td>
+                                    <th>Total de Alunos da Turma:</th> <td>$visitas[0]</td> <!--verificar se estar funcionando, 
+                                    visto que $visitas so é usado mais para frente -->
                                 </tr>
 
                                 <tr>
-                                    <th>Responsável pela Turma:</th> <td>Augusto Vicente</td>
+                                    <th>Responsável pela Turma:</th> <td>$agendamentos[$i]['responsavel_turma']</td>
                                 </tr>
 
                                 <tr>
-                                    <th>Nível de Ensino da Turma:</th> <td> Ensino Médio</td>
+                                    <th>Nível de Ensino da Turma:</th> <td>$agendamentos[$i]['nivel_ensino']</td>
                                 </tr>
 
                                 <tr>
-                                    <th>Ano Escolar da Turma:</th> <td>1º Ano</td> 
+                                    <th>Ano Escolar da Turma:</th> <td>$agendamentos[$i]['ano_escolar']</td> 
                                 </tr>
                             </thead>
 
@@ -150,31 +152,20 @@ foreach($agendamentos){
                             <thead>
                                 <tr class="table-warning">
                                     <th>Lista Completa de Alunos:</th> <td>              </td>
-                                </tr>
-                                   
+                                </tr> 
+
                                 <tr>
                                     <th>Nome:</th> <th>Idade:</th>
                                 </tr>
-    
-                                <tr>
-                                    <td>Idelvando Cerqueira</td> <td>20 anos</td>
-                                </tr>
-    
-                                <tr>
-                                    <td>Anderson Correia</td> <td>21 anos</td>
-                                </tr>
-    
-                                <tr>
-                                    <td>Esther Araújo</td> <td>21 anos</td>
-                                </tr>
-    
-                                <tr>
-                                    <td>Mariana Lima</td> <td>19 anos</td>
-                                </tr>
-    
-                                <tr>
-                                    <td>Papa Francisco</td> <td>70 anos</td>
-                                </tr>
+                                $i=1;
+                                @foreach($visitantes){
+                                    <tr>
+                                        <td><?php $visitantes[$i]['nome'] ?></td>
+                                        <td><?php $visitantes[$i]['idade'] ?></td>
+                                        $i++;
+                                    </tr>
+                                }
+
                             </thead>
     
                         </table>
