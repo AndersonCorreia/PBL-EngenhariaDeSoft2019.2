@@ -41,145 +41,144 @@
 </div>
 
 
-
-<form method="get" action="#"> <!--bloco começa aqui -->
+$i=0;
 @foreach($agendamentos){
-
-}
-<div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
-    <table class="table-borderless col-12">
-        <thead>
-        <!-- Somente exemplificando a estrutura -->
-            <tr class="table-secondary">
-                <th>Nome da Instituição:</th> <td>$agendamentos[$i]['nome_instituicao']</td>
-                <th>Cidade:</th> <td>$agendamentos[$i]['cidade_instituicao']</td>
-            </tr>
-        </thead>
-
-        <thead>
-            <tr>
-                <th>Data da Visita:</th> <td>$agendamentos[$i]['data_visita']</td> <!-- Exemplo da estrutura -->
-                <th>Turno da Visita:</th> <td>$agendamentos[$i]['turno_visita']</td>
-            </tr>
-        </thead>
-
-        <thead>
-            <tr>
-                <th>Status da Visita:</th> <td>$agendamentos[$i]['status_visita']</td>
-                <th>Telefone da Instituição:</th> <td>$agendamentos[$i]['telefone_instituicao']</td>
-            </tr>
-        </thead>
-
-            <thead>
-                <tr>
-                    <th>Total de Alunos da Turma:</th> <td>$visitas[0]</td> <!--verificar se estar funcionando, 
-                    visto que $visitas so é usado mais para frente -->
-                    <th>Responsável pela Turma:</th> <td>$agendamentos[$i]['responsavel_turma']</td>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th>Nível de Ensino da Turma:</th> <td>$agendamentos[$i]['nivel_ensino']</td>
-                    <th>Ano Escolar da Turma:</th> <td>$agendamentos[$i]['ano_escolar']</td>
-                </tr>
-            </thead>
-        </table>
-    </form>
-    <button type="button" class="btn btn-secondary float-left" data-toggle="modal"
-    data-target=".modal-dados-completos" expand>Dados Completos</button>
-    
-    <!-- modal dos dados completos -->
-    
-    <div class="modal fade modal-dados-completos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-secondary text-white">
-                    <h5 class="modal-title" id="modal-cadastrar-turmaTitle">Dados Completos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+    $i++;
+    <form method="get" action="#"> <!--bloco começa aqui -->
+        <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
+            <table class="table-borderless col-12">
+                <thead>
                 <!-- Somente exemplificando a estrutura -->
-                    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" style="overflow-y: auto;" bordaModal>
-                        <table class="table-borderless col-12">        
-                            <thead>
-                                <tr class="table-secondary">
-                                    <th>Nome da Instituição:</th> <td>$agendamentos[$i]['nome_instituicao']</td>
-                                </tr>
-                               
-                                <tr>
-                                    <th>Cidade:</th> <td>$agendamentos[$i]['cidade_instituicao']</td>
-                                </tr>
+                    <tr class="table-secondary">
+                        <th>Nome da Instituição:</th> <td>$agendamentos[$i]['instituicao']</td>
+                        <th>Cidade:</th> <td>$agendamentos[$i]['cidade']</td>
+                    </tr>
+                </thead>
 
-                                <tr>
-                                    <th>Data da Visita:</th> <td>$agendamentos[$i]['data_visita']</td>
-                                </tr>
+                <thead>
+                    <tr>
+                        <th>Data da Visita:</th> <td>$agendamentos[$i]['data']</td> <!-- Exemplo da estrutura -->
+                        <th>Turno da Visita:</th> <td>$agendamentos[$i]['turno']</td>
+                    </tr>
+                </thead>
 
-                                <tr>
-                                    <th>Turno da Visita:</th> <td>$agendamentos[$i]['turno_visita']</td>
-                                </tr>
+                <thead>
+                    <tr>
+                        <th>Status da Visita:</th> <td>$agendamentos[$i]['visitaStatus']</td>
+                        <th>Telefone da Instituição:</th> <td>$agendamentos[$i]['instituicaoTelefone']</td>
+                    </tr>
+                </thead>
 
-                                <tr>
-                                    <th>Status da Visita:</th> <td>$agendamentos[$i]['status_visita']</td>
-                                </tr>
-
-                                <tr>
-                                    <th>Telefone da Instituição:</th> <td>$agendamentos[$i]['telefone_instituicao'] ?></td>
-                                </tr>
-
-                                <tr>
-                                    <th>Total de Alunos da Turma:</th> <td>$visitas[0]</td> <!--verificar se estar funcionando, 
-                                    visto que $visitas so é usado mais para frente -->
-                                </tr>
-
-                                <tr>
-                                    <th>Responsável pela Turma:</th> <td>$agendamentos[$i]['responsavel_turma']</td>
-                                </tr>
-
-                                <tr>
-                                    <th>Nível de Ensino da Turma:</th> <td>$agendamentos[$i]['nivel_ensino']</td>
-                                </tr>
-
-                                <tr>
-                                    <th>Ano Escolar da Turma:</th> <td>$agendamentos[$i]['ano_escolar']</td> 
-                                </tr>
-                            </thead>
-
-                        </table>
-
-                        <table class="table-borderless col-12">
-                            <thead>
-                                <tr class="table-warning">
-                                    <th>Lista Completa de Alunos:</th> <td>              </td>
-                                </tr> 
-
-                                <tr>
-                                    <th>Nome:</th> <th>Idade:</th>
-                                </tr>
-                                $i=1;
-                                @foreach($visitantes){
-                                    <tr>
-                                        <td><?php $visitantes[$i]['nome'] ?></td>
-                                        <td><?php $visitantes[$i]['idade'] ?></td>
-                                        $i++;
-                                    </tr>
-                                }
-
-                            </thead>
+                <thead>
+                    <tr>
+                        <th>Total de Alunos da Turma:</th> <td>$visitas[0]</td> <!--verificar se estar funcionando, 
+                        visto que $visitas so é usado mais para frente -->
+                        <th>Responsável pela Turma:</th> <td>$agendamentos[$i]['usuario']</td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th>Nível de Ensino da Turma:</th> <td>$agendamentos[$i]['ensino']</td>
+                        <th>Ano Escolar da Turma:</th> <td>$agendamentos[$i]['ano_escolar']</td>
+                    </tr>
+                </thead>
+            </table>
+        </form>
+        <button type="button" class="btn btn-secondary float-left" data-toggle="modal"
+        data-target=".modal-dados-completos" expand>Dados Completos</button>
     
-                        </table>
-                        
+        <!-- modal dos dados completos -->
+        <div class="modal fade modal-dados-completos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-secondary text-white">
+                        <h5 class="modal-title" id="modal-cadastrar-turmaTitle">Dados Completos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                    <div class="modal-body">
+                    <!-- Somente exemplificando a estrutura -->
+                        <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" style="overflow-y: auto;" bordaModal>
+                            <table class="table-borderless col-12">        
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th>Nome da Instituição:</th> <td>$agendamentos[$i]['instituicao']</td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <th>Cidade:</th> <td>$agendamentos[$i]['cidade']</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Data da Visita:</th> <td>$agendamentos[$i]['data']</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Turno da Visita:</th> <td>$agendamentos[$i]['turno']</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Status da Visita:</th> <td>$agendamentos[$i]['visitaStatus']</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Telefone da Instituição:</th> <td>$agendamentos[$i]['instituicaoTelefone'] ?></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Total de Alunos da Turma:</th> <td>$visitas[0]</td> <!--verificar se estar funcionando, 
+                                        visto que $visitas so é usado mais para frente -->
+                                    </tr>
+
+                                    <tr>
+                                        <th>Responsável pela Turma:</th> <td>$agendamentos[$i]['usuario']</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Nível de Ensino da Turma:</th> <td>$agendamentos[$i]['ensino']</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Ano Escolar da Turma:</th> <td>$agendamentos[$i]['ano_escolar']</td> 
+                                    </tr>
+                                </thead>
+
+                            </table>
+
+                            <table class="table-borderless col-12">
+                                <thead>
+                                    <tr class="table-warning">
+                                        <th>Lista Completa de Alunos:</th> <td>              </td>
+                                    </tr> 
+
+                                    <tr>
+                                        <th>Nome:</th> <th>Idade:</th>
+                                    </tr>
+                                    $j=1;
+                                    @foreach($visitantes){
+                                        <tr>
+                                            <td>$visitantes[$j]['nome']</td>
+                                            <td>$visitantes[$j]['idade']</td>
+                                            $j++;
+                                        </tr>
+                                    }
+
+                                </thead>
+        
+                            </table>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                    </div>
                 </div>
             </div>
         </div>
+        </div>
     </div>
-    </div>
-</div>
+}
 
 </div>
 

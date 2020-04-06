@@ -140,53 +140,12 @@ use App\Model\Agendamento;
         $result = $this->dataBase->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
-
     }
 
     /**
      * Função que retorna, em um array, os dados de um agendamento institucional, da visita e da instituição em questão, 
-     * de acordo com o id do agendamento. Através de uma sequência de seleções diretas no banco de dados.
-     * Sendo, essas informações retornadas, o nome da instituição, o nome da cidade da instituição, a data da visita,
-     * o turno da visita, o status da visita, o telefone da instituição, o nome do responsável pela turma, o nível de ensino da
-     * turma e o ano escolar da turma.
-     * Serve para expor os agendamentos com um determinado id, como por exemplo na tela de gerenciamento de visitas.
-     * 
-     * @param string $id do agendamento.
-     * @return array com dados selecionados através do id passado por parâmetro.  
-     */
-    public function SELECT_AgendamentoInstitucionalById(int $id): array{
-        $sql1 = "SELECT visita, turma_ID, professor_instituicao_ID FROM agendamento_institucional WHERE ID = '$id'";
-        $result1 = $this->dataBase->query($sql1);
-        $row = mysqli_fetch_assoc($result1);
-        $sql2 = "SELECT instituicao_ID, usuario_ID FROM professor_instituicao WHERE ID = '$row[professor_instituicao_ID]'";
-        $result2 = mysqli_fetch_assoc($this->dataBase->query($sql2));
-        $sql3 = "SELECT nome, telefone, cidade_UF_ID FROM instituicao WHERE ID = '$result2[instituicao_ID]'";
-        $result3 = mysqli_fetch_assoc($this->dataBase->query($sql3));
-        $sql4 = "SELECT cidade FROM cidade_uf WHERE ID = '$result3[cidade_UF_ID]'";
-        $result4 = mysqli_fetch_assoc($this->dataBase->query($sql4));
-        $sql5 = "SELECT nome FROM usuario WHERE ID = '$result2[usuario_ID]'";
-        $result5 = mysqli_fetch_assoc($this->dataBase->query($sql5));
-        $sql6 = "SELECT ano_escolar, ensino FROM turma WHERE ID = '$row[turma_ID]'";
-        $result6 = mysqli_fetch_assoc($this->dataBase->query($sql6));
-        $sql7 = "SELECT data_visita, turno, status FROM visita WHERE ID = '$row[visita]'";
-        $result7 = mysqli_fetch_assoc($this->dataBase->query($sql7));
-        $nome_instituicao = $result3['nome'];
-        $cidade_instituicao = $result4['cidade'];
-        $data_visita = $result7['data_visita'];
-        $turno_visita = $result7['turno'];
-        $status_visita = $result7['status'];
-        $telefone_instituicao = $result3['telefone'];
-        $responsavel_turma = $result5['nome'];
-        $nivel_ensino = $result6['ensino'];
-        $ano_escolar = $result6['ano_escolar'];
-        $array = [$nome_instituicao, $cidade_instituicao, $data_visita, $turno_visita, $status_visita, $telefone_instituicao,
-        $responsavel_turma, $nivel_ensino, $ano_escolar];
-        return $array;
-    }
-
-    /**
-     * Função que retorna, em um array, os dados de um agendamento institucional, da visita e da instituição em questão, 
-     * de acordo com o nome da instituição do agendamento. Através de uma sequência de seleções diretas no banco de dados.
+     * de acordo com o nome da instituição do agendamento. Através de uma seleção direta na view visita_institucional,
+     * no banco de dados.
      * Sendo, essas informações retornadas, o nome da instituição, o nome da cidade da instituição, a data da visita,
      * o turno da visita, o status da visita, o telefone da instituição, o nome do responsável pela turma, o nível de ensino da
      * turma e o ano escolar da turma.
@@ -196,13 +155,13 @@ use App\Model\Agendamento;
      * @return array com dados selecionados através do nome passado por parâmetro.  
      */
     public function SELECT_AgendamentoInstitucionalByNomeInstituicao(string $nome){
-        $select1 = "SELECT ID FROM instituicao WHERE nome = '$nome'";
-        $result1 = mysqli_fetch_assoc($this->dataBase->query($select1));
-        $select2 = "SELECT ID FROM professor_instituicao WHERE instituicao_ID = '$result1[ID]'";
-        $result2 = mysqli_fetch_assoc($this->dataBase->query($select2));
-        $select3 = "SELECT ID FROM agendamento_institucional WHERE professor_instituicao_ID = '$result2[ID]'";
-        $result3 = mysqli_fetch_assoc($this->dataBase->query($select3));
-        return SELECT_AgendamentoInstitucionalById($result3['ID']);
+        
+        $select = "SELECT data, turno, visitaStatus, ano_escolar, ensino, instituicao, instituicaoTelefone, cidade, usuario";
+        $where = "instituicao = '$nome'";
+        $sql = "$select FROM visita_institucional WHERE $where ORDER BY data";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
 

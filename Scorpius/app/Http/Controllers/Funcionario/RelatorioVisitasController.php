@@ -18,16 +18,10 @@ class RelatorioVisitasController extends Controller{
 
     /**Função que retorna todos os agendamentos institucionais */
     public function getAgendamentosInstitucionais(){
-        $sql1 = "SELECT ID FROM agendamento_institucional";
-        $result1 = $this->dataBase->query($sql1);
+        $nome_instituicao = $_POST['nomeInstituicao'];
         $DAO = new AgendamentoInstitucionalDAO();
-        $agendamentos;
-        $i = 0;
-        while($row = mysqli_fetch_assoc($result1)){ 
-            $agendamentos[$i] = $DAO->SELECT_AgendamentoInstitucionalById($row['ID']);
-            $i++;
-        }
-        return $agendamentos;
+        $agendamentos = $DAO->SELECT_AgendamentoInstitucionalByNomeInstituicao($nome_instituicao);
+        //return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $agendamentos);
     }
 
     /**Função que retorna todos os visitantes de todos os agendamentos institucionais */
@@ -42,7 +36,7 @@ class RelatorioVisitasController extends Controller{
             $i++;
         }
         $visitantes[0] = $i;
-        return $visitantes;
+        //return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $visitantes);
     }
 }
 ?>
