@@ -101,6 +101,8 @@ INSERT INTO instituicao (ID, nome, responsavel, endereco, numero, cep, telefone,
 
 -- Insert em professor_instituicao --
 INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (1, 3, 1, TRUE, 202, 701);
+-- para o usuario scorpius --
+INSERT INTO professor_instituicao(ID, cont_Agendamento, cont_agendamento_cancelado, ativo, instituicao_ID, usuario_ID) VALUES (2, 2, 0, TRUE, 202, 6);
 
 -- INSERT de visitas --
 INSERT INTO visita (data_visita, turno ) VALUES ('2020-02-10','tarde');
@@ -143,11 +145,6 @@ INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(5, 9, 'confirmado
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(6, 11, 'confirmado', 601);
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(7, 13, 'cancelado pelo usuario', 601);
 INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(8, 15, 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(9, 16, 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(10, 16, 'lista de espera', 601);
-INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(11, 20, 'confirmado', 601);
-INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(12, 20, 'lista de espera', 601);
-INSERT INTO agendamento (ID, Visita, Status, usuario_ID)VALUES(13, 20, 'lista de espera', 601);
 
 -- INSERT das turmas --
 INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (1, 'A', '6º ano', 'Ensino Fundamental', 701);
@@ -158,6 +155,12 @@ INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (5, 'C', 
 INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (6, 'B', '3º ano', 'Ensino Médio', 701);
 INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (7, 'A', '4º semestre', 'Ensino Técnico', 701);
 INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (8, 'B', '3º semestre', 'Ensino Superior', 701);
+-- para o usuario scorpius --
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (9, 'A', '8º ano', 'Ensino Fundamental', 6);
+INSERT INTO turma (ID, nome, ano_escolar, ensino, professor_ID) VALUES (10, 'B', '8º ano', 'Ensino Fundamental', 6);
+
+INSERT INTO aluno(ID, nome, idade, turma_ID)VALUES (1, 'Ana Carolina', 12, 9);
+INSERT INTO aluno(ID, nome, idade, turma_ID)VALUES (2, 'João Pedro', 12, 10);
 
 -- INSERT dos Agendamentos de Instituições --
 INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
@@ -176,6 +179,9 @@ INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_i
 (7, 14, 'confirmado', 5, 1);
 INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_instituicao_ID) VALUES
 (8, 16,'cancelado pelo usuario', 8, 1);
+-- para o usuario scorpius --
+INSERT INTO agendamento_institucional(ID, Visita, Status, turma_ID, professor_instituicao_ID)VALUES(9, 24, 'confirmado', 9,2);
+INSERT INTO agendamento_institucional(ID, Visita, Status, turma_ID, professor_instituicao_ID)VALUES(10, 24, 'lista de espera', 10, 2);
 
 -- INSERT notificações --
 INSERT INTO notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES

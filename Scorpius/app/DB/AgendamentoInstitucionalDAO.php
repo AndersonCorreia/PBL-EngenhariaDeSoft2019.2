@@ -39,7 +39,7 @@ use App\Model\Agendamento;
         return $resultado;
     }
 
-    private function INSERT_Alunos( array $Alunos, int $ID){
+    private function INSERT_Alunos(array $Alunos, int $ID){
         $count = count($Alunos);
         for($i = 0; $i < $count; $i++){
             $nome = $Alunos[$i]['nome'];
@@ -50,7 +50,7 @@ use App\Model\Agendamento;
         }
     }
 
-    private function INSERT_Exposicoes( array $Exposicoes, int $ID){
+    private function INSERT_Exposicoes(array $Exposicoes, int $ID){
         $count = count($Exposicoes);
         for($i = 0; $i < $count; $i++){
             $expID = $Exposicoes[$i];
@@ -60,7 +60,7 @@ use App\Model\Agendamento;
         }
     }
 
-    private function INSERT_Responsaveis( array $Responsaveis, int $ID){
+    private function INSERT_Responsaveis(array $Responsaveis, int $ID){
         $count = count($Responsaveis);
         for($i = 0; $i < $count; $i++){
             $nome = $Responsaveis[$i]['nome'];
@@ -144,6 +144,46 @@ use App\Model\Agendamento;
 
         return $result->fetch_all(MYSQLI_ASSOC);
 
+    }
+
+    public function SELECT_AgendamentoInstitucionalById(int $id): array{
+        $sql1 = "SELECT visita, turma_ID, professor_instituicao_ID FROM agendamento_institucional WHERE ID = '$id'";
+        $result1 = $this->dataBase->query($sql1);
+        $row = mysqli_fetch_assoc($result1);
+        $sql2 = "SELECT instituicao_ID, usuario_ID FROM professor_instituicao WHERE ID = '$row[professor_instituicao_ID]'";
+        $result2 = mysqli_fetch_assoc($this->dataBase->query($sql2));
+        $sql3 = "SELECT nome, telefone, cidade_UF_ID FROM instituicao WHERE ID = '$result2[instituicao_ID]'";
+        $result3 = mysqli_fetch_assoc($this->dataBase->query($sql3));
+        $sql4 = "SELECT cidade FROM cidade_uf WHERE ID = '$result3[cidade_UF_ID]'";
+        $result4 = mysqli_fetch_assoc($this->dataBase->query($sql4));
+        $sql5 = "SELECT nome FROM usuario WHERE ID = '$result2[usuario_ID]'";
+        $result5 = mysqli_fetch_assoc($this->dataBase->query($sql5));
+        $sql6 = "SELECT ano_escolar, ensino FROM turma WHERE ID = '$row[turma_ID]'";
+        $result6 = mysqli_fetch_assoc($this->dataBase->query($sql6));
+        $sql7 = "SELECT data_visita, turno, status FROM visita WHERE ID = '$row[visita]'";
+        $result7 = mysqli_fetch_assoc($this->dataBase->query($sql7));
+        $nome_instituicao = $result3['nome'];
+        $cidade_instituicao = $result4['cidade'];
+        $data_visita = $result7['data_visita'];
+        $turno_visita = $result7['turno'];
+        $status_visita = $result7['status'];
+        $telefone_instituicao = $result3['telefone'];
+        $responsavel_turma = $result5['nome'];
+        $nivel_ensino = $result6['ensino'];
+        $ano_escolar = $result6['ano_escolar'];
+        $array = [$nome_instituicao, $cidade_instituicao, $data_visita, $turno_visita, $status_visita, $telefone_instituicao,
+        $responsavel_turma, $nivel_ensino, $ano_escolar];
+        return $array;
+    }
+
+    public function SELECT_AgendamentoInstitucionalByNomeInstituicao(string $nome){
+        $select1 = "SELECT ID FROM instituicao WHERE nome = '$nome'";
+        $result1 = mysqli_fetch_assoc($this->dataBase->query($select1));
+        $select2 = "SELECT ID FROM professor_instituicao WHERE instituicao_ID = '$result1[ID]'";
+        $result2 = mysqli_fetch_assoc($this->dataBase->query($select2));
+        $select3 = "SELECT ID FROM agendamento_institucional WHERE professor_instituicao_ID = '$result2[ID]'";
+        $result3 = mysqli_fetch_assoc($this->dataBase->query($select3));
+        return SELECT_AgendamentoInstitucionalById($result3[ID]);
     }
 }
 
