@@ -182,6 +182,9 @@ INSERT INTO agendamento_institucional (ID, Visita, Status, turma_ID, professor_i
 -- para o usuario scorpius --
 INSERT INTO agendamento_institucional(ID, Visita, Status, turma_ID, professor_instituicao_ID)VALUES(9, 24, 'confirmado', 9,2);
 INSERT INTO agendamento_institucional(ID, Visita, Status, turma_ID, professor_instituicao_ID)VALUES(10, 24, 'lista de espera', 10, 2);
+INSERT INTO agendamento_institucional(ID, Visita, Status, turma_ID, professor_instituicao_ID)VALUES(11, 28, 'pendente', 10, 2);
+UPDATE visita SET agendamento_institucional_ID = 9 WHERE (ID = 24);
+UPDATE visita SET agendamento_institucional_ID = 11 WHERE (ID = 28);
 
 -- INSERT notificações --
 INSERT INTO notificacao (ID, Gerada_em, Mensagem, usuario_ID) VALUES
