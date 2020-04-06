@@ -23,7 +23,6 @@ function getMenuLinksAll(){
         'cadastrar e modificar atividades'=>    ['link'=>route("telaGerenciamentoDeEventos.show") , 'texto'=>'Gerenciamento de Eventos' ],
         'criar usuarios'=>                      ['link'=>route('cadastroAdm') , 'texto'=>'Cadastrar Usuário' ],
         'gerenciar usuarios'=>                  ['link'=>route('gerenciarUsuarios.show') , 'texto'=>'Gerenciar Usuários' ],
-        'ver confiabilidade das instituições'=> ['link'=>'#' , 'texto'=>'Confiabilidade das instituições' ],
         'ver log de atividade'=>                ['link'=>route('logSistema.show') , 'texto'=>'Histórico de Atividades' ],
         'realizar backup'=>                     ['link'=>route('backup') , 'texto'=>'Realizar Backup' ],
         'gerenciar permissões'=>                ['link'=>route('permissoes.show') , 'texto'=>'Gerenciar Permissões' ]//creio que seria melhor ser permissão apenas para o adm
@@ -69,7 +68,9 @@ function getMenuLinks(){
         $DAO = new App\DB\PessoaDAO;
         $permissoes = $DAO->getPermissoes($tipoUsuario);
         foreach ($permissoes as $value) {
-            $links[]=$menuLinks[$value["permissao"]];
+            if(isset($menuLinks[$value["permissao"]])){
+                $links[]=$menuLinks[$value["permissao"]];
+            }
         }
         $links[]=$menuLinks['gerenciar permissões'];
     }

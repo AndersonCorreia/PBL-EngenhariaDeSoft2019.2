@@ -100,6 +100,6 @@
 
 <script>
 
-$('#form_agendamento').attr('action',{{route('AgendarDiurnoInstituicao.post')}});
+$('#form.agendamento').attr('action',"{{route('AgendarDiurnoInstituicao.post')}}");
 
 </script>

@@ -15,6 +15,14 @@
         </div>
     </div>
     @endif
+    @if(($agendamentosInstitucionais ?? ['não exibir']) === [])
+    <div class="alert alert-info" role="alert">
+        <span>Nenhum <b>agendamento institucional</b> para exibir.<br>
+            Qualquer <b>agendamento institucional</b> com a data de visita igual ou posterior a hoje
+            é exibido aqui, inclusive os cancelados.
+        </span><br>
+    </div>
+    @endif
     @if($agendamentos != [])
     <div class="row col-12 m-0 p-2 vh-40 scorpius-border-shadow">
         <h4 class="p-1 m-1 col-12">Agendamentos Individuais</h4>
@@ -26,6 +34,13 @@
                 </div>
             @endforeach
         </div>
+    </div>
+    @else
+    <div class="alert alert-info" role="alert">
+        <span>Nenhum <b>agendamento individual</b> para exibir.<br>
+            Qualquer <b>agendamento individual</b> com a data de visita igual ou posterior a hoje é exibido aqui,
+            inclusive os cancelados.
+        </span><br>
     </div>
     @endif
 </div>

@@ -45,7 +45,7 @@ INSERT INTO permissao (permissao, ID) VALUES ('relatorio dos agendamentos',5);
 INSERT INTO permissao (permissao, ID) VALUES ('cadastrar e modificar atividades',6);
 INSERT INTO permissao (permissao, ID) VALUES ('criar usuarios',7);
 INSERT INTO permissao (permissao, ID) VALUES ('gerenciar usuarios',8);
-INSERT INTO permissao (permissao, ID) VALUES ('ver confiabilidade das instituições',9);
+-- INSERT INTO permissao (permissao, ID) VALUES ('ver confiabilidade das instituições',9); --
 INSERT INTO permissao (permissao, ID) VALUES ('ver log de atividade',10);
 INSERT INTO permissao (permissao, ID) VALUES ('realizar backup',11);
 
@@ -60,7 +60,7 @@ INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (5,9);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (6,9);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (7,10);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (8,10);
-INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (9,10);
+-- INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (9,10); --
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (10,10);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (11,10);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (1,99);
@@ -71,7 +71,7 @@ INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (5,99);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (6,99);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (7,99);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (8,99);
-INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (9,99);
+-- INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (9,99); --
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (10,99);
 INSERT INTO permissao_tipo (permissao_ID, tipo_usuario_ID) VALUES (11,99);
 

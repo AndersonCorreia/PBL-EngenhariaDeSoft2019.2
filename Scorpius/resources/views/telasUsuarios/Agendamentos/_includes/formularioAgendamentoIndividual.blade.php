@@ -88,7 +88,7 @@
 @endsection
 
 <script>
-$('#form_agendamento')
-    .attr('action',{{ ($turno ?? "diurno") == 'diurno' ?
-            route('AgendarDiurnoVisitante.post') : route('AgendarNoturno.post')}});
+$('#form.agendamento')
+    .attr('action',"{{ ($turno ?? 'diurno') == 'diurno' ?
+            route('AgendarDiurnoVisitante.post') : route('AgendarNoturno.post')}}");
 </script>
