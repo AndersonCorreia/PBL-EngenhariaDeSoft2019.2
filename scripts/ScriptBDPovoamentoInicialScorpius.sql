@@ -9,18 +9,18 @@ INSERT INTO tipo_usuario (ID, tipo) VALUES (7, 'institucional');
 INSERT INTO tipo_usuario (ID, tipo) VALUES (6, 'visitante');
 
 -- Insert Generico --
-INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
-('Francisco Hugo', 'visitante@scorpius.com', 'visitante', '06515391501', 1, 6);
-INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
-('Larissa Luz', 'institucional@scorpius.com', 'institucional', '06515391502', 1, 7);
-INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
-('Ramom Hugo', 'estagiario@scorpius.com', 'estagiario', '06515391503', 1, 8);
-INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
-('Moises Hugo', 'funcionario@scorpius.com', 'funcionario', '06515391504', 1, 9);
-INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
-('Alana Hugo', 'adm@scorpius.com', 'administrador', '06515391505', 1, 10);
-INSERT INTO usuario (nome, email, senha, CPF, ativo, tipo_usuario_ID) VALUES
-('Alana Scorpius', 'scorpius@scorpius.com', 'scorpius', '06515391506', 1, 99);
+INSERT INTO usuario (nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+('Francisco Hugo', 'visitante@scorpius.com', 'visitante', '06515391501', 75982824576, 1, 6);
+INSERT INTO usuario (nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+('Larissa Luz', 'institucional@scorpius.com', 'institucional', '06515391502', 75988765564, 1, 7);
+INSERT INTO usuario (nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+('Ramom Hugo', 'estagiario@scorpius.com', 'estagiario', '06515391503', 75991231238, 1, 8);
+INSERT INTO usuario (nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+('Moises Hugo', 'funcionario@scorpius.com', 'funcionario', '06515391504', 75981235432, 1, 9);
+INSERT INTO usuario (nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+('Alana Hugo', 'adm@scorpius.com', 'administrador', '06515391505', 75988427121, 1, 10);
+INSERT INTO usuario (nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES
+('Alana Scorpius', 'scorpius@scorpius.com', 'scorpius', '06515391506', 75982923456, 1, 99);
 
 -- Insert dos usuarios --
 INSERT INTO usuario (ID, nome, email, senha, CPF, telefone, ativo, tipo_usuario_ID) VALUES

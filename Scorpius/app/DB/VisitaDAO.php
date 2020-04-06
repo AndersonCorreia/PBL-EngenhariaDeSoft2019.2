@@ -1,6 +1,9 @@
 <?php
 
 namespace App\DB;
+use DateTime;
+use DatePeriod;
+use DateInterval;
 use App\Model\Visita;
 use App\Model\AgendamentoInstitucional;
 use \App\DB\interfaces\DataAccessObject;
@@ -153,17 +156,17 @@ class VisitaDAO extends DataAccessObject{
         $this->dataBase->query("DELETE IGNORE FROM visita WHERE data_visita >= '$dataInicial'");
         $diasTurnos = $this->getDiasTurnosPermitidos();
         $turnos = ['manhã', 'tarde', 'noite'];
-        $dataI = DateTime($dataInicial);
-        $dataF = DateTime($dataFinal);
+        $dataI =  new DateTime($dataInicial);
+        $dataF =  new DateTime($dataFinal);
         $dataRange = new DatePeriod($dataI, new DateInterval('P1D'), $dataF);
         
         foreach($dataRange as $data){
             $day = self::$abrevDia[$data->format("w")];
             
             foreach($turnos as $turno){
-                if( isset($diasTurnos[$day][$turno])){
-                    $this->dataBase->query("INSERT IGNORE INTO visita (data_visita, turno) 
-                        VALUES ( '$data', '$turno')");
+                if(isset($diasTurnos[$day][$turno])){
+                    $this->dataBase->query("INSERT IGNORE INTO visita(data_visita, turno) 
+                        VALUES ( $data, '$turno')");
                 }
             }
         }

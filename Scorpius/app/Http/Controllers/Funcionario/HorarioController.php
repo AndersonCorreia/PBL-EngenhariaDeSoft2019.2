@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\DB\Proposta_horarioDAO;
+use App\DB\VisitaDAO;
 class HorarioController extends Controller{
 
 
@@ -22,7 +23,7 @@ class HorarioController extends Controller{
                 'estagiarios'=> $estagiarios
             ];
         }catch(\Exception $e){
-            return view('TelaPropostaHorarioFuncionario.errorNenhumaProposta', $variaveis);
+            return view('TelaPropostaHorarioFuncionario.errorNenhumaProposta');
         }
        
         return view('TelaPropostaHorarioFuncionario.telaGerenciamentoDehorarios', $variaveis);
@@ -38,6 +39,29 @@ class HorarioController extends Controller{
         $DAO = new Proposta_horarioDAO();
         $horario = $DAO->buscaHorarioConfirmadoEstagiario($id);
         return Response::json(['horario'=>$horario]);
+    }
+
+    public function consultaPermissao(){
+        $DAO = new Proposta_horarioDAO();
+        $data = $DAO->consultaPermissao();
+        utf8_encode($data);
+        return Response::json($data);
+    }
+
+    public function periodoVisita(Request $req){
+        $visita = new VisitaDAO();
+        $visita->INSERT_periodoVisitas($req->dataInicial, $req->dataFinal);
+    }
+
+    public function alterarPermissao(Request $req){
+        $DAO = new Proposta_horarioDAO();
+        $resp = true;
+        if($req->modo == 1){
+            $resp = $DAO->removePermissao();
+        }else{
+            $resp = $DAO->adicionaPermissao();
+        }
+        return $resp ? true : false;
     }
 
     public function getObservacao($id){

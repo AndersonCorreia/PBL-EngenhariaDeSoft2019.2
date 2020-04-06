@@ -26,6 +26,9 @@ Route::group(
     'prefix'=>'funcionario',
     'namespace'=>'Funcionario'],
     function(){
+        Route::post('/confirmacaoHorario/statusPeriodo', 'HorarioController@alterarPermissao')->name("alterarStatusPeriodo");
+        Route::post('/confirmacaoHorario/definirPeriodoVisita', 'HorarioController@periodoVisita')->name("definirPeriodoVisita");
+        Route::get('/confirmacaoHorario/consultaPermissao', 'HorarioController@consultaPermissao')->name("consultaPermissao");
         Route::get('/confirmacaoHorario', 'HorarioController@getTelaHorarioEstagiario')->name("telaGerenciamentoDehorarios.show");
         Route::get('/confirmacaoHorario/{id}', 'HorarioController@getProposta')->name("retornaProposta");
         Route::get('/confirmacaoHorario/horarioConfirmado/{id}', 'HorarioController@getHorarioConfirmado')->name("retornaHorarioConfirmado");
