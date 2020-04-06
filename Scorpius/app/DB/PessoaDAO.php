@@ -39,7 +39,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
     {
         $sql = "UPDATE usuario SET nome = '".$usuario->getNome().
                "', telefone = '".$usuario->getTelefone().
-               "', senha = '".$usuario->getSenha()."' WHERE ID = ".usuario->getID();
+               "', senha = '".$usuario->getSenha()."' WHERE ID = ".$usuario->getID();
 
         $resultado = $this->dataBase->query($sql);
         return $resultado;
