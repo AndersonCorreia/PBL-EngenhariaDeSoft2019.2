@@ -61,7 +61,8 @@ class HorarioController extends Controller{
         }else{
             $resp = $DAO->adicionaPermissao();
         }
-        return $resp ? true : false;
+        
+        Response::json($resp ? true : false);
     }
 
     public function getObservacao($id){

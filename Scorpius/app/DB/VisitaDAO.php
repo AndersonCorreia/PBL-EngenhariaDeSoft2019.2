@@ -151,27 +151,24 @@ class VisitaDAO extends DataAccessObject{
      */
     public function INSERT_periodoVisitas(string $dataInicial, string $dataFinal){
 
-        $this->dataBase->autocommit(false);
-
         $this->dataBase->query("DELETE IGNORE FROM visita WHERE data_visita >= '$dataInicial'");
         $diasTurnos = $this->getDiasTurnosPermitidos();
         $turnos = ['manhã', 'tarde', 'noite'];
         $dataI =  new DateTime($dataInicial);
         $dataF =  new DateTime($dataFinal);
         $dataRange = new DatePeriod($dataI, new DateInterval('P1D'), $dataF);
-        
         foreach($dataRange as $data){
             $day = self::$abrevDia[$data->format("w")];
             
             foreach($turnos as $turno){
+                $d = $data->format('Y-m-d'); 
                 if(isset($diasTurnos[$day][$turno])){
-                    $this->dataBase->query("INSERT IGNORE INTO visita(data_visita, turno) 
-                        VALUES ( $data, '$turno')");
+                    $this->dataBase->query("INSERT INTO visita(data_visita, turno) 
+                        VALUES ( '$d', '$turno')");
                 }
             }
         }
 
-        $this->dataBase->commit();
     }
     /**
      * Retornar um array com os dias e turnos abertos a visitação. 

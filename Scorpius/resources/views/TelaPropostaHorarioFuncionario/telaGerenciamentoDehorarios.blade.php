@@ -98,35 +98,62 @@
 
 
 
+<!-- Modal periodo de visita -->
+<div class="modal fade" id="modalPeridoVisita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Período de visitação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" fecharModal>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formPeriodo">
+                    <div class="form-group col-md-12" align="center">
+                        <label class="badge-pill badge-primary" for="semestre"></label>
+                    </div>
+                    <div class="form-group row col-12 p-3">
+                        <div class="col-md-2">
+                            <label for="periodo">Período de visitas:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group" style="padding-left: 20px;">
+                                <label for="periodo_inicio_campo" class="col-form-label">Data
+                                    Início:</label>
+                                <input type="date" class="form-control" name="data_inicial" id="periodo_inicio_campo" />
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="periodo_termino_campo" class="col-form-label">Data
+                                    Termino:</label>
+                                <input type="date" class="form-control" name="data_final" id="periodo_termino_campo" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" confirmaVisita>Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <!-- Corpo Principal -->
 <div class="container">
 
     <div class="periodo scorpius-border-shadow border-top border-shadow">
-        <form id="formPeriodo">
-            <div class="form-group col-md-12" align="center">
-                <label class="badge-pill badge-primary" for="semestre"></label>
-            </div>
-            <div class="form-group row col-12 p-3">
-                <div class="col-md-2">
-                    <label for="periodo">Período de visitas:</label>
-                </div>
-                <div class="col-md-5">
-                    <div class="form-group" style="padding-left: 20px;">
-                        <label for="periodo_inicio_campo" class="col-form-label">Data
-                            Início:</label>
-                        <input type="date" class="form-control" name="data_inicial" id="periodo_inicio_campo" />
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label for="periodo_termino_campo" class="col-form-label">Data
-                            Termino:</label>
-                        <input type="date" class="form-control" name="data_final" id="periodo_termino_campo" />
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div class="form-group col-md-12" align="right">
+        <div class="form-group col-md-12" align="center">
+            <label class="badge-pill badge-primary" for="semestre"></label>
+        </div>
+        <div class="form-group col-md-12" align="center">
             <button type="button" class="btn btn-info" periodo>
                 <i class="fa fa-unlock" aria-hidden="true"></i>
                 Abrir período de matrícula
@@ -176,7 +203,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Observações do Estagiário </h4>
                             <div style='display:none' class="alert alert-secondary" role="alert">
-                                Estagiários não fez nenhuma observação quanto sua proposta de horário.
+                                Estagiário não fez nenhuma observação quanto sua proposta de horário.
                             </div>
                             <p class="card-text"></p>
                     </div>
@@ -210,81 +237,11 @@
     <script>
     $(document).ready(function() {
 
-        //semestre corrente
-        var data = new Date();
-        if (data.getMonth() < 6) {
-            $('label[for=semestre]').html("Período: 1º Semestre")
-        } else {
-            $('label[for=semestre]').html("Período: 2º Semestre")
-        }
-
-        $('[periodo]').click(e => {
-            e.preventDefault()
-            validar()
-            let periodoInicial = $('#periodo_inicio_campo')
-            let periodoFinal = $('#periodo_termino_campo')
-            if (periodoInicial.hasClass("is-invalid") || periodoFinal.hasClass("is-invalid")) {
-                alert("data inválida")
-            } else {
-                jQuery('#modalMatricula').modal('show')
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        })
-
-        //consultar permissão 
-        $.get("{{route('consultaPermissao')}}", data => {
-            if (data) {
-                let botaoPeriodo = $('[periodo]')
-                $('.matricula').toggle()
-                $(botaoPeriodo).toggleClass('btn-dark')
-                $(botaoPeriodo).text("   Fechar período de matrícula")
-                $(botaoPeriodo).addClass('fa fa-unlock-alt')
-            }
-        })
-
-        //altera a permissao do estagiario para realizar demanda
-        $('[abrirMat]').click(e => {
-            jQuery('#modalMatricula').modal('hide')
-            $('.matricula').toggle()
-            let botaoPeriodo = $('[periodo]')
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $(botaoPeriodo).toggleClass('btn-dark')
-            if ($(botaoPeriodo).text().trim() === "Abrir período de matrícula") {
-                $(botaoPeriodo).text("   Fechar período de matrícula")
-                $(botaoPeriodo).addClass('fa fa-unlock-alt')
-                $.ajax({
-                    url: "{{route('alterarStatusPeriodo')}}",
-                    method: 'post',
-                    data: {
-                        modo: 0
-                    }
-                })
-                let dataInicio = new String($('#periodo_inicio_campo').val())
-                let dataFim = new String($('#periodo_termino_campo').val())
-                console.log(dataInicio,dataFim)
-                $.post("{{route('definirPeriodoVisita')}}", {
-                    dataInicial: dataInicio,
-                    dataFinal: dataFim
-                })
-            } else {
-                $(botaoPeriodo).text("   Abrir período de matrícula")
-                $(botaoPeriodo).removeClass('fa fa-unlock-alt')
-                $(botaoPeriodo).addClass('fa fa-unlock')
-                $.ajax({
-                    url: "{{route('alterarStatusPeriodo')}}",
-                    method: 'post',
-                    data: {
-                        modo: 1
-                    },
-                    success(retorno) {
-                        location.reload();
-                    }
-                })
-            }
-        })
+        });
 
         let horarios = new Map()
         let horario_original = new Map()
@@ -303,6 +260,86 @@
         botoesHorarios.prop("disabled", true)
         botoesSubmit.prop("disabled", true)
         download.prop("disabled", true)
+
+        //semestre corrente
+        var data = new Date();
+        if (data.getMonth() < 6) {
+            $('label[for=semestre]').html("Período: 1º Semestre")
+        } else {
+            $('label[for=semestre]').html("Período: 2º Semestre")
+        }
+
+        $('[confirmaVisita]').click(e => {
+            e.preventDefault()
+            validar()
+            let periodoInicial = $('#periodo_inicio_campo')
+            let periodoFinal = $('#periodo_termino_campo')
+            if (periodoInicial.hasClass("is-invalid") || periodoFinal.hasClass("is-invalid")) {
+                alert("data inválida")
+            } else {
+                let botaoPeriodo = $('[periodo]')
+                let dataInicio = new String($('#periodo_inicio_campo').val())
+                let dataFim = new String($('#periodo_termino_campo').val())
+                $.post("{{route('definirPeriodoVisita')}}", {
+                    dataInicial: dataInicio,
+                    dataFinal: dataFim
+                })
+                $(botaoPeriodo).toggleClass('btn-dark')
+                $(botaoPeriodo).text("   Abrir período de matrícula")
+                $(botaoPeriodo).removeClass('fa fa-unlock-alt')
+                $(botaoPeriodo).addClass('fa fa-unlock')
+                $.ajax({
+                    url: "{{route('alterarStatusPeriodo')}}",
+                    method: 'post',
+                    data: {
+                        modo: 1
+                    }
+                })
+                $('#modalPeridoVisita').modal('hide')
+                $('.matricula').toggle()
+            }
+        })
+
+        $('[periodo]').click(e => {
+            e.preventDefault()
+            console.log($(e.currentTarget))
+            if (!$(e.target).hasClass('btn-dark')) {
+                jQuery('#modalMatricula').modal('show')
+            } else {
+                $('#modalPeridoVisita').modal('show')
+            }
+
+        })
+
+        //consultar permissão 
+        $.get("{{route('consultaPermissao')}}", data => {
+            if (data) {
+                let botaoPeriodo = $('[periodo]')
+                $('.matricula').toggle()
+                $(botaoPeriodo).toggleClass('btn-dark')
+                $(botaoPeriodo).text("   Fechar período de matrícula")
+                $(botaoPeriodo).addClass('fa fa-unlock-alt')
+            }
+        })
+
+        //altera a permissao do estagiario para realizar demanda
+        $('[abrirMat]').click(e => {
+
+            let botaoPeriodo = $('[periodo]')
+            jQuery('#modalMatricula').modal('hide')
+            $('.matricula').toggle()
+            $(botaoPeriodo).toggleClass('btn-dark')
+            $(botaoPeriodo).text("   Fechar período de matrícula")
+            $(botaoPeriodo).addClass('fa fa-unlock-alt')
+            $.ajax({
+                url: "{{route('alterarStatusPeriodo')}}",
+                method: 'post',
+                data: {
+                    modo: 0
+                }
+            })
+
+        })
 
 
         $('[download]').click(e => {
@@ -340,12 +377,6 @@
                 let url =
                     "{{ route('retornaHorarioConfirmado', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
                 url = url.replace(":id", ID); // isso vai corrigir a string gerada com o id correto.
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
                 /**
                     Requisição ajax para retornar horarios de estagiários, 
                     como resultado pinta os horários na tela. 
@@ -390,12 +421,6 @@
                 let url =
                     "{{ route('retornaProposta', ['id' => ':id']) }}"; // isso vai compilar o blade com o id sendo uma string ":id" e, no javascript, atribuir ela a uma variável .
                 url = url.replace(":id", estID); // isso vai corrigir a string gerada com o id correto.
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
                 /**
                     Requisição ajax para retornar horarios de estagiários, 
                     como resultado pinta os horários na tela. 
