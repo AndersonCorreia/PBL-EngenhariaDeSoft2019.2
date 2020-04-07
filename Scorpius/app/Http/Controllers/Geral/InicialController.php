@@ -63,7 +63,7 @@ class InicialController extends Controller
             'token' => $request->token
         ];
         
-        $tokenAtual=hash_hmac("sha256", 'email', env("APP_KEY"));
+        $tokenAtual=hash_hmac("sha256", $request->usuario_email, env("APP_KEY"));
         if ($request->token == $tokenAtual){
             return view('telaRedefinicaoSenha.prosseguirRedefinicao', $variaveis);
         }
