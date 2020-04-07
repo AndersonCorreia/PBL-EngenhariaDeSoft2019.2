@@ -52,10 +52,11 @@ class AuthController extends Controller
             'token'=> $token,
             'usuario_email'=> $email,
         ];
+        session()->flash("email", $email);
          // Enviando o e-mail
         Mail::send('emails.emailRedefinicaoSenha', $dados, function($message){
             $message->from('scorpiusuefs@gmail.com', 'Scorpius - Redefinição de Senha');
-            $message->to($email);
+            $message->to( session('email') );
             $message->subject('Link para Redefinição de Senha');
         });
         

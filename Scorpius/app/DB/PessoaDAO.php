@@ -221,8 +221,10 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $sql = "UPDATE usuario SET ativo = 0 WHERE ID = $user_ID";
         return $this->dataBase->query($sql);
     }
+
     public function logSistema(){
-        $sql = "SELECT log.*, usuario.nome FROM log, usuario WHERE usuario.ID = usuario_made_ID";
+        $sql = "SELECT log.*, usuario.nome FROM log, usuario 
+                WHERE usuario.ID = usuario_made_ID ORDER BY log.datahora DESC";
         $logs = $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
         $sql = "SELECT * FROM acoes";
         $acoes = $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
@@ -263,9 +265,10 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
      * Deletar todas as permissões anteriores e adcionar as novas permissões vindas de um array.
      *
      * @param array $permissoesTipo permissoes atuais que seram inseridas no sistema
+     * @param array $msgs array com as mensagens que devem ser geradas para o log
      * @return void
      */
-    public function setPermissoes( array $permissoesTipo, string $msg){
+    public function setPermissoes( array $permissoesTipo, array $msgs){
 
         $this->dataBase->autocommit(false);
 
@@ -277,7 +280,9 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
             $stmt->bind_param("ii", $pt['permissao_ID'], $pt['tipo_ID']);
             $stmt->execute();
         }
-        $this->INSERT_log($msg);
+        foreach($msgs as $msg){
+            $this->INSERT_log($msg);
+        }
 
         $this->dataBase->commit();
     }

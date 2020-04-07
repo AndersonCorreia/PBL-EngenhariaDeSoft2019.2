@@ -482,7 +482,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`notificacao` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `gerada_em` DATETIME NOT NULL,
-  `mensagem` VARCHAR(100) NOT NULL,
+  `mensagem` VARCHAR(500) NOT NULL,
   `usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_Notificacao_usuario1_idx` (`usuario_ID` ASC),

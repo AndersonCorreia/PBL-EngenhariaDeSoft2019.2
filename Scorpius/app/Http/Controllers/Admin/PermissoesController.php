@@ -47,7 +47,8 @@ class PermissoesController extends Controller
     public function alterarPermissoes(Request $request){
 
         $DAO = new PessoaDAO();
-        $permissaoTipo = $this->preencherMatrizPermissaoTipo($request->get('p_t',[]), $msg, $request->alteracoes);
+        $permissaoTipo = $this->preencherMatrizPermissaoTipo( $request->get('p_t',[]) );
+        $msg = $this->getMensagens($request->alteracoes);
         $DAO->setPermissoes($permissaoTipo, $msg);
 
         return redirect()->back();
@@ -57,33 +58,62 @@ class PermissoesController extends Controller
 
         $DAO = new PessoaDAO();
         $permissaoTipo = $this->getDefaultPermissaoTipo();
-        $DAO->setPermissoes($permissaoTipo, "as permissões do sistema voltaram ao padrão");
+        $DAO->setPermissoes($permissaoTipo, ["As permissões do sistema voltaram ao padrão"]);
 
         return redirect()->back();
     }
-
-    public function preencherMatrizPermissaoTipo($p_t, &$msg, $alteracoes ){
+    /**
+     * Função para preencher uma matriz com as relações de permissoes e tipos
+     * para serem inseridas no banco
+     *
+     * @param array $p_t relação de permissoes com os tipos
+     * @return array
+     */
+    public function preencherMatrizPermissaoTipo(array $p_t){
 
         $permissaoTipo = [];
-        $msg = "--- Alteração das permissões do sistema: ";
 
         foreach ($p_t as $value) {
             $pt = \explode("|", $value);
             $permissaoTipo[] = ['permissao_ID' => $pt[0], 'tipo_ID' => $pt[1]];
         }
-        $alterou = false;
-        foreach ($alteracoes as $value) {
-            $alt = \explode("|", $value);
-            if($alt[2] != "naoAlterado"){
-                $alterou = true;
-                $msg .= " $alt[2] acesso do $alt[1] à $alt[0];";
-            }
-        }
-        if($alterou){
-            $msg .= "Não houve nenhuma mudança nas permissões";
-        }
 
         return $permissaoTipo;
+    }
+
+    /**
+     * Retornar um array com mensagens para exibir num log
+     * O tamanho maximo de uma mensagem é de 400 caracteres. Quando o limite é ultrapassado
+     * outra mensagem é criada.
+     *
+     * @param array $alteracoes array com as alterações realizadas nas permissões
+     * @return array
+     */
+    public function getMensagens(array $alteracoes):array{
+
+        $alterou = false;
+        $msgs=[];
+        $msg = "--- Alteração das permissões do sistema: --- ";
+
+        foreach ($alteracoes as $value) {
+            $alt = \explode("|", $value);
+            if( strlen($msg) >= 400){
+                $msgs[] = $msg;
+                $msg = "--- Alteração das permissões do sistema: --- ";
+                $alterou = false;//só salva a proxima mensagem se alguma permissao foi alterada
+            }
+            
+            if($alt[2] != "naoAlterado"){
+                $alterou = true;
+                $msg .= " $alt[2] acesso do ".strtoupper($alt[1])." à ".strtoupper($alt[0])." ; ";
+            }
+        }
+        
+        if($alterou){//salvando ultima mensagem caso tenha ocorrido uma alteração
+            $msgs[] = $msg;
+        }
+
+        return $msgs;
     }
 
     /**
