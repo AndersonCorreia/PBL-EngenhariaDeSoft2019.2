@@ -29,7 +29,7 @@
                 <i class="fas fa-angle-left"></i>
             </button>
             <span id="calendarDatas" class="text-dark font-weight-bold">
-                $data_inicio a $data_fim
+                {{$visitas_institucionais["datas"]["dataInicio"]}} a {{$visitas_institucionais["datas"]["dataFim"]}}
             </span>
             <button id="setaRight" type="button" class=" btn btn-default" onclick="proximosDias('diurno')">
                 <i class="fas fa-angle-right"></i>
@@ -40,274 +40,42 @@
                 <thead>
                     <tr class="thead-dark">
                         <th scope="col">Dia</th>
+                        @foreach($visitas_institucionais['datas'] as $data)
+                            <th scope="col">{{$data}}</th>
+                        @endforeach
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                <!-- array visitas_institucionais vai estar limitado por data  -->                
+                    <tr>   
                         <th class="table-secondary" scope="row">Manhã</th>
-                        @for($data=0; $data<4; $data++) {{-- mudar para percorrer os dias do calendario --}}
-                            <td>
-                                @forelse ($agendamentos_pendentes as $agendamento)
-                                    @if(($agendamento['turno'] == "manhã" and $agendamento['data'] = strtotime($data) )) 
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Pendente</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip" 
-                                            title="Lista de Espera" data-target=".modal-lista-espera" lista disabled>
-                                                    <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                                @forelse ($agendamentos_confirmados as $agendamento)
-
-                                    @if(($agendamento['turno'] == "manhã" &&  $agendamento['data'] = strtotime($data) ))
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Confirmado</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista disabled>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                                @forelse ($agendamentos_cancelados_usuario as $agendamento)
-                                    @if(($agendamento['turno'] == "manhã" &&  $agendamento['data'] = strtotime($data) ))
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip" 
-                                            title="Lista de Espera" data-target=".modal-lista-espera" data-day="$agendamento['data']" data-turn="$agendamento['turno']" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                                @forelse ($agendamentos_cancelados_funcionario as $agendamento)
-                                    @if(($agendamento['turno'] == "manhã" &&  $agendamento['data'] = strtotime($data) ))
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip" title="Lista de Espera"
-                                                data-target=".modal-lista-espera" data-day="$agendamento['data']" data-turn="$agendamento['turno']" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                            </td>
-                        @endfor
+                        @foreach($visitas_institucionais['visitas'] as $visita)
+                            @if($visita['turno'] == 'manhã')
+                                <td>@include('telaGerenciamentoDeVisitas._includes.diasTabela')</td>  
+                            @else
+                                <td></td>
+                            @endif
+                        @endforeach
                     </tr>
-                    <tr> {{-- Linha da Tarde --}}
+                    <tr> 
                         <th class="table-secondary" scope="row">Tarde</th>
-                        @for($data=0; $data<4; $data++) {{-- mudar para percorrer os dias do calendario --}}
-                            <td>
-                                @forelse ($agendamentos_pendentes as $agendamento)
-                                    @if(($agendamento['turno'] == "tarde" and $agendamento['data'] = strtotime($data) )) 
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Pendente</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                                @forelse ($agendamentos_confirmados as $agendamento)
-                                    @if(($agendamento['turno'] == "tarde" &&  $agendamento['data'] = strtotime($data) ))
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Confirmado</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                                @forelse ($agendamentos_cancelados_usuario as $agendamento)
-                                    @if(($agendamento['turno'] == "tarde" &&  $agendamento['data'] = strtotime($data) ))
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                                @forelse ($agendamentos_cancelados_funcionario as $agendamento)
-                                    @if(($agendamento['turno'] == "tarde" &&  $agendamento['data'] = strtotime($data) ))
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-                                
-                            </td>
-                        @endfor
+                        @foreach($visitas_institucionais['visitas'] as $visita)
+                            @if($visita['turno'] == 'tarde')
+                                <td>@include('telaGerenciamentoDeVisitas._includes.diasTabela')</td>  
+                            @else
+                                <td></td>
+                            @endif
+                        @endforeach
                     </tr>
                     <tr>
                         <th class="table-secondary" scope="row">Noite</th>
-                        @for($data=0; $data<4; $data++) {{-- mudar para percorrer os dias do calendario --}}
-                            <td>
-                                @forelse ($agendamentos_pendentes as $agendamento)
-                                    @if(($agendamento['turno'] == "noite" and $agendamento['data'] = strtotime($data) )) 
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Pendente</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                                @forelse ($agendamentos_confirmados as $agendamento)
-                                    @if(($agendamento['turno'] == "noite" &&  $agendamento['data'] = strtotime($data) ))
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Confirmado</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                                @forelse ($agendamentos_cancelados_usuario as $agendamento)
-                                    @if(($agendamento['turno'] == "noite" &&  $agendamento['data'] = strtotime($data) ))
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse
-
-                                @forelse ($agendamentos_cancelados_funcionario as $agendamento)
-                                    @if(($agendamento['turno'] == "noite" &&  $agendamento['data'] = strtotime($data) ))
-                                        <p>{{$agendamento['instituicao']}}</p>
-                                        <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" 
-                                                data-toggle="tooltip" title="Lista de Espera" data-target=".modal-lista-espera" lista>
-                                                <i class="fas fa-list-ol"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Confirmar"
-                                                btnconf>
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="cancelamento" data-toggle="modal"
-                                                data-target=".modal-cancelamento" data-toggle="tooltip" title="Cancelar" btncanc>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    @endif
-                                @empty
-                                @endforelse 
-
-                            </td>
-                        @endfor
+                        @foreach($visitas_institucionais['visitas'] as $visita)
+                            @if($visita['turno'] == 'noite')
+                                <td>@include('telaGerenciamentoDeVisitas._includes.diasTabela')</td>  
+                            @else
+                                <td></td>
+                            @endif
+                        @endforeach
                     </tr>
                 </tbody>
             </table>
