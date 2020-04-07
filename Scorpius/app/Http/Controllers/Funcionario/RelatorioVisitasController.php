@@ -21,22 +21,18 @@ class RelatorioVisitasController extends Controller{
         $nome_instituicao = $_POST['nomeInstituicao'];
         $DAO = new AgendamentoInstitucionalDAO();
         $agendamentos = $DAO->SELECT_AgendamentoInstitucionalByNomeInstituicao($nome_instituicao);
-        //return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $agendamentos);
+        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $agendamentos);
     }
 
     /**Função que retorna todos os visitantes de todos os agendamentos institucionais */
     public function getVisitantes(){
-        $sql1 = "SELECT ID FROM agendamento_institucional";
-        $result1 = $this->dataBase->query($sql1);
+        $nome_instituicao = $_POST['nomeInstituicao'];
+        $sql = "SELECT agendamentoID FROM visita_institucional WHERE instituicao  = '$nome_instituicao'";
+        $result = $this->dataBase->query($sql);
+        $array = $result->fetch_all(MYSQLI_ASSOC);
         $DAO = new AgendamentoInstitucionalDAO();
-        $visitantes;
-        $i = 1;
-        while($row = mysqli_fetch_assoc($result1)){ 
-            $visitantes[$i] = $DAO->getVisitantesByAgendamentoID($row['ID']);
-            $i++;
-        }
-        $visitantes[0] = $i;
-        //return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $visitantes);
+        $visitantes = $DAO->getVisitantesByAgendamentoID($array['agendamentoID']);
+        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $visitantes);
     }
 }
 ?>

@@ -71,7 +71,7 @@ $i=0;
 
                 <thead>
                     <tr>
-                        <th>Total de Alunos da Turma:</th> <td>$visitas[0]</td> <!--verificar se estar funcionando, 
+                        <th>Total de Alunos da Turma:</th> <td>$total_alunos</td> <!--verificar se estar funcionando, 
                         visto que $visitas so é usado mais para frente -->
                         <th>Responsável pela Turma:</th> <td>$agendamentos[$i]['usuario']</td>
                     </tr>
@@ -127,7 +127,7 @@ $i=0;
                                     </tr>
 
                                     <tr>
-                                        <th>Total de Alunos da Turma:</th> <td>$visitas[0]</td> <!--verificar se estar funcionando, 
+                                        <th>Total de Alunos da Turma:</th> <td>$total_alunos</td> <!--verificar se estar funcionando, 
                                         visto que $visitas so é usado mais para frente -->
                                     </tr>
 
@@ -155,15 +155,15 @@ $i=0;
                                     <tr>
                                         <th>Nome:</th> <th>Idade:</th>
                                     </tr>
-                                    $j=1;
+                                    $total_alunos=0;
                                     @foreach($visitantes){
                                         <tr>
                                             <td>$visitantes[$j]['nome']</td>
                                             <td>$visitantes[$j]['idade']</td>
-                                            $j++;
+                                            $total_alunos++;
                                         </tr>
                                     }
-
+                                    $total_alunos++;
                                 </thead>
         
                             </table>

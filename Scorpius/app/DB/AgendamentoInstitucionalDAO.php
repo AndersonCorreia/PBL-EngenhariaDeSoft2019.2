@@ -154,9 +154,10 @@ use App\Model\Agendamento;
      * @param string $nome da instituição que realizou o agendamento.
      * @return array com dados selecionados através do nome passado por parâmetro.  
      */
-    public function SELECT_AgendamentoInstitucionalByNomeInstituicao(string $nome){
+    public function SELECT_AgendamentoInstitucionalByNomeInstituicao(string $nome): array{
         
-        $select = "SELECT data, turno, visitaStatus, ano_escolar, ensino, instituicao, instituicaoTelefone, cidade, usuario";
+        $select = "SELECT agendamentoID, data, turno, visitaStatus, ano_escolar, ensino, instituicao, instituicaoTelefone, cidade, 
+        usuario";
         $where = "instituicao = '$nome'";
         $sql = "$select FROM visita_institucional WHERE $where ORDER BY data";
         $result = $this->dataBase->query($sql);
