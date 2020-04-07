@@ -7,10 +7,12 @@
 
 <div class="form-group row col-12">    
     <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
-     <div class="col-9">
-        <input id="nomeInst" class="form-control" type="text" name="instituicao" placeholder="Insira o Nome ou Cidade da Instituição" list="instList" required autofocus>
-        <datalist id="instList">            
-        </datalist>
+    <div class="col-9">
+        <form action="../../../../app/Http/Controllers/Funcionario/RelatorioVisitasController.php" method="POST">
+            <input id="nomeInst" class="form-control" type="text" name="instituicao" placeholder="Insira o Nome ou Cidade da Instituição" list="instList" required autofocus>
+            <datalist id="instList">            
+            </datalist>
+        </form>
     </div>     
     <button type="button" class="btn btn-primary float-left" buscar> Buscar </button>
     <button type="button" class="btn btn-danger float-left" data-toggle="modal"
@@ -41,45 +43,43 @@
 </div>
 
 
-$i=0;
-@foreach($agendamentos){
-    $i++;
+@foreach($agendamentos as $agendamento){
     <form method="get" action="#"> <!--bloco começa aqui -->
         <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
             <table class="table-borderless col-12">
                 <thead>
                 <!-- Somente exemplificando a estrutura -->
                     <tr class="table-secondary">
-                        <th>Nome da Instituição:</th> <td>$agendamentos[$i]['instituicao']</td>
-                        <th>Cidade:</th> <td>$agendamentos[$i]['cidade']</td>
+                        <th>Nome da Instituição:</th> <td>{{$agendamento['instituicao']}}</td>
+                        <th>Cidade:</th> <td>{{$agendamento['cidade']}}</td>
                     </tr>
                 </thead>
 
                 <thead>
                     <tr>
-                        <th>Data da Visita:</th> <td>$agendamentos[$i]['data']</td> <!-- Exemplo da estrutura -->
-                        <th>Turno da Visita:</th> <td>$agendamentos[$i]['turno']</td>
+                        <th>Data da Visita:</th> <td>{{$agendamento['data']}}</td> <!-- Exemplo da estrutura -->
+                        <th>Turno da Visita:</th> <td>{{$agendamento['turno']}}</td>
                     </tr>
                 </thead>
 
                 <thead>
                     <tr>
-                        <th>Status da Visita:</th> <td>$agendamentos[$i]['visitaStatus']</td>
-                        <th>Telefone da Instituição:</th> <td>$agendamentos[$i]['instituicaoTelefone']</td>
+                        <th>Status da Visita:</th> <td>{{$agendamento['visitaStatus']}}</td>
+                        <th>Telefone da Instituição:</th> <td>{{$agendamento['instituicaoTelefone']}}</td>
                     </tr>
                 </thead>
 
                 <thead>
                     <tr>
-                        <th>Total de Alunos da Turma:</th> <td>$total_alunos</td> <!--verificar se estar funcionando, 
+                        <th>Total de Alunos da Turma:</th> <td>{{$total_alunos}}</td> <!--verificar se estar funcionando, 
                         visto que $visitas so é usado mais para frente -->
-                        <th>Responsável pela Turma:</th> <td>$agendamentos[$i]['usuario']</td>
+                        <th>Responsável pela Turma:</th> <td>{{$agendamento['usuario']}}</td>
                     </tr>
                 </thead>
                 <thead>
                     <tr>
-                        <th>Nível de Ensino da Turma:</th> <td>$agendamentos[$i]['ensino']</td>
-                        <th>Ano Escolar da Turma:</th> <td>$agendamentos[$i]['ano_escolar']</td>
+                        <th>Nível de Ensino da Turma:</th> <td>{{$agendamento['ensino']}}</td>
+                        <th>Ano Escolar da Turma:</th> <td>{{$agendamento['ano_escolar']}}</td>
                     </tr>
                 </thead>
             </table>
@@ -103,44 +103,44 @@ $i=0;
                             <table class="table-borderless col-12">        
                                 <thead>
                                     <tr class="table-secondary">
-                                        <th>Nome da Instituição:</th> <td>$agendamentos[$i]['instituicao']</td>
+                                        <th>Nome da Instituição:</th> <td>{{$agendamento['instituicao']}}</td>
                                     </tr>
                                 
                                     <tr>
-                                        <th>Cidade:</th> <td>$agendamentos[$i]['cidade']</td>
+                                        <th>Cidade:</th> <td>{{$agendamento['cidade']}}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>Data da Visita:</th> <td>$agendamentos[$i]['data']</td>
+                                        <th>Data da Visita:</th> <td>{{$agendamento['data']}}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>Turno da Visita:</th> <td>$agendamentos[$i]['turno']</td>
+                                        <th>Turno da Visita:</th> <td>{{$agendamento['turno']}}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>Status da Visita:</th> <td>$agendamentos[$i]['visitaStatus']</td>
+                                        <th>Status da Visita:</th> <td>{{$agendamento['visitaStatus']}}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>Telefone da Instituição:</th> <td>$agendamentos[$i]['instituicaoTelefone'] ?></td>
+                                        <th>Telefone da Instituição:</th> <td>{{$agendamento['instituicaoTelefone']}}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>Total de Alunos da Turma:</th> <td>$total_alunos</td> <!--verificar se estar funcionando, 
+                                        <th>Total de Alunos da Turma:</th> <td>{{$total_alunos}}</td> <!--verificar se estar funcionando, 
                                         visto que $visitas so é usado mais para frente -->
                                     </tr>
 
                                     <tr>
-                                        <th>Responsável pela Turma:</th> <td>$agendamentos[$i]['usuario']</td>
+                                        <th>Responsável pela Turma:</th> <td>{{$agendamento['usuario']}}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>Nível de Ensino da Turma:</th> <td>$agendamentos[$i]['ensino']</td>
+                                        <th>Nível de Ensino da Turma:</th> <td>{{$agendamento['ensino']}}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>Ano Escolar da Turma:</th> <td>$agendamentos[$i]['ano_escolar']</td> 
+                                        <th>Ano Escolar da Turma:</th> <td>{{$agendamento['ano_escolar']}}</td> 
                                     </tr>
                                 </thead>
 

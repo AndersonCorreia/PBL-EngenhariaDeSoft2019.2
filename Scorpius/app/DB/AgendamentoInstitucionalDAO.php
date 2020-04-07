@@ -155,7 +155,6 @@ use App\Model\Agendamento;
      * @return array com dados selecionados através do nome passado por parâmetro.  
      */
     public function SELECT_AgendamentoInstitucionalByNomeInstituicao(string $nome): array{
-        
         $select = "SELECT agendamentoID, data, turno, visitaStatus, ano_escolar, ensino, instituicao, instituicaoTelefone, cidade, 
         usuario";
         $where = "instituicao = '$nome'";
