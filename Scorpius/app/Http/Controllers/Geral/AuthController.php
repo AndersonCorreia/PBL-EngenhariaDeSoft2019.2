@@ -46,20 +46,16 @@ class AuthController extends Controller
         return redirect()->route("paginaInicial");
     }
 
-    public function changePassword(){
-        //fazer
-    }
-
-    public function enviarEmailRedefinicaoSenha($usuario_email, $token)
+    public function enviarEmailRedefinicaoSenha($email, $token)
     {
         $dados = [
             'token'=> $token,
-            'usuario_email'=> $usuario_email,
+            'usuario_email'=> $email,
         ];
          // Enviando o e-mail
         Mail::send('emails.emailRedefinicaoSenha', $dados, function($message){
             $message->from('scorpiusuefs@gmail.com', 'Scorpius - Redefinição de Senha');
-            $message->to($this->email);
+            $message->to($email);
             $message->subject('Link para Redefinição de Senha');
         });
         
@@ -67,23 +63,19 @@ class AuthController extends Controller
 
     public function senhaRedefinicao(Request $request)
     {
-        $this->email = $request->email;
-        $token = hash_hmac("sha256", 'email', env("APP_KEY"));
-        $dados = [
-            'usuario_email' => $this->email,
-            'token' => $token
-        ];
-    
-        $this->enviarEmailRedefinicaoSenha($this->email, $token);
+        $email = $request->email;
+        $token = hash_hmac("sha256", $email, env("APP_KEY"));
+        
+        $this->enviarEmailRedefinicaoSenha($email, $token);
+
         return view('telaRedefinicaoSenha.avisoRedefinicao'); 
     }
 
     public function redefinirSenha(Request $request, $email, $token){
         $senha = $request->novaSenha;
-        $tokenAtual=hash_hmac("sha256", 'email', env("APP_KEY"));
+        $tokenAtual=hash_hmac("sha256", $email, env("APP_KEY"));
         if ($token == $tokenAtual){
-            $ID=(new PessoaDAO)->SELECTbyEmail($email);
-            $usuario= (new PessoaDAO)->SELECTbyID($ID);
+            $usuario=(new PessoaDAO)->SELECTbyEmail($email);
             $nome=$usuario["nome"];
             $cpf=$usuario["CPF"];
             $telefone=$usuario["telefone"];
