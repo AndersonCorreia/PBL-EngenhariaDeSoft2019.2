@@ -8,13 +8,14 @@
 <div class="form-group row col-12">    
     <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
     <div class="col-9">
-        <form action="../../../../app/Http/Controllers/Funcionario/RelatorioVisitasController.php" method="POST">
-            <input id="nomeInst" class="form-control" type="text" name="instituicao" placeholder="Insira o Nome ou Cidade da Instituição" list="instList" required autofocus>
+        <form action="{{route(telaRelatorioVisitasAgendadas)}}" method="POST">
+            <input id="nomeInst" class="form-control" type="text" name="instituicao" 
+            placeholder="Insira o Nome ou Cidade da Instituição" list="instList" required autofocus>
             <datalist id="instList">            
             </datalist>
         </form>
     </div>     
-    <button type="button" class="btn btn-primary float-left" buscar> Buscar </button>
+    <button type="submit" class="btn btn-primary float-left" buscar> Buscar </button>
     <button type="button" class="btn btn-danger float-left" data-toggle="modal"
     data-target=".modal-relatorio-estatistico" relatorio> Relatório Estatístico </button>
     <!-- modal do relatório estatístico -->
@@ -43,7 +44,7 @@
 </div>
 
 
-@foreach($agendamentos as $agendamento){
+@foreach($agendamentos ?? [] as $agendamento)
     <form method="get" action="#"> <!--bloco começa aqui -->
         <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
             <table class="table-borderless col-12">
@@ -155,15 +156,14 @@
                                     <tr>
                                         <th>Nome:</th> <th>Idade:</th>
                                     </tr>
-                                    $total_alunos=0;
-                                    @foreach($visitantes){
+                                    $total_alunos=1;
+                                    @foreach($visitante as $visita)
                                         <tr>
-                                            <td>$visitantes[$j]['nome']</td>
-                                            <td>$visitantes[$j]['idade']</td>
+                                            <td>{{$visita['nome']}}</td>
+                                            <td>{{$visita['idade']}}</td>
                                             $total_alunos++;
                                         </tr>
-                                    }
-                                    $total_alunos++;
+                                    @endforeach
                                 </thead>
         
                             </table>
@@ -178,7 +178,7 @@
         </div>
         </div>
     </div>
-}
+@endforeach
 
 </div>
 

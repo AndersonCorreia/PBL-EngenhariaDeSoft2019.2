@@ -31,8 +31,8 @@ class RelatorioVisitasController extends Controller{
         $result = $this->dataBase->query($sql);
         $array = $result->fetch_all(MYSQLI_ASSOC);
         $DAO = new AgendamentoInstitucionalDAO();
-        $visitantes = $DAO->getVisitantesByAgendamentoID($array['agendamentoID']);
-        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $visitantes);
+        $visitante = $DAO->getVisitantesByAgendamentoID($array['agendamentoID']);
+        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $visitante);
     }
 }
 ?>
