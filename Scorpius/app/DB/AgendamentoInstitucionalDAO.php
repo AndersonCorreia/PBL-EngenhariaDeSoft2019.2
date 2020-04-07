@@ -145,5 +145,29 @@ use App\Model\Agendamento;
         return $result->fetch_all(MYSQLI_ASSOC);
 
     }
+
+    /**
+     * Retorna registros da tabela agendamento_institucional num array, com filtros de data inicial, data final
+     * e limita a quantidade de resultados;
+     *
+     * @param string $dateInicio
+     * @param string $dateFim
+     * @param integer $limite
+     * @return array
+     */
+    public function SELECTbyDateInicio_FIM(String $dateInicio, String $dateFim, int $limite=6): array{
+        $where = "data > ? AND data <= ? LIMIT ?"; 
+        $sql = "SELECT * FROM visita_institucional WHERE $where";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ssi",$dateInicio, $dateFim, $limite);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        if($result==[]){
+            throw new \App\Exceptions\NenhumaVisitaEncontradaException();
+        }
+        
+        return $result;
+    }
 }
 
