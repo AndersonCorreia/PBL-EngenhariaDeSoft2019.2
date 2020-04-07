@@ -68,7 +68,7 @@ class AuthController extends Controller
     public function senhaRedefinicao(Request $request)
     {
         $this->email = $request->email;
-        $token = $request->_token;
+        $token = hash_hmac("sha256", 'email', env("APP_KEY"));
         $dados = [
             'usuario_email' => $this->email,
             'token' => $token
@@ -78,16 +78,19 @@ class AuthController extends Controller
         return view('telaRedefinicaoSenha.avisoRedefinicao'); 
     }
 
-    public function redefinirSenha(Request $request, $email){
+    public function redefinirSenha(Request $request, $email, $token){
         $senha = $request->novaSenha;
-        $ID=(new PessoaDAO)->SELECTbyEmail($email);
-        $usuario= (new PessoaDAO)->SELECTbyID($ID);
-        $nome=$usuario["nome"];
-        $cpf=$usuario["CPF"];
-        $telefone=$usuario["telefone"];
-        $tipo_usuario=$usuario["tipo"];
-        $user = new Empregado($nome, $senha, $tipo_usuario, $cpf, $telefone, $email);
-        $user->setSenha($senha);
-        return view('telaEntrar.index');
+        $tokenAtual=hash_hmac("sha256", 'email', env("APP_KEY"));
+        if ($token == $tokenAtual){
+            $ID=(new PessoaDAO)->SELECTbyEmail($email);
+            $usuario= (new PessoaDAO)->SELECTbyID($ID);
+            $nome=$usuario["nome"];
+            $cpf=$usuario["CPF"];
+            $telefone=$usuario["telefone"];
+            $tipo_usuario=$usuario["tipo"];
+            $user = new Empregado($nome, $senha, $tipo_usuario, $cpf, $telefone, $email, $ID);
+            $user->setSenha($senha);
+        }
+        return redirect()->route('entrar');
     }
 }

@@ -9,8 +9,9 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
     private $email;
 	private $senha;
 	private $tipo_usuario;
+	protected $ID;
 
-	public function __Construct($nome, $senha, $tipo_usuario, $cpf, $telefone, $email)
+	public function __Construct($nome, $senha, $tipo_usuario, $cpf, $telefone, $email, $ID = null)
     {
         $this->nome = $nome;
 		$this->senha = $senha;
@@ -18,6 +19,7 @@ abstract class Pessoa extends \App\DB\interfaces\DataObject {
 		$this->cpf = $cpf;
 		$this->telefone = $telefone;
 		$this->email = $email;
+		$this->ID = $ID;
     }
 
 	/**
