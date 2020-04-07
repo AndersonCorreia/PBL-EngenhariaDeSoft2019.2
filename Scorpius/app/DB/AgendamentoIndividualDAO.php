@@ -62,12 +62,13 @@ class AgendamentoIndividualDAO extends AgendamentoDAO {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    private function INSERT_Exposicao( int $expID, int $ID){
+    private function INSERT_Exposicao( int $expID = null, int $ID = null){
         
-        $sql = "INSERT INTO exposicao_agendamento (exposicao_ID, agendamento_ID) VALUE 
-            ( $expID, $ID)";
-        $this->dataBase->query($sql);
-        
+        if($expID != null && $ID != null){
+            $sql = "INSERT INTO exposicao_agendamento (exposicao_ID, agendamento_ID) 
+                    VALUE ( $expID, $ID)";
+            $this->dataBase->query($sql);
+        }
     }
 
     private function INSERT_Visitantes( array $visitantes, int $ID){

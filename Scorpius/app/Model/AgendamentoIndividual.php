@@ -9,7 +9,7 @@ class AgendamentoIndividual extends \App\DB\interfaces\DataObject
 	private $visita;
     private $statusAg;
     private $usuario_ID;
-    private $exposicaoID;
+    private $exposicaoID = null;
     private $visitantes;
     
     public function __Construct($usuario_ID, $visita, $status = 'confirmado'){
