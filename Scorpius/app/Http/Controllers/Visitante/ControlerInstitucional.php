@@ -97,7 +97,7 @@ class ControlerInstitucional extends Controller {
     public function editarInstituicao($id) {
 
         $variaveis = [
-            'paginaAtual' => "Ver Instituiçoes Cadastradas",
+            'paginaAtual' => "Ver Instituições Vínculadas",
             'registros' => instituicao::buscar($id),
             'instituicoes' => (new InstituicaoDAO)->getNomeEnderecoALL() 
         ];

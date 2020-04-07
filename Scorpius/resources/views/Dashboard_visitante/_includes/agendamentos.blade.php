@@ -1,49 +1,50 @@
+<!-- Modal -->
+<div class="modal fade" method="POST" action="{{route('confirma.post')}}" id="modalExemplo" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cancelamento Agendamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja confirmar as alterações?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" salvarMudanca>Salvar mudanças</button>
+            </div>
+        </div>
+    </div>
+</div>
 <meta name="csrf-token" content="{{csrf_token()}}">
 <form method="POST" action="{{route('confirma.post')}}" enctype="multipart/form-data">
     {{csrf_field()}}
     {{ method_field('POST') }}
 
-    <!-- Modal -->
-    <div class="modal fade" method="POST" action="{{route('confirma.post')}}" id="modalExemplo" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cancelamento Agendamento</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Tem certeza que deseja confirmar as alterações?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" salvarMudanca>Salvar mudanças</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <?php
     $flag=false; 
     function mudarValor(&$e){ $e=true; }?>
+    <!-- Corpo principal -->
     @foreach((session('tipo') == 'institucional' ? $registros['agendamento_institucional'] :
     $registros['agendamento'])
     as $agenda)
     @if(stripos($agenda['Status'], 'cancelado')===false)
     {{ mudarValor($flag) }}
-    <div class="agendas">
+    <div class="agendas form-group">
         <div class="agendamentos scorpius-border-shadow border-top border-shadow">
             <table class="table-borderless">
                 <thead>
                     <tr>
-                        <th>Data</th>
-                        <th>Turno</th>
-                        <th>Status</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Turno</th>
+                        <th scope="col">Status</th>
                         @if(session('tipo') == 'institucional')
-                        <th>Turma</th>
+                        <th scope="col">Turma</th>
                         @endif
-                        <th>
+                        <th scope="col">
                         </th>
                     </tr>
                 </thead>
@@ -135,8 +136,8 @@ $(document).ready(function() {
 
 <style>
 .agendamentos {
-    height: 95px;
-    width: 550px;
+    height: 25%;
+    width: 200%;
 }
 
 .agendas {

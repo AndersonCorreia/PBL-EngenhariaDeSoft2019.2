@@ -21,7 +21,8 @@
 </div>
 
 @if($exposicoes)
-
+<!-- Principal -->
+<meta name="csrf-token" content="{{csrf_token()}}">
 <form method="POST" action="{{route('confirma.post')}}" enctype="multipart/form-data">
     {{csrf_field()}}
     {{ method_field('POST') }}
@@ -75,10 +76,9 @@
     <div class="alert alert-secondary" role="alert">Não há eventos cadastrados.</div>
     @endif
 </form>
-<meta name="csrf-token" content="{{csrf_token()}}">
+
 
 <!-- modal cadastro -->
-
 <div class="modal fade" id="cadastrarModal" tabindex="-1" role="dialog" aria-labelledby="cadastrarModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -212,8 +212,11 @@
         </div>
     </div>
 </div>
+
 @include('layouts._includes.footer')
+
 @section('js')
+
 <script>
 jQuery(document).ready(function() {
     let valorAtual = null
@@ -308,8 +311,8 @@ jQuery(document).ready(function() {
         } else {
             $('#descricao_campo').val('').prop('disabled', false);
         }
-        if (valorAtual.quantidadeEscritos) {
-            $('#limiteVagas_campo').val(valorAtual.quantidadeEscritos).prop('disabled', false);
+        if (valorAtual.quantidade_inscritos) {
+            $('#limiteVagas_campo').val(valorAtual.quantidade_inscritos).prop('disabled', false);
         } else {
             $('#limiteVagas_campo').val(0).prop('disabled', false);
         }

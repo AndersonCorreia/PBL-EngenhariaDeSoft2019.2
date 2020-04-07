@@ -7,145 +7,9 @@
 {{csrf_field()}}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{csrf_token()}}">
-<!-- Modal confirmação -->
-<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmar Horário Estagiário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Tem certeza que deseja confirmar as alterações?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" salvarMudanca>Salvar mudanças</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal confirmação de periodo de matrícula-->
-<div class="modal fade" id="modalMatricula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalMatriculaLabel">Periodo de matrícula</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Tem certeza que deseja cotinuar?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" abrirMat>Confirmar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<!-- Modal horário estagiários -->
-<div class="modal fade" id="modalHorarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Horários Confirmados dos Estagiário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" fecharModal>
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="col-6  float-left">
-                    <div class="form-group row">
-                        <!-- DIV seleção de estagiário -->
-                        <div class="alert alert-danger" role="alert" style='display:none'>Estagiário não possui horário
-                            Confirmado!</div>
-                        <label class="col-sm-12 col-form-label pt-3" nomeEstagiario>Nome do Estagiário</label>
-                        <div class="col-9">
-                            <input id="nomeEstagiario" class="form-control" type="text" name="nomeEstagiario"
-                                placeholder="Insira o Nome do Estagiário" list="instList" required autofocus>
-                            <datalist id="instList">
-
-                            </datalist>
-                        </div>
-                        <button type="button" class="btn btn-primary float-left " buscarHorarioConfirmado> Buscar
-                        </button>
-
-                    </div>
-
-                </div>
-                <!--calendario-->
-                @include('TelaPropostaHorarioFuncionario._include.calendario')
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" fecharModalHorario>Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<!-- Modal periodo de visita -->
-<div class="modal fade" id="modalPeridoVisita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-lg " role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Período de visitação</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" fecharModal>
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formPeriodo">
-                    <div class="form-group col-md-12" align="center">
-                        <label class="badge-pill badge-primary" for="semestre"></label>
-                    </div>
-                    <div class="form-group row col-12 p-3">
-                        <div class="col-md-2">
-                            <label for="periodo">Período de visitas:</label>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group" style="padding-left: 20px;">
-                                <label for="periodo_inicio_campo" class="col-form-label">Data
-                                    Início:</label>
-                                <input type="date" class="form-control" name="data_inicial" id="periodo_inicio_campo" />
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="periodo_termino_campo" class="col-form-label">Data
-                                    Término:</label>
-                                <input type="date" class="form-control" name="data_final" id="periodo_termino_campo" />
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" confirmaVisita>Confirmar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+@include('TelaPropostaHorarioFuncionario._include.modal')
 <!-- Corpo Principal -->
 <div class="container">
-
     <div class="periodo scorpius-border-shadow border-top border-shadow">
         <div class="form-group col-md-12" align="center">
             <label class="badge-pill badge-primary" for="semestre"></label>
@@ -157,39 +21,43 @@
             </button>
         </div>
     </div>
-    <div class="matricula collapse  mt-3 mx-0 p-1 scorpius-border-shadow border-top border-shadow">
-        <div class="form-row">
-            <div class="col-6  float-right">
+    <div class="matricula collapse mt-3 mx-0 p-1 scorpius-border-shadow border-top border-shadow">
+        <div class="row justify-content-md-center">
+            <!-- DIV de buscar estagiário -->
+            <div class="col-6 float-right">
                 <div class="form-group row">
-                    <!-- DIV seleção de estagiário -->
                     <label class="col-sm-12 col-form-label pt-3" nomeEstagiario>Nome do Estagiário</label>
-                    <div class="col-9">
+                    <div class="col-sm-9">
                         <input id="nomeInst" class="form-control" type="text" name="estagiario"
                             placeholder="Insira o Nome do Estagiário" list="instList" required autofocus>
                         <datalist id="instList">
 
                         </datalist>
                     </div>
-
-                    <button type="button" class="btn btn-primary float-left " buscar> Buscar </button>
-
+                    <div class="col-3">
+                        <button type="button" class="btn btn-primary float-left " buscar> Buscar </button>
+                    </div>
                 </div>
-
             </div>
-
+            <!-- DIV de download da Proposta de horário -->
             <div class="col-4">
-                <!-- DIV de download da Proposta de horário -->
-                <div class="input-group-append">
-                    <label class="pt-3">Comprovante de Matrícula</label>
-                    <button type="button" class="btn btn-secondary" download>Download</button>
+                <div class="form-group row">
+                    <div class="input-group-append">
+                        <label class="pt-3">Comprovante de Matrícula</label>
+                        <button type="button" class="btn btn-secondary"  download>
+                        <i class="fa fa-download" ></i> Download</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-2">
-                <label class="pt-3">Horários Confirmados</label>
-                <button type="button" class="btn btn-warning " id="btnVisualizar" data-detalhe='' data-toggle="modal"
-                    data-target="#modalHorarios">
-                    <i class="fas fa-eye"></i> Visualizar
-                </button>
+            <!-- DIV de visualizar horários -->
+            <div class="col-sm-2">
+                <div class="form-group row">
+                    <label class="pt-3">Horários Confirmados</label>
+                    <button type="button" class="btn btn-warning " id="btnVisualizar" data-detalhe=''
+                        data-toggle="modal" data-target="#modalHorarios">
+                        <i class="fas fa-eye"></i> Visualizar
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -715,6 +583,7 @@
     }
     </script>
     @endsection
+    @section('css')
 
     <style>
     .periodo {
@@ -741,39 +610,12 @@
         padding: 20px 2px 0px 0px;
     }
 
-    .download {
-        padding-left: 60px;
-    }
-
-    /*configurando design do botão alterar*/
-    .submit_buttons {
-        background-color: #007bff;
-        position: absolute;
-        left: 680px;
-        color: white;
-        border: 5px;
-        border-radius: 5px;
-        padding: 5px;
-    }
-
-    /*configurando design do botão salvar*/
-    .submit_button {
-        background-color: #dd2c00;
-        position: absolute;
-        left: 680px;
-        color: white;
-        border: 5px;
-        border-radius: 5px;
-        padding: 5px;
-    }
-
     /*configurando design do botão de download*/
-    [download] {
+    [download]{
         text-align: top;
-        width: 200px;
-        height: 40px;
+        width: 100%;
+        height: 50%;
         border: 3px black;
-        background: transparent url(/../img/logo-download.png) no-repeat;
         background-position: left 15% bottom 50%;
         background-size: 18px;
         overflow: hidden;
@@ -783,12 +625,10 @@
         /* para o IE 5.x */
     }
 
-    [buscar] {
-        padding: 0px 20px 0px 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    #btnVisualizar{
+        color: white
     }
+
 
     /*Posição do botão do download */
     .input-group-append {
@@ -815,3 +655,4 @@
         border-left-width: 1px;
     }
     </style>
+    @endsection
