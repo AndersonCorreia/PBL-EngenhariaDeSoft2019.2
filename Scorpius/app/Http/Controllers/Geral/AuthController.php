@@ -76,6 +76,7 @@ class AuthController extends Controller
         $tokenAtual=hash_hmac("sha256", $email, env("APP_KEY"));
         if ($token == $tokenAtual){
             $usuario=(new PessoaDAO)->SELECTbyEmail($email);
+            $ID=$usuario["ID"];
             $nome=$usuario["nome"];
             $cpf=$usuario["CPF"];
             $telefone=$usuario["telefone"];
