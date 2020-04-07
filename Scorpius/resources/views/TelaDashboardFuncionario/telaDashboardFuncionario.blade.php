@@ -17,10 +17,10 @@
             </div>
             
             
-            <div class= "row mt-3 mx-3 p-3 px-3 scorpius-border-shadow border-top border-shadow bg-dark" proxVisita>
+            <div class= "row mt-3 mx-3 p-3 px-3 scorpius-border-shadow border-top border-shadow bg-dark" style="overflow-y: auto;"  proxVisita>
                 @foreach($visitantes as $visita)
                     @if(isset($visita['visitantes'][0]['aluno']))
-                    <div class= "row mt-1 mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-white text-black" conteudoProxVisita>
+                    <div class= "row mt-1 mx-3 p-3 scorpius-border-shadow border-top border-shadow bg-white text-black"  conteudoProxVisita>
                         <p class="h6 col-sm-12" nomeEscola>{{$visita['visitantes'][0]['instituicao']['nome']}}</p> <!--Substituir por acesso ao banco - nome da instituição -->
                         <p class="h6 col-sm-12" dataVisita>Data: {{$visita['dia']['data']}}</p> 
                         <p class="h6 col-sm-12" turnoVisita>Turno: {{strtoupper($visita['dia']['turno'])}}</p>
@@ -48,7 +48,7 @@
                 <h6 class="col-sm-12" nomeEscola>PRÓXIMAS VISITAS INDIVIDUAIS</h6>
             </div>
 
-            <div class= "row mt-3 mx-3 p-1 px-3 scorpius-border-shadow border-top border-shadow bg-dark" escolas>
+            <div class= "row mt-3 mx-3 p-1 px-3 scorpius-border-shadow border-top border-shadow bg-dark" style="overflow-y: auto;" escolas>
                 @foreach($visitantes as $visita)
                 @for($j = 1; $j < count($visita['visitantes']); $j++) {{-- {{dd($visita['visitantes'][1]['usuario'])}}
                 {{-- {{dd($visita)}} --}}
@@ -113,7 +113,7 @@
 
     [proxVisita]{
         width: 300px;
-        min-height: 370px;
+        height: 370px;
     }
 
     [conteudoProxVisita]{
@@ -128,7 +128,7 @@
 
     [escolas]{
         width: 300px; 
-        min-height: 370px;
+        height: 370px;
     }
 
     [checkInst]{
