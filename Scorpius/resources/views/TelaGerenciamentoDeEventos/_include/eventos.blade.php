@@ -285,7 +285,6 @@ jQuery(document).ready(function() {
         validar()
         $('#cadastrarModal').modal('show')
         valorAtual = $(e.currentTarget).data('detalhe')
-        console.log(valorAtual)
         if (valorAtual.titulo) {
             $('#nome_campo').val(valorAtual.titulo).prop('disabled', false);
         } else {

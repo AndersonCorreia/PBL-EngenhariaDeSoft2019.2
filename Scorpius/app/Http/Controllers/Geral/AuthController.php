@@ -46,20 +46,16 @@ class AuthController extends Controller
         return redirect()->route("paginaInicial");
     }
 
-    public function changePassword(){
-        //fazer
-    }
-
-    public function enviarEmailRedefinicaoSenha($usuario_email, $token)
+    public function enviarEmailRedefinicaoSenha($email, $token)
     {
         $dados = [
             'token'=> $token,
-            'usuario_email'=> $usuario_email,
+            'usuario_email'=> $email,
         ];
          // Enviando o e-mail
         Mail::send('emails.emailRedefinicaoSenha', $dados, function($message){
             $message->from('scorpiusuefs@gmail.com', 'Scorpius - Redefinição de Senha');
-            $message->to($this->email);
+            $message->to($email);
             $message->subject('Link para Redefinição de Senha');
         });
         
@@ -67,27 +63,27 @@ class AuthController extends Controller
 
     public function senhaRedefinicao(Request $request)
     {
-        $this->email = $request->email;
-        $token = $request->_token;
-        $dados = [
-            'usuario_email' => $this->email,
-            'token' => $token
-        ];
-    
-        $this->enviarEmailRedefinicaoSenha($this->email, $token);
+        $email = $request->email;
+        $token = hash_hmac("sha256", $email, env("APP_KEY"));
+        
+        $this->enviarEmailRedefinicaoSenha($email, $token);
+
         return view('telaRedefinicaoSenha.avisoRedefinicao'); 
     }
 
-    public function redefinirSenha(Request $request, $email){
+    public function redefinirSenha(Request $request, $email, $token){
         $senha = $request->novaSenha;
-        $ID=(new PessoaDAO)->SELECTbyEmail($email);
-        $usuario= (new PessoaDAO)->SELECTbyID($ID);
-        $nome=$usuario["nome"];
-        $cpf=$usuario["CPF"];
-        $telefone=$usuario["telefone"];
-        $tipo_usuario=$usuario["tipo"];
-        $user = new Empregado($nome, $senha, $tipo_usuario, $cpf, $telefone, $email);
-        $user->setSenha($senha);
-        return view('telaEntrar.index');
+        $tokenAtual=hash_hmac("sha256", $email, env("APP_KEY"));
+        if ($token == $tokenAtual){
+            $usuario=(new PessoaDAO)->SELECTbyEmail($email);
+            $ID=$usuario["ID"];
+            $nome=$usuario["nome"];
+            $cpf=$usuario["CPF"];
+            $telefone=$usuario["telefone"];
+            $tipo_usuario=$usuario["tipo"];
+            $user = new Empregado($nome, $senha, $tipo_usuario, $cpf, $telefone, $email, $ID);
+            $user->setSenha($senha);
+        }
+        return redirect()->route('entrar');
     }
 }

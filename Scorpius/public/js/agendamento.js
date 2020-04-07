@@ -52,7 +52,7 @@ function proximosDias(turno){
     Turno = turno;
     if( posCalendar<1 ){
         var datafinal = $("#data").attr("max");
-        $.getJSON("visitante/agendamento/dados/"+ Turno + "/" + datafinal+ "/proximo/", preencherCalendar);
+        $.getJSON("/visitante/agendamento/dados/"+ Turno + "/" + datafinal+ "/proximo/", preencherCalendar);
     }
     $("#setaLeft").removeAttr("disabled");
     $("#setaRight").attr("disabled", "");
@@ -63,7 +63,7 @@ function anterioresDias(turno){
     Turno = turno;
     if( posCalendar-->0 ){
         var data = $("#data").attr("min");
-        $.getJSON("/agendamento/dados/"+ Turno + "/" + data + "/anterior/", preencherCalendar);
+        $.getJSON("/visitante/agendamento/dados/"+ Turno + "/" + data + "/anterior/", preencherCalendar);
     }
     $("#setaRight").removeAttr("disabled");
     $("#setaLeft").attr("disabled","");

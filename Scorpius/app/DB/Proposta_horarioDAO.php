@@ -138,6 +138,33 @@ class Proposta_horarioDAO extends \App\DB\interfaces\DataAccessObject {
         return $ArrayResult[0]['guia_matricula'];
        
     }
+    
+    function removePermissao(){
+        $tipo_user = 8;
+        $permissao_ID=2;
+
+        $sql = "DELETE FROM permissao_tipo WHERE tipo_usuario_ID=? AND permissao_ID =?";
+        $stmt = $this->dataBase->prepare($sql);
+            $stmt->bind_param("ii", $tipo_user, $permissao_ID);
+            $result = $stmt->execute();
+            if($result){
+                return $result; 
+            }
+            throw new \Exception("Erro ao remover Permissao");
+    }
+
+    function consultaPermissao(){
+        $sql = "SELECT * FROM `permissao_tipo` WHERE permissao_ID = 2 AND tipo_usuario_ID = 8";
+        $stmt = $this->dataBase->query($sql);
+        return $stmt->fetch_all(MYSQLI_ASSOC) ? true : false;
+    }
+
+    function adicionaPermissao(){
+        $tipo_user = 8;
+        $permissao_ID=2;
+        $sql = "INSERT IGNORE INTO permissao_tipo(permissao_ID, tipo_usuario_ID) VALUES($permissao_ID,$tipo_user) ON DUPLICATE KEY UPDATE permissao_ID = $permissao_ID, tipo_usuario_ID = $tipo_user";
+        return $this->dataBase->query($sql);
+    }
 
 
 

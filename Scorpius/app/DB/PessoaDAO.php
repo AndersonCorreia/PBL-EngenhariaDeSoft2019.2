@@ -37,10 +37,9 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
 
     function UPDATE($usuario): bool
     {
-        $sql = "UPDATE usuario
-        SET nome = $usuario->nome, email = $usuario->email, telefone = $usuario->telefone,
-        senha = $usuario->senha
-        WHERE ID = usuario->id";
+        $sql = "UPDATE usuario SET nome = '".$usuario->getNome().
+               "', telefone = '".$usuario->getTelefone().
+               "', senha = '".$usuario->getSenha()."' WHERE ID = ".$usuario->getID();
 
         $resultado = $this->dataBase->query($sql);
         return $resultado;
@@ -301,8 +300,8 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         return $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
     }
     function SELECTbyEmail($email){
-        $sql = "SELECT ID FROM usuario WHERE email='$email'";
-        $resultado=$this->dataBase->query($sql)->fetch_assoc()['ID'];
+        $sql = "SELECT * FROM usuario WHERE email='$email'";
+        $resultado=$this->dataBase->query($sql)->fetch_assoc();
         return $resultado;
     }
 }

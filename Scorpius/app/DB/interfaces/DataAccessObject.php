@@ -32,6 +32,7 @@ abstract class DataAccessObject {
             $ini["DB_PORT"]         );
 
         date_default_timezone_set('America/Bahia');
+        $this->dataBase->autocommit(true);
     }
     /**
      * Realiza uma query SELECT retornando todos os dados de uma tabela em especifca
