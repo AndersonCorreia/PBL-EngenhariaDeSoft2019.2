@@ -300,8 +300,8 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         return $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
     }
     function SELECTbyEmail($email){
-        $sql = "SELECT ID FROM usuario WHERE email='$email'";
-        $resultado=$this->dataBase->query($sql)->fetch_assoc()['ID'];
+        $sql = "SELECT * FROM usuario WHERE email='$email'";
+        $resultado=$this->dataBase->query($sql)->fetch_assoc();
         return $resultado;
     }
 }
