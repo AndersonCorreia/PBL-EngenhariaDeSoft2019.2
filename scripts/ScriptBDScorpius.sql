@@ -439,6 +439,7 @@ CREATE TABLE IF NOT EXISTS `scorpius`.`horario_estagiario` (
   `turno` VARCHAR(45) NOT NULL,
   `estagiario_usuario_ID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
+  UNIQUE INDEX `UNIQUE_horario_estagiario` (`dia_semana`, `turno`, `estagiario_usuario_ID`),
   INDEX `fk_horario_estagiario_estagiario1_idx` (`estagiario_usuario_ID` ASC),
   CONSTRAINT `fk_horario_estagiario_estagiario1`
     FOREIGN KEY (`estagiario_usuario_ID`)

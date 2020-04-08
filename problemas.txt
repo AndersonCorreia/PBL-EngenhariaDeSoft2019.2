@@ -1,0 +1,14 @@
+cadastro de usuario administrativo: 
+placeholdaer de telefone errado sem mascara. cadastra usuario mesmo sem senha, falta redirecionar
+
+Backup:
+não ta fazendo Backup
+
+Confirmação de horario dos estagiarios:
+não exibe os horarios da proposta do estagiario
+ta confirmando horarios que não foram escolhidos e gerando duplicatas.
+
+alterar senha:
+deveria pedir por usuario digita a senha atual e não exibir
+mesmo com senhas diferentes a requisição é feita e retornar uma tela em branco
+
