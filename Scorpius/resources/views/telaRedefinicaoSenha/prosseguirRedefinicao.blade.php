@@ -46,9 +46,9 @@
             <label for="senha">Insira sua nova senha</label>
             <input class="form-control"  type="password" id="novaSenha" name="novaSenha">
             <label for="senha">Repetir senha</label>
-            <input class="form-control"  type="password" id="repetir_senha" name="repetir_senha">
+            <input class="form-control" onchange="validar()" type="password" id="repetir_senha" name="repetir_senha">
         </div>
-        <button type="submit" onclick="return validar()" class="btn btn-success btn-lg btn-block" style="font-size:15px">Enviar</button>
+        <button type="submit"  class="btn btn-success btn-lg btn-block" style="font-size:15px">Enviar</button>
     </div>
 </form>
 @endsection
