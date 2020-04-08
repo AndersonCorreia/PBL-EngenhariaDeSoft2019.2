@@ -21,7 +21,7 @@ class AdminController extends Controller
         //$id_user = session('ID');
         $visitantes = $this->selectEscolas();
 
-        dd($visitantes);
+        
         $variaveis = [
             'visitantes' => $visitantes,
 
@@ -32,13 +32,13 @@ class AdminController extends Controller
 
     public function selectEscolas(){
         $escolas = new InstituicaoDAO();
-        $totais = [];
+        $totais = array();
         $municipais = $escolas->SELECT_COUNT_alunosMunicipal();
-        $totais.push($municipais);
+        array_push($totais, $municipais);
         $estaduais = $escolas->SELECT_COUNT_alunosEstadual();
-        $totais.push($estaduais);
+        array_push($totais, $estaduais);
         $particulares = $escolas->SELECT_COUNT_alunosPrivada();
-        $totais.push($particulares);
+        array_push($totais, $particulares);
         
         return $totais;
     }

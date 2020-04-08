@@ -174,7 +174,8 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
     function SELECT_COUNT_alunosEstadual (){
         $sql = 'SELECT COUNT(i.`tipo_instituicao`) AS `Escolas Estaduais`  FROM `visita` as v INNER JOIN `agendamento_institucional` as ai on v.`agendamento_institucional_ID` = ai.`ID` INNER JOIN `professor_instituicao` as pii on ai.`professor_instituicao_ID` = pii.`ID` INNER JOIN `instituicao` AS i ON pii.`instituicao_ID` = i.`ID` WHERE i.`tipo_instituicao`= "Estadual"';
         $stmt = $this->dataBase->query($sql);
-        return $stmt; 
+        $row = $stmt->fetch_assoc();
+        return $row; 
     }
 
     /**
@@ -184,7 +185,8 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
     function SELECT_COUNT_alunosMunicipal (){
         $sql = 'SELECT COUNT(i.`tipo_instituicao`) AS `Escolas Municipais` FROM `visita` as v INNER JOIN `agendamento_institucional` as ai on v.`agendamento_institucional_ID` = ai.`ID` INNER JOIN `professor_instituicao` as pii on ai.`professor_instituicao_ID` = pii.`ID` INNER JOIN `instituicao` AS i ON pii.`instituicao_ID` = i.`ID` WHERE i.`tipo_instituicao`= "Municipal"';
         $stmt = $this->dataBase->query($sql);
-        return $stmt; 
+        $row = $stmt->fetch_assoc();
+        return $row; 
     }
 
     /**
@@ -194,6 +196,7 @@ class InstituicaoDAO extends \App\DB\interfaces\DataAccessObject {
     function SELECT_COUNT_alunosPrivada (){
         $sql = 'SELECT COUNT(i.`tipo_instituicao`) AS `Escolas Privadas`  FROM `visita` as v INNER JOIN `agendamento_institucional` as ai on v.`agendamento_institucional_ID` = ai.`ID` INNER JOIN `professor_instituicao` as pii on ai.`professor_instituicao_ID` = pii.`ID` INNER JOIN `instituicao` AS i ON pii.`instituicao_ID` = i.`ID` WHERE i.`tipo_instituicao`= "Privada"';
         $stmt = $this->dataBase->query($sql);
-        return $stmt; 
+        $row = $stmt->fetch_assoc();
+        return $row; 
     }
 }
