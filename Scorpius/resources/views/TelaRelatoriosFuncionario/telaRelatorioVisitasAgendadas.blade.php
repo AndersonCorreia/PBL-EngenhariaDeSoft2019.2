@@ -8,7 +8,7 @@
 <div class="form-group row col-12">    
     <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
     <div class="col-9">
-        <form action="{{route('buscarInstituicao')}}" method="post">
+        <form action="{{route('buscarInstituicao')}}" method="POST">
             <input id="nomeInst" class="form-control" type="text" name="instituicao" 
             placeholder="Insira o Nome da Instituição" list="instList" required autofocus>
             <datalist id="instList">            
