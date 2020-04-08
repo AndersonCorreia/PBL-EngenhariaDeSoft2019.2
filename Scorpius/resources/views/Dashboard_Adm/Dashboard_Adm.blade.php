@@ -34,8 +34,17 @@
         border-top-left-radius: 20px;
     }
 </style>
+@endsection
+
+<div id="chart-container">
+      <canvas id="exibedados"></canvas>
+    </div>
+
+@section('js')
 
 
+@include('Dashboard_Adm._includes.chart')
 
+@include('Dashboard_Adm._includes.estagiarios')
 
 @endsection

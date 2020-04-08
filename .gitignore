@@ -2,3 +2,5 @@
 /.vscode
 lembretes.txt
 php.ini
+scripts/ScriptBDPovoamentoInicialScorpius.sql.zip
+Scorpius/query.sql
