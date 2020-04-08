@@ -9,7 +9,7 @@
     <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
     <div class="col-9">
         <form action="{{route('buscarInstituicao')}}" method="post">
-        {{ csrf_field() }}
+            {{ csrf_field() }}
             <input id="nomeInst" class="form-control" type="text" name="instituicao" 
             placeholder="Insira o Nome da Instituição" list="instList" required autofocus>
             <datalist id="instList">            
@@ -18,9 +18,10 @@
             <button type="submit" class="btn btn-primary float-left" buscar> Buscar </button>
         </form>
     <button type="button" class="btn btn-danger float-left" data-toggle="modal"
-    data-target=".modal-relatorio-estatistico" relatorio> Relatório Estatístico </button>
+    data-target=".modal-relatorio-estatistico" relatorio disabled> Relatório Estatístico </button>
     <!-- modal do relatório estatístico -->
-    <div class="modal fade modal-relatorio-estatistico" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade modal-relatorio-estatistico" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
+    aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
@@ -31,7 +32,8 @@
                 </div>
                 <div class="modal-body">
                 <!-- Somente exemplificando a estrutura -->
-                    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" style="overflow-y: auto;" modalEstatistico>
+                    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" style="overflow-y: auto;" 
+                    modalEstatistico>
                         <!-- Espaço da tabela -->
                         
                     </div>
@@ -44,20 +46,17 @@
     </div>
 </div>
 
-
-@foreach($agendamentos as $agendamento)
-    <?php $id = $agendamento['agendamentoID']; ?>
-<<<<<<< HEAD
-    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
-=======
-    <form method="get" action="#"> <!--bloco começa aqui -->
-=======
-=======
->>>>>>> Resolvendo problemas...
-@foreach($agendamentos ?? [] as $agendamento)
-    
+@if(empty($agendamentos))
+    <form action="{{route('buscarInstituicao')}}" method="post">
+        {{ csrf_field() }}
+        <label class="col-sm-11 pt-3" nomeInstituicao >A instituição procurada não apresenta agendamentos.
+        <button class="btn btn-primary float-right"> Exibir todos os agendamentos </button>
+        </label>
+    </form>
+@else
+    @foreach($agendamentos as $agendamento)
+        <?php $id = $agendamento['agendamentoID']; ?>
         <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
->>>>>>> Corrigindo erros em Tela dos Relatórios
             <table class="table-borderless col-12">
                 <thead>
                 <!-- Somente exemplificando a estrutura -->
@@ -94,17 +93,9 @@
                     </tr>
                 </thead>
             </table>
-        <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="#modal{{$id}}" 
-        expand>Dados Completos</button>
-    </div>
-
-        </form>
-        <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="{{$id}}" 
-        expand>Dados Completos</button>
-
-        
-        <button type="button" class="btn btn-secondary float-left" data-toggle="modal"
-        data-target=".modal-dados-completos" expand>Dados Completos</button>
+            <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="#modal{{$id}}" 
+            expand>Dados Completos</button>
+        </div>
         <!-- modal dos dados completos -->
         <div class="modal fade" id="modal{{$id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
             aria-hidden="true">
@@ -191,13 +182,14 @@
                 </div>
             </div>
         </div>
-@endforeach
+    @endforeach
+@endif
 
 
 <style>
 
     [borda]{
-        width: 1050px;
+        width: auto;
         height: auto;
     }
 
