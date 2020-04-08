@@ -4,8 +4,8 @@
 
 @section('conteudo')
 
-<div class="form-row col-msm">
-    <div class="form-group d-block" id="listaEspera">
+<div class="form-row col-msm row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow">
+    <div class="form-group d-block " id="listaEspera">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
             <div class="row">
@@ -23,13 +23,13 @@
             </li>
         </ul>
     </div>
-    <div class="form-group col-sm-12 d-block p-0">
+    <div class="form-group col-sm-12 d-block p-0 ">
         <div style="text-align:center;">
             <button id="setaLeft" type="button" class=" btn btn-default" onclick="anterioresDias('diurno')" disabled>
                 <i class="fas fa-angle-left"></i>
             </button>
             <span id="calendarDatas" class="text-dark font-weight-bold">
-                {{$visitas_institucionais["datas"]["dataInicio"]}} a {{$visitas_institucionais["datas"]["dataFim"]}}
+                {{date("d/m/Y", strtotime(now())) }} a {{$visitas_institucionais["datas"]["dataFim"]}}
             </span>
             <button id="setaRight" type="button" class=" btn btn-default" onclick="proximosDias('diurno')">
                 <i class="fas fa-angle-right"></i>
@@ -40,9 +40,17 @@
                 <thead>
                     <tr class="thead-dark">
                         <th scope="col">Dia</th>
-                        @foreach($visitas_institucionais['datas'] as $data)
-                            <th scope="col">{{$data}}</th>
-                        @endforeach
+                        @forelse($visitas_institucionais['datas'] as $data)
+                            @if($loop->first)
+                                <th scope="col">{{date("d/m/Y", strtotime(now())) }}</th>
+                            @elseif($loop->last)
+                                <th scope="col">{{$visitas_institucionais["datas"]["dataFim"]}}</th>
+                            @else
+                                <th scope="col">{{$data}}</th> 
+                            @endif
+                        @empty
+                        <th scope="col"></th>
+                        @endforelse
                     </tr>
                 </thead>
                 <tbody>
@@ -98,48 +106,30 @@
                         </div>
                         <div class="modal-body">
                             <!-- colocar resto das coisas aqui -->
-                            <div class="custom-control custom-radio col-md-12">
-                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio1">
-                                    <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
-                                        <div class="row col-12 col-md-11 my-1">
-                                            <div class="row col-12">
-                                                @forelse($lista_espera as $agendamento)
-                                                     
-                                                        <div class="custom-control custom-radio">
-                                                            <div class="col-md-5">
-                                                                <label class="custom-control-label" for="customRadio1">
-                                                                    {{$agendamento['instituicao']}}
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label class="custom-control-label" for="customRadio1">
-                                                                    {{$agendamento['tipo_instituicao']}}   
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <label class="custom-control-label" for="customRadio1">
-                                                                    {{$agendamento['ano_escolar']}} - {{$agendamento['turma']}}    
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    
-                                                @empty
-                                                    <div class="col-md-12">
-                                                        <div class="col-12 p-0 my-1 font-weight-bold">
-                                                            <p>Não existe nenhuma instituição na lista de espera para esse dia e turno.</p>
-                                                        </div>
+                            
+                            <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
+                                <div class="row col-12 col-md-11 my-1">
+                                    <div class="row col-12">
+                                        <div class="custom-control custom-radio col-md-12">
+                                            @forelse($lista_espera as $agendamento)
+                                                <form >
+                                                    @include('telaGerenciamentoDeVisitas._includes.listaEsperaDiaTurno')
+                                                </form>
+                                            @empty
+                                                <div class="col-md-12">
+                                                    <div class="col-12 p-0 my-1 font-weight-bold">
+                                                        <p>Não existe nenhuma instituição na lista de espera para esse dia e turno.</p>
                                                     </div>
-                                                @endforelse
-                                            </div>
+                                                </div>
+                                            @endforelse
                                         </div>
                                     </div>
-                                </label>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancelar</button>
+                            <button type="submit" class="btn btn-primary" btnlistaEDT>Confirmar</button>
                         </div>
                     </div>
                 </div>
@@ -210,14 +200,43 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Confirmar</button>
+                            <button type="submit" class="btn btn-primary" data-dismiss="modal" btnConfirmaCancelamento>Confirmar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        
+    </div>
+</div>    
+    <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow">
+        <div class="row col-12 m-0 pl-2 p-0"><h4>Lista de Agendamentos cancelados</h4></div>
+        <div class="row col-12 m-0 pl-2 p-0"><p>Pelo funcionário:</p></div>
+        @forelse ($agendamentos_cancelados_funcionario as $agendamento)
+            <div class="row col-12 m-0 pl-2 p-0">
+                <p>{{$agendamento['instituicao']}}</p>
+            </div>
+            <div class="row col-12 m-0 pl-2 p-0">
+                <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
+            </div>
+            <div class="row col-12 m-0 pl-2 p-0">
+                <p>Motivo do cancelamento: </p>
+            </div>
+        @empty
+            <p>Não há nenhum agendamento cancelado!</p>
+        @endforelse
+        <div class="row col-12 m-0 pl-2 p-0"><p>Pelo usuário:</p></div>
+        @forelse ($agendamentos_cancelados_usuario as $agendamento)
+            <div class="row col-12 m-0 pl-2 p-0">
+                <p>{{$agendamento['instituicao']}}</p>
+            </div>
+            <div class="row col-12 m-0 pl-2 p-0">
+                <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
+            </div>
+        @empty
+            <p>Não há nenhum agendamento cancelado!</p>
+        @endforelse
+    </div>
+    
         <style>
             #listaEspera{
                 padding: 0px;

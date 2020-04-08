@@ -187,4 +187,18 @@ class VisitaDAO extends DataAccessObject{
 
         return $diasTurnoPermitidos;
     }
+
+    public function SELECT_visita_institucional_byID(int $ID){
+        
+        $sql = "SELECT * FROM visita_institucional WHERE agendamentoID = ?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("s", $ID);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+
+        if($result==[]){
+            throw new \App\Exceptions\NenhumaVisitaEncontradaException(2);
+        }
+        return $result;
+    }
 }

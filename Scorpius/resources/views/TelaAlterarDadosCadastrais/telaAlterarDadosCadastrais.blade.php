@@ -6,20 +6,20 @@
 <head>
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 </head>
-<div class="scorpius-border p-4">
-    <div class="scorpius-border-shadow-sm p-3"  onmousemove="verificaCamposPessoais()">
+<div class="scorpius-border p-4" onmousemove="verificaTel()">
+    <div class="scorpius-border-shadow-sm p-3" onmousemove="verificaCPF()">
         <p class="h3">Dados pessoais</p>
         <form action="{{route('alterarDadosAlteracao.post')}}" method="POST">
             {{csrf_field()}}
             <div class="form-row">
                 <div class="col-md-6 form-group">
                     <label for="nomeUsuario">Nome</label>
-                    <input class="form-control" name="nome" id="nomeUsuario" placeholder="Nome" minlength="3"
+                    <input class="form-control nome-text" name="nome" id="nomeUsuario" placeholder="Nome" minlength="3"
                         maxlength="12" type="text" value ="{{isset($dadosUsuario['nome']) ? $dadosUsuario['nome'] : ''}}" required>
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="sobrenomeUsuario">Sobrenome</label>
-                    <input class="form-control" name="sobrenome" id="sobrenomeUsuario" value="{{isset($dadosUsuario['sobrenome']) ? $dadosUsuario['sobrenome'] : ''}}"
+                    <input class="form-control nome-text" name="sobrenome" id="sobrenomeUsuario" value="{{isset($dadosUsuario['sobrenome']) ? $dadosUsuario['sobrenome'] : ''}}"
                             placeholder="Sobrenome" minlength="3" maxlength="20" type="text" required>
                 </div>
             </div>
@@ -35,14 +35,14 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">+55</div>
                         </div>
-                        <input required maxlength="14" minlength="14" type="text" value="{{isset($dadosUsuario['telefone']) ? $dadosUsuario['telefone'] : ''}}" 
-                                name="telefone" id="telefoneUsuario" class="form-control val" placeholder="(00) 0 0000-0000">
+                        <input required maxlength="15" minlength="15" type="text" value="{{isset($dadosUsuario['telefone']) ? $dadosUsuario['telefone'] : ''}}" 
+                                name="telefone" onchange="verificaTel();" id="telefoneUsuario" class="form-control val" placeholder="(00) 0 0000-0000">
                     </div>
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="cpfUsuario">CPF</label>
-                    <input onkeydown="javascript: fMasc( this, mCPF );" minlength="14" maxlength="14" type="text" name="cpf" id="cpfUsuario"
-                        class="form-control cpf-mask" value="{{isset($dadosUsuario['cpf']) ? $dadosUsuario['cpf'] : ''}}" placeholder="000.000.000-00" required>
+                    <input minlength="14" maxlength="14" type="text" name="cpf" id="cpfUsuario" class="form-control val cpf-mask" onchange="verificaCPF();"
+                            value="{{isset($dadosUsuario['cpf']) ? $dadosUsuario['cpf'] : ''}}" placeholder="000.000.000-00" required>
                     <small hidden id="feedback-cpf" class="text-danger">CPF inválido!</small>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         Cancelar
                     </a>
                 </div>
-                <button type="submit" id="btnAlterar" class="btn btn-secondary float-right" action="{{route('alterarDadosAlteracao.post')}}" onmousewheel="verificaCamposPessoais()">
+                <button type="submit" id="btnAlterar" class="btn btn-secondary float-right" action="{{route('alterarDadosAlteracao.post')}}">
                     Alterar dados
                 </button>
             </div>
@@ -102,14 +102,7 @@
 <script src="http://unpkg.com/vanilla-masker@1.1.1/lib/vanilla-masker.js"></script>
 <script>
 
-$(".val").on("input", function() {
-    var regexp = /[^0-9-.]/g;
-    if (this.value.match(regexp)) {
-        $(this).val(this.value.replace(regexp, ''));
-    }
-});
-
-jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {        //Funcão pros botoes revelarem a senha ao passar o mouse
     $('#iconRS2').hover(function(e) {       // CONFIRMA NOVA SENHA
         e.preventDefault();
         if ( $('#rptNovaSenha').attr('type') == 'password' ) {
@@ -144,82 +137,109 @@ jQuery(document).ready(function($) {
     });
 });
 
-function inputHandler(masks, max, event) {
+function verificaCPF(){
+    if($('#cpfUsuario').val() != ""){
+        if( cpfInvalido()== true  ){
+            $('#cpfUsuario').removeClass('is-valid');
+            $('#cpfUsuario').addClass('is-invalid');
+            $('#btnAlterar').attr("hidden", '');      //hide button
+        }
+        else{
+            $('#cpfUsuario').removeClass('is-invalid');
+            $('#cpfUsuario').addClass('is-valid');
+            $('#btnAlterar').removeAttr("hidden");    //SHOW button
+        }
+    }
+}
+
+function verificaTel(){
+    if($('#telefoneUsuario').val() != ""){         //SE NULO
+        if( telInvalido()== true){                          //SE INVALIDO
+            $('#telefoneUsuario').removeClass('is-valid');
+            $('#telefoneUsuario').addClass('is-invalid');
+            $('#btnAlterar').attr("hidden", '');      //hide button
+        }
+        else{                                                  //SE VALIDO
+            $('#telefoneUsuario').removeClass('is-invalid');
+            $('#telefoneUsuario').addClass('is-valid');
+            $('#btnAlterar').removeAttr("hidden");        //show button
+        }
+    }
+}
+
+function verificaCamposSenha(){
+    if($('#novaSenha').val() != "" || $('#rptNovaSenha').val() != ""){      //SE NAO NULO
+        if ($('#novaSenha').val() != $('#rptNovaSenha').val()) {        //SE INVALIDO
+            $('#rptNovaSenha').removeClass('is-valid');
+            $('#novaSenha').removeClass('is-valid');
+            $('#rptNovaSenha').addClass('is-invalid');
+            $('#novaSenha').addClass('is-invalid');
+            $('#alterarSenha').attr("hidden", '');      //hide button
+        } else {                                            //SE VALIDO
+            $('#novaSenha').removeClass('is-invalid');
+            $('#novaSenha').addClass('is-valid');
+            $('#rptNovaSenha').removeClass('is-invalid');
+            $('#rptNovaSenha').addClass('is-valid');
+            $('#alterarSenha').removeAttr("hidden");        //show button
+        }
+    }
+    if($('#novaSenha').val() === $('#rptNovaSenha').val()){     //SE SENHAS NOVAS IGUAIS
+            $('#novaSenha').removeClass('is-invalid');
+            $('#novaSenha').addClass('is-valid');
+            $('#rptNovaSenha').removeClass('is-invalid');
+            $('#rptNovaSenha').addClass('is-valid');
+            $('#alterarSenha').removeAttr("hidden");            //show button
+    }
+}
+
+function inputHandler(masks, max, event) {          //Gerencia a mascara para o cpf e para telefone
     let c = event.target;
-    let v = c.value.replace(/\D/g, '');
+    let v = c.value.replace(/\D/g, '');            
     let m = c.value.length > max ? 1 : 0;
     VMasker(c).unMask();
     VMasker(c).maskPattern(masks[m]);
     c.value = VMasker.toPattern(v, masks[m]);
 }
 
-let telMask = ['99 9 9999-9999'];
+let telMask = ['(99) 99999-9999'];               //Mascara de telefone
 let tel = document.querySelector('#telefoneUsuario');
 VMasker(tel).maskPattern(telMask[0]);
 tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);  
 
-let cpfMask = ['999.999.999-99'];
+let cpfMask = ['999.999.999-99'];               //Mascara de cpf
 let cpf = document.querySelector('#cpfUsuario');
 VMasker(cpf).maskPattern(cpfMask[0]);
 cpf.addEventListener('input', inputHandler.bind(undefined, cpfMask, 14), false); 
 
-
-function verificaCamposPessoais(){
-    if($('#cpfUsuario').val() != ""){
-        if(ValidaCPF()){
-            $('#feedback-senha').removeAttr("hidden");
-            $('#cpfUsuario').removeClass('is-valid');
-            $('#cpfUsuario').addClass('is-invalid');
-        }else{
-            $('#feedback-senha').attr("hidden", '');
-            $('#cpfUsuario').removeClass('is-invalid');
-            $('#cpfUsuario').addClass('is-valid');
-        }
-    }
-}
-function verificaCamposSenha(){
-    trava = 0;
-    if($('#novaSenha').val() != "" || $('#rptNovaSenha').val() != ""){
-        if ($('#novaSenha').val() != $('#rptNovaSenha').val()) {
-            $('#rptNovaSenha').removeClass('is-valid');
-            $('#novaSenha').removeClass('is-valid');
-            $('#rptNovaSenha').addClass('is-invalid');
-            $('#novaSenha').addClass('is-invalid');
-            $('#feedback-senha').removeAttr("hidden");
-            trava++;
-        } else {
-            $('#novaSenha').removeClass('is-invalid');
-            $('#novaSenha').addClass('is-valid');
-            $('#rptNovaSenha').removeClass('is-invalid');
-            $('#rptNovaSenha').addClass('is-valid');
-            $('#feedback-senha').attr("hidden", '');
-        }
-    }
-    
-    if (trava == 0) {
-        $('#alterarSenha').removeAttr("hidden");
-    } else {
-        $('#alterarSenha').attr("hidden", '');
-    }
-}
-function ValidaCPF(){	
-	let RegraValida=document.getElementById("cpfUsuario").value; 
-	let cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/;	 
-    if (cpfValido.test( ) == true)	{ 
-        return false;	
-    } else	{	 
-        return true	
-    }
+function cpfInvalido(){
+    let cpf = $('#cpfUsuario').val();
+    return  (cpf.length != 14 || cpf == "000.000.000-00" || cpf == "111.111.111-11" ||  
+            cpf == "222.222.222-22" || cpf == "333.333.333-33" || cpf == "444.444.444-44" ||  
+            cpf == "555.555.555-55" || cpf == "666.666.666-66" || cpf == "777.777.777-77" || 
+            cpf == "888.888.888-88" || cpf == "999.999.999-99");
 }
 
-function validaTel(){	
-	let RegraValida=document.getElementById("telefoneUsuario").value; 
-	let cpfValido = /^(([0-9]{2} [0-9]{1} [0-9]{4}-[0-9]{4})|([0-9]{11}))$/;	 
-    if (cpfValido.test( ) == true)	{ 
-        return false;	
-    } else	{	 
-        return true	
-    }
+function telInvalido(){
+    let tel = $('#telefoneUsuario').val();
+    return  (tel.length != 15 || tel == "(00) 00000-0000" || tel == "(11) 11111-1111" ||  
+            tel == "(22) 22222-2222" || tel == "(33) 33333-3333" || tel == "(44) 44444-4444" ||  
+            tel == "(55) 55555-5555" || tel == "(66) 66666-6666" || tel == "(77) 77777-7777" || 
+            tel == "(88) 88888-8888" || tel == "(99) 99999-9999");
 }
+
+$(".val").on("input", function() {      //Impede inserção de caracteres diferentes de * e substitui por ' '
+    var regexp = /[^0-9-.]/g;           //*
+    if (this.value.match(regexp)) {
+        $(this).val(this.value.replace(regexp, ''));
+    }
+});
+
+$(".nome-text").on("input", function() {       //Impede inserção de caracteres diferentes de * e substitui por ' '
+    var regexp = /[^A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]/g;      //*
+    if (this.value.match(regexp)) {
+        $(this).val(this.value.replace(regexp, ''));
+    }
+});
+
 </script>
 @endsection

@@ -27,51 +27,51 @@ class horarioEstagiarioController extends Controller
         $horarios = array();
         // MANHÂ
         if($_POST['seg-manha'] == 'true'){
-            $horarios[] = ['Segunda', 'manha'];
+            $horarios[] = ['segunda', 'manhã'];
         }
         if($_POST['ter-manha'] == 'true'){
-            $horarios[] = ['Terca', 'manha'];
+            $horarios[] = ['terça', 'manhã'];
         }
         if($_POST['qua-manha'] == 'true'){
-            $horarios[] = ['Quarta', 'manha'];
+            $horarios[] = ['quarta', 'manhã'];
         }
         if($_POST['qui-manha'] == 'true'){
-            $horarios[] = ['Quinta', 'manha'];
+            $horarios[] = ['quinta', 'manhã'];
         }
         if($_POST['sex-manha'] == 'true'){
-            $horarios[] = ['Sexta', 'manha'];
+            $horarios[] = ['sexta', 'manhã'];
         }
         // TARDE
         if($_POST['seg-tarde'] == 'true'){
-            $horarios[] = ['Segunda', 'tarde'];
+            $horarios[] = ['segunda', 'tarde'];
         }
         if($_POST['ter-tarde'] == 'true'){
-            $horarios[] = ['Terca', 'tarde'];
+            $horarios[] = ['terça', 'tarde'];
         }
         if($_POST['qua-tarde'] == 'true'){
-            $horarios[] = ['Quarta', 'tarde'];
+            $horarios[] = ['quarta', 'tarde'];
         }
         if($_POST['qui-tarde'] == 'true'){
-            $horarios[] = ['Quinta', 'tarde'];
+            $horarios[] = ['quinta', 'tarde'];
         }
         if($_POST['sex-tarde'] == 'true'){
-            $horarios[] = ['Sexta', 'tarde'];
+            $horarios[] = ['sexta', 'tarde'];
         }
         // NOITE
         if($_POST['seg-noite'] == 'true'){
-            $horarios[] = ['Segunda', 'noite'];
+            $horarios[] = ['segunda', 'noite'];
         }
         if($_POST['ter-noite'] == 'true'){
-            $horarios[] = ['Terca', 'noite'];
+            $horarios[] = ['terça', 'noite'];
         }
         if($_POST['qua-noite'] == 'true'){
-            $horarios[] = ['Quarta', 'noite'];
+            $horarios[] = ['quarta', 'noite'];
         }
         if($_POST['qui-noite'] == 'true'){
-            $horarios[] = ['Quinta', 'noite'];
+            $horarios[] = ['quinta', 'noite'];
         }
         if($_POST['sex-noite'] == 'true'){
-            $horarios[] = ['Sexta', 'noite'];
+            $horarios[] = ['sexta', 'noite'];
         }
         $obs = "";
         if(!empty($_POST['observacao'])){

@@ -35,7 +35,7 @@
                         value = {{session("nome")}} required>
                 </div>
                 <div class="col-md-3 rg-visitante">
-                    <input id="RG" class="form-control" type="text" minlength="14" maxlength="15" name="RG[]"
+                    <input id="RG" class="form-control nome-text" type="text" minlength="14" maxlength="15" name="RG[]"
                         placeholder="XXXXXXXXXX" required>
                 </div>
                 <div class="col-md-2 idade-visitante">
@@ -87,7 +87,16 @@
 
 @endsection
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script>
+$(".nome-text").on("input", function() {       //Impede inserção de caracteres diferentes de * e substitui por ' '
+    var regexp = /[^A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ^0-9]/g;      //*
+    if (this.value.match(regexp)) {
+        $(this).val(this.value.replace(regexp, ''));
+    }
+});
+
 $('#form.agendamento')
     .attr('action',"{{ ($turno ?? 'diurno') == 'diurno' ?
             route('AgendarDiurnoVisitante.post') : route('AgendarNoturno.post')}}");

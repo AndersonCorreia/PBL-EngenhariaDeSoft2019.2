@@ -31,6 +31,9 @@ class AuthorizeAdministrativo{
         if ($permissao == 'adm' && $tipo == 'scorpius' ){
             $tipo = 'adm';
         }
+        if ($permissao == 'estagiario' && $tipo == 'scorpius' ){
+            $tipo = 'estagiario';
+        }
         // fim da parte para remover depois
         
         if($permissao == $tipo || $DAO->asPermissao($tipo, $permissao) ){
@@ -72,7 +75,6 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["CadastroUsuario.post" ] = 'criar usuarios';
         $this->RotasPermissoes["dashboardFuncionario.show" ] = 'funcionario';
         $this->RotasPermissoes["dashboardEstagiario.show" ] = 'estagiario';
-        $this->RotasPermissoes["dashboardEstagiario.show" ] = 'adm';
         $this->RotasPermissoes["dashboardAdm.show" ] = 'adm';
         $this->RotasPermissoes["backup" ] = 'realizar backup';
         $this->RotasPermissoes["realizarBackup" ] = 'realizar backup';
