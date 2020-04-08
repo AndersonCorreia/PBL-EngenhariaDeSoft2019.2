@@ -165,6 +165,49 @@ use App\Model\Agendamento;
     }
 
     /**
+     * Função que retorna, em um array, os dados de todos os agendamentos institucionais, das visitas e das instituições em questão.
+     * Através de uma seleção direta na view visita_institucional, no banco de dados.
+     * Sendo, essas informações retornadas, o nome da instituição, o nome da cidade da instituição, a data da visita,
+     * o turno da visita, o status da visita, o telefone da instituição, o nome do responsável pela turma, o nível de ensino da
+     * turma e o ano escolar da turma.
+     * Serve para expor os agendamentos de uma determinada instituição, como por exemplo na tela de gerenciamento de visitas.
+     * 
+     * @return array com dados selecionados de todos os agendamentos institucionais.  
+     */
+    public function SELECTall_AgendamentoInstitucional(): array{
+        $select = "SELECT agendamentoID, data, turno, visitaStatus, ano_escolar, ensino, instituicao, instituicaoTelefone, cidade, 
+        usuario";
+        $sql = "$select FROM visita_institucional ORDER BY data";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function SELECT_InstitucionalRelatorioCompleto(){
+        $quant_agendamentos_total = "SELECT COUNT(agendamentoID) FROM visita_institucional";
+        $qat = $this->dataBase->query($quant_agendamentos_total);
+        $qatresult = $qat->fetch_all(MYSQLI_ASSOC);
+        $cidades_distintas = "SELECT COUNT(agendamentoID) FROM visita_institucional WHERE cidade IN (SELECT DISTINCT cidade 
+        FROM visita_institucional) GROUP BY cidade";
+        $cd = $this->dataBase->query($cidades_distintas);
+        $cdresult = $cd->fetch_all(MYSQLI_ASSOC);
+        $instituicoes_distintas = "SELECT COUNT(agendamentoID) FROM visita_institucional WHERE instituicao IN (SELECT DISTINCT instituicao 
+        FROM visita_institucional) GROUP BY instituicao";
+        $id = $this->dataBase->query($instituicoes_distintas);
+        $idresult = $id->fetch_all(MYSQLI_ASSOC);
+        $turnos_distintos = "SELECT COUNT(agendamentoID) FROM visita_institucional WHERE turno IN (SELECT DISTINCT turno 
+        FROM visita_institucional) GROUP BY turno";
+        $td = $this->dataBase->query($turnos_distintos);
+        $tdresult = $td->fetch_all(MYSQLI_ASSOC);
+        $select = "SELECT";
+        $where = "";
+        $sql = "$select FROM visita_institucional";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /**
      * Retorna registros da tabela agendamento_institucional num array, com filtros de data inicial, data final
      * e limita a quantidade de resultados;
      *
