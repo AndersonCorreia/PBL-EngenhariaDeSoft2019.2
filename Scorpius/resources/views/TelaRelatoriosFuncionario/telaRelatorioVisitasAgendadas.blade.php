@@ -45,7 +45,6 @@
 </div>
 
 
-<<<<<<< HEAD
 @foreach($agendamentos as $agendamento)
     <?php $id = $agendamento['agendamentoID']; ?>
 <<<<<<< HEAD
@@ -53,9 +52,10 @@
 =======
     <form method="get" action="#"> <!--bloco começa aqui -->
 =======
+=======
+>>>>>>> Resolvendo problemas...
 @foreach($agendamentos ?? [] as $agendamento)
     
->>>>>>> Implementando botão de busca na Tela de Relatório de Visitas
         <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
 >>>>>>> Corrigindo erros em Tela dos Relatórios
             <table class="table-borderless col-12">
@@ -94,22 +94,17 @@
                     </tr>
                 </thead>
             </table>
-<<<<<<< HEAD
         <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="#modal{{$id}}" 
         expand>Dados Completos</button>
     </div>
-=======
-<<<<<<< HEAD
+
         </form>
         <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="{{$id}}" 
         expand>Dados Completos</button>
-=======
+
         
         <button type="button" class="btn btn-secondary float-left" data-toggle="modal"
         data-target=".modal-dados-completos" expand>Dados Completos</button>
->>>>>>> Implementando botão de busca na Tela de Relatório de Visitas
-    
->>>>>>> Corrigindo erros em Tela dos Relatórios
         <!-- modal dos dados completos -->
         <div class="modal fade" id="modal{{$id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
             aria-hidden="true">
@@ -202,13 +197,8 @@
 <style>
 
     [borda]{
-<<<<<<< HEAD
-        width: auto;
-        height: 270px;
-=======
         width: 1050px;
         height: auto;
->>>>>>> Implementando botão de busca na Tela de Relatório de Visitas
     }
 
     [bordaModal]{

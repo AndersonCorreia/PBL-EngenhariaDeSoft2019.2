@@ -43,10 +43,8 @@
 
             <div class="form-group col-sm-4">
                 <span>Telefone da Instituição</span>
-                <input id="tel" class="form-control" class="form-control" type="text" maxlength="13" name="Telefone" 
-                placeholder="99-99999-9999" OnKeyUP="formatar('##-#####-####', this)" pattern="[0-9]{2}-[0-9]{4,6}-[0-9]{3,4}$" 
-                onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{ $registro['telefone'] ?? '' }}"
-                title="Numero de telefone com DD no formato xx-xxxxx-xxxx" required>
+                <input class="form-control" class="form-control" type="text" maxlength="13" name="telefone" placeholder="99-99999-9999" OnKeyUP="formatar('##-#####-####', this)"
+                pattern="[0-9]{2}-[0-9]{4,6}-[0-9]{3,4}$" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{ $registro['telefone'] ?? '' }}" title="Numero de telefone com DD no formato xx-xxxxx-xxxx" required>
             </div> 
 
             <div class="form-group col-sm-8">
@@ -131,16 +129,16 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
 <script src="{{ asset("/js/cadastroInstituicao.js")}}" ></script>
 <script>
-function formatar(mascara, documento){
-  var i = documento.value.length;
-  var saida = mascara.substring(0,1);
-  var texto = mascara.substring(i)
-  
-  if (texto.substring(0,1) != saida){
-            documento.value += texto.substring(0,1);
-  }
-  
-}
+    function formatar(mascara, documento){
+        var i = documento.value.length;
+        var saida = mascara.substring(0,1);
+        var texto = mascara.substring(i)
+        
+        if (texto.substring(0,1) != saida){
+                    documento.value += texto.substring(0,1);
+        }
+    
+    }
 </script>
 
 @endsection
