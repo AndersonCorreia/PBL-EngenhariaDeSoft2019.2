@@ -44,8 +44,12 @@ Route::group(
     'prefix'=>'funcionario',
     'namespace'=>'Funcionario'],
     function(){
+        Route::post('/relatorioVisitasAgendadas/buscar-insituicao', 'RelatorioVisitasController@buscarInstituicao')->name("buscarInstituicao");
         Route::get('/relatorioVisitasAgendadas', 'RelatorioVisitasController@getTelaRelatorioVisitas')->name("telaRelatorioVisitasAgendadas.show");
-    
+        
+
+
+
         //Rotas de checkin
         Route::post('/checkin-visitas/concluir-visita', 'CheckinVisitasController@concluirVisita')->name("concluirVisita");
         Route::post('/checkin-visitas/realizar-checkin-usuario', 'CheckinVisitasController@checkinUsuario')->name("checkinUsuario");
