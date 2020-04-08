@@ -38,15 +38,31 @@
 <div class="text-center mx-auto col col-md-10">
     <h5>Redefina sua senha</h5>
 </div>
-<form class="form-group mt-5 mx-auto col col-md-10" action="{{route('redefinirSenha', [ 'usuario_email' =>$email, 'token' => $token])}}" method="POST">
+<form class="form-group mt-5 mx-auto col col-md-10" name="form1" action="{{route('redefinirSenha', [ 'usuario_email' =>$email, 'token' => $token])}}" method="POST">
     {{csrf_field()}}
-    <!-- E-mail -->
+    <!-- Senha -->
     <div class='container'>
         <div class="form-group">
-            <label for="emailCadastro">Insira sua nova senha</label>
+            <label for="senha">Insira sua nova senha</label>
             <input class="form-control"  type="password" id="novaSenha" name="novaSenha">
+            <label for="senha">Repetir senha</label>
+            <input class="form-control"  type="password" id="repetir_senha" name="repetir_senha">
         </div>
-        <button type="submit" class="btn btn-success btn-lg btn-block" style="font-size:15px">Enviar</button>
+        <button type="submit" onclick="return validar()" class="btn btn-success btn-lg btn-block" style="font-size:15px">Enviar</button>
     </div>
 </form>
+@endsection
+
+@section('js')
+<script>
+function validar() {
+var senha = form1.novaSenha.value;
+var rep_senha = form1.repetir_senha.value;
+    if (senha != rep_senha) {
+        alert('Senhas diferentes! Digite novamente.');
+        form1.senha.focus();
+        return false;
+    }
+}
+</script>
 @endsection
