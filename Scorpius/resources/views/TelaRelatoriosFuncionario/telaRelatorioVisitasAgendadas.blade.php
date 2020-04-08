@@ -47,17 +47,10 @@
 
 @foreach($agendamentos as $agendamento)
     <?php $id = $agendamento['agendamentoID']; ?>
-<<<<<<< HEAD
-    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
-=======
     <form method="get" action="#"> <!--bloco começa aqui -->
-=======
-=======
->>>>>>> Resolvendo problemas...
 @foreach($agendamentos ?? [] as $agendamento)
     
         <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
->>>>>>> Corrigindo erros em Tela dos Relatórios
             <table class="table-borderless col-12">
                 <thead>
                 <!-- Somente exemplificando a estrutura -->
