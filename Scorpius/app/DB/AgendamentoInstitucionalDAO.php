@@ -217,7 +217,7 @@ use App\Model\Agendamento;
      * @return array
      */
     public function SELECTbyDateInicio_FIM(String $dateInicio, String $dateFim, int $limite=6): array{
-        $where = "data > ? AND data <= ? LIMIT ?"; 
+        $where = "data >= ? AND data <= ? LIMIT ?"; 
         $sql = "SELECT * FROM visita_institucional WHERE $where";
         $stmt = $this->dataBase->prepare($sql);
         $stmt->bind_param("ssi",$dateInicio, $dateFim, $limite);
