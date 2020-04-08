@@ -44,7 +44,8 @@
 </div>
 
 
-@foreach($agendamentos ?? [] as $agendamento)
+@foreach($agendamentos as $agendamento)
+    <?php $id = $agendamento['agendamentoID']; ?>
     <form method="get" action="#"> <!--bloco começa aqui -->
         <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
             <table class="table-borderless col-12">
@@ -72,8 +73,7 @@
 
                 <thead>
                     <tr>
-                        <th>Total de Alunos da Turma:</th> <td></td> <!--verificar se estar funcionando, 
-                        visto que $visitas so é usado mais para frente -->
+                        <th>Total de Alunos da Turma:</th> <td>{{$quant_visitantes[$id]}}</td>
                         <th>Responsável pela Turma:</th> <td>{{$agendamento['usuario']}}</td>
                     </tr>
                 </thead>
@@ -85,11 +85,12 @@
                 </thead>
             </table>
         </form>
-        <button type="button" class="btn btn-secondary float-left" data-toggle="modal"
-        data-target=".modal-dados-completos" expand>Dados Completos</button>
+        <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="{{$id}}" 
+        expand>Dados Completos</button>
     
         <!-- modal dos dados completos -->
-        <div class="modal fade modal-dados-completos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
+            aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-secondary text-white">
@@ -128,8 +129,7 @@
                                     </tr>
 
                                     <tr>
-                                        <th>Total de Alunos da Turma:</th> <td></td> <!--verificar se estar funcionando, 
-                                        visto que $visitas so é usado mais para frente -->
+                                        <th>Total de Alunos da Turma:</th> <td>{{$quant_visitantes[$id]}}</td>
                                     </tr>
 
                                     <tr>
@@ -156,6 +156,13 @@
                                     <tr>
                                         <th>Nome:</th> <th>Idade:</th>
                                     </tr>
+                                    @foreach($visitante[$id] as $visita)
+                                    <?php var_dump($visitante); ?>
+                                        <tr>
+                                            <td>{{$visita['nome']}}</td>
+                                            <td>{{$visita['idade']}}</td>
+                                        </tr>
+                                    @endforeach
                                 </thead>
         
                             </table>
@@ -168,7 +175,6 @@
                 </div>
             </div>
         </div>
-        </div>
     </div>
 @endforeach
 
@@ -178,7 +184,7 @@
 <style>
 
     [borda]{
-        width: 1050px;
+        width: auto;
         height: 270px;
     }
 

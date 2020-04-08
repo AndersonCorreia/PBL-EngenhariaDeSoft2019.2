@@ -19,14 +19,13 @@ class RelatorioVisitasController extends Controller{
         if(!empty($_POST['instituicao'])){
             $agendamentos = $DAO->SELECT_AgendamentoInstitucionalByNomeInstituicao($nome_instituicao);
         }
-        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', ["agendamentos" => $agendamentos]);
-    }
-
-    /**Função que retorna todos os visitantes de todos os agendamentos institucionais */
-    public function getVisitantes($id){
-        $DAO = new AgendamentoInstitucionalDAO();
-        $visitante = $DAO->getVisitantesByAgendamentoID($id);
-        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', ["visitante" => $visitante]);
+        foreach ($agendamentos as $agendamento) {
+            $id = $agendamento['agendamentoID'];
+            $visitante[$id] = $DAO->getVisitantesByAgendamentoID($id);
+            $quant_visitantes[$id] = count($visitante[$id]);
+        }
+        $variaveis = ['agendamentos' => $agendamentos, 'visitante' => $visitante, 'quant_visitantes' => $quant_visitantes];
+        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $variaveis);
     }
 }
 ?>
