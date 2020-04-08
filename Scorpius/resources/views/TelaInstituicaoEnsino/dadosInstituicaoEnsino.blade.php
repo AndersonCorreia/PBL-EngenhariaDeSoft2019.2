@@ -36,14 +36,14 @@
                     </div>
                 </div>
 
-                <div class="form-group col-sm-8">
+                <div class="form-group pt-3 col-sm-8">
                     <span>Responsável pela Instituição</span>
-                    <input class="form-control" type="text" maxlength="40" name="Responsavel"
+                    <input id="responsavelID" class="form-control" type="text" maxlength="40" name="Responsavel"
                         placeholder="Nome completo do responsável"
                         value="{{isset($registros['responsavel']) ? $registros['responsavel'] : ''}}" required>
                 </div>
 
-                <div class="form-group col-sm-4">
+                <div class="form-group pt-3 col-sm-4">
                     <span>Telefone da Instituição</span>
                     <input class="form-control" type="text" maxlength="13" name="Telefone" placeholder="99-99999-9999" OnKeyUP="formatar('##-#####-####', this)"
                         value="{{isset($registros['telefone']) ? $registros['telefone'] : ''}}"
@@ -52,7 +52,7 @@
 
                 <div class="form-group col-sm-8">
                     <span>Endereço da Instituição</span>
-                    <input class="form-control" type="text" maxlength="50" name="Endereco" placeholder="Rua e Bairro"
+                    <input class="form-control" id="enderecoID" type="text" maxlength="50" name="Endereco" placeholder="Rua e Bairro"
                         value="{{isset($registros['endereco']) ? $registros['endereco'] : ''}}" required>
                 </div>
 
@@ -70,7 +70,7 @@
 
                 <div class="form-group col-sm-4">
                     <span>Cidade</span>
-                    <input class="form-control" type="text" name="Cidade" placeholder="Cidade da instituição"
+                    <input id="cidadeID" class="form-control" type="text" name="Cidade" placeholder="Cidade da instituição"
                         value="{{isset($registros['cidade']) ? $registros['cidade'] : ''}}" required>
                 </div>
                 <?php
@@ -220,6 +220,40 @@ form span {
         }
     
     }
+</script>
+
+<script> 
+  document.getElementById("nomeInst").onkeypress = function(e) {
+         var chr = String.fromCharCode(e.which);
+         if ("0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+           return false;
+       };
+</script>
+
+<script> 
+  document.getElementById("responsavelID").onkeypress = function(e) {
+         var chr = String.fromCharCode(e.which);
+         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+           return false;
+       };
+</script>
+
+
+<script> 
+  document.getElementById("enderecoID").onkeypress = function(e) {
+         var chr = String.fromCharCode(e.which);
+         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+           return false;
+       };
+</script>
+
+
+<script> 
+  document.getElementById("cidadeID").onkeypress = function(e) {
+         var chr = String.fromCharCode(e.which);
+         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+           return false;
+       };
 </script>
 
 @endsection
