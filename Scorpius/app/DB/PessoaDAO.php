@@ -140,9 +140,17 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         }
         $guia = $demandaWeb['guia'];
         $observacao = $demandaWeb['observacao'];
-        $sqlDemanda = "UPDATE estagiario SET hasDemanda = 1, guia_matricula = '$guia', observacao =  '$observacao'
-        WHERE usuario_ID = $id_estagiario";
-        $demanda = $this->dataBase->query($sqlDemanda);
+        if($this->dataBase->query("SELECT * FROM estagiario WHERE usuario_ID = $id_estagiario")->num_rows < 1){
+            $demanda = $this->dataBase->query("INSERT INTO estagiario (hasDemanda, guia_matricula, observacao, usuario_ID) VALUES (
+                1,
+                '$guia',
+                '$observacao',
+                '$id_estagiario'
+            )");
+        }else{
+            $sqlDemanda = "UPDATE estagiario SET hasDemanda = 1, guia_matricula = '$guia', observacao =  '$observacao' WHERE usuario_ID = $id_estagiario";
+            $demanda = $this->dataBase->query($sqlDemanda);
+        }
         if (!(empty($demandaWeb['horarios']))) {
             foreach ($demandaWeb['horarios'] as $horario) {
                     $sql = "INSERT INTO proposta_horario (dia_semana, turno, estagiario_usuario_ID) VALUES (
@@ -164,7 +172,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $sql = "SELECT hasDemanda FROM estagiario WHERE usuario_ID = $id";
         $result = $this->dataBase->query($sql);
         $row = $result->fetch_assoc();
-        if ($row['hasDemanda'] == 1) {
+        if (intval($row['hasDemanda']) == 1) {
             return true;
         }
 

@@ -20,7 +20,8 @@ class BackupController extends Controller{
             set_time_limit(0);
             // Utilizando a classe para gerar um backup na pasta 'backups'
             // e manter os últimos dez arquivos
-            $backup = new Backup($req->diretorio, 10);
+            
+            $backup = new Backup($req->diretorio);
             $backup->generate();
     }
 }

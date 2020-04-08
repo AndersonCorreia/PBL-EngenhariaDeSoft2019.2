@@ -529,7 +529,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scorpius`.`backup` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_usuario` INT UNSIGNED NOT NULL,
-  `diretorio` VARCHAR(45) NOT NULL,
+  `data_backup` TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,	
+  `diretorio` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),
   INDEX `id_usuario_idx` (`id_usuario` ASC),

@@ -10,29 +10,23 @@ namespace App\Http\Controllers\Funcionario;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use App\DB\AgendamentoInstitucionalDAO;
 
 class RelatorioVisitasController extends Controller{
     public function getTelaRelatorioVisitas(){
-        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas');
-    }
-
-    /**Função que retorna todos os agendamentos institucionais */
-    public function getAgendamentosInstitucionais(){
-        $nome_instituicao = $_POST['instituicao'];
         $DAO = new AgendamentoInstitucionalDAO();
-        $agendamentos = $DAO->SELECT_AgendamentoInstitucionalByNomeInstituicao($nome_instituicao);
-        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', [ "agendamentos" => $agendamentos]);
+        $agendamentos = $DAO->SELECTall_AgendamentoInstitucional();
+        if(!empty($_POST['instituicao'])){
+            $agendamentos = $DAO->SELECT_AgendamentoInstitucionalByNomeInstituicao($nome_instituicao);
+        }
+        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', ["agendamentos" => $agendamentos]);
     }
 
     /**Função que retorna todos os visitantes de todos os agendamentos institucionais */
-    public function getVisitantes(){
-        $nome_instituicao = $_POST['instituicao'];
-        $sql = "SELECT agendamentoID FROM visita_institucional WHERE instituicao  = '$nome_instituicao'";
-        $result = $this->dataBase->query($sql);
-        $array = $result->fetch_all(MYSQLI_ASSOC);
+    public function getVisitantes($id){
         $DAO = new AgendamentoInstitucionalDAO();
-        $visitante = $DAO->getVisitantesByAgendamentoID($array['agendamentoID']);
-        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $visitante);
+        $visitante = $DAO->getVisitantesByAgendamentoID($id);
+        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', ["visitante" => $visitante]);
     }
 }
 ?>

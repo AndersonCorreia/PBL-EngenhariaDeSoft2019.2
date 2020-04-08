@@ -8,14 +8,14 @@
 <div class="form-group row col-12">    
     <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
     <div class="col-9">
-        <form action="{{route(buscarInstituicao)}}" method="POST">
+        <form action="{{route('buscarInstituicao')}}" method="POST">
             <input id="nomeInst" class="form-control" type="text" name="instituicao" 
             placeholder="Insira o Nome da Instituição" list="instList" required autofocus>
             <datalist id="instList">            
             </datalist>
-        </form>
     </div>     
-    <button type="submit" class="btn btn-primary float-left" buscar> Buscar </button>
+            <button type="submit" class="btn btn-primary float-left" buscar> Buscar </button>
+        </form>
     <button type="button" class="btn btn-danger float-left" data-toggle="modal"
     data-target=".modal-relatorio-estatistico" relatorio> Relatório Estatístico </button>
     <!-- modal do relatório estatístico -->
@@ -72,7 +72,7 @@
 
                 <thead>
                     <tr>
-                        <th>Total de Alunos da Turma:</th> <td>{{$total_alunos}}</td> <!--verificar se estar funcionando, 
+                        <th>Total de Alunos da Turma:</th> <td></td> <!--verificar se estar funcionando, 
                         visto que $visitas so é usado mais para frente -->
                         <th>Responsável pela Turma:</th> <td>{{$agendamento['usuario']}}</td>
                     </tr>
@@ -128,7 +128,7 @@
                                     </tr>
 
                                     <tr>
-                                        <th>Total de Alunos da Turma:</th> <td>{{$total_alunos}}</td> <!--verificar se estar funcionando, 
+                                        <th>Total de Alunos da Turma:</th> <td></td> <!--verificar se estar funcionando, 
                                         visto que $visitas so é usado mais para frente -->
                                     </tr>
 
@@ -156,14 +156,6 @@
                                     <tr>
                                         <th>Nome:</th> <th>Idade:</th>
                                     </tr>
-                                    $total_alunos=1;
-                                    @foreach($visitante as $visita)
-                                        <tr>
-                                            <td>{{$visita['nome']}}</td>
-                                            <td>{{$visita['idade']}}</td>
-                                            $total_alunos++;
-                                        </tr>
-                                    @endforeach
                                 </thead>
         
                             </table>
