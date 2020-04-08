@@ -10,7 +10,7 @@
     <div class="col-9">
         <form action="{{route(buscarInstituicao)}}" method="POST">
             <input id="nomeInst" class="form-control" type="text" name="instituicao" 
-            placeholder="Insira o Nome ou Cidade da Instituição" list="instList" required autofocus>
+            placeholder="Insira o Nome da Instituição" list="instList" required autofocus>
             <datalist id="instList">            
             </datalist>
         </form>
