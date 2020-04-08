@@ -37,11 +37,6 @@ class AlteraUsuarioController extends Controller
         ];
         return view('TelaAlterarDadosCadastrais.telaAlterarDadosCadastrais',$variaveis);
     }
-   
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -76,33 +71,13 @@ class AlteraUsuarioController extends Controller
             $idx = $u['id'];
             (new Usuario)->alterarDados($fullName,$telefone,$cpf,$novaSenha,$idx);
             $variaveis['isDadosAlterados'] = true;
-            //return redirect()->route('alterarDados.show');          //sucesso
             return view('TelaAlterarDadosCadastrais.telaConfirmaAlterarDadosCadastrais',$variaveis);
         }
     }
 
-   
-    public function show($id)
-    {
-        //
-    }
-
-    
-    public function edit($id)
-    {
-        //
-    }
-
-    
     public function update(Request $request, $id)
     {
         
         return 'cheguei update';
-    }
-
-    
-    public function destroy($id)
-    {
-        //
     }
 }

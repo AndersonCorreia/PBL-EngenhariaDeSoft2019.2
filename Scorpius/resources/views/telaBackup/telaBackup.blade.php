@@ -5,7 +5,7 @@
 @section('conteudo')
 {{csrf_field()}}
 {{ method_field('POST') }}
-<!-- Modal -->
+<!-- Modal Confirmação -->
 <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -28,6 +28,28 @@
     </div>
 </div>
 
+<!-- Modal Diretorio -->
+<div class="modal fade" id="modalDiretorio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Como Escolher um Diretório?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Para realizar o backup do sistema, você deve escolher uma pasta válida.</p>
+                <p>Cheque a pasta que será escolhida e selecione seu caminho(diretório).</p>
+                <p>Exemplo: <strong>C:\User\...\Desktop</strong></p>
+                <small class="text-danger">Lembre de colocar o caminho completo e correto!</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 
@@ -43,7 +65,8 @@
                     </div>
                     <div class="form-group pt-4">
                         <label for = "diretorio"> Diretório de Backup </label>
-                        <input type = "text" class = "form-control" id = "diretorio" placeholder ="C:\Users\..." >
+                        <button type="button" class="btn btn-secondary" data-target="#modalDiretorio" data-toggle="modal"><i class="far fa-lg fa-question-circle"></i></button>
+                        <input type = "text" class = "form-control" name="diretorio" id = "diretorio" placeholder ="C:\..." >
                     </div>
                     <div class="form-group pt-2">
                         <button type="button" class="btn btn-success form-control" value="backup" data-toggle="modal"
@@ -98,9 +121,9 @@ $(document).ready(function() {
 
             })
     })
-
-
 })
+
+
 </script>
 
 @endsection
@@ -110,6 +133,3 @@ button[type=submit] {
 
 }
 </style>
-
-
-
