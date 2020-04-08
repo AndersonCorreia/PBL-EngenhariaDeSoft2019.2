@@ -35,7 +35,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">+55</div>
                         </div>
-                        <input required maxlength="14" minlength="14" type="text" value="{{isset($dadosUsuario['telefone']) ? $dadosUsuario['telefone'] : ''}}" 
+                        <input required maxlength="15" minlength="15" type="text" value="{{isset($dadosUsuario['telefone']) ? $dadosUsuario['telefone'] : ''}}" 
                                 name="telefone" onchange="verificaTel();" id="telefoneUsuario" class="form-control val" placeholder="(00) 0 0000-0000">
                     </div>
                 </div>
