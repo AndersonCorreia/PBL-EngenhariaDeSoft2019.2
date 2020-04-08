@@ -4,7 +4,7 @@
 
 @section('conteudo')
 {{csrf_field()}}
-{{ method_field('POST') }}
+
 <!-- Modal Confirmação -->
 <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -70,7 +70,7 @@
                         <input type = "text" class = "form-control" name="diretorio" id = "diretorio" placeholder ="C:\..." >
                     </div>
                     <div class="form-group pt-2">
-                        <button type="submit" class="btn btn-success form-control" value="backup" data-toggle="modal"
+                        <button type="button" class="btn btn-success form-control" value="backup" data-toggle="modal"
                                 data-target="#modalExemplo" backup>Realizar Backup Agora <i class="fa fa-send"></i>
                         </button>
                     </div>
@@ -135,8 +135,3 @@ $(document).ready(function() {
 
 @endsection
 
-<style>
-button[type=submit] {
-
-}
-</style>
