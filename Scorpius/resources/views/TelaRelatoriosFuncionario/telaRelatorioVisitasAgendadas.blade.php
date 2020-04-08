@@ -5,10 +5,11 @@
 @section('conteudo')
 
 
-<div class="form-group row col-12">    
+<div class="form-group row col-12" style="overflow-y: auto;">    
     <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
     <div class="col-9">
-        <form action="{{route('buscarInstituicao')}}" method="POST">
+        <form action="{{route('buscarInstituicao')}}" method="post">
+        {{ csrf_field() }}
             <input id="nomeInst" class="form-control" type="text" name="instituicao" 
             placeholder="Insira o Nome da Instituição" list="instList" required autofocus>
             <datalist id="instList">            
@@ -44,14 +45,24 @@
 </div>
 
 
+<<<<<<< HEAD
 @foreach($agendamentos as $agendamento)
     <?php $id = $agendamento['agendamentoID']; ?>
+<<<<<<< HEAD
     <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
+=======
+    <form method="get" action="#"> <!--bloco começa aqui -->
+=======
+@foreach($agendamentos ?? [] as $agendamento)
+    
+>>>>>>> Implementando botão de busca na Tela de Relatório de Visitas
+        <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
+>>>>>>> Corrigindo erros em Tela dos Relatórios
             <table class="table-borderless col-12">
                 <thead>
                 <!-- Somente exemplificando a estrutura -->
                     <tr class="table-secondary">
-                        <th>Nome da Instituição:</th> <td>{{$agendamento['instituicao']}}</td>
+                        <th>Nome da Instituição:</th> <td nomeInstituicao >{{$agendamento['instituicao']}}</td>
                         <th>Cidade:</th> <td>{{$agendamento['cidade']}}</td>
                     </tr>
                 </thead>
@@ -83,9 +94,22 @@
                     </tr>
                 </thead>
             </table>
+<<<<<<< HEAD
         <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="#modal{{$id}}" 
         expand>Dados Completos</button>
     </div>
+=======
+<<<<<<< HEAD
+        </form>
+        <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="{{$id}}" 
+        expand>Dados Completos</button>
+=======
+        
+        <button type="button" class="btn btn-secondary float-left" data-toggle="modal"
+        data-target=".modal-dados-completos" expand>Dados Completos</button>
+>>>>>>> Implementando botão de busca na Tela de Relatório de Visitas
+    
+>>>>>>> Corrigindo erros em Tela dos Relatórios
         <!-- modal dos dados completos -->
         <div class="modal fade" id="modal{{$id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
             aria-hidden="true">
@@ -178,8 +202,13 @@
 <style>
 
     [borda]{
+<<<<<<< HEAD
         width: auto;
         height: 270px;
+=======
+        width: 1050px;
+        height: auto;
+>>>>>>> Implementando botão de busca na Tela de Relatório de Visitas
     }
 
     [bordaModal]{
@@ -191,6 +220,10 @@
         width: 750px;
         height: 300px;
         
+    }
+    
+    [nomeInstituicao]{
+        min-width: 340px;
     }
 
     [expand]{

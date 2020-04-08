@@ -44,7 +44,7 @@ Route::group(
     'prefix'=>'funcionario',
     'namespace'=>'Funcionario'],
     function(){
-        Route::post('/relatorioVisitasAgendadas/buscar-insituicao', 'RelatorioVisitasController@buscarInstituicao')->name("buscarInstituicao");
+        Route::post('/relatorioVisitasAgendadas/buscar-insituicao', 'RelatorioVisitasController@getTelaRelatorioVisitas')->name("buscarInstituicao");
         Route::get('/relatorioVisitasAgendadas', 'RelatorioVisitasController@getTelaRelatorioVisitas')->name("telaRelatorioVisitasAgendadas.show");
         
 
