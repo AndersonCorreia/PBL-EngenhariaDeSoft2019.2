@@ -81,7 +81,7 @@
     <!-- CPF -->
     <div class="col-4 mt-1">
         <label for="cpfCadastro">CPF</label>
-        <input aria-describedby="cpfHelp" name="cpf" id="cpfCadastro" placeholder="00000000000" type="text" minlength="11" inputmode="number"
+        <input aria-describedby="cpfHelp" name="cpf" id="cpfCadastro" placeholder="000.000.000-00" type="text" minlength="11" inputmode="number"
             maxlength="11" class="form-control" required pattern="[0-9]{11}" title="Informe apenas os numeros do CPF sem '.' e sem '-'.">
         @if($ERRO == 'CPF')
         <small id="cpfHelp" class="form-text text-danger">{{$MSG_ERRO}}</small>
@@ -98,7 +98,7 @@
     <!-- Telefone -->
     <div class="col-4 mb-0 mt-1">
         <label for="telefone">Telefone</label>
-        <input name="telefone" placeholder="(75)99999-9999" type="text" class="form-control" id="telefone"
+        <input name="telefone" placeholder="(00) 00000-0000" type="text" class="form-control" id="telefone"
             pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD no formato (xx)xxxxx-xxxx" required>
     </div>
     <!-- Senha -->
@@ -129,6 +129,7 @@
 <script src="{{ asset("/js/paginaCadastro.js")}}" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
 <script>
-    $('#telefone').mask('(00)00000-0000');
+    $('#telefone').mask('(00) 00000-0000');
+    $('#cpfCadastro').mask('000.000.000-00');
 </script>
 @endsection
