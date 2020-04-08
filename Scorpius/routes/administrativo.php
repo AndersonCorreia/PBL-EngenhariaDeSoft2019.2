@@ -17,7 +17,11 @@ Route::group(
     'prefix'=>'funcionario',
     'namespace'=>'Funcionario'],
     function(){
-        Route::get('/gerenciamentoDeVisitas', 'VisitaController@getTelaVisita')->name("telaGerenciamentoDeVisitas.show");
+        Route::get('/gerenciamentoDeVisitas', 'VisitaController@getTelaGerenciarVisita')->name("telaGerenciamentoDeVisitas.show");
+        Route::post('/gerenciamentoDeVisitas/confirmaAgendamento', 'VisitaController@confirmaAgendamento')->name("confirmaAgendamento");
+        Route::post('/gerenciamentoDeVisitas/cancelaAgendamento', 'VisitaController@cancelaAgendamento')->name("cancelaAgendamento");
+        Route::post('/gerenciamentoDeVisitas/escolherListaEspera', 'VisitaController@escolherListaEspera')->name("escolherListaEspera");
+
     }
 );
 
