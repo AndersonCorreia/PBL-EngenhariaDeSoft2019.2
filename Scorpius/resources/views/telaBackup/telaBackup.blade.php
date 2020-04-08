@@ -95,6 +95,12 @@ $(document).ready(function() {
         $('.alert').hide()
     })
 
+    $('[cancelar]').click(e=>{
+        e.preventDefault()
+        let url = "{{route('dashboardAdm.show')}}"
+        window.location.href = url
+    })
+
     $('[salvarMudanca]').click(e=>{
         e.preventDefault()
         let dir = $('#diretorio').val()
