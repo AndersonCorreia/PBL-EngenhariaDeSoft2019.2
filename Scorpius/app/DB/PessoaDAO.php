@@ -164,7 +164,7 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $sql = "SELECT hasDemanda FROM estagiario WHERE usuario_ID = $id";
         $result = $this->dataBase->query($sql);
         $row = $result->fetch_assoc();
-        if ($row['hasDemanda'] == 1) {
+        if (intval($row['hasDemanda']) == 1) {
             return true;
         }
 
