@@ -41,14 +41,14 @@
                         <div class="input-group-text">+55</div>
                     </div>
                     <input required maxlength="14" minlength="14" type="text" name="telefone" id="telefone" 
-                           class="form-control val" placeholder="(00) 0 0000-0000">
+                           class="form-control val" onchange="verificaTel();" placeholder="(00) 0 0000-0000">
                 </div>
             </div>
 
           <div class="col-md-4 form-group">
               <label for="cpf">CPF</label>
               <input minlength="14" maxlength="14" type="text" name="cpf" id="cpf"
-                     class="form-control val" placeholder="000.000.000-00" required>
+                     class="form-control val" onchange="verificaCamposPessoais();" placeholder="000.000.000-00" required>
           </div>
         </div>
 
@@ -135,61 +135,81 @@ jQuery(document).ready(function($) {
 });
 
 function verificaCamposPessoais(){
-    trava =0;
     if($('#cpf').val() != ""){
-        if(ValidaCPF()){
+        if( cpfInvalido()== true  ){
             $('#cpf').removeClass('is-valid');
             $('#cpf').addClass('is-invalid');
+            $('#btnCadastrar').attr("hidden", '');      //hide button
         }
         else{
             $('#cpf').removeClass('is-invalid');
             $('#cpf').addClass('is-valid');
+            $('#btnCadastrar').removeAttr("hidden");    //SHOW button
         }
     }
+}
 
-    if (trava == 0) {
-        $('#btnCadastrar').removeAttr("hidden");
-    } else {
-        $('#btnCadastrar').attr("hidden", '');
+function verificaTel(){
+    if($('#telefone').val() != ""){
+        if( telInvalido()== true){
+            $('#telefone').removeClass('is-valid');
+            $('#telefone').addClass('is-invalid');
+            $('#btnCadastrar').attr("hidden", '');      //hide button
+        }
+        else{
+            $('#telefone').removeClass('is-invalid');
+            $('#telefone').addClass('is-valid');
+            $('#btnCadastrar').removeAttr("hidden");        //show button
+        }
     }
 }
+
 function verificaCamposSenha(){
-    trava = 0;
     if($('#senha').val() != "" || $('#rptSenha').val() != ""){
         if ($('#senha').val() != $('#rptSenha').val()) {
             $('#rptSenha').removeClass('is-valid');
             $('#senha').removeClass('is-valid');
             $('#rptSenha').addClass('is-invalid');
-            $('#senha').addClass('is-invalid');
-            trava++;
+            $('#senha').addClass('is-invalid'); 
+            $('#btnCadastrar').attr("hidden", '');      //hide button
         } else {
             $('#senha').removeClass('is-invalid');
             $('#senha').addClass('is-valid');
             $('#rptSenha').removeClass('is-invalid');
             $('#rptSenha').addClass('is-valid');
+            $('#btnCadastrar').removeAttr("hidden");    //show button
         }
-    }
-    
-    if (trava == 0) {
-        $('#btnCadastrar').removeAttr("hidden");
-    } else {
-        $('#btnCadastrar').attr("hidden", '');
     }
 }
 
 function verificaTipoUsuario(){
-    let cpf = $('#tipo_usuario').val();
+    let tipo = $('#tipo_usuario').val();
 
-    if(cpf != 10 || cpf != 9 || cpf != 8){
+    if(tipo != 10 || tipo != 9 || tipo != 8){
         $('#btnCadastrar').attr("hidden",'');
         $('#feedback-tipo').removeAttr("hidden");
     }
-    if(cpf == 10 || cpf == 9 || cpf ==8) {
+    if(tipo == 10 || tipo == 9 || tipo ==8) {
         $('#btnCadastrar').removeAttr("hidden");
         $('#feedback-tipo').attr("hidden", '');
     }
 }
 
+function cpfInvalido(){
+    let cpf = $('#cpf').val();
+    return  (cpf.length != 14 || cpf == "000.000.000-00" || cpf == "111.111.111-11" ||  
+            cpf == "222.222.222-22" || cpf == "333.333.333-33" || cpf == "444.444.444-44" ||  
+            cpf == "555.555.555-55" || cpf == "666.666.666-66" || cpf == "777.777.777-77" || 
+            cpf == "888.888.888-88" || cpf == "999.999.999-99");
+}
+
+function telInvalido(){
+    let tel = $('#telefone').val();
+    return  (tel.length != 14 || tel == "00 0 0000-0000" || tel == "11 1 1111-1111" ||  
+            tel == "22 2 2222-2222" || tel == "33 3 3333-3333" || tel == "44 4 4444-4444" ||  
+            tel == "55 5 5555-5555" || tel == "66 6 6666-6666" || tel == "77 7 7777-7777" || 
+            tel == "88 8 8888-8888" || tel == "99 9 9999-9999");
+}
 
 $(".val").on("input", function() {
     var regexp = /[^0-9-.]/g;
