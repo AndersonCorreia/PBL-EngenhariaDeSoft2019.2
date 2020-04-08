@@ -74,6 +74,9 @@ function getMenuLinks(){
         }
         $links[]=$menuLinks['gerenciar permissões'];
     }
+    if( $tipoUsuario=="adm"){
+        $links[]=$menuLinks['gerenciar permissões'];
+    }
     
     $links[]=$menuLinks['alterarDados'];
     

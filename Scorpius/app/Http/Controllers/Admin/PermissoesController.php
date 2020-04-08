@@ -134,7 +134,6 @@ class PermissoesController extends Controller
                     [ 'permissao_ID' => 6, 'tipo_ID' => 9 ],
                     [ 'permissao_ID' => 7, 'tipo_ID' => 10 ],
                     [ 'permissao_ID' => 8, 'tipo_ID' => 10 ],
-                    [ 'permissao_ID' => 9, 'tipo_ID' => 10 ],
                     [ 'permissao_ID' => 10, 'tipo_ID' => 10 ],
                     [ 'permissao_ID' => 11, 'tipo_ID' => 10 ],
         ];
