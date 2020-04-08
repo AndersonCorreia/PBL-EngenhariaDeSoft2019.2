@@ -42,7 +42,8 @@
                 <p>Para realizar o backup do sistema, você deve escolher uma pasta válida.</p>
                 <p>Cheque a pasta que será escolhida e selecione seu caminho(diretório).</p>
                 <p>Exemplo: <strong>C:\User\...\Desktop</strong></p>
-                <small class="text-danger">Lembre de colocar o caminho completo e correto!</small>
+                <small class="text-danger">Certifique-se de colocar o caminho do diretório completo e correto!</small>
+                <small class="text-danger">Dê preferências a pastas vazias e lembre-se do diretório escolhido!</small>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

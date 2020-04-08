@@ -73,7 +73,7 @@ class Backup
               
  
             }else{
-                throw new \Exception('Diretorio Inválido.');
+                throw new \Exception('Diretorio Inválido ou Inexistente.');
             } 
     }
 }

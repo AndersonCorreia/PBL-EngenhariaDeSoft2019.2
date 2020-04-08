@@ -144,8 +144,8 @@
                     console.log(data);
                     
                     Swal.fire({
-                        title: 'Visita concluida!',
-                        text: "A visita foi concluida com sucesso.",
+                        title: 'Visita concluída!',
+                        text: "A visita foi concluída com sucesso.",
                         icon: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#28A745',

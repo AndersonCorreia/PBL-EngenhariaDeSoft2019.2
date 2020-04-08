@@ -31,6 +31,9 @@ class AuthorizeAdministrativo{
         if ($permissao == 'adm' && $tipo == 'scorpius' ){
             $tipo = 'adm';
         }
+        if ($permissao == 'estagiario' && $tipo == 'scorpius' ){
+            $tipo = 'estagiario';
+        }
         // fim da parte para remover depois
         
         if($permissao == $tipo || $DAO->asPermissao($tipo, $permissao) ){
@@ -61,6 +64,7 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["gerenciarUsuarios.excluirUsuario" ] = 'gerenciar usuarios';
         $this->RotasPermissoes["logSistema.show"] = 'ver log de atividade';
         $this->RotasPermissoes["telaRelatorioVisitasAgendadas.show"] = 'relatorio dos agendamentos';
+        $this->RotasPermissoes["buscarInstituicao"] = 'relatorio dos agendamentos';
         $this->RotasPermissoes["telaGerenciamentoDeEventos.show"] = 'cadastrar e modificar atividades' ;
         $this->RotasPermissoes["atualizarEvento"] = 'cadastrar e modificar atividades' ;
         $this->RotasPermissoes["editarEvento"] = 'cadastrar e modificar atividades' ;
@@ -71,7 +75,6 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["CadastroUsuario.post" ] = 'criar usuarios';
         $this->RotasPermissoes["dashboardFuncionario.show" ] = 'funcionario';
         $this->RotasPermissoes["dashboardEstagiario.show" ] = 'estagiario';
-        $this->RotasPermissoes["dashboardEstagiario.show" ] = 'adm';
         $this->RotasPermissoes["dashboardAdm.show" ] = 'adm';
         $this->RotasPermissoes["backup" ] = 'realizar backup';
         $this->RotasPermissoes["realizarBackup" ] = 'realizar backup';

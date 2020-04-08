@@ -39,19 +39,24 @@ class AlteraUsuarioController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Função que recebe os dados inseridos do usuário e faz a modifiação.
+     * Valida a senha inserida:
+     * Se senha atual inserida for diferente da senha atual *, a tela é redirecionada para tela de erro. 
+     * Se forem iguais ** e a nova senha e a repetição da senha são iguais entre 
+     * elas. Neste caso, checa se a senha nova e sua repetição são null ou vazias e,
+     * se forem, elas recebem o valor de $senhaAtual. Se não forem null ou vazias, os  dados são alterados. 
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return view da tela de sucerro/erro de alterar dados
      */
     public function store(Request $request)
-    {   $nome = $_POST['nome'];                      //echo($nome." ");
-        $sobrenome =$_POST['sobrenome'];             //echo($sobrenome." ");
-        $telefone =$_POST['telefone'];               //echo($telefone." ");
-        $cpf =$_POST['cpf'];                         //echo($cpf." ");
-        $senhaAtual =$_POST['senhaAtual'];           //echo($senhaAtual." ");
-        $novaSenha =$_POST['novaSenha'];             //echo($novaSenha." ");
-        $rptNovaSenha =$_POST['rptNovaSenha'];       //echo($rptNovaSenha." ");
+    {   $nome = $_POST['nome'];
+        $sobrenome =$_POST['sobrenome'];
+        $telefone =$_POST['telefone'];
+        $cpf =$_POST['cpf'];
+        $senhaAtual =$_POST['senhaAtual'];
+        $novaSenha =$_POST['novaSenha'];
+        $rptNovaSenha =$_POST['rptNovaSenha'];
       
         $u = (new Usuario)->getDados(session('ID'));
         $variaveis = [
@@ -59,19 +64,19 @@ class AlteraUsuarioController extends Controller
             'paginaAtual' => "Alterar Meus Dados"
         ];
 
-        if($senhaAtual != $u['senha']){
+        if($senhaAtual != $u['senha']){                                 //Se senha atual inserida for diferente da senha inserida *
             return view('TelaAlterarDadosCadastrais.telaErroAlterarDadosCadastrais',$variaveis);    //erro
         }
-        else if($senhaAtual == $u['senha'] && $novaSenha==$rptNovaSenha){
+        else if($senhaAtual == $u['senha'] && $novaSenha==$rptNovaSenha){                       //Se senha inserida for a mesma que a senha do usuário**
             if( $novaSenha==null && $rptNovaSenha == null || ($rptNovaSenha==' ' && $novaSenha==' ')){
                 $novaSenha = $senhaAtual; $rptNovaSenha = $senhaAtual;
             }
             
             $fullName = $nome." ".$sobrenome;
             $idx = $u['id'];
-            (new Usuario)->alterarDados($fullName,$telefone,$cpf,$novaSenha,$idx);
+            (new Usuario)->alterarDados($fullName,$telefone,$cpf,$novaSenha,$idx);          //Chama funcao que da UPDATE dos dados do usuario
             $variaveis['isDadosAlterados'] = true;
-            return view('TelaAlterarDadosCadastrais.telaConfirmaAlterarDadosCadastrais',$variaveis);
+            return view('TelaAlterarDadosCadastrais.telaConfirmaAlterarDadosCadastrais',$variaveis);    //SUCESSO
         }
     }
 

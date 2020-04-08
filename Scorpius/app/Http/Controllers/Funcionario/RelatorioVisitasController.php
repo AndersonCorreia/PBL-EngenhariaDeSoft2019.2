@@ -16,7 +16,8 @@ class RelatorioVisitasController extends Controller{
     public function getTelaRelatorioVisitas(){
         $DAO = new AgendamentoInstitucionalDAO();
         $agendamentos = $DAO->SELECTall_AgendamentoInstitucional();
-        if(!empty($_POST['instituicao'])){
+        $nome_instituicao = $_POST['instituicao'];
+        if(!empty($_POST['$nome_instituicao'])){
             $agendamentos = $DAO->SELECT_AgendamentoInstitucionalByNomeInstituicao($nome_instituicao);
         }
         foreach ($agendamentos as $agendamento) {
