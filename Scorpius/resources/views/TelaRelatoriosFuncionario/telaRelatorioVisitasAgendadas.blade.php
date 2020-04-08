@@ -46,8 +46,7 @@
 
 @foreach($agendamentos as $agendamento)
     <?php $id = $agendamento['agendamentoID']; ?>
-    <form method="get" action="#"> <!--bloco começa aqui -->
-        <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
+    <div class= "row mt-3 mx-2 p-3 scorpius-border-shadow border-top border-shadow" borda>
             <table class="table-borderless col-12">
                 <thead>
                 <!-- Somente exemplificando a estrutura -->
@@ -84,12 +83,11 @@
                     </tr>
                 </thead>
             </table>
-        </form>
-        <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="{{$id}}" 
+        <button type="button" class="btn btn-secondary float-left" data-toggle="modal" data-target="#modal{{$id}}" 
         expand>Dados Completos</button>
-    
+    </div>
         <!-- modal dos dados completos -->
-        <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
+        <div class="modal fade" id="modal{{$id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -157,7 +155,6 @@
                                         <th>Nome:</th> <th>Idade:</th>
                                     </tr>
                                     @foreach($visitante[$id] as $visita)
-                                    <?php var_dump($visitante); ?>
                                         <tr>
                                             <td>{{$visita['nome']}}</td>
                                             <td>{{$visita['idade']}}</td>
@@ -175,10 +172,7 @@
                 </div>
             </div>
         </div>
-    </div>
 @endforeach
-
-</div>
 
 
 <style>
