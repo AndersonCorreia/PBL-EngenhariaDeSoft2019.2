@@ -29,7 +29,7 @@ abstract class DataAccessObject {
             $ini["DB_USERNAME"],
             $ini["DB_PASSWORD"],
             $ini["DB_DATABASE"],
-            $ini["DB_PORT"]         );
+            $ini["DB_PORT"] );
 
         date_default_timezone_set('America/Bahia');
         $this->dataBase->autocommit(true);
