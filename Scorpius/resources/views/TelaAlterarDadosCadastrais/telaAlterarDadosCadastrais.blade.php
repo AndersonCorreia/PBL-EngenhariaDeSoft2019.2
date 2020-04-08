@@ -201,7 +201,7 @@ function inputHandler(masks, max, event) {          //Gerencia a mascara para o 
     c.value = VMasker.toPattern(v, masks[m]);
 }
 
-let telMask = ['99 9 9999-9999'];               //Mascara de telefone
+let telMask = ['(99) 99999-9999'];               //Mascara de telefone
 let tel = document.querySelector('#telefoneUsuario');
 VMasker(tel).maskPattern(telMask[0]);
 tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);  
@@ -221,10 +221,10 @@ function cpfInvalido(){
 
 function telInvalido(){
     let tel = $('#telefoneUsuario').val();
-    return  (tel.length != 14 || tel == "00 0 0000-0000" || tel == "11 1 1111-1111" ||  
-            tel == "22 2 2222-2222" || tel == "33 3 3333-3333" || tel == "44 4 4444-4444" ||  
-            tel == "55 5 5555-5555" || tel == "66 6 6666-6666" || tel == "77 7 7777-7777" || 
-            tel == "88 8 8888-8888" || tel == "99 9 9999-9999");
+    return  (tel.length != 15 || tel == "(00) 00000-0000" || tel == "(11) 11111-1111" ||  
+            tel == "(22) 22222-2222" || tel == "(33) 33333-3333" || tel == "(44) 44444-4444" ||  
+            tel == "(55) 55555-5555" || tel == "(66) 66666-6666" || tel == "(77) 77777-7777" || 
+            tel == "(88) 88888-8888" || tel == "(99) 99999-9999");
 }
 
 $(".val").on("input", function() {      //Impede inserção de caracteres diferentes de * e substitui por ' '
