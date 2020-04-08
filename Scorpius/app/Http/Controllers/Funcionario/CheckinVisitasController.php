@@ -184,7 +184,7 @@ class CheckinVisitasController extends Controller
     public function concluirVisita(Request $req)
     {
         $visita = new CheckinDAO();
-        $resultado = $visita->UPDATE_VISITA($req->ID, $req->status);
+        $resultado = $visita->CONCLUIR_VISITA($req->ID, $req->status);
         $msg = [
             'data' => $resultado,
             'success' => 'Visita editada com sucesso',

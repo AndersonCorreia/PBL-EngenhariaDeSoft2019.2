@@ -111,9 +111,29 @@ class CheckinDAO extends \App\DB\interfaces\DataAccessObject{
         return $this->dataBase->query("UPDATE visitante SET status_Checkin = '$status' WHERE ID = $visiID");
     }
 
-    public function UPDATE_VISITA($ID, $status)
+    public function CONCLUIR_VISITA($ID, $status)
     {   
         $visiID = intval($ID);
+
+        $sqlIndividual = "SELECT ID FROM agendamento WHERE visita = $visiID";
+        $resulIndividual = $this->dataBase->query($sqlIndividual);
+        if($resulIndividual->num_rows > 0){
+            $agendIndividual = $resulIndividual->fetch_all(MYSQLI_ASSOC);
+            foreach($agendIndividual as $agend){
+                $agendamento_ID = intval($agend['ID']);
+                $this->dataBase->query("UPDATE visitante SET status_Checkin = 'não compareceu' WHERE agendamento_ID = $agendamento_ID AND status_Checkin <> 'compareceu'");
+            }
+        }
+
+        $sqlInstituicao = "SELECT ID FROM agendamento_institucional WHERE visita = $visiID";
+        $resulInstituicao = $this->dataBase->query($sqlInstituicao);
+        if($resulInstituicao->num_rows > 0){
+            $agendInstituicao = $resulInstituicao->fetch_all(MYSQLI_ASSOC);
+            foreach($agendInstituicao as $agend){
+                $agendamento_ID = $agend['ID'];
+                $this->dataBase->query("UPDATE visitante_institucional SET status_Checkin = 'não compareceu' WHERE agendamento_institucional_ID = $agendamento_ID AND status_Checkin <> 'compareceu'");
+            }
+        }
         return $this->dataBase->query("UPDATE visita SET status = '$status' WHERE ID = $visiID");
     }
 
