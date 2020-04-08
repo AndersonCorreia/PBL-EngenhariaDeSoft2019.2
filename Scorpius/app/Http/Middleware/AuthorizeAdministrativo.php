@@ -71,6 +71,7 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes["CadastroUsuario.post" ] = 'criar usuarios';
         $this->RotasPermissoes["dashboardFuncionario.show" ] = 'funcionario';
         $this->RotasPermissoes["dashboardEstagiario.show" ] = 'estagiario';
+        $this->RotasPermissoes["dashboardEstagiario.show" ] = 'adm';
         $this->RotasPermissoes["dashboardAdm.show" ] = 'adm';
         $this->RotasPermissoes["backup" ] = 'realizar backup';
         $this->RotasPermissoes["realizarBackup" ] = 'realizar backup';

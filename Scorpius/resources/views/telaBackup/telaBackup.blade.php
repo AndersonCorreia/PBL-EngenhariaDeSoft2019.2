@@ -69,12 +69,12 @@
                         <input type = "text" class = "form-control" name="diretorio" id = "diretorio" placeholder ="C:\..." >
                     </div>
                     <div class="form-group pt-2">
-                        <button type="button" class="btn btn-success form-control" value="backup" data-toggle="modal"
+                        <button type="submit" class="btn btn-success form-control" value="backup" data-toggle="modal"
                                 data-target="#modalExemplo" backup>Realizar Backup Agora <i class="fa fa-send"></i>
                         </button>
                     </div>
                     <div class="form-group pt-2">
-                        <button type="submit" value="cancelar" name="cancelar" class="btn btn-danger form-control" cancelar>Cancelar
+                        <button type="button" value="cancelar" name="cancelar" class="btn btn-danger form-control" cancelar>Cancelar
                         </button>
                     </div>            
                 </div>
@@ -97,7 +97,7 @@ $(document).ready(function() {
 
     $('[cancelar]').click(e=>{
         e.preventDefault()
-        let url = "{{route('dashboardAdm.show')}}"
+        let url = "{{route('dashboard')}}"
         window.location.href = url
     })
 

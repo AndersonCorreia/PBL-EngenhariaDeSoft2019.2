@@ -313,7 +313,8 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         return $this->dataBase->query($sql)->fetch_all(MYSQLI_ASSOC);
     }
     function SELECTbyEmail($email){
-        $sql = "SELECT * FROM usuario WHERE email='$email'";
+        $join = "usuario as u LEFT JOIN tipo_usuario as t ON u.tipo_usuario_ID = t.ID";
+        $sql = "SELECT * FROM $join WHERE email='$email'";
         $resultado=$this->dataBase->query($sql)->fetch_assoc();
         return $resultado;
     }

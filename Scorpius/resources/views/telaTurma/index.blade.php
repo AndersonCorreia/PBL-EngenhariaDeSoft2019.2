@@ -135,7 +135,7 @@
                                                         </div>
                                                         <div class="col-md-2">
                                                             <input onclick="verificaTurma()" id="idadeAluno1"
-                                                                placeholder="Idade" type="number" max="99"
+                                                                placeholder="Idade" type="number" max="99" min=1
                                                                 class="form-control btn-block adcIdadeAluno"
                                                                 name="idadeAluno1" required>
                                                         </div>

@@ -43,8 +43,10 @@
 
             <div class="form-group col-sm-4">
                 <span>Telefone da Instituição</span>
-                <input class="form-control" class="form-control" type="text" maxlength="13" name="Telefone" placeholder="99-99999-9999" OnKeyUP="formatar('##-#####-####', this)"
-                pattern="[0-9]{2}-[0-9]{4,6}-[0-9]{3,4}$" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{ $registro['telefone'] ?? '' }}" title="Numero de telefone com DD no formato xx-xxxxx-xxxx" required>
+                <input id="tel" class="form-control" class="form-control" type="text" maxlength="13" name="Telefone" 
+                placeholder="99-99999-9999" OnKeyUP="formatar('##-#####-####', this)" pattern="[0-9]{2}-[0-9]{4,6}-[0-9]{3,4}$" 
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{ $registro['telefone'] ?? '' }}"
+                title="Numero de telefone com DD no formato xx-xxxxx-xxxx" required>
             </div> 
 
             <div class="form-group col-sm-8">
