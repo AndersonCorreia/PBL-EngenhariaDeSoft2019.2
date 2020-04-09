@@ -82,7 +82,7 @@
     <div class="col-4 mt-1">
         <label for="cpfCadastro">CPF</label>
         <input aria-describedby="cpfHelp" name="cpf" id="cpfCadastro" placeholder="000.000.000-00" type="text" minlength="11" inputmode="number"
-            maxlength="11" class="form-control" required pattern="[0-9]{11}" title="Informe apenas os numeros do CPF sem '.' e sem '-'.">
+            maxlength="11" class="form-control" required pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" title="Informe apenas os numeros do CPF sem '.' e sem '-'.">
         @if($ERRO == 'CPF')
         <small id="cpfHelp" class="form-text text-danger">{{$MSG_ERRO}}</small>
         @endif
