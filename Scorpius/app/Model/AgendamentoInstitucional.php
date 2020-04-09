@@ -57,12 +57,12 @@ class AgendamentoInstitucional extends \App\DB\interfaces\DataObject
         return $this->observacao;
     }
     
-    public function getStatus()
+    public function getStatusAg()
     {
         return $this->status;
     }
 
-    public function setStatus($status, $alterar=true)
+    public function setStatusAg($status, $alterar=true)
     {   
         $this->setAlterado($alterar);
         $this->status = $status;

@@ -92,7 +92,7 @@
 
         <!-- CÓDIGO DA LISTA DE ESPERA PARA UM DIA E TURNO ESPECIFICO-->
         <div id="lista-espera">
-
+            @foreach($visitas_institucionais['visitas'] as $visita)
             <!-- modal da lista espera -->
             <div class="modal fade" id="modal-lista-espera{{$visita['agendamentoID']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
                 aria-hidden="true">
@@ -135,7 +135,7 @@
                 </div>
             </div>
         </div>
-
+        @endforeach
 
         <!-- CÓDIGO DA LISTA DE ESPERA TOTAL -->
         <div id="lista-espera">
@@ -174,7 +174,7 @@
 
         <!-- CÓDIGO DO MOTIVO DO CANCELAMENTO -->
         <div id="cancelamento">
-
+            @foreach($visitas_institucionais['visitas'] as $visita)
             <!-- modal do motivo do cancelamento -->
             <div class="modal fade" id="modal-cancelamento{{$visita['agendamentoID']}}" tabindex="-1" role="dialog" 
                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -189,6 +189,8 @@
                         <div class="modal-body">
                             <form action="{{route("cancelaAgendamento")}}" method="POST">
                                 @csrf
+                                <input type="hidden" name="agendamentoID" value="{{$visita['agendamentoID']}}">
+                                <input type="hidden" name="usuarioID" value="{{$visita['usuarioID']}}">
                                 <!-- colocar resto das coisas aqui -->
                                 <div class="custom-control custom-radio col-md-12">
                                     <input type="radio" id="customRadio1" name="Radio" value="CC" class="custom-control-input">
@@ -209,6 +211,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>    

@@ -4,7 +4,6 @@
         <p>{{$visita['ano_escolar']}} - {{$visita['turma']}}</p>
         <p style="margin-top: -8px;"> Status: Confirmado</p>
             <div class="btn-group" role="group">
-            <input type="hidden" name="agendamentoID" value="{{$visita['agendamentoID']}}">
             <button type="buttom" class="btn btn-danger" name="{{$visita['agendamentoID']}}" data-toggle="modal"
             data-target="#modal-cancelamento{{$visita['agendamentoID']}}" data-toggle="tooltip" title="Cancelar" btncanc>
                 <i class="fas fa-times"></i>
@@ -25,6 +24,7 @@
             <form action="{{route('confirmaAgendamento')}}" method="POST">
                 @csrf
                 <input type="hidden" name="agendamentoID" value="{{$visita['agendamentoID']}}">
+                <input type="hidden" name="usuarioID" value="{{$visita['usuarioID']}}">
                 <button type="submit" class="btn btn-primary"
                     data-toggle="tooltip" title="Confirmar" btnconf>
                     <i class="fas fa-check"></i>

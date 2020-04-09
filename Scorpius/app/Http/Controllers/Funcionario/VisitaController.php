@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\DB\AgendamentoInstitucionalDAO;
+use App\DB\PessoaDAO;
+use App\model\AgendamentoInstitucional;
 use App\DB\VisitaDAO;
 use App\Model\Visita;
 use App\Http\Controllers\Visitante\AgendamentoController;
@@ -40,16 +42,28 @@ class VisitaController extends Controller{
     public function confirmaAgendamento(Request $request){
         $ID = $request->agendamentoID;
         $DAO = new AgendamentoInstitucionalDAO();
-        $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", "qualquer", "confirmado", $ID);
+        $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", false, "confirmado", $ID);
         $DAO->UPDATE($Agendamento);//o update só atualiza o status
+        $email = (new PessoaDAO)-SELECTbyID($request->usuarioID)["email"];
+        $data = now()->format("d/m/Y");
+        $this->enviarEmailAvisoConfirmacaoDeAgendamento($email, $data);
         redirect()->back();
     }
 
     public function cancelaAgendamento(Request $request){
         $ID = $request->agendamentoID;
         $DAO = new AgendamentoInstitucionalDAO();
-        $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", "qualquer", "cancelado pelo funcionario", $ID);
+        $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", false, "cancelado pelo funcionario", $ID);
         $DAO->UPDATE($Agendamento);//o update só atualiza o status
+        $email = (new PessoaDAO)-SELECTbyID($request->usuarioID)["email"];
+        $data = now()->format("d/m/Y");
+        if($request->radio == "CC"){
+            $motivo = "condições climaticas";
+        }
+        else {
+            $motivo = $request->motivo;
+        }
+        $this->enviarEmailAvisoConfirmacaoDeAgendamento($email, $data, $motivo);
         redirect()->back();
     }
 
@@ -117,10 +131,9 @@ class VisitaController extends Controller{
 
     }
 
-    public function enviarEmailAvisoCancelamento($email, $token, $motivo, $dataAgendamento)
+    public function enviarEmailAvisoCancelamento($email, $motivo, $dataAgendamento)
     {
         $dados = [
-            'token'=> $token,
             'usuario_email'=> $email,
             'motivo'=> $motivo,
             'data'=> $dataAgendamento,
@@ -135,11 +148,9 @@ class VisitaController extends Controller{
         
     }
 
-    public function enviarEmailAvisoConfirmacaoDeAgendamento($email, $token, $dataAgendamento)
+    public function enviarEmailAvisoConfirmacaoDeAgendamento($email, $dataAgendamento)
     {
         $dados = [
-            'token'=> $token,
-            'usuario_email'=> $email,
             'data'=> $dataAgendamento,
         ];
         session()->flash("email", $email);
