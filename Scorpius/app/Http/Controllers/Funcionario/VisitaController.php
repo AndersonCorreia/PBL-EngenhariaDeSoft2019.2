@@ -134,7 +134,7 @@ class VisitaController extends Controller{
         
     }
 
-    public function enviarEmailAvisoConfirmaçãoDeAgendamento($email, $token, $dataAgendamento)
+    public function enviarEmailAvisoConfirmacaoDeAgendamento($email, $token, $dataAgendamento)
     {
         $dados = [
             'token'=> $token,
@@ -143,7 +143,7 @@ class VisitaController extends Controller{
         ];
         session()->flash("email", $email);
          // Enviando o e-mail
-        Mail::send('emails.emailAvisoConfirmaçãoDeAgendamento', $dados, function($message){
+        Mail::send('emails.emailAvisoConfirmacaoDeAgendamento', $dados, function($message){
             $message->from('scorpiusuefs@gmail.com', 'Scorpius - Confirmação de Agendamento');
             $message->to( session('email') );
             $message->subject('Seu agendamento foi confirmado');
