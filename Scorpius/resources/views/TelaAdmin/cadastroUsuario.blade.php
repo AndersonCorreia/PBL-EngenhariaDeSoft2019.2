@@ -40,7 +40,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">+55</div>
                     </div>
-                    <input required maxlength="14" minlength="14" type="text" name="telefone" id="telefone" 
+                    <input required maxlength="15" minlength="15" type="text" name="telefone" id="telefone" 
                            class="form-control val" onchange="verificaTel();" placeholder="(00) 0 0000-0000">
                 </div>
             </div>
@@ -56,12 +56,12 @@
         <div class="form-group col-8">
           <label for="senhaAtual">Senha <b>*</b></label>
           <div class="form-row">
-              <input onchange="verificaCamposSenha()" minlength="6" maxlength="20" class="form-control col-7" name="senha" id="senha" type="password">
+              <input onchange="verificaCamposSenha()" minlength="6" maxlength="20" class="form-control col-7" required name="senha" id="senha" type="password">
               <button type="button" style="margin-left:5px" class="btn btn-warning" id="btnRevelaS" name="btnRevelaS" aria-hidden="false"><i class="fas fa-eye-slash" name ="iconS" id="iconS"></i> </button>
           </div>
             <label for="senhaAtual">Confirmação de Senha <b>*</b></label>
             <div class="form-row">
-                <input onchange="verificaCamposSenha()" minlength="6" maxlength="20" class="form-control col-7" name="rptSenha" id="rptSenha" type="password">
+                <input onchange="verificaCamposSenha()" minlength="6" maxlength="20" class="form-control col-7" required name="rptSenha" id="rptSenha" type="password">
                 <button type="button" style="margin-left:5px" class="btn btn-warning" id="btnRevelaS" name="btnRevelaS" aria-hidden="false"><i class="fas fa-eye-slash" name ="iconS2" id="iconS2"></i> </button>
             </div>   
             <small id="feedback-senha" class="text-danger"><b>*</b> As senhas devem ser iguais!</small>  
@@ -188,10 +188,12 @@ function verificaTipoUsuario(){
     if(tipo != 10 || tipo != 9 || tipo != 8){
         $('#btnCadastrar').attr("hidden",'');
         $('#feedback-tipo').removeAttr("hidden");
+        $('#btnCadastrar').attr("hidden", '');      //hide button
     }
     if(tipo == 10 || tipo == 9 || tipo ==8) {
         $('#btnCadastrar').removeAttr("hidden");
         $('#feedback-tipo').attr("hidden", '');
+        $('#btnCadastrar').removeAttr("hidden");    //show button
     }
 }
 
@@ -205,10 +207,10 @@ function cpfInvalido(){
 
 function telInvalido(){
     let tel = $('#telefone').val();
-    return  (tel.length != 14 || tel == "00 0 0000-0000" || tel == "11 1 1111-1111" ||  
-            tel == "22 2 2222-2222" || tel == "33 3 3333-3333" || tel == "44 4 4444-4444" ||  
-            tel == "55 5 5555-5555" || tel == "66 6 6666-6666" || tel == "77 7 7777-7777" || 
-            tel == "88 8 8888-8888" || tel == "99 9 9999-9999");
+    return  (tel.length != 15 || tel == "(00) 00000-0000" || tel == "(11) 11111-1111" ||  
+            tel == "(22) 22222-2222" || tel == "(33) 33333-3333" || tel == "(44) 44444-4444" ||  
+            tel == "(55) 55555-5555" || tel == "(66) 66666-6666" || tel == "(77) 77777-7777" || 
+            tel == "(88) 88888-8888" || tel == "(99) 99999-9999");
 }
 
 $(".val").on("input", function() {
@@ -234,7 +236,7 @@ function inputHandler(masks, max, event) {      //MASCARA PARA O TELEFONE E CPF
     c.value = VMasker.toPattern(v, masks[m]);
 }
 
-let telMask = ['99 9 9999-9999'];       //MASCARA PARA O TELEFONE 
+let telMask = ['(99) 99999-9999'];       //MASCARA PARA O TELEFONE 
 let tel = document.querySelector('#telefone');
 VMasker(tel).maskPattern(telMask[0]);
 tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);

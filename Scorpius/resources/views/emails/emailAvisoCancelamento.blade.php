@@ -1,0 +1,1 @@
+<p>Sua visita ao Observatório Antares para o dia {{$dados['data']}} foi cancelada por motivo de {{$dados['motivo']}}</p>
