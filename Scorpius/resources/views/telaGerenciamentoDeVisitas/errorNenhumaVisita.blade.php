@@ -1,6 +1,6 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Agendamento')
+@section('title', 'Gerenciar Visitas Agendadas')
 
 @section('conteudo')
 <div class="alert alert-info" role="alert">
@@ -11,3 +11,5 @@
       
    </p>
 </div>
+
+@endsection
