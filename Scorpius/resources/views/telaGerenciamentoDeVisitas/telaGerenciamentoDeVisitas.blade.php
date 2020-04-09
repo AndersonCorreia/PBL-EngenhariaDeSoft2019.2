@@ -92,8 +92,6 @@
 
         <!-- CÓDIGO DA LISTA DE ESPERA PARA UM DIA E TURNO ESPECIFICO-->
         <div id="lista-espera">
-
-            <!-- modal da lista espera -->
             <div class="modal fade modal-lista-espera" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
                 aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -105,20 +103,24 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <!-- colocar resto das coisas aqui -->
-                            
                             <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
                                 <div class="row col-12 col-md-11 my-1">
                                     <div class="row col-12">
                                         <div class="custom-control custom-radio col-md-12">
                                             @forelse($lista_espera as $agendamento)
                                                 <form >
+                                                @if($visita['turno'] == $agendamento['turno'] && $visita['data'] == $agendamento['data'])
                                                     @include('telaGerenciamentoDeVisitas._includes.listaEsperaDiaTurno')
+                                                @else
+                                                    <div class="col-12 p-0 my-1 font-weight-bold">
+                                                        <p>Não existe nenhuma instituição na lista de espera para esse dia e turno.</p>
+                                                    </div>
+                                                @endif
                                                 </form>
                                             @empty
                                                 <div class="col-md-12">
                                                     <div class="col-12 p-0 my-1 font-weight-bold">
-                                                        <p>Não existe nenhuma instituição na lista de espera para esse dia e turno.</p>
+                                                        <p>Não existe nenhuma instituição na lista de espera.</p>
                                                     </div>
                                                 </div>
                                             @endforelse
