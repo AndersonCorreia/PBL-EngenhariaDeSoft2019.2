@@ -115,5 +115,40 @@ class VisitaController extends Controller{
         return $array;
 
     }
+
+    public function enviarEmailAvisoCancelamento($email, $token, $motivo, $dataAgendamento)
+    {
+        $dados = [
+            'token'=> $token,
+            'usuario_email'=> $email,
+            'motivo'=> $motivo,
+            'data'=> $dataAgendamento,
+        ];
+        session()->flash("email", $email);
+         // Enviando o e-mail
+        Mail::send('emails.emailAvisoCancelamento', $dados, function($message){
+            $message->from('scorpiusuefs@gmail.com', 'Scorpius - Aviso de Cancelamento');
+            $message->to( session('email') );
+            $message->subject('Aviso de Cancelamento');
+        });
+        
+    }
+
+    public function enviarEmailAvisoConfirmaçãoDeAgendamento($email, $token, $dataAgendamento)
+    {
+        $dados = [
+            'token'=> $token,
+            'usuario_email'=> $email,
+            'data'=> $dataAgendamento,
+        ];
+        session()->flash("email", $email);
+         // Enviando o e-mail
+        Mail::send('emails.emailAvisoConfirmaçãoDeAgendamento', $dados, function($message){
+            $message->from('scorpiusuefs@gmail.com', 'Scorpius - Confirmação de Agendamento');
+            $message->to( session('email') );
+            $message->subject('Seu agendamento foi confirmado');
+        });
+        
+    }
 }
 ?>
