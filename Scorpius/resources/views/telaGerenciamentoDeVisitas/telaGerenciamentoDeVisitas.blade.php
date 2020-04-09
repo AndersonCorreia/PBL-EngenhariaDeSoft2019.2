@@ -208,36 +208,47 @@
         </div>
     </div>
 </div>    
-    <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow">
+    <div class= "row col-12 m-1 p-3 scorpius-border-shadow border-top border-shadow">
         <div class="row col-12 m-0 pl-2 p-0"><h4>Lista de Agendamentos Cancelados</h4></div>
-        <div class= "row col-11 m-1 p-2 scorpius-border-shadow border-top border-shadow">
-            <div class="row col-12 m-0 pl-2 p-0"><p> <b> Pelo Funcionário: </b> </p></div>
+        <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow bg-dark text-white" >
+            <div class="row col-12 m-0 pl-2 p-0"><p> <b> Cancelado Pelo Funcionário: </b> </p></div>
             @forelse ($agendamentos_cancelados_funcionario as $agendamento)
+            <div class= "row m-1 p-2 scorpius-border-shadow border-top border-shadow text-dark" agendCancelado>
                 <div class="row col-12 m-0 pl-2 p-0">
-                    <p>{{$agendamento['instituicao']}}</p>
+                    <p> <b> {{$agendamento['instituicao']}} </b> </p>
                 </div>
                 <div class="row col-12 m-0 pl-2 p-0">
-                    <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
+                    <p style="margin-top: -8px;"> <b> Data da Visita: {{$agendamento['data']}}  </b></p>
                 </div>
                 <div class="row col-12 m-0 pl-2 p-0">
-                    <p>Motivo do Cancelamento: </p>
+                    <p style="margin-top: -8px;"> <b> Ano Escolar: {{$agendamento['ano_escolar']}} </b></p> <p style="margin-top: -8px; margin-left: 80px;"> <b> Turma: {{$agendamento['turma']}}</b></p>
                 </div>
+                <div class="row col-12 m-0 pl-2 p-0">
+                    <p> <b> Motivo do Cancelamento: </b></p>
+                </div>
+            </div>
             @empty
-                <p>Não há nenhum agendamento cancelado!</p>
+                <p> <b> Não há nenhum agendamento cancelado! </b></p>
             @endforelse
         </div>
-        <div class= "row col-11 m-1 p-2 scorpius-border-shadow border-top border-shadow">
-            <div class="row col-12 m-0 pl-2 p-0"><p> <b> Pelo Usuário: </b> </p></div>
+        <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow bg-dark text-white">
+            <div class="row col-12 m-0 pl-2 p-0"><p> <b> Cancelado Pelo Usuário: </b> </p></div>
             @forelse ($agendamentos_cancelados_usuario as $agendamento)
+            <div class= "row m-1 p-2 scorpius-border-shadow border-top border-shadow text-dark" agendCancelado>
                 <div class="row col-12 m-0 pl-2 p-0">
-                    <p>{{$agendamento['instituicao']}}</p>
+                    <p> <b> {{$agendamento['instituicao']}} </b></p>
                 </div>
                 <div class="row col-12 m-0 pl-2 p-0">
-                    <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
+                    <p style="margin-top: -8px;"> <b> Data da Visita: {{$agendamento['data']}} </b></p> 
                 </div>
+                 <div class="row col-12 m-0 pl-2 p-0">
+                    <p style="margin-top: -8px;"> <b> Ano Escolar: {{$agendamento['ano_escolar']}} </b></p> <p style="margin-top: -8px; margin-left: 80px;"> <b> Turma: {{$agendamento['turma']}}</b></p>
+                </div>
+            </div>
             @empty
-                <p>Não há nenhum agendamento cancelado!</p>
+                <p> <b> Não há nenhum agendamento cancelado! </b> </p>
             @endforelse
+
         </div>
     </div>
     
@@ -269,6 +280,9 @@
                 margin-top: -8px;
                 width: 50px;
                 height: 30px;
+            }
+            [agendCancelado]{
+                width: 500px;
             }
 
             [posicaoButton] {
