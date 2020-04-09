@@ -197,7 +197,7 @@ class VisitaDAO extends DataAccessObject{
         $result = $stmt->get_result()->fetch_assoc();
 
         if($result==[]){
-            throw new \App\Exceptions\NenhumaVisitaEncontradaException(2);
+            throw new \App\Exceptions\NenhumaVisitaEncontradaException(3);
         }
         return $result;
     }
