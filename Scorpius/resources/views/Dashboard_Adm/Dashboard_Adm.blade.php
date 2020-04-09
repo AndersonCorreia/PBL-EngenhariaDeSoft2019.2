@@ -2,7 +2,29 @@
 
 @section('title', 'Bem-vindo(a), Administrador!')
 
+
 @section('conteudo')
+<!-- 
+<div class="col-xl-4">
+@foreach ($['chest'] as $exerciseName => $daysArray)
+        <tr>
+            <td>{{ $exerciseName }}</td>
+            <td>{{ implode(', ', $daysArray) }}</td>
+            <td>{{ implode(', ', $chests['hints'][$exerciseName]) }}</td>
+        </tr>
+@endforeach
+</div> -->
+
+@endsection
+
+
+
+@section('js')
+
+<!-- @include('Dashboard_Adm._includes.chart') -->
+
+<!-- @include('Dashboard_Adm._includes.estagiarios') -->
+
 
 <style>
     .notificacoes_agendamentos {
@@ -34,17 +56,4 @@
         border-top-left-radius: 20px;
     }
 </style>
-@endsection
-
-<div id="chart-container">
-      <canvas id="exibedados"></canvas>
-    </div>
-
-@section('js')
-
-
-@include('Dashboard_Adm._includes.chart')
-
-@include('Dashboard_Adm._includes.estagiarios')
-
 @endsection

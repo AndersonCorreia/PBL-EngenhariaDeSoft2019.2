@@ -21,7 +21,6 @@ class AdminController extends Controller
         //$id_user = session('ID');
         $visitantes = $this->selectEscolas();
 
-        
         $variaveis = [
             'visitantes' => $visitantes,
 
