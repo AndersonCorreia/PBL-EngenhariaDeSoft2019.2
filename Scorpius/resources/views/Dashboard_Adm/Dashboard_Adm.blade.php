@@ -4,16 +4,6 @@
 
 
 @section('conteudo')
-<!-- 
-<div class="col-xl-4">
-@foreach ($['chest'] as $exerciseName => $daysArray)
-        <tr>
-            <td>{{ $exerciseName }}</td>
-            <td>{{ implode(', ', $daysArray) }}</td>
-            <td>{{ implode(', ', $chests['hints'][$exerciseName]) }}</td>
-        </tr>
-@endforeach
-</div> -->
 
 @endsection
 
