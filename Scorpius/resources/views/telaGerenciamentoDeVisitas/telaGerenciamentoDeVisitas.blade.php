@@ -8,18 +8,18 @@
     <div class="form-group d-block " id="listaEspera">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-            <div class="row">
-                <div class="col-md-6">
-                    <h4 >Cronograma de Visitas Agendadas</h4>
-                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 >Cronograma de Visitas Agendadas</h4>
+                    </div>
 
-                <div class="col-md-6 float-right p-0 m-0">    
-                    <button type="submit" class="btn btn-secondary float-right" id="lista-espera" data-toggle="modal" 
-                        data-toggle="tooltip" title="Lista de Espera Completa" data-target=".modal-lista-espera-total" lista-total>
-                        <i class="fas fa-list-ol"></i> Consultar Lista de Espera
-                    </button>
+                    <div class="col-md-6 float-right p-0 m-0">    
+                        <button type="submit" class="btn btn-secondary float-right" id="lista-espera" data-toggle="modal" 
+                            data-toggle="tooltip" title="Lista de Espera Completa" data-target=".modal-lista-espera-total" lista-total>
+                            <i class="fas fa-list-ol"></i> Consultar Lista de Espera
+                        </button>
+                    </div>
                 </div>
-            </div>
             </li>
         </ul>
     </div>
@@ -93,48 +93,58 @@
         <!-- CÓDIGO DA LISTA DE ESPERA PARA UM DIA E TURNO ESPECIFICO-->
         <div id="lista-espera">
             @foreach($visitas_institucionais['visitas'] as $visita)
-            <!-- modal da lista espera -->
-            <div class="modal fade" id="modal-lista-espera{{$visita['agendamentoID']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header bg-secondary text-white">
-                            <h5 class="modal-title" id="modal-cadastrar-turmaTitle">Lista de Espera</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- colocar resto das coisas aqui -->
-                            
-                            <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
-                                <div class="row col-12 col-md-11 my-1">
-                                    <div class="row col-12">
-                                        <div class="custom-control custom-radio col-md-12">
-                                            @forelse($lista_espera as $agendamento)
-                                                <form >
-                                                    @include('telaGerenciamentoDeVisitas._includes.listaEsperaDiaTurno')
-                                                </form>
-                                            @empty
-                                                <div class="col-md-12">
-                                                    <div class="col-12 p-0 my-1 font-weight-bold">
-                                                        <p>Não existe nenhuma instituição na lista de espera para esse dia e turno.</p>
+                <!-- modal da lista espera -->
+                <div class="modal fade" id="modal-lista-espera{{$visita['agendamentoID']}}" tabindex="-1" role="dialog" 
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-secondary text-white">
+                                <h5 class="modal-title" id="modal-cadastrar-turmaTitle">Lista de Espera</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- colocar resto das coisas aqui -->
+                                
+                                <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
+                                    <div class="row col-12 col-md-11 my-1">
+                                        <div class="row col-12">
+                                            <div class="custom-control custom-radio col-md-12">
+                                                @forelse($lista_espera as $agendamento)
+                                                    @if($agendamento['data'] == $visita['data'] && $agendamento['turno'] == $visita['turno'])
+                                                        <form>
+                                                            @include('telaGerenciamentoDeVisitas._includes.listaEsperaDiaTurno')
+                                                        </form>
+                                                    @else
+                                                        @if($loop->last)
+                                                            <div class="col-md-12">
+                                                                <div class="col-12 p-0 my-1 font-weight-bold">
+                                                                    <p>Não existe nenhuma instituição na lista de espera para esse dia e turno.</p>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endif
+                                                @empty
+                                                    <div class="col-md-12">
+                                                        <div class="col-12 p-0 my-1 font-weight-bold">
+                                                            <p>Não existe nenhuma instituição na lista de espera.</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endforelse
+                                                @endforelse
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancelar</button>
-                            <button type="submit" class="btn btn-primary" btnlistaEDT>Confirmar</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancelar</button>
+                                <button type="submit" class="btn btn-primary" btnlistaEDT>Confirmar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         @endforeach
 
         <!-- CÓDIGO DA LISTA DE ESPERA TOTAL -->
