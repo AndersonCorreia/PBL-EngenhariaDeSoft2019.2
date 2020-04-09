@@ -56,4 +56,13 @@
             </div>
         </div>
     </div>
+
+<style>
+
+    [escolas]{
+        width: 475px; 
+        min-height: 355px;
+    }
+</style>
+
 @endsection
