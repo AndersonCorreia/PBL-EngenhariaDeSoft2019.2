@@ -225,7 +225,7 @@ use App\Model\Agendamento;
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
         if($result==[]){
-            throw new \App\Exceptions\NenhumaVisitaEncontradaException();
+            throw new \App\Exceptions\NenhumaVisitaEncontradaException(3);
         }
         
         return $result;

@@ -318,4 +318,9 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
         $resultado=$this->dataBase->query($sql)->fetch_assoc();
         return $resultado;
     }
+
+    public function dadoJaExistente($cpf,$email){
+        $resultado = $this->dataBase->query("SELECT * FROM usuario WHERE CPF='$cpf' OR email='$email'");
+        return $resultado->num_rows == 0 ? false : true;    //Se tem linhas, é true
+    }
 }

@@ -66,7 +66,10 @@ class Handler extends ExceptionHandler
             if( $exception->getCode() == 2 ){
                 return back()->with(['erroDataTurno' => true]);
             }
-            
+            if($exception->getCode() == 3){
+                return redirect()->route('vErros')
+                    ->with('viewErro', 'telaGerenciamentoDeVisitas.errorNenhumaVisita');
+            }
             return redirect()->route('vErros')
                 ->with('viewErro','telasUsuarios.Agendamentos.errorNenhumaVisita');
         }

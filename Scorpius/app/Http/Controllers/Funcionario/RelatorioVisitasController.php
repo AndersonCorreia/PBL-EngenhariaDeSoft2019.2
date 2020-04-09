@@ -16,17 +16,23 @@ class RelatorioVisitasController extends Controller{
     public function getTelaRelatorioVisitas(){
         $DAO = new AgendamentoInstitucionalDAO();
         $agendamentos = $DAO->SELECTall_AgendamentoInstitucional();
-        $nome_instituicao = $_POST['instituicao'];
-        if(!empty($_POST['$nome_instituicao'])){
+        if(!empty($_POST['instituicao'])){
+            $nome_instituicao = $_POST['instituicao'];
             $agendamentos = $DAO->SELECT_AgendamentoInstitucionalByNomeInstituicao($nome_instituicao);
         }
-        foreach ($agendamentos as $agendamento) {
-            $id = $agendamento['agendamentoID'];
-            $visitante[$id] = $DAO->getVisitantesByAgendamentoID($id);
-            $quant_visitantes[$id] = count($visitante[$id]);
+        if(!empty($agendamentos)){
+            foreach ($agendamentos as $agendamento) {
+                $id = $agendamento['agendamentoID'];
+                $visitante[$id] = $DAO->getVisitantesByAgendamentoID($id);
+                $quant_visitantes[$id] = count($visitante[$id]);
+            }
+            $variaveis = ['agendamentos' => $agendamentos, 'visitante' => $visitante, 'quant_visitantes' => $quant_visitantes];
+        
+            return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $variaveis);
         }
-        $variaveis = ['agendamentos' => $agendamentos, 'visitante' => $visitante, 'quant_visitantes' => $quant_visitantes];
-        return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas', $variaveis);
+        else{
+            return view('TelaRelatoriosFuncionario.telaRelatorioVisitasAgendadas');
+        }
     }
 }
 ?>
