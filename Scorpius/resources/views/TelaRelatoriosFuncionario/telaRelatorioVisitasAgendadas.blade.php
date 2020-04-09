@@ -11,7 +11,7 @@
         <form action="{{route('buscarInstituicao')}}" method="post">
             {{ csrf_field() }}
             <input id="nomeInst" class="form-control" type="text" name="instituicao" 
-            placeholder="Insira o Nome da Instituição" list="instList" required autofocus>
+            placeholder="Insira o Nome Completo da Instituição" list="instList" required autofocus>
             <datalist id="instList">            
             </datalist>
     </div>     
@@ -49,8 +49,10 @@
 @if(empty($agendamentos))
     <form action="{{route('buscarInstituicao')}}" method="post">
         {{ csrf_field() }}
-        <label class="col-sm-11 pt-3" nomeInstituicao >A instituição procurada não apresenta agendamentos.
-        <button class="btn btn-primary float-right"> Exibir todos os agendamentos </button>
+        <label class="col-sm-12 col-form-label pt-1" nomeInstituicao > <b> A instituição procurada não apresenta agendamentos. </b>
+        
+            <button class="btn btn-dark float-right" naoEcontrado> Exibir Todos os Agendamentos </button>
+        
         </label>
     </form>
 @else
@@ -219,6 +221,12 @@
     [relatorio]{
         margin-left: 10px; 
         margin-right: 10px;
+    }
+
+    [naoEcontrado]{
+        
+        margin-right: 30px; 
+        
     }
 
     h2{
