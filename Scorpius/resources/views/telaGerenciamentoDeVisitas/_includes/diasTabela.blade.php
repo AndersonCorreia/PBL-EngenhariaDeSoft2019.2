@@ -19,7 +19,7 @@
         <p style="margin-top: -8px;"> Status: Pendente</p>
         <div class="btn-group" role="group">
             <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip"
-                title="Lista de Espera" data-target=".modal-lista-espera" data-visita="{{json_encode($visita)}}" lista>
+                title="Lista de Espera" data-target=".modal-lista-espera" lista>
                 <i class="fas fa-list-ol"></i>
             </button>
             <button type="submit" class="btn btn-primary" name="{{$visita['agendamentoID']}}" data-toggle="tooltip" title="Confirmar" btnconf>
@@ -64,13 +64,6 @@
 
 @section('js')
 <script>
-    $('#myModal').on('shown.bs.modal', function () {
-        $v = $(this).attr('visita')
-        $queryString = filter_input(INPUT_SERVER, 'QUERY_STRING')
-        parse_str($queryString, $v)
-        // $("#id_de_cada_campo").val(visita.turno)
-    })
-
     jQuery(document).ready(function() {
         $('[btnconf]').click(e => {
             e.preventDefault()
