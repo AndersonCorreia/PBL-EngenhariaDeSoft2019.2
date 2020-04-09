@@ -17,8 +17,6 @@ use App\Http\Controllers\Visitante\AgendamentoController;
 
 class VisitaController extends Controller{
     public function getTelaGerenciarVisita(){
-        //$id_user = $_SESSION["ID"]; 
-        $id_user = 6;
         $DAO = new AgendamentoInstitucionalDAO();
         $lista_espera = $DAO->SELECT_VisitaInstitucionalByStatus("lista de espera");
 
@@ -40,18 +38,21 @@ class VisitaController extends Controller{
     }
 
     public function confirmaAgendamento(Request $request){
-        dd('método confirmaAgendamento()');
-        $ID = $request->input('name');
-        $DAO = new VisitaDAO();
-        $visitaConfirmada = new Visita("1111-11-11", "qualquer", "confirmado", $ID);
-        $DAO->UPDATE($visitaConfirmada);
+        $ID = $request->agendamentoID;
+        $DAO = new AgendamentoInstitucionalDAO();
+        $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", "qualquer", "confirmado", $ID);
+        $DAO->UPDATE($Agendamento);//o update só atualiza o status
+        redirect()->back();
     }
+
     public function cancelaAgendamento(Request $request){
-        dd('método cancelaAgendamento()');
-        $ID = $request->input('name');
-        $agend = new AgendamentoInstitucional("", "1", "1", "cancelado", $ID);
-        (new AgendamentoInstitucionalDAO())->update($agend);
+        $ID = $request->agendamentoID;
+        $DAO = new AgendamentoInstitucionalDAO();
+        $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", "qualquer", "cancelado pelo funcionario", $ID);
+        $DAO->UPDATE($Agendamento);//o update só atualiza o status
+        redirect()->back();
     }
+
     public function escolherListaEspera(Request $request){
         dd(' método escolherListaEspera()');
         $ID = $request->input('name');
