@@ -17,7 +17,7 @@
                 <div class="col-12 row m-0 p-0">
                     <div class="col-12 col-sm m-0 p-0">
                         <input id="nomeInst"  class="form-control limpavel" type="text" name="Instituicao" 
-                        placeholder="Nome da instituição" list="instList" required autofocus>
+                        placeholder="Nome da instituição" list="instList" required autofocus onchange="this.value = this.value.trim()">
                         <datalist id="instList">
                         @if (($instituicoes ?? false))
                             @foreach ($instituicoes as $inst)
@@ -37,20 +37,20 @@
 
             <div class="form-group pt-3 col-sm-8">    
                 <span>Responsável pela Instituição</span>
-                <input class="form-control"  type="text" maxlength="40" name="name" value="" id="responsavelID"
-                placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" title="Infome apenas letras" required>
+                <input class="form-control"  type="text" maxlength="40" name="Responsavel" value="" id="responsavelID"
+                placeholder="Nome completo do responsável" pattern="[a-zA-ZÀ-Úà-ú ]+$$" title="Infome apenas letras" required onchange="this.value = this.value.trim()">
             </div>
 
             <div class="form-group pt-3 col-sm-4">
                 <span>Telefone da Instituição</span>
-                <input class="form-control" class="form-control" type="text" maxlength="13" name="telefone" placeholder="99-99999-9999" OnKeyUP="formatar('##-#####-####', this)"
+                <input class="form-control" class="form-control" type="text" maxlength="13" name="Telefone" placeholder="99-99999-9999" OnKeyUP="formatar('##-#####-####', this)"
                 pattern="[0-9]{2}-[0-9]{4,6}-[0-9]{3,4}$" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{ $registro['telefone'] ?? '' }}" title="Numero de telefone com DD no formato xx-xxxxx-xxxx" required>
             </div> 
 
             <div class="form-group col-sm-8">
                 <span>Endereço da Instituição</span>
-                <input class="form-control"  type="text" id="enderecoID" maxlength="50" name="endereco" 
-                placeholder="Rua e Bairro" required>
+                <input class="form-control"  type="text" id="enderecoID" maxlength="50" name="Endereco" 
+                placeholder="Rua e Bairro" required onchange="this.value = this.value.trim()">
             </div>
 
             <div class="form-group col-sm-2 col-4">    
@@ -66,7 +66,7 @@
 
             <div class="form-group col-sm-4">
                 <span>Cidade</span>
-                <input class="form-control" placeholder="Cidade da instituição"  id="cidadeID" type="text" name="cidade" required>
+                <input class="form-control" placeholder="Cidade da instituição"  id="cidadeID" type="text" name="Cidade" required onchange="this.value = this.value.trim()">
             </div>
 
             <div class="form-group col-sm-3">
@@ -144,7 +144,7 @@
 <script> 
   document.getElementById("cidadeID").onkeypress = function(e) {
          var chr = String.fromCharCode(e.which);
-         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+         if (" qwéeêrtyúûuiíîoôóplkjhgfdsaãáàâzxcvbnmQWEÉÊRTYUÚÛÍÎIOÓÔPLKJHGFDSÀÃÂÁAZXCVBNM".indexOf(chr) < 0)
            return false;
        };
 </script> 
@@ -153,7 +153,7 @@
 <script> 
   document.getElementById("enderecoID").onkeypress = function(e) {
          var chr = String.fromCharCode(e.which);
-         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+         if (" qwéeêrtyúûuiíîoôóplkjhgfdsaãáàâzxcvbnmQWEÉÊRTYUÚÛÍÎIOÓÔPLKJHGFDSÀÃÂÁAZXCVBNM".indexOf(chr) < 0)
            return false;
        };
 </script>
@@ -162,7 +162,7 @@
 <script> 
   document.getElementById("responsavelID").onkeypress = function(e) {
          var chr = String.fromCharCode(e.which);
-         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+         if (" qwéeêrtyúûuiíîoôóplkjhgfdsaãáàâzxcvbnmQWEÉÊRTYUÚÛÍÎIOÓÔPLKJHGFDSÀÃÂÁAZXCVBNM".indexOf(chr) < 0)
            return false;
        };
 </script> 
@@ -170,7 +170,7 @@
 <script> 
   document.getElementById("nomeInst").onkeypress = function(e) {
          var chr = String.fromCharCode(e.which);
-         if ("0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+         if (" 0123456789qwéeêrtyúûuiíîoôóplkjhgfdsaãáàâzxcvbnmQWEÉÊRTYUÚÛÍÎIOÓÔPLKJHGFDSÀÃÂÁAZXCVBNM".indexOf(chr) < 0)
            return false;
        };
 </script>

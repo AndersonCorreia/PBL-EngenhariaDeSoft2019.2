@@ -20,7 +20,7 @@
                         <input id="nomeInst" class="form-control" type="text" name="Instituicao"
                             placeholder="Nome da instituição"
                             value="{{isset($registros['nome']) ? $registros['nome'] : ''}}" list="instList" 
-                            required autofocus>
+                            required autofocus onchange="this.value = this.value.trim()">
                         <datalist id="instList">
                             @if (($instituicoes ?? false))
                             @foreach ($instituicoes as $inst)
@@ -40,7 +40,7 @@
                     <span>Responsável pela Instituição</span>
                     <input id="responsavelID" class="form-control" type="text" maxlength="40" name="Responsavel"
                         placeholder="Nome completo do responsável"
-                        value="{{isset($registros['responsavel']) ? $registros['responsavel'] : ''}}" required>
+                        value="{{isset($registros['responsavel']) ? $registros['responsavel'] : ''}}" required onchange="this.value = this.value.trim()">
                 </div>
 
                 <div class="form-group pt-3 col-sm-4">
@@ -53,7 +53,7 @@
                 <div class="form-group col-sm-8">
                     <span>Endereço da Instituição</span>
                     <input class="form-control" id="enderecoID" type="text" maxlength="50" name="Endereco" placeholder="Rua e Bairro"
-                        value="{{isset($registros['endereco']) ? $registros['endereco'] : ''}}" required>
+                        value="{{isset($registros['endereco']) ? $registros['endereco'] : ''}}" required onchange="this.value = this.value.trim()">
                 </div>
 
                 <div class="form-group col-sm-2">
@@ -71,7 +71,7 @@
                 <div class="form-group col-sm-4">
                     <span>Cidade</span>
                     <input id="cidadeID" class="form-control" type="text" name="Cidade" placeholder="Cidade da instituição"
-                        value="{{isset($registros['cidade']) ? $registros['cidade'] : ''}}" required>
+                        value="{{isset($registros['cidade']) ? $registros['cidade'] : ''}}" required onchange="this.value = this.value.trim()">
                 </div>
                 <?php
                 #
@@ -225,7 +225,7 @@ form span {
 <script> 
   document.getElementById("nomeInst").onkeypress = function(e) {
          var chr = String.fromCharCode(e.which);
-         if ("0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+         if (" 0123456789qwéeêrtyúûuiíîoôóplkjhgfdsaãáàâzxcvbnmQWEÉÊRTYUÚÛÍÎIOÓÔPLKJHGFDSÀÃÂÁAZXCVBNM".indexOf(chr) < 0)
            return false;
        };
 </script>
@@ -233,7 +233,7 @@ form span {
 <script> 
   document.getElementById("responsavelID").onkeypress = function(e) {
          var chr = String.fromCharCode(e.which);
-         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+         if (" qwéeêrtyúûuiíîoôóplkjhgfdsaãáàâzxcvbnmQWEÉÊRTYUÚÛÍÎIOÓÔPLKJHGFDSÀÃÂÁAZXCVBNM".indexOf(chr) < 0)
            return false;
        };
 </script>
@@ -242,7 +242,7 @@ form span {
 <script> 
   document.getElementById("enderecoID").onkeypress = function(e) {
          var chr = String.fromCharCode(e.which);
-         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+         if (" qwéeêrtyúûuiíîoôóplkjhgfdsaãáàâzxcvbnmQWEÉÊRTYUÚÛÍÎIOÓÔPLKJHGFDSÀÃÂÁAZXCVBNM".indexOf(chr) < 0)
            return false;
        };
 </script>
@@ -251,7 +251,7 @@ form span {
 <script> 
   document.getElementById("cidadeID").onkeypress = function(e) {
          var chr = String.fromCharCode(e.which);
-         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+         if (" qwéeêrtyúûuiíîoôóplkjhgfdsaãáàâzxcvbnmQWEÉÊRTYUÚÛÍÎIOÓÔPLKJHGFDSÀÃÂÁAZXCVBNM".indexOf(chr) < 0)
            return false;
        };
 </script>
