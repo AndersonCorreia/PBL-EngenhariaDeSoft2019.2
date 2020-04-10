@@ -55,7 +55,7 @@
                 </thead>
                 <tbody>
                 <!-- array visitas_institucionais vai estar limitado por data  -->                
-                    <tr>   
+                    <tr> 
                         <th class="table-secondary" scope="row">Manhã</th>
                         @foreach($visitas_institucionais['visitas'] as $visita)
                             @if($visita['turno'] == 'manhã')
@@ -225,9 +225,9 @@
         </div>
     </div>
 </div>    
-    <div class= "row col-12 m-1 p-3 scorpius-border-shadow border-top border-shadow">
+    <div class= "row col-12 m-1 mx-4 p-3 scorpius-border-shadow border-top border-shadow" listaCancelados>
         <div class="row col-12 m-0 pl-2 p-0"><h4>Lista de Agendamentos Cancelados</h4></div>
-        <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow bg-dark text-white" >
+        <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow bg-dark text-white"  style="overflow-y: auto;" bordaFuncionario>
             <div class="row col-12 m-0 pl-2 p-0"><p> <b> Cancelado Pelo Funcionário: </b> </p></div>
             @forelse ($agendamentos_cancelados_funcionario as $agendamento)
             <div class= "row m-1 p-2 scorpius-border-shadow border-top border-shadow text-dark" agendCancelado>
@@ -248,10 +248,10 @@
                 <p> <b> Não há nenhum agendamento cancelado! </b></p>
             @endforelse
         </div>
-        <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow bg-dark text-white">
+        <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow bg-dark text-white"  style="overflow-y: auto;" bordaUsuario>
             <div class="row col-12 m-0 pl-2 p-0"><p> <b> Cancelado Pelo Usuário: </b> </p></div>
             @forelse ($agendamentos_cancelados_usuario as $agendamento)
-            <div class= "row m-1 p-2 scorpius-border-shadow border-top border-shadow text-dark" agendCancelado>
+            <div class= "row m-1 p-2 scorpius-border-shadow border-top border-shadow text-dark" usuarioCancela>
                 <div class="row col-12 m-0 pl-2 p-0">
                     <p> <b> {{$agendamento['instituicao']}} </b></p>
                 </div>
@@ -265,7 +265,6 @@
             @empty
                 <p> <b> Não há nenhum agendamento cancelado! </b> </p>
             @endforelse
-
         </div>
     </div>
     
@@ -300,6 +299,23 @@
             }
             [agendCancelado]{
                 width: 500px;
+            }
+
+            [listaCancelados]{
+                width: 1087px;
+            }
+
+            [usuarioCancela]{
+                width: 500px;
+                height: 130px;
+            }
+
+            [bordaUsuario]{
+                height: 200px;
+            }
+
+            [bordaFuncionario]{
+                height: 230px;
             }
 
             [posicaoButton] {

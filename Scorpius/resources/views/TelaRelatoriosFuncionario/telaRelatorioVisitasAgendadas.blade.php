@@ -5,7 +5,7 @@
 @section('conteudo')
 
 
-<div class="form-group row col-12" style="overflow-y: auto;">    
+<div class="form-group row col-12">    
     <label class="col-sm-12 col-form-label pt-3" nomeInstituicao >Buscar Visita</label>
     <div class="col-9">
         <form action="{{route('buscarInstituicao')}}" method="post">

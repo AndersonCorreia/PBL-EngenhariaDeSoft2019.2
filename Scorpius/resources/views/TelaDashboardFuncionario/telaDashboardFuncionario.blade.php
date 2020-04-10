@@ -8,7 +8,7 @@
 
 <form method="get" class= "m-1 p-3" action="#"> <!--bloco começa aqui -->
     <div class="form-group col-12 m-0 p-0">
-        <h4>Bem-vindo, Funcionário</h4>
+        <h4>Bem-vindo(a), Funcionário(a)</h4>
     </div>
     <div class="row">
         <div class="col-xl-4">
