@@ -44,7 +44,7 @@ class VisitaController extends Controller{
         $DAO = new AgendamentoInstitucionalDAO();
         $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", false, "confirmado", $ID);
         $DAO->UPDATE($Agendamento);//o update só atualiza o status
-        $email = (new PessoaDAO)-SELECTbyID($request->usuarioID)["email"];
+        $email = (new PessoaDAO)->SELECTbyID($request->usuarioID)["email"];
         $data = now()->format("d/m/Y");
         $this->enviarEmailAvisoConfirmacaoDeAgendamento($email, $data);
         redirect()->back();
@@ -55,7 +55,7 @@ class VisitaController extends Controller{
         $DAO = new AgendamentoInstitucionalDAO();
         $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", false, "cancelado pelo funcionario", $ID);
         $DAO->UPDATE($Agendamento);//o update só atualiza o status
-        $email = (new PessoaDAO)-SELECTbyID($request->usuarioID)["email"];
+        $email = (new PessoaDAO)->SELECTbyID($request->usuarioID)["email"];
         $data = now()->format("d/m/Y");
         if($request->radio == "CC"){
             $motivo = "condições climaticas";
@@ -155,7 +155,7 @@ class VisitaController extends Controller{
         ];
         session()->flash("email", $email);
          // Enviando o e-mail
-        Mail::send('emails.emailAvisoConfirmacaoDeAgendamento', $dados, function($message){
+        \Mail::send('emails.emailAvisoConfirmacaoDeAgendamento', $dados, function($message){
             $message->from('scorpiusuefs@gmail.com', 'Scorpius - Confirmação de Agendamento');
             $message->to( session('email') );
             $message->subject('Seu agendamento foi confirmado');

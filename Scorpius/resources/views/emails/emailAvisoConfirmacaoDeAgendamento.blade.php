@@ -1,1 +1,1 @@
-<p>Sua visita ao Observatório Antares para o dia {{$dados['data']}} foi confirmada</p>
+<p>Sua visita ao Observatório Antares para o dia {{$dados['data'] ?? ''}} foi confirmada</p>
