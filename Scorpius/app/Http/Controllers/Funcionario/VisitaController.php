@@ -47,7 +47,7 @@ class VisitaController extends Controller{
         $email = (new PessoaDAO)->SELECTbyID($request->usuarioID)["email"];
         $data = now()->format("d/m/Y");
         $this->enviarEmailAvisoConfirmacaoDeAgendamento($email, $data);
-        redirect()->back();
+        return redirect()->route('telaGerenciamentoDeVisitas.show');
     }
 
     public function cancelaAgendamento(Request $request){
@@ -64,15 +64,16 @@ class VisitaController extends Controller{
             $motivo = $request->motivo;
         }
         $this->enviarEmailAvisoCancelamento($email, $data, $motivo);
-        redirect()->back();
+        return redirect()->route('telaGerenciamentoDeVisitas.show');
     }
 
     public function escolherListaEspera(Request $request){
         dd(' método escolherListaEspera()');
-        $ID = $request->input('name');
+        $ID = $request->agendamentoID;
         $DAO = new VisitaDAO();
         $visitaConfirmada = new Visita("1111-11-11", "qualquer", "confirmado", $ID);
         $DAO->UPDATE($visitaConfirmada);
+        return redirect()->route('telaGerenciamentoDeVisitas.show');
     }
 
     public function getVisitasInstitucionais($data, $sentido){

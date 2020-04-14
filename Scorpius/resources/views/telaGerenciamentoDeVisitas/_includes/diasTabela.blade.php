@@ -2,7 +2,7 @@
     <div confirma>
         <p>{{$visita['instituicao']}}</p>
         <p>{{$visita['ano_escolar']}} - {{$visita['turma']}}</p>
-        <p style="margin-top: -8px;"> Status: Confirmado</p>
+        <p style="margin-top: -8px;">Status: {{$visita['agendamentoStatus']}}</p>
             <div class="btn-group" role="group">
             <button type="buttom" class="btn btn-danger" name="{{$visita['agendamentoID']}}" data-toggle="modal"
             data-target="#modal-cancelamento{{$visita['agendamentoID']}}" data-toggle="tooltip" title="Cancelar" btncanc>
@@ -15,7 +15,7 @@
     <div pendente>
         <p>{{$visita['instituicao']}}</p>
         <p>{{$visita['ano_escolar']}} - {{$visita['turma']}}</p>
-        <p style="margin-top: -8px;"> Status: Pendente</p>
+        <p style="margin-top: -8px;"> Status: {{$visita['agendamentoStatus']}}</p>
         <div class="btn-group" role="group">
             <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip"
                 title="Lista de Espera" data-target="#modal-lista-espera{{$visita['agendamentoID']}}" lista>
@@ -41,7 +41,7 @@
     <div cancelaU>
         <p>{{$visita['instituicao']}}</p>
         <p>{{$visita['ano_escolar']}} - {{$visita['turma']}}</p>
-        <p style="margin-top: -8px;"> Status: Cancelado pelo Usuário</p>
+        <p style="margin-top: -8px;"> Status: {{$visita['agendamentoStatus']}}</p>
         <div class="btn-group" role="group">
             <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip"
                 title="Lista de Espera" data-target="#modal-lista-espera{{$visita['agendamentoID']}}" data-day="$visita['data']"
@@ -54,7 +54,7 @@
 @elseif($visita['agendamentoStatus'] == "cancelado pelo funcionario")
         <div cancelaF>
             <p>{{$visita['instituicao']}}</p>
-            <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
+            <p style="margin-top: -8px;"> Status: {{$visita['agendamentoStatus']}}</p>
             <div class="btn-group" role="group">
                 <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip"
                     title="Lista de Espera" data-target="#modal-lista-espera{{$visita['agendamentoID']}}" data-day="$visita['data']"
