@@ -16,7 +16,7 @@ class Usuario extends Pessoa{
         $this->telefone = $usuario['telefone'];
         $this->senha = $usuario['senha'];
         $this->tipo_usuario = $usuario['tipo'];
-        
+
         $this->usuario->INSERT($this);
         return $this;
     }
@@ -40,6 +40,10 @@ class Usuario extends Pessoa{
     }
     public function getDados($id){
         return (new UsuarioDAO)->getDadosUsuario($id);
+    }
+    public function getTipo()
+    {
+        return $this->tipo_usuario;
     }
     public function alterarDados($nome,$telefone,$cpf,$senha,$id){     
         return (new UsuarioDAO)->alterarDadosUsuario($nome,$cpf,$telefone,$senha,$id);
