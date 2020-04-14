@@ -113,31 +113,28 @@
                                     <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
                                         <div class="row col-12 col-md-11 my-1">
                                             <div class="row col-12">
-                                                    <div class="custom-control custom-radio col-md-12">
-                                                        @forelse($lista_espera as $agendamento)
-                                                            @if($agendamento['data'] == $visita['data'] && $agendamento['turno'] == $visita['turno'])
-                                                                <input type="hidden" name="agendamentoIDconfirmado" value="{{$agendamento['agendamentoID']}}">
-                                                                <form>
-                                                                    @include('telaGerenciamentoDeVisitas._includes.listaEsperaDiaTurno')
-                                                                </form>
-                                                            @else
-                                                                @if($loop->last)
-                                                                    <div class="col-md-12">
-                                                                        <div class="col-12 p-0 my-1 font-weight-bold">
-                                                                            <p>Não existe nenhuma instituição na lista de espera para esse dia e turno.</p>
-                                                                        </div>
+                                                <div class="custom-control custom-radio col-md-12">
+                                                    @forelse($lista_espera as $agendamento)
+                                                        @if($agendamento['data'] == $visita['data'] && $agendamento['turno'] == $visita['turno'])
+                                                            <input type="hidden" name="agendamentoIDconfirmado" value="{{$agendamento['agendamentoID']}}">
+                                                            @include('telaGerenciamentoDeVisitas._includes.listaEsperaDiaTurno')
+                                                        @else
+                                                            @if($loop->last)
+                                                                <div class="col-md-12">
+                                                                    <div class="col-12 p-0 my-1 font-weight-bold">
+                                                                        <p>Não existe nenhuma instituição na lista de espera para esse dia e turno.</p>
                                                                     </div>
-                                                                @endif
-                                                            @endif
-                                                        @empty
-                                                            <div class="col-md-12">
-                                                                <div class="col-12 p-0 my-1 font-weight-bold">
-                                                                    <p>Não existe nenhuma instituição na lista de espera.</p>
                                                                 </div>
+                                                            @endif
+                                                        @endif
+                                                    @empty
+                                                        <div class="col-md-12">
+                                                            <div class="col-12 p-0 my-1 font-weight-bold">
+                                                                <p>Não existe nenhuma instituição na lista de espera.</p>
                                                             </div>
-                                                        @endforelse
-                                                    </div>
-                                                </form>
+                                                        </div>
+                                                    @endforelse
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
