@@ -29,7 +29,7 @@
                 <i class="fas fa-angle-left"></i>
             </button>
             <span id="calendarDatas" class="text-dark font-weight-bold">
-                {{date("d/m/Y", strtotime(now())) }} a {{$visitas_institucionais["datas"]["dataFim"]}}
+                {{$visitas_institucionais["datas"]["data0"]}} a {{$visitas_institucionais["datas"]["dataFim"]}}
             </span>
             <button id="setaRight" type="button" class=" btn btn-default" onclick="proximosDias('diurno')">
                 <i class="fas fa-angle-right"></i>
@@ -42,7 +42,7 @@
                         <th scope="col">Dia</th>
                         @forelse($visitas_institucionais['datas'] as $data)
                             @if($loop->first)
-                                <th scope="col">{{date("d/m/Y", strtotime(now())) }}</th>
+                                <th scope="col">{{$visitas_institucionais["datas"]["data0"]}}</th>
                             @elseif($loop->last)
                                 <th scope="col">{{$visitas_institucionais["datas"]["dataFim"]}}</th>
                             @else
