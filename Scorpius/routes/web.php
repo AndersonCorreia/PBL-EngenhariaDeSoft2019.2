@@ -10,7 +10,9 @@
 |
 */
 
-
+Route::get('termos-politica-privacidade', function(){
+    return view('telaCadastro.contrato-politica-privacidade')->name('termos');
+});
 Route::get('/', ['uses'=>'InicialController@inicio'])->name('paginaInicial');
 Route::get("/dashboard", function (){
     

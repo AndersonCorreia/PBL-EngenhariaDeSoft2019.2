@@ -82,7 +82,7 @@
     <div class="col-4 mt-1">
         <label for="cpfCadastro">CPF</label>
         <input aria-describedby="cpfHelp" name="cpf" id="cpfCadastro" placeholder="000.000.000-00" type="text" minlength="11" inputmode="number"
-            maxlength="11" class="form-control" required pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" title="Informe apenas os numeros do CPF sem '.' e sem '-'.">
+            maxlength="11" class="form-control" required>
         @if($ERRO == 'CPF')
         <small id="cpfHelp" class="form-text text-danger">{{$MSG_ERRO}}</small>
         @endif
@@ -98,8 +98,7 @@
     <!-- Telefone -->
     <div class="col-4 mb-0 mt-1">
         <label for="telefone">Telefone</label>
-        <input name="telefone" placeholder="(00) 00000-0000" type="text" class="form-control" id="telefone"
-            pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" title="Numero de telefone com DD no formato (xx)xxxxx-xxxx" required>
+        <input name="telefone" placeholder="(00) 00000-0000" type="text" class="form-control" id="telefone" required>
     </div>
     <!-- Senha -->
     <div class="form-group col-12 my-1">
@@ -117,8 +116,7 @@
         <button id='submit' type="submit" onclick="confirmarSenhaSubmit()" class="btn btn-success btn btn-block">Cadastre-se</button>
         
         <h6 class="float-right" style="font-size:13px">
-            Por cadastre-se, você aceita os <a target="_blank" href="">Termos</a> e a
-            <a target="_blank" href="">Politica de Privacidade</a>.
+            Por cadastre-se, você aceita os <a target="_blank" href="{{ route('termos') }}">Termos e a Politica de Privacidade</a>.
         </h6>
     </div>
 </form>
