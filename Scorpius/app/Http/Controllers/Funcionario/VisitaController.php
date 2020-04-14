@@ -42,19 +42,24 @@ class VisitaController extends Controller{
     public function confirmaAgendamento(Request $request){
         $ID = $request->agendamentoID;
         $DAO = new AgendamentoInstitucionalDAO();
-        $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", false, "confirmado", $ID);
-        $DAO->UPDATE($Agendamento);//o update só atualiza o status
+        //$Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", false, "confirmado", $ID);
+        //$DAO->UPDATE($Agendamento);//o update só atualiza o status
+        $DAO->confirmaAgendamento("agendamento_institucional", "confirmado", $ID);
+        (new VisitaDAO)->confirmaVisita("visita_institucional", "confirmado", $ID);
         $email = (new PessoaDAO)->SELECTbyID($request->usuarioID)["email"];
         $data = now()->format("d/m/Y");
         $this->enviarEmailAvisoConfirmacaoDeAgendamento($email, $data);
-        return redirect()->route('telaGerenciamentoDeVisitas.show');
+        return $this->getTelaGerenciarVisita();
     }
 
     public function cancelaAgendamento(Request $request){
         $ID = $request->agendamentoID;
+        
         $DAO = new AgendamentoInstitucionalDAO();
-        $Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", false, "cancelado pelo funcionario", $ID);
-        $DAO->UPDATE($Agendamento);//o update só atualiza o status
+        //$Agendamento = new AgendamentoInstitucional("qualquer", "qualquer", "qualquer", false, "cancelado pelo funcionario", $ID);
+        //$DAO->UPDATE($Agendamento);//o update só atualiza o status
+        $DAO->confirmaAgendamento("agendamento_institucional", "cancelado pelo funcionario", $ID);
+        (new VisitaDAO)->confirmaVisita("visita_institucional", "cancelado pelo funcionario", $ID);
         $email = (new PessoaDAO)->SELECTbyID($request->usuarioID)["email"];
         $data = now()->format("d/m/Y");
         if($request->radio == "CC"){
@@ -64,16 +69,34 @@ class VisitaController extends Controller{
             $motivo = $request->motivo;
         }
         $this->enviarEmailAvisoCancelamento($email, $data, $motivo);
-        return redirect()->route('telaGerenciamentoDeVisitas.show');
+        return $this->getTelaGerenciarVisita();
     }
 
     public function escolherListaEspera(Request $request){
-        dd(' método escolherListaEspera()');
-        $ID = $request->agendamentoID;
-        $DAO = new VisitaDAO();
-        $visitaConfirmada = new Visita("1111-11-11", "qualquer", "confirmado", $ID);
-        $DAO->UPDATE($visitaConfirmada);
-        return redirect()->route('telaGerenciamentoDeVisitas.show');
+        //confirma o agendamento da lista de espera
+        $ID = $request->agendamentoIDconfirmado;
+        $DAO = new AgendamentoInstitucionalDAO();
+        $DAO->confirmaAgendamento("agendamento_institucional", "confirmado", $ID);
+        (new VisitaDAO)->confirmaVisita("visita_institucional", "confirmado", $ID);
+        $email = (new PessoaDAO)->SELECTbyID($request->usuarioID)["email"];
+        $data = now()->format("d/m/Y");
+        $this->enviarEmailAvisoConfirmacaoDeAgendamento($email, $data);
+
+        //cancela o agendamento que estava pendente 
+        $IDcanc = $request->agendamentoIDcancelado;
+        $DAO->confirmaAgendamento("agendamento_institucional", "cancelado pelo funcionario", $IDcanc);
+        (new VisitaDAO)->confirmaVisita("visita_institucional", "cancelado pelo funcionario", $IDcanc);
+        $email = (new PessoaDAO)->SELECTbyID($request->usuarioID)["email"];
+        $data = now()->format("d/m/Y");
+        if($request->radio == "CC"){
+            $motivo = "condições climaticas";
+        }
+        else {
+            $motivo = $request->motivo;
+        }
+        $this->enviarEmailAvisoCancelamento($email, $data, $motivo);
+
+        return $this->getTelaGerenciarVisita();
     }
 
     public function getVisitasInstitucionais($data, $sentido){

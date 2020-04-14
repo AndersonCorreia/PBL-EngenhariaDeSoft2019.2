@@ -20,7 +20,7 @@ Route::group(
         Route::get('/gerenciamentoDeVisitas', 'VisitaController@getTelaGerenciarVisita')->name("telaGerenciamentoDeVisitas.show");
         Route::post('/gerenciamentoDeVisitas/confirmarAgendamento', 'VisitaController@confirmaAgendamento')->name("confirmaAgendamento");
         Route::post('/gerenciamentoDeVisitas/cancelarAgendamento', 'VisitaController@cancelaAgendamento')->name("cancelaAgendamento");
-        Route::post('/gerenciamentoDeVisitas/escolherListaEspera', 'VisitaController@escolherListaEspera')->name("escolherListaEspera");
+        Route::post('/gerenciamentoDeVisitas/escolherListaEspera', 'VisitaController@escolherListaEspera')->name("escolheListaEspera");
 
     }
 );
