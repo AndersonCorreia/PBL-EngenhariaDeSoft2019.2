@@ -14,6 +14,7 @@ class EmailVerificacaoDAO extends \App\DB\interfaces\DataAccessObject{
     function INSERT($email_verificacao): bool{
         $usuario_email = $email_verificacao->getUsuario_email();
         $token = $email_verificacao->getToken();
+        
         $sql = "INSERT INTO email_verificacao (usuario_email, token) VALUE (
             '$usuario_email',
             '$token'

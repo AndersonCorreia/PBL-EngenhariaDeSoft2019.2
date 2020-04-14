@@ -43,26 +43,26 @@ class CadastroController extends Controller
     public function store(Request $request)
     {
         $usuario = new Usuario();
-        if($usuario->pesquisaEmail($request['email'])){
+        if($usuario->pesquisaEmail($request->email)){
             return view('telaCadastro.index', [
                 'ERRO' => 'EMAIL',
                 'MSG_ERRO' => 'Este e-mail já existente, por favor insira outro.'
             ]);
         }
-        if($usuario->pesquisaCpf($request['cpf'])){
+        if($usuario->pesquisaCpf($request->cpf)){
             return view('telaCadastro.index', [
                 'ERRO' => 'CPF',
                 'MSG_ERRO' => 'Este CPF já existente, por favor insira outro.'
             ]);
         }
 
-        $this->nome = $request['nome'] . " " . $request['sobrenome'];
-        $this->email = $request['email'];
-        $this->cpf = $request['cpf'];
-        $this->telefone = $request['telefone'];
-        $this->tipo = $usuario->tipoUsuario($request['tipo']);
+        $this->nome = $request->nome . " " . $request->sobrenome;
+        $this->email = $request->email;
+        $this->cpf = $request->cpf;
+        $this->telefone = $request->telefone;
+        $this->tipo = $usuario->tipoUsuario($request->tipo);
         $this->tipo = intval($this->tipo);
-        $this->senha = $request['senha'];
+        $this->senha = $request->senha;
 
         $dados = [
             'nome' => $this->nome,

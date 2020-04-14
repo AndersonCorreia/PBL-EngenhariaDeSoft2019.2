@@ -45,6 +45,26 @@ class Usuario extends Pessoa{
     {
         return $this->tipo_usuario;
     }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getNome()
+    {
+        return $this->nome;
+    }
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
+    public function getTelefone()
+    {
+        return $this->telefone;
+    }
+    public function getSenha()
+    {
+        return $this->senha;
+    }
     public function alterarDados($nome,$telefone,$cpf,$senha,$id){     
         return (new UsuarioDAO)->alterarDadosUsuario($nome,$cpf,$telefone,$senha,$id);
     }    
