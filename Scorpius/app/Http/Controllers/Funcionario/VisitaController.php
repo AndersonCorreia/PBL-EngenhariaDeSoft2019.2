@@ -63,7 +63,7 @@ class VisitaController extends Controller{
         else {
             $motivo = $request->motivo;
         }
-        $this->enviarEmailAvisoConfirmacaoDeAgendamento($email, $data, $motivo);
+        $this->enviarEmailAvisoCancelamento($email, $data, $motivo);
         redirect()->back();
     }
 
@@ -131,7 +131,7 @@ class VisitaController extends Controller{
 
     }
 
-    public function enviarEmailAvisoCancelamento($email, $motivo, $dataAgendamento)
+    public function enviarEmailAvisoCancelamento($email, $dataAgendamento, $motivo)
     {
         $dados = [
             'usuario_email'=> $email,
@@ -140,7 +140,7 @@ class VisitaController extends Controller{
         ];
         session()->flash("email", $email);
          // Enviando o e-mail
-        Mail::send('emails.emailAvisoCancelamento', $dados, function($message){
+        \Mail::send('emails.emailAvisoCancelamento', $dados, function($message){
             $message->from('scorpiusuefs@gmail.com', 'Scorpius - Aviso de Cancelamento');
             $message->to( session('email') );
             $message->subject('Aviso de Cancelamento');

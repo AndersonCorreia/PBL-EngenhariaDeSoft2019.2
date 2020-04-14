@@ -1,6 +1,6 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', $paginaAtual)
+@section('title', 'Detalhamento das Próximas Visitas')
 
 @section('conteudo')
 <div class="col-12 m-0 px-3 py-3 p-0">
@@ -18,7 +18,7 @@
     @if(($agendamentosInstitucionais ?? ['não exibir']) === [])
     <div class="alert alert-info" role="alert">
         <span>Nenhum <b>agendamento institucional</b> para exibir.<br>
-            Qualquer <b>agendamento institucional</b> com a data de visita igual ou posterior a hoje
+            Qualquer <b>agendamento institucional</b>, com a data de visita igual ou posterior a hoje,
             é exibido aqui, inclusive os cancelados.
         </span><br>
     </div>
@@ -38,7 +38,7 @@
     @else
     <div class="alert alert-info" role="alert">
         <span>Nenhum <b>agendamento individual</b> para exibir.<br>
-            Qualquer <b>agendamento individual</b> com a data de visita igual ou posterior a hoje é exibido aqui,
+            Qualquer <b>agendamento individual</b>, com a data de visita igual ou posterior a hoje, é exibido aqui,
             inclusive os cancelados.
         </span><br>
     </div>

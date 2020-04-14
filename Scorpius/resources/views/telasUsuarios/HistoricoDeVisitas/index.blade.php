@@ -1,6 +1,6 @@
 @extends('layouts.templateGeralTelasUsuarios')
 
-@section('title', 'Historico de Visitas')
+@section('title', 'Histórico de Visitas')
 
 @section('conteudo')
 <div class="col-12 m-0 p-3 ">
@@ -17,8 +17,8 @@
     @endif
     @if(($agendamentosInstitucionais ?? ['não exibir']) === [])
     <div class="alert alert-info" role="alert">
-        <span>Nenhum <b>agendamento institucional</b> realizado para exibir no Historico.<br>
-            Qualquer <b>agendamento institucional</b> com a data de visita anterior a hoje é exibido aqui,
+        <span>Nenhum <b>agendamento institucional</b> realizado para exibir no Histórico.<br>
+            Qualquer <b>agendamento institucional</b>, com a data de visita anterior a hoje, é exibido aqui,
             inclusive os cancelados.
         </span><br>
     </div>
@@ -37,8 +37,8 @@
     </div>
     @else
     <div class="alert alert-info" role="alert">
-        <span>Nenhum <b>agendamento individual</b> realizado para exibir no Historico.<br>
-            Qualquer <b>agendamento individual</b> com a data de visita anterior a hoje é exibido aqui,
+        <span>Nenhum <b>agendamento individual</b> realizado para exibir no Histórico.<br>
+            Qualquer <b>agendamento individual</b>, com a data de visita anterior a hoje, é exibido aqui,
             inclusive os cancelados.
         </span><br>
     </div>

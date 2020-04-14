@@ -185,42 +185,42 @@
         <!-- CÓDIGO DO MOTIVO DO CANCELAMENTO -->
         <div id="cancelamento">
             @foreach($visitas_institucionais['visitas'] as $visita)
-            <!-- modal do motivo do cancelamento -->
-            <div class="modal fade" id="modal-cancelamento{{$visita['agendamentoID']}}" tabindex="-1" role="dialog" 
-                aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header bg-secondary text-white">
-                            <h5 class="modal-title">Motivo do Cancelamento</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{route("cancelaAgendamento")}}" method="POST">
-                                @csrf
-                                <input type="hidden" name="agendamentoID" value="{{$visita['agendamentoID']}}">
-                                <input type="hidden" name="usuarioID" value="{{$visita['usuarioID']}}">
-                                <!-- colocar resto das coisas aqui -->
-                                <div class="custom-control custom-radio col-md-12">
-                                    <input type="radio" id="customRadio1" name="Radio" value="CC" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
-                                </div>
-                                <div class="custom-control custom-radio col-md-12">
-                                    <input type="radio" id="customRadio2" name="Radio" value="outro" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio2">Outro:
-                                        <input class="col-8" type="text" name="motivo" min=10 max=200>
-                                    </label>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary" >Confirmar</button>
-                                </div>
-                            </form>
+                <!-- modal do motivo do cancelamento -->
+                <div class="modal fade" id="modal-cancelamento{{$visita['agendamentoID']}}" tabindex="-1" role="dialog" 
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-secondary text-white">
+                                <h5 class="modal-title">Motivo do Cancelamento</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{route("cancelaAgendamento")}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="agendamentoID" value="{{$visita['agendamentoID']}}">
+                                    <input type="hidden" name="usuarioID" value="{{$visita['usuarioID']}}">
+                                    <!-- colocar resto das coisas aqui -->
+                                    <div class="custom-control custom-radio col-md-12">
+                                        <input type="radio" id="customRadio1" name="radio" value="CC" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio1">Condições Climáticas</label>
+                                    </div>
+                                    <div class="custom-control custom-radio col-md-12">
+                                        <input type="radio" id="customRadio2" name="radio" value="outro" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio2">Outro:
+                                            <input class="col-8" type="text" name="motivo" min=10 max=200 required>
+                                        </label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary" >Confirmar</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>
