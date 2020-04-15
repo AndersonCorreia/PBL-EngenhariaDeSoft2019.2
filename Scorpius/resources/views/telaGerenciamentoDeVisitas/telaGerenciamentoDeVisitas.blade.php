@@ -117,6 +117,7 @@
                                                     @forelse($lista_espera as $agendamento)
                                                         @if($agendamento['data'] == $visita['data'] && $agendamento['turno'] == $visita['turno'])
                                                             <input type="hidden" name="agendamentoIDconfirmado" value="{{$agendamento['agendamentoID']}}">
+                                                            <input type="hidden" name="usuarioIDconfirmado" value="{{$agendamento['usuarioID']}}">
                                                             @include('telaGerenciamentoDeVisitas._includes.listaEsperaDiaTurno')
                                                         @else
                                                             @if($loop->last)

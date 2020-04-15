@@ -54,6 +54,7 @@
 @elseif($visita['agendamentoStatus'] == "cancelado pelo funcionario")
         <div cancelaF>
             <p>{{$visita['instituicao']}}</p>
+            <p>{{$visita['ano_escolar']}} - {{$visita['turma']}}</p>
             <p style="margin-top: -8px;"> Status: Cancelado pelo Funcionário</p>
             <div class="btn-group" role="group">
                 <button type="submit" class="btn btn-secondary" id="lista-espera" data-toggle="modal" data-toggle="tooltip"

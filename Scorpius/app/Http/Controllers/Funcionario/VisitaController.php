@@ -78,7 +78,7 @@ class VisitaController extends Controller{
         $DAO = new AgendamentoInstitucionalDAO();
         $DAO->confirmaAgendamento("agendamento_institucional", "confirmado", $ID);
         (new VisitaDAO)->confirmaVisita("visita_institucional", "confirmado", $ID);
-        $email = (new PessoaDAO)->SELECTbyID($request->usuarioID)["email"];
+        $email = (new PessoaDAO)->SELECTbyID($request->usuarioIDconfirmado)["email"];
         $data = now()->format("d/m/Y");
         $this->enviarEmailAvisoConfirmacaoDeAgendamento($email, $data);
 
@@ -86,7 +86,7 @@ class VisitaController extends Controller{
         $IDcanc = $request->agendamentoIDcancelado;
         $DAO->confirmaAgendamento("agendamento_institucional", "cancelado pelo funcionario", $IDcanc);
         (new VisitaDAO)->confirmaVisita("visita_institucional", "cancelado pelo funcionario", $IDcanc);
-        $email = (new PessoaDAO)->SELECTbyID($request->usuarioID)["email"];
+        $email = (new PessoaDAO)->SELECTbyID($request->usuarioIDcancelado)["email"];
         $data = now()->format("d/m/Y");
         if($request->radio == "CC"){
             $motivo = "condições climaticas";
