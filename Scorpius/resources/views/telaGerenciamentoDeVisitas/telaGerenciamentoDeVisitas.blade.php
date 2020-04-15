@@ -113,7 +113,7 @@
                                     <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
                                         <div class="row col-12 col-md-11 my-1">
                                             <div class="row col-12">
-                                                <div class="custom-control custom-radio col-md-12">
+                                                <div class="custom-control custom-radio col-md-12" type="radio" name="radio-group" id="radioLista">
                                                     @forelse($lista_espera as $agendamento)
                                                         @if($agendamento['data'] == $visita['data'] && $agendamento['turno'] == $visita['turno'])
                                                             <input type="hidden" name="agendamentoIDconfirmado" value="{{$agendamento['agendamentoID']}}">
@@ -200,7 +200,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="{{route("cancelaAgendamento")}}" method="POST">
+                                <form action="{{route('cancelaAgendamento')}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="agendamentoID" value="{{$visita['agendamentoID']}}">
                                     <input type="hidden" name="usuarioID" value="{{$visita['usuarioID']}}">
@@ -228,7 +228,7 @@
         </div>
     </div>
 </div>    
-    <div class= "row col-12 m-1 mx-4 p-3 scorpius-border-shadow border-top border-shadow" listaCancelados>
+    <div class= "row col-12 m-1 p-3 scorpius-border-shadow border-top border-shadow" listaCancelados>
         <div class="row col-12 m-0 pl-2 p-0"><h4>Lista de Agendamentos Cancelados</h4></div>
         <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow bg-dark text-white"  style="overflow-y: auto;" bordaFuncionario>
             <div class="row col-12 m-0 pl-2 p-0"><p> <b> Cancelado Pelo Funcionário: </b> </p></div>

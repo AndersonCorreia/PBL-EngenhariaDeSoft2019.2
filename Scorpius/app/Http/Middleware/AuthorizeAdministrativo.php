@@ -53,6 +53,7 @@ class AuthorizeAdministrativo{
         $this->RotasPermissoes[ "telaGerenciamentoDehorarios.show" ] = 'designar horários para estagiarios';
         $this->RotasPermissoes[ "downloadGuia" ] = 'designar horários para estagiarios';
         $this->RotasPermissoes[ "telaGerenciamentoDeVisitas.show" ] = 'gerenciamento de visitas';
+        $this->RotasPermissoes[ "escolheListaEspera" ] = 'gerenciamento de visitas';
         $this->RotasPermissoes["demandaWeb.show" ] = 'demanda web';
         $this->RotasPermissoes["demandaWeb.post" ] = 'demanda web';
         $this->RotasPermissoes["checkinVisitas" ] = 'realizar check-in';
