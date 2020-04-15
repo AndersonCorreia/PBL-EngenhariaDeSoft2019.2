@@ -226,6 +226,27 @@ class PessoaDAO extends \App\DB\interfaces\DataAccessObject
     }
     public function deletarUsuario($user_ID)
     {
+        $ID_usuario = intval(session('ID'));
+        $nome_modificador = $this->dataBase->query("SELECT nome FROM usuario WHERE ID = $ID_usuario")->fetch_assoc()['nome'];  
+        $nome_alterado = $this->dataBase->query("SELECT nome FROM usuario WHERE ID = $user_ID")->fetch_assoc()['nome'];
+        $msg = /*$nome_modificador.*/'Excluiu ' .$nome_alterado;
+        $result = $this->dataBase->query("SELECT ID FROM acoes WHERE atividade = '$msg'");
+        if($result->num_rows < 1){
+            $this->dataBase->query("INSERT INTO acoes (atividade) VALUES ('$msg')");
+            $acoes_ID = intval($this->getLastID());
+        }else{
+            $acoes_ID = $result->fetch_assoc()['ID'];
+        }
+        date_default_timezone_set('America/Bahia');
+        $data = date('Y-m-d');
+        $hora = date('H:i:s');
+        $datahora = $data.' '. $hora;
+        $this->dataBase->query("INSERT INTO log (datahora, acoes_ID, usuario_made_ID, usuario_affected_ID) VALUES (
+            '$datahora',
+            $acoes_ID,
+            $ID_usuario,
+            $user_ID
+        )");
         $sql = "UPDATE usuario SET ativo = 0 WHERE ID = $user_ID";
         return $this->dataBase->query($sql);
     }
