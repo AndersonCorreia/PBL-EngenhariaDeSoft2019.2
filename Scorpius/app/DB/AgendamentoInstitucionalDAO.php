@@ -20,7 +20,7 @@ use App\Model\Agendamento;
 
         $visitaID = $agendamento->getVisita()->getID();
         $observacao = $agendamento->getObservacao();
-        $statusAg = $agendamento->getStatus();
+        $statusAg = $agendamento->getStatusAg();
         $turmaID = $agendamento->getTurmaID(); 
         $professorInstituicaoID = $agendamento->getProfessorInstituicaoID(); 
         $sql = "INSERT INTO agendamento_institucional (visita, observacao, status, turma_ID, professor_instituicao_ID) 
