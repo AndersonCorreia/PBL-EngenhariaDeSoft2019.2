@@ -44,6 +44,13 @@ class VisitaDAO extends DataAccessObject{
         return $this->dataBase->query($sql);
     }
 
+    public function confirmaVisita($nomeTabela, $status, $id){
+        $sql="UPDATE $nomeTabela a SET a.agendamentoStatus = ? WHERE a.agendamentoID=?";
+        $stmt = $this->dataBase->prepare($sql);
+        $stmt->bind_param("ss",$status,$id);       
+        return $stmt->execute();
+    }
+
     /**
      * Retorna registros da tabela visita num array, com filtros de data inicial, data final
      * e limita a quantidade de resultados;
