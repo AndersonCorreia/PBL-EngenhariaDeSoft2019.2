@@ -27,14 +27,14 @@ class VisitaController extends Controller{
         
         $agendamentos_cancelados_usuario = $DAO->SELECT_VisitaInstitucionalByStatus("cancelado pelo usuario");
         $agendamentos_cancelados_funcionario = $DAO->SELECT_VisitaInstitucionalByStatus("cancelado pelo funcionario");
-        
+        $i = 0;
         $variaveis = [
             'paginaAtual' => "Gerenciamento de Visitas",
             'lista_espera' => $lista_espera,
             'visitas_institucionais' => $array,
             'agendamentos_cancelados_usuario' => $agendamentos_cancelados_usuario,
-            'agendamentos_cancelados_funcionario' => $agendamentos_cancelados_funcionario
-            
+            'agendamentos_cancelados_funcionario' => $agendamentos_cancelados_funcionario,
+            'i' => $i
         ];
         return view('telaGerenciamentoDeVisitas.telaGerenciamentoDeVisitas', $variaveis);
     }
@@ -101,50 +101,33 @@ class VisitaController extends Controller{
 
     public function getVisitasInstitucionais($data, $sentido){
         $DAO = new AgendamentoInstitucionalDAO();
-        $dataFim = now();
-        $dataFim = $dataFim->add(new \DateInterval("P2M"));
-        if($sentido == "anterior"){
-            $dataAtual = now();  
-        }
-        else {
-            $dataAtual = $data;
-        }
 
-        $visitasInst = $DAO->SELECTbyDateInicio_FIM("2020-04-07", "2020-04-14");
+        $visitasInst = $DAO->SELECTbyDateInicio_FIM("2020-03-21", "2020-04-16");
+        $datas = $DAO->SELECTdatas("2020-03-21", "2020-04-16");
         $array = [];
-        foreach($visitasInst as $v){
-            if(count($array)<12){
-                $this->preencherArrayDatas($array, date_create($v['data']) );   
+        foreach($datas as $d){
+            $c = count($array); 
+            if($c < 5){
+                $this->preencherArrayDatas($array, date_create($d[0]), count($datas));  
             }
         }
-
-        $dataFinalReal= new \DateTime($array["datas"]["dataLimite"]);
-        if ( count($array)>11 ){
-            $dataFinalReal->sub(new \DateInterval("P1D"));
-        }
-        $array["datas"]["dataFim"] = $dataFinalReal->format("d-m-Y");
-        
-        $array = [
-            'datas' => $array['datas'],
+        $visitasInstitucionais = [
+            'datas' => $array,
             'visitas' => $visitasInst
         ];
-
-        return $array;
+        return $visitasInstitucionais;
     }
-    public function preencherArrayDatas(array &$array, \DateTime $data){
-        $dm = $data->format("d-m");
-        $dma= $data->format("d-m-Y");
-        $d = $data->format("d");
-        $day = $data->format("w");
-        $mes = $data->format("m")-1;
-        
-        if( !isset($array["datas"]["dataInicio"]) ){
-            $array["datas"]["dataInicio"] = "$d-$mes";
-            $array["datas"]["data0"] = $data->format("d-m-Y");
+
+    public function preencherArrayDatas(array &$array, \DateTime $data, int $cd){
+        $c = count($array);
+        if( !isset($array["dataInicio"]) ){
+            $array["dataInicio"] = $data->format("d-m-Y");
+        }elseif($c < $cd-1){
+            $array[$c] = $data->format("d-m-Y");
+        }else{
+            $array["dataFim"] = $data->format("d-m-Y");
         }
-        $array["datas"]["dataFim"] = "$d-$mes";
-        $array["datas"]["dataLimite"] = $data->format("d-m-Y");
-        $array[$dma]["data"] = "$dm $day";
+
     }
 
     public function getAgendamentoEsperaDiaTurno(Request $request){

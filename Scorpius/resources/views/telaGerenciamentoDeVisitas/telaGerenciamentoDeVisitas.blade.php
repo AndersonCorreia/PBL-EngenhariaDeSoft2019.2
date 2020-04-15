@@ -29,7 +29,7 @@
                 <i class="fas fa-angle-left"></i>
             </button>
             <span id="calendarDatas" class="text-dark font-weight-bold">
-                {{$visitas_institucionais["datas"]["data0"]}} a {{$visitas_institucionais["datas"]["dataFim"]}}
+                {{$visitas_institucionais["datas"]["dataInicio"]}} a {{$visitas_institucionais["datas"]["dataFim"]}}
             </span>
             <button id="setaRight" type="button" class=" btn btn-default" onclick="proximosDias('diurno')">
                 <i class="fas fa-angle-right"></i>
@@ -40,16 +40,16 @@
                 <thead>
                     <tr class="thead-dark">
                         <th scope="col">Dia</th>
-                        @forelse($visitas_institucionais['datas'] as $data)
+                        @forelse($visitas_institucionais["datas"] as $data)
                             @if($loop->first)
-                                <th scope="col">{{$visitas_institucionais["datas"]["data0"]}}</th>
+                                <th scope="col">{{$visitas_institucionais["datas"]["dataInicio"]}}</th>
                             @elseif($loop->last)
                                 <th scope="col">{{$visitas_institucionais["datas"]["dataFim"]}}</th>
                             @else
                                 <th scope="col">{{$data}}</th> 
                             @endif
                         @empty
-                        <th scope="col"></th>
+                            @include('telaGerenciamentoDeVisitas.errorNenhumaVisita')
                         @endforelse
                     </tr>
                 </thead>
@@ -59,9 +59,12 @@
                         <th class="table-secondary" scope="row">Manhã</th>
                         @foreach($visitas_institucionais['visitas'] as $visita)
                             @if($visita['turno'] == 'manhã')
-                                <td>@include('telaGerenciamentoDeVisitas._includes.diasTabela')</td>  
-                            @else
+                                <td>
+                                    @include('telaGerenciamentoDeVisitas._includes.diasTabela')
+                                </td>  
+                            @elseif($visita['agendamentoStatus'] != 'lista de espera' && $visita['agendamentoStatus'] != 'cancelado pelo funcionario')
                                 <td></td>
+                            @else
                             @endif
                         @endforeach
                     </tr>
@@ -70,8 +73,9 @@
                         @foreach($visitas_institucionais['visitas'] as $visita)
                             @if($visita['turno'] == 'tarde')
                                 <td>@include('telaGerenciamentoDeVisitas._includes.diasTabela')</td>  
-                            @else
+                            @elseif($visita['agendamentoStatus'] != 'lista de espera' && $visita['agendamentoStatus'] != 'cancelado pelo funcionario')
                                 <td></td>
+                            @else
                             @endif
                         @endforeach
                     </tr>
@@ -80,8 +84,9 @@
                         @foreach($visitas_institucionais['visitas'] as $visita)
                             @if($visita['turno'] == 'noite')
                                 <td>@include('telaGerenciamentoDeVisitas._includes.diasTabela')</td>  
-                            @else
+                            @elseif($visita['agendamentoStatus'] != 'lista de espera' && $visita['agendamentoStatus'] != 'cancelado pelo funcionario')
                                 <td></td>
+                            @else
                             @endif
                         @endforeach
                     </tr>
@@ -113,7 +118,6 @@
                                     <div class="row mx-2 pt-1 scorpius-border-shadow border-top border-shadow" larguraDiv>
                                         <div class="row col-12 col-md-11 my-1">
                                             <div class="row col-12">
-                                                <div class="custom-control custom-radio col-md-12" type="radio" name="radio-group" id="radioLista">
                                                     @forelse($lista_espera as $agendamento)
                                                         @if($agendamento['data'] == $visita['data'] && $agendamento['turno'] == $visita['turno'])
                                                             <input type="hidden" name="agendamentoIDconfirmado" value="{{$agendamento['agendamentoID']}}">
@@ -135,7 +139,7 @@
                                                             </div>
                                                         </div>
                                                     @endforelse
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>

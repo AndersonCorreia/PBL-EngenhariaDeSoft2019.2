@@ -50,8 +50,13 @@
             </button>
         </div>
     </div>
-
 @elseif($visita['agendamentoStatus'] == "cancelado pelo funcionario")
+    @foreach($visitas_institucionais['datas'] as $data)
+        @if($visita['data'] == $data )
+            $i +=1
+        @endif
+    @endforeach
+    @if($i == 1)
         <div cancelaF>
             <p>{{$visita['instituicao']}}</p>
             <p>{{$visita['ano_escolar']}} - {{$visita['turma']}}</p>
@@ -64,5 +69,6 @@
                 </button>
             </div>
         </div>
+    @endif
 @else
 @endif

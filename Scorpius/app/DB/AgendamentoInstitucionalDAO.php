@@ -216,11 +216,11 @@ use App\Model\Agendamento;
      * @param integer $limite
      * @return array
      */
-    public function SELECTbyDateInicio_FIM(String $dateInicio, String $dateFim, int $limite=6): array{
-        $where = "data >= ? AND data <= ? LIMIT ?"; 
-        $sql = "SELECT * FROM visita_institucional WHERE $where";
+    public function SELECTbyDateInicio_FIM(String $dateInicio, String $dateFim): array{
+        $where = "data >= ? AND data <= ?"; 
+        $sql = "SELECT * FROM visita_institucional WHERE $where ORDER BY data, agendamentoID";
         $stmt = $this->dataBase->prepare($sql);
-        $stmt->bind_param("ssi",$dateInicio, $dateFim, $limite);
+        $stmt->bind_param("ss",$dateInicio, $dateFim);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
@@ -228,6 +228,21 @@ use App\Model\Agendamento;
             throw new \App\Exceptions\NenhumaVisitaEncontradaException(3);
         }
         
+        return $result;
+    }
+
+    public function SELECTdatas(String $dataInicio, String $dataFim): array{
+        $where = "data >= '$dataInicio' AND data <= '$dataFim' "; 
+        $select = "SELECT DISTINCT data";
+        $sql = "$select FROM visita_institucional WHERE $where ORDER BY data";
+        $result = $this->dataBase->query($sql);
+
+        return $result->fetch_all();
+
+        if($result==[]){
+            throw new \App\Exceptions\NenhumaVisitaEncontradaException(3);
+        }
+
         return $result;
     }
 }
