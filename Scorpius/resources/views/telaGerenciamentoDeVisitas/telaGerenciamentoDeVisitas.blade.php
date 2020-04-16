@@ -233,7 +233,7 @@
         </div>
     </div>
 </div>    
-    <div class= "row col-12 m-1 p-3 scorpius-border-shadow border-top border-shadow" listaCancelados>
+    <div class= "row col-12 m-1 p-3 scorpius-border-shadow border-top border-shadow" style="width: auto" listaCancelados>
         <div class="row col-12 m-0 pl-2 p-0"><h4>Lista de Agendamentos Cancelados</h4></div>
         <div class= "row col-12 m-1 p-2 scorpius-border-shadow border-top border-shadow bg-dark text-white"  style="overflow-y: auto;" bordaFuncionario>
             <div class="row col-12 m-0 pl-2 p-0"><p> <b> Cancelado Pelo Funcionário: </b> </p></div>
